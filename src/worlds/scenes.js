@@ -1,6 +1,7 @@
 // THE SCENE WORLD (a world to learn from, not part of the engine): shapes cut from the pattern catalogue, objects made of
 // shapes in fixed arrangements, and scenes of 1-3 things (half of them copies of one thing), at random places.
 'use strict';
+const SceneWorld = (() => {   // its own scope, so it can sit beside the engine in one page
 const SW = (typeof globalThis !== 'undefined' && globalThis.WORLD_SIZE) || 12, SH = SW, SPX = SW * SH;
 const P2 = (x, y) => x * 1000 + y;
 function norm(pts) { if (!pts.length) return { pts: [], ox: 0, oy: 0, key: '' }; let mx = Infinity, my = Infinity; for (const [x, y] of pts) { if (x < mx) mx = x; if (y < my) my = y; }
@@ -32,4 +33,5 @@ class SceneWorld {
   // a scene with two copies of an object never seen in training (made of known shapes in a new arrangement)
   held(r) { const h = Object.entries(this.heldObjects), t = h[Math.floor(r() * h.length)]; return this.place(r, [t, t]); }
 }
+return SceneWorld; })();
 if (typeof module !== 'undefined') module.exports = { SceneWorld };
