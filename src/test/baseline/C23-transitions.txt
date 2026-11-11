@@ -1,0 +1,19 @@
+C23 · transition memory. States are settled scenes ("where" cells; a held context is not scored); 30 training runs and 4 test runs per world.
+
+world                                       version   next state right: no cue / with cue   moving thing seen as two
+roof slides (branch at the normal house)    whole     80% / 100%                      0 of 60
+                                            changes   80% / 100%                      0 of 60
+one stick moving right                      whole     100% / 100%                     0 of 40
+                                            changes   100% / 100%                     0 of 40
+two sticks moving together                  whole     100% / 100%                     0 of 28
+                                            changes   100% / 100%                     0 of 28
+one moving, one staying                     whole     100% / 100%                     0 of 40
+                                            changes   100% / 100%                     0 of 40
+bouncing stick, no context                  whole     59% / 100%                      0 of 116
+                                            changes   59% / 100%                      0 of 116
+bouncing stick, direction held as context   whole     100% / 100%                     0 of 116
+                                            changes   100% / 100%                     0 of 116
+
+new place: stick moving right on a row never seen moving, whole: next state right 0 of 10
+
+new place: stick moving right on a row never seen moving, changes: next state right 0 of 10

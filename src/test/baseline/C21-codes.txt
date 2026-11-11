@@ -1,0 +1,41 @@
+C21 · learnt with C20 (seed 4242): 22 primitive columns, 8 composites (now assemblies). floors: level, sample per child: 3
+
+A. a house at 40 random places: its assembly identical in 40/40; floor-0 ("where") cells: 28 different sets
+   house assembly (4 cells): #/#@-1,1  .#/##@0,1  ###@0,0  ..#../.#.#./#...#@0,-1
+
+B. two sticks side by side ("#/#/#" at x=4 and x=6): explained by L1[#/#/#] + L1[#/#/#]
+   floor-0 cells: #/#/#@-1,0  #/#/#@1,0
+   stick column, floor 0 (+ = centre of attention, ● = active cell):
+      · · · · · · · · · · ·
+      · · · · · · · · · · ·
+      · · · · · · · · · · ·
+      · · · · ● + ● · · · ·
+      · · · · · · · · · · ·
+      · · · · · · · · · · ·
+      · · · · · · · · · · ·
+
+C. two houses side by side: 2 things recognised, 2 of them the house unit
+   their assemblies: identical yes (same kind of thing)
+   their floor-0 cells: shared 0.00 (where each one is)
+   left house where: ###@-2,0  #/#@-3,1  .#/##@-2,1  ..#../.#.#./#...#@-2,-1
+   right house where: ###@4,0  #/#@3,1  .#/##@4,1  ..#../.#.#./#...#@4,-1
+
+D. overlap between assemblies (floor shared by all composites; 1 = all of the smaller one shared):
+          block   plus    corner  box     house   flag    twins  
+   block    -     0.00    0.00    0.50    0.00    0.00    0.00   
+   plus   0.00      -     0.00    0.00    0.50    0.00    0.00   
+   corner 0.00    0.00      -     1.00    0.00    0.00    0.00   
+   box    0.50    0.00    1.00      -     0.00    0.00    0.00   
+   house  0.00    0.50    0.00    0.00      -     0.00    0.00   
+   flag   0.00    0.00    0.00    0.00    0.00      -     0.00   
+   twins  0.00    0.00    0.00    0.00    0.00    0.00      -    
+   never seen, tower [###/#.#/###/###/#.#/###]: held as a new assembly of 6 cells in existing columns; closest known: block (0.00)
+   never seen, arrow [..#../.#.#./#.#.#/..#../..#..]: held as a new assembly of 2 cells in existing columns; closest known: house (0.50)
+
+E. sample 1 per child: assemblies average 2.0 cells; rebuilding pixels from the cells recovers 68% of each thing
+E. sample 2 per child: assemblies average 2.7 cells; rebuilding pixels from the cells recovers 94% of each thing
+E. sample 3 per child: assemblies average 2.9 cells; rebuilding pixels from the cells recovers 100% of each thing
+E. sample all per child: assemblies average 2.9 cells; rebuilding pixels from the cells recovers 100% of each thing
+
+F. 300 fresh scenes: on average 14.7 pixels → 5.3 "where" cells + 4.4 assembly cells; 668 distinct cells used of 46552 (22 columns × 23×23 grid × 4 floors)
+   cells shared between composites at DIFFERENT levels, if they all used one floor: 3 of 28 pairs (with a floor per level: 0 by construction)

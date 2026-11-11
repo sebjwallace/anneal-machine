@@ -1,0 +1,10 @@
+C24 · shared changes. Trained in some places, tested in a place never seen. Next state right: no cue / with cue.
+
+world                                 shared changes   C23 exact, new place   C24, new place   C24, trained place
+roof slides (branch)                  6                0% / 0%                75% / 100%       78% / 100%
+one stick moving right                1                0% / 0%                100% / 100%      100% / 100%
+two sticks moving together            1                0% / 0%                100% / 100%      100% / 100%
+one moving, one staying               1                0% / 0%                100% / 100%      100% / 100%
+bouncing, no context                  2                0% / 0%                47% / 100%       57% / 100%
+bouncing, direction as context        4                0% / 0%                93% / 93%        100% / 100%
+bouncing, context, trained on 2 rows  6                0% / 0%                93% / 100%       100% / 100%

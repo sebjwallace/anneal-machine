@@ -1,0 +1,17 @@
+C22 · learnt with C20 (seed 4242): 22 primitive columns, 8 assemblies. 300 scenes per test.
+
+1a. one known thing, a rectangle hidden over part of it. Share of the thing hidden → picture restored exactly (and hidden pixels filled back):
+    told where   0-25%: 99% (100%)   25-50%: 94% (99%)   50-75%: 67% (72%)   75-100%: 3% (3%)
+    not told     0-25%: 94% (94%)   25-50%: 21% (22%)   50-75%: 0% (0%)   75-100%: 0% (0%)
+1b. 20% of the pixels removed (not told): removed pixels filled back 45%; pixels drawn that were never there: 14 (0.04% of empty pixels); heat (prediction against what is seen) 0.20
+1b. 40% of the pixels removed (not told): removed pixels filled back 15%; pixels drawn that were never there: 40 (0.10% of empty pixels); heat (prediction against what is seen) 0.37
+
+2. keeping 25% of the "where" cells (1.6 of 5.2 per scene): pixels from the cue alone 33% → after settling 36%; things wholly back 23%; pixels drawn that weren't there 0; rounds 0.22 on average (0 scenes needed more than one)
+2. keeping 50% of the "where" cells (2.7 of 5.2 per scene): pixels from the cue alone 52% → after settling 58%; things wholly back 43%; pixels drawn that weren't there 1; rounds 0.47 on average (0 scenes needed more than one)
+2. keeping 75% of the "where" cells (3.8 of 5.2 per scene): pixels from the cue alone 73% → after settling 80%; things wholly back 69%; pixels drawn that weren't there 1; rounds 0.64 on average (0 scenes needed more than one)
+
+example, two houses, one cell from each roof and one from each box (4 cells): found a house, a house in 1 round(s); picture back 100%, extra pixels 0
+
+example, two houses, two cells from each box only (4 cells): found a 2-part thing, a 2-part thing in 1 round(s); picture back 38%, extra pixels 0
+
+example, two houses, one cell from each house (2 cells): found nothing in 0 round(s); picture back 23%, extra pixels 0
