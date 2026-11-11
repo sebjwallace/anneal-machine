@@ -1,0 +1,712 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same or similar · C26 and C27</title>
+<style>
+:root{--bg:#f7f6f2;--fg:#1d1d1b;--muted:#6f6e68;--ink:#1d1d1b;--wall:#9b9a93;--empty:#e6e4dc;--line:#dcdad2;--card:#fff;--obj:#d9622b;--real:#2f8f6b;--bad:#d63c2f;--me:#2b78d9}
+@media (prefers-color-scheme:dark){:root{--bg:#151514;--fg:#ecebe6;--muted:#9b9a93;--ink:#ecebe6;--wall:#6f6e68;--empty:#2b2b28;--line:#34342f;--card:#1d1d1b;--obj:#f08a50;--real:#4cc49a;--bad:#f0614f;--me:#5ea2f2}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1240px;margin:0 auto;padding:20px}h1{font-size:20px;margin:0 0 4px}p.sub{color:var(--muted);margin:0 0 14px;max-width:980px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}button,select{font:inherit;padding:6px 10px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:6px}button{cursor:pointer}button:hover{border-color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}.card h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}.g{display:grid;gap:1px}.g i{display:block;background:var(--empty);border-radius:1px}
+.cap{color:var(--muted);font-size:12px;margin-top:6px;max-width:300px}.big{font-size:15px;font-weight:600}#msg{color:var(--muted)}
+.say{max-width:420px;line-height:1.55}.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;border:1px solid var(--line)}
+</style></head><body><main>
+<h1>Same, or similar?</h1>
+<p class="sub">The machine watched two-object demonstrations, as pictures only, in rooms whose walls are bricks. It learnt what happens next to each object from its surroundings, looking further out only when nearer didn't settle it. Then, from the first two pictures of a new start, it imagines the rest with no input. Two ways of using memory: <b>exact</b> (C26) only trusts situations seen exactly like this; <b>similar</b> (C27) trusts exact first, but when a situation is new it recalls the most similar one, where positions that are close count as alike. Objects in <span style="color:var(--bad)">red</span> are not where the truth has them.</p>
+<div class="bar"><label>Objects <select id="n"><option>2</option><option>3</option><option>4</option><option selected>5</option><option>6</option></select></label><button id="fresh">New start</button><button id="play">▶ play</button><button id="one">one step</button>
+<label>Speed <select id="speed"><option value="600">slow</option><option value="250" selected>normal</option><option value="90">fast</option></select></label><span id="msg">learning…</span></div>
+<div class="card"><div class="row">
+<div><div id="gT"></div><div class="cap"><b>What really happens</b></div></div>
+<div><div id="gE"></div><div class="cap"><b>Exact memory imagines</b> <span id="sE"></span></div></div>
+<div><div id="gS"></div><div class="cap"><b>Similar memory imagines</b> <span id="sS"></span></div></div>
+</div><div class="cap" id="stepno" style="max-width:none;margin-top:10px"></div></div>
+<div class="card"><h2>Close-up · one object in the similar-memory picture, about to move</h2>
+<div class="bar"><label>Object <select id="pick"></select></label><span class="cap" style="margin:0">Picked automatically where the two memories disagree; choose any.</span></div>
+<div class="row">
+<div><div id="cNow"></div><div class="cap">what it sees: <span style="color:var(--me)">itself</span> (its last place outlined), others, bricks; the box is how far it had to look</div></div>
+<div><div id="cMem"></div><div class="cap" id="cMemCap">the remembered situation it is using</div></div>
+<div class="say" id="say"></div>
+</div></div>
+</main>
+<script>globalThis.WORLD_SIZE = 24;</script>
+<script>// CATALOGUE (C01): about 100 designed 5x5 black-and-white patterns, in families with deliberate shared parts, plus the
+// noisy presentation stream. A pattern is 25 bits, row by row (cell r,c is bit r*5+c). Families, shapes and parts are for
+// the scorer and the viewer only: the machine never sees them. Runs in Node (require) and in the browser (inlined).
+'use strict';
+const N = 5, SIZE = N * N;
+
+// ---- building blocks: everything is drawn from bars, corners, boxes and blocks, so shapes share parts on purpose
+const blank = () => new Uint8Array(SIZE);
+const range = (a, b) => { const o = []; for (let i = a; i <= b; i++) o.push(i); return o; };
+function cells(list) { const p = blank(); for (const [r, c] of list) if (r >= 0 && r < N && c >= 0 && c < N) p[r * N + c] = 1; return p; }
+function or(...ps) { const p = blank(); for (const q of ps) for (let i = 0; i < SIZE; i++) if (q[i]) p[i] = 1; return p; }
+function rows(...lines) { const p = blank(); lines.forEach((l, r) => [...l].forEach((ch, c) => { if (ch === '#') p[r * N + c] = 1; })); return p; }
+const hbar = (r, c0 = 0, c1 = N - 1) => cells(range(c0, c1).map((c) => [r, c]));
+const vbar = (c, r0 = 0, r1 = N - 1) => cells(range(r0, r1).map((r) => [r, c]));
+// an L of two arms inside the size x size box whose top-left is (r, c); which = 'tl' | 'tr' | 'bl' | 'br' names its corner
+function corner(r, c, size, which) { const e = size - 1, top = which[0] === 't', left = which[1] === 'l';
+  return or(hbar(top ? r : r + e, c, c + e), vbar(left ? c : c + e, r, r + e)); }
+function frame(r, c, size) { const e = size - 1; return or(hbar(r, c, c + e), hbar(r + e, c, c + e), vbar(c, r, r + e), vbar(c + e, r, r + e)); }
+function block(r, c, size) { const l = []; for (const i of range(0, size - 1)) for (const j of range(0, size - 1)) l.push([r + i, c + j]); return cells(l); }
+const plus = (r, c, arm) => or(hbar(r, c - arm, c + arm), vbar(c, r - arm, r + arm));
+// a quarter turn clockwise: (r, c) goes to (c, N-1-r)
+function rot(p) { const q = blank(); for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (p[r * N + c]) q[c * N + (N - 1 - r)] = 1; return q; }
+
+// ---- the catalogue. shape = the same shape wherever it sits (a shifted copy shares its shape); parts = the bars a
+// composition was built from (for the composition tests later). An exact duplicate is dropped and reported.
+function build() {
+  const out = [], seen = new Map(), dropped = [];
+  const add = (family, name, bits, shape = name, parts = null) => {
+    const key = bits.join('');
+    if (seen.has(key)) { dropped.push({ name, family, sameAs: seen.get(key) }); return; }
+    seen.set(key, name); out.push({ id: out.length, name, family, shape, parts, bits });
+  };
+  const dDown = cells(range(0, 4).map((i) => [i, i])), dUp = cells(range(0, 4).map((i) => [i, 4 - i]));
+
+  for (const r of range(0, 4)) add('bars', `row ${r}`, hbar(r), 'row');
+  for (const c of range(0, 4)) add('bars', `col ${c}`, vbar(c), 'col');
+
+  add('diagonals', 'diag \\', dDown);
+  add('diagonals', 'diag /', dUp);
+  add('diagonals', 'short \\ upper', cells(range(0, 3).map((i) => [i, i + 1])), 'short \\');
+  add('diagonals', 'short \\ lower', cells(range(0, 3).map((i) => [i + 1, i])), 'short \\');
+  add('diagonals', 'short / upper', cells(range(0, 3).map((i) => [i, 3 - i])), 'short /');
+  add('diagonals', 'short / lower', cells(range(0, 3).map((i) => [i + 1, 4 - i])), 'short /');
+
+  for (const r of [0, 2, 4]) for (const [c0, side] of [[0, 'left'], [2, 'right']]) add('half bars', `row ${r} ${side}`, hbar(r, c0, c0 + 2), 'half row');
+  for (const c of [0, 2, 4]) for (const [r0, side] of [[0, 'top'], [2, 'bottom']]) add('half bars', `col ${c} ${side}`, vbar(c, r0, r0 + 2), 'half col');
+
+  for (const w of ['tl', 'tr', 'bl', 'br']) {
+    add('corners', `corner ${w}`, corner(w[0] === 't' ? 0 : 2, w[1] === 'l' ? 0 : 2, 3, w), `corner ${w}`);
+    add('corners', `corner ${w} centre`, corner(1, 1, 3, w), `corner ${w}`);           // the same corner, shifted inwards
+  }
+  for (const w of ['tl', 'tr', 'bl', 'br']) add('big Ls', `big L ${w}`, corner(0, 0, 5, w));
+
+  add('Ts', 'T top', or(hbar(0), vbar(2)), 'T top', ['row 0', 'col 2']);
+  add('Ts', 'T bottom', or(hbar(4), vbar(2)), 'T bottom', ['row 4', 'col 2']);
+  add('Ts', 'T left', or(vbar(0), hbar(2)), 'T left', ['col 0', 'row 2']);
+  add('Ts', 'T right', or(vbar(4), hbar(2)), 'T right', ['col 4', 'row 2']);
+  add('Ts', 'small T', or(hbar(0, 1, 3), vbar(2, 0, 2)), 'small T');
+  add('Ts', 'small T lower', or(hbar(1, 1, 3), vbar(2, 1, 3)), 'small T');             // shifted down one
+
+  add('crosses', 'plus', plus(2, 2, 2), 'plus', ['row 2', 'col 2']);
+  for (const [r, c] of [[2, 2], [1, 1], [1, 3], [3, 1], [3, 3]]) add('crosses', `small plus ${r},${c}`, plus(r, c, 1), 'small plus');
+  add('crosses', 'X', or(dDown, dUp), 'X', ['diag \\', 'diag /']);
+
+  add('boxes', 'frame', frame(0, 0, 5), 'frame', ['row 0', 'row 4', 'col 0', 'col 4']);
+  for (const [r, c] of [[0, 0], [0, 2], [2, 0], [2, 2], [1, 1]]) add('boxes', `small box ${r},${c}`, frame(r, c, 3), 'small box');
+
+  for (const [r, c] of [[0, 0], [0, 3], [3, 0], [3, 3], [1, 1], [2, 2]]) add('blocks', `block ${r},${c}`, block(r, c, 2), 'block');
+  add('blocks', 'big block', block(1, 1, 3));
+
+  add('letters', 'C', rows('.####', '#....', '#....', '#....', '.####'));
+  add('letters', 'U', rows('#...#', '#...#', '#...#', '#...#', '#####'), 'U', ['col 0', 'col 4', 'row 4']);
+  add('letters', 'H', rows('#...#', '#...#', '#####', '#...#', '#...#'), 'H', ['col 0', 'col 4', 'row 2']);
+  add('letters', 'E', rows('#####', '#....', '#####', '#....', '#####'), 'E', ['row 0', 'row 2', 'row 4', 'col 0']);
+  add('letters', 'F', rows('#####', '#....', '#####', '#....', '#....'), 'F', ['row 0', 'row 2', 'col 0']);
+  add('letters', 'Z', rows('#####', '...#.', '..#..', '.#...', '#####'));
+  add('letters', 'S', rows('.####', '#....', '.###.', '....#', '####.'));
+  add('letters', 'P', rows('####.', '#...#', '####.', '#....', '#....'));
+
+  add('brackets', '[', rows('###..', '#....', '#....', '#....', '###..'));
+  add('brackets', ']', rows('..###', '....#', '....#', '....#', '..###'));
+
+  const up = rows('..#..', '.#.#.', '#...#', '.....', '.....');
+  add('chevrons', 'chevron up', up); add('chevrons', 'chevron right', rot(up));
+  add('chevrons', 'chevron down', rot(rot(up))); add('chevrons', 'chevron left', rot(rot(rot(up))));
+
+  const step = rows('#....', '##...', '.##..', '..##.', '...##');
+  add('steps', 'steps \\', step); add('steps', 'steps /', rot(step));
+
+  // the "bars problem": shapes that are nothing but bars laid over each other
+  for (const [r, c] of [[1, 1], [1, 3], [3, 1], [3, 3], [0, 1], [4, 3], [1, 0], [3, 4]])
+    add('bar pairs', `row ${r} + col ${c}`, or(hbar(r), vbar(c)), 'row + col', [`row ${r}`, `col ${c}`]);
+  for (const [a, b] of [[0, 2], [1, 3], [2, 4], [0, 4]]) add('bar pairs', `rows ${a} + ${b}`, or(hbar(a), hbar(b)), 'two rows', [`row ${a}`, `row ${b}`]);
+  for (const [a, b] of [[0, 2], [1, 3], [2, 4], [0, 4]]) add('bar pairs', `cols ${a} + ${b}`, or(vbar(a), vbar(b)), 'two cols', [`col ${a}`, `col ${b}`]);
+  const bar = ([k, i]) => (k === 'row' ? hbar(i) : vbar(i));
+  for (const t of [[['row', 1], ['col', 1], ['col', 3]], [['row', 3], ['col', 1], ['col', 3]], [['row', 1], ['row', 3], ['col', 2]],
+    [['row', 1], ['row', 3], ['col', 1]], [['row', 0], ['row', 4], ['col', 2]], [['col', 0], ['col', 4], ['row', 1]]]) {
+    const names = t.map(([k, i]) => `${k} ${i}`);
+    add('bar triples', names.join(' + '), or(...t.map(bar)), 'three bars', names);
+  }
+  return { patterns: out, dropped };
+}
+
+// ---- the stream: patterns in random order (each pass a fresh shuffle, so all are seen equally often), each flash flipping
+// every cell independently with chance `noise` (5% flips about 1.25 of 25 cells). `noise` may be a number or a function
+// (the viewer's slider). Seeded, so a run can be repeated exactly.
+function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1);
+  t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function noisy(bits, p, r) { const q = bits.slice(); for (let i = 0; i < SIZE; i++) if (r() < p) q[i] ^= 1; return q; }
+function* stream(patterns, { seed = 1, noise = 0.05 } = {}) {
+  const r = rng(seed), order = patterns.map((_, i) => i);
+  for (let t = 0; ;) {
+    for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    for (const id of order) { const p = typeof noise === 'function' ? noise() : noise; yield { t: t++, id, clean: patterns[id].bits, bits: noisy(patterns[id].bits, p, r) }; }
+  }
+}
+
+const CATALOGUE = build();
+if (typeof module !== 'undefined') module.exports = { N, SIZE, CATALOGUE, build, stream, noisy, rng };
+</script>
+<script>// C25 WORLD: squares and diamonds that move and bump. The TRUE rules (the machine never reads this; it only sees pictures).
+//  - square: 2x2 pixels; diamond: 4 pixels in a 3x3 box. Each object sits in a 3x3 slot (its top-left corner is its position).
+//  - every step each object moves one cell in its direction (up, down, left or right).
+//  - a wall: the object turns round and steps back the way it came.
+//  - two objects whose slots would come within one cell of each other: both turn round and step back, and
+//      the one hit from below flips (square <-> diamond); the one hit from above becomes a square; from the side, no change.
+'use strict';
+const BUMP = (() => {
+  const SHAPES = { square: [[0, 0], [1, 0], [0, 1], [1, 1]], diamond: [[1, 0], [0, 1], [2, 1], [1, 2]] };
+  const DIRS = [[0, -1], [0, 1], [-1, 0], [1, 0]];
+  // WALLS (C25b): a border drawn in pictures, made of 2-pixel bricks: top and bottom rows, and two-wide sides. Objects bounce
+  // when their slot would come within one cell of a brick. Off by default (then the edge of the picture is the wall).
+  // cfg.room = { x, y, w, h }: the walls' outer rectangle (any size and place); null = the whole picture
+  const cfg = { walls: false, room: null };
+  const room = (N) => cfg.room || { x: 0, y: 0, w: N, h: N };
+  const box = (N) => { if (!cfg.walls) return { x0: 0, y0: 0, x1: N - 1, y1: N - 1 }; const R = room(N); return { x0: R.x + 3, y0: R.y + 2, x1: R.x + R.w - 4, y1: R.y + R.h - 3 }; };   // where a slot may lie
+  const outside = (x, y, N) => { const b = box(N); return x < b.x0 || y < b.y0 || x + 2 > b.x1 || y + 2 > b.y1; };
+  function bricks(N) { const R = room(N), out = []; for (let x = 0; x + 1 < R.w; x += 3) { out.push([R.x + x, R.y]); out.push([R.x + x, R.y + R.h - 1]); } for (let y = 2; y < R.h - 2; y += 2) { out.push([R.x, R.y + y]); out.push([R.x + R.w - 2, R.y + y]); } return out; }
+  // a random room that fits in the picture (at least min wide and high)
+  function randomRoom(r, N, min = 12) { const w = min + Math.floor(r() * (N - min + 1)), h = min + Math.floor(r() * (N - min + 1)); return { x: Math.floor(r() * (N - w + 1)), y: Math.floor(r() * (N - h + 1)), w, h }; }
+  // slots closer than one empty cell?  (slots are 3x3 at positions p, q)
+  const near = (p, q) => Math.abs(p[0] - q[0]) < 4 && Math.abs(p[1] - q[1]) < 4;
+  function step(objs, N) {
+    const want = objs.map((o) => [o.x + o.dx, o.y + o.dy]), out = objs.map((o) => ({ ...o })), hit = new Set();
+    for (let i = 0; i < objs.length; i++) for (let j = i + 1; j < objs.length; j++) {
+      if (hit.has(i) || hit.has(j) || !near(want[i], want[j])) continue; hit.add(i); hit.add(j);
+      for (const [a, b] of [[i, j], [j, i]]) { const A = objs[a], B = objs[b], o = out[a];
+        const vertical = Math.abs(A.y - B.y) > Math.abs(A.x - B.x);
+        if (vertical && B.y > A.y) o.shape = A.shape === 'square' ? 'diamond' : 'square';   // hit from below: flip
+        else if (vertical && B.y < A.y) o.shape = 'square';                                   // hit from above: square
+        o.dx = -A.dx; o.dy = -A.dy; o.x = A.x - A.dx; o.y = A.y - A.dy; } }
+    for (let i = 0; i < objs.length; i++) { if (hit.has(i)) continue; const o = out[i], [x, y] = want[i];
+      if (outside(x, y, N)) { o.dx = -o.dx; o.dy = -o.dy; o.x = objs[i].x + o.dx; o.y = objs[i].y + o.dy; } else { o.x = x; o.y = y; } }
+    // a step back can clash with someone else; then that object just stays
+    for (let i = 0; i < out.length; i++) for (let j = 0; j < out.length; j++) if (i !== j && near([out[i].x, out[i].y], [out[j].x, out[j].y]) && hit.has(i)) { out[i].x = objs[i].x; out[i].y = objs[i].y; }
+    return out;
+  }
+  function picture(objs, N, loose = []) { const x = new Uint8Array(N * N); if (cfg.walls) for (const [a, b] of bricks(N)) { x[b * N + a] = 1; if (a + 1 < N) x[b * N + a + 1] = 1; } for (const [a, b] of loose) { x[b * N + a] = 1; x[b * N + a + 1] = 1; } for (const o of objs) for (const [a, b] of SHAPES[o.shape]) { const p = o.x + a, q = o.y + b; if (p >= 0 && q >= 0 && p < N && q < N) x[q * N + p] = 1; } return x; }
+  // n objects at random places (slots at least one cell apart), random shapes and directions
+  function start(r, n, N) { const objs = [], b = box(N); for (let tries = 0; objs.length < n && tries < 500; tries++) { const p = [b.x0 + Math.floor(r() * (b.x1 - b.x0 - 1)), b.y0 + Math.floor(r() * (b.y1 - b.y0 - 1))];
+      if (objs.some((o) => near(p, [o.x, o.y]))) continue; const [dx, dy] = DIRS[Math.floor(r() * 4)]; objs.push({ x: p[0], y: p[1], dx, dy, shape: r() < 0.5 ? 'square' : 'diamond' }); } return objs; }
+  // two objects set up to meet: a target (still, or moving any way) and one heading at it from a random side, up to 3 cells off-centre
+  function meeting(r, N) { const b = box(N), side = Math.floor(r() * 4), c = [b.x0 + Math.floor(r() * (b.x1 - b.x0 - 1)), b.y0 + Math.floor(r() * (b.y1 - b.y0 - 1))], d = 5 + Math.floor(r() * 2);
+    const [dx, dy] = DIRS[side], A = { x: c[0], y: c[1], dx: 0, dy: 0, shape: r() < 0.5 ? 'square' : 'diamond' };
+    const td = DIRS[Math.floor(r() * 4)]; if (r() < 0.5) { A.dx = td[0]; A.dy = td[1]; }
+    const off = Math.floor(r() * 7) - 3;   // off-centre by up to 3 cells to the side
+    const B = { x: c[0] - dx * d + (dy !== 0 ? off : 0), y: c[1] - dy * d + (dx !== 0 ? off : 0), dx, dy, shape: r() < 0.5 ? 'square' : 'diamond' };
+    if (outside(B.x, B.y, N) || outside(A.x, A.y, N)) return null; return [A, B]; }
+  return { SHAPES, DIRS, step, picture, start, meeting, near, cfg, bricks, box, randomRoom };
+})();
+if (typeof module !== 'undefined') module.exports = BUMP;
+</script>
+<script>// CLEAN (C26; a copy of C20's flow.js with its crutches taken out). Changes:
+//  - MEMORIES MAY HOLD LOOSE PIXELS: a stored scene's leftover (what no part explains) is kept as a LOOSE remainder: it costs
+//    its pixels (as loose pixels do), it is never used to explain awake, and it doesn't count as a unit when pricing a
+//    placement. A part used by only one memory is unpacked back into loose pixels when that lowers energy (it always does).
+//    At rest, loose remainders are compared like parts, so something seen twice still becomes a part. No more scraps.
+//  - LOOK AGAIN: at rest, memories can be re-described with what is known now (exact descriptions only), when that is no
+//    dearer; parts that only old descriptions used then go. Coincidences between old memories don't outlive them.
+//  - NO SEARCH BUDGETS: rest tries every candidate move (best estimate first) until one lowers energy; two parts are
+//    compared at EVERY shift and the shift that lowers energy most is proposed (not just the biggest overlap); the best
+//    explanation tries every opening placement, not the strongest 12.
+// ENERGY WITH THE FLOW (C20; a copy of C19's instances.js). Changes from C19:
+//  - one currency, from the world: a loose or wrong pixel costs 1, a stored pixel costs 1, a placement costs 1 + log2(units+1)/log2(pixels
+//    in the world) (naming which unit, priced against naming a pixel). No hand-set cost.
+//  - TOTAL ENERGY = structure (stored pixels + placements in memories and composites) + flow (the cost of explaining every
+//    awake scene since the last rest with what exists now). Memories are kept exactly, so older scenes are always counted.
+//  - rest proposes moves cheaply, then MEASURES each (apply, re-explain the flow, keep only if total energy fell, else undo).
+//    Moves: decompose, compose, and two new opposites: dissolve (fold a composite into its users) and fuse (a composite
+//    becomes one plain part). Unused units are always-hot structure and go, like duplicates and pass-throughs.
+// Everything else (shift-invariant parts, placements, multiple instances, the scene world) is as C19, described below.
+// ---- C19 notes:
+// MULTIPLE INSTANCES (C19; a copy of C18's shift.js, generalised). Changes from C18, each removing a limitation:
+//  - explaining: a unit may be placed more than once in a scene (any placement that newly explains something);
+//  - composing: a memory is also compared with itself, and every occurrence of an arrangement is counted and replaced;
+//  - the world is 12x12, and some scenes hold 2 or 3 copies of the same thing.
+// SHIFT-INVARIANT DECOMPOSITION AND COMPOSITION (C18). A world of scenes. Parts are stored once, in their own frame;
+// memories and composites hold PLACEMENTS (which unit, at what offset), so position lives in the placements, and a composite
+// keeps its children's RELATIVE positions.
+// AWAKE: a scene is explained by units placed anywhere (each unit at its best offset; the unit that newly explains most, net
+// of what it gets wrong and its cost, claims next). If more than (1 - threshold) is left unexplained or wrong, the scene is
+// stored as a new memory: one new part (the whole scene, in its own frame), placed where it was.
+// REST, decompose: parts are compared under every shift, including each part against itself (repeats inside one memory).
+// The overlap at the best shift becomes a part; each original becomes placements of the overlap plus its remainder. Shapes
+// that are the same up to position are the same part. Applied when it lowers energy (hottest first). Then, compose: a group
+// of placements recurring with the same relative positions in several holders becomes a composite (one layer up).
+// ENERGY = pixels stored in parts + PART_COST per placement listed in memories and composites (no new settings).
+// Also exports SceneWorld, the scene generator (shapes from the catalogue, objects made of shapes, held-out objects).
+'use strict';
+const SW = (typeof globalThis !== 'undefined' && globalThis.WORLD_SIZE) || 12, SH = SW, SPX = SW * SH;   // C25: a bigger world can be asked for (globalThis.WORLD_SIZE); default 12
+const K = { CUT: 0.5 };
+const ARMS = { FL: { label: 'FL: total energy = structure + flow, every rest move measured' } };
+const keyOf = (pts) => pts.map(([x, y]) => x + ',' + y).join(';');
+function norm(pts) { if (!pts.length) return { pts: [], ox: 0, oy: 0, key: '' }; let mx = Infinity, my = Infinity; for (const [x, y] of pts) { if (x < mx) mx = x; if (y < my) my = y; }
+  const q = pts.map(([x, y]) => [x - mx, y - my]).sort((a, b) => a[1] - b[1] || a[0] - b[0]); return { pts: q, ox: mx, oy: my, key: keyOf(q) }; }
+const ptsOf = (x) => { const out = []; for (let i = 0; i < SPX; i++) if (x[i]) out.push([i % SW, Math.floor(i / SW)]); return out; };
+const P2 = (x, y) => x * 1000 + y;
+
+class Model {
+  constructor(arm = 'FL', opt = {}) {
+    this.arm = arm; this.soft = false; this.W = SW; this.H = SH; this.o = { threshold: 0.9, columns: 'free', flow: 100, ...ARMS[arm], ...opt };
+    this.units = []; this.items = []; this.nid = 0; this.t = 0; this.heat = 0;
+    this.buf = []; this.bufH = []; this.flowSeen = 0;   // awake scenes since the last rest (the flow), and how they are explained now
+    this.st = { snapshots: 0, factored: 0, collapsed: 0, composed: 0, dissolved: 0, fused: 0, dropped: 0, restSteps: 0 }; this.tried = 0; this.rejected = 0; this.lastRest = null; this.inRest = false;
+  }
+  get cols() { return this.units; }
+  get parts() { return this.units.filter((u) => u.layer === 1); }
+  get layers() { const top = Math.max(1, ...this.units.map((u) => u.layer)); return Array.from({ length: top }, (_, k) => ({ index: k, n: null, cols: this.units.filter((u) => u.layer === k + 1) })); }
+  holders() { return [...this.items, ...this.units.filter((u) => u.layer > 1)]; }
+  allH() { return [...this.holders(), ...this.bufH]; }
+  // THE PRICE OF A PLACEMENT, from the world, not a setting: 1, plus the bits to say WHICH unit, measured in "where" units
+  // (log2 of the pixels in the world, the cost of naming one pixel). A loose pixel costs 1; a stored pixel costs 1.
+  pc() { return 1 + Math.log2(this.units.filter((u) => !u.loose).length + 1) / Math.log2(SPX); }   // loose remainders aren't units
+  get live() { return this.units.filter((u) => !u.loose); }
+  exp(u) { if (u.layer === 1) return u.pts; if (u._exp) return u._exp; const s = new Map();
+    for (const k of u.place) for (const [x, y] of this.exp(k.u)) s.set(P2(x + k.dx, y + k.dy), [x + k.dx, y + k.dy]); u._exp = norm([...s.values()]).pts; return u._exp; }
+  pic(u) { const m = new Float32Array(SPX); for (const [x, y] of this.exp(u)) if (x >= 0 && y >= 0 && x < SW && y < SH) m[y * SW + x] = 1; return m; }
+  refresh() { for (const u of this.units) u._exp = null; for (const u of this.units) { u.m = this.pic(u); u.size = this.exp(u).length; } }
+  // loose: a memory's remainder (not a unit). Finding the same shape again as a non-loose piece makes it a unit.
+  part(pts, loose = false) { const n = norm(pts); let p = this.units.find((u) => u.layer === 1 && u.key === n.key);
+    if (p && !loose && p.loose) p.loose = false;
+    if (!p) { p = { id: this.nid++, layer: 1, pts: n.pts, key: n.key, uses: 0, born: this.t, last: this.t, cells: [], loose }; p.m = this.pic(p); p.size = n.pts.length; this.units.push(p); }
+    return { u: p, dx: n.ox, dy: n.oy }; }
+  links() { return this.holders().reduce((a, h) => a + h.place.filter((k) => !k.u.loose).length, 0); }   // a loose remainder costs its pixels only
+  itemsUsing(u) { return this.holders().filter((h) => h.place.some((k) => k.u === u)).length; }
+  // TOTAL ENERGY = structure (pixels stored + every placement listed in memories and composites) + flow (the cost of
+  // explaining each awake scene since the last rest with what exists now: placements + pixels left over + pixels wrong)
+  measure() { const pc = this.pc(), px = this.parts.reduce((a, p) => a + p.pts.length, 0), structure = px + pc * this.links(); let flow = 0;
+    for (const x of this.buf) flow += this.explain(x, pc).cost; return { E: structure + flow, structure, flow, pc }; }
+  // for display: the flow as each scene was explained when seen (cheap); rest always uses measure()
+  glance() { const pc = this.pc(), structure = this.parts.reduce((a, p) => a + p.pts.length, 0) + pc * this.links(); return { E: structure + this.flowSeen, structure, flow: this.flowSeen, pc }; }
+  energy() { return Math.round(this.glance().E * 10) / 10; }
+
+  // ---- explain a scene: greedy by net gain (newly explained - wrong), a placement taken only if its gain beats its price.
+  // Lazy: a placement's gain can only fall as the scene fills, so its last score bounds it and only the top is re-scored.
+  explain(x, pc = this.pc(), ban = null, first = null) {
+    const on = ptsOf(x), cov = new Uint8Array(SPX), cand = [];
+    const OW = 2 * SW, tally = this._tally || (this._tally = new Int32Array(OW * 2 * SH)), touched = [];   // offsets -SW..SW-1 x -SH..SH-1
+    for (const u of this.units) { if (u.loose) continue; const pts = this.exp(u), L = pts.length; if (2 * Math.min(L, on.length) - L <= pc) continue;
+      for (const [ux, uy] of pts) for (const [a, b] of on) { const i = (b - uy + SH) * OW + (a - ux + SW); if (!tally[i]++) touched.push(i); }
+      for (const i of touched) { const n = tally[i]; tally[i] = 0; const s = 2 * n - L; if (s > pc && !(ban && ban.has(u.id + '@' + ((i % OW) - SW) + ',' + (Math.floor(i / OW) - SH)))) cand.push({ u, dx: (i % OW) - SW, dy: Math.floor(i / OW) - SH, s, w: L - n, len: L }); } touched.length = 0; }
+    const better = (a, b) => a.s > b.s || (a.s === b.s && a.len > b.len);
+    cand.sort((a, b) => (better(a, b) ? -1 : better(b, a) ? 1 : 0));
+    const claims = []; let misses = 0;
+    if (first) { const i = cand.findIndex((c) => c.u === first.u && c.dx === first.dx && c.dy === first.dy); if (i >= 0) { const c = cand.splice(i, 1)[0];   // this placement is taken first
+      claims.push({ c: c.u, dx: c.dx, dy: c.dy }); misses += c.w; for (const [ux, uy] of this.exp(c.u)) { const x2 = ux + c.dx, y2 = uy + c.dy; if (x2 >= 0 && y2 >= 0 && x2 < SW && y2 < SH && x[y2 * SW + x2]) cov[y2 * SW + x2] = 1; } } }
+    while (cand.length) { const c = cand.shift(); let g = 0;
+      for (const [ux, uy] of this.exp(c.u)) { const x2 = ux + c.dx, y2 = uy + c.dy; if (x2 >= 0 && y2 >= 0 && x2 < SW && y2 < SH) { const i = y2 * SW + x2; if (x[i] && !cov[i]) g++; } }
+      c.s = g - c.w; if (c.s <= pc) continue;
+      if (cand.length && better(cand[0], c)) { let i = 0; while (i < cand.length && !better(c, cand[i])) i++; cand.splice(i, 0, c); continue; }
+      claims.push({ c: c.u, dx: c.dx, dy: c.dy }); misses += c.w;
+      for (const [ux, uy] of this.exp(c.u)) { const x2 = ux + c.dx, y2 = uy + c.dy; if (x2 >= 0 && y2 >= 0 && x2 < SW && y2 < SH && x[y2 * SW + x2]) cov[y2 * SW + x2] = 1; } }
+    const left = [], ownerPx = new Int16Array(SPX).fill(-1), missPx = new Int16Array(SPX).fill(-1), recon = new Uint8Array(SPX);
+    claims.forEach((c, k) => { for (const [ux, uy] of this.exp(c.c)) { const x2 = ux + c.dx, y2 = uy + c.dy; if (x2 < 0 || y2 < 0 || x2 >= SW || y2 >= SH) continue; const i = y2 * SW + x2;
+      recon[i] = 1; if (x[i] && ownerPx[i] < 0) ownerPx[i] = k; if (!x[i]) missPx[i] = k; } });
+    for (const [a, b] of on) if (!cov[b * SW + a]) left.push(b * SW + a);
+    return { claims, left, misses, recon, ownerPx, missPx, on: on.length, cost: pc * claims.length + left.length + misses };
+  }
+  step(x) {
+    this.t++; const r = this.explain(x), hs = r.on ? (r.left.length + r.misses) / r.on : 0; let born = null;
+    if (r.on && hs > 1 - this.o.threshold) { const pl = this.part(ptsOf(x)); born = pl.u; this.items.push({ id: this.items.length, place: [pl], scene: x.slice() }); this.st.snapshots++; }
+    else if (r.on) { this.buf.push(x.slice()); this.flowSeen += r.cost; if (this.buf.length > this.o.flow) this.flowSeen -= this.explain(this.buf.shift()).cost; }   // the flow: the scenes explained since the last rest (the most recent 100)
+    for (const { c } of r.claims) { c.uses++; c.last = this.t; } this.heat = hs;
+    return { ...r, born, bornAll: born ? [born] : [], heatShare: hs, sim: 1 - hs, cells: [], work: this.units.length, rested: false };
+  }
+  // BEST EXPLANATION (option, C21): greedy can grab a big unit with wrong pixels (one box for two sticks). So the strongest
+  // opening placements are each tried first, the rest filled greedily, and the explanation with the lowest total cost
+  // (placements + left over + wrong) is kept.
+  explainBest(x) { const pc = this.pc(); let best = this.explain(x, pc);
+    // every opening placement is tried first in turn; the rest is filled greedily; the cheapest whole explanation wins
+    const open = this.openings(x, pc);
+    for (const o of open) { const r = this.explain(x, pc, null, o); if (r.cost < best.cost - 1e-9) best = r; }
+    return best; }
+  openings(x, pc) { const on = ptsOf(x), out = [];
+    for (const u of this.units) { if (u.loose) continue; const pts = this.exp(u), L = pts.length, t = new Map(); for (const [ux, uy] of pts) for (const [a, b] of on) { const k = P2(a - ux, b - uy); t.set(k, (t.get(k) || 0) + 1); }
+      for (const [k, n] of t) { const sc = 2 * n - L; if (sc > pc) { const dx = Math.floor((k + 500) / 1000); out.push({ u, dx, dy: k - dx * 1000, sc }); } } }
+    return out.sort((a, b) => b.sc - a.sc); }
+  read(x, best = this.o.best) { return { ...(best ? this.explainBest(x) : this.explain(x)), cells: [] }; }
+
+  // ---- REST. Candidate moves are proposed cheaply (from the placement lists), then each is MEASURED: applied, the flow
+  // re-explained, and kept only if total energy fell; otherwise undone. Four moves, and their opposites are among them:
+  //  decompose (split two parts at their best shift), compose (a recurring arrangement becomes a composite),
+  //  dissolve (a composite is folded back into its users), fuse (a composite becomes one plain part again).
+  // every shift at which A and B (or A and itself) share at least two pixels
+  shifts(A, B, self) { const tally = new Map(); for (const [ax, ay] of A.pts) for (const [bx, by] of B.pts) { const k = P2(ax - bx, ay - by); if (self && k === 0) continue; tally.set(k, (tally.get(k) || 0) + 1); }
+    const out = []; for (const [k, n] of tally) if (n >= 2) { const dx = Math.floor((k + 500) / 1000); out.push({ dx, dy: k - dx * 1000, n }); } return out; }
+  // the geometry of comparing two parts never changes while both exist (parts are never edited), so it is remembered
+  geoms(A, B) { const id = A.id + '|' + B.id; if (!this._geo) this._geo = new Map(); if (!this._geo.has(id)) this._geo.set(id, this.shifts(A, B, A === B).map((sh) => this.splitGeom(A, B, sh))); return this._geo.get(id); }
+  // the cost of a unit and its uses: its pixels, plus a placement per use (a loose remainder's use is free)
+  planSplit(A, B, uses, pc) { let best = null; for (const g of this.geoms(A, B)) { const p = this.priceSplit(A, B, g, uses, pc); if (!best || p.est > best.est) best = p; } return best; }
+  priceSplit(A, B, g, uses, pc) {
+    const { self, pA, pB } = g, keys = this._keys, link = (n) => (n.loose ? 0 : pc);
+    const usesA = uses.get(A) || 0, usesB = self ? 0 : uses.get(B) || 0;
+    let before = A.pts.length + usesA * link(A) + (self ? 0 : B.pts.length + usesB * link(B)), after = 0; const added = new Set();
+    for (const n of [...pA, ...(pB || [])]) if (!((keys.get(n.key) || 0) > (n.key === A.key) + (!self && n.key === B.key)) && !added.has(n.key)) { added.add(n.key); after += n.pts.length; }
+    const listCost = (P) => P.reduce((a, n) => a + link(n), 0);
+    const wrapA = !A.loose && pc * pA.length <= usesA * (listCost(pA) - pc), wrapB = !self && !B.loose && pc * pB.length <= usesB * (listCost(pB) - pc);
+    after += wrapA ? pc * pA.length + usesA * pc : usesA * listCost(pA); if (!self) after += wrapB ? pc * pB.length + usesB * pc : usesB * listCost(pB);
+    return { A, B, self, pA, pB, wrapA, wrapB, est: before - after, overlap: g.overlap };
+  }
+  // pieces: the shared overlap (a part: it is in both), and each side's remainder (loose if that side was loose)
+  splitGeom(A, B, { dx, dy }) {
+    const self = A === B;
+    const inA = new Set(A.pts.map(([x, y]) => P2(x, y))), O = B.pts.map(([x, y]) => [x + dx, y + dy]).filter(([x, y]) => inA.has(P2(x, y)));
+    const oset = new Set(O.map(([x, y]) => P2(x, y)));
+    let piecesA, piecesB = null;
+    if (self) { const back = O.map(([x, y]) => [x - dx, y - dy]), cover = new Set([...oset, ...back.map(([x, y]) => P2(x, y))]);
+      piecesA = [[O, false], [back, false], [A.pts.filter(([x, y]) => !cover.has(P2(x, y))), !!A.loose]]; }
+    else { piecesA = [[O, false], [A.pts.filter(([x, y]) => !oset.has(P2(x, y))), !!A.loose]]; const ob = new Set(O.map(([x, y]) => P2(x - dx, y - dy)));
+      piecesB = [[O.map(([x, y]) => [x - dx, y - dy]), false], [B.pts.filter(([x, y]) => !ob.has(P2(x, y))), !!B.loose]]; }
+    const keep = (arr) => arr.filter(([p]) => p.length).map(([p, loose]) => ({ ...norm(p), loose }));
+    return { self, pA: keep(piecesA), pB: piecesB ? keep(piecesB) : null, overlap: O.length };
+  }
+  applySplit(best) {
+    const H = this.allH(), { A, B, self, pA, pB, wrapA, wrapB } = best; this.units = this.units.filter((u) => u !== A && u !== B);
+    const mk = (n) => { const q = this.part(n.pts, n.loose); return { u: q.u, dx: n.ox - q.dx, dy: n.oy - q.dy }; };
+    const rA = pA.map(mk), rB = pB ? pB.map(mk) : null;
+    const wrap = (X, r) => { X.layer = 1 + Math.max(...r.map((p) => p.u.layer)); X.place = r.map((p) => ({ u: p.u, dx: p.dx, dy: p.dy })); delete X.pts; X.key = null; this.units.push(X); };
+    if (wrapA) wrap(A, rA); if (!self && wrapB) wrap(B, rB);
+    for (const h of H) { if (h === A || h === B) continue; const nw = []; for (const k of h.place) { const r = k.u === A && !wrapA ? rA : (!self && k.u === B && !wrapB ? rB : null);
+      if (r) for (const p of r) nw.push({ u: p.u, dx: k.dx + p.dx, dy: k.dy + p.dy }); else nw.push(k); } h.place = nw; }
+    this.st.factored++; return { type: 'decompose', A, B, self, pieces: [...new Set([...rA, ...(rB || [])].map((p) => p.u))] };
+  }
+  findIn(h, cfg) {
+    const out = [], taken = new Set();
+    for (const k of h.place) { if (k.u !== cfg[0].u) continue; const tx = k.dx - cfg[0].dx, ty = k.dy - cfg[0].dy, hit = [];
+      for (const c of cfg) { const q = h.place.find((z) => z.u === c.u && z.dx === c.dx + tx && z.dy === c.dy + ty && !taken.has(z)); if (!q) { hit.length = 0; break; } hit.push(q); }
+      if (hit.length === cfg.length) { hit.forEach((q) => taken.add(q)); out.push({ tx, ty, hit }); } }
+    return out; }
+  planComposes(H, pc) {
+    const out = [], seen = new Set();
+    for (let i = 0; i < H.length; i++) for (let j = i; j < H.length; j++) for (const p of H[i].place) for (const q of H[j].place) { if (p.u !== q.u || p === q) continue;
+      const tx = q.dx - p.dx, ty = q.dy - p.dy; if (i === j && tx === 0 && ty === 0) continue;
+      if (p.u.loose) continue; const cfg = H[i].place.filter((a) => !a.u.loose && H[j].place.some((b) => b.u === a.u && b.dx === a.dx + tx && b.dy === a.dy + ty && (i !== j || b !== a)));
+      if (cfg.length < 2) continue; let mx = Infinity, my = Infinity; for (const c of cfg) { mx = Math.min(mx, c.dx); my = Math.min(my, c.dy); }
+      const rel = cfg.map((c) => ({ u: c.u, dx: c.dx - mx, dy: c.dy - my })).sort((a, b) => a.u.id - b.u.id || a.dy - b.dy || a.dx - b.dx), key = rel.map((c) => c.u.id + '@' + c.dx + ',' + c.dy).join(' ');
+      if (seen.has(key)) continue; seen.add(key);
+      const n = H.reduce((a, h) => a + this.findIn(h, rel).length, 0); if (n < 2) continue;
+      out.push({ rel, est: pc * (n * (rel.length - 1) - rel.length) }); }
+    return out; }
+  applyCompose(best) {
+    const c = { id: this.nid++, layer: 1 + Math.max(...best.rel.map((k) => k.u.layer)), place: best.rel, uses: 0, born: this.t, last: this.t, cells: [] }; this.units.push(c);
+    for (const h of this.allH()) { if (h === c) continue; const at = this.findIn(h, best.rel); if (!at.length) continue; const drop = new Set(at.flatMap((o) => o.hit));
+      h.place = h.place.filter((q) => !drop.has(q)); for (const o of at) h.place.push({ u: c, dx: o.tx, dy: o.ty }); }
+    this.st.composed++; return { type: 'compose', made: c, pieces: [c] };
+  }
+  applyDissolve(c) {
+    for (const h of this.allH()) { if (h === c || !h.place.some((k) => k.u === c)) continue;
+      h.place = h.place.flatMap((k) => (k.u === c ? c.place.map((p) => ({ u: p.u, dx: k.dx + p.dx, dy: k.dy + p.dy })) : [k])); }
+    this.units = this.units.filter((u) => u !== c); this.st.dissolved++; return { type: 'dissolve', A: c, pieces: [...new Set(c.place.map((p) => p.u))] };
+  }
+  applyFuse(c) { const pts = this.exp(c).map(([x, y]) => [x, y]), kids = [...new Set(c.place.map((p) => p.u))];
+    c.layer = 1; c.pts = pts; c.key = keyOf(pts); delete c.place; c._exp = null; this.st.fused++; return { type: 'fuse', A: c, made: c, pieces: [c], kids }; }
+  candidates() {
+    const pc = this.pc(), H = this.allH(), out = [], parts = this.parts;
+    const uses = new Map(); for (const h of H) for (const k of h.place) uses.set(k.u, (uses.get(k.u) || 0) + 1);
+    this._keys = new Map(); for (const p of parts) this._keys.set(p.key, (this._keys.get(p.key) || 0) + 1);
+    for (let i = 0; i < parts.length; i++) for (let j = i; j < parts.length; j++) { const p = this.planSplit(parts[i], parts[j], uses, pc); if (p) out.push({ est: p.est, go: () => this.applySplit(p) }); }
+    for (const p of this.planComposes(H, pc)) out.push({ est: p.est, go: () => this.applyCompose(p) });
+    const refs = new Map(), only = new Map(), byItemOnly = new Map(); for (const h of H) for (const k of h.place) { refs.set(k.u, (refs.get(k.u) || 0) + 1); if (!only.has(k.u)) only.set(k.u, new Set()); only.get(k.u).add(h); }
+    for (const c of this.units) if (c.layer > 1) { const n = refs.get(c) || 0, L = c.place.length;
+      out.push({ est: pc * (L - n * (L - 1)), go: () => this.applyDissolve(c) });
+      const freed = [...new Set(c.place.map((p) => p.u))].filter((k) => only.get(k).size === 1 && k.layer === 1).reduce((a, k) => a + k.pts.length, 0);
+      out.push({ est: pc * L + freed - this.exp(c).length, go: () => this.applyFuse(c) }); }
+    // look again: every memory is re-described with what is known now (placements, plus its leftover as loose pixels), where
+    // that is exact and no dearer; parts that only old descriptions used then go (as unused structure)
+    { let est = 0; const plans = []; for (const it of this.items) { if (!it.scene) continue; const q = this.explainBest(it.scene); if (q.misses) continue;
+        const now = it.place.reduce((a, k) => a + (k.u.loose ? k.u.pts.length : pc), 0), nw = pc * q.claims.length + q.left.length; if (nw > now + 1e-9) continue; est += now - nw; plans.push([it, q]); }
+      if (plans.length) out.push({ est, go: () => { for (const [it, q] of plans) { const place = q.claims.map((c) => ({ u: c.c, dx: c.dx, dy: c.dy }));
+        if (q.left.length) { const pl = this.part(q.left.map((i) => [i % SW, Math.floor(i / SW)]), true); place.push(pl); } it.place = place; }
+        this.st.relooked = (this.st.relooked || 0) + 1; return { type: 'relook', pieces: [] }; } }); }
+    // unpack: a part that only one memory uses goes back to being that memory's loose pixels (saves its placement)
+    const items = new Set(this.items);
+    for (const p of parts) if (!p.loose && (refs.get(p) || 0) === 1 && items.has([...only.get(p)][0])) out.push({ est: pc, go: () => { p.loose = true; this.st.unpacked = (this.st.unpacked || 0) + 1; return { type: 'unpack', A: p, pieces: [p] }; } });
+    return out.sort((a, b) => b.est - a.est);
+  }
+  save() { return { units: this.units.slice(), f: this.units.map((u) => ({ ...u, place: u.place ? u.place.slice() : u.place })), items: this.items.map((h) => h.place), bufH: this.bufH.map((h) => h.place), nid: this.nid, st: { ...this.st } }; }
+  restore(s) { this.units = s.units; s.units.forEach((u, i) => { for (const k of Object.keys(u)) delete u[k]; Object.assign(u, s.f[i]); });
+    this.items.forEach((h, i) => { h.place = s.items[i]; }); this.bufH.forEach((h, i) => { h.place = s.bufH[i]; }); this.nid = s.nid; this.st = s.st; this.refresh(); }
+  // ALWAYS-HOT STRUCTURE, removed first at every step (each can only lower energy): units nothing uses; composites with one
+  // child (pass-throughs); units that look identical (same pixels up to position), from any layer.
+  tidy() {
+    let n = 0; const holders = () => [...this.items, ...this.units.filter((u) => u.layer > 1), ...this.bufH];
+    const redirect = (from, to, ox, oy) => { for (const h of holders()) { if (h === from) continue; h.place = h.place.map((k) => (k.u === from ? { u: to, dx: k.dx + ox, dy: k.dy + oy } : k)); } this.units = this.units.filter((u) => u !== from); n++; };
+    for (let again = true; again;) { again = false;
+      const used = new Set(); for (const h of holders()) for (const k of h.place) used.add(k.u);
+      const idle = this.units.filter((u) => !used.has(u)); if (idle.length) { this.units = this.units.filter((u) => used.has(u)); this.st.dropped += idle.length; again = true; continue; }
+      for (const u of this.units) if (u.layer > 1 && u.place.length === 1) { const c = u.place[0]; redirect(u, c.u, c.dx, c.dy); again = true; break; }
+      if (again) continue;
+      this.refresh(); const byKey = new Map(); for (const u of this.units) { if (u.loose) continue; const k = norm(this.exp(u)).key; if (!byKey.has(k)) byKey.set(k, []); byKey.get(k).push(u); }
+      for (const g of byKey.values()) if (g.length > 1) { const keep = g.reduce((a, b) => (this.itemsUsing(b) > this.itemsUsing(a) ? b : a)); for (const d of g) if (d !== keep) redirect(d, keep, 0, 0); again = true; break; } }
+    for (let ch = true; ch;) { ch = false; for (const u of this.units) if (u.layer > 1) { const L = 1 + Math.max(...u.place.map((k) => k.u.layer)); if (L !== u.layer) { u.layer = L; ch = true; } } }
+    this.refresh(); this.st.collapsed += n; return n;
+  }
+  restStep() {
+    const pc = this.pc(); this.bufH = this.buf.map((x) => ({ place: this.explain(x, pc).claims.map((c) => ({ u: c.c, dx: c.dx, dy: c.dy })), replay: true }));
+    this.tidy(); const E0 = this.measure().E;
+    for (const c of this.candidates()) { const s = this.save(); const a = c.go(); this.tidy(); const E1 = this.measure().E; this.tried++;
+      if (E1 < E0 - 1e-9) { this.flowSeen = this.measure().flow; a.saving = Math.round((E0 - E1) * 10) / 10; this.st.restSteps++; this.lastRest = a; return a; }
+      this.restore(s); this.rejected++; }
+    this.buf = []; this.bufH = []; this.flowSeen = 0; this._geo = null; this.lastRest = null; return null;
+  }
+  rest(max = 100000) { let n = 0; while (n < max && this.restStep()) n++; return n; }
+  cellCount() { return 0; }
+}
+
+// ---- THE SCENE WORLD: shapes (cut from the catalogue), objects (shapes in a fixed arrangement), scenes of 1-3 things
+class SceneWorld {
+  constructor(cat) {
+    const crop = (name) => norm(ptsOf25(cat.patterns.find((p) => p.name === name).bits)).pts;
+    function ptsOf25(b) { const o = []; for (let i = 0; i < 25; i++) if (b[i]) o.push([i % 5, Math.floor(i / 5)]); return o; }
+    this.shapes = { block: crop('block 0,0'), plus: crop('small plus 1,1'), corner: crop('corner tl'), box: crop('small box 0,0'), chevron: crop('chevron up'), bar: crop('row 0 left'), stick: crop('col 0 top'), diag: crop('short \\ upper') };
+    const S = this.shapes, put = (list) => { const s = new Map(); for (const [nm, dx, dy] of list) for (const [x, y] of S[nm]) s.set(P2(x + dx, y + dy), [x + dx, y + dy]); return norm([...s.values()]).pts; };
+    this.objects = { house: put([['chevron', 0, 0], ['box', 1, 2]]), flag: put([['stick', 0, 0], ['block', 1, 0]]), twins: put([['block', 0, 0], ['block', 3, 0]]) };
+    this.heldObjects = { tower: put([['box', 0, 0], ['box', 0, 3]]), arrow: put([['chevron', 0, 0], ['stick', 2, 2]]) };
+    this.things = [...Object.entries(this.shapes), ...Object.entries(this.objects)];
+  }
+  // place a list of things ([name, points]) at random free positions (a 1-pixel gap around each); things that don't fit are skipped
+  place(r, list) {
+    const x = new Uint8Array(SPX), taken = new Set(), names = [];
+    for (const [nm, pts] of list) { let w = 0, h = 0; for (const [a, b] of pts) { w = Math.max(w, a + 1); h = Math.max(h, b + 1); }
+      for (let tries = 0; tries < 60; tries++) { const ox = Math.floor(r() * (SW - w + 1)), oy = Math.floor(r() * (SH - h + 1)); let ok = true;
+        for (let yy = oy - 1; yy <= oy + h && ok; yy++) for (let xx = ox - 1; xx <= ox + w; xx++) if (taken.has(P2(xx, yy))) { ok = false; break; }
+        if (!ok) continue; for (let yy = oy; yy < oy + h; yy++) for (let xx = ox; xx < ox + w; xx++) taken.add(P2(xx, yy)); for (const [a, b] of pts) x[(oy + b) * SW + ox + a] = 1; names.push(nm); break; } }
+    return { x, name: names.join(' + ') };
+  }
+  // half the scenes: 1-3 different things; the other half: 2-3 copies of one thing, sometimes with one more thing
+  next(r, noise) { const pick = () => this.things[Math.floor(r() * this.things.length)], list = [];
+    if (r() < 0.5) { for (let k = 1 + Math.floor(r() * 3); k > 0; k--) list.push(pick()); }
+    else { const t = pick(); for (let k = 2 + Math.floor(r() * 2); k > 0; k--) list.push(t); if (r() < 0.5) list.push(pick()); }
+    const s = this.place(r, list); if (noise) for (let i = 0; i < SPX; i++) if (r() < noise) s.x[i] ^= 1; return s; }
+  // a scene with two copies of an object never seen in training (made of known shapes in a new arrangement)
+  held(r) { const h = Object.entries(this.heldObjects), t = h[Math.floor(r() * h.length)]; return this.place(r, [t, t]); }
+}
+if (typeof module !== 'undefined') module.exports = { Model, ARMS, SceneWorld, K, SW, SH, SPX, norm, ptsOf, keyOf };
+</script>
+<script>// SPARSE CODES ON PRIMITIVE COLUMNS (C21). Built on top of a learnt C20 model (flow.js), which is not changed.
+//  - COLUMNS: only the primitives (C20's layer-1 parts). Nothing else gets a column.
+//  - CELLS: every column has a grid of cells, one per offset (x, y), stacked in floors.
+//      floor 0: where an instance of the primitive is, relative to the centre of attention (the middle of the scene);
+//      floor 1, 2, ...: where the primitive sits relative to the centre of the composite it is part of.
+//  - ASSEMBLIES: a composite (house, flag, ...) is not a column. It is a set of cells in the primitive columns, one per part,
+//    at that part's offset from the composite's centre. A composite made of composites takes a SAMPLE of each child's cells
+//    (at most opt.sample per child), moved to its own centre and up to its own floor.
+//  - scenes are explained with the model's best explanation (opt.best, default on), not just its greedy one.
+//  - opt.floors: 'level' (a composite at layer L uses floor L-1) or 'shared' (all composites use floor 1).
+'use strict';
+class Codes {
+  constructor(model, opt = {}) { this.m = model; this.o = { floors: 'level', sample: 3, best: true, ...opt }; this.cache = new Map(); }
+  // the centre of a set of points (rounded down), and of a unit in its own frame
+  static centre(pts) { let w = 0, h = 0; for (const [x, y] of pts) { w = Math.max(w, x + 1); h = Math.max(h, y + 1); } return [Math.floor((w - 1) / 2), Math.floor((h - 1) / 2)]; }
+  cen(u) { return Codes.centre(this.m.exp(u)); }
+  floor(u) { return this.o.floors === 'level' ? u.layer - 1 : 1; }
+  key(c) { return c.col.id + '|' + c.f + '|' + c.x + ',' + c.y; }
+  // a unit's primitives, flattened, as [primitive, x, y] (x, y = where the primitive's own frame starts, in u's frame)
+  prims(u, ox = 0, oy = 0, out = []) { if (u.layer === 1) out.push([u, ox, oy]); else for (const k of u.place) this.prims(k.u, ox + k.dx, oy + k.dy, out); return out; }
+  // the assembly of a composite: cells {col, f, x, y}, position-free (offsets from its own centre)
+  code(u) {
+    if (u.layer === 1) return [];
+    if (this.cache.has(u)) return this.cache.get(u);
+    const [cx, cy] = this.cen(u), f = this.floor(u), out = [], seen = new Set();
+    const add = (c) => { const k = this.key(c); if (!seen.has(k)) { seen.add(k); out.push(c); } };
+    for (const k of u.place) {
+      if (k.u.layer === 1) { const [px, py] = this.cen(k.u); add({ col: k.u, f, x: k.dx + px - cx, y: k.dy + py - cy }); continue; }
+      // a child composite: a fixed sample of its cells (the same every time), moved from its centre to ours
+      const [kx, ky] = this.cen(k.u), sh = [k.dx + kx - cx, k.dy + ky - cy], cells = this.code(k.u);
+      const pick = cells.map((c, i) => [((k.u.id * 2654435761 + i * 40503) >>> 0) % 9973, c]).sort((a, b) => a[0] - b[0]).slice(0, this.o.sample).map((z) => z[1]);
+      for (const c of pick) add({ col: c.col, f, x: c.x + sh[0], y: c.y + sh[1] });
+    }
+    this.cache.set(u, out); return out;
+  }
+  // a scene: explained by the model, then floor-0 cells (every primitive instance, offset from the middle of the scene)
+  // and the assembly of each composite recognised in it
+  encode(x) {
+    const q = this.m.read(x, this.o.best), ax = Math.floor((this.m.W - 1) / 2), ay = Math.floor((this.m.H - 1) / 2), where = [], things = [];
+    for (const cl of q.claims) {
+      const at = [];
+      for (const [p, px, py] of this.prims(cl.c, cl.dx, cl.dy)) { const [qx, qy] = this.cen(p), c = { col: p, f: 0, x: px + qx - ax, y: py + qy - ay }; where.push(c); at.push(c); }
+      things.push({ unit: cl.c, dx: cl.dx, dy: cl.dy, where: at, code: this.code(cl.c) });
+    }
+    return { q, where, things };
+  }
+  // the scene as one new assembly, offsets from its own centre (how a never-seen arrangement would first be held)
+  fresh(enc) { const pts = enc.where.map((c) => [c.x, c.y]); let mx = Infinity, my = Infinity; for (const [x, y] of pts) { mx = Math.min(mx, x); my = Math.min(my, y); }
+    const [cx, cy] = Codes.centre(pts.map(([x, y]) => [x - mx, y - my])); return enc.where.map((c) => ({ col: c.col, f: 1, x: c.x - mx - cx, y: c.y - my - cy })); }
+  // rebuild pixels from cells (each cell draws its primitive centred at its offset)
+  draw(cells) { const s = new Map(); for (const c of cells) { const [px, py] = this.cen(c.col); for (const [x, y] of c.col.pts) s.set((x - px + c.x) + ',' + (y - py + c.y), [x - px + c.x, y - py + c.y]); } return [...s.values()]; }
+  overlap(a, b) { const A = new Set(a.map((c) => this.key(c))), n = b.filter((c) => A.has(this.key(c))).length; return n / Math.max(1, Math.min(a.length, b.length)); }
+}
+if (typeof module !== 'undefined') module.exports = { Codes };
+</script>
+<script>// RULES WITHOUT CRUTCHES (C26). Replaces rules.js's hand-set parts: no reach setting, no wall context, no filter, no
+// "nearest within 3", no rule-picking scheme of mine.
+// THINGS: each recognised unit in a picture (one cell: the unit, at its offset), whatever it is: an object, a brick, anything.
+// FOLLOWING from one picture to the next: the pairing that describes the change most cheaply. Describing a thing as moved
+// costs naming its new offset; describing it as gone-and-new costs more (a new placement). Nearest pairs first; anything
+// that would cost more to describe as moved than as new is left unpaired.
+// ONE PRINCIPLE FOR RULES: for each change, the smallest surroundings that always lead to it. The surroundings of a thing are
+// what it is, where it was a moment ago, and the things around it (what they are, where they are and were), each at a
+// distance. To predict: look at the thing alone first; if the situations seen like that always led to the same change,
+// that's the answer; if they led to different changes, look one step further out, and so on. If nothing seen matches at
+// some distance, the last answer that matched stands (the most common change there).
+'use strict';
+class Reach {
+  constructor(codes) { this.C = codes; this.obs = []; this.levels = null; this.units = new Map(); }
+  things(x) { const m = this.C.m, ax = Math.floor((m.W - 1) / 2), ay = Math.floor((m.H - 1) / 2);
+    return this.C.encode(x).things.map((t) => { const [cx, cy] = this.C.cen(t.unit); this.units.set(t.unit.id, t.unit); return { u: t.unit, x: t.dx + cx - ax, y: t.dy + cy - ay, px: t.dx, py: t.dy }; }); }
+  // the price of naming an offset of size d, against a new placement (pc), in the same currency as the seeing layer
+  follow(A, B) { const m = this.C.m, SPX = m.W * m.H, pc = m.pc(), all = [];
+    A.forEach((a, i) => B.forEach((b, j) => { const d = Math.max(Math.abs(a.x - b.x), Math.abs(a.y - b.y)), cost = Math.log2((2 * d + 1) ** 2) / Math.log2(SPX) + (a.u === b.u ? 0 : Math.log2(this.units.size + 1) / Math.log2(SPX)); if (cost < pc) all.push([cost, i, j]); }));
+    all.sort((p, q) => p[0] - q[0]); const ua = new Set(), ub = new Set(), pair = new Map(); for (const [, i, j] of all) { if (ua.has(i) || ub.has(j)) continue; ua.add(i); ub.add(j); pair.set(i, j); } return pair; }
+  // surroundings of thing i, each item with its distance (0 = the thing itself)
+  context(i, now, prev) { const me = now[i], out = [{ k: 'me:' + me.u.id, d: 0 }];
+    if (prev[i]) out.push({ k: 'was:' + prev[i].u.id + '@' + (prev[i].x - me.x) + ',' + (prev[i].y - me.y), d: 0 });
+    now.forEach((o, j) => { if (j === i) return; const dx = o.x - me.x, dy = o.y - me.y, d = Math.max(Math.abs(dx), Math.abs(dy)); out.push({ k: 'near:' + o.u.id + '@' + dx + ',' + dy, d });
+      if (prev[j]) out.push({ k: 'nearwas:' + prev[j].u.id + '@' + (prev[j].x - me.x) + ',' + (prev[j].y - me.y), d }); });
+    return out; }
+  afterOf(me, nx) { return nx ? nx.u.id + '@' + (nx.x - me.x) + ',' + (nx.y - me.y) : 'gone'; }
+  // observations are stored compactly: each surroundings item as a number, sorted by distance, so "out to distance r" is a prefix
+  id(k) { if (!this.ids) this.ids = new Map(); let v = this.ids.get(k); if (v === undefined) { v = this.ids.size; this.ids.set(k, v); } return v; }
+  pack(ctx) { const z = ctx.map((c) => [c.d, this.id(c.k)]).sort((p, q) => p[0] - q[0] || p[1] - q[1]); return { ids: Int32Array.from(z.map((p) => p[1])), ds: Uint8Array.from(z.map((p) => p[0])) }; }
+  learnRun(pics) { const F = pics.map((p) => this.things(p)); let prev = F[0].map(() => null);
+    for (let t = 0; t + 1 < F.length; t++) { const now = F[t], nxt = this.follow(now, F[t + 1]);
+      if (t > 0) for (let i = 0; i < now.length; i++) this.obs.push({ ...this.pack(this.context(i, now, prev)), after: this.afterOf(now[i], nxt.has(i) ? F[t + 1][nxt.get(i)] : null) });
+      const np = F[t + 1].map(() => null); for (const [i, j] of nxt) np[j] = now[i]; prev = np; }
+    this.levels = null; }
+  key(p, r) { let n = 0; while (n < p.ds.length && p.ds[n] <= r) n++; return Array.prototype.join.call(p.ids.subarray(0, n), ','); }
+  // at rest: distance by distance, what each situation (seen out to that distance) led to. Only situations that didn't
+  // always lead to the same change are looked at further out.
+  rest() { const ds = new Set([0]); for (const o of this.obs) for (const d of o.ds) ds.add(d); this.dists = [...ds].sort((a, b) => a - b); this.levels = [];
+    let S = this.obs;
+    for (const r of this.dists) { const m = new Map(), keyOf = new Map(); for (const o of S) { const k = this.key(o, r); keyOf.set(o, k); if (!m.has(k)) m.set(k, new Map()); const g = m.get(k); g.set(o.after, (g.get(o.after) || 0) + 1); }
+      this.levels.push(m); S = S.filter((o) => m.get(keyOf.get(o)).size > 1); if (!S.length) break; }
+    return this.levels.reduce((a, m) => a + m.size, 0); }
+  predictOne(ctx) { const p = this.packQuery(ctx); let last = null, reach = null;
+    for (let li = 0; li < this.levels.length; li++) { const g = this.levels[li].get(this.key(p, this.dists[li])); if (!g) break;
+      let best = null, bn = -1; for (const [a, n] of g) if (n > bn) { bn = n; best = a; } last = best; reach = this.dists[li]; if (g.size === 1) return { after: best, reach, sure: true }; }
+    return last ? { after: last, reach, sure: false } : null; }
+  // a query's items that were never seen can't match any stored situation: they get an id no situation has
+  packQuery(ctx) { const z = ctx.map((c) => [c.d, this.ids.has(c.k) ? this.ids.get(c.k) : -1 - this.id('?' + c.k)]).sort((p, q) => p[0] - q[0] || p[1] - q[1]); return { ids: Int32Array.from(z.map((p) => p[1])), ds: Uint8Array.from(z.map((p) => p[0])) }; }
+  step(now, prev) { const m = this.C.m, ax = Math.floor((m.W - 1) / 2), ay = Math.floor((m.H - 1) / 2), out = [];
+    now.forEach((me, i) => { const b = this.predictOne(this.context(i, now, prev)); if (!b) { out.push({ ...me, from: i, rule: null }); return; } if (b.after === 'gone') return;
+      const [id, rest] = b.after.split('@'), [dx, dy] = rest.split(',').map(Number), u = this.units.get(+id) || this.units.get(id), [cx, cy] = this.C.cen(u), x = me.x + dx, y = me.y + dy;
+      out.push({ u, x, y, px: x - cx + ax, py: y - cy + ay, from: i, rule: b }); });
+    return out; }
+}
+if (typeof module !== 'undefined') module.exports = { Reach };
+</script>
+<script>// SIMILAR, NOT ONLY IDENTICAL (C27). On top of C26's rules (reach.js), which are unchanged.
+// A situation (a thing's surroundings) becomes a set of CELLS. Each thing nearby lights cells for what it is and where it is
+// (and where it was), at EVERY scale at once: its exact offset, and the offset rounded to 2, 4, 8, 16 cells. Two positions
+// share more cells the closer they are; the same position shares all of them. No blur size to choose.
+// Recall is by overlap (shared cells / all cells of either, the way assemblies overlap), not by exact match.
+// PREDICTING (same principle as C26: the smallest surroundings that settle it): out to each distance in turn, what was
+// seen EXACTLY like this decides, as in C26. Only when nothing exactly like it was ever seen (a new situation) is it
+// recalled by overlap: what the most similar remembered situations led to.
+'use strict';
+const ReachBase = typeof module !== 'undefined' && typeof require !== 'undefined' ? require('./reach.js').Reach : Reach;
+class Similar extends ReachBase {
+  constructor(codes) { super(codes); this.scales = 0; while ((1 << this.scales) < codes.m.W) this.scales++; }
+  // the cells an item lights (with its distance): one per scale
+  cellsOf(k) { const [type, rest] = k.split(':'), [u, off] = rest.split('@'), out = [];
+    if (!off) { for (let s = 0; s <= this.scales; s++) out.push(type + ':' + u + ':' + s); return out; }
+    const [dx, dy] = off.split(',').map(Number); for (let s = 0; s <= this.scales; s++) out.push(type + ':' + u + ':' + s + ':' + Math.floor(dx / (1 << s)) + ',' + Math.floor(dy / (1 << s))); return out; }
+  rest() { const n = super.rest();
+    // for each distance: every remembered situation (out to that distance) as cells, with an index from cell to situations
+    this.names = []; for (const [k, v] of this.ids) this.names[v] = k;
+    this.index = this.levels.map((m) => { const keys = [...m.keys()], cells = keys.map((key) => (key === '' ? [] : key.split(',').map(Number).flatMap((id) => this.cellsOf(this.names[id])))), inv = new Map();
+      cells.forEach((cs, i) => { for (const c of cs) { if (!inv.has(c)) inv.set(c, []); inv.get(c).push(i); } }); return { keys, cells, inv, sizes: cells.map((c) => c.length), at: new Map(keys.map((k, i) => [k, i])), under: new Map() }; });
+    // which situation at each distance grew out of which one at the distance before (exactly the same out to there)
+    for (const o of this.obs) for (let li = 1; li < this.levels.length; li++) { const k = this.key(o, this.dists[li]), X = this.index[li], i = X.at.get(k); if (i === undefined) break;
+      const up = this.key(o, this.dists[li - 1]); if (!X.under.has(up)) X.under.set(up, new Set()); X.under.get(up).add(i); }
+    return n; }
+  // exact first, as C26: out to each distance, the situation seen exactly like this. Only when nothing exactly like it was
+  // ever seen (a genuinely new situation) is it recalled by overlap: among the situations that were exactly the same out
+  // to the previous distance, the ones most like it further out.
+  predictOne(ctx) { const p = this.packQuery(ctx); let last = null, reach = null;
+    for (let li = 0; li < this.levels.length; li++) { const r = this.dists[li]; let g = this.levels[li].get(this.key(p, r)), how = 'same';
+      let match = this.key(p, r), sim = 1; if (!g) { const rc = li ? this.recall(ctx, li, this.key(p, this.dists[li - 1])) : null; how = 'similar'; if (!rc) break; g = rc.g; match = rc.key; sim = rc.sim; }
+      let best = null, bn = -1; for (const [a, n] of g) if (n > bn) { bn = n; best = a; } last = best; reach = r;
+      if (g.size === 1 || how === 'similar') return { after: best, reach, sure: g.size === 1, how, match, sim, outcomes: g }; }
+    return last ? { after: last, reach, sure: false, how: 'same' } : null; }
+  // among the situations that were exactly the same out to the previous distance, the ones most like this one further out
+  recall(ctx, li, up) { const r = this.dists[li], q = ctx.filter((z) => z.d <= r).flatMap((z) => this.cellsOf(z.k)), X = this.index[li], shared = new Map(), ok = X.under.get(up);
+    if (!ok) return null; for (const i of ok) shared.set(i, 0);
+    for (const c of q) { const L = X.inv.get(c); if (L) for (const i of L) if (ok.has(i)) shared.set(i, shared.get(i) + 1); }
+    let best = -1, top = []; for (const [i, sh] of shared) { const sim = sh / (q.length + X.sizes[i] - sh); if (sim > best + 1e-9) { best = sim; top = [i]; } else if (Math.abs(sim - best) < 1e-9) top.push(i); }
+    if (!top.length) return null; const g = new Map(); for (const i of top) for (const [a, n] of this.levels[li].get(X.keys[i])) g.set(a, (g.get(a) || 0) + n); return { g, key: X.keys[top[0]], sim: best }; }
+}
+if (typeof module !== 'undefined') module.exports = { Similar };
+</script>
+<script>
+const $ = (id) => document.getElementById(id), css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim(), GN = 24;
+const M = new Model('FL', {}); let Cd = null, Lr = null, sim = [], E = null, S = null, t = 0, timer = null;
+function vGrid(w, h, px, paint) { const d = document.createElement('div'); d.className = 'g'; d.style.gridTemplateColumns = 'repeat(' + w + ',' + px + 'px)'; for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = document.createElement('i'); i.style.width = i.style.height = px + 'px'; paint(x, y, i); d.appendChild(i); } return d; }
+const kindOf = (u) => (u.layer > 1 ? 'square' : u.pts.length === 4 ? 'diamond' : 'brick');
+const runSim = (objs, n) => { const out = [objs]; for (let k = 0; k < n; k++) out.push(BUMP.step(out[out.length - 1], GN)); return out; };
+const pixels = (u) => Cd.m.exp(u);
+// one imagined step with a chosen way of using memory; keeps who came from whom
+function stepWith(run, how) { const out = [];
+  run.now.forEach((me, i) => { const b = how === 'exact' ? Reach.prototype.predictOne.call(Lr, Lr.context(i, run.now, run.prev)) : Lr.predictOne(Lr.context(i, run.now, run.prev));
+    if (!b) { out.push({ ...me, from: i }); return; } if (b.after === 'gone') return;
+    const [id, rest] = b.after.split('@'), [dx, dy] = rest.split(',').map(Number), u = Lr.units.get(+id), [cx, cy] = Cd.cen(u), x = me.x + dx, y = me.y + dy, ax = Math.floor((GN - 1) / 2);
+    out.push({ u, x, y, px: x - cx + ax, py: y - cy + ax, from: i }); });
+  return { prev: out.map((z) => run.now[z.from]), now: out }; }
+const truthNext = () => sim[t + 1] || sim[sim.length - 1];
+const okList = (run) => { const tr = truthNext(); return run.now.map((p) => kindOf(p.u) === 'brick' || tr.some((o) => o.shape === kindOf(p.u) && o.x === p.px && o.y === p.py)); };
+function drawRun(el, run, label) { const ok = okList(run), cols = new Map();
+  run.now.forEach((p, k) => { const c = kindOf(p.u) === 'brick' ? css('--wall') : ok[k] ? css('--obj') : css('--bad'); for (const [a, b] of pixels(p.u)) cols.set((p.px + a) + ',' + (p.py + b), c); });
+  el.replaceChildren(vGrid(GN, GN, 9, (x, y, i) => { const c = cols.get(x + ',' + y); if (c) i.style.background = c; }));
+  const objs = run.now.filter((p) => kindOf(p.u) !== 'brick'), right = objs.filter((p, k) => okList({ now: objs })[k]).length; label.textContent = '· ' + right + ' of ' + truthNext().length + ' right'; }
+function draw() { const tp = BUMP.picture(truthNext(), GN), walls = new Set(BUMP.bricks(GN).flatMap(([a, b]) => [a + ',' + b, (a + 1) + ',' + b]));
+  $('gT').replaceChildren(vGrid(GN, GN, 9, (x, y, i) => { if (tp[y * GN + x]) i.style.background = walls.has(x + ',' + y) ? css('--wall') : css('--real'); }));
+  drawRun($('gE'), E, $('sE')); drawRun($('gS'), S, $('sS')); $('stepno').textContent = 'step ' + t + ' of imagining, from the first two pictures only'; fillPick(); closeUp(); }
+// close-up of one object in the similar-memory run
+const word = (after, me) => { if (!after) return 'nothing it knows'; if (after === 'gone') return 'disappears'; const [id, rest] = after.split('@'), [dx, dy] = rest.split(',').map(Number), u = Lr.units.get(+id), k = kindOf(u), [cx, cy] = Cd.cen(u), [mx, my] = Cd.cen(me.u);
+  const px = dx - cx + mx, py = dy - cy + my, dir = px > 0 ? 'moves right' : px < 0 ? 'moves left' : py > 0 ? 'moves down' : py < 0 ? 'moves up' : 'stays put'; return (k !== kindOf(me.u) ? 'becomes a ' + k + ' and ' : '') + dir; };
+function fillPick() { const objs = S.now.map((p, i) => [p, i]).filter(([p]) => kindOf(p.u) !== 'brick'), sel = $('pick'), keep = sel.dataset.user ? +sel.value : null;
+  let auto = objs[0] ? objs[0][1] : 0; for (const [p, i] of objs) { const ctx = Lr.context(i, S.now, S.prev), a = Reach.prototype.predictOne.call(Lr, ctx), b = Lr.predictOne(ctx); if ((a && a.after) !== (b && b.after)) { auto = i; break; } }
+  sel.innerHTML = objs.map(([p, i], k) => '<option value="' + i + '">' + (k + 1) + ': ' + kindOf(p.u) + '</option>').join(''); sel.value = String(keep !== null && objs.some(([, i]) => i === keep) ? keep : auto); }
+function closeUp() { const i = +$('pick').value, me = S.now[i]; if (!me) return; const R = 6, W = 2 * R + 1 + 4, ctx = Lr.context(i, S.now, S.prev), b = Lr.predictOne(ctx), a = Reach.prototype.predictOne.call(Lr, ctx), reach = b ? b.reach : 0, [mx, my] = Cd.cen(me.u), half = Math.floor(W / 2);
+  const cols = new Map(), outline = new Set(), put = (u, x, y, c) => { const [cx, cy] = Cd.cen(u); for (const [p, q] of pixels(u)) cols.set((x - cx + p) + ',' + (y - cy + q), c); };
+  S.now.forEach((o, j) => put(o.u, o.x - me.x, o.y - me.y, j === i ? css('--me') : kindOf(o.u) === 'brick' ? css('--wall') : css('--ink')));
+  if (S.prev[i]) { const pv = S.prev[i], [cx, cy] = Cd.cen(pv.u); for (const [p, q] of pixels(pv.u)) outline.add((pv.x - me.x - cx + p) + ',' + (pv.y - me.y - cy + q)); }
+  const box = (x, y) => Math.max(Math.abs(x), Math.abs(y)) === reach + 2;
+  $('cNow').replaceChildren(vGrid(W, W, 13, (x, y, el) => { const k = (x - half) + ',' + (y - half), c = cols.get(k); if (c) el.style.background = c; if (outline.has(k)) el.style.boxShadow = 'inset 0 0 0 2px ' + css('--me'); else if (box(x - half, y - half)) el.style.boxShadow = 'inset 0 0 0 1px ' + css('--muted'); }));
+  // the remembered situation (from its stored key: what each item was, and where)
+  let memNote = '';
+  if (b && b.match !== undefined) { const mc = new Map(), mo = new Set();
+    for (const id of (b.match === '' ? [] : b.match.split(',').map(Number))) { const nm = Lr.names ? Lr.names[id] : null; if (!nm) continue; const [type, rest] = nm.split(':'), [uid, off] = rest.split('@'), u = Lr.units.get(+uid); if (!u) continue;
+      if (type === 'me') { const [cx, cy] = Cd.cen(u); for (const [p, q] of pixels(u)) mc.set((p - cx) + ',' + (q - cy), css('--me')); continue; }
+      const [dx, dy] = off.split(',').map(Number), [cx, cy] = Cd.cen(u);
+      if (type === 'was') { for (const [p, q] of pixels(u)) mo.add((dx - cx + p) + ',' + (dy - cy + q)); continue; }
+      if (type === 'near') for (const [p, q] of pixels(u)) mc.set((dx - cx + p) + ',' + (dy - cy + q), kindOf(u) === 'brick' ? css('--wall') : css('--ink')); }
+    $('cMem').replaceChildren(vGrid(W, W, 13, (x, y, el) => { const k = (x - half) + ',' + (y - half), c = mc.get(k); if (c) el.style.background = c; if (mo.has(k)) el.style.boxShadow = 'inset 0 0 0 2px ' + css('--me'); else if (box(x - half, y - half)) el.style.boxShadow = 'inset 0 0 0 1px ' + css('--muted'); }));
+    memNote = b.how === 'similar' ? 'the most similar situation it remembers (' + Math.round(100 * b.sim) + '% of cells shared)' : 'the situation it remembers exactly like this'; }
+  else $('cMem').replaceChildren(); $('cMemCap').textContent = memNote || 'nothing remembered';
+  const outs = b && b.outcomes ? [...b.outcomes].sort((p, q) => q[1] - p[1]).map(([o, n]) => word(o, me) + ' (' + n + '×)').join(', ') : '';
+  $('say').innerHTML = '<div class="big">It looked ' + (reach === 0 ? 'only at itself' : 'out to ' + reach + ' cell' + (reach > 1 ? 's' : '')) + '.</div>' +
+    '<p>' + (b ? (b.how === 'similar' ? '<span class="tag">new situation</span> Nothing exactly like this was ever seen out there, so it recalled the most similar one.' : '<span class="tag">seen before</span> It has seen exactly this, out to that distance.') : 'It has nothing to go on.') + (outs ? ' What happened then: ' + outs + '.' : '') + '</p>' +
+    '<p><b>Similar memory says:</b> ' + word(b && b.after, me) + '<br><b>Exact memory says:</b> ' + word(a && a.after, me) + (a && b && a.after !== b.after ? ' <span class="tag">they disagree</span>' : '') + '</p>';
+}
+function fresh() { const r = rng(Math.floor(Math.random() * 1e9)); BUMP.cfg.room = { x: 0, y: 0, w: GN, h: GN }; sim = runSim(BUMP.start(r, +$('n').value, GN), 400);
+  const p0 = Lr.things(BUMP.picture(sim[0], GN)), p1 = Lr.things(BUMP.picture(sim[1], GN)), pf = Lr.follow(p0, p1), prev = p1.map(() => null); for (const [i, j] of pf) prev[j] = p0[i];
+  E = { now: p1, prev }; S = { now: p1, prev: prev.slice() }; t = 0; $('pick').dataset.user = ''; draw(); }
+function step() { E = stepWith(E, 'exact'); S = stepWith(S, 'similar'); t++; draw(); }
+function play() { if (timer) { clearInterval(timer); timer = null; $('play').textContent = '▶ play'; return; } $('play').textContent = '❚❚ pause'; timer = setInterval(step, +$('speed').value); }
+// learning: shapes from simple pictures, then demonstrations in rooms (chunked so the page stays responsive)
+const r1 = rng(1), r2 = rng(2); let phase = 0, k = 0; const MEET = 480, ROAM = 120;
+(function vLearn() {
+  if (phase === 0) { BUMP.cfg.walls = false; for (let j = 0; j < 60 && k < 300; j++) { k++; const n = 1 + Math.floor(r1() * 3), o = BUMP.start(r1, n, GN), l = [], objs = []; for (const q of o) { if (r1() < 1 / 3) l.push([q.x, q.y + 1]); else objs.push(q); } M.step(BUMP.picture(objs, GN, l)); if (k % 98 === 0) M.rest(); }
+    $('msg').textContent = 'learning shapes from pictures… ' + k + ' / 300'; if (k < 300) return setTimeout(vLearn, 0); M.rest(); Cd = new Codes(M, {}); Lr = new Similar(Cd); BUMP.cfg.walls = true; phase = 1; k = 0; return setTimeout(vLearn, 0); }
+  if (phase === 1) { for (let j = 0; j < 12 && k < MEET + ROAM; j++) { k++; let s = null; if (k <= MEET) { while (!s) { BUMP.cfg.room = BUMP.randomRoom(r2, GN); s = BUMP.meeting(r2, GN); } Lr.learnRun(runSim(s, 12).map((o) => BUMP.picture(o, GN))); }
+      else { BUMP.cfg.room = BUMP.randomRoom(r2, GN); Lr.learnRun(runSim(BUMP.start(r2, 2, GN), 30).map((o) => BUMP.picture(o, GN))); } }
+    $('msg').textContent = 'watching two-object demonstrations in rooms… ' + k + ' / ' + (MEET + ROAM); if (k < MEET + ROAM) return setTimeout(vLearn, 0);
+    $('msg').textContent = 'resting…'; return setTimeout(() => { Lr.rest(); $('msg').textContent = 'ready · shapes learnt: ' + M.units.filter((u) => !u.loose).map((u) => kindOf(u)).join(', ') + ' · ' + (MEET + ROAM) + ' demonstrations, never more than two objects'; fresh(); }, 0); }
+})();
+$('fresh').onclick = () => { if (Lr) fresh(); }; $('one').onclick = () => { if (Lr) step(); }; $('play').onclick = () => { if (Lr) play(); };
+$('speed').onchange = () => { if (timer) { play(); play(); } }; $('n').onchange = () => { if (Lr) fresh(); };
+$('pick').onchange = () => { $('pick').dataset.user = '1'; closeUp(); };
+</script></body></html>

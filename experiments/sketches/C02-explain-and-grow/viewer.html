@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Columns learning live · C02 explain and grow</title>
+<style>
+:root{--bg:#f7f6f2;--fg:#1d1d1b;--muted:#6f6e68;--ink:#1d1d1b;--empty:#e6e4dc;--heat:#d63c2f;--new:#2b78d9;--line:#dcdad2;--card:#fff;--cell:#b9b6aa;--on:#d9622b}
+@media (prefers-color-scheme:dark){:root{--bg:#151514;--fg:#ecebe6;--muted:#9b9a93;--ink:#ecebe6;--empty:#2b2b28;--heat:#f0614f;--new:#5ea2f2;--line:#34342f;--card:#1d1d1b;--cell:#55534c;--on:#f08a50}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1280px;margin:0 auto;padding:22px 18px 40px}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:var(--muted);margin:0 0 14px;max-width:95ch}
+.bar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.bar label{color:var(--muted)}
+select,button,input[type=number]{font:inherit;font-size:13px;padding:5px 10px;border-radius:7px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+button{cursor:pointer}button:hover{border-color:var(--muted)}
+input[type=range]{width:110px;accent-color:var(--on)}
+input[type=number]{width:62px}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items:start}
+@media (max-width:860px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.ph{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.ph h2{font-size:13px;margin:0;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.ph span{font-size:12px;color:var(--muted)}
+#cv{display:block;width:100%}
+.right{position:sticky;top:10px;display:flex;flex-direction:column;gap:14px}
+.trio{display:flex;gap:12px}
+.trio>div{flex:1;min-width:0}
+.g{display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+.g i{display:block;aspect-ratio:1;background:var(--empty);border-radius:2px;position:relative}
+.cap{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.3}
+.name{font-size:15px;font-weight:600;margin-bottom:8px}
+.stats{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:13px}
+.stats span:nth-child(odd){color:var(--muted)}
+.stats b{font-weight:600;font-variant-numeric:tabular-nums}
+#spark{width:100%;height:46px;display:block;margin-top:6px}
+.key{font-size:12px;color:var(--muted);line-height:1.7}
+.key s{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px;text-decoration:none}
+#tip{position:fixed;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:7px;padding:6px 9px;font-size:12px;display:none;box-shadow:0 4px 14px rgba(0,0,0,.12);z-index:5}
+</style></head><body><main>
+<h1>Columns learning live: explain and grow</h1>
+<p class="sub">Each flash, columns compete to <b>explain</b> it. What nothing explains is heat (red), and heat grows a new column from the leftover. A column that claims while some of its pixels are off loses those pixels. Cells inside a column say which whole that part belongs to. The six bar triples are held out: press <i>Show a held-out pattern</i> to see one met for the first time, with no learning.</p>
+<div class="bar">
+  <label for="arm">Arm</label><select id="arm"></select>
+  <label for="noise">Noise</label><input type="range" id="noise" min="0" max="20" value="5"><b id="nv">5%</b>
+  <label for="speed">Speed</label><input type="range" id="speed" min="1" max="30" value="6"><span id="sv"></span>
+  <button id="play">Pause</button><button id="step">Step</button><button id="ff">Skip 500</button><button id="held">Show a held-out pattern</button>
+  <label for="seed">Seed</label><input type="number" id="seed" value="1" min="1"><button id="reset">Restart</button>
+</div>
+<div class="wrap">
+  <div class="panel"><div class="ph"><h2>Columns</h2><span id="colhint">field on top · cells underneath · coloured border = explaining this flash</span></div><canvas id="cv"></canvas></div>
+  <div class="right">
+    <div class="panel">
+      <div class="ph"><h2>Input</h2><span id="tno"></span></div>
+      <div class="name" id="pname"></div>
+      <div class="trio">
+        <div><div class="g" id="gin"></div><div class="cap">as flashed</div></div>
+        <div><div class="g" id="gex"></div><div class="cap">explained by column colour; red = heat</div></div>
+        <div><div class="g" id="grc"></div><div class="cap">what the columns rebuild</div></div>
+      </div>
+      <div class="key" style="margin-top:8px"><s style="background:var(--heat)"></s>left over (heat) &nbsp; <s style="box-shadow:inset 0 0 0 2px var(--new)"></s>new column / new cell</div>
+    </div>
+    <div class="panel">
+      <div class="ph"><h2>State</h2><span id="restflag"></span></div>
+      <div class="stats" id="stats"></div>
+      <div class="cap" style="margin-top:8px">heat per flash (share left over), last 300 flashes</div>
+      <canvas id="spark"></canvas>
+    </div>
+  </div>
+</div>
+<div id="tip"></div>
+</main>
+<script>// CATALOGUE (C01): about 100 designed 5x5 black-and-white patterns, in families with deliberate shared parts, plus the
+// noisy presentation stream. A pattern is 25 bits, row by row (cell r,c is bit r*5+c). Families, shapes and parts are for
+// the scorer and the viewer only: the machine never sees them. Runs in Node (require) and in the browser (inlined).
+'use strict';
+const N = 5, SIZE = N * N;
+
+// ---- building blocks: everything is drawn from bars, corners, boxes and blocks, so shapes share parts on purpose
+const blank = () => new Uint8Array(SIZE);
+const range = (a, b) => { const o = []; for (let i = a; i <= b; i++) o.push(i); return o; };
+function cells(list) { const p = blank(); for (const [r, c] of list) if (r >= 0 && r < N && c >= 0 && c < N) p[r * N + c] = 1; return p; }
+function or(...ps) { const p = blank(); for (const q of ps) for (let i = 0; i < SIZE; i++) if (q[i]) p[i] = 1; return p; }
+function rows(...lines) { const p = blank(); lines.forEach((l, r) => [...l].forEach((ch, c) => { if (ch === '#') p[r * N + c] = 1; })); return p; }
+const hbar = (r, c0 = 0, c1 = N - 1) => cells(range(c0, c1).map((c) => [r, c]));
+const vbar = (c, r0 = 0, r1 = N - 1) => cells(range(r0, r1).map((r) => [r, c]));
+// an L of two arms inside the size x size box whose top-left is (r, c); which = 'tl' | 'tr' | 'bl' | 'br' names its corner
+function corner(r, c, size, which) { const e = size - 1, top = which[0] === 't', left = which[1] === 'l';
+  return or(hbar(top ? r : r + e, c, c + e), vbar(left ? c : c + e, r, r + e)); }
+function frame(r, c, size) { const e = size - 1; return or(hbar(r, c, c + e), hbar(r + e, c, c + e), vbar(c, r, r + e), vbar(c + e, r, r + e)); }
+function block(r, c, size) { const l = []; for (const i of range(0, size - 1)) for (const j of range(0, size - 1)) l.push([r + i, c + j]); return cells(l); }
+const plus = (r, c, arm) => or(hbar(r, c - arm, c + arm), vbar(c, r - arm, r + arm));
+// a quarter turn clockwise: (r, c) goes to (c, N-1-r)
+function rot(p) { const q = blank(); for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (p[r * N + c]) q[c * N + (N - 1 - r)] = 1; return q; }
+
+// ---- the catalogue. shape = the same shape wherever it sits (a shifted copy shares its shape); parts = the bars a
+// composition was built from (for the composition tests later). An exact duplicate is dropped and reported.
+function build() {
+  const out = [], seen = new Map(), dropped = [];
+  const add = (family, name, bits, shape = name, parts = null) => {
+    const key = bits.join('');
+    if (seen.has(key)) { dropped.push({ name, family, sameAs: seen.get(key) }); return; }
+    seen.set(key, name); out.push({ id: out.length, name, family, shape, parts, bits });
+  };
+  const dDown = cells(range(0, 4).map((i) => [i, i])), dUp = cells(range(0, 4).map((i) => [i, 4 - i]));
+
+  for (const r of range(0, 4)) add('bars', `row ${r}`, hbar(r), 'row');
+  for (const c of range(0, 4)) add('bars', `col ${c}`, vbar(c), 'col');
+
+  add('diagonals', 'diag \\', dDown);
+  add('diagonals', 'diag /', dUp);
+  add('diagonals', 'short \\ upper', cells(range(0, 3).map((i) => [i, i + 1])), 'short \\');
+  add('diagonals', 'short \\ lower', cells(range(0, 3).map((i) => [i + 1, i])), 'short \\');
+  add('diagonals', 'short / upper', cells(range(0, 3).map((i) => [i, 3 - i])), 'short /');
+  add('diagonals', 'short / lower', cells(range(0, 3).map((i) => [i + 1, 4 - i])), 'short /');
+
+  for (const r of [0, 2, 4]) for (const [c0, side] of [[0, 'left'], [2, 'right']]) add('half bars', `row ${r} ${side}`, hbar(r, c0, c0 + 2), 'half row');
+  for (const c of [0, 2, 4]) for (const [r0, side] of [[0, 'top'], [2, 'bottom']]) add('half bars', `col ${c} ${side}`, vbar(c, r0, r0 + 2), 'half col');
+
+  for (const w of ['tl', 'tr', 'bl', 'br']) {
+    add('corners', `corner ${w}`, corner(w[0] === 't' ? 0 : 2, w[1] === 'l' ? 0 : 2, 3, w), `corner ${w}`);
+    add('corners', `corner ${w} centre`, corner(1, 1, 3, w), `corner ${w}`);           // the same corner, shifted inwards
+  }
+  for (const w of ['tl', 'tr', 'bl', 'br']) add('big Ls', `big L ${w}`, corner(0, 0, 5, w));
+
+  add('Ts', 'T top', or(hbar(0), vbar(2)), 'T top', ['row 0', 'col 2']);
+  add('Ts', 'T bottom', or(hbar(4), vbar(2)), 'T bottom', ['row 4', 'col 2']);
+  add('Ts', 'T left', or(vbar(0), hbar(2)), 'T left', ['col 0', 'row 2']);
+  add('Ts', 'T right', or(vbar(4), hbar(2)), 'T right', ['col 4', 'row 2']);
+  add('Ts', 'small T', or(hbar(0, 1, 3), vbar(2, 0, 2)), 'small T');
+  add('Ts', 'small T lower', or(hbar(1, 1, 3), vbar(2, 1, 3)), 'small T');             // shifted down one
+
+  add('crosses', 'plus', plus(2, 2, 2), 'plus', ['row 2', 'col 2']);
+  for (const [r, c] of [[2, 2], [1, 1], [1, 3], [3, 1], [3, 3]]) add('crosses', `small plus ${r},${c}`, plus(r, c, 1), 'small plus');
+  add('crosses', 'X', or(dDown, dUp), 'X', ['diag \\', 'diag /']);
+
+  add('boxes', 'frame', frame(0, 0, 5), 'frame', ['row 0', 'row 4', 'col 0', 'col 4']);
+  for (const [r, c] of [[0, 0], [0, 2], [2, 0], [2, 2], [1, 1]]) add('boxes', `small box ${r},${c}`, frame(r, c, 3), 'small box');
+
+  for (const [r, c] of [[0, 0], [0, 3], [3, 0], [3, 3], [1, 1], [2, 2]]) add('blocks', `block ${r},${c}`, block(r, c, 2), 'block');
+  add('blocks', 'big block', block(1, 1, 3));
+
+  add('letters', 'C', rows('.####', '#....', '#....', '#....', '.####'));
+  add('letters', 'U', rows('#...#', '#...#', '#...#', '#...#', '#####'), 'U', ['col 0', 'col 4', 'row 4']);
+  add('letters', 'H', rows('#...#', '#...#', '#####', '#...#', '#...#'), 'H', ['col 0', 'col 4', 'row 2']);
+  add('letters', 'E', rows('#####', '#....', '#####', '#....', '#####'), 'E', ['row 0', 'row 2', 'row 4', 'col 0']);
+  add('letters', 'F', rows('#####', '#....', '#####', '#....', '#....'), 'F', ['row 0', 'row 2', 'col 0']);
+  add('letters', 'Z', rows('#####', '...#.', '..#..', '.#...', '#####'));
+  add('letters', 'S', rows('.####', '#....', '.###.', '....#', '####.'));
+  add('letters', 'P', rows('####.', '#...#', '####.', '#....', '#....'));
+
+  add('brackets', '[', rows('###..', '#....', '#....', '#....', '###..'));
+  add('brackets', ']', rows('..###', '....#', '....#', '....#', '..###'));
+
+  const up = rows('..#..', '.#.#.', '#...#', '.....', '.....');
+  add('chevrons', 'chevron up', up); add('chevrons', 'chevron right', rot(up));
+  add('chevrons', 'chevron down', rot(rot(up))); add('chevrons', 'chevron left', rot(rot(rot(up))));
+
+  const step = rows('#....', '##...', '.##..', '..##.', '...##');
+  add('steps', 'steps \\', step); add('steps', 'steps /', rot(step));
+
+  // the "bars problem": shapes that are nothing but bars laid over each other
+  for (const [r, c] of [[1, 1], [1, 3], [3, 1], [3, 3], [0, 1], [4, 3], [1, 0], [3, 4]])
+    add('bar pairs', `row ${r} + col ${c}`, or(hbar(r), vbar(c)), 'row + col', [`row ${r}`, `col ${c}`]);
+  for (const [a, b] of [[0, 2], [1, 3], [2, 4], [0, 4]]) add('bar pairs', `rows ${a} + ${b}`, or(hbar(a), hbar(b)), 'two rows', [`row ${a}`, `row ${b}`]);
+  for (const [a, b] of [[0, 2], [1, 3], [2, 4], [0, 4]]) add('bar pairs', `cols ${a} + ${b}`, or(vbar(a), vbar(b)), 'two cols', [`col ${a}`, `col ${b}`]);
+  const bar = ([k, i]) => (k === 'row' ? hbar(i) : vbar(i));
+  for (const t of [[['row', 1], ['col', 1], ['col', 3]], [['row', 3], ['col', 1], ['col', 3]], [['row', 1], ['row', 3], ['col', 2]],
+    [['row', 1], ['row', 3], ['col', 1]], [['row', 0], ['row', 4], ['col', 2]], [['col', 0], ['col', 4], ['row', 1]]]) {
+    const names = t.map(([k, i]) => `${k} ${i}`);
+    add('bar triples', names.join(' + '), or(...t.map(bar)), 'three bars', names);
+  }
+  return { patterns: out, dropped };
+}
+
+// ---- the stream: patterns in random order (each pass a fresh shuffle, so all are seen equally often), each flash flipping
+// every cell independently with chance `noise` (5% flips about 1.25 of 25 cells). `noise` may be a number or a function
+// (the viewer's slider). Seeded, so a run can be repeated exactly.
+function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1);
+  t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function noisy(bits, p, r) { const q = bits.slice(); for (let i = 0; i < SIZE; i++) if (r() < p) q[i] ^= 1; return q; }
+function* stream(patterns, { seed = 1, noise = 0.05 } = {}) {
+  const r = rng(seed), order = patterns.map((_, i) => i);
+  for (let t = 0; ;) {
+    for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    for (const id of order) { const p = typeof noise === 'function' ? noise() : noise; yield { t: t++, id, clean: patterns[id].bits, bits: noisy(patterns[id].bits, p, r) }; }
+  }
+}
+
+const CATALOGUE = build();
+if (typeof module !== 'undefined') module.exports = { N, SIZE, CATALOGUE, build, stream, noisy, rng };
+</script>
+<script>// EXPLAIN AND GROW (C02). Columns compete to EXPLAIN a flash, not to win it. Whatever no column explains is heat, and only
+// heat grows structure: the leftover becomes a new column. Misfit (a column claiming while some of its pixels are off) takes
+// those pixels away fast; fit strengthens slowly. So a whole used for only part of itself sheds the rest, and the shed part
+// becomes leftover, then a column of its own. Cells inside columns say WHICH whole a part belongs to: a flash's cells settle
+// together, as the core's entities do, and a whole that nothing completes gets fresh cells. Rest prunes columns that add
+// nothing (judged by replay) and retires what has gone unused. Plain JS, no dependencies; runs in Node and in the browser.
+'use strict';
+const PX = 25;
+const K = { CUT: 0.5, ETA_M: 0.02, ETA_HOT: 0.2, PMAX: 33, ROUNDS: 5, RETIRE: 1000, THETA: 0.1 };   // the core's values
+const BORN = 0.6;      // NEW SETTING: a new link starts just over the connected line (CUT)
+const MIN_PART = 2;    // NEW RULE: a part binds at least two pixels; one pixel alone binds nothing (it stays as heat)
+const ARMS = {
+  A: { label: 'A: grow only', claim: 0.8, split: false, confirm: false },        // NEW SETTING (arm A only): claim near-whole fits
+  B: { label: 'B: grow and split', claim: K.CUT, split: true, confirm: false },
+  C: { label: 'C: grow, split, confirm', claim: K.CUT, split: true, confirm: true },
+  D: { label: 'D: grow, split, confirm, join', claim: K.CUT, split: true, confirm: true, join: true },
+};
+// arm D: columns keep a "together" link to the columns they are claimed with: it strengthens when they are claimed together
+// and weakens when one is claimed without the other. At rest, two columns that are (nearly) always claimed together are one
+// thing, so they JOIN. Splitting's counterpart: what is sometimes apart separates; what is always together becomes one.
+const TOGETHER = 1 - K.ETA_HOT;   // NEW SETTING (arm D): 0.8, how "nearly always together" counts as one thing
+
+class Model {
+  constructor(arm = 'B', opt = {}) {
+    this.arm = arm; this.o = { ...ARMS[arm], ...opt };
+    this.cols = []; this.nid = 0; this.ncell = 0; this.t = 0; this.heat = 0; this.buf = []; this.tent = [];
+    this.st = { grown: 0, retired: 0, redundant: 0, rests: 0, tentative: 0, fresh: 0, cellsRetired: 0 };
+  }
+
+  // ---- EXPLAIN: repeatedly let the column that newly explains most, net of what it gets wrong, claim its pixels.
+  // A column takes part only if enough of its own pixels are on (fit, the core's "share of my inputs active").
+  explain(x, cols = this.cols) {
+    const expl = new Uint8Array(PX), claims = [], used = new Set(); let misses = 0;
+    for (;;) {
+      let best = null, bs = 0, bf = 0, bmiss = 0;
+      for (const c of cols) {
+        if (used.has(c)) continue; let n = 0, hit = 0, gain = 0;
+        for (let i = 0; i < PX; i++) if (c.m[i] >= K.CUT) { n++; if (x[i]) { hit++; if (!expl[i]) gain++; } }
+        if (n < MIN_PART || !gain) continue; const fit = hit / n; if (fit < this.o.claim) continue;
+        const s = gain - (n - hit);
+        if (s > bs || (s === bs && best && fit > bf)) { best = c; bs = s; bf = fit; bmiss = n - hit; }
+      }
+      if (!best) break;
+      used.add(best); claims.push({ c: best, fit: bf }); misses += bmiss;
+      for (let i = 0; i < PX; i++) if (best.m[i] >= K.CUT && x[i]) expl[i] = 1;
+    }
+    const left = []; for (let i = 0; i < PX; i++) if (x[i] && !expl[i]) left.push(i);
+    return { claims, left, misses, expl };
+  }
+
+  // ---- one flash, learning on
+  step(x) {
+    this.t++; const r = this.explain(x); let on = 0; for (let i = 0; i < PX; i++) on += x[i];
+    for (const { c, fit } of r.claims) {                        // HEAT CHANGES, COOLING KEEPS
+      c.uses++; c.last = this.t; const mis = 1 - fit;
+      for (let i = 0; i < PX; i++) { if (!c.m[i]) continue;
+        if (x[i]) c.m[i] += K.ETA_M * fit * (1 - c.m[i]);
+        else if (this.o.split) { c.m[i] -= K.ETA_HOT * mis * c.m[i]; if (c.m[i] < K.THETA) c.m[i] = 0; } }
+    }
+    if (this.o.join) { const on2 = new Set(r.claims.map((q) => q.c));          // TOGETHER links (arm D)
+      for (const c of on2) { for (const d of on2) if (d !== c) c.tog.set(d, (c.tog.get(d) || 0) * (1 - K.ETA_HOT) + K.ETA_HOT);
+        for (const [d, v] of c.tog) if (!on2.has(d)) { const w = v * (1 - K.ETA_HOT); if (w < K.THETA) c.tog.delete(d); else c.tog.set(d, w); } } }
+    let born = null;                                            // GROW FROM THE LEFTOVER
+    if (r.left.length >= MIN_PART) born = this.o.confirm ? this.tentative(r.left) : this.grow(r.left);
+    const cells = this.settleCells(r.claims.map((q) => q.c).concat(born ? [born] : []), true);
+    this.heat += on ? r.left.length / on : 0; this.buf.push(x);
+    const out = { ...r, born, cells, rested: false };
+    if (this.heat >= K.PMAX) { this.rest(); out.rested = true; }
+    return out;
+  }
+
+  grow(px) { const c = { id: this.nid++, m: new Float32Array(PX), uses: 0, last: this.t, born: this.t, cells: [], tog: new Map() };
+    for (const i of px) c.m[i] = BORN; this.cols.push(c); this.st.grown++; return c; }
+
+  // arm C: a leftover must recur (overlap at least half of each, both ways) before it becomes a column
+  tentative(left) { const L = new Set(left);
+    for (let k = 0; k < this.tent.length; k++) { const T = this.tent[k]; let ov = 0; for (const i of T.px) if (L.has(i)) ov++;
+      if (ov >= MIN_PART && ov / T.px.length >= K.CUT && ov / left.length >= K.CUT) { this.tent.splice(k, 1); return this.grow(T.px.filter((i) => L.has(i))); } }
+    this.tent.push({ px: left, born: this.t }); this.st.tentative++; return null; }
+
+  // ---- CELLS: which whole each part belongs to. Projection and casting until stable (one cell per column), then cells that
+  // don't fit the others drop out. Fit = partner columns present / (partner columns + other columns in the flash), so a cell
+  // made for "T" doesn't fit inside "E". Columns left without a cell get fresh ones (learn) and the chosen cells are linked.
+  cellFit(u, A, colSet) { let present = 0; const seen = new Set();
+    for (const [v, m] of u.links) { if (m < K.THETA) continue; seen.add(v.col); if (A.has(v)) present++; }
+    let others = 0; for (const c of colSet) if (c !== u.col && !seen.has(c)) others++;
+    const d = seen.size + others; return d ? present / d : 1; }
+  settleCells(cols, learn) {
+    if (!cols.length) return [];
+    const colSet = new Set(cols), cand = []; for (const c of cols) for (const u of c.cells) cand.push(u);
+    let act = cand;
+    for (let r = 0; r < K.ROUNDS; r++) {
+      const acc = new Map(); for (const v of act) for (const [u, m] of v.links) if (colSet.has(u.col) && u.col !== v.col) acc.set(u, (acc.get(u) || 0) + m);
+      const best = new Map(); for (const u of cand) { const x = acc.get(u) || 0, b = best.get(u.col); if (x > 0 && (!b || x > b[1])) best.set(u.col, [u, x]); }
+      const nxt = [...best.values()].map((b) => b[0]), same = nxt.length === act.length && nxt.every((u, i) => u === act[i]); act = nxt; if (same) break;
+    }
+    { const A = new Set(act), has = new Set(act.map((u) => u.col));          // a column nobody drove: its best-fitting cell
+      for (const c of cols) if (!has.has(c) && c.cells.length) { let b = null, bf = -1; for (const u of c.cells) { const f = this.cellFit(u, A, colSet); if (f > bf) { b = u; bf = f; } } act.push(b); } }
+    for (;;) { const A = new Set(act), keep = act.filter((u) => this.cellFit(u, A, colSet) > K.CUT); if (keep.length === act.length) break; act = keep; }
+    const byCol = new Map(act.map((u) => [u.col, u])), out = [];
+    for (const c of cols) { let u = byCol.get(c), fresh = false;
+      if (!u && learn) { u = { id: this.ncell++, col: c, links: new Map(), last: this.t }; c.cells.push(u); this.st.fresh++; fresh = true; }
+      if (u) out.push({ col: c, cell: u, fresh }); }
+    if (learn) { for (const { cell } of out) cell.last = this.t;
+      for (let i = 0; i < out.length; i++) for (let j = 0; j < out.length; j++) if (i !== j) { const a = out[i].cell, b = out[j].cell, m = a.links.get(b) || 0; a.links.set(b, m + K.ETA_HOT * (1 - m)); } }
+    return out;
+  }
+
+  removeCell(u) { for (const [v] of u.links) v.links.delete(u); const cs = u.col.cells; cs.splice(cs.indexOf(u), 1); }
+  removeCol(c) { for (const u of [...c.cells]) this.removeCell(u); this.cols.splice(this.cols.indexOf(c), 1); for (const d of this.cols) d.tog.delete(c); }
+  // JOIN (arm D, at rest): two columns whose together links are strong both ways become one column (union of their pixels).
+  // The joined column keeps the older one's cells; the other's cells go (the wholes re-form on their next sighting).
+  join() { let n = 0;
+    for (let again = true; again;) { again = false;
+      for (const c of this.cols) { for (const [d, v] of c.tog) { if (v < TOGETHER || (d.tog.get(c) || 0) < TOGETHER) continue;
+        for (let i = 0; i < PX; i++) c.m[i] = Math.max(c.m[i], d.m[i]); c.uses = Math.max(c.uses, d.uses); c.last = Math.max(c.last, d.last);
+        c.tog.delete(d); this.removeCol(d); n++; again = true; break; } if (again) break; } }
+    this.st.joined = (this.st.joined || 0) + n; }
+
+  // ---- REST: retire what has gone unused; then replay the flashes since the last rest and remove any column whose
+  // removal leaves every flash it explained explained at least as well (no more pixels left over or wrong). Least used first.
+  rest() {
+    this.st.rests++;
+    for (const c of [...this.cols]) if (this.t - c.last > K.RETIRE) { this.removeCol(c); this.st.retired++; }
+    for (const c of this.cols) for (const u of [...c.cells]) if (this.t - u.last > K.RETIRE) { this.removeCell(u); this.st.cellsRetired++; }
+    this.tent = this.tent.filter((T) => this.t - T.born <= K.RETIRE);
+    if (this.o.join) this.join();
+    const recs = this.buf.map((x) => ({ x, r: this.explain(x) })), by = new Map();
+    recs.forEach((q, k) => q.r.claims.forEach(({ c }) => { if (!by.has(c)) by.set(c, []); by.get(c).push(k); }));
+    const gone = new Set();
+    for (const c of [...by.keys()].sort((a, b) => by.get(a).length - by.get(b).length)) {
+      const withC = this.cols.filter((d) => !gone.has(d)), without = withC.filter((d) => d !== c); let ok = true;
+      for (const k of by.get(c)) { const x = recs[k].x, w = this.explain(x, withC), wo = this.explain(x, without);
+        if (wo.left.length + wo.misses > w.left.length + w.misses) { ok = false; break; } }
+      if (ok) gone.add(c);
+    }
+    for (const c of gone) { this.removeCol(c); this.st.redundant++; }
+    this.buf = []; this.heat = 0;
+  }
+
+  // ---- read without learning: which columns explain x, what they rebuild, what is left, and which cells
+  read(x) { const r = this.explain(x), recon = new Uint8Array(PX);
+    for (const { c } of r.claims) for (let i = 0; i < PX; i++) if (c.m[i] >= K.CUT) recon[i] = 1;
+    return { ...r, recon, cells: this.settleCells(r.claims.map((q) => q.c), false) }; }
+  cellCount() { let n = 0; for (const c of this.cols) n += c.cells.length; return n; }
+}
+
+if (typeof module !== 'undefined') module.exports = { Model, ARMS, K, PX, MIN_PART, BORN };
+</script>
+<script>
+const PAT = CATALOGUE.patterns, HELD = PAT.filter((p) => p.family === 'bar triples'), TRAIN = PAT.filter((p) => p.family !== 'bar triples');
+const PAL = ['#d9622b', '#2f8f6b', '#7b5bd6', '#c8a020', '#c2417d', '#3a8fc4', '#7a8a2a', '#a8572e', '#5c6ad1', '#2a9a9a'];
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const $ = (id) => document.getElementById(id);
+for (const k of Object.keys(ARMS)) { const o = document.createElement('option'); o.value = k; o.textContent = ARMS[k].label; $('arm').appendChild(o); }
+$('arm').value = 'B';
+let M, R, order = [], oi = 0, timer = null, noise = 0.05, speed = 6, last = null, lastHeld = false; const spark = [];
+function reset() { M = new Model($('arm').value); R = rng((+$('seed').value || 1) * 7919 + 13); order = []; oi = 0; spark.length = 0; last = null; next(); }
+function nextId() { if (oi >= order.length) { order = TRAIN.map((p) => p.id); for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; } oi = 0; } return order[oi++]; }
+function next(draw = true) { const id = nextId(), x = noisy(PAT[id].bits, noise, R), out = M.step(x);
+  let on = 0; for (const v of x) on += v; spark.push(on ? out.left.length / on : 0); if (spark.length > 300) spark.shift();
+  last = { id, x, out, held: false }; if (draw) render(); }
+function showHeld() { play(false); const p = HELD[Math.floor(Math.random() * HELD.length)], x = p.bits.slice(), q = M.read(x);
+  last = { id: p.id, x, out: { ...q, born: null, rested: false }, held: true }; render(); }
+
+// ---- the column canvas
+const TW = 46, FS = 7, GAP = 8, CELL = 4, CPR = 9, CROWS = 4;   // tile width, field pixel, gap, cell pitch, cells per row, rows shown
+let layout = [];
+function drawCols() {
+  const cv = $('cv'), W = cv.clientWidth, dpr = window.devicePixelRatio || 1, per = Math.max(1, Math.floor((W + GAP) / (TW + GAP)));
+  const TH = 4 + 5 * FS + 6 + CROWS * CELL + 14, rowsN = Math.ceil(M.cols.length / per), H = Math.max(80, rowsN * (TH + GAP));
+  cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px'; const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+  const ink = css('--ink'), empty = css('--empty'), cellc = css('--cell'), nw = css('--new'), mut = css('--muted'), line = css('--line');
+  const claim = new Map(), cellOn = new Map();
+  if (last) { last.out.claims.forEach((q, k) => claim.set(q.c, PAL[k % PAL.length])); for (const z of last.out.cells || []) cellOn.set(z.cell, z.fresh); }
+  const born = last && last.out.born; layout = [];
+  if (!M.cols.length) { g.fillStyle = mut; g.font = '13px system-ui'; g.fillText('No columns yet: the first leftover will grow one.', 4, 20); }
+  M.cols.forEach((c, k) => {
+    const x0 = (k % per) * (TW + GAP), y0 = Math.floor(k / per) * (TH + GAP), fx = x0 + (TW - 5 * FS) / 2, fy = y0 + 4; layout.push([x0, y0, TW, TH, c]);
+    const col = claim.get(c);
+    g.strokeStyle = c === born ? nw : col || line; g.lineWidth = c === born || col ? 2 : 1; g.strokeRect(x0 + .5, y0 + .5, TW - 1, TH - 1);
+    for (let i = 0; i < 25; i++) { const v = c.m[i], px = fx + (i % 5) * FS, py = fy + Math.floor(i / 5) * FS;
+      g.fillStyle = empty; g.fillRect(px, py, FS - 1, FS - 1);
+      if (v > 0) { g.globalAlpha = v >= K.CUT ? 1 : 0.25 + 0.5 * v; g.fillStyle = col && v >= K.CUT ? col : ink; g.fillRect(px, py, FS - 1, FS - 1); g.globalAlpha = 1; } }
+    const cy = fy + 5 * FS + 5, cs = c.cells, show = Math.min(cs.length, CPR * CROWS - (cs.length > CPR * CROWS ? 1 : 0));
+    let shownOn = false;
+    for (let j = 0; j < show; j++) { const u = cs[j], px = fx + (j % CPR) * CELL, py = cy + Math.floor(j / CPR) * CELL;
+      if (cellOn.has(u)) { g.fillStyle = cellOn.get(u) ? nw : col || ink; shownOn = true; } else g.fillStyle = cellc; g.fillRect(px, py, CELL - 1, CELL - 1); }
+    if (cs.length > show) { // the active cell may be beyond the visible ones: show it in the last slot
+      const px = fx + (show % CPR) * CELL, py = cy + Math.floor(show / CPR) * CELL; let act = null; for (const u of cs.slice(show)) if (cellOn.has(u)) act = u;
+      g.fillStyle = act ? (cellOn.get(act) ? nw : col || ink) : mut; g.fillRect(px, py, CELL - 1, CELL - 1); }
+    g.fillStyle = mut; g.font = '10px system-ui'; g.textAlign = 'center'; g.fillText(cs.length + (cs.length === 1 ? ' cell' : ' cells'), x0 + TW / 2, y0 + TH - 4); g.textAlign = 'left';
+  });
+}
+$('cv').addEventListener('mousemove', (e) => { const r = $('cv').getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, t = $('tip');
+  const hit = layout.find(([x0, y0, w, h]) => x >= x0 && x < x0 + w && y >= y0 && y < y0 + h);
+  if (!hit) { t.style.display = 'none'; return; } const c = hit[4], px = [...c.m].filter((v) => v >= K.CUT).length;
+  t.innerHTML = 'column ' + c.id + ' · ' + px + ' pixels<br>claimed ' + c.uses + ' times · ' + c.cells.length + ' cells<br>born at flash ' + c.born + ', last used ' + c.last;
+  t.style.display = 'block'; t.style.left = (e.clientX + 14) + 'px'; t.style.top = (e.clientY + 12) + 'px'; });
+$('cv').addEventListener('mouseleave', () => { $('tip').style.display = 'none'; });
+
+// ---- the right-hand side
+function grid(el, paint) { el.innerHTML = ''; for (let i = 0; i < 25; i++) { const d = document.createElement('i'); paint(i, d); el.appendChild(d); } }
+function render() {
+  drawCols(); if (!last) return; const { id, x, out } = last, ink = css('--ink'), heat = css('--heat');
+  $('pname').textContent = (last.held ? 'held out, first sight: ' : '') + '"' + PAT[id].name + '"';
+  $('tno').textContent = last.held ? 'no learning' : 'flash ' + M.t;
+  grid($('gin'), (i, d) => { if (x[i]) d.style.background = ink; });
+  const owner = new Array(25).fill(-1), miss = new Array(25).fill(-1);
+  out.claims.forEach((q, k) => { for (let i = 0; i < 25; i++) if (q.c.m[i] >= K.CUT) { if (x[i] && owner[i] < 0) owner[i] = k; if (!x[i]) miss[i] = k; } });
+  const left = new Set(out.left);
+  grid($('gex'), (i, d) => { if (left.has(i)) d.style.background = heat; else if (owner[i] >= 0) d.style.background = PAL[owner[i] % PAL.length];
+    else if (miss[i] >= 0) d.style.boxShadow = 'inset 0 0 0 2px ' + PAL[miss[i] % PAL.length];
+    if (out.born && out.born.m[i] >= K.CUT) d.style.boxShadow = 'inset 0 0 0 2px ' + css('--new'); });
+  grid($('grc'), (i, d) => { let on = false; for (const q of out.claims) if (q.c.m[i] >= K.CUT) on = true; if (on) d.style.background = ink; });
+  const st = M.st, s = [['columns', M.cols.length], ['cells', M.cellCount()], ['parts in this flash', out.claims.length], ['left over now', out.left.length + ' px'],
+    ['rest pressure', Math.round(100 * M.heat / K.PMAX) + '%'], ['rests', st.rests], ['columns grown', st.grown], ['retired (unused)', st.retired], ['removed (added nothing)', st.redundant]];
+  if (M.o.join) s.push(['joined', st.joined || 0]); if (M.o.confirm) s.push(['leftovers waiting to recur', M.tent.length]);
+  $('stats').innerHTML = s.map(([a, b]) => '<span>' + a + '</span><b>' + b + '</b>').join('');
+  $('restflag').textContent = out.rested ? 'just rested' : '';
+  const sc = $('spark'), dpr = window.devicePixelRatio || 1, W = sc.clientWidth, H = 46; sc.width = W * dpr; sc.height = H * dpr; const g = sc.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  g.fillStyle = heat; const bw = W / 300; spark.forEach((v, k) => { const h = Math.max(v > 0 ? 1 : 0, v * (H - 2)); g.fillRect(k * bw, H - h, Math.max(1, bw - .2), h); });
+}
+function play(on) { clearInterval(timer); timer = on ? setInterval(() => next(), 1000 / speed) : null; $('play').textContent = on ? 'Pause' : 'Play'; }
+$('play').onclick = () => play(!timer);
+$('step').onclick = () => { play(false); next(); };
+$('ff').onclick = () => { for (let i = 0; i < 499; i++) next(false); next(); };
+$('held').onclick = showHeld;
+$('reset').onclick = reset; $('arm').onchange = reset;
+$('noise').oninput = (e) => { noise = e.target.value / 100; $('nv').textContent = e.target.value + '%'; };
+const sv = () => { $('sv').textContent = speed + '/s'; }; sv();
+$('speed').oninput = (e) => { speed = +e.target.value; sv(); if (timer) play(true); };
+window.addEventListener('resize', () => render());
+reset(); play(true);
+</script></body></html>

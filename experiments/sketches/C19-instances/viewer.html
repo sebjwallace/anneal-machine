@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Many of the same · C19, multiple instances in one scene</title>
+<style>
+:root{--bg:#f7f6f2;--fg:#1d1d1b;--muted:#6f6e68;--ink:#1d1d1b;--empty:#e6e4dc;--heat:#d63c2f;--new:#2b78d9;--ep:#8a4fd1;--line:#dcdad2;--card:#fff;--cell:#b9b6aa;--on:#d9622b}
+@media (prefers-color-scheme:dark){:root{--bg:#151514;--fg:#ecebe6;--muted:#9b9a93;--ink:#ecebe6;--empty:#2b2b28;--heat:#f0614f;--new:#5ea2f2;--ep:#b07cf0;--line:#34342f;--card:#1d1d1b;--cell:#55534c;--on:#f08a50}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1320px;margin:0 auto;padding:22px 18px 40px}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:var(--muted);margin:0 0 14px;max-width:100ch}
+.bar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.bar label{color:var(--muted)}
+select,button,input[type=number]{font:inherit;font-size:13px;padding:5px 10px;border-radius:7px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+button{cursor:pointer}button:hover{border-color:var(--muted)}
+input[type=range]{width:110px;accent-color:var(--on)}
+input[type=number]{width:62px}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:14px;align-items:start}
+@media (max-width:880px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.ph{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:8px}
+.ph h2{font-size:13px;margin:0;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.ph span{font-size:12px;color:var(--muted)}
+#cv{display:block;width:100%}
+.right{position:sticky;top:10px;display:flex;flex-direction:column;gap:14px}
+.trio{display:flex;gap:12px}.trio>div{flex:1;min-width:0}
+.g{display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+.g i{display:block;aspect-ratio:1;background:var(--empty);border-radius:2px}
+.cap{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.3}
+.name{font-size:15px;font-weight:600;margin-bottom:8px}
+.stats{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:13px}
+.stats span:nth-child(odd){color:var(--muted)}
+.stats b{font-weight:600;font-variant-numeric:tabular-nums}
+canvas.chart{width:100%;display:block;margin-top:6px}
+.key{font-size:12px;color:var(--muted);line-height:1.7}
+.key s{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px;text-decoration:none}
+.dg{font-size:12px;color:var(--muted)}.dg s{display:inline-block;width:12px;height:10px;border:2px dashed;border-radius:2px;margin-right:4px;vertical-align:-1px;text-decoration:none}
+#tip{position:fixed;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:7px;padding:6px 9px;font-size:12px;display:none;box-shadow:0 4px 14px rgba(0,0,0,.12);z-index:5}
+</style></head><body><main>
+<h1>Many of the same: C19, multiple instances in one scene</h1>
+<p class="sub">As C18 (learn once, recognise anywhere), in a 12x12 world where half the scenes hold 2 or 3 copies of the same thing. Three limitations removed, nothing added: a unit can be placed as many times as it newly explains something; composition also compares a memory with itself (an arrangement repeated inside one scene); and every occurrence of an arrangement is counted and replaced. Rest is automatic every 98 flashes by default. 'Show a held-out pattern' shows two copies of an object never seen in training (tower, arrow). Pattern noise starts at 0.</p>
+<div class="bar">
+  <label for="arm">Arm</label><select id="arm"></select>
+  <label for="speed">Speed</label><input type="range" id="speed" min="1" max="30" value="6"><span id="sv"></span>
+  <button id="play">Pause</button><button id="step">Step</button><button id="ff">Skip 500</button><button id="ff5">Skip 5,000</button><button id="held">Show a held-out pattern</button>
+  <label for="seed">Seed</label><input type="number" id="seed" value="1" min="1"><button id="reset">Restart</button>
+</div>
+<div class="bar"><b style="font-weight:600">Noise</b>
+  <select id="nmode"><option value="steady">steady</option><option value="wave">wave</option></select>
+  <label for="noise" id="nlabel">Level</label><input type="range" id="noise" min="0" max="20" value="0"><b id="nv">0%</b>
+  <span id="wavectl" style="display:none"><label for="period">Wave length</label> <input type="range" id="period" min="50" max="5000" step="50" value="1000"> <b id="pv">1000 flashes</b></span>
+  <span style="color:var(--muted)">now: <b id="nnow" style="color:var(--fg)">0.0%</b></span>
+  <b style="font-weight:600;margin-left:12px">Stream</b><select id="smode"><option value="shuffled">shuffled</option><option value="focus">changing focus</option></select>
+  <span id="focusctl" style="display:none"><label for="phase">each focus lasts</label> <input type="range" id="phase" min="50" max="3000" step="50" value="300"> <b id="phv">300 flashes</b> <span style="color:var(--muted)">(80% of flashes from 10 patterns)</span></span>
+</div>
+<div class="bar"><b style="font-weight:600">Awake and rest</b>
+  <label for="fth">Awake: store a new memory unless the parts explain at least</label><input type="range" id="fth" min="50" max="100" step="1" value="90"><b id="fthv">90%</b>
+  <button id="frest">Rest now (watch it factor)</button><button id="frestfast">Rest instantly</button>
+  <label for="fauto">Rest automatically</label><select id="fauto"><option value="0">never</option><option value="98" selected>every 98 flashes</option><option value="500">every 500 flashes</option><option value="2000">every 2,000 flashes</option></select>
+  <span id="fmsg" style="color:var(--muted)"></span></div>
+<div class="wrap">
+  <div class="panel"><div class="ph"><h2>Columns</h2><span>field on top · cells underneath · coloured border = explaining this flash · dark border = active in its layer</span></div><canvas id="cv"></canvas></div>
+  <div class="right">
+    <div class="panel">
+      <div class="ph"><h2>Input</h2><span id="tno"></span></div>
+      <div class="name" id="pname"></div>
+      <div class="trio">
+        <div><div class="g" id="gin"></div><div class="cap">as flashed</div></div>
+        <div><div class="g" id="gex"></div><div class="cap">explained</div></div>
+        <div><div class="g" id="grc"></div><div class="cap">rebuilt</div></div>
+      </div>
+      <div class="key" style="margin-top:8px"><s style="background:var(--heat)"></s>left over (heat) &nbsp;<s style="background:var(--ep)"></s>from an episode &nbsp;<s style="box-shadow:inset 0 0 0 2px var(--new)"></s>new</div>
+    </div>
+    <div class="panel">
+      <div class="ph"><h2>Heat</h2><span id="trendnote"></span></div>
+      <div class="cap" style="margin-top:0">from the start (share left over or wrong; each bar averages a stretch of flashes). Blue line: noise, on a 0–20% scale</div>
+      <canvas id="trend" class="chart" style="height:80px"></canvas>
+      <div class="cap">last 300 flashes</div>
+      <canvas id="spark" class="chart" style="height:40px"></canvas>
+      <div id="lwrap" style="display:none"><div class="cap">each layer on its own, from the start (line colour = layer: <span id="lkey"></span>)</div><canvas id="ltrend" class="chart" style="height:80px"></canvas></div>
+    </div>
+    <div class="panel"><div class="ph"><h2>State</h2><span id="restflag"></span></div><div class="stats" id="stats"></div></div>
+  </div>
+</div>
+<div id="tip"></div>
+</main>
+<script>// CATALOGUE (C01): about 100 designed 5x5 black-and-white patterns, in families with deliberate shared parts, plus the
+// noisy presentation stream. A pattern is 25 bits, row by row (cell r,c is bit r*5+c). Families, shapes and parts are for
+// the scorer and the viewer only: the machine never sees them. Runs in Node (require) and in the browser (inlined).
+'use strict';
+const N = 5, SIZE = N * N;
+
+// ---- building blocks: everything is drawn from bars, corners, boxes and blocks, so shapes share parts on purpose
+const blank = () => new Uint8Array(SIZE);
+const range = (a, b) => { const o = []; for (let i = a; i <= b; i++) o.push(i); return o; };
+function cells(list) { const p = blank(); for (const [r, c] of list) if (r >= 0 && r < N && c >= 0 && c < N) p[r * N + c] = 1; return p; }
+function or(...ps) { const p = blank(); for (const q of ps) for (let i = 0; i < SIZE; i++) if (q[i]) p[i] = 1; return p; }
+function rows(...lines) { const p = blank(); lines.forEach((l, r) => [...l].forEach((ch, c) => { if (ch === '#') p[r * N + c] = 1; })); return p; }
+const hbar = (r, c0 = 0, c1 = N - 1) => cells(range(c0, c1).map((c) => [r, c]));
+const vbar = (c, r0 = 0, r1 = N - 1) => cells(range(r0, r1).map((r) => [r, c]));
+// an L of two arms inside the size x size box whose top-left is (r, c); which = 'tl' | 'tr' | 'bl' | 'br' names its corner
+function corner(r, c, size, which) { const e = size - 1, top = which[0] === 't', left = which[1] === 'l';
+  return or(hbar(top ? r : r + e, c, c + e), vbar(left ? c : c + e, r, r + e)); }
+function frame(r, c, size) { const e = size - 1; return or(hbar(r, c, c + e), hbar(r + e, c, c + e), vbar(c, r, r + e), vbar(c + e, r, r + e)); }
+function block(r, c, size) { const l = []; for (const i of range(0, size - 1)) for (const j of range(0, size - 1)) l.push([r + i, c + j]); return cells(l); }
+const plus = (r, c, arm) => or(hbar(r, c - arm, c + arm), vbar(c, r - arm, r + arm));
+// a quarter turn clockwise: (r, c) goes to (c, N-1-r)
+function rot(p) { const q = blank(); for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (p[r * N + c]) q[c * N + (N - 1 - r)] = 1; return q; }
+
+// ---- the catalogue. shape = the same shape wherever it sits (a shifted copy shares its shape); parts = the bars a
+// composition was built from (for the composition tests later). An exact duplicate is dropped and reported.
+function build() {
+  const out = [], seen = new Map(), dropped = [];
+  const add = (family, name, bits, shape = name, parts = null) => {
+    const key = bits.join('');
+    if (seen.has(key)) { dropped.push({ name, family, sameAs: seen.get(key) }); return; }
+    seen.set(key, name); out.push({ id: out.length, name, family, shape, parts, bits });
+  };
+  const dDown = cells(range(0, 4).map((i) => [i, i])), dUp = cells(range(0, 4).map((i) => [i, 4 - i]));
+
+  for (const r of range(0, 4)) add('bars', `row ${r}`, hbar(r), 'row');
+  for (const c of range(0, 4)) add('bars', `col ${c}`, vbar(c), 'col');
+
+  add('diagonals', 'diag \\', dDown);
+  add('diagonals', 'diag /', dUp);
+  add('diagonals', 'short \\ upper', cells(range(0, 3).map((i) => [i, i + 1])), 'short \\');
+  add('diagonals', 'short \\ lower', cells(range(0, 3).map((i) => [i + 1, i])), 'short \\');
+  add('diagonals', 'short / upper', cells(range(0, 3).map((i) => [i, 3 - i])), 'short /');
+  add('diagonals', 'short / lower', cells(range(0, 3).map((i) => [i + 1, 4 - i])), 'short /');
+
+  for (const r of [0, 2, 4]) for (const [c0, side] of [[0, 'left'], [2, 'right']]) add('half bars', `row ${r} ${side}`, hbar(r, c0, c0 + 2), 'half row');
+  for (const c of [0, 2, 4]) for (const [r0, side] of [[0, 'top'], [2, 'bottom']]) add('half bars', `col ${c} ${side}`, vbar(c, r0, r0 + 2), 'half col');
+
+  for (const w of ['tl', 'tr', 'bl', 'br']) {
+    add('corners', `corner ${w}`, corner(w[0] === 't' ? 0 : 2, w[1] === 'l' ? 0 : 2, 3, w), `corner ${w}`);
+    add('corners', `corner ${w} centre`, corner(1, 1, 3, w), `corner ${w}`);           // the same corner, shifted inwards
+  }
+  for (const w of ['tl', 'tr', 'bl', 'br']) add('big Ls', `big L ${w}`, corner(0, 0, 5, w));
+
+  add('Ts', 'T top', or(hbar(0), vbar(2)), 'T top', ['row 0', 'col 2']);
+  add('Ts', 'T bottom', or(hbar(4), vbar(2)), 'T bottom', ['row 4', 'col 2']);
+  add('Ts', 'T left', or(vbar(0), hbar(2)), 'T left', ['col 0', 'row 2']);
+  add('Ts', 'T right', or(vbar(4), hbar(2)), 'T right', ['col 4', 'row 2']);
+  add('Ts', 'small T', or(hbar(0, 1, 3), vbar(2, 0, 2)), 'small T');
+  add('Ts', 'small T lower', or(hbar(1, 1, 3), vbar(2, 1, 3)), 'small T');             // shifted down one
+
+  add('crosses', 'plus', plus(2, 2, 2), 'plus', ['row 2', 'col 2']);
+  for (const [r, c] of [[2, 2], [1, 1], [1, 3], [3, 1], [3, 3]]) add('crosses', `small plus ${r},${c}`, plus(r, c, 1), 'small plus');
+  add('crosses', 'X', or(dDown, dUp), 'X', ['diag \\', 'diag /']);
+
+  add('boxes', 'frame', frame(0, 0, 5), 'frame', ['row 0', 'row 4', 'col 0', 'col 4']);
+  for (const [r, c] of [[0, 0], [0, 2], [2, 0], [2, 2], [1, 1]]) add('boxes', `small box ${r},${c}`, frame(r, c, 3), 'small box');
+
+  for (const [r, c] of [[0, 0], [0, 3], [3, 0], [3, 3], [1, 1], [2, 2]]) add('blocks', `block ${r},${c}`, block(r, c, 2), 'block');
+  add('blocks', 'big block', block(1, 1, 3));
+
+  add('letters', 'C', rows('.####', '#....', '#....', '#....', '.####'));
+  add('letters', 'U', rows('#...#', '#...#', '#...#', '#...#', '#####'), 'U', ['col 0', 'col 4', 'row 4']);
+  add('letters', 'H', rows('#...#', '#...#', '#####', '#...#', '#...#'), 'H', ['col 0', 'col 4', 'row 2']);
+  add('letters', 'E', rows('#####', '#....', '#####', '#....', '#####'), 'E', ['row 0', 'row 2', 'row 4', 'col 0']);
+  add('letters', 'F', rows('#####', '#....', '#####', '#....', '#....'), 'F', ['row 0', 'row 2', 'col 0']);
+  add('letters', 'Z', rows('#####', '...#.', '..#..', '.#...', '#####'));
+  add('letters', 'S', rows('.####', '#....', '.###.', '....#', '####.'));
+  add('letters', 'P', rows('####.', '#...#', '####.', '#....', '#....'));
+
+  add('brackets', '[', rows('###..', '#....', '#....', '#....', '###..'));
+  add('brackets', ']', rows('..###', '....#', '....#', '....#', '..###'));
+
+  const up = rows('..#..', '.#.#.', '#...#', '.....', '.....');
+  add('chevrons', 'chevron up', up); add('chevrons', 'chevron right', rot(up));
+  add('chevrons', 'chevron down', rot(rot(up))); add('chevrons', 'chevron left', rot(rot(rot(up))));
+
+  const step = rows('#....', '##...', '.##..', '..##.', '...##');
+  add('steps', 'steps \\', step); add('steps', 'steps /', rot(step));
+
+  // the "bars problem": shapes that are nothing but bars laid over each other
+  for (const [r, c] of [[1, 1], [1, 3], [3, 1], [3, 3], [0, 1], [4, 3], [1, 0], [3, 4]])
+    add('bar pairs', `row ${r} + col ${c}`, or(hbar(r), vbar(c)), 'row + col', [`row ${r}`, `col ${c}`]);
+  for (const [a, b] of [[0, 2], [1, 3], [2, 4], [0, 4]]) add('bar pairs', `rows ${a} + ${b}`, or(hbar(a), hbar(b)), 'two rows', [`row ${a}`, `row ${b}`]);
+  for (const [a, b] of [[0, 2], [1, 3], [2, 4], [0, 4]]) add('bar pairs', `cols ${a} + ${b}`, or(vbar(a), vbar(b)), 'two cols', [`col ${a}`, `col ${b}`]);
+  const bar = ([k, i]) => (k === 'row' ? hbar(i) : vbar(i));
+  for (const t of [[['row', 1], ['col', 1], ['col', 3]], [['row', 3], ['col', 1], ['col', 3]], [['row', 1], ['row', 3], ['col', 2]],
+    [['row', 1], ['row', 3], ['col', 1]], [['row', 0], ['row', 4], ['col', 2]], [['col', 0], ['col', 4], ['row', 1]]]) {
+    const names = t.map(([k, i]) => `${k} ${i}`);
+    add('bar triples', names.join(' + '), or(...t.map(bar)), 'three bars', names);
+  }
+  return { patterns: out, dropped };
+}
+
+// ---- the stream: patterns in random order (each pass a fresh shuffle, so all are seen equally often), each flash flipping
+// every cell independently with chance `noise` (5% flips about 1.25 of 25 cells). `noise` may be a number or a function
+// (the viewer's slider). Seeded, so a run can be repeated exactly.
+function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1);
+  t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function noisy(bits, p, r) { const q = bits.slice(); for (let i = 0; i < SIZE; i++) if (r() < p) q[i] ^= 1; return q; }
+function* stream(patterns, { seed = 1, noise = 0.05 } = {}) {
+  const r = rng(seed), order = patterns.map((_, i) => i);
+  for (let t = 0; ;) {
+    for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    for (const id of order) { const p = typeof noise === 'function' ? noise() : noise; yield { t: t++, id, clean: patterns[id].bits, bits: noisy(patterns[id].bits, p, r) }; }
+  }
+}
+
+const CATALOGUE = build();
+if (typeof module !== 'undefined') module.exports = { N, SIZE, CATALOGUE, build, stream, noisy, rng };
+</script>
+<script>// MULTIPLE INSTANCES (C19; a copy of C18's shift.js, generalised). Changes from C18, each removing a limitation:
+//  - explaining: a unit may be placed more than once in a scene (any placement that newly explains something);
+//  - composing: a memory is also compared with itself, and every occurrence of an arrangement is counted and replaced;
+//  - the world is 12x12, and some scenes hold 2 or 3 copies of the same thing.
+// SHIFT-INVARIANT DECOMPOSITION AND COMPOSITION (C18). A world of scenes. Parts are stored once, in their own frame;
+// memories and composites hold PLACEMENTS (which unit, at what offset), so position lives in the placements, and a composite
+// keeps its children's RELATIVE positions.
+// AWAKE: a scene is explained by units placed anywhere (each unit at its best offset; the unit that newly explains most, net
+// of what it gets wrong and its cost, claims next). If more than (1 - threshold) is left unexplained or wrong, the scene is
+// stored as a new memory: one new part (the whole scene, in its own frame), placed where it was.
+// REST, decompose: parts are compared under every shift, including each part against itself (repeats inside one memory).
+// The overlap at the best shift becomes a part; each original becomes placements of the overlap plus its remainder. Shapes
+// that are the same up to position are the same part. Applied when it lowers energy (hottest first). Then, compose: a group
+// of placements recurring with the same relative positions in several holders becomes a composite (one layer up).
+// ENERGY = pixels stored in parts + PART_COST per placement listed in memories and composites (no new settings).
+// Also exports SceneWorld, the scene generator (shapes from the catalogue, objects made of shapes, held-out objects).
+'use strict';
+const SW = 12, SH = 12, SPX = SW * SH;
+const K = { CUT: 0.5 };
+const PART_COST = 1;
+const ARMS = { MI: { label: 'MI: as C18, with any number of instances of a unit in a scene' } };
+const keyOf = (pts) => pts.map(([x, y]) => x + ',' + y).join(';');
+function norm(pts) { if (!pts.length) return { pts: [], ox: 0, oy: 0, key: '' }; let mx = Infinity, my = Infinity; for (const [x, y] of pts) { if (x < mx) mx = x; if (y < my) my = y; }
+  const q = pts.map(([x, y]) => [x - mx, y - my]).sort((a, b) => a[1] - b[1] || a[0] - b[0]); return { pts: q, ox: mx, oy: my, key: keyOf(q) }; }
+const ptsOf = (x) => { const out = []; for (let i = 0; i < SPX; i++) if (x[i]) out.push([i % SW, Math.floor(i / SW)]); return out; };
+const P2 = (x, y) => x * 1000 + y;
+
+class Model {
+  constructor(arm = 'MI', opt = {}) {
+    this.arm = arm; this.soft = false; this.W = SW; this.H = SH; this.o = { threshold: 0.9, columns: 'free', ...ARMS[arm], ...opt };
+    this.units = []; this.items = []; this.nid = 0; this.t = 0; this.heat = 0; this.phase = 'decompose';
+    this.buf = []; this.bufH = [];   // awake scenes since the last rest (replayed by composition, as the core's rest replays), then dropped
+    this.st = { snapshots: 0, factored: 0, collapsed: 0, composed: 0, restSteps: 0 }; this.lastRest = null;
+  }
+  get cols() { return this.units; }
+  get parts() { return this.units.filter((u) => u.layer === 1); }
+  get layers() { const top = Math.max(1, ...this.units.map((u) => u.layer)); return Array.from({ length: top }, (_, k) => ({ index: k, n: null, cols: this.units.filter((u) => u.layer === k + 1) })); }
+  holders() { return [...this.items, ...this.units.filter((u) => u.layer > 1)]; }
+  // a unit's points in its own frame (composites: union of children at their offsets)
+  exp(u) { if (u.layer === 1) return u.pts; if (u._exp) return u._exp; const s = new Map();
+    for (const k of u.place) for (const [x, y] of this.exp(k.u)) s.set(P2(x + k.dx, y + k.dy), [x + k.dx, y + k.dy]); u._exp = norm([...s.values()]).pts; return u._exp; }
+  pic(u) { const m = new Float32Array(SPX); for (const [x, y] of this.exp(u)) if (x < SW && y < SH) m[y * SW + x] = 1; return m; }
+  refresh() { for (const u of [...this.units].sort((a, b) => a.layer - b.layer)) { u._exp = null; } for (const u of this.units) { u.m = this.pic(u); u.size = this.exp(u).length; } }
+  part(pts) { const n = norm(pts); let p = this.units.find((u) => u.layer === 1 && u.key === n.key);
+    if (!p) { p = { id: this.nid++, layer: 1, pts: n.pts, key: n.key, uses: 0, born: this.t, last: this.t, cells: [] }; p.m = this.pic(p); p.size = n.pts.length; this.units.push(p); }
+    return { u: p, dx: n.ox, dy: n.oy }; }
+  energy() { return this.parts.reduce((a, p) => a + p.pts.length, 0) + PART_COST * this.links(); }
+  links() { return this.holders().reduce((a, h) => a + h.place.length, 0); }
+  itemsUsing(u) { return this.holders().filter((h) => h.place.some((k) => k.u === u)).length; }
+
+  // ---- explain a scene: each unit at its best offset; greedy by net gain, as before
+  explain(x) {
+    // a unit may be placed again elsewhere (another instance): only the same placement can't be claimed twice
+    const X = new Set(), on = ptsOf(x); for (const [a, b] of on) X.add(P2(a, b)); const cov = new Set(), claims = []; let misses = 0; const used = new Set();
+    for (;;) { let best = null;
+      for (const u of this.units) { const pts = this.exp(u), tally = new Map();
+        for (const [ux, uy] of pts) for (const [a, b] of on) { if (cov.has(P2(a, b))) continue; const k = P2(a - ux, b - uy); tally.set(k, (tally.get(k) || 0) + 1); }
+        for (const [k, n] of tally) { const dx = Math.floor((k + 500) / 1000) , dy = k - dx * 1000; if (used.has(u.id + '@' + k)) continue; let g = 0, w = 0;
+          for (const [ux, uy] of pts) { const q = P2(ux + dx, uy + dy); if (X.has(q)) { if (!cov.has(q)) g++; } else w++; }
+          const s = g - w; if (g && (s > PART_COST || (s === PART_COST && w === 0)) && (!best || s > best.s || (s === best.s && pts.length > this.exp(best.u).length))) best = { u, dx, dy, s, w }; } }
+      if (!best) break; used.add(best.u.id + '@' + P2(best.dx, best.dy)); claims.push({ c: best.u, dx: best.dx, dy: best.dy }); misses += best.w;
+      for (const [ux, uy] of this.exp(best.u)) { const q = P2(ux + best.dx, uy + best.dy); if (X.has(q)) cov.add(q); } }
+    const left = [], ownerPx = new Int16Array(SPX).fill(-1), missPx = new Int16Array(SPX).fill(-1), recon = new Uint8Array(SPX);
+    claims.forEach((c, k) => { for (const [ux, uy] of this.exp(c.c)) { const x2 = ux + c.dx, y2 = uy + c.dy; if (x2 < 0 || y2 < 0 || x2 >= SW || y2 >= SH) continue; const i = y2 * SW + x2;
+      recon[i] = 1; if (x[i] && ownerPx[i] < 0) ownerPx[i] = k; if (!x[i]) missPx[i] = k; } });
+    for (const [a, b] of on) if (!cov.has(P2(a, b))) left.push(b * SW + a);
+    return { claims, left, misses, recon, ownerPx, missPx, on: on.length };
+  }
+  step(x) {
+    this.t++; const r = this.explain(x), hs = r.on ? (r.left.length + r.misses) / r.on : 0; let born = null;
+    if (r.on && hs > 1 - this.o.threshold) { const pl = this.part(ptsOf(x)); born = pl.u; this.items.push({ id: this.items.length, place: [pl], scene: x.slice() }); this.st.snapshots++; }
+    for (const { c } of r.claims) { c.uses++; c.last = this.t; } this.heat = hs;
+    if (!born && r.claims.length >= 2) { this.buf.push(x.slice()); if (this.buf.length > 1000) this.buf.shift(); }   // explained by several units: evidence for composition
+    return { ...r, born, bornAll: born ? [born] : [], heatShare: hs, sim: 1 - hs, cells: [], work: this.units.length, rested: false };
+  }
+  read(x) { return { ...this.explain(x), cells: [] }; }
+
+  // ---- REST, decompose: best shift between two parts (or a part and itself), factor if it lowers energy
+  bestShift(A, B, self) { const tally = new Map(); for (const [ax, ay] of A.pts) for (const [bx, by] of B.pts) { const k = P2(ax - bx, ay - by); if (self && k === 0) continue; tally.set(k, (tally.get(k) || 0) + 1); }
+    let bk = null, bn = 0; for (const [k, n] of tally) if (n > bn) { bn = n; bk = k; } if (bk === null) return null; const dx = Math.floor((bk + 500) / 1000); return { dx, dy: bk - dx * 1000, n: bn }; }
+  planSplit(A, B, H) {
+    const self = A === B, sh = this.bestShift(A, B, self); if (!sh || sh.n < 2) return null; const { dx, dy } = sh;
+    const inA = new Set(A.pts.map(([x, y]) => P2(x, y))), O = B.pts.map(([x, y]) => [x + dx, y + dy]).filter(([x, y]) => inA.has(P2(x, y)));   // overlap, in A's frame
+    const oset = new Set(O.map(([x, y]) => P2(x, y)));
+    let piecesA, piecesB = null;
+    if (self) { const back = O.map(([x, y]) => [x - dx, y - dy]), cover = new Set([...oset, ...back.map(([x, y]) => P2(x, y))]);   // the repeat appears twice in A
+      piecesA = [O, back, A.pts.filter(([x, y]) => !cover.has(P2(x, y)))]; }
+    else { piecesA = [O, A.pts.filter(([x, y]) => !oset.has(P2(x, y)))]; const ob = new Set(O.map(([x, y]) => P2(x - dx, y - dy)));
+      piecesB = [O.map(([x, y]) => [x - dx, y - dy]), B.pts.filter(([x, y]) => !ob.has(P2(x, y)))]; }
+    const keep = (arr) => arr.filter((p) => p.length).map((p) => norm(p));
+    const pA = keep(piecesA), pB = piecesB ? keep(piecesB) : null, remaining = new Set(this.parts.filter((p) => p !== A && p !== B).map((p) => p.key));
+    let dpix = -A.pts.length - (self ? 0 : B.pts.length); const added = new Set(); for (const n of [...pA, ...(pB || [])]) if (!remaining.has(n.key) && !added.has(n.key)) { added.add(n.key); dpix += n.pts.length; }
+    // two ways to replace a part by its pieces: rewrite every holder that uses it (one more link per use), or turn the part
+    // itself into a composite of the pieces (its links stored once; its users keep pointing at it). Take the cheaper.
+    const usesA = H.reduce((a, h) => a + h.place.filter((k) => k.u === A).length, 0), usesB = self ? 0 : H.reduce((a, h) => a + h.place.filter((k) => k.u === B).length, 0);
+    const wrapA = pA.length <= usesA * (pA.length - 1), wrapB = !self && pB.length <= usesB * (pB.length - 1);
+    const dl = (wrapA ? pA.length : usesA * (pA.length - 1)) + (self ? 0 : wrapB ? pB.length : usesB * (pB.length - 1));
+    return { A, B, self, pA, pB, wrapA, wrapB, saving: -(dpix + PART_COST * dl), overlap: O.length, dx, dy };
+  }
+  splitStep() {
+    const parts = this.parts, H = this.holders(); let best = null;
+    for (let i = 0; i < parts.length; i++) for (let j = i; j < parts.length; j++) { const pl = this.planSplit(parts[i], parts[j], H);
+      if (pl && pl.saving > 0 && (!best || pl.saving > best.saving || (pl.saving === best.saving && pl.overlap > best.overlap))) best = pl; }
+    if (!best) return null;
+    const { A, B, self, pA, pB, wrapA, wrapB } = best; this.units = this.units.filter((u) => u !== A && u !== B);
+    const mk = (n) => { const q = this.part(n.pts); return { u: q.u, dx: n.ox - q.dx, dy: n.oy - q.dy }; };   // piece placed at its offset in the original's frame
+    const rA = pA.map(mk), rB = pB ? pB.map(mk) : null;
+    const wrap = (X, r) => { X.layer = 1 + Math.max(...r.map((p) => p.u.layer)); X.place = r.map((p) => ({ u: p.u, dx: p.dx, dy: p.dy })); delete X.pts; X.key = null; this.units.push(X); };
+    if (wrapA) wrap(A, rA); if (!self && wrapB) wrap(B, rB);   // the part becomes a composite of its pieces (users unchanged)
+    for (const h of [...H, ...this.bufH]) { if (h === A || h === B) continue; const nw = []; for (const k of h.place) { const r = k.u === A && !wrapA ? rA : (!self && k.u === B && !wrapB ? rB : null);
+      if (r) for (const p of r) nw.push({ u: p.u, dx: k.dx + p.dx, dy: k.dy + p.dy }); else nw.push(k); } h.place = nw; }
+    this.st.factored++;
+    return { type: 'decompose', A, B, self, saving: best.saving, pieces: [...new Set([...rA, ...(rB || [])].map((p) => p.u))] };
+  }
+  // ---- REST, compose: a group of placements with the same relative positions in several holders becomes a composite
+  // every occurrence of the arrangement cfg in holder h that uses placements not already taken by another occurrence
+  findIn(h, cfg) {
+    const out = [], taken = new Set();
+    for (const k of h.place) { if (k.u !== cfg[0].u) continue; const tx = k.dx - cfg[0].dx, ty = k.dy - cfg[0].dy, hit = [];
+      for (const c of cfg) { const q = h.place.find((z) => z.u === c.u && z.dx === c.dx + tx && z.dy === c.dy + ty && !taken.has(z)); if (!q) { hit.length = 0; break; } hit.push(q); }
+      if (hit.length === cfg.length) { hit.forEach((q) => taken.add(q)); out.push({ tx, ty, hit }); } }
+    return out; }
+  composeStep() {
+    const H = [...this.holders(), ...this.bufH]; let best = null; const seen = new Set();
+    // pairs of holders, and each holder with itself (an arrangement repeated inside one memory), at every translation
+    for (let i = 0; i < H.length; i++) for (let j = i; j < H.length; j++) for (const p of H[i].place) for (const q of H[j].place) { if (p.u !== q.u || p === q) continue;
+      const tx = q.dx - p.dx, ty = q.dy - p.dy; if (i === j && tx === 0 && ty === 0) continue;
+      const cfg = H[i].place.filter((a) => H[j].place.some((b) => b.u === a.u && b.dx === a.dx + tx && b.dy === a.dy + ty && (i !== j || b !== a)));
+      if (cfg.length < 2) continue; let mx = Infinity, my = Infinity; for (const c of cfg) { mx = Math.min(mx, c.dx); my = Math.min(my, c.dy); }
+      const rel = cfg.map((c) => ({ u: c.u, dx: c.dx - mx, dy: c.dy - my })).sort((a, b) => a.u.id - b.u.id || a.dy - b.dy || a.dx - b.dx), key = rel.map((c) => c.u.id + '@' + c.dx + ',' + c.dy).join(' ');
+      if (seen.has(key)) continue; seen.add(key);
+      const users = H.map((h) => ({ h, at: this.findIn(h, rel) })).filter((z) => z.at.length), n = users.reduce((a, z) => a + z.at.length, 0), saving = n * (rel.length - 1) - rel.length;   // every occurrence counts
+      if (saving > 0 && (!best || saving > best.saving)) best = { rel, users, saving }; }
+    if (!best) return null;
+    const c = { id: this.nid++, layer: 1 + Math.max(...best.rel.map((k) => k.u.layer)), place: best.rel, uses: 0, born: this.t, last: this.t, cells: [] }; this.units.push(c);
+    for (const { h, at } of best.users) { const drop = new Set(at.flatMap((o) => o.hit)); h.place = h.place.filter((q) => !drop.has(q)); for (const o of at) h.place.push({ u: c, dx: o.tx, dy: o.ty }); }   // replace every occurrence
+    this.st.composed++; return { type: 'compose', made: c, saving: best.saving, pieces: [c] };
+  }
+  // DUPLICATES ARE THE HOTTEST STRUCTURE (both always lower energy, so they go first, at every layer):
+  //  a composite with a single child is a pass-through: its users point at the child instead;
+  //  units that look identical (same pixels up to position), from any layer, collapse into one (the most used is kept).
+  tidy() {
+    let n = 0; const holders = () => [...this.items, ...this.units.filter((u) => u.layer > 1), ...this.bufH];
+    const redirect = (from, to, ox, oy) => { for (const h of holders()) { if (h === from) continue; h.place = h.place.map((k) => (k.u === from ? { u: to, dx: k.dx + ox, dy: k.dy + oy } : k)); } this.units = this.units.filter((u) => u !== from); n++; };
+    for (let again = true; again;) { again = false;
+      for (const u of this.units) if (u.layer > 1 && u.place.length === 1) { const c = u.place[0]; redirect(u, c.u, c.dx, c.dy); again = true; break; }
+      if (again) continue;
+      this.refresh(); const byKey = new Map(); for (const u of this.units) { const k = norm(this.exp(u)).key; if (!byKey.has(k)) byKey.set(k, []); byKey.get(k).push(u); }
+      for (const g of byKey.values()) if (g.length > 1) { const keep = g.reduce((a, b) => (this.itemsUsing(b) > this.itemsUsing(a) ? b : a)); for (const d of g) if (d !== keep) redirect(d, keep, 0, 0); again = true; break; } }
+    // layers follow structure: a part is layer 1; a composite is one above its highest child
+    for (let ch = true; ch;) { ch = false; for (const u of this.units) if (u.layer > 1) { const L = 1 + Math.max(...u.place.map((k) => k.u.layer)); if (L !== u.layer) { u.layer = L; ch = true; } } }
+    if (n) { this.refresh(); this.st.collapsed += n; } return n;
+  }
+  restStep() {
+    this.tidy();
+    let a = null;
+    if (this.phase === 'decompose') { a = this.splitStep(); if (!a) { this.phase = 'compose';   // replay the awake scenes since the last rest, explained with the current units
+      this.bufH = this.buf.map((x) => ({ place: this.explain(x).claims.map((c) => ({ u: c.c, dx: c.dx, dy: c.dy })), replay: true })).filter((h) => h.place.length >= 2); } }
+    if (!a && this.phase === 'compose') { a = this.composeStep(); if (!a) { this.phase = 'decompose'; this.lastRest = null; this.buf = []; this.bufH = []; return null; } }
+    this.refresh(); this.st.restSteps++; this.lastRest = a; return a;
+  }
+  rest(max = 100000) { let n = 0; while (n < max && this.restStep()) n++; return n; }
+  cellCount() { return 0; }
+}
+
+// ---- THE SCENE WORLD: shapes (cut from the catalogue), objects (shapes in a fixed arrangement), scenes of 1-3 things
+class SceneWorld {
+  constructor(cat) {
+    const crop = (name) => norm(ptsOf25(cat.patterns.find((p) => p.name === name).bits)).pts;
+    function ptsOf25(b) { const o = []; for (let i = 0; i < 25; i++) if (b[i]) o.push([i % 5, Math.floor(i / 5)]); return o; }
+    this.shapes = { block: crop('block 0,0'), plus: crop('small plus 1,1'), corner: crop('corner tl'), box: crop('small box 0,0'), chevron: crop('chevron up'), bar: crop('row 0 left'), stick: crop('col 0 top'), diag: crop('short \\ upper') };
+    const S = this.shapes, put = (list) => { const s = new Map(); for (const [nm, dx, dy] of list) for (const [x, y] of S[nm]) s.set(P2(x + dx, y + dy), [x + dx, y + dy]); return norm([...s.values()]).pts; };
+    this.objects = { house: put([['chevron', 0, 0], ['box', 1, 2]]), flag: put([['stick', 0, 0], ['block', 1, 0]]), twins: put([['block', 0, 0], ['block', 3, 0]]) };
+    this.heldObjects = { tower: put([['box', 0, 0], ['box', 0, 3]]), arrow: put([['chevron', 0, 0], ['stick', 2, 2]]) };
+    this.things = [...Object.entries(this.shapes), ...Object.entries(this.objects)];
+  }
+  // place a list of things ([name, points]) at random free positions (a 1-pixel gap around each); things that don't fit are skipped
+  place(r, list) {
+    const x = new Uint8Array(SPX), taken = new Set(), names = [];
+    for (const [nm, pts] of list) { let w = 0, h = 0; for (const [a, b] of pts) { w = Math.max(w, a + 1); h = Math.max(h, b + 1); }
+      for (let tries = 0; tries < 60; tries++) { const ox = Math.floor(r() * (SW - w + 1)), oy = Math.floor(r() * (SH - h + 1)); let ok = true;
+        for (let yy = oy - 1; yy <= oy + h && ok; yy++) for (let xx = ox - 1; xx <= ox + w; xx++) if (taken.has(P2(xx, yy))) { ok = false; break; }
+        if (!ok) continue; for (let yy = oy; yy < oy + h; yy++) for (let xx = ox; xx < ox + w; xx++) taken.add(P2(xx, yy)); for (const [a, b] of pts) x[(oy + b) * SW + ox + a] = 1; names.push(nm); break; } }
+    return { x, name: names.join(' + ') };
+  }
+  // half the scenes: 1-3 different things; the other half: 2-3 copies of one thing, sometimes with one more thing
+  next(r, noise) { const pick = () => this.things[Math.floor(r() * this.things.length)], list = [];
+    if (r() < 0.5) { for (let k = 1 + Math.floor(r() * 3); k > 0; k--) list.push(pick()); }
+    else { const t = pick(); for (let k = 2 + Math.floor(r() * 2); k > 0; k--) list.push(t); if (r() < 0.5) list.push(pick()); }
+    const s = this.place(r, list); if (noise) for (let i = 0; i < SPX; i++) if (r() < noise) s.x[i] ^= 1; return s; }
+  // a scene with two copies of an object never seen in training (made of known shapes in a new arrangement)
+  held(r) { const h = Object.entries(this.heldObjects), t = h[Math.floor(r() * h.length)]; return this.place(r, [t, t]); }
+}
+if (typeof module !== 'undefined') module.exports = { Model, ARMS, SceneWorld, K, SW, SH, SPX, norm, ptsOf };
+</script>
+<script>
+const ARMSX = ARMS, MC = Model;
+const PAT = CATALOGUE.patterns, HELD = PAT.filter((p) => p.family === 'bar triples'), TRAIN = PAT.filter((p) => p.family !== 'bar triples');
+const PAL = ['#d9622b', '#2f8f6b', '#7b5bd6', '#c8a020', '#c2417d', '#3a8fc4', '#7a8a2a', '#a8572e', '#5c6ad1', '#2a9a9a'];
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const $ = (id) => document.getElementById(id);
+for (const k of Object.keys(ARMSX)) { const o = document.createElement('option'); o.value = k; o.textContent = ARMSX[k].label; $('arm').appendChild(o); }
+if ('MI') $('arm').value = 'MI';
+let M, R, order = [], oi = 0, timer = null, noise = 0, speed = 6, last = null, waveT = 0; const spark = [], hist = [], nhist = [];
+// noise: steady, or a wave rising from 0 to the peak and back over the wave length (in flashes)
+function noiseNow() { if ($('nmode').value !== 'wave') return noise; const P = +$('period').value; return noise * (1 - Math.cos(2 * Math.PI * waveT / P)) / 2; }
+function shapeSizes() { if (!document.getElementById('nl')) return null; const n = Math.max(1, Math.min(16, +$('nl').value || 5)), top = Math.max(2, +$('top').value || 100), k = +$('shrink').value;
+  const s = []; for (let i = 0; i < n; i++) s.push(Math.max(1, Math.round(top * Math.pow(k, i)))); return s; }
+function showSizes() { const s = shapeSizes(); if (s) $('sizes').textContent = 'sizes: ' + s.join(', ') + ' (' + s.reduce((a, b) => a + b, 0) + ' columns)'; }
+function plasticList() { if (!document.getElementById('pnl')) return null; const n = Math.max(1, Math.min(12, +$('pnl').value || 5)), a = +$('pfast').value || 0.4, b = +$('pslow').value || 0.025;
+  return Array.from({ length: n }, (_, i) => (n === 1 ? a : a * Math.pow(b / a, i / (n - 1)))); }
+function showPlastic() { const p = plasticList(); if (p) $('plist').textContent = 'plasticity: ' + p.map((v) => v.toFixed(3)).join(', '); }
+const lhist = []; let focus = [];
+const PRESETS = {};
+function comboOpts() { if (!document.getElementById('cnl')) return null; const n = Math.max(1, Math.min(16, +$('cnl').value || 5)), top = Math.max(2, +$('ctop').value || 100), k = +$('ckeep').value || 0.5;
+  const a = +$('cptop').value || 0.4, b = +$('cpbot').value || 0.025;
+  return { sizes: Array.from({ length: n }, (_, i) => Math.max(1, Math.round(top * Math.pow(k, i)))), plastic: Array.from({ length: n }, (_, i) => (n === 1 ? a : a * Math.pow(b / a, i / (n - 1)))) }; }
+function showCombo() { const c = comboOpts(); if (c) $('clist').textContent = 'sizes: ' + c.sizes.join(', ') + ' (' + c.sizes.reduce((x, y) => x + y, 0) + ' columns) · plasticity: ' + c.plastic.map((v) => v.toFixed(3)).join(', '); }
+function loadPreset(k) { const p = PRESETS[k]; if (!p) return;
+  if (ARMSX[p.arm]) $('arm').value = p.arm; $('cnl').value = p.nl; $('ctop').value = p.top; $('ckeep').value = String(p.keep); $('cptop').value = String(p.ptop); $('cpbot').value = String(p.pbot);
+  $('smode').value = p.smode; $('smode').onchange(); $('nmode').value = p.nmode; $('nmode').onchange();
+  if (p.noise !== undefined) { $('noise').value = p.noise; noise = p.noise / 100; $('nv').textContent = p.noise + '%'; }
+  if (p.period) { $('period').value = p.period; $('pv').textContent = p.period + ' flashes'; }
+  showCombo(); reset(); }
+function reset() { const pe = document.getElementById('price'), opt = {}; if (pe) opt.price = +pe.value; const s = shapeSizes(); if (s) { opt.sizes = s; opt.columns = $('colmode').value || 'grow'; opt.seed = +$('seed').value || 1; }
+  if (document.getElementById('fth')) opt.threshold = (+$('fth').value || 90) / 100;
+  if (document.getElementById('ql')) { if (+$('ql').value) opt.layers = Math.max(1, Math.min(10, +$('ql').value)); if (+$('qtop').value) opt.top = +$('qtop').value / 100;
+    if ($('qstep').value !== '') opt.step = +$('qstep').value / 100; if ($('qmeas').value) opt.measure = $('qmeas').value; if ($('qafter').value) opt.after = $('qafter').value; }
+  if (document.getElementById('nth')) { opt.threshold = (+$('nth').value || 90) / 100; if ($('nmeas').value) opt.measure = $('nmeas').value; if ($('nafter').value) opt.after = $('nafter').value; }
+  if (document.getElementById('sfirst')) { if (+$('sfirst').value) opt.first = Math.max(1, +$('sfirst').value); if (+$('sgrow').value) opt.growth = +$('sgrow').value; if (+$('smax').value) opt.maxLayers = Math.max(1, +$('smax').value);
+    if (+$('srate').value) opt.rate = +$('srate').value; opt.level = +$('ssettle').value || 0; if ($('supdate').value) opt.update = $('supdate').value; opt.restless = +$('srest').value || 0; if ($('sstart').value) opt.start = $('sstart').value; opt.seed = +$('seed').value || 1; }
+  const co = comboOpts(); if (co) { opt.sizes = co.sizes; opt.plastic = co.plastic; opt.forget = !!$('cforget').checked; opt.columns = $('ccol').value || 'grow'; opt.seed = +$('seed').value || 1; }
+  const pl = plasticList(); if (pl) { opt.sizes = pl.map(() => Math.max(2, +$('psize').value || 50)); opt.plastic = pl; opt.forget = !!$('pforget').checked; opt.columns = $('pcol').value || 'grow'; opt.seed = +$('seed').value || 1; }
+  M = new MC($('arm').value, opt); R = rng((+$('seed').value || 1) * 7919 + 13); order = []; oi = 0; spark.length = 0; hist.length = 0; nhist.length = 0; lhist.length = 0; waveT = 0; focus = []; last = null; next(); }
+function nextId() {
+  if ($('smode').value === 'focus') { const ph = +$('phase').value || 300;              // CHANGING FOCUS: a new group of 10 every ph flashes
+    if (waveT % ph === 0 || !focus.length) { const pool = TRAIN.map((p) => p.id); focus = []; for (let k = 0; k < 10; k++) focus.push(pool.splice(Math.floor(R() * pool.length), 1)[0]); }
+    if (R() < 0.8) return focus[Math.floor(R() * focus.length)]; }
+  if (oi >= order.length) { order = TRAIN.map((p) => p.id); for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; } oi = 0; } return order[oi++]; }
+function heatOf(out, x) { if (out.heatShare !== undefined) return out.heatShare; let on = 0; for (const v of x) on += v; return on ? (out.left.length + (out.misses || 0)) / on : 0; }
+// C18: a bigger world when the model brings one (SW x SH, scenes from SceneWorld); otherwise the 5x5 catalogue
+const GW = typeof SW !== 'undefined' ? SW : 5, GH = typeof SH !== 'undefined' ? SH : 5, GPX = GW * GH;
+const WORLD = typeof SceneWorld !== 'undefined' ? new SceneWorld(CATALOGUE) : null;
+function next(draw = true) { const nz = noiseNow(); let id = null, x, name = null;
+  if (WORLD) { const s = WORLD.next(R, nz); x = s.x; name = s.name; } else { id = nextId(); x = noisy(PAT[id].bits, nz, R); }
+  const out = M.step(x), h = heatOf(out, x); waveT++;
+  spark.push(h); if (spark.length > 300) spark.shift(); hist.push(h); nhist.push(nz);
+  if (out.per) { let on = 0; for (const v of x) on += v; out.per.forEach((q, i) => { (lhist[i] = lhist[i] || []).push(on ? (q.left.length + q.misses) / on : 0); }); }
+  last = { id, name, x, out, held: false, nz };
+  if (document.getElementById('fauto') && +$('fauto').value && M.t % +$('fauto').value === 0) { const n = M.rest(); $('fmsg').textContent = 'rested automatically at flash ' + M.t + ': ' + n + ' steps'; }
+  if (draw) render(); }
+// C16: rest, step by step (each step: the hottest pair is factored into overlap and differences)
+let restTimer = null;
+function restTick() { const a = M.restStep();
+  if (!a) { clearInterval(restTimer); restTimer = null; $('fmsg').textContent = 'settled: nothing left that lowers energy (' + M.st.restSteps + ' rest steps so far)'; render(); return; }
+  last = { rest: a, out: { claims: a.pieces.map((c) => ({ c })), left: [], misses: 0, cells: [], bornAll: [] } }; $('fmsg').textContent = 'resting… step ' + M.st.restSteps + ', energy ' + M.energy(); render(); }
+function showHeld() { play(false);
+  if (WORLD) { const s = WORLD.held(rng(Math.floor(Math.random() * 1e9))), q = M.read(s.x); last = { id: null, name: s.name, x: s.x, out: { ...q, born: null, rested: false }, held: true }; render(); return; }
+  const p = HELD[Math.floor(Math.random() * HELD.length)], x = p.bits.slice(), q = M.read(x);
+  last = { id: p.id, x, out: { ...q, born: null, rested: false }, held: true }; render(); }
+
+// ---- the column canvas (grouped by layer when the model has layers)
+let layout = [], hover = null, diag = null;
+const DIAG_ON = false;
+function drawCols() {
+  diag = DIAG_ON && M.diagnose ? M.diagnose() : null; const twinOfHover = diag && hover && diag.get(hover) ? diag.get(hover).twin : null;
+  const idle = (i) => last && last.out.per && last.out.per[i] && last.out.per[i].skipped, rank = M.order ? M.order() : null;
+  const groups = M.layers ? M.layers.map((L, i) => ({ title: 'layer ' + (i + 1) + ' · ' + L.cols.length + (M.o.columns === 'free' ? '' : ' of ' + L.n) + ' columns' + (M.o.plastic ? ' · plasticity ' + M.o.plastic[i].toFixed(3) : '')
+    + (M.o.cascade && rank ? ' · looks ' + (rank.indexOf(i) + 1) + (rank.indexOf(i) === 0 ? 'st' : rank.indexOf(i) === 1 ? 'nd' : rank.indexOf(i) === 2 ? 'rd' : 'th') : '') + (idle(i) ? ' · idle (nothing hot left)' : '') + (M.soft && L.ema !== undefined ? (L.settled ? ' · settled' : ' · learning') + ' · heat ' + L.ema.toFixed(2) : '')
+    + (L.threshold !== undefined ? ' · new column if nothing is ' + Math.round(100 * L.threshold) + '% similar' + (last && last.out.from === i ? ' · ANSWERING' : '') : ''), cols: L.cols })) : [{ title: null, cols: M.cols }];
+  const total = groups.reduce((a, g) => a + g.cols.length, 0), small = total > 80;
+  const FS = Math.max(2, Math.floor((small ? 25 : 35) / GW)), TW = small ? 33 : 46, GAP = small ? 5 : 8, CELL = small ? 3 : 4, CPR = small ? 9 : 9, CROWS = small ? 3 : 4, HEAD = 20;
+  const cv = $('cv'), W = cv.clientWidth, dpr = window.devicePixelRatio || 1, per = Math.max(1, Math.floor((W + GAP) / (TW + GAP)));
+  const TH = 4 + 5 * FS + 5 + CROWS * CELL + (small ? 3 : 14);
+  let H = 0; for (const g of groups) H += (g.title ? HEAD : 0) + Math.max(1, Math.ceil(g.cols.length / per)) * (TH + GAP) + 4; H = Math.max(80, H);
+  cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px'; const g2 = cv.getContext('2d'); g2.setTransform(dpr, 0, 0, dpr, 0, 0); g2.clearRect(0, 0, W, H);
+  const ink = css('--ink'), empty = css('--empty'), cellc = css('--cell'), nw = css('--new'), mut = css('--muted'), line = css('--line');
+  const claim = new Map(), cellOn = new Map(), act = new Set(last && last.out.active ? last.out.active : []);
+  if (last) { last.out.claims.forEach((q, k) => claim.set(q.c, PAL[k % PAL.length])); for (const z of last.out.cells || []) cellOn.set(z.cell, z.fresh); }
+  const born = new Set(last ? (last.out.bornAll || (last.out.born ? [last.out.born] : [])) : []); layout = [];
+  let y = 0;
+  for (const grp of groups) {
+    if (grp.title) { g2.fillStyle = mut; g2.font = '600 11px system-ui'; g2.fillText(grp.title.toUpperCase(), 0, y + 13); y += HEAD; }
+    if (!grp.cols.length) { g2.fillStyle = mut; g2.font = '12px system-ui'; g2.fillText('no columns yet', 2, y + 14); }
+    grp.cols.forEach((c, k) => {
+      const x0 = (k % per) * (TW + GAP), y0 = y + Math.floor(k / per) * (TH + GAP), fx = x0 + (TW - 5 * FS) / 2, fy = y0 + 4; layout.push([x0, y0, TW, TH, c]);
+      const col = claim.get(c), isAct = act.has(c), isNew = born.has(c);
+      g2.strokeStyle = isNew ? nw : col || (isAct ? ink : line); g2.lineWidth = isNew || col || isAct ? 2 : 1; g2.strokeRect(x0 + .5, y0 + .5, TW - 1, TH - 1);
+      if (diag) { const d = diag.get(c);                                    // C10 markers: dashed outlines inside the border
+        if (d && d.outcompeted) { g2.save(); g2.setLineDash([3, 2]); g2.strokeStyle = '#e08a1e'; g2.lineWidth = 2; g2.strokeRect(x0 + 2.5, y0 + 2.5, TW - 5, TH - 5); g2.restore(); }
+        if (d && d.duplicate) { g2.save(); g2.setLineDash([2, 2]); g2.strokeStyle = '#8a4fd1'; g2.lineWidth = 2; g2.strokeRect(x0 + 5, y0 + 5, TW - 10, TH - 10); g2.restore();
+          g2.fillStyle = '#8a4fd1'; g2.font = '700 11px system-ui'; g2.fillText('≈', x0 + TW - 10, y0 + 11); }
+        if (c === twinOfHover || c === hover) { g2.save(); g2.strokeStyle = '#8a4fd1'; g2.lineWidth = 3; g2.strokeRect(x0 + 1.5, y0 + 1.5, TW - 3, TH - 3); g2.restore(); } }
+      for (let i = 0; i < GPX; i++) { const v = c.m[i], px = fx + (i % GW) * FS, py = fy + Math.floor(i / GW) * FS;
+        g2.fillStyle = empty; g2.fillRect(px, py, FS - 1, FS - 1);
+        if (M.soft) { if (v > 0.02) { g2.globalAlpha = Math.min(1, v); g2.fillStyle = col || ink; g2.fillRect(px, py, FS - 1, FS - 1); g2.globalAlpha = 1; } }   // soft: strength as shade
+        else if (v > 0) { g2.globalAlpha = v >= K.CUT ? 1 : 0.25 + 0.5 * v; g2.fillStyle = col && v >= K.CUT ? col : ink; g2.fillRect(px, py, FS - 1, FS - 1); g2.globalAlpha = 1; } }
+      const cy = fy + 5 * FS + 4, cs = c.cells, cap = CPR * CROWS, show = Math.min(cs.length, cs.length > cap ? cap - 1 : cap);
+      for (let j = 0; j < show; j++) { const u = cs[j], px = fx + (j % CPR) * CELL, py = cy + Math.floor(j / CPR) * CELL;
+        g2.fillStyle = cellOn.has(u) ? (cellOn.get(u) ? nw : col || ink) : cellc; g2.fillRect(px, py, CELL - 1, CELL - 1); }
+      if (cs.length > show) { const px = fx + (show % CPR) * CELL, py = cy + Math.floor(show / CPR) * CELL; let a = null; for (const u of cs.slice(show)) if (cellOn.has(u)) a = u;
+        g2.fillStyle = a ? (cellOn.get(a) ? nw : col || ink) : mut; g2.fillRect(px, py, CELL - 1, CELL - 1); }
+      if (!small) { g2.fillStyle = mut; g2.font = '10px system-ui'; g2.textAlign = 'center';
+        const lab = M.itemsUsing ? (c.layer > 1 ? (c.parts ? c.parts.size : c.place.length) + ' parts, ×' + M.itemsUsing(c) : M.st.composed !== undefined ? 'used ×' + M.itemsUsing(c) : 'in ' + M.itemsUsing(c) + ' memor' + (M.itemsUsing(c) === 1 ? 'y' : 'ies')) : cs.length + (cs.length === 1 ? ' cell' : ' cells');
+        g2.fillText(lab, x0 + TW / 2, y0 + TH - 4); g2.textAlign = 'left'; }
+    });
+    y += Math.max(1, Math.ceil(grp.cols.length / per)) * (TH + GAP) + 4;
+  }
+}
+$('cv').addEventListener('mousemove', (e) => { const r = $('cv').getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, t = $('tip');
+  const hit = layout.find(([x0, y0, w, h]) => x >= x0 && x < x0 + w && y >= y0 && y < y0 + h);
+  if (!hit) { t.style.display = 'none'; if (hover) { hover = null; drawCols(); } return; } const c = hit[4], px = [...c.m].filter((v) => v >= K.CUT).length;
+  if (DIAG_ON && hover !== c) { hover = c; drawCols(); }
+  const d = diag && diag.get(c), dtxt = d ? '<br>recently: ' + d.wins.toFixed(0) + ' wins · ' + d.seconds.toFixed(0) + ' second places (' + d.near.toFixed(0) + ' near ties)'
+    + (d.outcompeted ? '<br><b style="color:#e08a1e">outcompeted</b>: second far more often than first' : '')
+    + (d.twin ? '<br>closest in its layer: column ' + d.twin.id + ' (difference ' + d.dist.toFixed(2) + ')' + (d.duplicate ? ' · <b style="color:#8a4fd1">≈ near-duplicate</b>, the twin wins more' : '') : '') : '';
+  t.innerHTML = 'column ' + c.id + (c.layer !== undefined ? ' (layer ' + (c.layer + 1) + ')' : '') + ' · ' + px + ' pixels<br>claimed ' + c.uses + ' times · ' + c.cells.length + ' cells<br>born at flash ' + c.born + ', last used ' + c.last + dtxt;
+  t.style.display = 'block'; t.style.left = (e.clientX + 14) + 'px'; t.style.top = (e.clientY + 12) + 'px'; });
+$('cv').addEventListener('mouseleave', () => { $('tip').style.display = 'none'; if (hover) { hover = null; drawCols(); } });
+
+// ---- charts
+function canvas2d(el, Hh) { const dpr = window.devicePixelRatio || 1, W = el.clientWidth; el.width = W * dpr; el.height = Hh * dpr; const g = el.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); return [g, W]; }
+function drawTrend() { const [g, W] = canvas2d($('trend'), 80), Hh = 80, heat = css('--heat'), mut = css('--muted'), line = css('--line');
+  g.strokeStyle = line; g.lineWidth = 1; for (const v of [0.25, 0.5, 0.75]) { const yy = Math.round(Hh - v * (Hh - 4)) + .5; g.beginPath(); g.moveTo(0, yy); g.lineTo(W, yy); g.stroke(); }
+  if (!hist.length) return; const bins = Math.min(hist.length, Math.floor(W / 2)), per = hist.length / bins, bw = W / bins; g.fillStyle = heat;
+  for (let b = 0; b < bins; b++) { let s = 0, n = 0; for (let k = Math.floor(b * per); k < Math.floor((b + 1) * per); k++) { s += hist[k]; n++; } const v = n ? s / n : 0, h = Math.max(1, v * (Hh - 4));
+    g.fillRect(b * bw, Hh - h, Math.max(1, bw - .3), h); }
+  g.strokeStyle = css('--new'); g.lineWidth = 1.5; g.beginPath();                     // noise, on a 0–20% scale
+  for (let b = 0; b < bins; b++) { let s = 0, n = 0; for (let k = Math.floor(b * per); k < Math.floor((b + 1) * per); k++) { s += nhist[k]; n++; } const v = n ? s / n : 0, yy = Hh - Math.min(1, v / 0.2) * (Hh - 4);
+    if (b) g.lineTo(b * bw + bw / 2, yy); else g.moveTo(bw / 2, yy); } g.stroke();
+  g.fillStyle = mut; g.font = '10px system-ui'; g.fillText('1', 2, 10); g.fillText(hist.length + ' flashes', W - 70, 10);
+  const avg = (a) => a.reduce((x, y) => x + y, 0) / Math.max(1, a.length), first = hist.slice(0, Math.min(200, hist.length)), lastN = hist.slice(-200);
+  $('trendnote').textContent = 'first 200: ' + avg(first).toFixed(2) + ' · last 200: ' + avg(lastN).toFixed(2); }
+function drawLayers() { if (!lhist.length) { $('lwrap').style.display = 'none'; return; } $('lwrap').style.display = '';
+  const [g, W] = canvas2d($('ltrend'), 80), Hh = 80, n = lhist[0].length; if (!n) return; const bins = Math.min(n, Math.floor(W / 3)), per = n / bins, bw = W / bins;
+  g.strokeStyle = css('--line'); g.lineWidth = 1; for (const v of [0.25, 0.5, 0.75]) { const yy = Math.round(Hh - v * (Hh - 4)) + .5; g.beginPath(); g.moveTo(0, yy); g.lineTo(W, yy); g.stroke(); }
+  lhist.forEach((h, li) => { g.strokeStyle = PAL[li % PAL.length]; g.lineWidth = 1.5; g.beginPath();
+    for (let b = 0; b < bins; b++) { let s = 0, c = 0; for (let k = Math.floor(b * per); k < Math.floor((b + 1) * per); k++) { s += h[k]; c++; } const yy = Hh - Math.min(1, c ? s / c : 0) * (Hh - 4);
+      if (b) g.lineTo(b * bw + bw / 2, yy); else g.moveTo(bw / 2, yy); } g.stroke(); });
+  $('lkey').innerHTML = lhist.map((_, i) => '<b style="color:' + PAL[i % PAL.length] + '">' + (i + 1) + '</b>').join(' '); }
+function drawSpark() { const [g, W] = canvas2d($('spark'), 40), Hh = 40; g.fillStyle = css('--heat'); const bw = W / 300;
+  spark.forEach((v, k) => { const h = Math.max(v > 0 ? 1 : 0, Math.min(1, v) * (Hh - 2)); g.fillRect(k * bw, Hh - h, Math.max(1, bw - .2), h); }); }
+
+// ---- the right-hand side
+function grid(el, paint) { el.innerHTML = ''; if (el.style) el.style.gridTemplateColumns = 'repeat(' + GW + ',1fr)'; for (let i = 0; i < GPX; i++) { const d = document.createElement('i'); paint(i, d); el.appendChild(d); } }
+function render() {
+  drawCols(); drawTrend(); drawSpark(); drawLayers(); if (!last) return;
+  if (last.rest) { renderRest(); return; }
+  const { id, x, out } = last, ink = css('--ink'), heat = css('--heat'), epc = css('--ep');
+  $('pname').textContent = (last.held ? 'held out, first sight: ' : '') + '"' + (last.name || PAT[id].name) + '"';
+  $('tno').textContent = last.held ? 'no learning' : 'flash ' + M.t;
+  if (last.nz !== undefined) $('nnow').textContent = (100 * last.nz).toFixed(1) + '%';
+  grid($('gin'), (i, d) => { if (x[i]) d.style.background = ink; });
+  let owner = new Array(GPX).fill(-1), miss = new Array(GPX).fill(-1); const epm = out.ep && out.ep.episode ? out.ep.episode : 0;
+  if (out.ownerPx) { owner = out.ownerPx; miss = out.missPx; }   // models that place units anywhere say which pixel each claim covers
+  else out.claims.forEach((q, k) => { for (let i = 0; i < GPX; i++) if (q.c.m[i] >= K.CUT) { if (x[i] && owner[i] < 0) owner[i] = k; if (!x[i]) miss[i] = k; } });
+  const left = new Set(out.left);
+  grid($('gex'), (i, d) => { if (left.has(i)) d.style.background = heat; else if (owner[i] >= 0) d.style.background = PAL[owner[i] % PAL.length];
+    else if (x[i] && (epm & (1 << i))) d.style.background = epc; else if (miss[i] >= 0) d.style.boxShadow = 'inset 0 0 0 2px ' + PAL[miss[i] % PAL.length];
+    if (out.born && out.born.m && !out.ownerPx && out.born.m[i] >= K.CUT) d.style.boxShadow = 'inset 0 0 0 2px ' + css('--new'); });
+  grid($('grc'), (i, d) => { let on = epm & (1 << i); if (out.ownerPx) on = out.recon[i]; else for (const q of out.claims) if (q.c.m[i] >= K.CUT) on = true; if (on) d.style.background = ink; });
+  let onN = 0; for (const v of x) onN += v;
+  const st = M.st, s = [['columns', M.cols.length], ['cells', M.cellCount()], ['parts in this flash', out.claims.length], ['left over now', out.left.length + ' px'], ['wrong now', (out.misses || 0) + ' px']];
+  if (M.eps) s.push(['episodes stored', M.eps.length]);
+  if (out.from !== undefined) s.push(['picture given by', 'layer ' + (out.from + 1)]);
+  factorStats(s);
+  { const caps = document.querySelectorAll ? document.querySelectorAll('.trio .cap') : []; if (caps.length === 3) { caps[0].textContent = 'as flashed'; caps[1].textContent = 'explained'; caps[2].textContent = 'rebuilt'; } }
+  if (out.sim !== undefined) { s.push(['patterns in the catalogue (training)', TRAIN.length]); s.push(['best match similarity', out.sim < 0 ? '-' : Math.round(100 * out.sim) + '%' + (out.born ? ' → new column' : '')]); }
+  if (diag) { let o = 0, d = 0; for (const v of diag.values()) { if (v.outcompeted) o++; if (v.duplicate) d++; } s.push(['outcompeted columns', o]); s.push(['near-duplicates', d]); }
+  if (M.timeline) M.timeline.slice(-4).forEach((e) => s.push(['flash ' + e.t, e.event]));
+  if (out.work !== undefined) { s.push(['work: columns checked', out.work]); if (out.per) s.push(['layers that looked', out.per.filter((q) => !q.skipped).length + ' of ' + out.per.length]); }
+  if (out.per && onN) out.per.forEach((q, i) => s.push(['layer ' + (i + 1) + ' alone: heat', ((q.left.length + q.misses) / onN).toFixed(2)]));
+  if (M.o && M.o.pay) s.push(['rest pressure', Math.round(100 * M.heat / K.PMAX) + '%']);
+  const LBL = { rests: 'rests', grown: 'columns grown', retired: 'retired (unused)', removed: 'removed (didn\'t pay)', recycled: 'taken over', absorbed: 'nearest moved (layer full)', reseeded: 'unused column reseeded' };
+  for (const k of Object.keys(LBL)) if (st[k] !== undefined) s.push([LBL[k], st[k]]);
+  $('stats').innerHTML = s.map(([a, b]) => '<span>' + a + '</span><b>' + b + '</b>').join('');
+  $('restflag').textContent = out.rested ? 'just rested' : '';
+}
+function factorStats(s) { if (M.energy) { s.push(['energy (pixels stored + parts used)', M.energy()]); s.push(['memories', M.items.length]); s.push(['pixels stored in parts', M.parts.reduce((a, p) => a + [...p.m].filter((v) => v).length, 0)]);
+  s.push(['parts used by memories', M.links()]); s.push(['rest steps (factored / collapsed)', M.st.restSteps + ' (' + M.st.factored + ' / ' + M.st.collapsed + ')']);
+  if (M.st.composed !== undefined) { s.push(['composites made', M.st.composed]); s.push(['layers', M.layers.length]); } } }
+function renderRest() { const a = last.rest, ink = css('--ink'), ov = PAL[0];
+  const comp = a.type === 'compose';
+  $('pname').textContent = comp ? 'resting: a group used again and again becomes a composite' : 'resting: the hottest pair, factored'; $('tno').textContent = 'saves ' + a.saving + ' energy';
+  if (a.P === undefined) {   // C18: steps that carry units: show part A, part B (or A again, compared with itself shifted), and the result
+    const pa = a.A ? a.A.m : null, pb = a.self ? (a.A ? a.A.m : null) : a.B ? a.B.m : null, res = a.made ? a.made.m : a.pieces[0] ? a.pieces[0].m : null;
+    grid($('gin'), (i, d) => { if (pa && pa[i]) d.style.background = ink; if (comp && a.made && a.made.m[i]) d.style.background = ov; });
+    grid($('gex'), (i, d) => { if (pb && pb[i]) d.style.background = ink; });
+    grid($('grc'), (i, d) => { if (res && res[i]) d.style.background = ov; });
+    const caps = document.querySelectorAll ? document.querySelectorAll('.trio .cap') : [];
+    if (caps.length === 3) { if (comp) { caps[0].textContent = 'arrangement found again and again'; caps[1].textContent = ''; caps[2].textContent = 'now a composite'; }
+      else { caps[0].textContent = 'part A, as it was'; caps[1].textContent = a.self ? 'part A again (compared with itself, shifted)' : 'part B, as it was'; caps[2].textContent = 'the shared piece, now a part (anywhere)'; } }
+    const s = [['columns (units)', M.units.length]]; factorStats(s); $('stats').innerHTML = s.map(([p, q]) => '<span>' + p + '</span><b>' + q + '</b>').join(''); return; }
+  const bit = (m, i) => (m & (1 << i)) !== 0;
+  grid($('gin'), (i, d) => { if (bit(a.P, i)) d.style.background = bit(a.O, i) ? ov : ink; });
+  grid($('gex'), (i, d) => { if (bit(a.Q, i)) d.style.background = bit(a.O, i) ? ov : ink; });
+  grid($('grc'), (i, d) => { if (bit(a.O, i)) d.style.background = ov; });
+  const caps = document.querySelectorAll ? document.querySelectorAll('.trio .cap') : [];
+  if (caps.length === 3) { if (comp) { caps[0].textContent = 'a memory using the group (orange)'; caps[1].textContent = 'another one'; caps[2].textContent = 'the group, now a composite'; }
+    else { caps[0].textContent = 'part A (orange: shared)'; caps[1].textContent = 'part B'; caps[2].textContent = 'their overlap, now a part'; } }
+  const s = [['columns (parts)', M.parts.length]]; factorStats(s); $('stats').innerHTML = s.map(([p, q]) => '<span>' + p + '</span><b>' + q + '</b>').join(''); }
+function play(on) { clearInterval(timer); timer = on ? setInterval(() => next(), 1000 / speed) : null; $('play').textContent = on ? 'Pause' : 'Play'; }
+$('play').onclick = () => play(!timer);
+$('step').onclick = () => { play(false); next(); };
+$('ff').onclick = () => { for (let i = 0; i < 499; i++) next(false); next(); };
+$('ff5').onclick = () => { for (let i = 0; i < 4999; i++) next(false); next(); };
+if (document.getElementById('fth')) {
+  $('fth').oninput = (e) => { $('fthv').textContent = e.target.value + '%'; if (M) M.o.threshold = e.target.value / 100; };
+  $('frest').onclick = () => { play(false); clearInterval(restTimer); restTimer = setInterval(restTick, Math.max(60, 600 / speed)); };
+  $('frestfast').onclick = () => { play(false); clearInterval(restTimer); restTimer = null; const n = M.rest(); $('fmsg').textContent = 'rested: ' + n + ' steps, now settled'; last = null; render(); };
+  const playBtn = $('play').onclick; $('play').onclick = () => { clearInterval(restTimer); restTimer = null; playBtn(); }; }
+if (document.getElementById('ql')) { const ql = () => { const n = +$('ql').value || 5, a = +$('qtop').value || 90, s = +$('qstep').value || 0;
+    $('qlist').textContent = 'thresholds: ' + Array.from({ length: n }, (_, k) => Math.max(5, a - k * s) + '%').join(', '); };
+  for (const id of ['ql', 'qtop', 'qstep']) $(id).oninput = ql; ql(); $('qapply').onclick = reset; $('qmeas').onchange = reset; $('qafter').onchange = reset; }
+if (document.getElementById('nth')) { $('napply').onclick = reset; $('nmeas').onchange = reset; $('nafter').onchange = reset;
+  $('nth').oninput = (e) => { $('nthv').textContent = e.target.value + '%'; if (M) M.o.threshold = e.target.value / 100; }; }   // threshold: live
+if (document.getElementById('sfirst')) { $('sapply').onclick = reset; $('supdate').onchange = reset; $('sstart').onchange = reset;
+  $('srest').oninput = (e) => { $('srestv').textContent = (+e.target.value).toFixed(3); if (M) M.o.restless = +e.target.value; }; }   // live, no restart
+$('held').onclick = showHeld;
+$('reset').onclick = reset; $('arm').onchange = reset; if (document.getElementById('price')) $('price').onchange = reset;
+$('noise').oninput = (e) => { noise = e.target.value / 100; $('nv').textContent = e.target.value + '%'; };
+$('nmode').onchange = () => { const w = $('nmode').value === 'wave'; $('wavectl').style.display = w ? '' : 'none'; $('nlabel').textContent = w ? 'Peak' : 'Level'; };
+$('period').oninput = (e) => { $('pv').textContent = e.target.value + ' flashes'; };
+$('smode').onchange = () => { $('focusctl').style.display = $('smode').value === 'focus' ? '' : 'none'; focus = []; };
+$('phase').oninput = (e) => { $('phv').textContent = e.target.value + ' flashes'; };
+if (document.getElementById('cnl')) { for (const id of ['cnl', 'ctop']) $(id).oninput = showCombo; for (const id of ['ckeep', 'cptop', 'cpbot']) $(id).onchange = showCombo;
+  $('capply').onclick = reset; $('ccol').onchange = reset; $('cforget').onchange = reset; $('preset').onchange = () => loadPreset($('preset').value); showCombo(); }
+if (document.getElementById('pnl')) { for (const id of ['pnl', 'psize']) $(id).oninput = showPlastic; for (const id of ['pfast', 'pslow']) $(id).onchange = showPlastic; $('papply').onclick = reset; $('pcol').onchange = reset; $('pforget').onchange = reset; showPlastic(); }
+if (document.getElementById('nl')) { for (const id of ['nl', 'top', 'shrink']) $(id).oninput = showSizes; $('shrink').onchange = showSizes; $('colmode').onchange = reset; $('apply').onclick = reset; showSizes(); }
+const sv = () => { $('sv').textContent = speed + '/s'; }; sv();
+$('speed').oninput = (e) => { speed = +e.target.value; sv(); if (timer) play(true); };
+window.addEventListener('resize', () => render());
+if (document.getElementById('preset')) { $('preset').value = 'fast-slow'; loadPreset('fast-slow'); } else reset(); play(true);
+</script></body></html>

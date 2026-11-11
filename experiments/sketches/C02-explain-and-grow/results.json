@@ -1,0 +1,1497 @@
+[
+ {
+  "group": "mechanism",
+  "name": "A grow only",
+  "arm": "A",
+  "noise": 0.05,
+  "first": 0,
+  "mean": {
+   "cols": 132.4,
+   "size": 2.552351607240195,
+   "cells": 3753.2,
+   "leftover": 0.01659863945578231,
+   "err": 0.0816326530612245,
+   "distinct": 98,
+   "parts": 3.079591836734694,
+   "reuse": 3.5398472694171614,
+   "unused": 47.2,
+   "stable": 0.6194584123359631,
+   "noisyErr": 1.2646938775510204,
+   "cellStable": 0.21673469387755104,
+   "cellDistinct": 60.2,
+   "similar": 0.6426811826077645,
+   "heldLeft": 0,
+   "heldErr": 0.06666666666666667,
+   "heldParts": 5.2333333333333325,
+   "ms": 555
+  },
+  "range": {
+   "cols": [
+    121,
+    142
+   ],
+   "size": [
+    2.371900826446281,
+    2.8088235294117645
+   ],
+   "cells": [
+    3217,
+    4073
+   ],
+   "leftover": [
+    0.006802721088435374,
+    0.024149659863945575
+   ],
+   "err": [
+    0.07142857142857142,
+    0.10204081632653061
+   ],
+   "distinct": [
+    98,
+    98
+   ],
+   "parts": [
+    2.5510204081632653,
+    3.5
+   ],
+   "reuse": [
+    3.125,
+    3.897727272727273
+   ],
+   "unused": [
+    33,
+    58
+   ],
+   "stable": [
+    0.5955661571988096,
+    0.6438773301528404
+   ],
+   "noisyErr": [
+    1.1989795918367347,
+    1.3346938775510204
+   ],
+   "cellStable": [
+    0.1683673469387755,
+    0.25
+   ],
+   "cellDistinct": [
+    50,
+    70
+   ],
+   "similar": [
+    0.5886170100470632,
+    0.6870178236377286
+   ],
+   "heldLeft": [
+    0,
+    0
+   ],
+   "heldErr": [
+    0,
+    0.16666666666666666
+   ],
+   "heldParts": [
+    4.333333333333333,
+    6
+   ],
+   "ms": [
+    419,
+    685
+   ]
+  },
+  "st": [
+   {
+    "grown": 199,
+    "retired": 1,
+    "redundant": 73,
+    "rests": 5,
+    "tentative": 0,
+    "fresh": 4873,
+    "cellsRetired": 484
+   },
+   {
+    "grown": 187,
+    "retired": 0,
+    "redundant": 66,
+    "rests": 5,
+    "tentative": 0,
+    "fresh": 5245,
+    "cellsRetired": 1209
+   },
+   {
+    "grown": 215,
+    "retired": 3,
+    "redundant": 70,
+    "rests": 5,
+    "tentative": 0,
+    "fresh": 4727,
+    "cellsRetired": 187
+   },
+   {
+    "grown": 247,
+    "retired": 3,
+    "redundant": 106,
+    "rests": 6,
+    "tentative": 0,
+    "fresh": 5180,
+    "cellsRetired": 429
+   },
+   {
+    "grown": 198,
+    "retired": 4,
+    "redundant": 58,
+    "rests": 5,
+    "tentative": 0,
+    "fresh": 4234,
+    "cellsRetired": 210
+   }
+  ]
+ },
+ {
+  "group": "mechanism",
+  "name": "B grow + split",
+  "arm": "B",
+  "noise": 0.05,
+  "first": 0,
+  "mean": {
+   "cols": 121.8,
+   "size": 2.3241588725885833,
+   "cells": 4158.2,
+   "leftover": 0.03910430839002268,
+   "err": 0.20204081632653065,
+   "distinct": 97.8,
+   "parts": 3.2918367346938773,
+   "reuse": 3.6815773931216214,
+   "unused": 34.2,
+   "stable": 0.6247698741168126,
+   "noisyErr": 1.3502040816326533,
+   "cellStable": 0.20877551020408167,
+   "cellDistinct": 60.6,
+   "similar": 0.637552020354901,
+   "heldLeft": 0,
+   "heldErr": 0.03333333333333333,
+   "heldParts": 5.833333333333334,
+   "ms": 470.4
+  },
+  "range": {
+   "cols": [
+    118,
+    126
+   ],
+   "size": [
+    2.2184873949579833,
+    2.484126984126984
+   ],
+   "cells": [
+    3555,
+    4496
+   ],
+   "leftover": [
+    0.03316326530612245,
+    0.05051020408163266
+   ],
+   "err": [
+    0.14285714285714285,
+    0.25510204081632654
+   ],
+   "distinct": [
+    97,
+    98
+   ],
+   "parts": [
+    3.0408163265306123,
+    3.510204081632653
+   ],
+   "reuse": [
+    3.425287356321839,
+    3.8181818181818183
+   ],
+   "unused": [
+    30,
+    39
+   ],
+   "stable": [
+    0.6039640546528301,
+    0.651861876785346
+   ],
+   "noisyErr": [
+    1.2142857142857142,
+    1.426530612244898
+   ],
+   "cellStable": [
+    0.18775510204081633,
+    0.2612244897959184
+   ],
+   "cellDistinct": [
+    54,
+    69
+   ],
+   "similar": [
+    0.5869159739400321,
+    0.6830443354923575
+   ],
+   "heldLeft": [
+    0,
+    0
+   ],
+   "heldErr": [
+    0,
+    0.16666666666666666
+   ],
+   "heldParts": [
+    5.166666666666667,
+    6.5
+   ],
+   "ms": [
+    427,
+    512
+   ]
+  },
+  "st": [
+   {
+    "grown": 160,
+    "retired": 0,
+    "redundant": 34,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 5479,
+    "cellsRetired": 432
+   },
+   {
+    "grown": 147,
+    "retired": 0,
+    "redundant": 27,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 5121,
+    "cellsRetired": 631
+   },
+   {
+    "grown": 153,
+    "retired": 0,
+    "redundant": 34,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 5349,
+    "cellsRetired": 497
+   },
+   {
+    "grown": 146,
+    "retired": 0,
+    "redundant": 20,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 5157,
+    "cellsRetired": 1339
+   },
+   {
+    "grown": 146,
+    "retired": 0,
+    "redundant": 28,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 5501,
+    "cellsRetired": 902
+   }
+  ]
+ },
+ {
+  "group": "mechanism",
+  "name": "C grow + split + confirm",
+  "arm": "C",
+  "noise": 0.05,
+  "first": 0,
+  "mean": {
+   "cols": 88,
+   "size": 2.2040036206140647,
+   "cells": 3596,
+   "leftover": 0.038015873015873024,
+   "err": 0.17755102040816326,
+   "distinct": 97.8,
+   "parts": 3.387755102040816,
+   "reuse": 4.642235015399194,
+   "unused": 16.4,
+   "stable": 0.6709572791154423,
+   "noisyErr": 1.3081632653061224,
+   "cellStable": 0.2026530612244898,
+   "cellDistinct": 52.4,
+   "similar": 0.6991451283411345,
+   "heldLeft": 0,
+   "heldErr": 0,
+   "heldParts": 6.233333333333333,
+   "ms": 412
+  },
+  "range": {
+   "cols": [
+    82,
+    94
+   ],
+   "size": [
+    2.141304347826087,
+    2.268292682926829
+   ],
+   "cells": [
+    3071,
+    4342
+   ],
+   "leftover": [
+    0.02397959183673469,
+    0.0457482993197279
+   ],
+   "err": [
+    0.1326530612244898,
+    0.21428571428571427
+   ],
+   "distinct": [
+    97,
+    98
+   ],
+   "parts": [
+    3.2142857142857144,
+    3.5918367346938775
+   ],
+   "reuse": [
+    4.453333333333333,
+    5.0285714285714285
+   ],
+   "unused": [
+    10,
+    22
+   ],
+   "stable": [
+    0.6495010601643256,
+    0.69181814500692
+   ],
+   "noisyErr": [
+    1.2295918367346939,
+    1.403061224489796
+   ],
+   "cellStable": [
+    0.18571428571428572,
+    0.23061224489795917
+   ],
+   "cellDistinct": [
+    49,
+    56
+   ],
+   "similar": [
+    0.6626177700762166,
+    0.7219801495050476
+   ],
+   "heldLeft": [
+    0,
+    0
+   ],
+   "heldErr": [
+    0,
+    0
+   ],
+   "heldParts": [
+    5.666666666666667,
+    6.5
+   ],
+   "ms": [
+    310,
+    490
+   ]
+  },
+  "st": [
+   {
+    "grown": 93,
+    "retired": 0,
+    "redundant": 8,
+    "rests": 6,
+    "tentative": 177,
+    "fresh": 5096,
+    "cellsRetired": 856
+   },
+   {
+    "grown": 98,
+    "retired": 0,
+    "redundant": 16,
+    "rests": 7,
+    "tentative": 161,
+    "fresh": 5255,
+    "cellsRetired": 1951
+   },
+   {
+    "grown": 101,
+    "retired": 0,
+    "redundant": 9,
+    "rests": 6,
+    "tentative": 184,
+    "fresh": 5302,
+    "cellsRetired": 648
+   },
+   {
+    "grown": 107,
+    "retired": 0,
+    "redundant": 13,
+    "rests": 7,
+    "tentative": 179,
+    "fresh": 5489,
+    "cellsRetired": 2140
+   },
+   {
+    "grown": 107,
+    "retired": 0,
+    "redundant": 20,
+    "rests": 7,
+    "tentative": 172,
+    "fresh": 5314,
+    "cellsRetired": 1646
+   }
+  ]
+ },
+ {
+  "group": "mechanism",
+  "name": "D grow+split+confirm+join",
+  "arm": "D",
+  "noise": 0.05,
+  "first": 0,
+  "mean": {
+   "cols": 88,
+   "size": 2.2040036206140647,
+   "cells": 3596,
+   "leftover": 0.038015873015873024,
+   "err": 0.17755102040816326,
+   "distinct": 97.8,
+   "parts": 3.387755102040816,
+   "reuse": 4.642235015399194,
+   "unused": 16.4,
+   "stable": 0.6709572791154423,
+   "noisyErr": 1.3081632653061224,
+   "cellStable": 0.2026530612244898,
+   "cellDistinct": 52.4,
+   "similar": 0.6991451283411345,
+   "heldLeft": 0,
+   "heldErr": 0,
+   "heldParts": 6.233333333333333,
+   "ms": 393.6
+  },
+  "range": {
+   "cols": [
+    82,
+    94
+   ],
+   "size": [
+    2.141304347826087,
+    2.268292682926829
+   ],
+   "cells": [
+    3071,
+    4342
+   ],
+   "leftover": [
+    0.02397959183673469,
+    0.0457482993197279
+   ],
+   "err": [
+    0.1326530612244898,
+    0.21428571428571427
+   ],
+   "distinct": [
+    97,
+    98
+   ],
+   "parts": [
+    3.2142857142857144,
+    3.5918367346938775
+   ],
+   "reuse": [
+    4.453333333333333,
+    5.0285714285714285
+   ],
+   "unused": [
+    10,
+    22
+   ],
+   "stable": [
+    0.6495010601643256,
+    0.69181814500692
+   ],
+   "noisyErr": [
+    1.2295918367346939,
+    1.403061224489796
+   ],
+   "cellStable": [
+    0.18571428571428572,
+    0.23061224489795917
+   ],
+   "cellDistinct": [
+    49,
+    56
+   ],
+   "similar": [
+    0.6626177700762166,
+    0.7219801495050476
+   ],
+   "heldLeft": [
+    0,
+    0
+   ],
+   "heldErr": [
+    0,
+    0
+   ],
+   "heldParts": [
+    5.666666666666667,
+    6.5
+   ],
+   "ms": [
+    331,
+    444
+   ]
+  },
+  "st": [
+   {
+    "grown": 93,
+    "retired": 0,
+    "redundant": 8,
+    "rests": 6,
+    "tentative": 177,
+    "fresh": 5096,
+    "cellsRetired": 856,
+    "joined": 0
+   },
+   {
+    "grown": 98,
+    "retired": 0,
+    "redundant": 16,
+    "rests": 7,
+    "tentative": 161,
+    "fresh": 5255,
+    "cellsRetired": 1951,
+    "joined": 0
+   },
+   {
+    "grown": 101,
+    "retired": 0,
+    "redundant": 9,
+    "rests": 6,
+    "tentative": 184,
+    "fresh": 5302,
+    "cellsRetired": 648,
+    "joined": 0
+   },
+   {
+    "grown": 107,
+    "retired": 0,
+    "redundant": 13,
+    "rests": 7,
+    "tentative": 179,
+    "fresh": 5489,
+    "cellsRetired": 2140,
+    "joined": 0
+   },
+   {
+    "grown": 107,
+    "retired": 0,
+    "redundant": 20,
+    "rests": 7,
+    "tentative": 172,
+    "fresh": 5314,
+    "cellsRetired": 1646,
+    "joined": 0
+   }
+  ]
+ },
+ {
+  "group": "noise",
+  "name": "B noise 0%",
+  "arm": "B",
+  "noise": 0,
+  "first": 0,
+  "mean": {
+   "cols": 47.6,
+   "size": 2.736384159584278,
+   "cells": 1380.4,
+   "leftover": 0.05327006327006326,
+   "err": 0.40816326530612246,
+   "distinct": 97,
+   "parts": 2.9,
+   "reuse": 5.984691487449127,
+   "unused": 0,
+   "stable": 0.752857209117413,
+   "noisyErr": 1.3459183673469388,
+   "cellStable": 0.38469387755102036,
+   "cellDistinct": 68.4,
+   "similar": 0.7123330055117438,
+   "heldLeft": 0.015384615384615385,
+   "heldErr": 0.2333333333333333,
+   "heldParts": 5.733333333333333,
+   "ms": 175.6
+  },
+  "range": {
+   "cols": [
+    45,
+    51
+   ],
+   "size": [
+    2.533333333333333,
+    2.869565217391304
+   ],
+   "cells": [
+    1075,
+    1823
+   ],
+   "leftover": [
+    0.040306122448979596,
+    0.06243558029272314
+   ],
+   "err": [
+    0.30612244897959184,
+    0.5204081632653061
+   ],
+   "distinct": [
+    95,
+    98
+   ],
+   "parts": [
+    2.826530612244898,
+    2.938775510204082
+   ],
+   "reuse": [
+    5.431372549019608,
+    6.311111111111111
+   ],
+   "unused": [
+    0,
+    0
+   ],
+   "stable": [
+    0.7361408177989806,
+    0.7609503563330091
+   ],
+   "noisyErr": [
+    1.25,
+    1.4561224489795919
+   ],
+   "cellStable": [
+    0.35,
+    0.40816326530612246
+   ],
+   "cellDistinct": [
+    63,
+    72
+   ],
+   "similar": [
+    0.6671344293196323,
+    0.7586510532970141
+   ],
+   "heldLeft": [
+    0,
+    0.025641025641025644
+   ],
+   "heldErr": [
+    0,
+    0.5
+   ],
+   "heldParts": [
+    4.666666666666667,
+    6.666666666666667
+   ],
+   "ms": [
+    165,
+    190
+   ]
+  },
+  "st": [
+   {
+    "grown": 50,
+    "retired": 0,
+    "redundant": 5,
+    "rests": 3,
+    "tentative": 0,
+    "fresh": 1882,
+    "cellsRetired": 588
+   },
+   {
+    "grown": 55,
+    "retired": 0,
+    "redundant": 8,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 1789,
+    "cellsRetired": 626
+   },
+   {
+    "grown": 56,
+    "retired": 0,
+    "redundant": 5,
+    "rests": 3,
+    "tentative": 0,
+    "fresh": 1934,
+    "cellsRetired": 381
+   },
+   {
+    "grown": 57,
+    "retired": 0,
+    "redundant": 8,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 2517,
+    "cellsRetired": 618
+   },
+   {
+    "grown": 49,
+    "retired": 0,
+    "redundant": 3,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 1976,
+    "cellsRetired": 706
+   }
+  ]
+ },
+ {
+  "group": "noise",
+  "name": "B noise 15%",
+  "arm": "B",
+  "noise": 0.15,
+  "first": 0,
+  "mean": {
+   "cols": 138.4,
+   "size": 2.3261148343179103,
+   "cells": 5164.8,
+   "leftover": 0.05166666666666668,
+   "err": 0.2775510204081633,
+   "distinct": 98,
+   "parts": 3.395918367346939,
+   "reuse": 3.2363866001607144,
+   "unused": 35.4,
+   "stable": 0.5882854809589502,
+   "noisyErr": 1.4216326530612244,
+   "cellStable": 0.10979591836734695,
+   "cellDistinct": 33,
+   "similar": 0.5801685909822474,
+   "heldLeft": 0,
+   "heldErr": 0,
+   "heldParts": 5.733333333333333,
+   "ms": 812.6
+  },
+  "range": {
+   "cols": [
+    136,
+    140
+   ],
+   "size": [
+    2.27007299270073,
+    2.3785714285714286
+   ],
+   "cells": [
+    4134,
+    7470
+   ],
+   "leftover": [
+    0.038888888888888896,
+    0.06955782312925171
+   ],
+   "err": [
+    0.19387755102040816,
+    0.40816326530612246
+   ],
+   "distinct": [
+    98,
+    98
+   ],
+   "parts": [
+    3.2857142857142856,
+    3.561224489795918
+   ],
+   "reuse": [
+    2.9814814814814814,
+    3.4329896907216493
+   ],
+   "unused": [
+    31,
+    43
+   ],
+   "stable": [
+    0.5763777464032562,
+    0.614367582530848
+   ],
+   "noisyErr": [
+    1.3265306122448979,
+    1.4775510204081632
+   ],
+   "cellStable": [
+    0.09081632653061225,
+    0.1357142857142857
+   ],
+   "cellDistinct": [
+    27,
+    43
+   ],
+   "similar": [
+    0.5275325340530872,
+    0.6527584434313484
+   ],
+   "heldLeft": [
+    0,
+    0
+   ],
+   "heldErr": [
+    0,
+    0
+   ],
+   "heldParts": [
+    5.5,
+    6
+   ],
+   "ms": [
+    569,
+    921
+   ]
+  },
+  "st": [
+   {
+    "grown": 165,
+    "retired": 0,
+    "redundant": 25,
+    "rests": 3,
+    "tentative": 0,
+    "fresh": 7937,
+    "cellsRetired": 0
+   },
+   {
+    "grown": 171,
+    "retired": 0,
+    "redundant": 35,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 7856,
+    "cellsRetired": 2721
+   },
+   {
+    "grown": 171,
+    "retired": 0,
+    "redundant": 31,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 7712,
+    "cellsRetired": 2573
+   },
+   {
+    "grown": 162,
+    "retired": 0,
+    "redundant": 23,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 7776,
+    "cellsRetired": 3325
+   },
+   {
+    "grown": 173,
+    "retired": 0,
+    "redundant": 36,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 7846,
+    "cellsRetired": 2530
+   }
+  ]
+ },
+ {
+  "group": "noise",
+  "name": "D noise 0%",
+  "arm": "D",
+  "noise": 0,
+  "first": 0,
+  "mean": {
+   "cols": 45.2,
+   "size": 2.6111481616935226,
+   "cells": 1606.2,
+   "leftover": 0.06093033950176807,
+   "err": 0.3979591836734694,
+   "distinct": 97,
+   "parts": 2.836734693877551,
+   "reuse": 6.172437235118215,
+   "unused": 0,
+   "stable": 0.7580135539064111,
+   "noisyErr": 1.2846938775510204,
+   "cellStable": 0.37244897959183676,
+   "cellDistinct": 64.6,
+   "similar": 0.7202546243587549,
+   "heldLeft": 0.012820512820512822,
+   "heldErr": 0.2,
+   "heldParts": 5.366666666666666,
+   "ms": 154
+  },
+  "range": {
+   "cols": [
+    43,
+    47
+   ],
+   "size": [
+    2.4893617021276597,
+    2.782608695652174
+   ],
+   "cells": [
+    1235,
+    2046
+   ],
+   "leftover": [
+    0.05368480725623584,
+    0.06760204081632652
+   ],
+   "err": [
+    0.29591836734693877,
+    0.5408163265306123
+   ],
+   "distinct": [
+    97,
+    97
+   ],
+   "parts": [
+    2.4285714285714284,
+    3.0918367346938775
+   ],
+   "reuse": [
+    5.173913043478261,
+    7.046511627906977
+   ],
+   "unused": [
+    0,
+    0
+   ],
+   "stable": [
+    0.7383819241982507,
+    0.7806709588597345
+   ],
+   "noisyErr": [
+    1.153061224489796,
+    1.379591836734694
+   ],
+   "cellStable": [
+    0.3469387755102041,
+    0.4193877551020408
+   ],
+   "cellDistinct": [
+    62,
+    67
+   ],
+   "similar": [
+    0.6964563556000878,
+    0.7454875750918336
+   ],
+   "heldLeft": [
+    0,
+    0.025641025641025644
+   ],
+   "heldErr": [
+    0,
+    0.5
+   ],
+   "heldParts": [
+    4.666666666666667,
+    6
+   ],
+   "ms": [
+    124,
+    177
+   ]
+  },
+  "st": [
+   {
+    "grown": 49,
+    "retired": 0,
+    "redundant": 1,
+    "rests": 5,
+    "tentative": 56,
+    "fresh": 2263,
+    "cellsRetired": 720,
+    "joined": 1
+   },
+   {
+    "grown": 45,
+    "retired": 0,
+    "redundant": 2,
+    "rests": 5,
+    "tentative": 53,
+    "fresh": 2133,
+    "cellsRetired": 894,
+    "joined": 0
+   },
+   {
+    "grown": 45,
+    "retired": 0,
+    "redundant": 2,
+    "rests": 4,
+    "tentative": 59,
+    "fresh": 2417,
+    "cellsRetired": 346,
+    "joined": 0
+   },
+   {
+    "grown": 50,
+    "retired": 0,
+    "redundant": 3,
+    "rests": 5,
+    "tentative": 58,
+    "fresh": 2607,
+    "cellsRetired": 809,
+    "joined": 0
+   },
+   {
+    "grown": 50,
+    "retired": 0,
+    "redundant": 1,
+    "rests": 5,
+    "tentative": 61,
+    "fresh": 2257,
+    "cellsRetired": 405,
+    "joined": 3
+   }
+  ]
+ },
+ {
+  "group": "noise",
+  "name": "D noise 15%",
+  "arm": "D",
+  "noise": 0.15,
+  "first": 0,
+  "mean": {
+   "cols": 111.4,
+   "size": 2.1575368960769747,
+   "cells": 5578.4,
+   "leftover": 0.06853741496598639,
+   "err": 0.32653061224489793,
+   "distinct": 97.8,
+   "parts": 3.557142857142857,
+   "reuse": 3.8840348446653805,
+   "unused": 21.6,
+   "stable": 0.6186189377515904,
+   "noisyErr": 1.4610204081632654,
+   "cellStable": 0.11142857142857143,
+   "cellDistinct": 32.4,
+   "similar": 0.6515369800159558,
+   "heldLeft": 0,
+   "heldErr": 0,
+   "heldParts": 6.633333333333333,
+   "ms": 671
+  },
+  "range": {
+   "cols": [
+    107,
+    119
+   ],
+   "size": [
+    2.1401869158878504,
+    2.1848739495798317
+   ],
+   "cells": [
+    5019,
+    6274
+   ],
+   "leftover": [
+    0.058645124716553296,
+    0.07936507936507939
+   ],
+   "err": [
+    0.25510204081632654,
+    0.3673469387755102
+   ],
+   "distinct": [
+    97,
+    98
+   ],
+   "parts": [
+    3.479591836734694,
+    3.63265306122449
+   ],
+   "reuse": [
+    3.760869565217391,
+    4.057471264367816
+   ],
+   "unused": [
+    17,
+    27
+   ],
+   "stable": [
+    0.6077386049324818,
+    0.6292093677297759
+   ],
+   "noisyErr": [
+    1.396938775510204,
+    1.5224489795918368
+   ],
+   "cellStable": [
+    0.09387755102040816,
+    0.1336734693877551
+   ],
+   "cellDistinct": [
+    27,
+    39
+   ],
+   "similar": [
+    0.6257585101213905,
+    0.6683748089911137
+   ],
+   "heldLeft": [
+    0,
+    0
+   ],
+   "heldErr": [
+    0,
+    0
+   ],
+   "heldParts": [
+    5.833333333333333,
+    7.166666666666667
+   ],
+   "ms": [
+    600,
+    760
+   ]
+  },
+  "st": [
+   {
+    "grown": 123,
+    "retired": 0,
+    "redundant": 16,
+    "rests": 6,
+    "tentative": 200,
+    "fresh": 7986,
+    "cellsRetired": 2547,
+    "joined": 0
+   },
+   {
+    "grown": 125,
+    "retired": 0,
+    "redundant": 15,
+    "rests": 6,
+    "tentative": 205,
+    "fresh": 8169,
+    "cellsRetired": 1543,
+    "joined": 0
+   },
+   {
+    "grown": 131,
+    "retired": 0,
+    "redundant": 12,
+    "rests": 6,
+    "tentative": 196,
+    "fresh": 7861,
+    "cellsRetired": 1466,
+    "joined": 0
+   },
+   {
+    "grown": 119,
+    "retired": 0,
+    "redundant": 10,
+    "rests": 6,
+    "tentative": 204,
+    "fresh": 7992,
+    "cellsRetired": 2242,
+    "joined": 0
+   },
+   {
+    "grown": 123,
+    "retired": 0,
+    "redundant": 11,
+    "rests": 6,
+    "tentative": 184,
+    "fresh": 7960,
+    "cellsRetired": 2447,
+    "joined": 0
+   }
+  ]
+ },
+ {
+  "group": "order",
+  "name": "B parts first",
+  "arm": "B",
+  "noise": 0.05,
+  "first": 43,
+  "mean": {
+   "cols": 115.8,
+   "size": 2.375286484975961,
+   "cells": 3791,
+   "leftover": 0.036404151404151416,
+   "err": 0.2,
+   "distinct": 98,
+   "parts": 3.1653061224489796,
+   "reuse": 3.764208666841094,
+   "unused": 33,
+   "stable": 0.6312229306974204,
+   "noisyErr": 1.3348979591836734,
+   "cellStable": 0.20673469387755103,
+   "cellDistinct": 56.8,
+   "similar": 0.6632969719199463,
+   "heldLeft": 0,
+   "heldErr": 0,
+   "heldParts": 5.4,
+   "ms": 345.8
+  },
+  "range": {
+   "cols": [
+    109,
+    122
+   ],
+   "size": [
+    2.305084745762712,
+    2.4836065573770494
+   ],
+   "cells": [
+    3585,
+    3958
+   ],
+   "leftover": [
+    0.026785714285714284,
+    0.04455782312925172
+   ],
+   "err": [
+    0.17346938775510204,
+    0.22448979591836735
+   ],
+   "distinct": [
+    98,
+    98
+   ],
+   "parts": [
+    2.979591836734694,
+    3.3469387755102042
+   ],
+   "reuse": [
+    3.5180722891566263,
+    4.208333333333333
+   ],
+   "unused": [
+    24,
+    41
+   ],
+   "stable": [
+    0.6126053906411043,
+    0.6535925214241539
+   ],
+   "noisyErr": [
+    1.2428571428571429,
+    1.3806122448979592
+   ],
+   "cellStable": [
+    0.19387755102040816,
+    0.22346938775510203
+   ],
+   "cellDistinct": [
+    52,
+    61
+   ],
+   "similar": [
+    0.6501519667664147,
+    0.6823960840360832
+   ],
+   "heldLeft": [
+    0,
+    0
+   ],
+   "heldErr": [
+    0,
+    0
+   ],
+   "heldParts": [
+    4.833333333333333,
+    6
+   ],
+   "ms": [
+    285,
+    408
+   ]
+  },
+  "st": [
+   {
+    "grown": 147,
+    "retired": 0,
+    "redundant": 28,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4322,
+    "cellsRetired": 483
+   },
+   {
+    "grown": 132,
+    "retired": 0,
+    "redundant": 23,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4414,
+    "cellsRetired": 602
+   },
+   {
+    "grown": 130,
+    "retired": 1,
+    "redundant": 18,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4258,
+    "cellsRetired": 232
+   },
+   {
+    "grown": 141,
+    "retired": 0,
+    "redundant": 19,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4306,
+    "cellsRetired": 237
+   },
+   {
+    "grown": 135,
+    "retired": 0,
+    "redundant": 17,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4520,
+    "cellsRetired": 391
+   }
+  ]
+ },
+ {
+  "group": "order",
+  "name": "B wholes first",
+  "arm": "B",
+  "noise": 0.05,
+  "first": 55,
+  "mean": {
+   "cols": 115.2,
+   "size": 2.3892270634276906,
+   "cells": 3163.6,
+   "leftover": 0.04500566893424037,
+   "err": 0.22244897959183674,
+   "distinct": 97.8,
+   "parts": 3.214285714285714,
+   "reuse": 3.657763985884487,
+   "unused": 29,
+   "stable": 0.628635163589245,
+   "noisyErr": 1.3714285714285714,
+   "cellStable": 0.20693877551020412,
+   "cellDistinct": 56.6,
+   "similar": 0.6290517133018416,
+   "heldLeft": 0,
+   "heldErr": 0,
+   "heldParts": 5.4,
+   "ms": 485
+  },
+  "range": {
+   "cols": [
+    110,
+    121
+   ],
+   "size": [
+    2.2142857142857144,
+    2.58974358974359
+   ],
+   "cells": [
+    2759,
+    3675
+   ],
+   "leftover": [
+    0.03605442176870749,
+    0.05297619047619048
+   ],
+   "err": [
+    0.14285714285714285,
+    0.2755102040816326
+   ],
+   "distinct": [
+    97,
+    98
+   ],
+   "parts": [
+    2.86734693877551,
+    3.4591836734693877
+   ],
+   "reuse": [
+    3.2298850574712645,
+    3.927710843373494
+   ],
+   "unused": [
+    25,
+    33
+   ],
+   "stable": [
+    0.5999948464234179,
+    0.6635367891745435
+   ],
+   "noisyErr": [
+    1.3112244897959184,
+    1.4561224489795919
+   ],
+   "cellStable": [
+    0.16428571428571428,
+    0.27448979591836736
+   ],
+   "cellDistinct": [
+    46,
+    68
+   ],
+   "similar": [
+    0.5636440802294035,
+    0.6852326189493244
+   ],
+   "heldLeft": [
+    0,
+    0
+   ],
+   "heldErr": [
+    0,
+    0
+   ],
+   "heldParts": [
+    4.5,
+    6
+   ],
+   "ms": [
+    460,
+    525
+   ]
+  },
+  "st": [
+   {
+    "grown": 153,
+    "retired": 0,
+    "redundant": 37,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4924,
+    "cellsRetired": 769
+   },
+   {
+    "grown": 156,
+    "retired": 0,
+    "redundant": 44,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4704,
+    "cellsRetired": 664
+   },
+   {
+    "grown": 141,
+    "retired": 0,
+    "redundant": 20,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4521,
+    "cellsRetired": 858
+   },
+   {
+    "grown": 142,
+    "retired": 0,
+    "redundant": 32,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4957,
+    "cellsRetired": 1527
+   },
+   {
+    "grown": 149,
+    "retired": 1,
+    "redundant": 31,
+    "rests": 4,
+    "tentative": 0,
+    "fresh": 4483,
+    "cellsRetired": 1345
+   }
+  ]
+ }
+]
