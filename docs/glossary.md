@@ -7,7 +7,7 @@ Use these words, with these meanings, and no others.
 | Word | Meaning |
 |---|---|
 | **heat** (owner) | Whatever can't be explained cheaply: a picture or part of one that doesn't fit what's known, or structure that doesn't pay its way. Learning is cooling. |
-| **energy** (owner) | The total cost of describing everything: structure plus flow. The machine keeps a change only if energy falls. |
+| **energy** (owner) | The total cost of describing everything: structure plus flow, plus change when pictures come in sequence. The machine keeps a change only if energy falls. |
 | **structure** (to confirm) | What the machine keeps: stored pixels, plus every placement listed in memories and composites. |
 | **flow** (to confirm) | The cost of explaining the pictures seen since the last rest, with what's known now. |
 | **awake / rest** (owner) | Awake: seeing and explaining pictures as they come. Rest: comparing memories and reorganising, keeping only changes that lower energy. |
@@ -30,5 +30,8 @@ Use these words, with these meanings, and no others.
 | **cue** (owner) | A hint from the input about which next state to move into (one cell of it is enough). |
 | **context** (owner) | Something held from elsewhere that steers which transition happens. It has no position. |
 | **shared change** (to confirm) | What two remembered transitions share when their whole changes line up: the change plus its unchanged surroundings, without position. Applies anywhere it fits. |
+| **kind** (to confirm) | A thing with one slot whose piece can vary: what the versions share, held once, plus a list of fillers. |
+| **slot / filler** (to confirm) | Slot: the place in a kind where the piece varies. Filler: one piece that can go there. |
+| **change (in the bill)** (to confirm) | The cost of describing what moved between pictures in a sequence. Part of energy alongside structure and flow. |
 | **engine / machine** (owner) | Engine: the inner mechanism (seeing, cells, completion, change). Machine: the engine acting in a world (to come). |
 | **crutch** (owner) | Anything that makes the machine work without coming from its own principles: a fixed number, a filter, a hand-written rule. Not allowed in `src/`. |

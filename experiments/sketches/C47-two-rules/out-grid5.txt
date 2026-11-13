@@ -1,0 +1,6 @@
+GRID 5X5 PARK (25 places) · store of days holds 50 walks
+  days | general shapes kept | ONE RULE: real new routes trusted, doubted · made-up caught, missed | TWO RULES: same
+   100 |  1 walks, 0 kinds       | 0 trusted, 0 doubted · 0 caught, 0 missed   | 0 trusted, 0 doubted · 0 caught, 0 missed
+   300 |  8 walks, 0 kinds       | 10 trusted, 0 doubted · 0 caught, 0 missed   | 10 trusted, 0 doubted · 0 caught, 0 missed
+  1000 | 10 walks, 14 kinds       | 0 trusted, 6 doubted · 31 caught, 0 missed   | 6 trusted, 0 doubted · 31 caught, 0 missed
+  3000 | 12 walks, 25 kinds       | 1 trusted, 9 doubted · 38 caught, 0 missed   | 8 trusted, 2 doubted · 38 caught, 0 missed

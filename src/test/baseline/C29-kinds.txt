@@ -1,0 +1,6 @@
+ENGINE TEST · kinds and one energy (moving world: table moves right, frame down, cart left; never shown: frame+dots, cart+peak)
+
+[seeing only (pictures one by one)] 22 s · things 14 · kinds 2 (3 versions, 3 versions) · different changes 7
+  next picture · seen objects: exact 100%, overlap 100% · never-seen objects: exact 0%, overlap 87%
+[one energy (pictures in sequence)] 30 s · things 11 · kinds 3 (2 versions, 3 versions, 3 versions) · different changes 4
+  next picture · seen objects: exact 90%, overlap 98% · never-seen objects: exact 0%, overlap 87%

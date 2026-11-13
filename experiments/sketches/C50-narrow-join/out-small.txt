@@ -1,0 +1,6 @@
+
+SMALL PARK (17 places) · store of days holds 50 walks
+  days | general memory | joined walks, checked against the store of experiences
+   300 |  6 assemblies with slots | real new walks: 0 trusted, 0 doubted · made-up: 0 caught, 0 missed
+  1000 |  8 assemblies with slots | real new walks: 0 trusted, 0 doubted · made-up: 2 caught, 0 missed
+  3000 | 12 assemblies with slots | real new walks: 0 trusted, 0 doubted · made-up: 9 caught, 0 missed

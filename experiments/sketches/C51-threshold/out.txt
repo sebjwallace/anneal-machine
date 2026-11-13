@@ -1,0 +1,15 @@
+STAGE 1 · two walks sharing a junction: A → J → P and G → J → O
+  A and P (walked)               A → J → P (bar went down to 1) · 2 assemblies woke
+  A and O (never walked)         A → J → O (bar went down to 1) · 8 assemblies woke
+  P and A (backwards)            no way through · 10 assemblies woke
+
+STAGE 2 · C44's longer park
+ only short walks:
+  A and O (with the fork)        undecided · 40 assemblies woke
+  A and O (no fork)              A → B → C → D → E → F → G → H → O (bar went down to 1) · 33 assemblies woke
+  A and S (no way)               no way through · 30 assemblies woke
+ plus longer walks:
+  A and O (with the fork)        A → B → C → D → E → F → G → H → O (bar went down to 1) · 20 assemblies woke
+  A and O (no fork)              A → B → C → D → E → F → G → H → O (bar went down to 1) · 18 assemblies woke
+ bar NOT raised again after the gap closes:
+  A and O (no fork)              bar never raised: 12 states left active (a flood) · 7 assemblies woke

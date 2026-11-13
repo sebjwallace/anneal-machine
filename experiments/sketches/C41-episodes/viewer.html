@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Episodes and kinds: how a new route appears</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f6f4ef; --card:#fffdf8; --ink:#1f2328; --soft:#5d6470; --line:#e2ddd2; --accent:#2f6fde; --good:#1e9e63; --warn:#d0782a; --bad:#c2453d;
+    --A:#3b82f6; --J:#8b5cf6; --P:#14b8a6; --G:#f59e0b; --O:#ef4444; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 Inter, system-ui, sans-serif; }
+  main { max-width: 1060px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 28px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .lede { color: var(--soft); max-width: 760px; margin: 0 0 22px; }
+  .tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
+  .tab { border:1px solid var(--line); background:var(--card); padding:8px 13px; border-radius:999px; cursor:pointer; font:500 14px Inter; color:var(--soft); }
+  .tab.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .grid { display:grid; grid-template-columns: 1.25fr 1fr; gap:18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; }
+  .card h2 { font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--soft); margin:0 0 12px; font-weight:600; }
+  .story p { margin: 0 0 10px; }
+  .story b { font-weight:600; }
+  .row { display:flex; align-items:center; gap:10px; margin: 10px 0; position:relative; }
+  .label { width: 150px; font-size:13px; color:var(--soft); flex: none; }
+  .label .tag { display:inline-block; margin-top:2px; font-size:11px; padding:1px 7px; border-radius:999px; background:#fde9e7; color:var(--bad); font-weight:600; }
+  .steps { display:flex; align-items:center; gap:6px; }
+  .tile { width:54px; height:54px; border-radius:12px; display:grid; place-items:center; font:700 22px 'JetBrains Mono', monospace; color:#fff; position:relative; transition: transform .35s, box-shadow .35s, opacity .35s, outline-color .35s; outline: 3px solid transparent; outline-offset: 3px; }
+  .tile.empty { background: transparent; border: 2px dashed var(--line); color: var(--line); }
+  .tile.dim { opacity:.28; }
+  .tile.hit { outline-color: var(--ink); transform: translateY(-3px); }
+  .tile.filled { border: 3px dashed rgba(255,255,255,.9); box-shadow: 0 0 0 3px var(--good); }
+  .tile .stack { display:flex; flex-direction:column; gap:3px; }
+  .slot { width:54px; border-radius:12px; padding:4px; background:#efeae0; display:flex; flex-direction:column; gap:4px; }
+  .slot .tile { width:46px; height:46px; font-size:19px; }
+  .arrow { color: var(--soft); font-size:18px; }
+  .thing { border-radius:12px; padding: 4px 8px; transition: background .35s, box-shadow .35s; }
+  .thing.consider { background:#eef3fd; box-shadow: 0 0 0 2px var(--accent) inset; }
+  .thing.win { background:#e7f6ee; box-shadow: 0 0 0 2px var(--good) inset; }
+  .thing.lose { opacity:.45; }
+  .thing.tie { background:#fdf1e6; box-shadow: 0 0 0 2px var(--warn) inset; }
+  .badge { font: 600 12px Inter; padding: 3px 9px; border-radius: 999px; background:#eceae4; color: var(--soft); margin-left: 6px; white-space: nowrap; transition: background .3s, color .3s; }
+  .badge.n2 { background: var(--good); color:#fff; } .badge.n1 { background: #f3e2cf; color:#9a5a1d; } .badge.n0 { background:#eceae4; }
+  .badge.tie { background: var(--warn); color:#fff; }
+  .cuebar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .cueslot { display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .cueslot small { color:var(--soft); font-size:11px; }
+  .cueslot .tile { cursor:pointer; }
+  .cueslot .tile.empty:hover { border-color: var(--soft); color: var(--soft); }
+  .pal { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .chip { border:1px solid var(--line); background:#fff; border-radius:999px; padding:5px 11px; font: 600 13px Inter; cursor:pointer; }
+  .chip:hover { border-color: var(--ink); }
+  .btns { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+  button.main { background:var(--accent); color:#fff; border:0; padding:10px 16px; border-radius:10px; font:600 14px Inter; cursor:pointer; }
+  button.ghost { background:transparent; border:1px solid var(--line); padding:10px 14px; border-radius:10px; font:500 14px Inter; cursor:pointer; color:var(--ink); }
+  button:disabled { opacity:.45; cursor:default; }
+  .verdict { margin-top: 14px; min-height: 64px; padding: 12px 14px; border-radius: 10px; background: #f1eee7; font-size: 15px; transition: background .3s; }
+  .verdict.good { background:#e7f6ee; } .verdict.bad { background:#fbeceb; } .verdict.warn { background:#fdf1e6; }
+  .result { margin-top: 12px; }
+  .legend { font-size:12px; color:var(--soft); margin-top:8px; }
+  .kindform { display:flex; align-items:center; gap:8px; padding: 12px; background: #f4f0ff; border-radius: 12px; margin-bottom: 10px; }
+  .kindform .label { width:auto; margin-right:8px; color:#5b3fb5; font-weight:600; }
+  .unfold { font-size:13px; color: var(--soft); margin: 4px 0 2px; }
+  .fade-in { animation: fi .5s ease both; } @keyframes fi { from { opacity:0; transform: translateY(6px);} to { opacity:1; transform:none; } }
+  .pulse { animation: pu 1s ease 2; } @keyframes pu { 50% { transform: scale(1.12); } }
+  .A{background:var(--A)} .J{background:var(--J)} .P{background:var(--P)} .G{background:var(--G)} .O{background:var(--O)}
+  .rule { font-size: 14px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-top:12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>How a new route appears: episodes and kinds</h1>
+  <p class="lede">Five states, two episodes that share one state, and the engine's one recall rule. Go through the tabs in order. On each one, set a cue (or use the buttons), then press <b>Recall</b> and watch what the engine does.</p>
+  <div class="tabs" id="tabs"></div>
+  <div class="grid">
+    <div class="card">
+      <h2 id="memTitle">In memory</h2>
+      <div id="memory"></div>
+      <div class="legend">Each tile is a state; left to right is time. A tile with a green dashed ring was filled in by recall, not cued.</div>
+    </div>
+    <div class="card">
+      <h2>The cue</h2>
+      <div class="cuebar" id="cue"></div>
+      <div class="pal" id="pal"></div>
+      <div class="pal" id="presets"></div>
+      <div class="btns"><button class="main" id="go">Recall ▶</button><button class="ghost" id="clear">Clear cue</button></div>
+      <div class="verdict" id="verdict">Pick a cue, then press Recall.</div>
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+  <div class="card story" style="margin-top:18px" id="story"></div>
+</main>
+<script>
+const STATES = ['A', 'J', 'P', 'G', 'O'];
+const E1 = { name: 'Episode 1', parts: [['A', 0], ['J', 1], ['P', 2]] }, E2 = { name: 'Episode 2', parts: [['G', 0], ['J', 1], ['O', 2]] };
+const TABS = [
+  { id: 'episodes', title: '1 · Two episodes', things: [E1, E2], cue: { 0: 'A', 2: 'P' },
+    story: `<p>Each <b>episode</b> is a short run of states in time, held as one thing, just as a scene holds its parts. Episode 1 went <b>A → J → P</b>. Episode 2 went <b>G → J → O</b>. They share <b>J</b> and nothing else. A and O were never in the same episode.</p>
+    <p><b>The recall rule:</b> a thing in memory comes back only if <b>two or more</b> of the cues fall inside it. One thing explaining two cues is cheaper than explaining them separately; that saving is the only reason to bring it back. If two things fit the cues equally well, the engine doesn't choose either.</p>
+    <p>Try it: the cue is set to A then P. Press Recall.</p>` },
+  { id: 'ao', title: '2 · A and O: nothing', things: [E1, E2], cue: { 0: 'A', 2: 'O' },
+    story: `<p>Now cue <b>A</b> and <b>O</b>. You can see the route by eye: A → J, and J → O. But watch the evidence count. Episode 1 holds A but not O: <b>1 cue</b>. Episode 2 holds O but not A: <b>1 cue</b>. Neither reaches two, so nothing comes back.</p>
+    <p>The shared J doesn't help. Nobody cued J, so joining at J explains nothing extra. There's no magnet in the existing rule.</p>` },
+  { id: 'region', title: '3 · A level above: too much', things: [{ name: 'Both episodes, lined up at J', parts: [['A', 0], ['G', 0], ['J', 1], ['P', 2], ['O', 2]] }], cue: { 0: 'A', 2: 'O' },
+    story: `<p>Suppose there were a level above episodes: one thing holding <b>both</b> episodes, lined up where they share J. Now A and O both fall inside it: <b>2 cues</b>, so it comes back.</p>
+    <p>But it brings back <b>everything</b> it holds, including G and P, which you didn't want. You get the whole patch, not the path. That's what the park map did.</p>` },
+  { id: 'kind', title: '4 · A kind with two slots', kind: true, cue: { 0: 'A', 2: 'O' },
+    story: `<p>Look at the two episodes again: <b>? → J → ?</b>. They're identical except at both ends. A <b>kind</b> is the engine's way of holding one form with a <b>slot</b> that can take different versions. Today a kind has only one slot. Give it two: the first slot can be A or G, the last can be P or O.</p>
+    <p>A kind doesn't store its versions; it makes them when needed. Two choices × two choices = <b>four versions</b>, including two that never happened. One of them is <b>A → J → O</b>.</p>
+    <p>Press Recall with A and O. Only one version holds both cues, so it alone comes back, and it fills in <b>J and nothing else</b>: just the path. Same rule as before, no search.</p>` },
+  { id: 'fork', title: '5 · The fork', kind: true, cue: { 0: 'A', 1: 'J' },
+    story: `<p>Same kind, but now cue <b>A</b> and <b>J</b>, as if you're at the junction asking "where now?". Two versions hold both cues equally: A → J → P and A → J → O. The engine <b>refuses to choose</b>. That's the right answer: you're at a fork, and the cue can't decide.</p>
+    <p>Add the destination (put O or P in the last step) and it decides at once. A goal is what settles a fork.</p>
+    <p><b>The catch:</b> the engine can't build a two-slot kind yet. That would be a change to the core, and whether energy would actually keep one is still open.</p>` },
+];
+const kindVersions = () => { const out = []; for (const a of ['A', 'G']) for (const b of ['P', 'O']) out.push({ name: `${a} → J → ${b}`, parts: [[a, 0], ['J', 1], [b, 2]], novel: (a === 'A') !== (b === 'P') }); return out; };
+let tab = 0, cue = {}, busy = false;
+const $ = (id) => document.getElementById(id);
+const tile = (s, cls = '') => `<div class="tile ${s ? s : 'empty'} ${cls}">${s || '·'}</div>`;
+function thingsNow() { const T = TABS[tab]; return T.kind ? kindVersions() : T.things; }
+function renderTabs() { $('tabs').innerHTML = TABS.map((t, i) => `<button class="tab ${i === tab ? 'on' : ''}" data-i="${i}">${t.title}</button>`).join('');
+  document.querySelectorAll('.tab').forEach((b) => b.onclick = () => { if (!busy) setTab(+b.dataset.i); }); }
+function renderMemory(states = {}) { const T = TABS[tab]; let h = '';
+  if (T.kind) { $('memTitle').textContent = 'In memory: one kind';
+    h += `<div class="kindform fade-in"><span class="label">The kind</span><div class="slot">${tile('A')}${tile('G')}</div><span class="arrow">→</span>${tile('J')}<span class="arrow">→</span><div class="slot">${tile('P')}${tile('O')}</div></div>`;
+    h += `<div class="unfold">…which can make these versions when needed:</div>`; }
+  else $('memTitle').textContent = T.things.length > 1 ? 'In memory: two episodes' : 'In memory: one thing above the episodes';
+  thingsNow().forEach((t, i) => { const st = states[i] || {};
+    h += `<div class="row thing ${st.cls || ''} fade-in" style="animation-delay:${i * 80}ms"><div class="label">${t.name}${t.novel ? '<br><span class="tag">never happened</span>' : ''}</div><div class="steps">`;
+    if (t.parts.some(([, x], k) => t.parts.findIndex(([, y]) => y === x) !== k)) { for (let x = 0; x < 3; x++) { const here = t.parts.filter(([, y]) => y === x).map(([s]) => s);
+        h += (x ? '<span class="arrow">→</span>' : '') + (here.length > 1 ? `<div class="slot" style="background:transparent;padding:0">${here.map((s) => tile(s, (st.hits || []).includes(s + x) ? 'hit' : st.cls === 'consider' ? '' : '')).join('')}</div>` : tile(here[0], (st.hits || []).includes(here[0] + x) ? 'hit' : '')); } }
+    else t.parts.forEach(([s, x], k) => { h += (k ? '<span class="arrow">→</span>' : '') + tile(s, (st.hits || []).includes(s + x) ? 'hit' : ''); });
+    h += `</div>${st.badge || ''}</div>`; });
+  $('memory').innerHTML = h; }
+function renderCue() { let h = ''; for (let x = 0; x < 3; x++) h += (x ? '<span class="arrow">→</span>' : '') + `<div class="cueslot"><small>step ${x + 1}</small><div data-x="${x}">${tile(cue[x], 'cuet')}</div></div>`;
+  $('cue').innerHTML = h; document.querySelectorAll('.cueslot > div').forEach((d) => d.onclick = () => { if (busy) return; const x = +d.dataset.x, cur = cue[x], i = cur ? STATES.indexOf(cur) : -1; const nx = i + 1 < STATES.length ? STATES[i + 1] : null; if (nx) cue[x] = nx; else delete cue[x]; resetOut(); renderCue(); }); }
+function renderPresets() { const P = [['A + P', { 0: 'A', 2: 'P' }], ['A + O', { 0: 'A', 2: 'O' }], ['A + J', { 0: 'A', 1: 'J' }], ['J + O', { 1: 'J', 2: 'O' }], ['A alone', { 0: 'A' }]];
+  $('pal').innerHTML = '<span style="font-size:13px;color:var(--soft);align-self:center">Click a step to cycle its state, or pick:</span>';
+  $('presets').innerHTML = P.map(([n], i) => `<button class="chip" data-i="${i}">${n}</button>`).join('');
+  document.querySelectorAll('#presets .chip').forEach((b) => b.onclick = () => { if (busy) return; cue = { ...P[+b.dataset.i][1] }; resetOut(); renderCue(); }); }
+function resetOut() { $('verdict').className = 'verdict'; $('verdict').innerHTML = 'Press Recall.'; $('result').innerHTML = ''; renderMemory(); }
+function setTab(i) { tab = i; cue = { ...TABS[i].cue }; renderTabs(); renderCue(); renderMemory(); $('story').innerHTML = TABS[i].story; $('verdict').className = 'verdict'; $('verdict').innerHTML = 'Press Recall.'; $('result').innerHTML = ''; }
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+async function recall() { if (busy) return; busy = true; $('go').disabled = true;
+  const things = thingsNow(), cues = Object.entries(cue).map(([x, s]) => [s, +x]);
+  if (!cues.length) { $('verdict').innerHTML = 'Put at least one state in the cue.'; busy = false; $('go').disabled = false; return; }
+  const scores = things.map((t) => { const hits = cues.filter(([s, x]) => t.parts.some(([q, y]) => q === s && y === x)).map(([s, x]) => s + x); const missing = t.parts.filter(([q, y]) => cue[y] !== q).length; return { hits, n: hits.length, missing }; });
+  const states = {}; $('verdict').className = 'verdict'; $('verdict').innerHTML = 'Each thing in memory counts how many cues fall inside it…'; $('result').innerHTML = '';
+  for (let i = 0; i < things.length; i++) { states[i] = { cls: 'consider', hits: scores[i].hits }; renderMemory(states); await wait(650);
+    const n = scores[i].n; states[i] = { cls: '', hits: scores[i].hits, badge: `<span class="badge n${Math.min(n, 2)}">${n} cue${n === 1 ? '' : 's'}${n < 2 ? ' · not enough' : ''}</span>` }; renderMemory(states); await wait(300); }
+  const ok = scores.map((s, i) => ({ ...s, i })).filter((s) => s.n >= 2).sort((a, b) => b.n - a.n || a.missing - b.missing);
+  await wait(300);
+  if (!ok.length) { $('verdict').className = 'verdict bad'; $('verdict').innerHTML = '<b>Nothing comes back.</b> No single thing holds two of the cues, so recalling any of them saves nothing.';
+    $('result').innerHTML = `<div class="row"><div class="label">Recalled</div><div class="steps">${[0, 1, 2].map((x) => (x ? '<span class="arrow">→</span>' : '') + tile(cue[x], cue[x] ? '' : 'dim')).join('')}</div></div>`; }
+  else { const best = ok[0], tied = ok.filter((s) => s.n === best.n && s.missing === best.missing);
+    if (tied.length > 1) { tied.forEach((s) => states[s.i] = { ...states[s.i], cls: 'tie', badge: `<span class="badge tie">${s.n} cues · tie</span>` }); renderMemory(states);
+      $('verdict').className = 'verdict warn'; $('verdict').innerHTML = `<b>A fork: no choice.</b> ${tied.length} things hold the cues equally well, so the cue can't decide between them and the engine takes neither. Add another cue to break the tie.`;
+      $('result').innerHTML = `<div class="row"><div class="label">Recalled</div><div class="steps">${[0, 1, 2].map((x) => (x ? '<span class="arrow">→</span>' : '') + tile(cue[x], cue[x] ? '' : 'dim')).join('')}</div></div>`; }
+    else { things.forEach((_, i) => { if (i !== best.i) states[i] = { ...states[i], cls: 'lose' }; }); states[best.i] = { ...states[best.i], cls: 'win' }; renderMemory(states); await wait(500);
+      const t = things[best.i]; let h = `<div class="row"><div class="label">Recalled</div><div class="steps">`;
+      for (let x = 0; x < 3; x++) { const here = t.parts.filter(([, y]) => y === x).map(([s]) => s); h += (x ? '<span class="arrow">→</span>' : '');
+        h += here.length > 1 ? `<div class="slot" style="background:transparent;padding:0">${here.map((s) => tile(s, cue[x] === s ? '' : 'filled pulse')).join('')}</div>` : tile(here[0], cue[x] === here[0] ? '' : 'filled pulse'); }
+      $('result').innerHTML = h + '</div></div>';
+      const extra = t.parts.filter(([s, y]) => cue[y] !== s).map(([s]) => s);
+      $('verdict').className = 'verdict good'; $('verdict').innerHTML = `<b>${t.name} comes back</b>, holding ${best.n} cues. Filled in: <b>${extra.join(', ') || 'nothing'}</b>.${t.novel ? ' This version <b>never happened</b>: it is new, made from what did.' : ''}${extra.length > 1 && TABS[tab].id === 'region' ? ' That is more than the path.' : ''}`; } }
+  busy = false; $('go').disabled = false; }
+$('go').onclick = recall; $('clear').onclick = () => { if (!busy) { cue = {}; resetOut(); renderCue(); } };
+renderPresets(); setTab(0);
+</script>
+</body>
+</html>

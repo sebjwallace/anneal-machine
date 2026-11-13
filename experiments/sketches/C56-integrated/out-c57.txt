@@ -1,0 +1,36 @@
+
+baseline (short walks, plain rest) · 1.5 s · 7 assemblies, 3 with slots, longest holds 5 places · views misread while learning: 24
+  held-back pairs (6): real route 2 (2 trusted) · made up: 0 caught by experiences, 0 not caught · undecided 4 · no way 0 · on average 4.7 rounds, 29 woke
+    bench to oak         undecided · 6 rounds, 34 woke
+    gate to meadow       undecided · 6 rounds, 38 woke
+    fountain to bridge   undecided · 2 rounds, 14 woke
+    pond to oak          pond → junction → bridge → hill → meadow → oak (real, trusted) · 6 rounds, 38 woke
+    bench to hill        undecided · 2 rounds, 14 woke
+    gate to junction     gate → fountain → pond → junction (real, trusted) · 6 rounds, 38 woke
+
+whole days only · 0.8 s · 8 assemblies, 0 with slots, longest holds 5 places · views misread while learning: 29
+  held-back pairs (6): real route 2 (2 trusted) · made up: 0 caught by experiences, 4 not caught · undecided 0 · no way 0 · on average 8.5 rounds, 57 woke
+    bench to oak         bench → gate → fountain → pond → junction → hill → meadow → oak (MADE UP, trusted) · 11 rounds, 75 woke
+    gate to meadow       gate → fountain → pond → junction → hill → meadow (MADE UP, trusted) · 11 rounds, 75 woke
+    fountain to bridge   fountain → pond → junction → bridge (real, trusted) · 6 rounds, 40 woke
+    pond to oak          pond → junction → hill → meadow → oak (MADE UP, trusted) · 6 rounds, 36 woke
+    bench to hill        bench → gate → fountain → pond → junction → hill (MADE UP, trusted) · 11 rounds, 75 woke
+    gate to junction     gate → fountain → pond → junction (real, trusted) · 6 rounds, 38 woke
+
+replay at rest only · 1.3 s · 9 assemblies, 3 with slots, longest holds 5 places · views misread while learning: 24
+  held-back pairs (6): real route 4 (4 trusted) · made up: 0 caught by experiences, 2 not caught · undecided 0 · no way 0 · on average 6.8 rounds, 44 woke
+    bench to oak         bench → gate → fountain → pond → junction → hill → meadow → oak (MADE UP, trusted) · 11 rounds, 75 woke
+    gate to meadow       gate → fountain → pond → junction → bridge → hill → meadow (real, trusted) · 6 rounds, 36 woke
+    fountain to bridge   fountain → pond → junction → bridge (real, trusted) · 6 rounds, 36 woke
+    pond to oak          pond → junction → hill → meadow → oak (MADE UP, trusted) · 6 rounds, 42 woke
+    bench to hill        bench → gate → fountain → pond → junction → bridge → hill (real, trusted) · 6 rounds, 36 woke
+    gate to junction     gate → fountain → pond → junction (real, trusted) · 6 rounds, 36 woke
+
+whole days + replay · 0.8 s · 8 assemblies, 0 with slots, longest holds 5 places · views misread while learning: 29
+  held-back pairs (6): real route 2 (2 trusted) · made up: 0 caught by experiences, 4 not caught · undecided 0 · no way 0 · on average 8.5 rounds, 57 woke
+    bench to oak         bench → gate → fountain → pond → junction → hill → meadow → oak (MADE UP, trusted) · 11 rounds, 75 woke
+    gate to meadow       gate → fountain → pond → junction → hill → meadow (MADE UP, trusted) · 11 rounds, 75 woke
+    fountain to bridge   fountain → pond → junction → bridge (real, trusted) · 6 rounds, 40 woke
+    pond to oak          pond → junction → hill → meadow → oak (MADE UP, trusted) · 6 rounds, 36 woke
+    bench to hill        bench → gate → fountain → pond → junction → hill (MADE UP, trusted) · 11 rounds, 75 woke
+    gate to junction     gate → fountain → pond → junction (real, trusted) · 6 rounds, 38 woke

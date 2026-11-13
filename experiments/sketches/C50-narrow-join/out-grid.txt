@@ -1,0 +1,6 @@
+
+GRID PARK (16 places) · store of days holds 50 walks
+  days | general memory | joined walks, checked against the store of experiences
+   300 |  9 assemblies with slots | real new walks: 2 trusted, 0 doubted · made-up: 1 caught, 0 missed
+  1000 | 17 assemblies with slots | real new walks: 0 trusted, 0 doubted · made-up: 13 caught, 0 missed
+  3000 | 17 assemblies with slots | real new walks: 2 trusted, 0 doubted · made-up: 18 caught, 0 missed

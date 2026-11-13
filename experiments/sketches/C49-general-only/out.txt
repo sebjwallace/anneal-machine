@@ -1,0 +1,24 @@
+
+100 walks seen
+  hub 4 x 4                  100 walks · 0.1 s · energy: settled 270, one broad shape 283, nothing 300
+      settled into C/D → J → R/P/Q  |  B/C/D → J → S  |  B → J → Q/R
+  hub 6 x 6                  100 walks · 0.4 s · energy: settled 291, one broad shape 309, nothing 300
+      settled into B/F/C → J → S/Q/U/T
+  paired (A→J→P, G→J→O)      100 walks · 0.0 s · energy: settled 238, one broad shape 238, nothing 300
+      settled into A/G → J → P/O
+
+300 walks seen
+  hub 4 x 4                  300 walks · 0.1 s · energy: settled 706, one broad shape 797, nothing 900
+      settled into D/B → J → R/Q  |  B/D/A → J → S  |  C → J → P/S  |  D/A → J → P  |  C/A → J → R  |  C/D → J → Q
+  hub 6 x 6                  300 walks · 2.0 s · energy: settled 793, one broad shape 853, nothing 900
+      settled into F/C/E → J → Q/U/T  |  B → J → S/U/T/Q  |  E/C/F/A → J → P/S/R  |  D → J → R/P/Q/T/U
+  paired (A→J→P, G→J→O)      300 walks · 0.0 s · energy: settled 684, one broad shape 684, nothing 900
+      settled into A/G → J → P/O
+
+1000 walks seen
+  hub 4 x 4                 1000 walks · 0.1 s · energy: settled 2144, one broad shape 2595, nothing 3000
+      settled into D/C → J → P  |  B → J → S/Q  |  D/B → J → R  |  A → J → R/P  |  C → J → R/Q  |  A/C → J → S  |  D → J → Q/S
+  hub 6 x 6                 1000 walks · 3.5 s · energy: settled 2329, one broad shape 2755, nothing 3000
+      settled into D/F/C → J → S  |  B → J → S/T  |  D/E/B → J → R  |  C → J → R/P  |  A → J → P/S/R  |  B/A/C → J → U  |  E → J → P/S/U  |  D/B/C → J → Q  |  F → J → R/U/Q  |  A/C/E → J → T  |  F/D → J → P  |  D → J → T/U  |  E/F → J → T/Q
+  paired (A→J→P, G→J→O)     1000 walks · 0.0 s · energy: settled 2246, one broad shape 2246, nothing 3000
+      settled into A/G → J → P/O

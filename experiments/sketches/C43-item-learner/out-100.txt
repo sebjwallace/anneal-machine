@@ -1,0 +1,35 @@
+
+HUB 2 starts × 2 ends (A→J→Q and B→J→P held out): 2 different episodes · 0.0 s · energy 192 (structure 16, flow 177)
+  holds 2 plain episodes, no kinds
+  A + Q (never happened)         nothing
+  A + P (happened)               A → J* → P
+  A + J (where next?)            A → J → P*
+  A alone                        nothing
+
+HUB 3 starts × 3 ends (A→J→Q and B→J→P held out): 7 different episodes · 0.0 s · energy 235 (structure 41, flow 195)
+  holds 6 plain episodes, no kinds
+  A + Q (never happened)         nothing
+  A + P (happened)               A → J* → P
+  A + J (where next?)            undecided (two fit equally)
+  A alone                        nothing
+
+HUB 4 starts × 4 ends (A→J→Q and B→J→P held out): 14 different episodes · 0.1 s · energy 267 (structure 40, flow 227)
+  holds 2 plain episodes and kind [J@2] slots @1: D/A, @3: S/P; [J@2 B@1] slots @3: Q/S/R
+  A + Q (never happened)         nothing
+  A + P (happened)               A → J* → P
+  A + J (where next?)            undecided (two fit equally)
+  A alone                        nothing
+
+HUB 6 starts × 6 ends (A→J→Q and B→J→P held out): 34 different episodes · 0.0 s · energy 288 (structure 17, flow 271)
+  holds 0 plain episodes and kind [J@2] slots @1: E/A/F, @3: S/R
+  A + Q (never happened)         nothing
+  A + P (happened)               nothing
+  A + J (where next?)            undecided (two fit equally)
+  A alone                        nothing
+
+PAIRED (A→J→P and G→J→O only): 2 different episodes · 0.0 s · energy 192 (structure 16, flow 177)
+  holds 2 plain episodes, no kinds
+  A + O (never happened)         nothing
+  A + P (happened)               A → J* → P
+  A + J (where next?)            A → J → P*
+  A alone                        nothing

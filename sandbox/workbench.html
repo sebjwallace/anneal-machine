@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anneal · Workbench</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="lib/sandkit/shell/sb-theme-settings.js"></script>
+  <script src="lib/sandkit/shell/sb-shell.js"></script>
+  <script src="lib/sandkit/shell/sb-export.js"></script>
+  <script src="lib/sandkit/shell/sb-highlighting.js"></script>
+  <script src="lib/sandkit/components/sb-comments/sb-comments.js"></script>
+  <script src="lib/sandkit/components/sb-notebook/sb-notebook.js"></script>
+  <script src="components/an-sequencer/an-sequencer.js"></script>
+
+  <script src="sandbox.js"></script>
+</head>
+<body>
+  <sb-shell>
+    <sb-theme-settings slot="settings"></sb-theme-settings>
+    <sb-export slot="actions"></sb-export>
+    <sb-comments slot="modes"></sb-comments>
+  </sb-shell>
+
+  <main>
+    <sb-notebook id="workbench" address heading="Workbench">
+      <section heading="Design a sequence of column activations" kind="idea" ref="WB-design">
+        <p>Set up your own grid of columns, then design what happens over time. Each step of the timeline says which columns are active: a whole column (all its cells), or just the cells you pick. <b>Hold</b> keeps a column on at every step. Drag to paint; the faint columns are the step before. Play it back, or step through with the arrow keys.</p>
+        <an-sequencer id="seq" rows="8" cols="8" cells="4"></an-sequencer>
+        <p class="muted small">This is a design pad: nothing runs on it yet. The design (and what's active at each step) is available to the page, ready for experiments such as transition memory to be wired in.</p>
+      </section>
+    </sb-notebook>
+  </main>
+</body>
+</html>

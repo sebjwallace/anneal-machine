@@ -1,0 +1,28 @@
+
+HUB (12 different walks, 1000 shown) · 2.0 s · 12 things (0 kinds), 12 memories
+  #0 layer 1: B@1 J@2 R@3
+  #1 layer 1: G@1 J@2 O@3
+  #2 layer 1: C@1 J@2 P@3
+  #3 layer 1: A@1 J@2 R@3
+  #4 layer 1: A@1 J@2 P@3
+  #5 layer 1: A@1 J@2 Q@3
+  #6 layer 1: B@1 J@2 P@3
+  #7 layer 1: C@1 J@2 O@3
+  #8 layer 1: G@1 J@2 Q@3
+  #9 layer 1: B@1 J@2 O@3
+  #10 layer 1: C@1 J@2 Q@3
+  #11 layer 1: G@1 J@2 R@3
+  A + P (happened)           A → J* → P   (1 placement)
+  A + O (never happened)     · → · → ·   (0 placements, 2 wrong)
+  B + Q (never happened)     · → · → ·   (0 placements, 2 wrong)
+  A + J (where next?)        A → J → R*   (1 placement)
+  A alone                    · → · → ·   (0 placements, 1 wrong)
+
+PAIRED (2 different walks, 1000 shown) · 0.4 s · 2 things (0 kinds), 2 memories
+  #0 layer 1: G@1 J@2 O@3
+  #1 layer 1: A@1 J@2 P@3
+  A + P (happened)           A → J* → P   (1 placement)
+  A + O (never happened)     · → · → ·   (0 placements, 2 wrong)
+  G + P (never happened)     · → · → ·   (0 placements, 2 wrong)
+  A + J (where next?)        A → J → P*   (1 placement)
+  A alone                    · → · → ·   (0 placements, 1 wrong)

@@ -1,0 +1,21 @@
+STAGE 1 · two walks sharing a junction: A → J → P and G → J → O
+  A and P (walked)                   A → J → P   (pushed 0 rounds; came back down through: walk 1) · states lit: 0
+  A and O (never walked)             A → J → O   (pushed 1 round; came back down through: walk 1, walk 2) · states lit: 4
+  G and P (never walked)             G → J → P   (pushed 1 round; came back down through: walk 2, walk 1) · states lit: 4
+  P and A (backwards: no walk goes that way) no way through (pushed 3 rounds, nothing met) · states lit: 8
+
+STAGE 2 · a longer park. Walks: A→B→C, C→D→E, C→K→E (two ways from C to E), E→F→G, G→H→O, plus side paths C→X→Y, E→Z→W, and Q→R→S off on its own
+ only the short walks in memory:
+  A and O                            undecided: two routes fit equally
+  A and E                            undecided: two routes fit equally
+  A and S (no way)                   no way through (pushed 5 rounds, nothing met) · states lit: 15
+ plus two longer walks actually walked in one go (A…E by D, and E…O):
+  A and O                            A → B → C → D → E → F → G → H → O   (pushed 1 round; came back down through: long walk A-E (by D), long walk E-O) · states lit: 8
+  A and E                            A → B → C → D → E   (pushed 0 rounds; came back down through: long walk A-E (by D)) · states lit: 0
+  A and S (no way)                   no way through (pushed 3 rounds, nothing met) · states lit: 15
+
+ the same park without the second way from C to E (no fork):
+ only the short walks:
+  A and O                            A → B → C → D → E → F → G → H → O   (pushed 2 rounds; came back down through: A-C, C-E by D, E-G, G-O) · states lit: 26
+ plus the two longer walks:
+  A and O                            A → B → C → D → E → F → G → H → O   (pushed 1 round; came back down through: long walk A-E, long walk E-O) · states lit: 8

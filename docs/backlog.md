@@ -64,3 +64,7 @@ Grouped by where they came up. Nothing here is started.
 
 ## Side branch (paused, owner: a curiosity, not the main course)
 - Imagination of squares and diamonds (C25 to C27): rules for situations, similarity. Paused. Findings in findings/C25 to C27.
+
+- **Flow window:** ideally every picture ever seen. Grow it or summarise older pictures (decision 008; ties into forgetting). This is what keeps one energy at 90% on the moving world: with every picture as the flow it predicts 100% (C32), at about 3× the time.
+- **A kind that nearly fits** (C32, experiment): a rest move that adds what's actually there as a new version. It works, but energy turns it down on every test world, so it isn't in the engine. Revisit with a world where it would pay.
+- **"Remember one thing" at rest** (C32, experiment): lowers the 12×12 bill (1,161) and removes completion's invented pixels, but damaged-picture completion gets slightly worse. Owner to decide if it's worth pursuing.

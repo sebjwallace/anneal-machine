@@ -1,7 +1,9 @@
-# 003 · The 90% threshold for remembering
+# 003 · When a picture is remembered (retired: now derived)
 
-**What:** a picture is stored as a new memory when more than 10% of it is left unexplained or wrong.
+**Was:** a picture was remembered as a new memory if more than 10% of it was left unexplained or wrong (the owner's 90% threshold, from C14).
 
-**Why:** the owner's rule, from experiment C14 (snapshot columns settle just under the number of patterns).
+**Now (C30):** a picture is remembered only if total energy is lower with it stored than with it left in the flow. This is the same test every rest move passes, so no number is left.
 
-**Open:** whether remembering could follow from energy alone, e.g. storing whenever a memory would lower the total. This ties in with forgetting (see backlog).
+**What it changed:** on the 12×12 world, 8 memories instead of 51, a bill of 1,172 instead of 1,191, and 12 things instead of 13 (every shape still found). Learning takes 9 s instead of 31 s. Under noise it stays lean, where 0.9 stored nearly every noisy picture.
+
+**What it depends on:** the flow window (decision 008). What counts as recurring is now judged against the recent pictures. `o.remember` can still be set to a number for comparison.

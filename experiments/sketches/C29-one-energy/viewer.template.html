@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C29 viewer · one energy</title>
+<style>
+:root{--bg:#fafaf7;--card:#fff;--ink:#1d1d1b;--muted:#6b6b66;--line:#e4e3dd;--accent:#2f6fde;--bad:#d2453b;--good:#2f9e5b}
+@media (prefers-color-scheme:dark){:root{--bg:#18181a;--card:#222225;--ink:#ececea;--muted:#9a9a95;--line:#34343a;--accent:#6b9cff;--bad:#ff6b5e;--good:#4cc27e}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:20px;margin:0 0 4px}h2{font-size:15px;margin:0 0 10px}h3{font-size:13px;margin:12px 0 6px;color:var(--muted);font-weight:600}
+p.lead{color:var(--muted);margin:0 0 16px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:820px){.cols{grid-template-columns:1fr}}
+button,select{font:inherit;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}button:disabled{opacity:.5;cursor:default}
+canvas{image-rendering:pixelated;border:1px solid var(--line);border-radius:4px;background:var(--bg);display:block}
+.pic{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;color:var(--muted)}
+.pic.now canvas{outline:2px solid var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.stat{border:1px solid var(--line);border-radius:6px;padding:6px 8px}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--muted)}
+.bar{display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--line);margin:4px 0}
+.bar div{height:100%}.legend{font-size:12px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.things{display:flex;flex-wrap:wrap;gap:8px}
+.thing{border:1px solid var(--line);border-radius:8px;padding:6px;display:flex;flex-direction:column;gap:4px;font-size:12px;min-width:84px}
+.thing.kind{border-color:var(--accent);border-width:2px}
+.thing .t{display:flex;gap:6px;align-items:center}.thing .fl{display:flex;gap:3px;flex-wrap:wrap}
+.sw{width:10px;height:10px;border-radius:2px;display:inline-block}
+.log{max-height:170px;overflow:auto;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:6px}
+.log div{padding:1px 0}.log b{color:var(--ink);font-weight:500}
+.status{font-size:12px;color:var(--muted)}
+table{border-collapse:collapse;font-size:13px}td,th{padding:4px 10px;border-bottom:1px solid var(--line);text-align:left}
+.tag{font-size:11px;padding:1px 6px;border-radius:10px;background:var(--line);color:var(--muted)}.tag.held{background:var(--bad);color:#fff}
+.score{font-weight:600}
+</style></head><body><main>
+<h1>One energy: seeing and change in one bill</h1>
+<p class="lead">Two learners watch the same short sequences of moving objects. Each object is a <b>base</b> (table moves right, frame moves down, cart moves left) with a <b>top</b> on it (cap, peak, dots, hook). Two pairs are never shown while learning: <b>frame + dots</b> and <b>cart + peak</b>.
+The <b>plain engine</b> pays only for seeing. <b>One energy</b> also pays for remembering how things change, so a kind (one base, several tops) that lets one change cover every version becomes worth keeping. The learners run in your browser.</p>
+
+<div class="card"><div class="row" style="align-items:center;justify-content:space-between">
+  <div class="row" style="align-items:center;gap:8px"><button id="play" class="primary">Start learning</button><button id="step">One picture</button>
+  <label>Speed <select id="speed"><option value="1">slow</option><option value="3" selected>normal</option><option value="12">fast</option><option value="1000">as fast as possible</option></select></label></div>
+  <div class="status" id="status"></div></div>
+  <h3>What they are watching now</h3><div class="row" id="strip"></div><div class="status" id="stripnames"></div>
+</div>
+
+<div class="cols" id="models"></div>
+
+<div class="card"><h2>Test: what happens next?</h2>
+<p class="lead" style="margin-bottom:10px">Pick an object and a fresh sequence is made. Each learner explains the picture with what it knows (colours = which thing it saw), then predicts the next picture by moving every thing the way it usually moves.</p>
+<div class="row" style="align-items:center;gap:8px"><label>Object <select id="variant"></select></label><button id="newseq">New sequence</button>
+<label>Picture <input type="range" id="tpos" min="0" max="4" value="0"></label><span class="status" id="tposl"></span>
+<button id="scoreall">Score every object</button></div>
+<div id="test" style="margin-top:12px"></div><div id="scores" style="margin-top:12px"></div>
+</div>
+<!--LIBS-->
+<script>
+'use strict';
+const W = 16, SPX = W * W, EPISODES = 100, REST_EVERY = 98, Wd = LIB.world, rng = LIB.catalogue.rng;
+const PAL = ['#2f6fde', '#e08a1e', '#2f9e5b', '#b04fd1', '#d2453b', '#1aa3a3', '#c9a400', '#7b5c3e', '#e05fa3', '#5b6bd8', '#6aa81e', '#8f8f8f', '#00838f', '#a0522d'];
+const PLAIN = { type: 'moves', compose: 'grouped a recurring arrangement into one thing', decompose: 'split two parts where they overlap', split: 'split two parts where they overlap', dissolve: 'folded a group back into its users',
+  fuse: 'fused a group into one plain part', unpack: 'unpacked a part back into loose pixels', redescribe: 're-described memories with what is known now', relook: 're-described memories with what is known now',
+  kind: 'made a kind: same base, different tops', makekind: 'made a kind: same base, different tops', 'make-kind': 'made a kind: same base, different tops', widen: 'added another top to a kind', share: 'two kinds now share one list of tops', unkind: 'undid a kind' };
+const plain = (t) => PLAIN[t] || PLAIN[String(t).toLowerCase().replace(/\s/g, '')] || t;
+const head = (u) => (u.virtual ? u.K : u);
+
+// ---------- the learners
+const mk = (name, lib, note) => ({ name, note, lib, m: new lib.Model(), pairs: [], seen: 0, resting: false, log: [], R: new Map(), E: null, colours: new Map(), next: 0, done: false });
+const models = [mk('Plain engine', LIB.engine, 'pays only for seeing'), mk('One energy', LIB.c29, 'pays for seeing and for remembering changes')];
+// the learning stream: the same sequences for both (as in run.js), picture by picture
+const r = rng(1), stream = []; for (let e = 0; e < EPISODES; e++) { const ep = Wd.episode(r, W); ep.pics.forEach((x, i) => stream.push({ x, prev: i ? ep.pics[i - 1] : null, ep, i })); }
+const colourOf = (M, u) => { const h = head(u); if (!M.colours.has(h)) M.colours.set(h, PAL[M.colours.size % PAL.length]); return M.colours.get(h); };
+function rules(M) { const m = M.m, out = new Map(), cache = new Map(), rd = (x) => { if (!cache.has(x)) cache.set(x, m.read(x).claims); return cache.get(x); };
+  for (const [a, b] of M.pairs) { const A = rd(a), B = rd(b), all = [], ua = new Set(), ub = new Set();
+    A.forEach((p, i) => B.forEach((q, j) => { if (head(p.c) === head(q.c)) all.push([Math.abs(p.dx - q.dx) + Math.abs(p.dy - q.dy), i, j]); }));
+    all.sort((x, y) => x[0] - y[0]); for (const [, i, j] of all) { if (ua.has(i) || ub.has(j)) continue; ua.add(i); ub.add(j); const h = head(A[i].c), k = (B[j].dx - A[i].dx) + ',' + (B[j].dy - A[i].dy);
+      if (!out.has(h)) out.set(h, new Map()); out.get(h).set(k, (out.get(h).get(k) || 0) + 1); } }
+  return out; }
+const usual = (R, h) => { const r = R.get(h); if (!r) return null; let best = null, n = -1, tot = 0; for (const [k, c] of r) { tot += c; if (c > n) { n = c; best = k; } } const [dx, dy] = best.split(',').map(Number); return { dx, dy, n, tot, kinds: r.size }; };
+function predict(M, x) { const m = M.m, q = m.read(x), out = new Uint8Array(SPX);
+  for (const c of q.claims) { const u = usual(M.R, head(c.c)), dx = u ? u.dx : 0, dy = u ? u.dy : 0;
+    for (const [ux, uy] of m.exp(c.c)) { const a = ux + c.dx + dx, b = uy + c.dy + dy; if (a >= 0 && b >= 0 && a < W && b < W) out[b * W + a] = 1; } }
+  return { out, claims: q.claims }; }
+const changesCount = (R) => [...R.values()].reduce((a, mm) => a + mm.size, 0);
+
+function stepModel(M) {   // one picture, or one move of rest
+  const m = M.m;
+  if (M.resting) { const a = m.restStep(); if (a) { M.log.unshift({ at: M.seen, text: plain(a.type), saving: a.saving }); return; }
+    M.resting = false; M.R = rules(M); if (M.next >= stream.length) M.done = true; return; }
+  if (M.next >= stream.length) { M.resting = true; return; }
+  const s = stream[M.next++]; m.step(s.x, s.prev); if (s.prev) M.pairs.push([s.prev, s.x]); M.seen++;
+  if (M.seen % 10 === 0 || M.seen % REST_EVERY === 0) M.E = m.measure();
+  if (M.seen % REST_EVERY === 0) { M.resting = true; M.log.unshift({ at: M.seen, text: 'starts to rest', rest: true }); }
+  else if (M.next >= stream.length) { M.E = m.measure(); M.resting = true; M.log.unshift({ at: M.seen, text: 'last rest', rest: true }); }
+}
+
+// ---------- drawing
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function canvas(px = 8, n = W) { const c = document.createElement('canvas'); c.width = c.height = n; c.style.width = c.style.height = n * px + 'px'; return c; }
+function paint(c, cells, n = W) { const g = c.getContext('2d'); g.clearRect(0, 0, n, n); cells.forEach((col, i) => { if (!col) return; g.fillStyle = col; g.fillRect(i % n, Math.floor(i / n), 1, 1); }); return c; }
+const ink = () => css('--ink');
+function picCells(x, col = ink()) { return Array.from(x, (v) => (v ? col : null)); }
+function shapeCanvas(pts, col, px = 6) { let mx = 1e9, my = 1e9, Mx = -1e9, My = -1e9; for (const [x, y] of pts) { mx = Math.min(mx, x); my = Math.min(my, y); Mx = Math.max(Mx, x); My = Math.max(My, y); }
+  const n = Math.max(Mx - mx + 1, My - my + 1, 3), cells = new Array(n * n).fill(null); for (const [x, y] of pts) cells[(y - my) * n + (x - mx)] = col; return paint(canvas(px, n), cells, n); }
+function labelled(c, text, cls = '') { const d = document.createElement('div'); d.className = 'pic ' + cls; d.append(c); const s = document.createElement('div'); s.textContent = text; d.append(s); return d; }
+function explained(M, x, claims) { const cells = new Array(SPX).fill(null), cov = new Set();
+  for (const c of claims) { const col = colourOf(M, c.c); for (const [ux, uy] of M.m.exp(c.c)) { const a = ux + c.dx, b = uy + c.dy; if (a < 0 || b < 0 || a >= W || b >= W) continue; const i = b * W + a; if (x[i]) { cells[i] = col; cov.add(i); } } }
+  for (let i = 0; i < SPX; i++) if (x[i] && !cov.has(i)) cells[i] = css('--bad'); return cells; }
+const ARROW = { '1,0': '→', '-1,0': '←', '0,1': '↓', '0,-1': '↑', '0,0': 'stays' };
+
+// ---------- the panels
+const box = document.getElementById('models');
+models.forEach((M) => { M.el = document.createElement('div'); M.el.className = 'card'; box.append(M.el); });
+function renderModel(M) { const m = M.m, live = m.units.filter((u) => !u.loose), kinds = live.filter((u) => u.kind), E = M.E;
+  const used = new Set(); for (const u of live) for (const k of (u.place || [])) used.add(head(k.u)); for (const K of kinds) for (const f of K.slot.set.fillers) used.add(f.u);
+  const wholes = live.filter((u) => u.kind || !used.has(u)), parts = live.filter((u) => !u.kind && used.has(u));
+  const st = (v, l) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`;
+  let h = `<h2>${M.name} <span class="status">· ${M.note}</span></h2><div class="stats">${st(M.seen, 'pictures seen')}${st(live.length, 'things stored')}${st(kinds.length, 'kinds')}${st(changesCount(M.R), 'different changes')}</div>`;
+  if (E) { const tot = E.structure + E.flow + (E.change || 0), pct = (v) => (100 * v / tot).toFixed(1) + '%';
+    h += `<div class="status">Energy (the bill since the last rest): <b style="color:var(--ink)">${tot.toFixed(0)}</b>${M.resting ? ' · resting: trying changes, keeping only those that lower the bill' : ''}</div>
+    <div class="bar"><div style="width:${pct(E.structure)};background:#2f6fde"></div><div style="width:${pct(E.flow)};background:#e08a1e"></div><div style="width:${pct(E.change || 0)};background:#2f9e5b"></div></div>
+    <div class="legend"><span><i style="background:#2f6fde"></i>what is stored ${E.structure.toFixed(0)}</span><span><i style="background:#e08a1e"></i>describing recent pictures ${E.flow.toFixed(0)}</span>${E.change !== undefined ? `<span><i style="background:#2f9e5b"></i>describing recent changes ${E.change.toFixed(0)}</span>` : '<span>changes: not counted</span>'}</div>`; }
+  M.el.innerHTML = h;
+  const sec = (title) => { const t = document.createElement('h3'); t.textContent = title; M.el.append(t); const d = document.createElement('div'); d.className = 'things'; M.el.append(d); return d; };
+  const w = sec('Whole things it recognises, and how each usually moves');
+  for (const u of wholes) { const col = colourOf(M, u), card = document.createElement('div'); card.className = 'thing' + (u.kind ? ' kind' : '');
+    const us = usual(M.R, u), mv = us ? `${ARROW[us.dx + ',' + us.dy] || `${us.dx},${us.dy}`} <span class="status">(${us.n}×${us.kinds > 1 ? `, ${us.kinds} different` : ''})</span>` : '<span class="status">no change yet</span>';
+    const t = document.createElement('div'); t.className = 't'; t.innerHTML = `<span class="sw" style="background:${col}"></span>${u.kind ? `<b>kind</b>` : 'thing'} · ${mv}`; card.append(t);
+    if (u.kind) { const fl = document.createElement('div'); fl.className = 'fl'; for (const f of u.slot.set.fillers) fl.append(shapeCanvas(m.exp(m.inst(u, f)), col, 4)); card.append(fl);
+      const s = document.createElement('div'); s.className = 'status'; s.textContent = `${u.slot.set.fillers.length} versions, one change`; card.append(s); }
+    else card.append(shapeCanvas(m.exp(u), col, 4));
+    w.append(card); }
+  if (parts.length) { const p = sec('Parts they are built from'); for (const u of parts) p.append(shapeCanvas(m.exp(u), css('--muted'), 4)); }
+  const lg = document.createElement('div'); lg.className = 'log'; lg.innerHTML = '<b>Rest log</b> (changes it kept, newest first)' + (M.log.length ? '' : '<div>nothing yet</div>') +
+    M.log.slice(0, 80).map((l) => `<div>${l.rest ? `— after picture ${l.at}: ${l.text}` : `• ${l.text}${l.saving !== undefined ? ` <span>(bill −${l.saving})</span>` : ''}`}</div>`).join(''); M.el.append(lg); }
+
+function renderStrip() { const s = document.getElementById('strip'); s.innerHTML = ''; const M = models[1], cur = stream[Math.min(Math.max(M.next - 1, 0), stream.length - 1)];
+  cur.ep.pics.forEach((x, i) => s.append(labelled(paint(canvas(6), picCells(x)), String(i + 1), i === cur.i ? 'now' : '')));
+  document.getElementById('stripnames').textContent = 'Objects in this sequence: ' + cur.ep.names.map((n) => n.replace('+', ' + ')).join(', '); }
+function status() { const a = models.map((M) => M.done ? `${M.name}: finished` : `${M.name}: ${M.resting ? 'resting' : 'watching'}`).join(' · ');
+  document.getElementById('status').textContent = `${Math.min(models[1].next, stream.length)} / ${stream.length} pictures · ${a}`; }
+function renderAll() { models.forEach(renderModel); renderStrip(); status(); }
+
+// ---------- running
+let playing = false, timer = null;
+const playBtn = document.getElementById('play');
+function tick() { if (!playing) return; const n = +document.getElementById('speed').value, t0 = performance.now();
+  for (let k = 0; k < n && performance.now() - t0 < 60; k++) models.forEach((M) => { if (!M.done) stepModel(M); });
+  renderAll(); if (models.every((M) => M.done)) { playing = false; playBtn.textContent = 'Finished'; playBtn.disabled = true; renderTest(); return; }
+  timer = setTimeout(tick, n >= 12 ? 0 : 120); }
+playBtn.onclick = () => { playing = !playing; playBtn.textContent = playing ? 'Pause' : 'Continue'; if (playing) tick(); };
+document.getElementById('step').onclick = () => { models.forEach((M) => { if (M.done) return; do stepModel(M); while (M.resting && !M.done); }); renderAll(); renderTest(); };
+
+// ---------- the test bench
+const vSel = document.getElementById('variant'), held = new Set(Wd.HELD.map(([b, f]) => b + '+' + f));
+for (const b of Object.keys(Wd.BASES)) for (const f of Wd.FILLERS) { const o = document.createElement('option'); o.value = b + '+' + f; o.textContent = `${b} + ${f}${held.has(b + '+' + f) ? '  (never seen)' : ''}`; vSel.append(o); }
+let tseq = null, tseed = 100;
+function newSeq() { const [b, f] = vSel.value.split('+'); tseq = Wd.episode(rng(tseed++), W, 5, [[b, f]]); renderTest(); }
+function overlap(p, t) { let i = 0, u = 0; for (let k = 0; k < p.length; k++) { if (p[k] && t[k]) i++; if (p[k] || t[k]) u++; } return u ? i / u : 1; }
+function renderTest() { const box = document.getElementById('test'); if (!tseq) newSeq(); const i = +document.getElementById('tpos').value, x = tseq.pics[i], y = tseq.pics[i + 1];
+  document.getElementById('tposl').textContent = `${i + 1} → ${i + 2}`; box.innerHTML = '';
+  for (const M of models) { const row = document.createElement('div'); row.className = 'row'; row.style.marginBottom = '10px'; row.style.alignItems = 'center';
+    const { out, claims } = predict(M, x), ov = overlap(out, y), exact = out.every((v, k) => v === y[k]);
+    const diff = Array.from(out, (v, k) => (v && y[k] ? css('--good') : v ? css('--bad') : y[k] ? css('--muted') : null));
+    const name = document.createElement('div'); name.style.width = '120px'; name.innerHTML = `<b>${M.name}</b><div class="status">${M.seen ? '' : 'has not learnt yet'}</div>`; row.append(name);
+    row.append(labelled(paint(canvas(7), explained(M, x, claims)), 'how it sees it'), labelled(paint(canvas(7), picCells(out, css('--accent'))), 'its guess'),
+      labelled(paint(canvas(7), picCells(y)), 'what happened'), labelled(paint(canvas(7), diff), 'right / wrong / missed'));
+    const sc = document.createElement('div'); sc.innerHTML = `<div class="score" style="color:${exact ? 'var(--good)' : 'var(--ink)'}">${exact ? 'exact' : Math.round(100 * ov) + '% overlap'}</div>`; row.append(sc); box.append(row); }
+  const lg = document.createElement('div'); lg.className = 'legend'; lg.innerHTML = '<span>In "how it sees it", each colour is one thing it recognised (same colours as its panel); <span style="color:var(--bad)">red</span> = pixels it could not explain. In the last picture: <span style="color:var(--good)">green</span> right, <span style="color:var(--bad)">red</span> guessed wrongly, grey missed.</span>'; box.append(lg); }
+vSel.onchange = newSeq; document.getElementById('newseq').onclick = newSeq; document.getElementById('tpos').oninput = renderTest;
+document.getElementById('scoreall').onclick = () => { const out = document.getElementById('scores'); out.textContent = 'Scoring…'; setTimeout(() => {
+  const combos = []; for (const b of Object.keys(Wd.BASES)) for (const f of Wd.FILLERS) combos.push([b, f]);
+  let h = '<table><tr><th>object</th>' + models.map((M) => `<th>${M.name}</th>`).join('') + '</tr>';
+  for (const [b, f] of combos) { h += `<tr><td>${b} + ${f} ${held.has(b + '+' + f) ? '<span class="tag held">never seen</span>' : ''}</td>`;
+    for (const M of models) { const g = rng(7); let ok = 0, all = 0, ov = 0; for (let k = 0; k < 6; k++) { const ep = Wd.episode(g, W, 5, [[b, f]]); for (let i = 1; i < ep.pics.length - 1; i++) { all++; const p = predict(M, ep.pics[i]).out; if (p.every((v, j) => v === ep.pics[i + 1][j])) ok++; ov += overlap(p, ep.pics[i + 1]); } }
+      h += `<td>${Math.round(100 * ok / all)}% exact · ${Math.round(100 * ov / all)}% overlap</td>`; }
+    h += '</tr>'; }
+  out.innerHTML = h + '</table><div class="status" style="margin-top:6px">Six fresh sequences per object, 24 guesses each.</div>'; }, 30); };
+
+renderAll(); newSeq();
+</script></main></body></html>

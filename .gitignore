@@ -1,3 +1,4 @@
 node_modules/
 .DS_Store
 *.cpuprofile
+experiments/sketches/*/viewer.html

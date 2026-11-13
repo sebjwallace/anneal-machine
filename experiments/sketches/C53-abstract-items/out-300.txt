@@ -1,0 +1,38 @@
+
+HUB 4 X 4 (14 different walks, 300 shown) · 1.2 s · 9 items, 8 assemblies, 3 with slots
+  assembly: A J P
+  assembly: A J R
+  assembly: B J P
+  assembly: B J R
+  assembly: B J O
+  assembly: B J
+  assembly: A J Q
+  assembly: G J Q
+  with 1 slot: G → J → R/P/O
+  with 1 slot: C → J → R/P/O
+  with 1 slot: C → J → P/Q
+  A + P (happened)           reading: A → J* → P       completion: A → J* → P
+  A + O (never happened)     reading: · → · → ·        completion: nothing
+  B + Q (never happened)     reading: · → · → ·        completion: nothing
+  A + J (where next?)        reading: A → J → P*       completion: undecided
+  A alone                    reading: · → · → ·        completion: nothing
+
+HUB 6 X 6 (34 different walks, 300 shown) · 1.5 s · 13 items, 0 assemblies, 4 with slots
+  with 1 slot: E/D/G/B/C → J → O
+  with 1 slot: A → J → R/S/T/P/Q
+  with 2 slots: E/D/G/B/C → J → R/S/T/P/Q
+  with 1 slot: C → J → R/S/T/P/Q
+  A + P (happened)           reading: A → J* → P       completion: A → J* → P
+  A + O (never happened)     reading: · → · → ·        completion: nothing
+  B + Q (never happened)     reading: · → · → ·        completion: B → J* → Q
+  A + J (where next?)        reading: A → J → R*       completion: undecided
+  A alone                    reading: · → · → ·        completion: nothing
+
+PAIRED (2 different walks, 300 shown) · 0.2 s · 5 items, 2 assemblies, 0 with slots
+  assembly: G J O
+  assembly: A J P
+  A + P (happened)           reading: A → J* → P       completion: A → J* → P
+  A + O (never happened)     reading: · → · → ·        completion: nothing
+  G + P (never happened)     reading: · → · → ·        completion: nothing
+  A + J (where next?)        reading: A → J → P*       completion: A → J → P*
+  A alone                    reading: · → · → ·        completion: nothing

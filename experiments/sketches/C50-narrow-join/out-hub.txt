@@ -1,0 +1,6 @@
+
+HUB PARK (13 places) · store of days holds 50 walks
+  days | general memory | joined walks, checked against the store of experiences
+   100 |  1 assemblies with slots | real new walks: 0 trusted, 0 doubted · made-up: 0 caught, 0 missed · held back: A to Q: nothing · B to P: nothing
+   300 |  2 assemblies with slots | real new walks: 1 trusted, 0 doubted · made-up: 0 caught, 0 missed · held back: A to Q: nothing · B to P: B → J → P (trusted)
+  1000 |  5 assemblies with slots | real new walks: 2 trusted, 0 doubted · made-up: 0 caught, 0 missed · held back: A to Q: A → J → Q (trusted) · B to P: B → J → P (trusted)

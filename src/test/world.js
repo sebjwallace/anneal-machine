@@ -5,6 +5,7 @@ const { CATALOGUE, rng } = require(path.join(__dirname, '../worlds/catalogue.js'
 const { Model } = require(path.join(__dirname, '../engine/see.js'));
 const { SceneWorld } = require(path.join(__dirname, '../worlds/scenes.js'));
 const FILE = path.join(__dirname, 'cache', 'world12-4242.json');
+// (the cache holds plain units only: this world forms no kinds; if it ever does, extend the format)
 function learn() { const W = new SceneWorld(CATALOGUE), r = rng(4242), m = new Model('FL', {}); for (let t = 1; t <= 600; t++) { m.step(W.next(r, 0).x); if (t % 98 === 0) m.rest(); } m.rest();
   const live = m.units.filter((u) => !u.loose); fs.writeFileSync(FILE, JSON.stringify(live.map((u) => ({ id: u.id, layer: u.layer, pts: u.pts || null, place: u.place ? u.place.map((k) => ({ u: k.u.id, dx: k.dx, dy: k.dy })) : null })))); }
 function load() { if (!fs.existsSync(FILE)) learn(); const m = new Model('FL', {}), saved = JSON.parse(fs.readFileSync(FILE, 'utf8')), by = new Map();

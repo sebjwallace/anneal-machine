@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anneal · 2 · Columns and assemblies</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="lib/sandkit/shell/sb-theme-settings.js"></script>
+  <script src="lib/sandkit/shell/sb-shell.js"></script>
+  <script src="lib/sandkit/shell/sb-export.js"></script>
+  <script src="lib/sandkit/shell/sb-highlighting.js"></script>
+  <script src="lib/sandkit/components/sb-comments/sb-comments.js"></script>
+  <script src="lib/sandkit/components/sb-notebook/sb-notebook.js"></script>
+  <script src="lib/sandkit/components/sb-callout/sb-callout.js"></script>
+
+  <!-- The engine's cells and completion code, straight from the repo (never copied), and a world of plain symbols. -->
+  <script src="../src/engine/complete.js"></script>
+  <script src="../src/engine/cells.js"></script>
+  <script src="symbols.js"></script>
+  <script src="components/an-columns/an-columns.js"></script>
+  <script src="components/an-assembly/an-assembly.js"></script>
+  <script src="data/assemblies.js"></script>
+
+  <script src="sandbox.js"></script>
+</head>
+<body>
+  <sb-shell>
+    <sb-theme-settings slot="settings"></sb-theme-settings>
+    <sb-export slot="actions"></sb-export>
+    <sb-comments slot="modes"></sb-comments>
+  </sb-shell>
+
+  <main>
+    <sb-notebook id="columns" address heading="2 · Columns and assemblies">
+
+      <!-- 1 ─────────────────────────────────────────────────────────── -->
+      <section heading="The smallest pieces" kind="idea" ref="COL-pieces">
+        <p>Start with the smallest pieces the machine knows: its <b>primitives</b>. In pictures they're small strokes and shapes, but nothing here depends on that. A primitive could be a note, a word or a step: anything that can be somewhere. Here they're plain symbols:</p>
+        <div class="tokens" id="tokens"></div>
+        <p>Each primitive gets one <b>column</b>. Columns are only ever made for primitives. Everything bigger is built from them, as we'll see, so the number of columns stays small however much the machine learns.</p>
+        <sb-callout kind="definition" heading="Primitive">
+          <p>A piece that isn't made of other pieces. At rest the machine finds these by comparison: what two things share becomes a piece of its own (chapter 1).</p>
+        </sb-callout>
+        <sb-callout kind="definition" heading="Column">
+          <p>One per primitive: everything the machine holds about that piece, as cells.</p>
+        </sb-callout>
+      </section>
+
+      <!-- 2 ─────────────────────────────────────────────────────────── -->
+      <section heading="A column is a stack of grids (floors)" kind="idea" relevance="key" ref="COL-floors">
+        <p>Picture a column as a tower of flat grids stacked on top of each other. Each grid is a <b>floor</b>. Every floor is the same: a grid of <b>cells</b>, where each cell is a position, an offset from the grid's middle. A lit cell means "this piece, at this offset".</p>
+        <div class="pair">
+          <div class="view"><an-columns id="f-col" radius="3" style="--an-s:20px; --an-h:300px"></an-columns><p class="muted small">One column, for piece A. The outlined cell on each floor is its middle.</p></div>
+          <div class="view">
+            <p>The floors differ only in <b>what the offset is measured from</b>:</p>
+            <ul>
+              <li><span class="point" tabindex="0" data-points-at="floor-0"><b>Floor 0, the bottom</b></span>: where this piece is, measured from the <b>centre of attention</b>.</li>
+              <li><span class="point" tabindex="0" data-points-at="floor-1"><b>Floor 1</b></span>: where this piece sits <b>inside a thing</b> made of pieces, measured from that thing's own centre.</li>
+              <li><span class="point" tabindex="0" data-points-at="floor-2"><b>Floor 2</b></span>: where this piece sits <b>inside a thing made of things</b>, measured from that bigger thing's centre.</li>
+              <li>…and one floor more for each level up.</li>
+            </ul>
+            <p>The next sections meet the floors one at a time: floor 0 first, then floor 1, then floor 2.</p>
+            <p class="try"><strong>Try:</strong> Point at a dotted phrase to light that floor. Drag the column to turn it, and use the settings under it.</p>
+          </div>
+        </div>
+        <sb-callout kind="definition" heading="Floor">
+          <p>One layer of a column: a grid of positions. Floor 0 holds where things are; each floor above holds a piece's place inside a thing of the next level up.</p>
+        </sb-callout>
+      </section>
+
+      <!-- 3 ─────────────────────────────────────────────────────────── -->
+      <section heading="Floor 0: where things are" kind="try" relevance="key" ref="COL-cells">
+        <p>Start with the bottom floor. Floor 0 says <b>where</b> pieces are, measured from the <b>centre of attention</b> (marked +). Put an A on the field and one cell lights on floor 0 of A's column, at the same offset from the middle.</p>
+        <p>So position needs no extra machinery: <em>where</em> something is, is simply <em>which cell</em> is lit. Two of the same piece are two lit cells in the same column.</p>
+        <div class="pair">
+          <div class="view"><h4>The field (click to place or remove)</h4><div class="pick" id="w-pick"></div><div id="w-field"></div></div>
+          <div class="view"><h4>The columns, floor 0: where</h4><div id="w-cols"></div></div>
+        </div>
+        <p class="try"><strong>Try:</strong> Place an A, then another A elsewhere: two cells in A's column. Move one and watch its cell move. Each column only ever lights its own piece.</p>
+      </section>
+
+      <!-- 4 ─────────────────────────────────────────────────────────── -->
+      <section heading="Floor 1: things made of pieces" kind="try" ref="COL-things">
+        <p>A <b>thing</b> is a few pieces in a fixed arrangement. It doesn't get a column. It lights cells on a higher floor of its pieces' columns, floor 1, each at the piece's offset from <b>the thing's own centre</b>.</p>
+        <p>This splits <b>what</b> from <b>where</b>. Floor 0 changes as the thing moves; floor 1 doesn't. The same thing anywhere lights the same floor-1 cells.</p>
+        <div class="buttons" id="t-pick"></div>
+        <div class="buttons"><button data-move="-1,0">← left</button><button data-move="1,0">right →</button><button data-move="0,-1">↑ up</button><button data-move="0,1">↓ down</button></div>
+        <div class="pair">
+          <div class="view"><h4>The field</h4><div id="t-field"></div></div>
+          <div class="view"><h4>Its pieces' columns</h4><div id="t-cols"></div></div>
+        </div>
+        <p class="try"><strong>Try:</strong> Pick the hat and move it about. Floor 0 (where) follows it; floor 1 (what it is) stays exactly the same.</p>
+      </section>
+
+      <!-- 5 ─────────────────────────────────────────────────────────── -->
+      <section heading="An assembly: the smallest cue that brings it back" kind="idea" relevance="key" ref="COL-assembly">
+        <p>A thing doesn't need to keep all of its cells. Its <b>assembly</b> is the <b>smallest set of its cells from which completion (section 6) brings the whole thing back</b>. Nobody sets how big an assembly is; it depends on what else the machine knows.</p>
+        <p>The machine tries the smallest sets first, one cell, then two, and keeps the first set that rebuilds the thing exactly and nothing else:</p>
+        <div id="a-table"></div>
+        <p>Why not A and B for the hat? A and B in that arrangement also fit the cup and the arch equally well. When the evidence fits two things equally, completion takes neither. So the hat's assembly needs the piece only the hat has. An assembly keeps what's <b>distinctive</b>.</p>
+        <sb-callout kind="definition" heading="Assembly">
+          <p>A thing held as a few cells across its pieces' columns: the fewest from which completion rebuilds the whole.</p>
+        </sb-callout>
+      </section>
+
+      <!-- 6 ─────────────────────────────────────────────────────────── -->
+      <section heading="Completion: the whole from a part" kind="try" relevance="key" ref="COL-complete">
+        <p>Give the machine a few cells and it brings back what they belong to:</p>
+        <ol>
+          <li>Each lit cell votes for every thing it could be part of, centred wherever that would put it.</li>
+          <li>A thing is accepted only if it describes <b>two or more</b> of the cells as one. Describing them with one placement is cheaper than describing them one by one (the same rule as in chapter 1).</li>
+          <li>The biggest saving goes first. On a tie, the thing that claims least it hasn't seen goes first. If the evidence fits two things equally, <b>neither</b> is taken.</li>
+          <li>The missing cells are filled in, and it repeats until nothing more saves (it <b>settles</b>).</li>
+        </ol>
+        <div class="buttons"><span class="muted">Start from:</span><button data-cue="AC">A and C</button><button data-cue="AB">A and B</button><button data-cue="A">A alone</button><button data-cue="CD">C and D</button><button data-cue="clear">nothing</button></div>
+        <div class="pair">
+          <div class="view"><h4>The cue (click to place or remove)</h4><div class="pick" id="c-pick"></div><div id="c-field"></div></div>
+          <div class="view"><h4>After completion</h4><div id="c-out"></div><p class="sum" id="c-sum"></p></div>
+        </div>
+        <p class="try"><strong>Try:</strong> A and C: the hat comes back, and B is filled in. A and B: nothing comes back, because three things fit equally and it won't guess. A alone: one cell can't save anything. Then try C and D.</p>
+      </section>
+
+      <!-- 7 ─────────────────────────────────────────────────────────── -->
+      <section heading="Floor 2: things made of things" kind="idea" ref="COL-climb">
+        <p>Things can be made of things. The <b>lamp</b> is a hat above a cup. It's one level higher, so it lights cells one floor higher, floor 2, in the same primitive columns: still no new columns. A scene would be another level again.</p>
+        <div class="pair">
+          <div class="view"><h4>The lamp</h4><div id="l-field"></div></div>
+          <div class="view"><h4>Its pieces' columns, three floors</h4><div id="l-cols"></div></div>
+        </div>
+        <p>Here are the lamp's columns in 3D. In A's column, on floor 1 are <span class="point" tabindex="0" data-points-at="lamp-hat-A">the hat's A</span> and <span class="point" tabindex="0" data-points-at="lamp-cup-A">the cup's A</span>, each measured from its own thing's centre. On floor 2 are the lamp's two As, measured from the lamp's centre, and on floor 0 is <span class="point" tabindex="0" data-points-at="lamp-where">where they are</span>.</p>
+        <an-columns id="l-col" radius="3"></an-columns>
+        <p class="muted small">Solid lines go up a column (the same piece, floor to floor); dashed lines join a thing's cells across columns. Dashed cubes on floor 2 are the lamp's cells outside its assembly, the ones completion fills in. Click a cube to keep only it and its neighbours; the cube in the corner snaps to a side.</p>
+        <p>Its assembly is just <span class="point" tabindex="0" data-points-at="lamp-assembly"><b>two As, one above the other</b></span>. No single piece of the lamp is distinctive, since every piece also belongs to the hat, the cup or the arch. But that arrangement belongs to the lamp alone. And from C and D (section 6), completion brings back the whole lamp: six cells from two, one from each half.</p>
+        <p class="muted">This is the seed of the "episodic memory" idea: a few distinctive cells, spread across the levels of a scene, bringing the whole scene back.</p>
+      </section>
+
+      <!-- 8 ─────────────────────────────────────────────────────────── -->
+      <section heading="Looking inside a thing" kind="idea" ref="COL-inside">
+        <p>Three things the engine learnt from pictures, each seen two ways at once: its cells in its pieces' columns, and the picture it stands for. Pick a thing, and point at a part in either view: it lights in both. Use <b>Focus</b> to look at a thing inside it (the corner inside "corner + bar", the block inside the twins). <b>Offsets</b> draws each piece's offset from the centre of the thing in focus; <b>Kept or filled in</b> shows which cells the assembly keeps and which completion fills in; <b>Play completion</b> shows it happening.</p>
+        <an-assembly id="asm"></an-assembly>
+        <p class="muted small">A snapshot of what the engine learnt (data/assemblies.js), not live yet.</p>
+      </section>
+
+      <!-- 9 ─────────────────────────────────────────────────────────── -->
+      <section heading="So far" kind="summary" ref="COL-summary">
+        <ul>
+          <li><b>Columns only for primitives</b>, so there are few of them, whatever is learnt.</li>
+          <li><b>Cells are positions.</b> Floor 0 is where; each higher floor is a piece's place inside a thing of that level.</li>
+          <li><b>What and where are separate:</b> the same thing anywhere lights the same higher-floor cells.</li>
+          <li><b>An assembly is the smallest cue that completion turns back into the whole thing,</b> so it keeps what's distinctive, and its size depends on what else is known.</li>
+          <li><b>Completion</b> uses the same rule as everything else (describing several things as one saves), and refuses to guess when the evidence can't decide.</li>
+        </ul>
+        <p>Open questions (your call):</p>
+        <ul>
+          <li><b>Graded positions:</b> a cell one step away shares nothing with its neighbour. Should nearby positions overlap?</li>
+          <li><b>One floor per level, or one shared floor</b> (decision 004).</li>
+          <li><b>An abstract region</b> where nearness comes from shared meaning rather than position.</li>
+        </ul>
+        <p class="muted">Everything on this page runs the engine's own code (<code>src/engine/cells.js</code>, <code>complete.js</code>) on a world of plain symbols (<code>sandbox/symbols.js</code>).</p>
+      </section>
+
+    </sb-notebook>
+  </main>
+
+  <script>
+    // Declare everything first; the sandbox starts at the bottom.
+    const $ = (id) => document.getElementById(id);
+    const W = lessonWorld(), CODES = new Codes(W), N = W.W, MID = Math.floor(N / 2), PRIMS = Object.values(W.prims);
+    const FLOOR_TONE = ['var(--sb-accent)', '#b04fd1', 'var(--sb-good)'], FLOOR_NAME = ['floor 0 · where', 'floor 1 · inside a thing', 'floor 2 · inside a thing of things'];
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const el = (tag, attrs = {}, text) => { const e = document.createElementNS(svgNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text !== undefined) e.textContent = text; return e; };
+
+    // ---- Drawing, by hand (see the journal): a field of symbols, and columns as stacks of small grids ----
+    // field: items [{ name, x, y, kind: 'cue' | 'filled' | 'thing' }] in field coordinates (0..N-1), centre marked
+    function drawField(box, items, onClick) {
+      const s = 30, svg = el('svg', { viewBox: `0 0 ${N * s} ${N * s}`, class: 'field' });
+      for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) { const r = el('rect', { x: x * s + 1, y: y * s + 1, width: s - 2, height: s - 2, rx: 4, class: 'fcell' }); if (onClick) r.addEventListener('click', () => onClick(x, y)); svg.append(r); }
+      svg.append(el('text', { x: MID * s + s / 2, y: MID * s + s / 2 + 5, class: 'centre' }, '+'));
+      for (const it of items) { const g = el('g', { class: 'tok ' + (it.kind || '') }); g.append(el('rect', { x: it.x * s + 3, y: it.y * s + 3, width: s - 6, height: s - 6, rx: 5 }), el('text', { x: it.x * s + s / 2, y: it.y * s + s / 2 + 5 }, it.name));
+        if (onClick) g.addEventListener('click', () => onClick(it.x, it.y)); svg.append(g); }
+      box.replaceChildren(svg);
+    }
+    // columns: one per primitive; floors: [{ f, cells: [{ name, x, y, dim }] }] with x, y offsets from a centre
+    function drawColumns(box, floors) {
+      const s = 9, R = MID, n = 2 * R + 1, wrap = document.createElement('div'); wrap.className = 'cols';
+      for (const p of PRIMS) { const col = document.createElement('div'); col.className = 'col';
+        const head = document.createElement('div'); head.className = 'colhead'; head.textContent = p.name; col.append(head);
+        for (const fl of [...floors].reverse()) { const svg = el('svg', { viewBox: `0 0 ${n * s} ${n * s}`, class: 'floor', title: FLOOR_NAME[fl.f] });
+          for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) svg.append(el('rect', { x: x * s + 0.5, y: y * s + 0.5, width: s - 1, height: s - 1, class: 'ccell' + (x === R && y === R ? ' mid' : '') }));
+          for (const c of fl.cells.filter((c) => c.name === p.name)) if (Math.abs(c.x) <= R && Math.abs(c.y) <= R) svg.append(el('rect', { x: (c.x + R) * s + 0.5, y: (c.y + R) * s + 0.5, width: s - 1, height: s - 1, fill: FLOOR_TONE[fl.f], opacity: c.dim ? 0.3 : 1 }));
+          const lab = document.createElement('div'); lab.className = 'flabel'; lab.textContent = 'floor ' + fl.f; col.append(svg, lab); }
+        wrap.append(col); }
+      const key = document.createElement('div'); key.className = 'legend'; key.innerHTML = floors.map((fl) => `<span><i style="background:${FLOOR_TONE[fl.f]}"></i>${FLOOR_NAME[fl.f]}</span>`).join('') + '<span class="muted">· each column is a stack of floors, floor 0 at the bottom; each floor\'s middle is its centre</span>';
+      box.replaceChildren(wrap, key);
+    }
+    function picker(box, onPick) { let cur = 'A'; box.innerHTML = '<span class="muted">Place:</span>' + PRIMS.map((p) => `<button data-p="${p.name}" class="${p.name === cur ? 'on' : ''}">${p.name}</button>`).join('');
+      box.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; cur = b.dataset.p; box.querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b)); onPick && onPick(cur); }); return () => cur; }
+
+    // ---- View model: a thing at a place, as field items and as cells on each floor ----
+    // where a thing's centre is in the field: (cx, cy); its primitives from CODES.whole (offsets from its own centre)
+    function thingItems(u, cx, cy) { return CODES.whole(u).map((c) => ({ name: c.col.name, x: cx + c.x, y: cy + c.y, kind: 'thing' })); }
+    function thingFloors(u, cx, cy) {
+      const floors = [{ f: 0, cells: CODES.whole(u).map((c) => ({ name: c.col.name, x: cx + c.x - MID, y: cy + c.y - MID })) }];
+      const add = (t) => { floors.push({ f: CODES.floor(t), cells: CODES.whole(t).map((c) => ({ name: c.col.name, x: c.x, y: c.y })) }); };
+      add(u); for (const p of u.place) if (p.u.layer > 1) { const f = floors.find((x) => x.f === CODES.floor(p.u)); if (!f) add(p.u); else f.cells.push(...CODES.whole(p.u).map((c) => ({ name: c.col.name, x: c.x, y: c.y }))); }
+      return floors.sort((a, b) => a.f - b.f);
+    }
+
+    // ---- Section 1 ----
+    $('tokens').innerHTML = PRIMS.map((p) => `<span class="token">${p.name}</span>`).join('');
+
+    // ---- Section 2: place pieces, see floor 0 ----
+    const placed = [{ name: 'A', x: 2, y: 3 }, { name: 'A', x: 6, y: 5 }, { name: 'C', x: 4, y: 2 }];
+    const wCur = picker($('w-pick'));
+    function toggle(list, name, x, y) { const i = list.findIndex((p) => p.x === x && p.y === y); if (i >= 0) list.splice(i, 1); else list.push({ name, x, y }); }
+    function showWhere() { drawField($('w-field'), placed, (x, y) => { toggle(placed, wCur(), x, y); showWhere(); });
+      drawColumns($('w-cols'), [{ f: 0, cells: placed.map((p) => ({ name: p.name, x: p.x - MID, y: p.y - MID })) }]); }
+
+    // ---- Section 3: a thing, moved about ----
+    let tSel = W.things.hat, tAt = [MID, MID];
+    $('t-pick').innerHTML = '<span class="muted">Thing:</span>' + ['hat', 'cup', 'arch'].map((n) => `<button data-t="${n}" class="${n === 'hat' ? 'on' : ''}">${n}</button>`).join('');
+    $('t-pick').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; tSel = W.things[b.dataset.t]; $('t-pick').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b)); showThing(); });
+    document.querySelectorAll('[data-move]').forEach((b) => b.addEventListener('click', () => { const [dx, dy] = b.dataset.move.split(',').map(Number); const nx = tAt[0] + dx, ny = tAt[1] + dy;
+      if (thingItems(tSel, nx, ny).every((c) => c.x >= 0 && c.y >= 0 && c.x < N && c.y < N)) tAt = [nx, ny]; showThing(); }));
+    function showThing() { drawField($('t-field'), thingItems(tSel, ...tAt)); drawColumns($('t-cols'), thingFloors(tSel, ...tAt)); }
+
+    // ---- Section 4: each thing's assembly, from the engine ----
+    function showAssemblies() {
+      const rowsHtml = Object.values(W.things).map((t) => { const whole = CODES.whole(t), code = CODES.code(t), inCode = (c) => code.some((k) => k.col === c.col && k.x === c.x && k.y === c.y);
+        return `<tr><td><b>${t.name}</b>${t.layer > 2 ? ' <span class="muted">(made of things)</span>' : ''}</td><td>${whole.map((c) => `<span class="token sm ${inCode(c) ? 'keep' : 'drop'}">${c.col.name}</span>`).join('')}</td><td>${code.length} of ${whole.length}</td></tr>`; }).join('');
+      $('a-table').innerHTML = `<table class="tbl"><tr><th>Thing</th><th>Its pieces (assembly kept solid)</th><th>Assembly</th></tr>${rowsHtml}</table>`;
+    }
+
+    // ---- Section 5: completion from a cue, by the engine ----
+    let cue = [];
+    const cCur = picker($('c-pick'));
+    const PRESET = { AC: [['A', 3, 5], ['C', 4, 4]], AB: [['A', 3, 4], ['B', 5, 4]], A: [['A', 4, 4]], CD: [['C', 4, 2], ['D', 4, 6]], clear: [] };
+    document.querySelectorAll('[data-cue]').forEach((b) => b.addEventListener('click', () => { cue = PRESET[b.dataset.cue].map(([name, x, y]) => ({ name, x, y })); showComplete(); }));
+    function showComplete() {
+      drawField($('c-field'), cue.map((c) => ({ ...c, kind: 'cue' })), (x, y) => { toggle(cue, cCur(), x, y); showComplete(); });
+      const r = CODES.K.settle(cue.map((c) => ({ col: W.prims[c.name], x: c.x - MID, y: c.y - MID })));
+      drawField($('c-out'), r.cells.map((c) => ({ name: c.col.name, x: c.x + MID, y: c.y + MID, kind: c.from === 'cue' ? 'cue' : 'filled' })).filter((c) => c.x >= 0 && c.y >= 0 && c.x < N && c.y < N));
+      const found = r.found.map((t) => t.u.name), added = r.cells.filter((c) => c.from !== 'cue').length;
+      $('c-sum').innerHTML = !cue.length ? 'Place some pieces, or pick a starting point.' : found.length ? `Recalled: <b>${found.join(', ')}</b> · ${added} cell${added === 1 ? '' : 's'} filled in (outlined) · settled in ${r.rounds.length} round${r.rounds.length === 1 ? '' : 's'}.`
+        : `Nothing recalled. ${cue.length < 2 ? 'One cell alone saves nothing.' : 'Either no thing takes in two of these cells, or several fit equally and it won\'t guess.'}`;
+    }
+
+    // ---- Section 2: one column in 3D (the an-columns component) ----
+    function showStack() { const fl = $('f-col');
+      fl.columns = ['A']; fl.floors = [0, 1, 2].map((f) => ({ f, label: 'floor ' + f, ref: 'floor-' + f }));
+      fl.cells = [{ col: 'A', f: 0, x: -2, y: 1, text: 'A', tone: 'accent', ref: 'floor-0', chain: 'a' }, { col: 'A', f: 1, x: -1, y: 1, text: 'A', color: FLOOR_TONE[1], ref: 'floor-1', chain: 'a' },
+        { col: 'A', f: 2, x: -1, y: -1, text: 'A', color: 'var(--sb-good)', ref: 'floor-2', chain: 'a' }]; }
+
+    // ---- Section 7: the lamp, all its columns ----
+    function showLamp() { const lamp = W.things.lamp;
+      drawField($('l-field'), thingItems(lamp, MID, MID)); drawColumns($('l-cols'), thingFloors(lamp, MID, MID));
+      const code = CODES.code(lamp), inCode = (c) => code.some((k) => k.col === c.col && k.x === c.x && k.y === c.y), lc = $('l-col');
+      lc.columns = [...new Set(CODES.whole(lamp).map((c) => c.col.name))].sort();
+      lc.floors = [{ f: 0, label: 'floor 0 · where' }, { f: 1, label: 'floor 1 · hat, cup' }, { f: 2, label: 'floor 2 · lamp' }];
+      lc.cells = [
+        ...CODES.whole(lamp).map((c) => ({ col: c.col.name, f: 0, x: c.x, y: c.y, text: c.col.name, tone: 'accent', ref: 'lamp-where', title: 'where it is' })),
+        ...CODES.whole(W.things.hat).map((c) => ({ col: c.col.name, f: 1, x: c.x, y: c.y, text: c.col.name, color: FLOOR_TONE[1], group: 'hat', ref: 'lamp-hat-' + c.col.name, tags: ['hat'], title: "the hat's " + c.col.name })),
+        ...CODES.whole(W.things.cup).map((c) => ({ col: c.col.name, f: 1, x: c.x, y: c.y, text: c.col.name, color: FLOOR_TONE[1], group: 'cup', ref: 'lamp-cup-' + c.col.name, tags: ['cup'], title: "the cup's " + c.col.name })),
+        ...CODES.whole(lamp).map((c) => ({ col: c.col.name, f: 2, x: c.x, y: c.y, text: c.col.name, color: 'var(--sb-good)', group: 'lamp', filled: !inCode(c), ref: inCode(c) ? 'lamp-assembly' : 'lamp-' + c.col.name, title: inCode(c) ? "in the lamp's assembly" : "the lamp's " + c.col.name + ' (filled in by completion)' })) ]; }
+
+    // ---- Section 8: looking inside a thing ----
+    $('asm').data = window.ANNEAL_ASSEMBLIES;
+
+    // ---- Start ----
+    showStack(); showWhere(); showThing(); showAssemblies(); cue = PRESET.AC.map(([name, x, y]) => ({ name, x, y })); showComplete(); showLamp();
+  </script>
+</body>
+</html>

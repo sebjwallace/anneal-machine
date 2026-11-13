@@ -1,0 +1,15 @@
+== 0 of 5 pixels missing
+visual bar fixed  · abstract bar fixed  | both views recognised 30/30 · route found 0 · no way 30 · undecided 0 · wrong 0
+visual bar moving · abstract bar fixed  | both views recognised 30/30 · route found 0 · no way 30 · undecided 0 · wrong 0
+visual bar fixed  · abstract bar moving | both views recognised 30/30 · route found 30 · no way 0 · undecided 0 · wrong 0
+visual bar moving · abstract bar moving | both views recognised 30/30 · route found 30 · no way 0 · undecided 0 · wrong 0
+== 1 of 5 pixels missing
+visual bar fixed  · abstract bar fixed  | both views recognised 26/30 · route found 0 · no way 26 · undecided 0 · wrong 0
+visual bar moving · abstract bar fixed  | both views recognised 26/30 · route found 0 · no way 26 · undecided 0 · wrong 0
+visual bar fixed  · abstract bar moving | both views recognised 26/30 · route found 26 · no way 0 · undecided 0 · wrong 0
+visual bar moving · abstract bar moving | both views recognised 26/30 · route found 26 · no way 0 · undecided 0 · wrong 0
+== 2 of 5 pixels missing
+visual bar fixed  · abstract bar fixed  | both views recognised  0/30 · route found 0 · no way 0 · undecided 0 · wrong 0
+visual bar moving · abstract bar fixed  | both views recognised  6/30 · route found 0 · no way 6 · undecided 0 · wrong 0
+visual bar fixed  · abstract bar moving | both views recognised  0/30 · route found 0 · no way 0 · undecided 0 · wrong 0
+visual bar moving · abstract bar moving | both views recognised  6/30 · route found 6 · no way 0 · undecided 0 · wrong 0

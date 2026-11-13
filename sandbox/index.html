@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anneal · 1 · The basics</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Sandkit, copied into lib/ (see lib/sandkit/SOURCE.md). Theming loads first, so the page never flashes the wrong theme. -->
+  <script src="lib/sandkit/shell/sb-theme-settings.js"></script>
+  <script src="lib/sandkit/shell/sb-shell.js"></script>
+  <script src="lib/sandkit/shell/sb-export.js"></script>
+  <script src="lib/sandkit/shell/sb-highlighting.js"></script>
+  <script src="lib/sandkit/components/sb-comments/sb-comments.js"></script>
+  <script src="lib/sandkit/components/sb-notebook/sb-notebook.js"></script>
+  <script src="lib/sandkit/components/sb-grid/sb-grid.js"></script>
+  <script src="lib/sandkit/components/sb-callout/sb-callout.js"></script>
+  <script src="lib/sandkit/components/sb-stat/sb-stat.js"></script>
+
+  <!-- The engine, straight from the repo (never copied), with the world it learns from. -->
+  <script src="../src/worlds/catalogue.js"></script>
+  <script src="../src/worlds/scenes.js"></script>
+  <script src="../src/engine/see.js"></script>
+
+  <!-- The sandbox's name, goal and pages, then its model. -->
+  <script src="sandbox.js"></script>
+  <script src="model.js"></script>
+</head>
+<body>
+  <sb-shell>
+    <sb-theme-settings slot="settings"></sb-theme-settings>
+    <sb-export slot="actions"></sb-export>
+    <sb-comments slot="modes"></sb-comments>
+  </sb-shell>
+
+  <main>
+    <sb-notebook id="basics" address heading="1 · The basics">
+
+      <!-- 1 ─────────────────────────────────────────────────────────── -->
+      <section heading="One rule" kind="idea" relevance="key" ref="IDEA-rule">
+        <p>Anneal learns from pictures with a single rule:</p>
+        <p class="big">Keep whatever makes the whole description cheapest.</p>
+        <p>Everything else on this page follows from that. There are no weights to train and no numbers tuned by hand. Each time the engine considers a change, it works out the cost of describing everything it has seen, with and without the change, and keeps the change only if the cost falls.</p>
+        <sb-callout kind="definition" heading="Energy (the bill)">
+          <p>The total cost of describing everything: <b>structure</b> (what the engine has stored) plus <b>flow</b> (the cost of explaining the recent pictures with what it has stored).</p>
+        </sb-callout>
+        <sb-callout kind="definition" heading="Heat">
+          <p>Whatever can't be explained cheaply: pixels nothing known accounts for. Learning is cooling.</p>
+        </sb-callout>
+      </section>
+
+      <!-- 2 ─────────────────────────────────────────────────────────── -->
+      <section heading="Pricing a picture" kind="idea" ref="IDEA-price">
+        <p>Every cost is in one currency, taken from the world:</p>
+        <ul>
+          <li>a pixel nobody explains (or one drawn wrongly) costs <b>1</b>;</li>
+          <li>a pixel stored in memory costs <b>1</b>;</li>
+          <li>a <b>placement</b>, "this part, here", costs 1 plus the cost of naming which part. That's a little more than 1, and grows slowly as the engine knows more parts.</li>
+        </ul>
+        <p>So knowing a shape pays off whenever placing it once is cheaper than paying for its pixels one by one. Here is the same picture described twice:</p>
+        <div class="pair">
+          <div class="view"><h4>Knowing nothing</h4><sb-grid id="price-raw"></sb-grid><p class="sum" id="price-raw-sum"></p></div>
+          <div class="view"><h4>Knowing some parts</h4><sb-grid id="price-known"></sb-grid><p class="sum" id="price-known-sum"></p></div>
+        </div>
+        <p class="try"><strong>Try:</strong> <button id="price-next">Another picture</button> Compare the two bills. The second engine learnt its parts from 200 pictures, while this page was loading.</p>
+      </section>
+
+      <!-- 3 ─────────────────────────────────────────────────────────── -->
+      <section heading="Seeing: the cheapest explanation" kind="idea" ref="IDEA-see">
+        <p>To <b>see</b> a picture, the engine places the parts it knows wherever they fit, trying every possible starting placement, and keeps the cheapest whole explanation. A part can be placed anywhere, and more than once. Recognising something just means "placing it is cheaper than paying for its pixels".</p>
+        <div class="pair">
+          <div class="view"><h4>The picture, coloured by which part explains each pixel</h4><sb-grid id="see-grid"></sb-grid></div>
+          <div class="view"><h4>The parts it placed</h4><div class="parts" id="see-parts"></div><p class="sum" id="see-sum"></p></div>
+        </div>
+        <p class="try"><strong>Try:</strong> <button id="see-next">Another picture</button> Look for a part placed twice (two of the same thing), and for any red: pixels nothing it knows accounts for.</p>
+      </section>
+
+      <!-- 4 ─────────────────────────────────────────────────────────── -->
+      <section heading="Rest: compare, don't average" kind="try" relevance="key" ref="IDEA-rest">
+        <p>Awake, a picture the engine can't explain cheaply is <b>remembered</b> whole. Then, at <b>rest</b>, pictures stop and it reorganises what it holds. It compares stored things with each other at every shift: what two things share becomes a part of its own, and recurring arrangements of parts become bigger things. Each move is tried, the bill is measured, and the move is kept only if the bill fell.</p>
+        <p>This is learning by comparison, not by averaging. A cross compared with a bar gives the bar exactly, at once, not a blur built up over thousands of examples.</p>
+        <div class="buttons">
+          <button id="rest-look">Show it 20 pictures</button>
+          <button id="rest-step">Rest: one move</button>
+          <button id="rest-all">Rest until settled</button>
+          <button id="rest-reset">Start again</button>
+        </div>
+        <sb-stat id="rest-stats"></sb-stat>
+        <div class="pair">
+          <div class="view"><h4>What it holds</h4><div class="parts" id="rest-parts"></div></div>
+          <div class="view"><h4>Moves kept at rest</h4><ol class="log" id="rest-log"></ol></div>
+        </div>
+        <p class="try"><strong>Try:</strong> Show it 20 pictures, then step through rest one move at a time. Watch the stored pictures break into the shapes they share, and the bill fall with every move. Then show it 20 more and rest again: there's less to learn the second time.</p>
+      </section>
+
+      <!-- 5 ─────────────────────────────────────────────────────────── -->
+      <section heading="So far, and what's next" kind="summary" ref="IDEA-next">
+        <p>One rule, one currency, and two phases: <b>awake</b> it explains as cheaply as it can and remembers what it can't; at <b>rest</b> it compares what it holds and keeps whatever lowers the bill.</p>
+        <p>Possible next chapters (your call):</p>
+        <ol>
+          <li><b>The same thing, anywhere, many times:</b> why parts are stored without position.</li>
+          <li><b>Cells and assemblies:</b> parts as columns, and a thing as the smallest set of cells that brings it back.</li>
+          <li><b>Completion:</b> rebuilding a whole from a part.</li>
+          <li><b>Change:</b> transitions, shared changes, context and cues.</li>
+          <li><b>Kinds:</b> one form with a varying piece.</li>
+          <li><b>The wall:</b> why busy scenes stall, and the options.</li>
+        </ol>
+        <p class="muted">The full picture, with what works and what doesn't: <code>docs/state.md</code>.</p>
+      </section>
+
+    </sb-notebook>
+  </main>
+
+  <script>
+    // Declare everything first; the sandbox starts at the bottom.
+    const $ = (id) => document.getElementById(id);
+    const PAL = ['#2f6fde', '#e08a1e', '#2f9e5b', '#b04fd1', '#1aa3a3', '#c9a400', '#e05fa3', '#7b5c3e', '#5b6bd8', '#6aa81e'];
+    const tidy = (v) => (Math.round(v * 10) / 10).toLocaleString();
+
+    // ---- View model: pictures and explanations as rows for sb-grid ----
+    const toRows = (values, n) => Array.from({ length: n }, (_, y) => Array.from({ length: n }, (_, x) => values[y * n + x]));
+    function pictureView(grid, x, n) { grid.states = { 1: { label: 'pixel on', tone: 'text' } }; grid.cells = toRows(x, n); }
+    function unexplainedView(grid, x, n) { grid.states = { 9: { label: 'not explained (1 each)', tone: 'bad' } }; grid.cells = toRows(Array.from(x, (v) => (v ? 9 : 0)), n); }
+    // each pixel coloured by the part that explains it; unexplained red; drawn wrongly orange
+    function explainedView(grid, learner, x, q) {
+      const n = learner.size, colour = new Map(), states = {};
+      q.claims.forEach((c, k) => { if (!colour.has(c.c)) colour.set(c.c, colour.size); const i = colour.get(c.c); states[10 + i] = { label: `part ${i + 1}`, color: PAL[i % PAL.length] }; });
+      states[9] = { label: 'not explained', tone: 'bad' }; states[8] = { label: 'drawn wrongly', tone: 'warn' };
+      const v = Array.from(x, (on, p) => (on ? (q.ownerPx[p] >= 0 ? 10 + colour.get(q.claims[q.ownerPx[p]].c) : 9) : (q.missPx[p] >= 0 ? 8 : 0)));
+      grid.states = states; grid.cells = toRows(v, n); return colour;
+    }
+    function billText(learner, q) {
+      const pc = learner.price(), n = q.claims.length;
+      return `Bill: ${n} placement${n === 1 ? '' : 's'} × ${tidy(pc)} + ${q.left.length} unexplained + ${q.misses} drawn wrongly = <b>${tidy(q.cost)}</b> (paying for every pixel: ${q.on})`;
+    }
+    // a part drawn small, by hand (no component draws a bare shape this small; see the journal)
+    function partCanvas(pts, colour) {
+      let w = 1, h = 1; const mx = Math.min(...pts.map((p) => p[0])), my = Math.min(...pts.map((p) => p[1]));
+      for (const [x, y] of pts) { w = Math.max(w, x - mx + 1); h = Math.max(h, y - my + 1); }
+      const c = document.createElement('canvas'), s = 8; c.width = w * s; c.height = h * s; const g = c.getContext('2d'); g.fillStyle = colour;
+      for (const [x, y] of pts) g.fillRect((x - mx) * s, (y - my) * s, s - 1, s - 1); return c;
+    }
+    function partCard(pts, colour, label) { const d = document.createElement('div'); d.className = 'part'; d.append(partCanvas(pts, colour)); const s = document.createElement('span'); s.textContent = label; d.append(s); return d; }
+
+    // ---- Sections 2 and 3: an engine that has learnt from 200 pictures ----
+    const taught = createLearner({ seed: 4242 }), viewer = createLearner({ seed: 7 });
+    let ready = false;
+    function teach(done) {   // learn in small chunks, so the page stays responsive
+      const N = 200; let t = 0;
+      const tick = () => { for (let k = 0; k < 10 && t < N; k++, t++) { taught.look(taught.nextPicture()); if ((t + 1) % 98 === 0) while (taught.restStep()); }
+        $('price-known-sum').textContent = $('see-sum').textContent = `Learning from ${N} pictures… ${t}`;
+        if (t < N) setTimeout(tick, 0); else { while (taught.restStep()); ready = true; done(); } };
+      tick();
+    }
+    function showPrice() { const x = viewer.nextPicture(), n = viewer.size;
+      unexplainedView($('price-raw'), x, n); $('price-raw-sum').innerHTML = `Bill: ${x.reduce((a, b) => a + b, 0)} pixels × 1 = <b>${x.reduce((a, b) => a + b, 0)}</b>`;
+      if (!ready) { pictureView($('price-known'), x, n); return; }
+      const q = taught.explain(x); explainedView($('price-known'), taught, x, q); $('price-known-sum').innerHTML = billText(taught, q); }
+    function showSee() { if (!ready) return; const x = viewer.nextPicture(), q = taught.explain(x), colour = explainedView($('see-grid'), taught, x, q), box = $('see-parts');
+      box.innerHTML = ''; const count = new Map(); for (const c of q.claims) count.set(c.c, (count.get(c.c) || 0) + 1);
+      for (const [u, i] of colour) box.append(partCard(taught.shape(u), PAL[i % PAL.length], `part ${i + 1}${count.get(u) > 1 ? ` · placed ${count.get(u)}×` : ''}`));
+      $('see-sum').innerHTML = billText(taught, q); }
+
+    // ---- Section 4: a fresh engine you drive ----
+    const fresh = createLearner({ seed: 1 });
+    const MOVE = { decompose: 'split two things where they overlap: the shared piece became a part', compose: 'grouped a recurring arrangement into one bigger thing', dissolve: 'folded a group back into the things using it',
+      fuse: 'turned a group into one plain part', unpack: 'turned a part only one memory used back into loose pixels', relook: 're-described memories with what it knows now', kind: 'made a kind (one form, a varying piece)', widen: 'added a version to a kind', share: 'two kinds now share one list of pieces', unkind: 'undid a kind', 'dissolve kind': 'folded a kind away' };
+    function showRest() {
+      const b = fresh.bill(), parts = fresh.parts();
+      $('rest-stats').stats = [
+        { id: 'seen', label: 'Pictures seen', value: fresh.seen },
+        { id: 'parts', label: 'Things stored', value: parts.length },
+        { id: 'E', label: 'Bill (energy)', value: Math.round(b.E), better: 'lower', note: `stored ${Math.round(b.structure)} + explaining recent pictures ${Math.round(b.flow)}` },
+      ];
+      const box = $('rest-parts'); box.innerHTML = parts.length ? '' : '<p class="muted">Nothing yet.</p>';
+      parts.slice().sort((a, b2) => a.layer - b2.layer).forEach((u, i) => box.append(partCard(fresh.shape(u), u.layer > 1 ? '#b04fd1' : '#2f6fde', u.layer > 1 ? 'made of parts' : 'part')));
+      $('rest-log').innerHTML = fresh.log.length ? fresh.log.map((l) => `<li>${MOVE[l.type] || l.type} <span class="muted">(bill −${l.saving})</span></li>`).join('') : '<li class="muted">No moves yet.</li>';
+    }
+    function look20() { for (let k = 0; k < 20; k++) fresh.look(fresh.nextPicture()); showRest(); }
+    function restOne() { const a = fresh.restStep(); if (!a) $('rest-log').insertAdjacentHTML('beforeend', '<li class="muted">Settled: no move lowers the bill.</li>'); else showRest(); }
+    function restAll() { while (fresh.restStep()); showRest(); $('rest-log').insertAdjacentHTML('beforeend', '<li class="muted">Settled: no move lowers the bill.</li>'); }
+
+    // ---- Wiring ----
+    $('price-next').addEventListener('click', showPrice);
+    $('see-next').addEventListener('click', showSee);
+    $('rest-look').addEventListener('click', look20);
+    $('rest-step').addEventListener('click', restOne);
+    $('rest-all').addEventListener('click', restAll);
+    $('rest-reset').addEventListener('click', () => { fresh.reset(); showRest(); });
+
+    // ---- Start ----
+    showPrice(); showRest();
+    teach(() => { showPrice(); showSee(); });
+  </script>
+</body>
+</html>

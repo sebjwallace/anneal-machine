@@ -1,0 +1,7 @@
+
+GRID PARK (16 places) · store of days holds 50 walks
+  days | general shapes kept | ONE RULE: real new routes trusted, doubted · made-up caught, missed | TWO RULES: same
+   100 |  1 walks, 0 kinds       | 0 trusted, 0 doubted · 0 caught, 0 missed   | 0 trusted, 0 doubted · 0 caught, 0 missed
+   300 |  9 walks, 3 kinds       | 3 trusted, 0 doubted · 0 caught, 0 missed   | 3 trusted, 0 doubted · 0 caught, 0 missed
+  1000 |  4 walks, 12 kinds       | 3 trusted, 1 doubted · 15 caught, 0 missed   | 4 trusted, 0 doubted · 15 caught, 0 missed
+  3000 |  9 walks, 14 kinds       | 3 trusted, 1 doubted · 16 caught, 0 missed   | 4 trusted, 0 doubted · 16 caught, 0 missed

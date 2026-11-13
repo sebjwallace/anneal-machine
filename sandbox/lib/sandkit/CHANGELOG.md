@@ -1,0 +1,364 @@
+# Sandkit changelog
+
+Sandkit's own version covers the practices, the sandbox template and the tools. Each component, and the shell, has its own version and changelog in its folder.
+
+Versions follow [semantic versioning](https://semver.org). Until 1.0, a breaking change raises the minor version (0.1 to 0.2) and anything else raises the patch version (0.1.0 to 0.1.1). Breaking entries start `**Breaking:**` and say how to migrate.
+
+## 0.2.91 · 2026-11-07
+- Two engines: added `tags` 0.1.0, finding your way around a tag map for any sandbox that tags. It applies tagging's rules once (nothing superseded, working tags ignored, retired tags followed) and gives what carries a selection, what's like some items, each with a score where rarer tags weigh more, the ways to narrow or widen, and every tag with what carries it.
+- `tools/tags.mjs search`: the agent's tag search, one scored line per item and never the record, twenty at a time, saying when there are more and how to go on (`--from`), then the ways to narrow or widen. `report` now runs on the engine's rules. Setup copies the tags engine into every sandbox with the tool, and records its version.
+- **Breaking:** `discovery` 0.4.0 drops `tags()` and its `tags` input, so tags have one home: use the tags engine's `list()`, which gives the same shape.
+- **Breaking:** `sb-tags-mode` 0.3.0 wears no amber: the frame round the page is gone and the card and banner are plain. It gains a Search tab when the page sets `search`: tags found by name, results scored, full screen, and with `pull-in`, Pull in, firing `sb-pull`.
+- `sb-board` 0.2.1: lines between lit parts and a related tray are off its "Not yet".
+- New tag search practice, `practices/tagging-search.md`: when the agent searches before reading and how to read the output, and how a page wires search into Tags mode and pulls results onto a board. The sandbox template points agents to it under Tagging. The domain discovery practice checks tags with the report.
+- `demos/collation` searches by tags in Tags mode and pulls records onto the board, handing what was pulled in to the agent. New `demos/tag-search` shows the engine on the discovery demo's records, and the discovery demo lists its tags from the tags engine.
+
+## 0.2.90 · 2026-11-07
+- **Breaking:** `sb-board` 0.2.0 is rebuilt as a board that lays itself out from rough places and groups, with three link styles, problems in words, and a veil with coloured dots while tags are chosen. Nothing used the old one, so there's nothing to migrate. The locating practice and the catalogue follow it.
+- **Breaking:** `sb-tags-mode` 0.2.0 drops the quiet bar outside the mode; reopen the mode to see what's chosen. It also gains a tag list with pins, + and − per tag, intersection or union, presets, a colour per tag, and a card that never shifts.
+- The shell's highlighting script takes `colors` and `without` in `sb-tag-focus`, and leaves chosen tags inside `data-sb-shows-chosen` to the element.
+- New `demos/collation`: real discovery records gathered on a board, with Tags mode, presets and an outliner.
+- The tagging practice says a tag's declaration can give its colour, and the highlighting practice says how each chosen tag lights in its own.
+- Token economy is written down as a goal: `AGENTS.md`, `CONTRIBUTING.md` and `DECISIONS.md` for those working on Sandkit, and the sandbox template and building guide for agents using it, economical by default unless the person asks otherwise. The highlighting practice says when it needn't be read.
+- The tagging practice is split so an agent reads only what it needs: `tagging.md` holds what always applies and points to `tagging-applying.md`, `tagging-tidying.md` and `tagging-presets.md`.
+- The highlighting practice is split the same way: `highlighting.md` holds the one line and the rules for everyone, and points to `highlighting-own-parts.md`, `highlighting-wiring.md`, `highlighting-tags.md` and `highlighting-pins.md`.
+- The tagging practice says how to offer presets, saved selections of tags, and `tools/tags.mjs` flags a preset naming a tag that's no longer current.
+
+## 0.2.89 · 2026-11-06
+- Sixty components: added `sb-tags-mode`, Tags in the shell's mode picker. Point at a tagged part to see its tags and what they mean, see the page's tags with counts, and click a tag to keep it lit across the page, by all or any, after the mode ends too, until it's cleared. The arrow keys visit what's lit.
+- Keeping topics lit: `sb-tag-focus` tells the highlighting script what's chosen (shell 0.1.11). The highlighting, tagging, modes and locating practices say how, and the sandbox template adds the mode on a tagging yes.
+- The discovery demo carries its tags on its cards and passages, includes the highlighting script and offers Tags mode.
+
+## 0.2.88 · 2026-11-06
+- Lighting by tag. Parts can carry `data-tags`, and pointing at one also lights, faintly, whatever on the page shares a tag, with no wiring (shell 0.1.10). `sb-table` 0.1.5 and `sb-discovery-card` 0.1.7 pass tags through, as the first pair; `CONTRIBUTING.md` gives the convention for the rest. The highlighting and tagging practices describe it. A page with no tags sees no difference.
+- Lit whole discovery cards and paper can now be seen.
+
+## 0.2.87 · 2026-11-06
+- Page-wide highlighting with no wiring. The new script `shell/sb-highlighting.js` (shell 0.1.9), in the page templates, makes anything with a `data-ref` announce `sb-highlight` while pointed at or focused, and light up when its ref is announced, through redraws; `data-points-at` points at several things on purpose; pins from an `sb-outliner` stay lit everywhere. `tools/setup.mjs` copies it. To use it in an existing sandbox, add `<script src="lib/sandkit/shell/sb-highlighting.js"></script>` to a page after the other shell scripts. The highlighting practice, the building guide and the sandbox's `AGENTS.md` now start from it, and existing wiring keeps working beside it. The template's `style.css` no longer carries `is-lit`. See `demos/highlighting-preview`.
+- `sb-id` 0.1.4, `sb-person` 0.1.2, `sb-poll` 0.1.2, `sb-accordion` 0.1.2: light when named in a list on `sb-highlight`, even without the script, so these may now light on a page that already sends lists. `sb-id` also announces on pointer events, so moving straight from a pill no longer turns off what comes next, and a tap shows its card without announcing.
+- `sb-math`, `sb-outliner`, `sb-discovery-card`, `sb-xref` 0.1.2 and 0.1.6: say when they speak for themselves, with `data-sb-announces` and `data-sb-lights`.
+
+## 0.2.86 · 2026-11-06
+- New `tools/tags.mjs report`, copied into sandboxes: how far a sandbox's tags reach and how well they narrow, then only what's worth a look, with items to spot-check. It has no pass mark. The tagging practice gains **Checking the map**, and building a sandbox runs it after a batch of tagging. Recorded in `DECISIONS.md`.
+
+## 0.2.85 · 2026-11-06
+- A new **Tagging** practice with two kinds of tag: semantic tags, a lasting map of the domain where an item's combination of tags says where it sits, and working tags, which group things for a situation in a `working` field and are then cleared. Semantic tagging is opt-in, discovery included. It costs tokens, so the agent asks, with the benefits, the costs and its recommendation, records the answer in the sandbox's `AGENTS.md`, and suggests starting or stopping as needs change. The practice also covers tags as pointers to content that nothing is reasoned from, the map not being the model, what and when to tag, choosing them by balancing aggregating and differentiating, keeping the set small, declaring them, retiring one, and what they're for. It says tags that relate to each other could come, and asks an agent that meets the need to tell the person rather than invent a structure. Recorded in `DECISIONS.md`.
+- The domain discovery practice keeps what's particular to discovery and adds a tag tidy-up at the end of each iteration, if the sandbox tags. The sources practice tags as it catalogues, likewise. Building a sandbox asks about tagging at the start, and the sandbox template's `AGENTS.md` mentions it.
+- `discovery` 0.3.6: a retired tag names what replaced it, `replacedBy`, and `tags()` passes it on. Working tags are ignored.
+
+## 0.2.84 · 2026-11-05
+- `sb-discovery-card` 0.1.5: two new kinds, `capability` and `contract`, the contract on a material of its own, recorded in `STYLE.md` and `DECISIONS.md`, with a `document` variant to read cold or save as a PDF through the browser's print dialog.
+- `discovery` 0.3.5: takes capabilities and contracts. A contract is `proposed` until every party has signed, then `in force`, and `review` once something it names is replaced. `contractAt(k)` gives the one binding, and `answers(id)` what answers to it, from each test's `serves`.
+- The domain discovery practice gains **The domain contract**: what it holds, how it differs from requirements, acceptance criteria and specifications, signing it whole and amending it, and showing it, with how to save it as a PDF through the browser's print dialog and show its pages on screen. The Domain Discovery Engine demo shows it working.
+- `discovery` 0.3.4: a claim's score counts each source once for each stance, however many excerpts or copies carry it, as its standing already did. The domain discovery practice says so.
+
+## 0.2.83 · 2026-11-05
+- Follow-ups from the first real use of a mechanism, in a household resilience sandbox's water chapter. 1 mechanism.
+- `tools/setup.mjs` tags every installed mechanism before `model.js` on every page that loads the model, on every run, whatever `--page` says, and reports which pages it tagged. It always says what changed: the root changelog's entries since the installed Sandkit version, breaking first with their indented points, then plainly if no part's version moved or nothing changed at all. `SOURCE.md` keeps a fixed order, so updates give small diffs, and the output names the folder rather than printing "Updated ..".
+- Setup keeps all of Sandkit's guidance in a sandbox's `AGENTS.md` current. **Sandkit components** (with Find by need inside) and **Sandkit mechanisms** sit between `sandkit:components` and `sandkit:mechanisms` markers, refreshed on every run, with nothing outside them touched. An older sandbox has those sections found by their headings and replaced, or added in the template's position, with the old text saved to `lib/sandkit/AGENTS-replaced.md` first, under a heading giving the date and the update. **Put back any lines your sandbox had added there, outside the markers.** Recorded in `DECISIONS.md`.
+- `sb-store` 0.1.1: amounts are exactly zero when nothing happened, proved by laws on a decimal grid, and the manifest gains a store that starts full and running across a range.
+- The mechanisms practice covers more than one page, ranges on both sides (pair the ends by the outcome they produce), a mechanism's raw results inside the model's log, and requiring mechanisms in tests. The template's `model.js` notes that loading the model loads its mechanisms.
+- The journal gains a **Changed** kind, versioned like **Added**, with "Is it breaking?" still asked first. The journal entry starts when planning, with its **Parts** line, and is completed at the end. Recorded in `DECISIONS.md`.
+- Breaking entries are written in one form from now on, and `test/versions` flags others in new entries.
+
+## 0.2.82 · 2026-11-04
+- The first mechanism: `sb-store`, a level between a floor and a ceiling, filled and taken from. 1 mechanism. It's proven by invariance tests over seeded random settings, and regression tests from a household's water stockpile, a rainwater tank, a home battery, a bank account and venue seating. Its demo steps a tank by hand.
+- Conventions every mechanism now follows, in `practices/mechanisms.md`, `CONTRIBUTING.md` and `DECISIONS.md`: one shape; two kinds, stocks that return `{ state, ...what happened }` with a `step` for everything in one model step, and flows that return only what happened; order within a step as part of the contract; exact stepping by default; what varies between steps as an argument; policies as named strings in `POLICIES`; invalid input throwing, saying what to do instead; one equation, one home; subject-specific logic in the wiring, on purpose; regression tests taking their numbers from outside the mechanism, statistical tests recording their tolerance, and capacity laws saying they hold for one mechanism; concurrency left to allocation.
+- The first mechanisms are now store, then driver and encounter, then allocation and conversion. Find by need gains **How the subject works**. The `sb-tally` fixture follows the new shape, and `test/mechanisms` lets a manifest name its own mechanism.
+
+## 0.2.81 · 2026-11-03
+- Groundwork for mechanisms, the reusable parts of domain models, as components are of the page. None yet: the first, a store, comes next. The README says a sandbox has a domain model and a view model, and why Sandkit is built from parts. A new practice, `practices/mechanisms.md`, says what a mechanism is, when to use one, composing them in `model.js` and how things interact, configuring, ranges, loading, ejecting one, how candidates become mechanisms, and what their regression and invariance tests are for. `DECISIONS.md`, `CONTRIBUTING.md`, the root `AGENTS.md` and `CATALOG.md` cover mechanisms beside components and engines.
+- The building guide plans the model's parts before building it, as it does the page's, and the journal's **Parts** line and the handover's **Built by hand** cover both. The template's `AGENTS.md` has a Sandkit mechanisms section and a `mechanisms/` folder for ejected ones, and its `model.js` shows how the model loads mechanisms under Node, since in a page they load before it.
+- Mechanisms carry the `sb-` prefix, as components do, sharing one set of names with them: `mechanisms/sb-store/sb-store.js` declares `SbStore`, unlikely to clash wherever it's used and plainly Sandkit's when read.
+- `tools/setup.mjs` sets up mechanisms by name: copied with their manifests and changelogs, tagged before `model.js`, and recorded in `SOURCE.md`. A name found in more than one kind of part is refused.
+- `test/mechanisms` checks every mechanism is pure, knows nothing of Sandkit, carries the prefix and declares only its own global, that no component or engine names one, and that a model loads one in a page and in Node, against a fixture mechanism in `tools/fixtures/mechanism/`. `test/catalog` and `test/versions` cover mechanisms, counting folders only.
+
+## 0.2.80 · 2026-11-03
+- Agents compose from the catalog first. `CATALOG.md` opens with **Find by need**, the catalog indexed by what a subject needs, and `test/catalog` keeps it covering every component and engine. `tools/setup.mjs` keeps a copy in each sandbox's `AGENTS.md` between `sandkit:find-by-need` markers, replacing only what's between them and adding the block to older sandboxes, and the template's `AGENTS.md` opens Sandkit components with the rule to look there before building anything by hand. The building guide plans each chapter's parts first, the journal entry gains a **Parts** line naming what was built by hand and why (and any **candidate** for Sandkit), and the handover a **Built by hand** line.
+- Sandboxes carry `CLAUDE.md`, holding `@AGENTS.md`, for agents that read only that file. Setup adds it to any sandbox without one and never replaces one that's there.
+
+## 0.2.79 · 2026-11-02
+- The domain model is pure. The building guide says what the model is: the domain alone, as plain data and functions that know nothing of pages, components, saving or the clock, giving the same output for the same input. A view model, in the page or a new optional `view.js`, prepares what the page shows, and everything depends on the model, never the reverse. The template's `AGENTS.md` and `model.js` say the same. Recorded in DECISIONS.md.
+
+## 0.2.78 · 2026-11-02
+- Personal information is registered and never shared by accident. The template's `AGENTS.md` lists every place personal data is kept (what kind, whose, where, never the data), and the sources practice has the agent keep that list as it goes, screen what it writes (model, records, journal, pages, comments) as well as sources, and look for the person's own details too. Before sharing, it starts from the list, looks again anyway, warns plainly what would go and to whom, and goes ahead only once the person says yes to those items. Recorded in DECISIONS.md.
+
+## 0.2.77 · 2026-11-02
+- Licences and sharing. The sources practice has the agent check who owns material and what its terms allow, as part of screening: it says what it found when proposing material, never gets round a login, paywall or a site's refusal of automated reading, and records the terms in the catalogue's new `licence` field. Where a copy shouldn't be kept, it keeps a digest in its own words in `sources/digests/` (`format: "digest"`). Before a sandbox is shared, it names anything that may not be the person's to share, and they decide. The template's `AGENTS.md` asks who the sandbox is for; the pages and building practices and the README point to the check before sharing. Recorded in DECISIONS.md.
+
+## 0.2.76 · 2026-10-29
+- Nothing becomes a source without the person's say-so. The sources practice no longer tells the agent to save parts of a chat as it goes: it proposes what it would bring in, from the chat, the web or anywhere else, and adds it only once the person agrees, since most of a chat is working talk and some of it may be irrelevant or not meant to be kept. What a person puts in `sources/` themselves is theirs to add. The domain discovery practice and the template's `AGENTS.md` say the same.
+
+## 0.2.75 · 2026-10-29
+- `sb-discovery-card` 0.1.4: fourteen new kinds (hypothesis, problem, incident, strategy, dispute, requirement, principle, pattern, anti-pattern, optimization, solution, option, trade-off and recommendation), and an optional `title` after a card's code. Recorded in DECISIONS.md.
+- `engines/discovery` 0.3.3 takes the fourteen kinds, with what each rests on, what each link means and the statuses that follow: a hypothesis supported or refuted and a requirement met or not by observations, a problem solved once a solution to it is applied, an option chosen or set aside and a recommendation followed or declined by the decisions weighing them, a dispute settled. A decision names the option it took (`chose`) and any dispute it `settles`.
+- The domain discovery practice describes the new kinds and where they go on the boards, says which kinds keep the status their record states, and lets a risk be raised by someone (a concern) as well as brought about by a decision.
+
+## 0.2.74 · 2026-10-27
+- `engines/discovery` 0.3.2 weighs a claim citing a superseded excerpt on the excerpt replacing it, so a wrong excerpt stops counting once corrected, and a claim is never edited to fix a citation. The domain discovery practice says how to correct an excerpt, and to show a source with only its excerpts that aren't superseded.
+- `tools/sources.mjs check` checks a discovery sandbox's excerpts (`records/excerpts.js`): each is in a catalogued source, its quote is in the file, as `sb-source` finds it, and one in an image has a region. Superseded excerpts are noted, not checked; an excerpts file without an `EXCERPTS` list it can read fails, rather than passing unchecked. Before, it checked only the model's `ITEMS`, which a discovery sandbox doesn't have, so excerpts citing the wrong file went unnoticed. The domain discovery practice names the list `EXCERPTS`.
+
+## 0.2.73 · 2026-10-27
+- Fifty-nine components: `sb-discovery-board` and `sb-source-trace` are retired for `sb-lineage`, which draws the same thing for any subject. **Breaking.** Sandboxes keep their copies, and `tools/setup.mjs` now leaves a retired component as it is, saying what replaces it. To move:
+  - **`sb-discovery-board`:** rename the tag, and `sb-discovery-board__` in your CSS, to `sb-lineage`. `columns`, `links`, `direction`, `spacing`, `highlight` and `reveal` work as before, items still placed by `data-ref`. Every link is now drawn, with pointing fading what isn't linked; add `links-shown="chain"` for links only along the chain pointed at, as before. Viewers can also pan and zoom.
+  - **`sb-source-trace`:** draw the trace in `sb-lineage` with the sources practice's `traceLineage`, which turns `model.items` and the catalogue into cards, columns and links; style the sources as paper as it shows. `subject`, `trail` and `clearTrail()` work as before. Listen for `sb-select` instead of `sb-open` and the trace's own following: open a source, or make an item the subject. `traceSources`, `drawNode`, `nodeSize`, `result` and `tools/analyse.mjs trace` are gone; call `fit()` to show the whole trace.
+- The domain discovery practice lays boards out in `sb-lineage`; the sources practice traces in it, with `traceLineage`; the locating and workshops practices name it. The control room example and the discovery demo use it.
+
+## 0.2.72 · 2026-10-27
+- Sixty-one components: added `sb-lineage`, where things come from and what they lead to, grown from `sb-discovery-board` and made generic: items in columns with every link drawn and labelled, pointing fading everything not linked to an item, or links only along the chain pointed at, a subject showing only its lineage, followed by viewers with a trail back, pan and zoom, and full screen. It's to replace `sb-discovery-board` and `sb-source-trace` in later steps. Recorded in DECISIONS.md.
+
+## 0.2.71 · 2026-10-27
+- `sb-search` 0.2.0: controls inside items the sandbox draws are their own, and the search updates in place, so choosing a preset, sort or grouping never moves the page. Presets can say what they show (`about`), filters fall under categories, fields can be searched without being shown (`show: false`), items can be left unchosen (`choose="none"`), groups can sit within groups, group headings can be the sandbox's own (`heading`), what's applied shows as chips to take away, criteria brought round to a preset show as it, when nothing matches the search offers ways back, and it looks calmer: one container, sentence-case labels, icons, and chosen filter values filled. **Breaking** only for a sandbox that styled `sb-search__chosen`, now gone; see the component's changelog.
+
+## 0.2.70 · 2026-10-27
+- Tags in domain discovery: `engines/discovery` 0.3.1 takes tags declared with what they mean, carried by any source, excerpt or record, and lists them all, naming any never declared. The domain discovery practice says how to tag well, in `records/tags.js`; the sources practice points catalogue tags to it. Recorded in DECISIONS.md.
+- `sb-search` 0.1.1 optionally draws items the sandbox's own way in the list or grid (`drawItem`), keeping its frame, choosing and grouping around them. Recorded in DECISIONS.md.
+
+## 0.2.69 · 2026-10-27
+- Sixty components: added `sb-search`, a collection to search, filter, range, sort and group, as a list, grid or table, in the page or full screen, with presets and a slot for the chosen item's detail. It works from a bare array, and takes functions of the sandbox's own where it knows better.
+
+## 0.2.68 · 2026-10-26
+- The domain discovery practice puts discovery on a page of its own by default, `discovery.html` (or another name the person prefers), linked from the header, and says how to add it. The sandbox template's AGENTS.md says so too, and records the practices a sandbox follows under Where it stands; the building guide says when to follow domain discovery.
+
+## 0.2.67 · 2026-10-26
+- Excerpts: the pieces of sources that records cite, each picked out once as a record of its own with a code (`SRC-2.3`), whatever the format. **Breaking** for discovery sandboxes: `engines/discovery` 0.3.0 takes records citing excerpts by code, and gives every excerpt a record rests on (`excerptsOf`); see its changelog to migrate. `sb-discovery-card` 0.1.3 draws an excerpt on its source's paper, with its words, a region of an image or rows of data. The domain discovery and sources practices describe them.
+
+## 0.2.66 · 2026-10-26
+- `engines/discovery` 0.2.4 follows what replaces what, scenarios and rules without code, and everything standing by an iteration. The domain discovery practice says how a record supersedes another, and that a sandbox can lay out boards of its own, such as one following scenarios.
+- The domain discovery practice says the boards are a recommended layout: the kinds, the records and the engine are the method, and a sandbox lays out its own. Recorded in DECISIONS.md. The catalogue's line for the engine says all it now does.
+
+## 0.2.65 · 2026-10-25
+- `engines/discovery` 0.2.3 takes feedback and works out its status, and words a plan's link to a claim as what it says should be. The domain discovery practice says how feedback is recorded, and tones those links muted.
+
+## 0.2.64 · 2026-10-25
+- From a trial discovery sandbox: the sandbox template's AGENTS.md points to any other practice followed and lists `records/`; the domain discovery practice sets up `sb-modal` and `sb-source` too, says where the model lives and that a discovery page must be served; the sources practice lists the catalogue's `iteration` and `gatheredBy`.
+
+## 0.2.63 · 2026-10-25
+- `engines/discovery` 0.2.2: every link says what it means. The domain discovery practice labels board links with it.
+
+## 0.2.62 · 2026-10-25
+- `engines/discovery` 0.2.1 no longer runs a class's getters when counting its decisions.
+
+## 0.2.61 · 2026-10-25
+- `engines/discovery` 0.2.0 runs the model being built: every version and candidate against every scenario and rule, what each run found, whether a trial earns its place, and the compression signal. It's handed the model's versions and candidates in place of `also`, and the domain discovery practice points to it for building the model.
+
+## 0.2.60 · 2026-10-25
+- `engines/discovery` 0.1.2 knows what rests on what: the links between records, the iterations each appears in, and what an iteration shows, raised, updated or carried. The domain discovery practice's iterations point to it.
+
+## 0.2.59 · 2026-10-25
+- `engines/discovery` 0.1.1 works out every status that follows from the records, as of any iteration, and why a decision needs another look. The domain discovery practice points to it, and reserves `created`, `by` and `iteration` in records for their making.
+
+## 0.2.58 · 2026-10-25
+- `tools/setup.mjs` sets up engines as it does components, named by their folder (`node tools/setup.mjs <sandbox> discovery`): copied into `lib/sandkit/engines/` with their manifests and changelogs, given a script tag, recorded in `SOURCE.md` and kept on update. The building guide and the template's `AGENTS.md` say so, and the domain discovery practice gives the command for a discovery sandbox.
+
+## 0.2.57 · 2026-10-25
+- Engines and records, decided: an engine is a method's rules written once, in `engines/` beside `components/`, one classic script with no DOM, knowing no component; what a sandbox writes is kept in `records/` beside `sources/`, never edited, each record carrying when, by whom and in which iteration it was made. The domain discovery practice gains a Records section.
+- The first engine, `engines/discovery` 0.1.0: weighing claims, from the records and each source's authored grade.
+- The sources practice: the catalogue gains `grade` (a value from 1 to 5 with the reason for it, and any aspects that matter), `speaksTo` (how things are, or what should be) and `copies`. Listed in the catalog's Discovery section; `test/versions` checks engines too.
+
+## 0.2.56 · 2026-10-25
+- **Manifests name no other component.** Every component's "Works well with" section is gone, and the few manifests naming another in passing say it in plain words, so components stay agnostic of each other even in suggestions (a patch version for each). The practices say which components go together; `test/isolation` now checks manifests too. The decision, the contributing guide, `AGENTS.md`, the readme, the building guide and the template's `AGENTS.md` say so.
+- Fifty-nine components: added `sb-discovery-board`, the sandbox's own items in columns by the part they play, with an item's chain lit and its links drawn when pointed at. The domain discovery practice gains a Boards section: the three boards and their columns, links as signal, and composing the board with the cards.
+
+## 0.2.55 · 2026-10-25
+- Fifty-eight components: added `sb-discovery-card`, one card of domain discovery in 26 kinds, compact, normal or expanded, in a new Discovery section of the catalog.
+- A new practice, `practices/domain-discovery.md`: discovering a domain on purpose, an iteration at a time, with a record of cards that are never edited, the kinds and what each is for, weighing claims, growing and trying the model, feedback, and showing the cards.
+- `STYLE.md`: `sb-discovery-card` wears paper for sources and passages, and the record card for the rest.
+- The sources practice: source material comes from outside the sandbox, chats included, and what the agent writes inside it cites sources rather than being one. A new section, Screening: ask what counts as sensitive, screen every source wherever it came from, raise what's found rather than fixing it silently, and replace the original with the redacted copy the person agrees to. The inbox steps screen before cataloguing; the feedback and domain discovery practices point to it, and the template's `AGENTS.md` has a Sensitive material section for each sandbox's rules. The control room example follows suit: its analysis is no longer a source, and ASM-1 cites the fault log and the interview directly.
+
+## 0.2.54 · 2026-10-24
+- Fifty-seven components: added `sb-board`, a board to pan and zoom holding the sandbox's own content where the agent placed it, with labelled frames, pen marks anchored to refs, and viewers' moves kept apart from the layout and described in words for the agent. The locating practice lists it.
+
+## 0.2.53 · 2026-10-24
+- `sb-board` renamed `sb-kanban` (0.2.0), while no sandbox uses it.
+
+## 0.2.52 · 2026-10-24
+- A style guide, `STYLE.md`: the materials that make things recognisable (paper, the record card, the mode frame, the agent's dashed circle, ink) and which components wear each, the theme tokens and their fallbacks, tones, lighting, shapes and type, and where components differ today. Copied into every sandbox, linked from the domain components practice and the template's `AGENTS.md`, and from the readme and contributing guide.
+- Using Sandkit saves tokens, and the guides now say why: the building guide, the template's `AGENTS.md` and the readme explain that a manifest is the part a sandbox needs, about a third of a script's size. Copying by hand uses a copy command, never reading files and writing them out, and a component's source is read only as a last resort. The building guide also says Sandkit's own examples and demos load its files directly because they live inside it, which a sandbox shouldn't copy.
+
+## 0.2.51 · 2026-10-24
+- A new practice, `practices/domain-components.md`: a sandbox's own components, for things in its subject that appear in more than one place. When to make one, composing them from Sandkit components, a function in `parts.js` before a custom element, and listing them in `AGENTS.md`. Linked from the building guide, the highlighting practice and the catalog; the template's `AGENTS.md` has a section for them.
+
+## 0.2.50 · 2026-10-24
+- Fifty-six components: added `sb-stamp`, a status pressed onto the page like a rubber stamp, set from the model and marked stale, with the reason, when the model has moved past it.
+
+## 0.2.49 · 2026-10-22
+- Fifty-five components: added `sb-outliner`, everything on a page that can be pointed at, in a floating panel: pointing lights a whole trace across the page, and pins keep traces lit while people work, following the model, with a gentle glow.
+- The highlighting practice: `sb-highlight` can carry a trace in `refs`, and a new section, "Keeping things lit", covers `sb-pins`, the pinned classes, glow and a `pinnable` helper beside `pointable`. The locating practice's `announce` takes a trace.
+- The shell has panels, opened from header buttons (shell 0.1.8). The building guide suggests an outliner once the model has traces, and inspect mode once it has labels people could misread.
+
+## 0.2.48 · 2026-10-22
+- Keys for modes: each mode's first letter turns it on, and again goes back to Explore (shell 0.1.7). The modes practice says so.
+
+## 0.2.47 · 2026-10-22
+- Fifty-four components: added `sb-inspect-mode`, Inspect in the shell's mode picker: point at any part to be told exactly what it is, in a card the sandbox fills, and click to hold it. The modes practice lists it.
+
+## 0.2.46 · 2026-10-21
+- Fifty-three components: added `sb-accordion`, sections that open and close and still say what's going on while closed: a note from the model, a dot when what's inside changed, and a tint when something highlighted is inside. The locating practice lists it.
+- The shell's themes have a drop, `--sb-drop`, lift's opposite, for layers nested past where lifts still stand apart (shell 0.1.6).
+
+## 0.2.45 · 2026-10-20
+- A new practice, `practices/workshops.md`: working through a sandbox's model with the people who know the subject, until they understand it, have corrected it and own it. Principles, roles, preparing, the workshop page, the activities and the components for each, the round trip with the agent, driving attention, and closing. Linked from the README, the building guide, the catalog and the template's `AGENTS.md`.
+
+## 0.2.44 · 2026-10-20
+- Fifty-two components: added `sb-handoff`, handing something to the agent as one precise prompt, shown on the page, with whether it's been sent and the agent's reply once it's in.
+
+## 0.2.43 · 2026-10-20
+- Fifty-one components: added `sb-poll`, a question put to a group with every answer hidden until all are in, then revealed together; with an outcome, a prediction. Options and people can be any content, through slots.
+
+## 0.2.42 · 2026-10-20
+- Fifty components: added `sb-person`, a person as a badge: name and role, an agent marked with a dashed circle, and every badge for a person lit up when one is pointed at.
+
+## 0.2.41 · 2026-10-20
+- Sandkit names no particular AI: the sources practice has an agent sign its own analyses as `Agent`, and the examples, demos and tests say "the agent".
+
+## 0.2.40 · 2026-10-20
+- The locating practice lists `sb-notebook`: its sections' bars are marked when given a `ref`, and `reveal` opens the section holding a ref.
+
+## 0.2.39 · 2026-10-20
+- Forty-nine components: added `sb-notebook`, a workshop's sections in one page: each with its kind, who and when, and the codes it cites counted from `data-ref`; key sections open, asides collapsed, an outline and up and down to move around, and filters by code, kind and person that open what matches.
+
+## 0.2.38 · 2026-10-20
+- Forty-eight components: added `sb-choice`, a decision as a card: the options weighed with their pros and cons, the one chosen and why, who decided and when, what it replaces, and what the record is missing. With `editable`, a group records decisions in a workshop, and the sandbox saves each one.
+
+## 0.2.37 · 2026-10-19
+- Modes: commenting and tracing are modes, offered one at a time in the shell's new mode picker (shell 0.1.4), and sharing one amber look. A new practice, `practices/modes.md`, and a Modes section in the catalog, apart from the components that show a subject.
+- Forty-seven components: added `sb-trace-mode`, Trace in the mode picker: click any part to see why it's there. `sb-comments` 0.2.0 is now a mode too (breaking: move it to `slot="modes"`).
+- Every new sandbox has comment mode: the template puts `sb-comments` in the shell, wired once in `sandbox.js`, and `tools/setup.mjs` always copies it. The sources practice's "Tracing" uses `sb-trace-mode`; the building guide and feedback practice say where modes come from.
+- The control-room and checkout examples use the mode picker.
+
+## 0.2.36 · 2026-10-19
+- Serving is documented where people and agents start: the README's Getting started says to ask the assistant to serve a sandbox that shows its source material, and "Showing the working" describes the sources practice and tracing, now they exist. The building guide says to serve such a sandbox, in step 1 and in the handover's Open.
+
+## 0.2.35 · 2026-10-19
+- Forty-six components: added `sb-source-trace`, why something in the model is there as one graph flowing left to right, from the sources to what rests on it. `tools/analyse.mjs trace` runs it from Node. The sources practice gains "Tracing", with trace mode; the locating practice lists it.
+- A fourth example, `examples/control-room/`: a power grid control room's frequency screen, every part traceable to invented but realistic sources, with Sources and Trace in the header. Served from Sandkit's root.
+
+## 0.2.34 · 2026-10-19
+- Forty-five components: added `sb-sources`, a sandbox's source material as cards of paper to search, filter and sort, with how many sources each filter value would show, a slider for the dates written, replaced sources marked and files not yet catalogued listed apart. The sources and locating practices list it.
+
+## 0.2.33 · 2026-10-19
+- Forty-four components: added `sb-source`, one source as a sheet of paper with the passages the model cites marked where they are and quotes it can't find listed. The sources practice shows sources with it; the locating practice lists it.
+
+## 0.2.32 · 2026-10-19
+- Added the sources practice: source material kept in `sources/`, described in one `catalogue.json`, arrivals processed from `sources/inbox/`, never edited but superseded, and cited from the model's `ITEMS` by quote, page, region or annotation, never by line. Added `tools/sources.mjs check`, copied into sandboxes. Files that can't be read as they are get a readable copy, catalogued as derived from the original. The template has an empty catalogue, an inbox and `ITEMS` in `model.js`; the identifiers, journal, building and pages practices point to it.
+
+## 0.2.31 · 2026-10-19
+- Added `tools/serve.mjs`, which serves a sandbox on this computer only, so pages can list its files and save into `sources/inbox/`. Opt-in: pages still open by double-clicking, and only features that need files ask for it. `tools/setup.mjs` copies it into sandboxes.
+
+## 0.2.30 · 2026-10-18
+- Highlighting practice: "Your own parts", so hand-built parts point, light up and are found like components: `data-ref` on each, one `pointable` helper per container, lit with the sandbox's own `is-lit` class in theme colours, SVG notes, and `reveal` on parts that hide things. "Wiring the rest" announces for components that don't, such as `sb-c4`, from their `data-ref`. The template's `style.css` has the `is-lit` rules; the locating and building practices point to the section. `test/own-parts` checks the snippets.
+
+## 0.2.29 · 2026-10-18
+- Forty-three components: added `sb-rule`, one rule as a card, a mandate or a conditional, with the branch in force and whether it holds shown as the model changes. The locating practice lists it.
+
+## 0.2.28 · 2026-10-18
+- Forty-two components: added `sb-scenario`, a Given / When / Then scenario as a card, its steps lit up by their refs and the step happening now marked. The locating practice lists it.
+
+## 0.2.27 · 2026-10-18
+- Pages: added the pages practice, for sandboxes that grow or need sharing in parts, with one model shared by every page, `sandbox.js` listing the name, goal and pages once, and data loaded as scripts. Added `tools/export.mjs`, which exports one page as a single HTML file that still runs, listing every file it put in; the shell's new Export button (shell 0.1.3) gives people the prompt asking their agent to run it.
+- The template has `sandbox.js`, and its `index.html` includes it and the Export button rather than writing out the goal; `templates/page.html` starts new pages. `tools/setup.mjs` copies the page template and the export tool into sandboxes, and adds tags only for the components named, with `--page` for a page other than `index.html`. The building practice links the pages practice.
+
+## 0.2.26 · 2026-10-18
+- Forty-one components: added `sb-ontology`, kinds of things and how they relate, shown a few at a time with what each kind inherits and the model's problems marked. Two new principles: readability over completeness, and components render while models compute, any exception approved by the author first. The building practice suggests an ontology as a model's data when the subject is kinds and relations; the locating practice lists `sb-ontology`.
+
+## 0.2.25 · 2026-10-18
+- Forty components: added `sb-dependencies`, what goes with what in a data set, near-misses first with the samples that break them; its core also runs from Node. `tools/analyse.mjs` takes an analysis's flags without a value (`--pairs`). The building practice finds dependencies after profiling, treating rules as candidates and exceptions as questions. `sb-profile` 0.1.1 points to it.
+
+## 0.2.24 · 2026-10-18
+- Thirty-nine components: added `sb-profile`, a data set's shape and value domain, with what's surprising marked. It is the first component with a core, an analysis that also runs from Node. Added `tools/analyse.mjs`, which runs any component's core on JSON or JSON Lines files. The building practice profiles data sources first.
+
+## 0.2.23 · 2026-10-18
+- The template and every component demo cap their main area at `--sb-page-width`, so a viewer's Page width setting (shell 0.1.2) takes effect; without one, each keeps its own width (the template's is the whole window).
+
+## 0.2.22 · 2026-10-18
+- Thirty-eight components: added `sb-comments`, comments from the people exploring a sandbox, each citing what it's about. Added the feedback practice: collecting comments, and what the agent does on receiving them. The journal, identifiers and building practices cite feedback (`FB-`), and the locating practice gains `refsAt`.
+
+## 0.2.21 · 2026-10-18
+- Thirty-seven components: added `sb-tour`, a guided tour of the page as it stands. The locating practice's `goTo` returns the place it went to (still truthy, so nothing that checked it changes), finding it again if revealing redrew what holds it, and the practice gains "Touring the page". `sb-panel` 0.1.3 respects `hidden`.
+
+## 0.2.20 · 2026-10-18
+- Thirty-six components: added `sb-xref`, where a thing appears and what it's linked to.
+
+## 0.2.19 · 2026-10-18
+- The locating practice says why a walkthrough's hidden steps aren't gone to: its steps are what reveal.
+
+## 0.2.18 · 2026-10-18
+- `sb-timeline` and `sb-board` 0.1.1 carry `data-ref` for the locating practice, beside their documented `data-id`.
+
+## 0.2.17 · 2026-10-18
+- For the locating practice: `sb-wireframe` 0.1.1's `reveal` takes a place and says whether it found the part; `sb-panel` 0.1.2 gains `reveal`, expanding a collapsed panel; `sb-image` 0.1.1 marks its marks with `data-ref` and gains `reveal`.
+
+## 0.2.16 · 2026-10-18
+- More components mark their parts for the locating practice: `sb-log`, `sb-flowchart`, `sb-statechart` and `sb-decision-tree` 0.1.1 carry `data-ref`.
+
+## 0.2.15 · 2026-10-18
+- The checkout architecture example gains chapter 5, when payment fails, completing its first plan.
+
+## 0.2.14 · 2026-10-18
+- `sb-table` 0.1.2 is framed, so a table has a clear edge against the page, and 0.1.3 shades its heading row.
+
+## 0.2.13 · 2026-10-18
+- The checkout architecture example gains chapter 4, where it's kept: the database's tables and rows, each write replayed. `sb-erd` 0.1.1 marks entities and fields with `data-ref`.
+
+## 0.2.12 · 2026-10-18
+- The checkout architecture example gains chapter 3, what's sent: each message's JSON, with the fields that matter spotlit.
+
+## 0.2.11 · 2026-10-18
+- The template's page takes the whole window, so diagrams have room, while paragraphs keep their own readable width. Existing sandboxes keep their width until they choose to change it.
+
+## 0.2.10 · 2026-10-18
+- The checkout architecture example gains chapter 2, placing an order. `sb-sequence` 0.1.1 marks participants, and messages and notes given an id, with `data-ref`. `sb-walkthrough` 0.1.1 frames each view.
+
+## 0.2.9 · 2026-10-18
+- The locating practice says when to skip `goTo`: when you know which view you mean, call its `reveal`. Words that go somewhere keep their target in an attribute of their own, not `data-ref`.
+
+## 0.2.8 · 2026-10-18
+- Added a third example sandbox, checkout architecture: chapter 1, the parts, with names in the prose that go to their part. `sb-c4` 0.1.1 marks its boxes and lines with `data-ref`, and `reveal` says whether it holds the element.
+
+## 0.2.7 · 2026-10-18
+- More components mark their parts for the locating practice: `sb-id` 0.1.2, `sb-table` 0.1.1, `sb-rules` 0.1.1 and `sb-graph` 0.1.1 carry `data-ref`.
+
+## 0.2.6 · 2026-10-18
+- Added the locating practice: finding everywhere a ref appears on the page and going to it, through closed tabs and folded branches. `sb-tabs` 0.1.3 gains `reveal(ref)`; `sb-tree` 0.1.1 marks its nodes with `data-ref`.
+
+## 0.2.5 · 2026-10-18
+- Added the journal practice: a sandbox records what changed and why in `JOURNAL.md`, each entry a version, and retired codes in its model.
+- The template has a `JOURNAL.md`, and `AGENTS.md`'s Roadmap is now **Where it stands**, with the version and open questions. Setting up only copies the template into new sandboxes: to add a journal to an existing one, follow "Adding a journal to an existing sandbox" in the practice.
+- The guide records each iteration in the journal before handing over, and its handover gives the new version.
+
+## 0.2.4 · 2026-10-17
+- Thirty-five components: added `sb-venn`, two or three overlapping sets with every region named and counted.
+
+## 0.2.3 · 2026-10-17
+- Thirty-four components: added `sb-statechart`, a statechart with nested states, parallel regions and history.
+
+## 0.2.2 · 2026-10-17
+- Thirty-three components: added `sb-decision-tree`, a decision tree that shows the way a case went.
+
+## 0.2.1 · 2026-10-17
+- Thirty-two components: added `sb-timeline`, a timeline of events.
+
+## 0.2.0 · 2026-10-17
+- **Breaking:** `sb-timeline` is renamed `sb-scrubber`, freeing the name for a timeline of events. See `components/sb-scrubber/CHANGELOG.md` to migrate.
+
+## 0.1.6 · 2026-10-17
+- Thirty-one components: added `sb-board`.
+
+## 0.1.5 · 2026-10-17
+- Thirty components: added `sb-annotate`.
+
+## 0.1.4 · 2026-10-17
+- Twenty-nine components: added `sb-image`.
+
+## 0.1.3 · 2026-10-17
+- Twenty-eight components: added `sb-json`.
+
+## 0.1.2 · 2026-10-17
+- Twenty-seven components: added `sb-modal`.
+
+## 0.1.1 · 2026-10-17
+- Highlighting practice: pointing shows, clicking acts, with dashed and solid underlines telling prose words apart.
+
+## 0.1.0 · 2026-10-17
+- First release: the building-a-sandbox, highlighting and identifiers practices, the sandbox template, `tools/setup.mjs`, the shell, and twenty-six components (`sb-bars`, `sb-c4`, `sb-callout`, `sb-chart`, `sb-code`, `sb-controls`, `sb-erd`, `sb-flowchart`, `sb-graph`, `sb-grid`, `sb-id`, `sb-log`, `sb-math`, `sb-matrix`, `sb-panel`, `sb-parameters`, `sb-plane`, `sb-rules`, `sb-sequence`, `sb-stat`, `sb-table`, `sb-tabs`, `sb-timeline`, `sb-tree`, `sb-walkthrough`, `sb-wireframe`).

@@ -1,0 +1,12 @@
+visual: 11 landmarks · abstract: 10 assemblies, 2 with slots · experiences kept: 32 · (learnt with context from above)
+
+(1) "how do I get from the bench to the oak?" (never walked), 30 times, views partly obscured
+  0 of 5 pixels missing: route found 30 (checked against experiences: 30 trusted) · no way 0 · undecided 0 · wrong 0 · views not read right 0
+  1 of 5 pixels missing: route found 26 (checked against experiences: 26 trusted) · no way 0 · undecided 0 · wrong 0 · views not read right 4
+  2 of 5 pixels missing: route found 6 (checked against experiences: 6 trusted) · no way 0 · undecided 0 · wrong 0 · views not read right 24
+
+(2) reading a view along a walk (200 each): right / wrong (of which the expected thing) / nothing
+  expected, 2 missing  no context 158 /  42 ( 0) /   0 · with context 200 /   0 ( 0) /   0 · context, then a second look on a misfit 200 /   0 ( 0) /   0
+  surprise, 1 missing  no context 188 /  12 ( 1) /   0 · with context 186 /  14 ( 3) /   0 · context, then a second look on a misfit 188 /  12 ( 1) /   0
+  surprise, 2 missing  no context 147 /  53 (10) /   0 · with context 143 /  57 (15) /   0 · context, then a second look on a misfit 147 /  53 (11) /   0
+  noise                no context   0 /   6 ( 1) / 194 · with context   0 /   6 ( 1) / 194 · context, then a second look on a misfit   0 /   6 ( 1) / 194

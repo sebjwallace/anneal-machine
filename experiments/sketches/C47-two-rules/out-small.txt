@@ -1,0 +1,7 @@
+
+SMALL PARK (17 places) · store of days holds 50 walks
+  days | general shapes kept | ONE RULE: real new routes trusted, doubted · made-up caught, missed | TWO RULES: same
+   100 |  2 walks, 0 kinds       | 0 trusted, 0 doubted · 0 caught, 0 missed   | 0 trusted, 0 doubted · 0 caught, 0 missed
+   300 |  6 walks, 3 kinds       | 5 trusted, 1 doubted · 0 caught, 0 missed   | 6 trusted, 0 doubted · 0 caught, 0 missed
+  1000 | 11 walks, 6 kinds       | 2 trusted, 1 doubted · 0 caught, 0 missed   | 3 trusted, 0 doubted · 0 caught, 0 missed
+  3000 | 12 walks, 9 kinds       | 2 trusted, 1 doubted · 0 caught, 0 missed   | 3 trusted, 0 doubted · 0 caught, 0 missed

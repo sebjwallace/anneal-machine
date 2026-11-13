@@ -1,0 +1,26 @@
+300 days (39 different walks), learnt in 0.6 s: 9 walks kept, 3 kinds
+  kept: A → B → C → D → E
+  kept: A → B → C → K
+  kept: G → H → O
+  kept: F → G → H → O
+  kept: E → F → G
+  kept: E → Z → W
+  kept: Q → R → S
+  kept: C → K → E
+  kept: A → B → C
+  kind: K/D → E → F/Z → G/W
+  kind: D/K → E → Z/F
+  kind: B → C → K/D → E
+
+pairs never in one walk, with a real way between them: 16 · found a real route 2 · undecided (two equal routes) 8 · wrong 0 · missed 6 · 1.0 rounds on average
+pairs with no way between them: 154 · said "no way through" 150
+  · A to G: there is a way, but it found none
+  · A to Y: there is a way, but it found none
+  · A to W: there is a way, but it found none
+  · B to G: there is a way, but it found none
+  · B to W: there is a way, but it found none
+  · C to W: there is a way, but it found none
+  ✗ F to W: no real way, but said F → W
+  ✗ Z to G: no real way, but said Z → G
+  ✗ Z to H: no real way, but said Z → G → H
+  ✗ Z to O: no real way, but said Z → G → H → O

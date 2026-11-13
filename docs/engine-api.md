@@ -24,14 +24,15 @@ A bigger picture can be used by setting `globalThis.WORLD_SIZE` before loading (
 
 | | |
 |---|---|
-| `m.step(x)` | **Awake.** Explains picture `x`, and stores it if more than 10% is unexplained or wrong. Returns `{ claims, left, misses, recon, ownerPx, missPx, heatShare, born, cost }`: `claims` = `[{ c: unit, dx, dy }]`; `left` = pixel indices unexplained; `misses` = wrong pixels; `recon` = the rebuilt picture; `ownerPx[i]` = which claim explains pixel `i`; `heatShare` = share left over or wrong. |
-| `m.rest()` | **Rest** until settled; returns the number of changes kept. `m.restStep()` does one change at a time (for animating) and returns `{ type, saving, pieces, A, B, made }`, or `null` when settled. `type` is one of `decompose`, `compose`, `dissolve`, `fuse`, `unpack`, `relook`. |
+| `m.step(x, prev)` | **Awake.** Explains picture `x` (`prev`, optional: the picture just before it in a sequence, so the change between them joins the energy), and stores it if more than 10% is unexplained or wrong. Returns `{ claims, left, misses, recon, ownerPx, missPx, heatShare, born, cost }`: `claims` = `[{ c: unit, dx, dy }]`; `left` = pixel indices unexplained; `misses` = wrong pixels; `recon` = the rebuilt picture; `ownerPx[i]` = which claim explains pixel `i`; `heatShare` = share left over or wrong. |
+| `m.rest()` | **Rest** until settled; returns the number of changes kept. `m.restStep()` does one change at a time (for animating) and returns `{ type, saving, pieces, A, B, made }`, or `null` when settled. `type` is one of `decompose`, `compose`, `dissolve`, `fuse`, `unpack`, `relook`, `kind`, `widen`, `share`, `unkind`, `dissolve kind`. |
 | `m.read(x, hidden)` | Explains without learning; `hidden` (optional, 1 = unknown) marks hidden places. Same fields as `step`. |
 | `m.units` | Everything learnt: `{ id, layer, pts (layer 1) or place: [{ u, dx, dy }] (composites), loose }`. Skip units with `loose: true` (memory leftovers, not things). |
 | `m.parts`, `m.layers` | Parts (layer 1) and units by layer. |
 | `m.exp(u)` | A unit's pixels in its own frame. |
 | `m.items` | Memories: `{ place, scene }`. |
-| `m.measure()` | `{ E, structure, flow, pc }`: energy and its split, and the price of a placement (exact; slow). `m.glance()` is cheap, for display. |
+| Kinds | A unit with `kind: true` has `place` (what the versions share), `slot: { set: { fillers: [{ u, dx, dy }] }, sx, sy }`. Its versions are made on demand by `m.inst(K, filler)` (`virtual: true`, `K`, `place`); claims can name them. `m.exp(u)` works for all. |
+| `m.measure()` | `{ E, structure, flow, change, pc }`: energy and its split, and the price of a placement (exact; slow). `m.glance()` is cheap, for display. |
 | `m.st` | Counters (stored pictures, splits, composites, …). |
 
 ## Cells (`src/engine/cells.js`)

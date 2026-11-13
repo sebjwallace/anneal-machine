@@ -6,10 +6,11 @@
   "private": true,
   "engines": { "node": ">=18" },
   "scripts": {
-    "test": "node src/test/see.js && node src/test/cells.js && node src/test/complete.js && node src/test/change.js",
+    "test": "node src/test/see.js && node src/test/cells.js && node src/test/complete.js && node src/test/change.js && node src/test/kinds.js",
     "test:see": "node src/test/see.js",
     "test:cells": "node src/test/cells.js",
     "test:complete": "node src/test/complete.js",
-    "test:change": "node src/test/change.js"
+    "test:change": "node src/test/change.js",
+    "test:kinds": "node src/test/kinds.js"
   }
 }

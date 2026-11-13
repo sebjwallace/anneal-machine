@@ -1,0 +1,28 @@
+ONLY the two episodes:
+  A and P (same episode)       A  →  J*  →  P   [found: episode 1]
+  A and J                      A  →  J  →  P*   [found: episode 1]
+  J and O                      G*  →  J  →  O   [found: episode 2]
+  A and O, two steps apart     A  →  O   [found: nothing]
+  A and O, one step apart      A  →  O   [found: nothing]
+  A and O, three steps apart   A  →  O   [found: nothing]
+  A alone                      A   [found: nothing]
+
+WITH a level above episodes ("both episodes", lined up at J):
+  A and P (same episode)       A  →  J*  →  P   [found: episode 1]
+  A and J                      A  →  J  →  P*   [found: episode 1]
+  J and O                      G*  →  J  →  O   [found: episode 2]
+  A and O, two steps apart     A/G*  →  J*  →  O/P*   [found: both episodes]
+  A and O, one step apart      A  →  O   [found: nothing]
+  A and O, three steps apart   A  →  O   [found: nothing]
+  A alone                      A   [found: nothing]
+
+A KIND WITH TWO SLOTS ("_ J _"; versions written out by hand):
+  A and P (same episode)       A  →  J*  →  P   [found: A J P]
+  A and J                      A  →  J   [found: nothing]
+  J and O                      J  →  O   [found: nothing]
+  A and O, two steps apart     A  →  J*  →  O   [found: A J O (never happened)]
+  A and O, one step apart      A  →  O   [found: nothing]
+  A and O, three steps apart   A  →  O   [found: nothing]
+  A alone                      A   [found: nothing]
+
+(* = filled in, not cued)
