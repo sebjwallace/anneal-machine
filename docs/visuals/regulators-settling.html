@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regulators settling together (entrainment)</title>
+<style>
+:root{--acc-bg:#E6F1FB;--acc-b:#85B7EB;--acc-t:#0C447C;--bg:#fff;--text:#1f1e1d;--muted:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border3:rgba(0,0,0,.55);--cell:#f5f4f0;
+--teal-f:#E1F5EE;--teal-s:#0F6E56;--purple-f:#EEEDFE;--purple-s:#534AB7;--amber-f:#FAEEDA;--amber-s:#854F0B;--coral-f:#F0997B;--coral-s:#993C1D}
+@media (prefers-color-scheme:dark){:root{--acc-bg:#0C447C;--acc-b:#378ADD;--acc-t:#B5D4F4;--bg:#1f1e1d;--text:#ecebe6;--muted:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border3:rgba(255,255,255,.6);--cell:#2a2a28;
+--teal-f:#085041;--teal-s:#5DCAA5;--purple-f:#3C3489;--purple-s:#AFA9EC;--amber-f:#633806;--amber-s:#EF9F27;--coral-f:#993C1D;--coral-s:#F0997B}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--muted);font-size:14px;margin:0 0 1rem}
+svg text{fill:var(--text);font-size:14px}
+svg .ts{fill:var(--muted);font-size:12px}
+svg .th{font-weight:500}
+.cell,.col,.row,.heat{transition:all .6s ease}
+.c-teal{fill:var(--teal-f);stroke:var(--teal-s)}
+.c-purple{fill:var(--purple-f);stroke:var(--purple-s)}
+.c-amber{fill:var(--amber-f);stroke:var(--amber-s)}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+.cap{font-size:15px;line-height:1.6;min-height:3.4em;margin:.75rem 0 0}
+.ctl{display:flex;align-items:center;gap:8px;margin:.5rem 0 0}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{background:var(--cell)}
+#stepn{font-size:13px;color:var(--muted);margin-left:8px}
+
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+section.story code{font-size:13px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 .5rem}
+.mode.on{background:var(--acc-bg);color:var(--acc-t);border-color:var(--acc-b)}
+.lbl{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<h1>Regulators settling together (entrainment)</h1>
+<p class="sub">Six linked regulators, each with its own resting state. Disturb one or more, or hold a load on one, and watch the heat spread along the links and the whole system settle together. Drawn by hand with a small simulation; the walkthrough underneath tells you what to press and what to look at.</p>
+<div class="row"><span class="lbl">Show as:</span>
+<button class="mode" data-m="lev">Levels</button>
+<button class="mode" data-m="rhy">Rhythms</button></div>
+<div class="row">
+<button id="d1">Disturb one</button>
+<button id="d2">Disturb two</button>
+<button id="hold">Hold a load on one</button>
+<button id="calm">Calm</button>
+</div>
+<svg id="en" viewBox="0 0 680 330" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Six linked regulators and their total heat</title>
+<g id="net"></g>
+<text class="ts" x="440" y="24">Total heat over time</text>
+<rect x="440" y="34" width="220" height="150" rx="4" fill="none" stroke="var(--border)" stroke-width="0.5"/>
+<path id="spark" d="" fill="none" stroke="#D85A30" stroke-width="1.5"/>
+<text class="ts" x="440" y="210">Heat now</text>
+<text id="hnow" class="th" x="440" y="238" style="font-size:22px">0</text>
+<text id="state" class="ts" x="440" y="266"></text>
+</svg>
+<p id="cap" style="font-size:15px;line-height:1.6;margin:.25rem 0 0;min-height:3.2em"></p>
+<section class="story">
+<h2>How to read it (a walkthrough)</h2>
+<p><b>Start by looking at it at rest.</b> There are six regulators, A to F, joined by lines. Each one has a resting level, shown by the dashed line through its middle, and the dot is where it actually is. At rest every dot sits on its line, nothing is orange, and the heat line on the right is flat at zero.</p>
+<p><b>Press "Disturb one".</b> A gets pushed up off its level and turns orange. Watch the lines coming out of A: they glow orange too, because A and its neighbours now disagree. The neighbours start moving towards A, and that pulls A back down. For a moment the heat spreads out across the group, then everything drifts back onto its line together. The heat line shoots up and slides back down to zero. Nobody fixes A; the group settles it.</p>
+<p><b>Press "Disturb two".</b> A gets pushed up and D gets pushed down, and there's a direct link between them. They pull on each other, so this settles quickly. Disturbances that oppose each other partly cancel out.</p>
+<p><b>Press "Hold a load on one".</b> This is the craving. A load is held on A and not lifted. A can't get back to rest on its own, so watch the neighbours: they shift a little towards A and stay there, sharing the strain. The heat line doesn't go back to zero; it levels off higher. The heat is spread thinly across the group instead of piling up in A. <b>Now press "Calm"</b> to lift the load, which is like the coffee arriving. Everything falls back to rest, and the heat line drops to zero.</p>
+<p><b>Now press "Rhythms" at the top.</b> This is entrainment proper. Each regulator now pulses: its circle grows and shrinks, and the dot goes round like a clock hand. At rest all six pulse in step. <b>Press "Disturb one"</b> and A gets knocked out of step; watch it get pulled back into the shared rhythm by its neighbours, like pendulum clocks on one wall. <b>Then press "Hold a different pace on one":</b> A wants to go faster. The others won't let it run away, and it can't fully slow down, so they settle into one shared rhythm with A slightly ahead. That's settling around a disturbance rather than removing it (allostasis).</p>
+<h2>What it shows</h2>
+<p>The principle that works inside a region (settling into a low-energy state) taken up a level: regulators that each have a resting state, linked so that each link wants its two ends to agree. A disturbance in one is heat that spreads along the links; the others respond, and the whole system moves downhill in energy until nothing more can fall.</p>
+<p>The held load shows something the owner pointed out: while a disturbance can't be resolved, the neighbours take on part of the stress, so it is spread thinly instead of concentrated in one part. That keeps the system going long enough for the disturbance to be resolved, as load spreads through a sound structure. It is still heat, but flowing and shared rather than trapped in one place. What this is about, in the end, is balance.</p>
+<h2>What's simplified here</h2>
+<p>This is drawn by hand with a small simulation, not the engine. Levels: each regulator is pulled back to its rest, and each link pulls its two ends together; the strengths are chosen to make it easy to see, not measured. Rhythms: each regulator has the same pace and each link pulls its two ends into step (the usual way coupled rhythms are modelled). The "heat" is the energy of that simulation: how far each is from rest, plus how much each link's two ends disagree.</p>
+<h2>Open questions</h2>
+<p>What happens when two parts need incompatible things, so that no state satisfies both and the system can't fully settle (feeling torn)? When does sharing a load protect the system, and when does it spread a failure? How would regions of the engine be linked so they settle each other like this?</p>
+<h2>Where it comes from</h2>
+<p>The owner's idea of regulators everywhere (13 November 2026); the theory in <code>docs/theories/regulators-and-heat.md</code> and <code>architecture-and-regulation.md</code>.</p>
+</section>
+</main>
+<script>
+const NS="http://www.w3.org/2000/svg",mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const NAMES=["A","B","C","D","E","F"],n=6,CX=210,CY=170,RR=115;
+const P=NAMES.map((_,i)=>[CX+RR*Math.cos(-Math.PI/2+i*2*Math.PI/n),CY+RR*Math.sin(-Math.PI/2+i*2*Math.PI/n)]);
+const LINKS=[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,3],[1,4]];
+const net=document.getElementById("net");
+const lk=LINKS.map(([a,b])=>mk("line",{x1:P[a][0],y1:P[a][1],x2:P[b][0],y2:P[b][1],stroke:"var(--border2)","stroke-width":1},net));
+const ring=[],dot=[],needle=[];
+P.forEach(([x,y],i)=>{ring[i]=mk("circle",{cx:x,cy:y,r:26,fill:"var(--cell)",stroke:"var(--border2)","stroke-width":0.5},net);
+dot[i]=mk("circle",{cx:x,cy:y,r:26,fill:"#D85A30",opacity:0},net);
+mk("line",{x1:x-18,y1:y,x2:x+18,y2:y,stroke:"var(--border2)","stroke-width":0.5,"stroke-dasharray":"2 2"},net);
+needle[i]=mk("circle",{cx:x,cy:y,r:5,fill:"var(--text)"},net);
+const t=mk("text",{x:x,y:y+44,"text-anchor":"middle",class:"ts"},net);t.textContent=NAMES[i]});
+let mode="lev",x=new Array(n).fill(0),th=new Array(n).fill(0),load=new Array(n).fill(0),pace=new Array(n).fill(0),hist=[],note="";
+const A=0.25,K=0.6,DT=0.05,W=2.2,KR=0.9;
+function heat(){let h=0;if(mode==="lev"){for(let i=0;i<n;i++)h+=A*x[i]*x[i];for(const[a,b]of LINKS)h+=(x[a]-x[b])**2}else{for(const[a,b]of LINKS)h+=1-Math.cos(th[a]-th[b])}return h}
+function step(){if(mode==="lev"){const d=x.map((xi,i)=>-A*xi+load[i]);for(const[a,b]of LINKS){const f=K*(x[b]-x[a]);d[a]+=f;d[b]-=f}for(let i=0;i<n;i++)x[i]+=DT*d[i]*2}
+else{const d=th.map((_,i)=>W+pace[i]);for(const[a,b]of LINKS){const f=KR*Math.sin(th[b]-th[a]);d[a]+=f;d[b]-=f}for(let i=0;i<n;i++)th[i]+=DT*d[i]}}
+function nodeHeat(i){let h=0;if(mode==="lev"){h=A*x[i]*x[i];for(const[a,b]of LINKS)if(a===i||b===i)h+=(x[a]-x[b])**2/2}else{for(const[a,b]of LINKS)if(a===i||b===i)h+=(1-Math.cos(th[a]-th[b]))/2}return h}
+function draw(){const H=heat();hist.push(H);if(hist.length>220)hist.shift();
+const mx=Math.max(1,...hist);let d="";hist.forEach((v,i)=>{const px=440+i,py=184-v/mx*140;d+=(i?" L ":"M ")+px.toFixed(1)+" "+py.toFixed(1)});document.getElementById("spark").setAttribute("d",d);
+document.getElementById("hnow").textContent=H<0.005?"0":H.toFixed(2);
+for(let i=0;i<n;i++){const h=nodeHeat(i);dot[i].setAttribute("opacity",Math.min(0.85,h*0.9).toFixed(2));
+if(mode==="lev"){needle[i].setAttribute("cy",P[i][1]-Math.max(-20,Math.min(20,x[i]*7)));needle[i].setAttribute("cx",P[i][0]);ring[i].setAttribute("r",26)}
+else{const s=(1+Math.cos(th[i]))/2;ring[i].setAttribute("r",(18+10*s).toFixed(1));needle[i].setAttribute("cx",P[i][0]+18*Math.sin(th[i]));needle[i].setAttribute("cy",P[i][1]-18*Math.cos(th[i]))}}
+LINKS.forEach(([a,b],k)=>{const t=mode==="lev"?(x[a]-x[b])**2:1-Math.cos(th[a]-th[b]);lk[k].setAttribute("stroke",t>0.02?"#D85A30":"var(--border2)");lk[k].setAttribute("stroke-width",(1+Math.min(5,t*4)).toFixed(1))});
+const held=load.some(v=>v)||pace.some(v=>v);
+document.getElementById("state").textContent=H<0.01?"settled":held?"held: settling around the load":"settling";
+const cap=document.getElementById("cap");cap.textContent=H<0.01&&!held?(note?"Settled again. "+note:(mode==="lev"?"At rest: every regulator sits at its resting level, and neighbours agree.":"At rest: all six pulse in step.")):note}
+function loop(){for(let k=0;k<3;k++)step();draw();requestAnimationFrame(loop)}
+function setMode(m){mode=m;x.fill(0);th.fill(0);load.fill(0);pace.fill(0);hist=[];note="";document.querySelectorAll(".mode").forEach(b=>b.classList.toggle("on",b.dataset.m===m));document.getElementById("hold").textContent=m==="lev"?"Hold a load on one":"Hold a different pace on one"}
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+document.getElementById("d1").onclick=()=>{if(mode==="lev")x[0]+=3;else th[0]+=2.6;note=mode==="lev"?"A was pushed off its level. Its heat spreads along its links: its neighbours move towards it, which pulls A back, and the whole group settles.":"A was knocked out of step. Its neighbours feel the mismatch and A is pulled back into step with them: entrainment."};
+document.getElementById("d2").onclick=()=>{if(mode==="lev"){x[0]+=3;x[3]-=3}else{th[0]+=2.6;th[3]-=2.2}note=mode==="lev"?"A pushed up and D pushed down, and they're linked. They pull each other back, so this settles faster than A alone would.":"A and D knocked out of step in different directions. The links pull everyone back into one rhythm."};
+document.getElementById("hold").onclick=()=>{if(mode==="lev"){load.fill(0);load[0]=1.5;note="A load is held on A (like a craving that isn't resolved). It can't settle alone, so its neighbours shift to share it: the heat spreads thin across the group instead of piling up in A. Press Calm to lift the load."}else{pace.fill(0);pace[0]=0.6;note="A wants a faster pace. The others can't let it run away, and it can't fully slow: they settle into one shared pace with A a little ahead. Press Calm to let A go back to the common pace."}};
+document.getElementById("calm").onclick=()=>{load.fill(0);pace.fill(0);note="The load is lifted. Everything falls back to rest."};
+setMode("lev");loop();
+</script>
+</body>
+</html>

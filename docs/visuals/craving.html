@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A craving as heat</title>
+<style>
+:root{--acc-bg:#E6F1FB;--acc-b:#85B7EB;--acc-t:#0C447C;--bg:#fff;--text:#1f1e1d;--muted:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border3:rgba(0,0,0,.55);--cell:#f5f4f0;
+--teal-f:#E1F5EE;--teal-s:#0F6E56;--purple-f:#EEEDFE;--purple-s:#534AB7;--amber-f:#FAEEDA;--amber-s:#854F0B;--coral-f:#F0997B;--coral-s:#993C1D}
+@media (prefers-color-scheme:dark){:root{--acc-bg:#0C447C;--acc-b:#378ADD;--acc-t:#B5D4F4;--bg:#1f1e1d;--text:#ecebe6;--muted:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border3:rgba(255,255,255,.6);--cell:#2a2a28;
+--teal-f:#085041;--teal-s:#5DCAA5;--purple-f:#3C3489;--purple-s:#AFA9EC;--amber-f:#633806;--amber-s:#EF9F27;--coral-f:#993C1D;--coral-s:#F0997B}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--muted);font-size:14px;margin:0 0 1rem}
+svg text{fill:var(--text);font-size:14px}
+svg .ts{fill:var(--muted);font-size:12px}
+svg .th{font-weight:500}
+.cell,.col,.row,.heat{transition:all .6s ease}
+.c-teal{fill:var(--teal-f);stroke:var(--teal-s)}
+.c-purple{fill:var(--purple-f);stroke:var(--purple-s)}
+.c-amber{fill:var(--amber-f);stroke:var(--amber-s)}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+.cap{font-size:15px;line-height:1.6;min-height:3.4em;margin:.75rem 0 0}
+.ctl{display:flex;align-items:center;gap:8px;margin:.5rem 0 0}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{background:var(--cell)}
+#stepn{font-size:13px;color:var(--muted);margin-left:8px}
+
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+section.story code{font-size:13px}
+.mode.on{background:var(--acc-bg);color:var(--acc-t);border-color:var(--acc-b)}
+.ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:.5rem 0 0}
+.a{transition:all .6s ease}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+</style>
+</head>
+<body>
+<main>
+<h1>A craving as heat</h1>
+<p class="sub">A craving for coffee is held and unexplained: heat. The bar drops, memories wake from where you are and from the craving until they meet, and arriving at the café explains it. Drawn by hand to show the idea; see the story below.</p>
+<svg id="cv" viewBox="0 0 680 360" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>A craving as held heat</title>
+<text class="ts" x="10" y="20">The park</text>
+<g id="map"></g>
+<g id="cols"></g>
+<g id="rows"></g>
+<text class="ts" x="636" y="20" text-anchor="middle">Heat</text>
+<rect x="620" y="32" width="32" height="200" rx="4" fill="none" stroke="var(--border2)" stroke-width="0.5"/>
+<rect id="heat" class="a c-coral" x="622" y="230" width="28" height="0" rx="3"/>
+<text class="ts" x="636" y="262" text-anchor="middle">Bar</text>
+<text id="bar" class="th" x="636" y="294" text-anchor="middle" style="font-size:28px">2</text>
+<g transform="translate(20,342)">
+<circle r="6" class="c-teal"/><text class="ts" x="12" y="4">from where you are</text>
+<circle r="6" class="c-purple" cx="160"/><text class="ts" x="172" y="4">from the craving</text>
+<circle r="6" class="c-amber" cx="300"/><text class="ts" x="312" y="4">where they meet</text>
+<circle r="6" class="c-coral" cx="430"/><text class="ts" x="442" y="4">you</text>
+</g>
+</svg>
+<p class="cap" id="cap"></p>
+<div class="ctl">
+<button id="play">Pause</button>
+<button id="back" aria-label="Previous step">&#8249;</button>
+<button id="fwd" aria-label="Next step">&#8250;</button>
+<button id="again">Restart</button>
+<span id="stepn"></span>
+</div>
+<section class="story">
+<h2>What it shows</h2>
+<p>A craving read as heat. Wanting coffee is a held thing (the coffee cell stays lit) that nothing explains yet: no memory holds where you are and coffee together. That unexplained hold is heat. With where you are held at one end and the craving at the other, the heat lowers the bar, and memories wake from both ends until they meet: the path from the gate to the fountain, and the memory of having coffee at the café. The bar goes back up, leaving a plan. Walking it, the café and the craving finally fall inside one memory, and the craving is explained. The hold lets go and the heat is gone.</p>
+<h2>Why it works this way</h2>
+<p>It is the moving bar (see <code>moving-bar.html</code>) with a want as the far end. The café is found because it is what settles the gap: not low energy on its own, but low energy given the craving, because it is where the held thing fits. Heat falls in two stages, as the owner sees it: having a plan settles part of it (there is even some excitement, energy starting to flow), and only arriving resolves the rest.</p>
+<h2>What's simplified here</h2>
+<p>The rounds, memories and heat levels are drawn by hand. In experiment C59 the engine found this route by itself (the bar dropped, then the sides met at the café), but nothing in the engine yet measures a held craving as heat or lets go of it on arrival: those two parts are the owner's idea, not yet built.</p>
+<h2>Open questions</h2>
+<p>How is the heat of a held want measured in the engine's own currency? What exactly releases the hold: is "two active things inside one memory" (the café and coffee) enough?</p>
+<h2>Where it comes from</h2>
+<p>The owner's idea (13 November 2026), built on the moving bar (C44, C51) and the theory in <code>docs/theories/feelings-as-heat.md</code>. Tested in <code>experiments/sketches/C59-craving/</code>.</p>
+</section>
+</main>
+<script>
+const NS="http://www.w3.org/2000/svg",mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const L={gate:["Gate",25,150],fountain:["Fountain",95,150],pond:["Pond",160,85],bench:["Bench",215,85],oak:["Oak",160,150],hill:["Hill",215,150],cafe:["Café",160,215]};
+const P=[["gate","fountain"],["fountain","pond"],["pond","bench"],["fountain","oak"],["oak","hill"],["fountain","cafe"]];
+const map=document.getElementById("map");
+P.forEach(([a,b])=>mk("line",{x1:L[a][1],y1:L[a][2],x2:L[b][1],y2:L[b][2],stroke:"var(--border2)","stroke-width":2},map));
+Object.values(L).forEach(([n,x,y])=>{mk("circle",{cx:x,cy:y,r:9,fill:"var(--cell)",stroke:"var(--border2)","stroke-width":0.5},map);const t=mk("text",{x,y:y+24,"text-anchor":"middle",class:"ts"},map);t.textContent=n});
+const walker=mk("circle",{cx:25,cy:150,r:6,class:"a c-coral"},map);
+const C=["gate","fountain","pond","bench","oak","hill","cafe","coffee"],X=i=>290+i*38,NM=k=>k==="coffee"?"coffee":L[k][0];
+const M=[["gate","fountain"],["fountain","pond"],["pond","bench"],["fountain","oak"],["oak","hill"],["fountain","cafe"],["cafe","coffee"]];
+const ML=["path","path","path","path","path","path","had coffee"];
+const RY=i=>100+i*28;
+const cg=document.getElementById("cols"),rg=document.getElementById("rows"),col={},cell={},row={};
+C.forEach((k,i)=>{const x=X(i);col[k]=mk("rect",{x:x-13,y:40,width:26,height:26,rx:4,class:"a",fill:"none",stroke:"var(--border2)","stroke-width":0.5},cg);
+const t=mk("text",{x:x-6,y:32,class:"ts",transform:`rotate(-35 ${x-6} 32)`},cg);t.textContent=NM(k);
+mk("line",{x1:x,y1:70,x2:x,y2:RY(M.length-1)+10,stroke:"var(--border)","stroke-width":0.5,"stroke-dasharray":"2 4"},cg)});
+const here=mk("path",{d:"M0 0 L-6 -9 L6 -9 Z",class:"a c-coral",transform:`translate(${X(0)},40)`},cg);
+M.forEach((m,r)=>{const a=C.indexOf(m[0]),b=C.indexOf(m[1]);row[r]=mk("rect",{x:X(Math.min(a,b))-13,y:RY(r)-10,width:X(Math.max(a,b))-X(Math.min(a,b))+26,height:20,rx:10,class:"a",fill:"none",stroke:"var(--border)","stroke-width":0.5},rg);
+const t=mk("text",{x:274,y:RY(r)+4,"text-anchor":"end",class:"ts"},rg);t.textContent=ML[r];
+m.forEach(k=>{cell[r+k]=mk("circle",{cx:X(C.indexOf(k)),cy:RY(r),r:6,class:"a",fill:"var(--cell)",stroke:"var(--border2)","stroke-width":0.5},rg)})});
+const S=[
+{h:0,b:2,at:"gate",c:{gate:"s"},m:{},t:"At the gate. Nothing is held, nothing is unexplained. Calm."},
+{h:60,b:2,at:"gate",c:{gate:"s",coffee:"e"},m:{},t:"A craving: the coffee cell is held. No memory holds the gate and coffee together, so nothing explains it. That unexplained hold is heat."},
+{h:72,b:1,at:"gate",c:{gate:"s",coffee:"e"},m:{},t:"The heat opens the valve: the bar drops to 1, so one active thing can wake a memory."},
+{h:78,b:1,at:"gate",c:{gate:"s",coffee:"e",fountain:"s",cafe:"e"},m:{0:"s",6:"e"},t:"The gate wakes the path to the fountain. The craving wakes the memory of having coffee at the café."},
+{h:84,b:1,at:"gate",c:{gate:"s",coffee:"e",fountain:"s",cafe:"m",pond:"s",oak:"s"},m:{0:"s",6:"e",1:"s",3:"s",5:"m"},t:"The fountain wakes its three paths. The path from the fountain to the café is reached from both sides: they meet."},
+{h:50,b:2,at:"gate",c:{gate:"s",fountain:"s",cafe:"m",coffee:"e",pond:"f",oak:"f"},m:{0:"s",5:"m",6:"e",1:"f",3:"f"},t:"The bar goes back up. What joins where you are to the craving stays: gate, fountain, café. The other paths go quiet. There's a plan, so some heat goes, but the craving is still held."},
+{h:45,b:2,at:"fountain",c:{gate:"s",fountain:"s",cafe:"m",coffee:"e"},m:{0:"s",5:"m",6:"e"},t:"Walking the plan: at the fountain."},
+{h:15,b:2,at:"cafe",c:{cafe:"m",coffee:"e"},m:{6:"w"},t:"At the café. The café and the craving now fall inside one memory: two active things, one explanation. The craving is explained."},
+{h:0,b:2,at:"cafe",c:{cafe:"s",coffee:"f"},m:{},t:"Explained, the hold lets go and the heat is gone. Settled, until the next craving."}];
+const cls={s:"c-teal",e:"c-purple",m:"c-amber",w:"c-amber"};
+function paint(el,c,dim,base){if(c){el.setAttribute("class","a "+c);el.removeAttribute("fill");el.removeAttribute("stroke")}else{el.setAttribute("class","a");el.setAttribute("fill",base||"var(--cell)");el.setAttribute("stroke","var(--border2)")}el.style.opacity=dim?0.35:1}
+let k=0,run=true,tm;
+function draw(){const s=S[k];
+C.forEach(c=>{const v=s.c[c];paint(col[c],v&&v!=="f"?cls[v]:null,v==="f","none")});
+M.forEach((m,r)=>{const v=s.m[r],on=v&&v!=="f";row[r].setAttribute("stroke",on?"var(--border3)":"var(--border)");row[r].setAttribute("stroke-width",on?1:0.5);row[r].style.opacity=v==="f"?0.4:1;
+m.forEach(c=>{const cv=s.c[c];paint(cell[r+c],on&&cv&&cv!=="f"?(v==="w"?"c-amber":cls[cv]):null,v==="f")})});
+walker.setAttribute("cx",L[s.at][1]);walker.setAttribute("cy",L[s.at][2]);
+here.setAttribute("transform",`translate(${X(C.indexOf(s.at))},40)`);
+const hp=s.h*2,he=document.getElementById("heat");he.setAttribute("height",hp);he.setAttribute("y",232-hp);
+document.getElementById("bar").textContent=s.b;document.getElementById("cap").textContent=s.t;
+document.getElementById("stepn").textContent="Step "+(k+1)+" of "+S.length}
+function tick(){clearTimeout(tm);if(!run)return;tm=setTimeout(()=>{k=k<S.length-1?k+1:0;draw();tick()},k===S.length-1?4500:3000)}
+const pb=document.getElementById("play");
+function setRun(v){run=v;pb.textContent=v?"Pause":"Play";tick()}
+pb.onclick=()=>setRun(!run);
+document.getElementById("fwd").onclick=()=>{k=Math.min(S.length-1,k+1);draw();setRun(false)};
+document.getElementById("back").onclick=()=>{k=Math.max(0,k-1);draw();setRun(false)};
+document.getElementById("again").onclick=()=>{k=0;draw();setRun(true)};
+draw();tick();
+</script>
+
+</body>
+</html>

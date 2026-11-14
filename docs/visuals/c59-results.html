@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C59 results: does a craving turn into structure?</title>
+<style>
+:root{--bg:#fff;--text:#1f1e1d;--muted:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border3:rgba(0,0,0,.55);--cell:#f5f4f0;
+--teal-f:#E1F5EE;--teal-s:#0F6E56;--purple-f:#EEEDFE;--purple-s:#534AB7;--amber-f:#FAEEDA;--amber-s:#854F0B;--coral-f:#F0997B;--coral-s:#993C1D}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1e1d;--text:#ecebe6;--muted:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border3:rgba(255,255,255,.6);--cell:#2a2a28;
+--teal-f:#085041;--teal-s:#5DCAA5;--purple-f:#3C3489;--purple-s:#AFA9EC;--amber-f:#633806;--amber-s:#EF9F27;--coral-f:#993C1D;--coral-s:#F0997B}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--muted);font-size:14px;margin:0 0 1rem}
+svg text{fill:var(--text);font-size:14px}
+svg .ts{fill:var(--muted);font-size:12px}
+svg .th{font-weight:500}
+.cell,.col,.row,.heat{transition:all .6s ease}
+.c-teal{fill:var(--teal-f);stroke:var(--teal-s)}
+.c-purple{fill:var(--purple-f);stroke:var(--purple-s)}
+.c-amber{fill:var(--amber-f);stroke:var(--amber-s)}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+.cap{font-size:15px;line-height:1.6;min-height:3.4em;margin:.75rem 0 0}
+.ctl{display:flex;align-items:center;gap:8px;margin:.5rem 0 0}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{background:var(--cell)}
+#stepn{font-size:13px;color:var(--muted);margin-left:8px}
+
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+section.story code{font-size:13px}
+.c-gray{fill:var(--cell);stroke:var(--border3)}
+.sec{font-size:13px;color:var(--muted);margin:1rem 0 .4rem}
+.chip{display:inline-block;font-size:13px;padding:4px 10px;border-radius:8px;border:.5px solid var(--border);margin:2px 4px 2px 0;color:var(--muted)}
+.chip.on{background:var(--teal-f);color:var(--teal-s);border-color:var(--teal-s)}
+.chip.want{background:var(--amber-f);color:var(--amber-s);border-color:var(--amber-s)}
+.park{display:grid;grid-template-columns:170px minmax(0,1fr);gap:8px;align-items:center;margin:6px 0}
+.lbl{font-size:13px;color:var(--muted)}
+.a{transition:all .5s ease}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+input[type=range]{accent-color:var(--teal-s)}
+</style>
+</head>
+<body>
+<main>
+<h1>C59 results: does a craving turn into structure?</h1>
+<p class="sub">Results from the engine (experiment C59). Drag the slider: how many satisfied coffee walks before the walk is kept, and what the next craving then costs. Below it, what comes back with no craving. The story underneath says what it means.</p>
+<p class="sec">1. Satisfied walks lived (varied park), then a craving at the gate</p>
+<div style="display:flex;align-items:center;gap:12px">
+<input type="range" min="1" max="5" step="1" value="1" id="k" style="flex:1" aria-label="Number of satisfied coffee walks">
+<span style="font-size:14px;font-weight:500;min-width:110px" id="kout">1 walk</span>
+</div>
+<svg id="res" viewBox="0 0 680 210" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Is the walk kept, and what the next craving costs</title>
+<g id="cols"></g>
+<g id="mem"></g>
+<text class="ts" x="400" y="24">Next craving at the gate: memories woken</text>
+<text class="ts" x="400" y="62">ends together</text>
+<rect x="490" y="50" width="160" height="16" rx="3" fill="none" stroke="var(--border)" stroke-width="0.5"/>
+<rect id="bj" class="a c-coral" x="490" y="50" width="0" height="16" rx="3"/>
+<text id="tj" class="ts" x="656" y="62" text-anchor="end"></text>
+<text class="ts" x="400" y="92">each end alone</text>
+<rect x="490" y="80" width="160" height="16" rx="3" fill="none" stroke="var(--border)" stroke-width="0.5"/>
+<rect id="ba" class="a c-gray" x="490" y="80" width="0" height="16" rx="3"/>
+<text id="ta" class="ts" x="656" y="92" text-anchor="end"></text>
+<text class="ts" x="400" y="130">Did the bar drop (heat)?</text>
+<text id="dj" class="th" x="400" y="154"></text>
+<text id="da" class="ts" x="400" y="176"></text>
+</svg>
+<p class="lbl" id="note" style="margin:0"></p>
+<p class="sec">2. No craving: at the fountain from the gate, what comes back</p>
+<div class="park"><span class="lbl">Varied park</span><div><span class="chip on">gate</span><span class="chip on">fountain</span><span class="chip">café</span><span class="chip">coffee</span></div></div>
+<div class="park"><span class="lbl">Walk past the café too</span><div><span class="chip on">gate</span><span class="chip on">fountain</span><span class="chip on">café</span><span class="chip">coffee</span></div></div>
+<div class="park"><span class="lbl">Only ever for coffee</span><div><span class="chip on">gate</span><span class="chip on">fountain</span><span class="chip on">café</span><span class="chip want">coffee</span></div></div>
+<section class="story">
+<h2>What it shows</h2>
+<p>The results of experiment C59, a run of the engine (the branch engine, abstract region over items), not a drawing. The question was whether a craving's heat turns into structure: whether a satisfied walk is kept as one memory, so that the next craving at the gate is answered without heat.</p>
+<p>Part 1: after 1, 2 or 3 satisfied walks (gate, fountain, café, coffee) the walk is not kept, and a craving at the gate still opens the valve and searches (21 memories woken). After 4 it is kept as one memory, and the next craving is answered at the normal bar: no valve, 6 memories woken. Part 2: with no craving, arriving at the fountain from the gate (two things lit: the fountain now, the gate as "was") brings back as much as the route makes distinctive.</p>
+<h2>What it means</h2>
+<p>Heat does become structure, and once it has, the structure keeps the heat down. But the energy rule keeps the walk because it was repeated (one memory becomes cheaper than describing each copy in pieces), not because it ended a craving. The engine's bill is structure + flow + change, and it has no line for the heat a want costs, so a memory can't earn its keep by the heat it would save. In the owner's terms: the machine converts repetition into structure, but not yet heat.</p>
+<p>The second time is free of heat only if the two held ends (where you are and the craving) count together towards the recall rule's two active things. Counted each on its own side, the bar still drops (14 woken).</p>
+<p>The craving arising from the walk follows how distinctive the route is, with no strengths or weights: where the route leads many ways, only the shared stretch comes back; where you also walk past the café, the café comes to mind but not the coffee; where the route is walked only for coffee, the coffee itself comes back.</p>
+<h2>Choices in the experiment</h2>
+<p>Coffee is an item: the moment of having it, after the café (time runs along the walk). The craving is that item held as the end. Worlds of 200 days, rests every 50, seed 59; the flow window (100 pictures) decides how many repeats make a walk pay. "Ends together" is a new option in a copy of <code>think</code>.</p>
+<h2>Open questions</h2>
+<p>Should heat be in the bill, so that one satisfaction is enough? Should the two held ends always count together? What lets the held craving go once it is explained?</p>
+<h2>Where it comes from</h2>
+<p><code>experiments/sketches/C59-craving/</code>: <code>run.js</code>, <code>sweep.js</code>, <code>findings.md</code>, outputs in <code>out.txt</code> and <code>out-sweep.txt</code>. The ideas: <code>craving.html</code>, <code>heat-into-structure.html</code>.</p>
+</section>
+</main>
+<script>
+const NS="http://www.w3.org/2000/svg",mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const C=["gate","fountain","café","coffee"],X=i=>70+i*70,cg=document.getElementById("cols"),mg=document.getElementById("mem");
+C.forEach((c,i)=>{mk("rect",{x:X(i)-24,y:12,width:48,height:22,rx:4,fill:"none",stroke:"var(--border2)","stroke-width":0.5},cg);const t=mk("text",{x:X(i),y:27,"text-anchor":"middle",class:"ts"},cg);t.textContent=c;mk("line",{x1:X(i),y1:36,x2:X(i),y2:196,stroke:"var(--border)","stroke-width":0.5,"stroke-dasharray":"2 4"},cg)});
+const rows=[{lab:"stretch",cells:[0,1]},{lab:"stretch",cells:[2,3]},{lab:"the walk",cells:[0,1,2,3],walk:true}];
+const R=rows.map((r,i)=>{const y=62+i*44,g=mk("g",{class:"a"},mg);const l=mk("text",{x:8,y:y+4,class:"ts"},g);l.textContent=r.lab;
+mk("rect",{x:X(r.cells[0])-16,y:y-12,width:X(r.cells[r.cells.length-1])-X(r.cells[0])+32,height:24,rx:12,fill:"none",stroke:r.walk?"var(--border3)":"var(--border2)","stroke-width":r.walk?1:0.5},g);
+r.cells.forEach(c=>mk("circle",{cx:X(c),cy:y,r:7,class:r.walk?"c-amber":"c-teal"},g));return g});
+const D={1:[21,32,true,true],2:[21,32,true,true],3:[21,32,true,true],4:[6,14,false,true],5:[6,14,false,true]};
+const k=document.getElementById("k");
+function draw(){const n=+k.value,[j,a,dj,da]=D[n],held=n>=4;
+document.getElementById("kout").textContent=n+(n>1?" walks":" walk");
+R[2].style.opacity=held?1:0.12;
+document.getElementById("bj").setAttribute("width",j/32*160);document.getElementById("ba").setAttribute("width",a/32*160);
+document.getElementById("tj").textContent=j;document.getElementById("ta").textContent=a;
+document.getElementById("dj").textContent=dj?"Yes: the valve opens and it searches":"No: the walk comes straight back";
+document.getElementById("da").textContent="Each end alone: "+(da?"yes, still":"no");
+document.getElementById("note").textContent=held?"Kept as one memory. The heat of the search has become structure: the next craving costs a third as much and needs no valve, but only when the gate and the craving count together.":"Not kept. One walk is cheaper to leave as the two stretches already known; the energy rule doesn't count the heat it would save."}
+k.oninput=draw;draw();
+</script>
+</body>
+</html>

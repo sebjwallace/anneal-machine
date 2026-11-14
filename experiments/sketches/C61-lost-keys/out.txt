@@ -1,0 +1,20 @@
+
+HELD (the machine holds its own looks for the episode)
+  days 51-300: found 250/250 · looks per search 2.06 · revisits 0
+  first time the keys were in the garage (day 54, never there before): looked kitchen → hallway → bedroom → lounge → garage (5 looks)
+  later garage days: looks 5, 5
+  the next day, first look: kitchen (the "no keys" of the garage day was not kept as a ban)
+
+NO-HOLD control (looks not held)
+  days 51-300: found 126/250 · looks per search 25.30 · revisits 6076
+  first time the keys were in the garage (day 54, never there before): looked kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen → kitchen (50 looks, not found)
+  later garage days: looks 50, 50
+  the next day, first look: kitchen (the "no keys" of the garage day was not kept as a ban)
+
+MARKED control (we mark the wrong rooms seen: puppeteering)
+  days 51-300: found 250/250 · looks per search 1.00 · revisits 0
+  first time the keys were in the garage (day 54, never there before): looked garage (1 looks)
+  later garage days: looks 1, 1
+  the next day, first look: kitchen (the "no keys" of the garage day was not kept as a ban)
+
+for comparison: looking in order of the true odds averages 1.87 looks

@@ -1,0 +1,102 @@
+{
+ "A": {
+  "first": [
+   true,
+   2211,
+   false
+  ],
+  "kept": false,
+  "second": [
+   true,
+   2211,
+   false
+  ],
+  "later": [
+   false,
+   false,
+   true,
+   2222
+  ],
+  "span": "no"
+ },
+ "B": {
+  "first": [
+   true,
+   2211,
+   false
+  ],
+  "kept": false,
+  "second": [
+   true,
+   2211,
+   false
+  ],
+  "later": [
+   false,
+   false,
+   true,
+   2222
+  ],
+  "span": "no"
+ },
+ "C": {
+  "first": [
+   true,
+   20788,
+   false
+  ],
+  "kept": false,
+  "second": [
+   false,
+   7,
+   true
+  ],
+  "later": [
+   false,
+   true,
+   false,
+   7
+  ],
+  "span": "no"
+ },
+ "D": {
+  "first": [
+   true,
+   21068,
+   false
+  ],
+  "kept": false,
+  "second": [
+   false,
+   9,
+   true
+  ],
+  "later": [
+   false,
+   true,
+   false,
+   9
+  ],
+  "span": "no"
+ },
+ "E": {
+  "first": [
+   true,
+   329,
+   true
+  ],
+  "kept": false,
+  "second": [
+   false,
+   9,
+   true
+  ],
+  "later": [
+   false,
+   false,
+   true,
+   3771
+  ],
+  "span": "no"
+ }
+}

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C60 results: heat bounds a memory</title>
+<style>
+:root{--acc-bg:#E6F1FB;--acc-b:#85B7EB;--acc-t:#0C447C;--ok:#3B6D11;--bad:#A32D2D;--coral-f:#F0997B;--coral-s:#993C1D;--bg:#fff;--text:#1f1e1d;--muted:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border3:rgba(0,0,0,.55);--cell:#f5f4f0;
+--teal-f:#E1F5EE;--teal-s:#0F6E56;--purple-f:#EEEDFE;--purple-s:#534AB7;--amber-f:#FAEEDA;--amber-s:#854F0B;--coral-f:#F0997B;--coral-s:#993C1D}
+@media (prefers-color-scheme:dark){:root{--acc-bg:#0C447C;--acc-b:#378ADD;--acc-t:#B5D4F4;--ok:#97C459;--bad:#F09595;--coral-f:#993C1D;--coral-s:#F0997B;--bg:#1f1e1d;--text:#ecebe6;--muted:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border3:rgba(255,255,255,.6);--cell:#2a2a28;
+--teal-f:#085041;--teal-s:#5DCAA5;--purple-f:#3C3489;--purple-s:#AFA9EC;--amber-f:#633806;--amber-s:#EF9F27;--coral-f:#993C1D;--coral-s:#F0997B}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--muted);font-size:14px;margin:0 0 1rem}
+svg text{fill:var(--text);font-size:14px}
+svg .ts{fill:var(--muted);font-size:12px}
+svg .th{font-weight:500}
+.cell,.col,.row,.heat{transition:all .6s ease}
+.c-teal{fill:var(--teal-f);stroke:var(--teal-s)}
+.c-purple{fill:var(--purple-f);stroke:var(--purple-s)}
+.c-amber{fill:var(--amber-f);stroke:var(--amber-s)}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+.cap{font-size:15px;line-height:1.6;min-height:3.4em;margin:.75rem 0 0}
+.ctl{display:flex;align-items:center;gap:8px;margin:.5rem 0 0}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{background:var(--cell)}
+#stepn{font-size:13px;color:var(--muted);margin-left:8px}
+
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+section.story code{font-size:13px}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 .5rem}
+.mode.on{background:var(--acc-bg);color:var(--acc-t);border-color:var(--acc-b)}
+.res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:.5rem 0 0}
+.card{background:var(--cell);border-radius:8px;padding:.75rem 1rem}
+.card .k{font-size:13px;color:var(--muted)}
+.card .v{font-size:16px;font-weight:500;margin-top:4px}
+.card .s{font-size:13px;color:var(--muted);margin-top:2px}
+.ok{color:var(--ok)}.no{color:var(--bad)}
+.a{transition:all .5s ease}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+</style>
+</head>
+<body>
+<main>
+<h1>C60 results: heat bounds a memory</h1>
+<p class="sub">Results from the engine (experiment C60). A craving rises in the grassland and is satisfied at the coffee. Press the buttons to compare four ways of keeping what happened. The walkthrough underneath tells you what to press and what to look at.</p>
+<div class="ctl">
+<button class="mode" data-m="E0">Energy only</button>
+<button class="mode" data-m="C">Keep the arc</button>
+<button class="mode" data-m="D">Keep the whole stretch</button>
+<button class="mode" data-m="E">Keep every walk</button>
+</div>
+<svg id="arc" viewBox="0 0 680 250" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>The heat of a craving along the walk, and what is kept</title>
+<g id="g"></g>
+</svg>
+<div class="res">
+<div class="card"><div class="k">Kept at once</div><div class="v" id="r1"></div><div class="s" id="s1"></div></div>
+<div class="card"><div class="k">Second craving</div><div class="v" id="r2"></div><div class="s" id="s2"></div></div>
+<div class="card"><div class="k">After 100 more days</div><div class="v" id="r3"></div><div class="s" id="s3"></div></div>
+</div>
+<p id="cap" style="font-size:14px;line-height:1.6;color:var(--muted);margin:.75rem 0 0"></p>
+<section class="story">
+<h2>How to read it (a walkthrough)</h2>
+<p><b>Start with the orange hill, before pressing anything.</b> Along the bottom is the walk, left to right: meadow, grassland, gate, fountain, café, coffee, street. The orange hill is the heat of the craving. In the meadow there's nothing. At the grassland the craving starts, and the hill begins to rise. It keeps building past the gate and the fountain, and peaks at the café. At the coffee it drops straight to nothing, because the craving is satisfied. That's the arc, sunrise to sunset.</p>
+<p>The question the experiment asked: after that walk, what does the machine keep, and does it help next time? The bracket under the walk shows what was kept. The three boxes underneath answer: did it keep anything straight away; what happened the next time the craving came; and was it still there 100 days later?</p>
+<p><b>Press "Energy only".</b> The bracket disappears, because nothing was kept, and all three boxes are red. This is the machine's normal learning rule on its own, the one that keeps things only if they make everything cheaper. A single walk never passes that test, because remembering it costs more than the walk's heat. So the next time the craving comes, the valve opens again and it has to search.</p>
+<p><b>Press "Keep the arc".</b> This is the owner's idea. The bracket runs from the grassland, where the heat rose, to the coffee, where it fell, and that stretch is kept as one memory straight away. Look at the middle box: the next time you're in the grassland and feel the craving, the memory comes straight back. No valve opens, and only 7 memories wake. The right box shows it's still there 100 days later.</p>
+<p><b>Press "Keep every walk".</b> Now the machine keeps every walk, craving or not. The middle box is green, so it works at first. But the right box is red: faded. All the ordinary walks filled the memory up and pushed the coffee walk out, so 100 days later the valve opens again. Compare this with the arc: because only walks with heat get kept, nothing pushes the arc out.</p>
+<p><b>Press "Keep the whole stretch".</b> This time the bracket runs from the meadow to the street, past both ends of the hill. Everything is green, so it works. But the middle box says it brings back the meadow and the street as well. Those weren't part of getting coffee; they just happened to be before and after.</p>
+<p><b>Putting it together.</b> The heat is what tells the machine what's worth keeping, and where the memory should start and end. Cut it at the arc, and you get exactly the walk that solved the craving. It comes back the moment the craving returns, and it lasts.</p>
+<h2>What's behind it</h2>
+<p>These are results from the engine (experiment C60, on the branch engine), not a drawing; only the shape of the hill is drawn smoothly. The craving is held alongside where you are, from where it rose to where it fell, and counts as heat because nothing known explains it. "Keep" means the store of experiences, which has its own rule (keep at once), as opposed to general memory, which keeps only what pays. Replay at rest was on.</p>
+<p>The craving, held throughout, has no moment of its own: it can't say when a memory happened, but it counts as one of the two active things that wake a memory. Where you are says when. That's why feeling the craving in the grassland is enough to bring the whole walk back.</p>
+<h2>What it didn't show</h2>
+<p>Coffee hasn't yet separated out as what resolves the craving everywhere (apart from any place); that probably needs more cravings in more places, or rest comparing the arcs with each other. And the first time in the park, finding the way was mostly "undecided"; the walk was taken as lived (finding the way was C59's question). The rise and fall of the craving are given from outside (the body), as set points are in the theory.</p>
+<h2>Where it comes from</h2>
+<p><code>experiments/sketches/C60-heat-arc/</code> (<code>run.js</code>, <code>think.js</code>, <code>findings.md</code>, <code>out.txt</code>); the theory in <code>docs/theories/regulators-and-heat.md</code>; the earlier visuals <code>craving.html</code>, <code>heat-into-structure.html</code> and <code>c59-results.html</code>.</p>
+</section>
+</main>
+<script>
+const NS="http://www.w3.org/2000/svg",mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const g=document.getElementById("g");
+const S=["meadow","grassland","gate","fountain","café","coffee","street"],H=[0,1,2,3,4,0,0],X=i=>60+i*90,BASE=170,U=26;
+mk("line",{x1:40,y1:BASE,x2:640,y2:BASE,stroke:"var(--border2)","stroke-width":0.5},g);
+const tl=mk("text",{x:40,y:30,class:"ts"},g);tl.textContent="Heat of the held craving (unexplained, building up)";
+let d=`M ${X(0)} ${BASE}`;const pts=S.map((_,i)=>[X(i),BASE-H[i]*U]);
+for(let i=0;i<pts.length;i++){const[x,y]=pts[i];if(!i){d+=` L ${x} ${y}`;continue}const[px,py]=pts[i-1],cx=(px+x)/2;d+=` C ${cx} ${py}, ${cx} ${y}, ${x} ${y}`}
+d+=` L ${X(6)} ${BASE} Z`;
+mk("path",{d,class:"c-coral",opacity:0.85,"stroke-width":1},g);
+S.forEach((s,i)=>{mk("circle",{cx:X(i),cy:BASE,r:5,fill:"var(--cell)",stroke:"var(--border2)","stroke-width":0.5},g);const t=mk("text",{x:X(i),y:BASE+20,"text-anchor":"middle",class:"ts"},g);t.textContent=s});
+const lab=(x,y,s)=>{const t=mk("text",{x,y,"text-anchor":"middle",class:"ts"},g);t.textContent=s};
+lab(X(1),BASE-U-10,"rises");lab(X(4),BASE-4*U-10,"peak");lab(X(5)+8,BASE-12,"falls");
+const br=mk("g",{class:"a"},g);
+const brl=mk("path",{d:"",fill:"none",stroke:"var(--border3)","stroke-width":1.5},br);
+const brt=mk("text",{x:0,y:BASE+52,"text-anchor":"middle",class:"th"},br);
+const M={
+E0:{b:null,v1:"No",s1:"energy alone: a memory costs more than one walk's heat",v2:"Valve opens",s2:"no way to coffee",v3:"Valve opens",s3:"nothing kept",cap:"With the heat in what is seen, but only the energy rule deciding, one walk is never kept: a memory costs a placement per item, and a single picture's unexplained heat costs less. Structure only pays for what recurs."},
+C:{b:[1,5],v1:"Yes",s1:"grassland to coffee, as one experience",v2:"No valve",s2:"straight back, 7 memories woken",v3:"Still there",s3:"the store holds only arcs (3)",cap:"Kept from where the heat rose to where it fell. The next craving, felt at the grassland, wakes it by the plain recall rule (where you are and the craving: two things inside one memory). Because only arcs are kept, nothing pushes it out."},
+D:{b:[0,6],v1:"Yes",s1:"meadow to street, before and after included",v2:"No valve",s2:"straight back, 9 woken, meadow and street too",v3:"Still there",s3:"",cap:"Kept without the boundary. It works, but the memory carries what came before the heat rose and after it fell, which brings back the meadow and the street along with the way to coffee."},
+E:{b:[0,6],v1:"Yes",s1:"one of every walk kept (store of 50)",v2:"No valve",s2:"straight back, 9 woken",v3:"Faded",s3:"pushed out by ordinary walks; valve opens, no way",cap:"Every walk kept as an experience. It works at first, but ordinary days fill the store and the craving's walk is pushed out. Heat is what says an experience is worth keeping."}};
+const cls=(el,ok)=>{el.className="v "+(ok?"ok":"no")};
+function draw(m){const s=M[m];
+if(s.b){const[a,b]=s.b,x1=X(a)-14,x2=X(b)+14,y=BASE+34;brl.setAttribute("d",`M ${x1} ${y-8} L ${x1} ${y} L ${x2} ${y} L ${x2} ${y-8}`);brt.setAttribute("x",(x1+x2)/2);brt.textContent=m==="E"?"kept, then fades":"kept as one memory";br.style.opacity=1}else br.style.opacity=0;
+document.getElementById("r1").textContent=s.v1;cls(document.getElementById("r1"),s.v1==="Yes");document.getElementById("s1").textContent=s.s1;
+document.getElementById("r2").textContent=s.v2;cls(document.getElementById("r2"),s.v2==="No valve");document.getElementById("s2").textContent=s.s2;
+document.getElementById("r3").textContent=s.v3;cls(document.getElementById("r3"),s.v3==="Still there");document.getElementById("s3").textContent=s.s3;
+document.getElementById("cap").textContent=s.cap;
+document.querySelectorAll(".mode").forEach(x=>x.classList.toggle("on",x.dataset.m===m))}
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>draw(b.dataset.m));
+draw("C");
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The moving bar: heat opens the valve</title>
+<style>
+:root{--bg:#fff;--text:#1f1e1d;--muted:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border3:rgba(0,0,0,.55);--cell:#f5f4f0;
+--teal-f:#E1F5EE;--teal-s:#0F6E56;--purple-f:#EEEDFE;--purple-s:#534AB7;--amber-f:#FAEEDA;--amber-s:#854F0B;--coral-f:#F0997B;--coral-s:#993C1D}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1e1d;--text:#ecebe6;--muted:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border3:rgba(255,255,255,.6);--cell:#2a2a28;
+--teal-f:#085041;--teal-s:#5DCAA5;--purple-f:#3C3489;--purple-s:#AFA9EC;--amber-f:#633806;--amber-s:#EF9F27;--coral-f:#993C1D;--coral-s:#F0997B}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--muted);font-size:14px;margin:0 0 1rem}
+svg text{fill:var(--text);font-size:14px}
+svg .ts{fill:var(--muted);font-size:12px}
+svg .th{font-weight:500}
+.cell,.col,.row,.heat{transition:all .6s ease}
+.c-teal{fill:var(--teal-f);stroke:var(--teal-s)}
+.c-purple{fill:var(--purple-f);stroke:var(--purple-s)}
+.c-amber{fill:var(--amber-f);stroke:var(--amber-s)}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+.cap{font-size:15px;line-height:1.6;min-height:3.4em;margin:.75rem 0 0}
+.ctl{display:flex;align-items:center;gap:8px;margin:.5rem 0 0}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{background:var(--cell)}
+#stepn{font-size:13px;color:var(--muted);margin-left:8px}
+
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+section.story code{font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<h1>The moving bar: heat opens the valve</h1>
+<p class="sub">Start and end are held. The gap between them is heat, and heat lowers the bar from 2 to 1. Memories wake out from both ends until they meet, then the bar goes back up and the route settles. Drawn by hand to show the idea (C44, C51, C54); not a run of the engine.</p>
+<svg id="mv" viewBox="0 0 680 360" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Columns, memories and the heat valve</title>
+<text class="ts" x="20" y="34">Columns</text>
+<g id="cols"></g>
+<text class="ts" x="20" y="100">Memories</text>
+<g id="rows"></g>
+<text class="ts" x="600" y="34" text-anchor="middle">Heat</text>
+<rect x="584" y="46" width="32" height="200" rx="4" fill="none" stroke="var(--border2)" stroke-width="0.5"/>
+<rect id="heat" class="heat c-coral" x="586" y="244" width="28" height="0" rx="3"/>
+<text class="ts" x="600" y="280" text-anchor="middle">Bar</text>
+<text id="bar" class="th" x="600" y="312" text-anchor="middle" style="font-size:28px">2</text>
+<g transform="translate(110,340)">
+<circle r="6" class="c-teal"/><text class="ts" x="12" y="4">from the start</text>
+<circle r="6" class="c-purple" cx="130"/><text class="ts" x="142" y="4">from the end</text>
+<circle r="6" class="c-amber" cx="250"/><text class="ts" x="262" y="4">where they meet</text>
+</g>
+</svg>
+<p class="cap" id="cap"></p>
+<div class="ctl">
+<button id="play">Pause</button>
+<button id="back" aria-label="Previous step">&#8249;</button>
+<button id="fwd" aria-label="Next step">&#8250;</button>
+<button id="again">Restart</button>
+<span id="stepn"></span>
+</div>
+<section class="story">
+<h2>What it shows</h2>
+<p>How the machine joins two things that no single memory joins: a start and an end, such as "how do I get from A to G?" when that route has never been walked as one. Start and end are both held active the whole time. Nothing holds them together, so there is a gap, and a gap is heat. Heat lowers the bar for waking a memory from 2 to 1. Memories then wake out from both ends, round by round, until the two sides meet. Where they meet, the bar goes back up to 2 and the route settles.</p>
+<h2>Why it works this way</h2>
+<p>A memory normally comes back only when two active things fall inside it (the recall rule): describing two things as one memory is the saving, and one thing alone saves nothing. That keeps the machine from waking everything at once. But with only a start and an end held, and no memory holding both, nothing can wake, and the machine would be stuck. Lowering the bar is the release: while the gap is open, one active thing is enough. It isn't a separate search procedure. It is the same recall rule with the bar lowered, and it goes back up as soon as the gap closes. The owner's image is lightning: the charge holds until a path closes.</p>
+<p>There are three honest answers: a route; "undecided" at a real fork (two equally good routes); and "no way through" when nothing meets and nothing new wakes.</p>
+<h2>What's simplified here</h2>
+<p>The memories, columns and rounds are drawn by hand. In the engine, once the sides meet, each half is joined again the same way until one memory holds each step; here the side branches simply go quiet. The amount of heat on the gauge is illustrative, not measured.</p>
+<h2>Open questions</h2>
+<p>Should the bar drop in proportion to the gap rather than straight to 1? Bigger memories make shortcuts (fewer rounds, fewer memories woken), but they have only been shown when long walks were given by hand; can they form from learning?</p>
+<h2>Where it comes from</h2>
+<p>Experiments C44 (pushing from both ends), C51 (the moving bar), C54 (two regions, both bars moving), and the branch engine's <code>think</code> (C56). See <code>docs/checkpoints/11-thinking.md</code> and the philosophy section "a gap is heat, and heat lowers the bar".</p>
+</section>
+</main>
+<script>
+const C="ABCDEFGHIJ".split(""),X=i=>130+i*44,NS="http://www.w3.org/2000/svg";
+const M=[["A","B","H"],["B","C"],["A","I"],["C","D"],["D","E"],["E","F","J"],["F","G"]];
+const RY=i=>118+i*30;
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const cols={},cells={},rows={};
+const cg=document.getElementById("cols"),rg=document.getElementById("rows");
+C.forEach((c,i)=>{cols[c]=mk("rect",{x:X(i)-15,y:44,width:30,height:30,rx:4,class:"col",fill:"none",stroke:"var(--border2)","stroke-width":0.5},cg);
+  const t=mk("text",{x:X(i),y:64,"text-anchor":"middle",class:"th"},cg);t.textContent=c;
+  mk("line",{x1:X(i),y1:78,x2:X(i),y2:RY(M.length-1)+12,stroke:"var(--border)","stroke-width":0.5,"stroke-dasharray":"2 4"},cg)});
+M.forEach((m,r)=>{const idx=m.map(c=>C.indexOf(c));
+  rows[r]=mk("rect",{x:X(Math.min(...idx))-14,y:RY(r)-11,width:X(Math.max(...idx))-X(Math.min(...idx))+28,height:22,rx:11,class:"row",fill:"none",stroke:"var(--border)","stroke-width":0.5},rg);
+  const l=mk("text",{x:20,y:RY(r)+4,class:"ts"},rg);l.textContent="memory "+(r+1);
+  m.forEach(c=>{cells[r+c]=mk("circle",{cx:X(C.indexOf(c)),cy:RY(r),r:7,class:"cell",fill:"var(--cell)",stroke:"var(--border2)","stroke-width":0.5},rg)})});
+const S=[
+{h:0,b:2,c:{},m:{},t:"At rest. The bar is at 2: a memory wakes only when two active things fall inside it."},
+{h:40,b:2,c:{A:"s",G:"e"},m:{},t:"A question comes in: start A and end G are held. No memory holds both, so at bar 2 nothing wakes. The open gap is heat."},
+{h:70,b:1,c:{A:"s",G:"e"},m:{},t:"The heat opens the valve and the bar drops to 1. Now a single active thing is enough to wake a memory."},
+{h:78,b:1,c:{A:"s",G:"e",B:"s",H:"s",I:"s",F:"e"},m:{0:"s",2:"s",6:"e"},t:"First round. A wakes memories 1 and 3, G wakes memory 7. Their other cells light up."},
+{h:84,b:1,c:{A:"s",G:"e",B:"s",H:"s",I:"s",F:"e",C:"s",E:"e",J:"e"},m:{0:"s",2:"s",6:"e",1:"s",5:"e"},t:"Second round. The newly lit columns wake more memories, spreading out from both ends."},
+{h:88,b:1,c:{A:"s",G:"e",B:"s",H:"s",I:"s",F:"e",C:"s",E:"e",J:"e",D:"m"},m:{0:"s",2:"s",6:"e",1:"s",5:"e",3:"s",4:"e"},t:"Third round. C and E both wake memories that reach D. The two sides meet."},
+{h:30,b:2,c:{A:"s",B:"s",C:"s",D:"m",E:"e",F:"e",G:"e",H:"f",I:"f",J:"f"},m:{0:"s",1:"s",3:"s",4:"e",5:"e",6:"e",2:"f"},f:["0H","5J","2A","2I"],t:"Where they meet, the bar goes back up to 2. What joins the two held ends stays: each memory on it holds two active things. Side branches go quiet."},
+{h:0,b:2,c:{A:"s",B:"s",C:"s",D:"m",E:"e",F:"e",G:"e"},m:{0:"s",1:"s",3:"s",4:"e",5:"e",6:"e"},f:["0H","5J"],t:"Settled. A route from A to G, made of memories that were never walked as one. The heat has gone into the route, and it cools."}];
+const cls={s:"c-teal",e:"c-purple",m:"c-amber"};
+let k=0,run=true,tm;
+function draw(){const s=S[k],fd=new Set(s.f||[]);
+  C.forEach(c=>{const v=s.c[c],e=cols[c];
+    if(v&&v!=="f"){e.setAttribute("class","col "+cls[v]);e.removeAttribute("fill");e.removeAttribute("stroke");e.setAttribute("stroke-width",1)}
+    else{e.setAttribute("class","col");e.setAttribute("fill","none");e.setAttribute("stroke","var(--border2)");e.setAttribute("stroke-width",0.5)}
+    e.style.opacity=v==="f"?0.35:1});
+  M.forEach((m,r)=>{const v=s.m[r],re=rows[r],on=v&&v!=="f";
+    re.setAttribute("stroke",on?"var(--border3)":"var(--border)");re.setAttribute("stroke-width",on?1:0.5);re.style.opacity=v==="f"?0.4:1;
+    m.forEach(c=>{const e=cells[r+c],cv=s.c[c],lit=on&&cv&&cv!=="f"&&!fd.has(r+c);
+      if(lit){e.setAttribute("class","cell "+cls[cv]);e.removeAttribute("fill");e.removeAttribute("stroke")}
+      else{e.setAttribute("class","cell");e.setAttribute("fill","var(--cell)");e.setAttribute("stroke","var(--border2)")}
+      e.style.opacity=fd.has(r+c)||v==="f"?0.35:1})});
+  const hp=s.h*2,he=document.getElementById("heat");he.setAttribute("height",hp);he.setAttribute("y",246-hp);
+  document.getElementById("bar").textContent=s.b;
+  document.getElementById("cap").textContent=s.t;
+  document.getElementById("stepn").textContent="Step "+(k+1)+" of "+S.length}
+function tick(){clearTimeout(tm);if(!run)return;tm=setTimeout(()=>{k=k<S.length-1?k+1:0;draw();tick()},k===S.length-1?4500:2800)}
+const pb=document.getElementById("play");
+function setRun(v){run=v;pb.textContent=v?"Pause":"Play";tick()}
+pb.onclick=()=>setRun(!run);
+document.getElementById("fwd").onclick=()=>{k=Math.min(S.length-1,k+1);draw();setRun(false)};
+document.getElementById("back").onclick=()=>{k=Math.max(0,k-1);draw();setRun(false)};
+document.getElementById("again").onclick=()=>{k=0;draw();setRun(true)};
+draw();tick();
+</script>
+</body>
+</html>

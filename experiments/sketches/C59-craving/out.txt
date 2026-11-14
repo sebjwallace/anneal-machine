@@ -1,0 +1,26 @@
+
+=== VARIED PARK (gate → fountain leads many ways)
+  before: 7 assemblies, 0 with slots; a memory holding gate and coffee: no
+  no craving, at the fountain from the gate: 6 memories fit; brings back gate → fountain
+  FIRST craving at the gate (each end on its own): gate → fountain → café → coffee · bar dropped: yes · rounds 6 · woken 32
+  FIRST craving at the gate (ends count together): gate → fountain → café → coffee · bar dropped: yes · rounds 4 · woken 21
+  lived gate → fountain → café → coffee: kept as a memory awake: no (left in the flow)
+  after rest: a memory holding gate and coffee: no
+  SECOND craving at the gate (each end on its own): gate → fountain → café → coffee · bar dropped: yes · rounds 6 · woken 32
+  SECOND craving at the gate (ends count together): gate → fountain → café → coffee · bar dropped: yes · rounds 4 · woken 21
+  no craving, at the fountain from the gate: 6 memories fit; brings back gate → fountain
+  +100 days (no coffee walks): walk held no · craving at the gate: gate → fountain → café → coffee, bar dropped yes, woken 21 · no craving at the fountain: gate → fountain
+  +100 days (coffee walk every 10 days): walk held yes · craving at the gate: gate → fountain → café → coffee, bar dropped no, woken 6 · no craving at the fountain: gate → fountain
+
+=== COFFEE PARK (gate → fountain mostly leads to the café)
+  before: 4 assemblies, 0 with slots; a memory holding gate and coffee: no
+  no craving, at the fountain from the gate: 1 memories fit; brings back gate → fountain → café → street
+  FIRST craving at the gate (each end on its own): gate → fountain → café → coffee · bar dropped: yes · rounds 6 · woken 20
+  FIRST craving at the gate (ends count together): gate → fountain → café → coffee · bar dropped: yes · rounds 4 · woken 15
+  lived gate → fountain → café → coffee: kept as a memory awake: no (left in the flow)
+  after rest: a memory holding gate and coffee: no
+  SECOND craving at the gate (each end on its own): gate → fountain → café → coffee · bar dropped: yes · rounds 6 · woken 20
+  SECOND craving at the gate (ends count together): gate → fountain → café → coffee · bar dropped: yes · rounds 4 · woken 15
+  no craving, at the fountain from the gate: 1 memories fit; brings back gate → fountain → café → street
+  +100 days (no coffee walks): walk held no · craving at the gate: gate → fountain → café → coffee, bar dropped yes, woken 15 · no craving at the fountain: gate → fountain → café → street
+  +100 days (coffee walk every 10 days): walk held yes · craving at the gate: gate → fountain → café → coffee, bar dropped no, woken 6 · no craving at the fountain: gate → fountain → café

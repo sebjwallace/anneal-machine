@@ -1,0 +1,35 @@
+
+A  energy only, no craving signal
+   first craving in the park, from the grassland: no way, bar dropped yes, 2211 woken
+   kept as an experience: - · in general memory awake: no · after a rest, a memory holding gate and coffee: no
+   second craving: from the grassland no way, bar dropped yes, 2211 woken · from the gate: bar dropped yes, 2211 woken
+   after 100 more ordinary days: general memory no · experience still kept: - · craving from the grassland: no way, bar dropped yes, 2222 woken
+   what resolves the craving apart from any place: nothing separate · store holds 0
+
+B  energy only, craving broadcast
+   first craving in the park, from the grassland: no way, bar dropped yes, 2211 woken
+   kept as an experience: - · in general memory awake: no · after a rest, a memory holding gate and coffee: no
+   second craving: from the grassland no way, bar dropped yes, 2211 woken · from the gate: bar dropped yes, 2211 woken
+   after 100 more ordinary days: general memory no · experience still kept: - · craving from the grassland: no way, bar dropped yes, 2222 woken
+   what resolves the craving apart from any place: nothing separate · store holds 0
+
+C  craving broadcast; each arc kept as an experience; replay
+   first craving in the park, from the grassland: undecided, bar dropped yes, 20788 woken
+   kept as an experience: yes · in general memory awake: no · after a rest, a memory holding gate and coffee: no
+   second craving: from the grassland grassland → gate → fountain → café → coffee, bar dropped no, 7 woken · from the gate: bar dropped no, 7 woken
+   after 100 more ordinary days: general memory no · experience still kept: yes · craving from the grassland: grassland → gate → fountain → café → coffee, bar dropped no, 7 woken
+   what resolves the craving apart from any place: nothing separate · store holds 3
+
+D  craving broadcast; the whole stretch kept as an experience; replay
+   first craving in the park, from the grassland: undecided, bar dropped yes, 21068 woken
+   kept as an experience: yes · in general memory awake: no · after a rest, a memory holding gate and coffee: no
+   second craving: from the grassland grassland → gate → fountain → café → coffee, bar dropped no, 9 woken · from the gate: bar dropped no, 9 woken
+   after 100 more ordinary days: general memory no · experience still kept: yes · craving from the grassland: grassland → gate → fountain → café → coffee, bar dropped no, 9 woken
+   what resolves the craving apart from any place: nothing separate · store holds 3
+
+E  craving broadcast; every walk kept as an experience; replay
+   first craving in the park, from the grassland: grassland → gate → fountain → café → coffee, bar dropped yes, 329 woken
+   kept as an experience: yes · in general memory awake: no · after a rest, a memory holding gate and coffee: no
+   second craving: from the grassland grassland → gate → fountain → café → coffee, bar dropped no, 9 woken · from the gate: bar dropped no, 9 woken
+   after 100 more ordinary days: general memory no · experience still kept: no, faded · craving from the grassland: no way, bar dropped yes, 3771 woken
+   what resolves the craving apart from any place: nothing separate · store holds 50

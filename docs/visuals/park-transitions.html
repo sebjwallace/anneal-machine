@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Park walks as state transitions, with a held context</title>
+<style>
+:root{--bg:#fff;--text:#1f1e1d;--muted:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border3:rgba(0,0,0,.55);--cell:#f5f4f0;
+--coral-f:#FAECE7;--coral-s:#993C1D;--purple-f:#EEEDFE;--purple-s:#534AB7;--blue-f:#E6F1FB;--blue-s:#185FA5;--teal:#1D9E75;
+--win-bg:#EAF3DE;--win-b:#97C459;--win-t:#27500A;--acc-bg:#E6F1FB;--acc-b:#85B7EB;--acc-t:#0C447C}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1e1d;--text:#ecebe6;--muted:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border3:rgba(255,255,255,.6);--cell:#2a2a28;
+--coral-f:#712B13;--coral-s:#F0997B;--purple-f:#3C3489;--purple-s:#AFA9EC;--blue-f:#0C447C;--blue-s:#85B7EB;--teal:#5DCAA5;
+--win-bg:#27500A;--win-b:#639922;--win-t:#C0DD97;--acc-bg:#0C447C;--acc-b:#378ADD;--acc-t:#B5D4F4}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--muted);font-size:14px;margin:0 0 .5rem;line-height:1.5}
+svg text{fill:var(--text);font-size:14px}
+svg .ts{fill:var(--muted);font-size:12px}
+.a{transition:all .5s ease}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+.c-purple{fill:var(--purple-f);stroke:var(--purple-s)}
+.c-blue{fill:var(--blue-f);stroke:var(--blue-s)}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px;margin:.5rem 0 0}
+.chip{font-size:12px;padding:5px 8px;border-radius:8px;border:.5px solid var(--border);color:var(--muted);transition:all .4s ease}
+.chip.fit{border-color:var(--border3);color:var(--text)}
+.chip.win{background:var(--win-bg);border-color:var(--win-b);color:var(--win-t)}
+.row2{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:.75rem 0 0}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{background:var(--cell)}
+.ctx.on{background:var(--acc-bg);color:var(--acc-t);border-color:var(--acc-b)}
+.cap{font-size:15px;line-height:1.6;min-height:3.4em;margin:.5rem 0 0}
+.lbl{font-size:13px;color:var(--muted)}
+
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+section.story code{font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<h1>Park walks as state transitions, with a held context</h1>
+<p class="sub">Each landmark is a column with a "now" cell and a "was" cell; a context is a column whose cell stays held. Remembered transitions fit when all their cells are lit, and the most detailed fit predicts the next state. Holding a context decides which way to go at the fountain. Drawn by hand to show the idea (change memory, <code>src/engine/change.js</code>); not a run of the engine.</p>
+<div class="row2"><span class="lbl">Hold a context:</span>
+<button class="ctx" data-c="">None</button>
+<button class="ctx" data-c="ducks">Feed the ducks</button>
+<button class="ctx" data-c="picnic">Picnic</button>
+<button class="ctx" data-c="coffee">Coffee</button></div>
+<svg id="pk" viewBox="0 0 680 270" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>The park and its columns</title>
+<text class="ts" x="10" y="20">The park</text>
+<g id="map"></g>
+<text class="ts" x="290" y="20">Columns</text>
+<g id="colg"></g>
+</svg>
+<p class="cap" id="cap"></p>
+<div class="row2">
+<button id="play">Play</button>
+<button id="fwd" aria-label="Next step">&#8250;</button>
+<button id="again">Restart</button>
+<span class="lbl" id="stepn"></span>
+</div>
+<p class="lbl" style="margin:1rem 0 0">Remembered transitions (before → after). Outlined: fits the current state. Green: the most detailed fit, which wins.</p>
+<div class="chips" id="chips"></div>
+<section class="story">
+<h2>What it shows</h2>
+<p>How the machine remembers what happens next, and how a held context steers it. Each landmark is a column with two cells: "now" (where you are) and "was" (where you just were). When you move, the old now cell becomes the was cell. A context, such as wanting to feed the ducks, is a column of its own whose cell stays lit for the whole walk. A remembered transition is the set of cells that were lit together (now, was and the context) linked to the now cell that came next: one assembly across the columns.</p>
+<h2>Why it works this way</h2>
+<p>To predict, every remembered transition whose cells are all lit fits the current state, and the most detailed fit wins: the one that accounts for the most of what is lit. At the fountain, three ways out are known, but each was learnt with a context held. Holding "ducks" makes only the transition to the pond fit, so the walk rolls on by itself through the pond to the bench. Nothing chooses the path; the held cell makes one memory fit better than the others. The "was" cell gives direction: arriving at the fountain from the gate is a different state from arriving from the pond.</p>
+<p>With no context, the first step still works, because at rest the machine compared the three walks and kept "gate to fountain" as a shared change without a context. At the fountain nothing fits, so it doesn't guess: it waits.</p>
+<h2>What's simplified here</h2>
+<p>In the engine, cells also carry positions (where each thing is), and shared changes are found by comparing remembered transitions at every shift. When two transitions fit with equal detail, today's engine takes the one seen most (a declared choice, decision 005); that case doesn't come up in this park.</p>
+<h2>Open questions</h2>
+<p>A context here is just held. Is it a want, with heat until something explains it? (That is the craving visual and experiment C59.) Should equal detail be refused, as completion refuses ties, rather than broken by "seen most"?</p>
+<h2>Where it comes from</h2>
+<p>The engine's change memory, <code>src/engine/change.js</code>; checkpoints 07 (transition) and 08 (stamp); the column guide, <code>docs/guides/the-column.md</code>, section 14.</p>
+</section>
+</main>
+<script>
+const NS="http://www.w3.org/2000/svg",mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const L={gate:["Gate",30,135],fountain:["Fountain",110,135],pond:["Pond",185,60],bench:["Bench",255,60],oak:["Oak",185,135],hill:["Hill",255,135],cafe:["Café",185,215]};
+const P=[["gate","fountain"],["fountain","pond"],["pond","bench"],["fountain","oak"],["oak","hill"],["fountain","cafe"]];
+const CT={ducks:"ducks",picnic:"picnic",coffee:"coffee"};
+const COLS=[...Object.keys(L),...Object.keys(CT)],CX=i=>318+i*36,NOW=150,WAS=200;
+const map=document.getElementById("map"),cg=document.getElementById("colg");
+P.forEach(([a,b])=>mk("line",{x1:L[a][1],y1:L[a][2],x2:L[b][1],y2:L[b][2],stroke:"var(--border2)","stroke-width":2},map));
+const node={};
+Object.entries(L).forEach(([k,[n,x,y]])=>{node[k]=mk("circle",{cx:x,cy:y,r:11,class:"a"},map);const t=mk("text",{x,y:y+28,"text-anchor":"middle",class:"ts"},map);t.textContent=n});
+const walker=mk("circle",{cx:30,cy:135,r:6,fill:"var(--coral-s)",class:"a"},map);
+const ghost=mk("line",{x1:0,y1:0,x2:0,y2:0,stroke:"var(--teal)","stroke-width":3,"stroke-dasharray":"5 4",opacity:0,class:"a"},map);
+const rl=(y,s)=>{const t=mk("text",{x:290,y:y+4,class:"ts"},cg);t.textContent=s};rl(NOW,"now");rl(WAS,"was");
+const links=mk("g",{},cg);
+const cell={};
+COLS.forEach((k,i)=>{const isC=!!CT[k],x=CX(i);
+  mk("rect",{x:x-14,y:90,width:28,height:isC?82:132,rx:4,fill:"none",stroke:"var(--border)","stroke-width":0.5},cg);
+  const t=mk("text",{x:x,y:82,class:"ts",transform:`rotate(-40 ${x} 82)`},cg);t.textContent=isC?CT[k]:L[k][0];
+  cell[k+"now"]=mk("circle",{cx:x,cy:NOW,r:9,class:"a"},cg);
+  if(!isC)cell[k+"was"]=mk("circle",{cx:x,cy:WAS,r:9,class:"a"},cg)});
+const proj=mk("circle",{cx:0,cy:NOW,r:13,fill:"none",stroke:"var(--teal)","stroke-width":1.5,"stroke-dasharray":"3 3",opacity:0,class:"a"},cg);
+mk("line",{x1:572,y1:96,x2:572,y2:180,stroke:"var(--border)","stroke-width":0.5,"stroke-dasharray":"2 3"},cg);
+const MEM=[],walks={ducks:["gate","fountain","pond","bench"],picnic:["gate","fountain","oak","hill"],coffee:["gate","fountain","cafe"]};
+for(const [c,w] of Object.entries(walks))for(let i=0;i+1<w.length;i++)MEM.push({now:w[i],was:i?w[i-1]:null,ctx:c,to:w[i+1],kind:"exact"});
+MEM.push({now:"gate",was:null,ctx:null,to:"fountain",kind:"shared"});
+const nm=k=>L[k][0];
+const desc=m=>`${m.kind==="shared"?"shared: ":""}now ${nm(m.now)}${m.was?", was "+nm(m.was):""}${m.ctx?", "+m.ctx:""} → ${nm(m.to)}`;
+const chips=document.getElementById("chips");
+MEM.forEach(m=>{m.el=document.createElement("div");m.el.className="chip";m.el.textContent=desc(m);chips.appendChild(m.el)});
+const fits=(m,s)=>m.now===s.now&&(!m.was||m.was===s.was)&&(!m.ctx||m.ctx===s.ctx);
+const detail=m=>1+(m.was?1:0)+(m.ctx?1:0);
+let ctx="ducks",s,phase,run=false,tm,n;
+function reset(){s={now:"gate",was:null,ctx};phase=0;n=1;show()}
+function choose(){const f=MEM.filter(m=>fits(m,s));if(!f.length)return{f,w:null};const top=Math.max(...f.map(detail)),best=f.filter(m=>detail(m)===top),tos=new Set(best.map(m=>m.to));return{f,w:tos.size===1?best[0]:null}}
+function paint(el,cls){if(cls){el.setAttribute("class","a "+cls);el.removeAttribute("fill");el.removeAttribute("stroke")}else{el.setAttribute("class","a");el.setAttribute("fill","var(--cell)");el.setAttribute("stroke","var(--border2)");el.setAttribute("stroke-width",0.5)}}
+function show(){
+  COLS.forEach(k=>{paint(cell[k+"now"],k===s.now?"c-coral":(CT[k]&&k===s.ctx)?"c-blue":null);if(cell[k+"was"])paint(cell[k+"was"],k===s.was?"c-purple":null)});
+  Object.keys(L).forEach(k=>paint(node[k],k===s.now?"c-coral":null));
+  walker.setAttribute("cx",L[s.now][1]);walker.setAttribute("cy",L[s.now][2]);
+  const {f,w}=choose();links.innerHTML="";
+  MEM.forEach(m=>{m.el.className="chip"+(phase>=1&&f.includes(m)?" fit":"")+(phase>=1&&m===w?" win":"")});
+  const cap=document.getElementById("cap");
+  if(phase>=1&&w){const i=COLS.indexOf(w.to);proj.setAttribute("cx",CX(i));proj.setAttribute("opacity",1);
+    ghost.setAttribute("x1",L[s.now][1]);ghost.setAttribute("y1",L[s.now][2]);ghost.setAttribute("x2",L[w.to][1]);ghost.setAttribute("y2",L[w.to][2]);ghost.setAttribute("opacity",1);
+    const pts=[[CX(COLS.indexOf(w.now)),NOW]];if(w.was)pts.push([CX(COLS.indexOf(w.was)),WAS]);if(w.ctx)pts.push([CX(COLS.indexOf(w.ctx)),NOW]);
+    pts.forEach(([x,y])=>mk("line",{x1:x,y1:y,x2:CX(i),y2:NOW,stroke:"var(--teal)","stroke-width":1,"stroke-dasharray":"4 3",opacity:0.8},links));
+    cap.textContent=`${f.length} remembered transition${f.length>1?"s":""} fit${f.length>1?"":"s"} this state. The most detailed one ${w.ctx?"includes the held context and ":""}wins: it predicts ${nm(w.to)} next (dashed). The cells it was learnt with are one assembly across the columns.`}
+  else{proj.setAttribute("opacity",0);ghost.setAttribute("opacity",0);
+    if(phase===0)cap.textContent=s.was?`Now at ${nm(s.now)}. The previous now cell has moved to was: ${nm(s.was)}. ${s.ctx?"The context cell stays held.":"No context held."}`:`At the gate. Its now cell is lit${s.ctx?", and the context cell “"+s.ctx+"” is held":""}. Nothing in was yet.`;
+    else cap.textContent=s.now==="fountain"&&!s.ctx?"At the fountain three paths are known, but each was learnt with a context. With none held, nothing fits, so it doesn't guess. It waits.":`Nothing fits from ${nm(s.now)}: the end of the walk.`}
+  document.getElementById("stepn").textContent="Step "+n}
+function step(){if(phase===0){phase=1;show();return choose().w}const {w}=choose();if(!w)return false;s={now:w.to,was:s.now,ctx};phase=0;n++;show();return true}
+function tick(){clearTimeout(tm);if(!run)return;tm=setTimeout(()=>{const ok=step();if(ok===false||(ok===null&&phase===1)){setRun(false);return}tick()},2200)}
+const pb=document.getElementById("play");
+function setRun(v){run=v;pb.textContent=v?"Pause":"Play";tick()}
+pb.onclick=()=>{if(!run&&phase===1&&!choose().w)reset();setRun(!run)};
+document.getElementById("fwd").onclick=()=>{setRun(false);step()};
+document.getElementById("again").onclick=()=>{setRun(false);reset()};
+document.querySelectorAll(".ctx").forEach(b=>b.onclick=()=>{ctx=b.dataset.c;document.querySelectorAll(".ctx").forEach(x=>x.classList.toggle("on",x===b));setRun(false);reset();setRun(true)});
+document.querySelector('.ctx[data-c="ducks"]').classList.add("on");reset();
+</script>
+</body>
+</html>

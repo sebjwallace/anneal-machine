@@ -1,0 +1,24 @@
+
+varied park
+   1 coffee walks: held no · craving, each end alone: bar dropped yes, woken 32 · ends together: bar dropped yes, woken 21 · no craving at the fountain: gate → fountain
+   2 coffee walks: held no · craving, each end alone: bar dropped yes, woken 32 · ends together: bar dropped yes, woken 21 · no craving at the fountain: gate → fountain
+   3 coffee walks: held no · craving, each end alone: bar dropped yes, woken 32 · ends together: bar dropped yes, woken 21 · no craving at the fountain: gate → fountain
+   4 coffee walks: held yes, as [café + coffee + [gate + fountain]] · craving, each end alone: bar dropped yes, woken 14 · ends together: bar dropped no, woken 6 · no craving at the fountain: gate → fountain
+   5 coffee walks: held yes, as [café + coffee + [gate + fountain]] · craving, each end alone: bar dropped yes, woken 14 · ends together: bar dropped no, woken 6 · no craving at the fountain: gate → fountain
+  10 coffee walks: held yes, as [café + [gate + fountain] + coffee] · craving, each end alone: bar dropped yes, woken 14 · ends together: bar dropped no, woken 6 · no craving at the fountain: gate → fountain
+
+coffee park
+   1 coffee walks: held no · craving, each end alone: bar dropped yes, woken 20 · ends together: bar dropped yes, woken 15 · no craving at the fountain: gate → fountain → café → street
+   2 coffee walks: held no · craving, each end alone: bar dropped yes, woken 20 · ends together: bar dropped yes, woken 15 · no craving at the fountain: gate → fountain → café → street
+   3 coffee walks: held no · craving, each end alone: bar dropped yes, woken 20 · ends together: bar dropped yes, woken 15 · no craving at the fountain: gate → fountain → café → street
+   4 coffee walks: held yes, as [coffee + [café + gate + fountain]] · craving, each end alone: bar dropped yes, woken 8 · ends together: bar dropped no, woken 6 · no craving at the fountain: gate → fountain → café
+   5 coffee walks: held yes, as [coffee + [café + gate + fountain]] · craving, each end alone: bar dropped yes, woken 8 · ends together: bar dropped no, woken 6 · no craving at the fountain: gate → fountain → café
+  10 coffee walks: held yes, as [coffee + [café + gate + fountain]] · craving, each end alone: bar dropped yes, woken 8 · ends together: bar dropped no, woken 6 · no craving at the fountain: gate → fountain → café
+
+only-for-coffee park
+   1 coffee walks: held no · craving, each end alone: bar dropped yes, woken 2 · ends together: bar dropped yes, woken 2 · no craving at the fountain: nothing
+   2 coffee walks: held no · craving, each end alone: bar dropped yes, woken 2 · ends together: bar dropped yes, woken 2 · no craving at the fountain: nothing
+   3 coffee walks: held no · craving, each end alone: bar dropped yes, woken 2 · ends together: bar dropped yes, woken 2 · no craving at the fountain: nothing
+   4 coffee walks: held no · craving, each end alone: bar dropped yes, woken 2 · ends together: bar dropped yes, woken 2 · no craving at the fountain: nothing
+   5 coffee walks: held yes, as [gate + fountain + café + coffee] · craving, each end alone: bar dropped yes, woken 7 · ends together: bar dropped no, woken 6 · no craving at the fountain: gate → fountain → café → coffee
+  10 coffee walks: held yes, as [gate + fountain + café + coffee] · craving, each end alone: bar dropped yes, woken 7 · ends together: bar dropped no, woken 6 · no craving at the fountain: gate → fountain → café → coffee
