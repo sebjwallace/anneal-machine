@@ -1,0 +1,23 @@
+C79 · Which cell: Numenta's scheme in a text world. Written 14 November 2026 after smoke runs on development seed 1,
+before any run on test seeds 101-105. Settings in run.js. Two fixes were made while looking at dev seed 1 and are
+declared:
+  1. Context is the previous two words (with the whole sentence so far, earlier words' segments fired too).
+  2. A cell predicted only through cells lit by a burst learns this context (Numenta: learn from winners). Without it, a
+     new (subject, verb) pair woke every object of the verb, the object looked predicted, and the context was not learnt
+     (66% after one reading).
+Also: the learning cell is the least-used (or a random) cell; Numenta's preference for a nearly matching segment is left
+out (with a bar of two, "nearly" is one link, which the shared first cell always gives).
+
+Seen on dev seed 1 (8 subjects, 4 verbs, 10 objects, one reading): identity right 100%, sharp 0% (5.3 words predicted);
+least and random right 100%, sharp 100%; newcomer any valid / only valid 100% / 100% for all; with three readings,
+least used 169 cells against 103 (the word after "the" can never be predicted from one cell, so it keeps learning).
+
+Runs: worlds 8/4/10 and 20/6/30 (subjects/verbs/objects), one reading and three.
+
+Predictions:
+  P1  identity: last word right >= 95%, sharp <= 5% (it predicts every object of the verb).
+  P2  least: right >= 95% and sharp >= 95% after one reading, in both worlds.
+  P3  the newcomer: least predicts a valid object >= 95% and only valid objects >= 95%.
+  P4  random within 5 points of least on right and sharp.
+  P5  three readings: least uses >= 40% more cells than one reading (the creep at the word after "the"), small world.
+Nothing will be changed after looking at test seeds.

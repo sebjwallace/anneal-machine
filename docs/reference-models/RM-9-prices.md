@@ -33,8 +33,10 @@ picking one from ten. It is measured against naming one cell's position in the w
 ## Open
 - **The whole bill restated in cells and links.** What an unexplained cell and a prediction not there cost, against the
   links of the structure that would explain them, so that one currency covers fitting, keeping, binding and cutting.
-- **The naming cost** ("which assembly, out of how many") has no direct meaning when nothing lists assemblies. Its
-  cell-level equivalent is open.
+- **The naming cost** ("which assembly, out of how many") counts every assembly known: a global count over a list, so
+  it is bookkeeping (CTR-1 CON-19) and cannot be carried into the cell form as it is. Its cell-level equivalent is open.
+- **This is the largest gap in the models.** Without a rule for keeping and dropping at the level of cells, every
+  model's "kept only if it pays" is unbacked, and growth is unconditional (CON-1).
 
 ## Rules a rebuild must keep
 - **One currency, taken from the world; no hand-set weights.**

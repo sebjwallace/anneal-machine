@@ -15,11 +15,13 @@ holding links to the other sampled cells. Later:
 
 ## What it does
 ```
-bind(parts):                                   # parts: assemblies active together, each a set of active cells
+bind(active):                                  # the active cells, after settling
+    parts: group the active cells by their firing assembly segments: two active cells are in the same part if one's
+           firing segment (kind 'part' or 'word') holds a link from the other   # read from segments, not handed in
     sample = for each part, two of its active cells
     for each cell c in sample:
         c grows a segment (kind = 'bind') holding links to (sample without c)
-    keep the binding only if it pays (RM-9)
+    keep the binding only if it pays (RM-9)        # not yet defined at the level of cells: a known gap
 ```
 
 **Why two per part:**
@@ -37,7 +39,7 @@ Same mechanism, two keeping rules.
 
 ## Rules a rebuild must keep
 - **Bind a sample, never every cell to every other.** Extra links only add chances to fire by mistake.
-- **A binding is structure, and it pays its links** (RM-9).
+- **A binding is structure, and should pay its links** (RM-9): not yet defined at the level of cells, a known gap.
 
 ## Evidence
 - C76:
@@ -45,6 +47,8 @@ Same mechanism, two keeping rules.
   - 30 links per composition against 132 for wiring everything;
   - far fewer stray cells, at about a fiftieth of the work.
 - C77: at 64 cells per column, 96% clean with 500 compositions stored.
+- **Note:** in C76 and C77 the parts were given by the world the experiment built. Grouping the active cells into
+  parts by their firing segments, as the pseudocode does, is proposed, not yet tested.
 - The visual [z-binding](../visuals/z-binding.html).
 
 ## Junctions
@@ -52,5 +56,7 @@ A column with two winning cells active marks where two assemblies meet: a strong
 required (C76's parts shared no cell).
 
 ## Open
+- **When to bind.** Binding needs a moment that marks a whole (the end of a sentence, a held episode). What marks it,
+  from the region's own state, is not settled; in C76-C78 and C81 the experiment chose the moment and the parts.
 - When a binding should be kept (the experience store against paying over repetition), at the level of cells.
 - Binding from a part only partly seen.

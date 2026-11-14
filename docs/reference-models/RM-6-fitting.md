@@ -10,7 +10,8 @@ memory; that is consolidation (RM-7, RM-8).
 
 ## The idea
 Candidate assemblies compete to explain the input. The one that saves most takes its cells; every rival recounts on what
-is left; an assembly is taken only while it still saves something. Then every cell knows its own state, and the
+is left; an assembly is taken only while it still saves something. In the cell form, support (how much of a memory is
+active, RM-2) stands in for saving, because the bill is not yet stated in cells and links (RM-9): a known gap. Then every cell knows its own state, and the
 competition is reopened only where a winner left heat.
 
 ## Local heat
@@ -23,34 +24,28 @@ neither                        quiet
 ```
 The total misfit is the sum of the two heats, but nobody adds it up: each cell knows only its own.
 
-## What it does (as in the core, over placements)
+## What it does (the cell form, proposed)
 ```
-fit(input):
-    best = compete(input, banned = none)
-    current = best; banned = {}
-    repeat at most 6 times (a compute limit):
-        hot = winners in current that claimed cells not lit
+fit(input):                               # input: lit input cells
+    light their columns (RM-1)
+    candidates: memories woken by the input (their cells' segments fire, RM-2, RM-4)
+    repeat:
+        winners = compete(candidates) (RM-5)         # one shared level of support; rivals refused
+        the winners' cells become active; their cells are explained
+        read every cell's state (local heat, above)
+        hot = winners that left cells predicted but not lit
         if hot is empty: stop
-        banned = banned + hot                         # take back only the winners that left heat
-        current = compete(input, banned)
-        if cost(current) < cost(best): best = current
-    return best
-
-compete(input, banned):
-    candidates scored by saving = newly explained - claimed but not there - price (RM-9)
-    repeat: take the best candidate, if its saving is above zero; every other candidate recounts on what is left
+        release the hot winners' cells, and let the rivals compete for them again without the hot winners
+            (at most a few times: a compute limit)
+    return the states                     # the misfit is what is left lit and unexplained, or predicted and not there
 ```
+Not yet built or tested in this form. The re-settling step is shown in C75 (over placements); the waking and competition
+steps are shown in C73, C74 and C78.
 
-## The cell form (proposed)
-The same steps with cells:
-- candidates are the memories woken by the input (RM-4);
-- the "saving" of each is its support against its price;
-- the shared level of support picks winners (RM-5);
-- the states above are read straight from the cells;
-- re-settling releases the cells of a winner that left "claimed but not there" and lets the rivals compete again for
-  them.
-
-Not yet built.
+## Today's core (bookkeeping: not to be rebuilt this way)
+The core's `explain` and `greedy` in `src/engine/see.js` do the same competition over placements: every unit is counted
+against every lit pixel to make the candidates, scored, then taken greedily, then re-settled where heat is left. That is
+a scan over a list of all units (CTR-1 CON-19, CTR-2 CON-8), recorded here only so a reader knows what it is.
 
 ## Rules a rebuild must keep
 - **Fitting never changes memory.**
@@ -63,7 +58,3 @@ Not yet built.
   fortieth of the work, and learnt exactly the same. In the core since 14 November 2026.
 - The visual [z-fitting](../visuals/z-fitting.html).
 
-## Note on the core today
-The core's competition (`greedy` in `src/engine/see.js`) builds its candidates by counting every unit against every lit
-pixel. That is association in bookkeeping form, and at the pixel level nothing can be skipped. It is to be replaced by
-the cell form.

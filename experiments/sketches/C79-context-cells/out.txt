@@ -1,0 +1,20 @@
+== world 8/4/10, readings 1
+arm        last word right   sharp (only it)   words predicted   newcomer: any valid / only valid   cells used   segments
+identity              100%                0%               5.6                        100% / 100%           24        120
+least                 100%              100%               1.0                        100% / 100%          104        130
+random                100%               99%               1.0                        100% / 100%           95        130
+== world 8/4/10, readings 3
+arm        last word right   sharp (only it)   words predicted   newcomer: any valid / only valid   cells used   segments
+identity              100%                0%               5.6                        100% / 100%           24        186
+least                 100%              100%               1.0                        100% / 100%          170        326
+random                100%               99%               1.0                        100% / 100%          137        315
+== world 20/6/30, readings 1
+arm        last word right   sharp (only it)   words predicted   newcomer: any valid / only valid   cells used   segments
+identity              100%                0%              14.9                        100% / 100%           58        451
+least                 100%              100%               1.0                        100% / 100%          323        482
+random                100%               96%               1.0                        100% / 100%          277        482
+== world 20/6/30, readings 3
+arm        last word right   sharp (only it)   words predicted   newcomer: any valid / only valid   cells used   segments
+identity              100%                0%              14.9                        100% / 100%           58        693
+least                 100%              100%               1.0                        100% / 100%          525       1206
+random                100%               96%               1.0                        100% / 100%          399       1158

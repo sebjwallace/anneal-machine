@@ -34,17 +34,33 @@ when input cells arrive:
 A whole column lighting when nothing predicts one of its cells is what lets an old memory be woken by a new context:
 it is how comparison happens by itself (RM-8).
 
-## Which cell a new memory uses (open)
-- **Pictures:** the cell is chosen by where the input sits (an offset). This works, but doesn't generalise.
-- **Context alone fails:** cells encode the frame, not the individual (the other repository's sketch 20: recall 52%).
-- **Identity alone** (one cell per word) keeps individuals apart (88%) but not contexts.
-- **Best rule so far, by fit or fresh:** reuse a cell when one of its segments already fits; give a fresh cell (least
-  used) to whatever nothing explains. That is the energy rule: pay for a new cell only when the old ones can't explain
-  it.
-- **Open:** a choice using both context and identity.
+## Which cell a new memory uses (shown for text, C79)
+**The column is the identity; the cell is the context** (Numenta's scheme, on our cells and segments):
+```
+for each input that is on, with context = the winner cells of the recent inputs:
+    predicted = cells in its column with a firing segment (RM-2)
+    if predicted:
+        those become active
+        if they were predicted only through cells lit by a burst (not by the context's winners):
+            the predicted cell with the fewest segments grows a segment over the winners      # learn from winners
+    else:
+        the whole column lights (every cell active)                           # nothing predicts: compare widely
+        the cell in the column with the fewest segments grows a segment over the winners    # a fresh cell
+```
+- **Evidence.** In C79, after one reading, the next word was predicted right and sharply every time, where one cell per
+  word predicted every word that ever followed. A word never seen in a context still predicted only valid continuations,
+  because its whole column lit.
+- **What was tried before:** cells chosen by context alone (without the column) encoded the frame, not the word; one
+  cell per word kept the word but lost its context; pictures use offsets.
+- **Open:**
+  - **The creep.** An input with too little context to be predicted (one cell, against a bar of two) learns a fresh cell
+    every time.
+  - **How long context is held.** Two words in C79.
 
 ## Rules a rebuild must keep
-- A cell is active or not, and carries no strength or level.
+- A cell is active or not, and carries no strength or level. "Fewest segments" is read from the cell's own
+  structure (how many segments it holds), not from a counter kept beside it (CON-9).
+- Growth here is unconditional until the energy rule exists at the level of cells (RM-9): a known gap (CON-1).
 - C is fixed architecture, not tuned per world (CTR-1 CON-3).
 - Columns are separate: nothing in one column reads another's cells except through segments.
 
@@ -55,5 +71,5 @@ it is how comparison happens by itself (RM-8).
 - The visual [columns](../visuals/columns.html).
 
 ## Open
-- What picks the cell for a new memory (above).
+- The creep, and how long context is held (above).
 - How large C must be, and whether it can grow.

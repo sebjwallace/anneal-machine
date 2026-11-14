@@ -16,6 +16,7 @@ partly wakes the memory it resembles, and the cells' states draw the cut.
 when an input arrives whose columns light all their cells (RM-1):
     count segments (RM-2); support includes the cell itself if active
     memory = cells at the top level of support (RM-5)        # the memory that fits best
+    if rivals tie at the top level (RM-5): no cut          # it is not clear which memory the input resembles
     F = cells of memory that are lit          # fits: the shared part
     P = cells of memory that are not lit      # predicted but not there: the memory's own remainder
     U = lit columns with no cell in F         # unexplained: the input's own remainder
@@ -23,10 +24,10 @@ when an input arrives whose columns light all their cells (RM-1):
         cut:
             F becomes its own assembly (RM-3), on the same cells     # the abstraction, really shared
             P becomes its own assembly, on the same cells
-            remove the memory's old whole-memory segments
+            remove the memory's old whole-memory segments: the firing segments that put its cells at the top level
             U gets fresh cells (RM-1) and becomes an assembly
             rebind the old whole as F + P, and the input as F + U (RM-7)
-        keep the cut only if it pays (RM-9)
+        keep the cut only if it pays (RM-9)          # not yet defined at the level of cells: a known gap
 ```
 
 ## Rules a rebuild must keep

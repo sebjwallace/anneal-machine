@@ -1,0 +1,7 @@
+C81 · levels from letters   400 sentences, no spaces, read once   seeds 101,102,103,104,105
+
+arm    boundaries (2nd half): precision / recall   runs that are exactly one word   word assemblies: stored / recognised   words recognised (2nd half)   cell chains per word   shared parts: stored / shared beginnings / whole words   sentences bound   object recalled from subject + verb
+none                                  74% / 82%                              44%                              648 / 682                           40%                    7.3                                         446 / 14% / 36%                90                                   63%
+heat                                  46% / 87%                               8%                              298 / 804                            9%                    1.0                                           173 / 3% / 9%                 0                                    0%
+two                                   74% / 82%                              44%                             250 / 1075                           54%                    1.0                                          149 / 6% / 12%                90                                   75%
+truth                               100% / 100%                             100%                              24 / 1176                          100%                    1.0                                           7 / 100% / 0%               400                                  100%

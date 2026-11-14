@@ -30,15 +30,15 @@ supersede it for the cells-first design ([cells first](../theories/cells-first.m
 
 | Model | About | Status |
 |---|---|---|
-| [RM-1 · Cells and columns](RM-1-cells-and-columns.md) | Input cells, the column of cells over each, which cell becomes active. | shown (C74, C76-C78); what picks the cell is open |
+| [RM-1 · Cells and columns](RM-1-cells-and-columns.md) | Input cells, the column of cells over each, which cell becomes active. | shown (C74, C76-C79); what picks the cell shown for text (C79) |
 | [RM-2 · Segments](RM-2-segments.md) | One memory's evidence on one cell: AND on the segment, OR at the cell; firing at two. | shown (C35, C73-C78) |
 | [RM-3 · Assemblies](RM-3-assemblies.md) | What an assembly is (cells and links, never an entry), how one is stored. | shown |
 | [RM-4 · Waking and completion](RM-4-waking-and-completion.md) | Settling from a cue: segments fire, cells join, round by round. | shown (C73, C74, C76) |
 | [RM-5 · Competition](RM-5-competition.md) | Within a column; between whole memories through one shared level of support; when it helps and when only more cells do. | shown (C74, C77, C78) |
-| [RM-6 · Fitting](RM-6-fitting.md) | Explaining an input: competition, local heat, re-settling where heat is left. | core (C75, over placements); cell form proposed |
-| [RM-7 · Composition](RM-7-composition.md) | Binding a sample of the active cells: two cells per part. | shown (C76, C77) |
+| [RM-6 · Fitting](RM-6-fitting.md) | Explaining an input: competition, local heat, re-settling where heat is left. | cell form proposed (re-settling shown in C75); today's core does it by bookkeeping |
+| [RM-7 · Composition](RM-7-composition.md) | Binding a sample of the active cells: two cells per part. | shown (C76, C77); grouping into parts read from segments, when to bind open |
 | [RM-8 · Decomposition](RM-8-decomposition.md) | The cut between fit and misfit; the shared part on the same cells; rebinding. | shown (C78) |
-| [RM-9 · Prices](RM-9-prices.md) | The one currency: what the bill counts today, how it reads in cells and links, where the bar of two comes from. | core (placements); cell form partly shown, partly open |
+| [RM-9 · Prices](RM-9-prices.md) | The one currency: what the bill counts today, how it reads in cells and links, where the bar of two comes from. | open at the level of cells: the largest gap |
 | [RM-10 · Frames](RM-10-frames.md) | Frames as a pattern of decomposed memories, not a mechanism; holding a variable open. | proposed; holding a variable open is open |
 
 **How the models fit together:**
@@ -46,9 +46,21 @@ supersede it for the cells-first design ([cells first](../theories/cells-first.m
 2. Segments fire (RM-2) and memories wake and complete (RM-4).
 3. They compete (RM-5), and the input is fitted (RM-6), leaving local heat.
 4. At rest or from replay, what recurs is composed (RM-7) and what partly fits is cut (RM-8).
-5. Everything is kept only if it pays (RM-9).
+5. Everything should be kept only if it pays (RM-9). At the level of cells that rule is not yet defined: a known gap.
 
 Frames are what that leaves behind (RM-10).
+
+**What the models do not yet cover cleanly (read before building):**
+1. **The energy rule at the level of cells (RM-9).** No model yet says how a segment or an assembly is kept or dropped
+   because energy falls. Until it does, growth in these models is unconditional, which falls short of CTR-1 CON-1. A
+   rebuild must keep that gap visible, not fill it with a hand-set rule.
+2. **Competition is through one global level of support (RM-5),** not a local one.
+3. **Boundaries in a stream, letting go of context, recognising a stored word, and wiring regions together** (as in
+   C80 and C81) are not described: the experiments did them in their own code, partly by bookkeeping. They are not part
+   of any model until they are done by the region's own state.
+
+**A standing rule:** where a model is silent or marked open, a rebuild says so and leaves the gap. It does not fill it
+with a list, a scan over everything, a number set by hand, or the truth (CTR-2 CON-2, CON-8).
 
 **Changing a model:**
 - A model changes when evidence changes it: an experiment that shows a better way, or shows a rule wrong.

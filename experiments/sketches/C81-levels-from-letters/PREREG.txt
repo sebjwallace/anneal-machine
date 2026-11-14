@@ -1,0 +1,32 @@
+C81 · Levels from letters. Written 14 November 2026 after smoke runs on development seed 1, before any run on test
+seeds 101-105. Settings in run.js: C80's stream without spaces (24 words, 400 three-word sentences, read once); the cells
+engine, 32 cells per column, context of two steps.
+
+Changes made while looking at dev seed 1, declared:
+  1. The region's boundary guess is the peak of breadth, with one letter of look-ahead (the region predicts the next
+     letter without learning, then decides); a guess on every rise was 31% right.
+  2. The engine now keeps sequence segments ('seq', predicting the next input from what came before) apart from
+     assembly segments ('word', 'part', 'bind', completing what is active now). Without it, stored words predicted all
+     their letters at once and spoiled the boundaries. The engine's tests still pass.
+  3. A two-region arm was added: region 1 never lets go and marks boundaries; region 2 lets go at region 1's boundaries
+     and holds the words, parts and sentences. Letting go in the region that marks boundaries spoiled them (46% right).
+  4. The measure of shared parts was widened: a part is a shared beginning (two or more real words begin with it), a
+     whole word found inside a longer run, or neither. Measuring code only.
+
+Seen on dev seed 1:
+  - truth: 24 words stored, recognised every time after, one chain of cells per word, 7 parts all shared beginnings, 400
+    sentences bound, the object recalled from subject + verb 100%;
+  - two: boundaries 74 / 82%, words recognised in the second half 54%, one chain per word, parts 6% shared beginnings
+    and 12% whole words, 99 sentences bound, object recalled 83%;
+  - none: 6.6 chains per word;
+  - heat: boundaries 46% right.
+
+Predictions:
+  P1  truth: one chain of cells per word, >= 99% of second-half words recognised, >= 95% of parts are shared beginnings,
+      object recalled >= 95%.
+  P2  none: >= 3 chains of cells per word (without letting go, a word has no single identity).
+  P3  heat (one region letting go): boundary precision <= 55%.
+  P4  two: boundary precision >= 70% and recall >= 75%; <= 1.2 chains per word; >= 45% of second-half words recognised.
+  P5  two: object recalled from subject + verb >= 75% of the sentences bound.
+  P6  two: shared beginnings plus whole words are <= 35% of the parts stored (most parts are fragments of wrong cuts).
+Nothing will be changed after looking at test seeds.

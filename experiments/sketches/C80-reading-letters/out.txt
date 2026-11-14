@@ -1,0 +1,30 @@
+C80 · reading from letters, one region   400 sentences read once (about 6188 characters with spaces)   seeds 101,102,103,104,105
+
+WITH SPACES
+  cells
+    first quarter  inside words: right  80% sharp  62% surprise  20%   first letters: surprise  38%
+                   letters predicted: inside 1.2, at first letters 3.2   boundaries where the breadth peaks: precision  64% recall  73%   space predicted  91%
+    last quarter   inside words: right  98% sharp  75% surprise   2%   first letters: surprise   7%
+                   letters predicted: inside 1.3, at first letters 4.6   boundaries where the breadth peaks: precision  84% recall  96%   space predicted 100%
+    cells used 445, segments 1047, segment checks per letter: first quarter 32, last quarter 46
+  one cell per letter
+    first quarter  inside words: right  94% sharp  37% surprise   6%   first letters: surprise  19%
+                   letters predicted: inside 2.8, at first letters 6.4   boundaries where the breadth peaks: precision  55% recall  67%   space predicted  94%
+    last quarter   inside words: right 100% sharp  38% surprise   0%   first letters: surprise   0%
+                   letters predicted: inside 3.2, at first letters 8.0   boundaries where the breadth peaks: precision  65% recall  79%   space predicted 100%
+    cells used 20, segments 137, segment checks per letter: first quarter 79, last quarter 102
+
+WITHOUT SPACES
+  cells
+    first quarter  inside words: right  80% sharp  55% surprise  20%   first letters: surprise  45%
+                   letters predicted: inside 1.7, at first letters 3.2   boundaries where the breadth peaks: precision  54% recall  60%   from surprise: precision  42% recall  45%
+    last quarter   inside words: right  98% sharp  67% surprise   2%   first letters: surprise  15%
+                   letters predicted: inside 1.7, at first letters 4.4   boundaries where the breadth peaks: precision  76% recall  83%   from surprise: precision  68% recall  15%
+    cells used 477, segments 1335, segment checks per letter: first quarter 36, last quarter 63
+  one cell per letter
+    first quarter  inside words: right  90% sharp  26% surprise  10%   first letters: surprise  25%
+                   letters predicted: inside 3.8, at first letters 6.4   boundaries where the breadth peaks: precision  47% recall  53%   from surprise: precision  43% recall  25%
+    last quarter   inside words: right 100% sharp  27% surprise   0%   first letters: surprise   0%
+                   letters predicted: inside 4.3, at first letters 8.2   boundaries where the breadth peaks: precision  53% recall  61%   from surprise: precision  50% recall   0%
+    cells used 19, segments 181, segment checks per letter: first quarter 73, last quarter 100
+

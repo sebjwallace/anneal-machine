@@ -26,4 +26,4 @@ guessed, until a cue picks one. They might be held as cells predicted but not co
 - Several variables that relate to each other ("x + y = z").
 - A new filler binding into a variable from its surroundings alone (C66 found types from surroundings by comparison;
   doing it with cells is open).
-- What picks the cell for text (RM-1).
+- The creep in text: an input with too little context keeps learning fresh cells (RM-1).

@@ -15,9 +15,9 @@ round by round, until nothing new fires: pattern completion, as in Hopfield.
 settle(cue):                                    # cue: a set of active cells
     active = cue
     repeat (until nothing new joins, or a round limit as a compute limit):
-        count segments from active (RM-2)
-        candidates = cells not in active with a firing segment
-        winners = compete(candidates) (RM-5)
+        count assembly segments from active (RM-2: 'part', 'word', 'bind'; never 'seq', which predicts the next input)
+        candidates = cells not in active with a firing assembly segment
+        winners = compete(candidates) (RM-5)        # refuses a tie between rivals
         if winners is empty: stop
         active = active + winners
     return active            # the cue plus what was brought back (cells predicted, not seen)

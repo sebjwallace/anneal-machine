@@ -1,0 +1,21 @@
+C80 · Reading from letters, one region. Written 14 November 2026 after smoke runs on development seed 1, before any run
+on test seeds 101-105. Settings in run.js: 24 words (8 subjects, 6 verbs, 10 objects, several sharing beginnings),
+400 random three-word sentences read once as one stream, with spaces and without; the cells engine with 32 cells per
+column and context of two steps, against one cell per letter. One change was made while looking at dev seed 1, and is
+declared: boundaries are guessed where the number of letters predicted (the breadth) peaks, as well as where a burst
+happens; bursts alone stopped marking boundaries once every possible first letter was predicted.
+
+Seen on dev seed 1 (last quarter): cells inside words right 99 / 96%, sharp 76 / 66% (with / without spaces); one cell per
+letter sharp 38 / 30%; without spaces, boundaries where the breadth peaks precision 76%, recall 85% (one cell per letter
+51 / 62%); from surprise alone, recall 18%.
+
+Predictions (cells arm, last quarter, unless said):
+  P1  Inside words, the next letter is predicted right >= 95%, with and without spaces.
+  P2  Sharper than one cell per letter by >= 25 points, with and without spaces.
+  P3  Without spaces, boundaries where the breadth peaks: precision >= 70%, recall >= 80%, and both >= 15 points above
+      one cell per letter.
+  P4  Without spaces, surprise alone finds <= 30% of boundaries.
+  P5  The breadth at first letters is >= 2.5 times the breadth inside words.
+  P6  Without spaces, boundary precision rises by >= 10 points from the first quarter to the last.
+  P7  Segment checks per letter grow by less than 2 times from the first quarter to the last.
+Nothing will be changed after looking at test seeds.

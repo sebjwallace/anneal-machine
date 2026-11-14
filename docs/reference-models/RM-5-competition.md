@@ -13,8 +13,12 @@ within a column:
     if the top two tie, the column has no winner (refused)
 
 between whole memories (one shared level of support):
-    of all candidates in a round, only those at the top level of support join
+    top = the candidates in a round at the top level of support
     # every cell of the best-matching memory reaches the same, highest support, so the memory joins whole
+    rivals: two top cells are rivals if neither's firing segment holds a link from the other
+            (they belong to different memories), and they compete for the same column, or the same cells
+    if any rivals are in top: those rivals do not join (a tie is refused, CON-7); the rest of top joins
+    else: all of top joins
 ```
 
 For bindings (RM-7), the same idea compares binding segments:
@@ -41,6 +45,9 @@ wins.
 C73, C74, C77, C78.
 
 ## Open
+- **Rivals that can both be right.** Two memories that only overlap (taking one shrinks the other, it doesn't rule it
+  out) are not a tie. The test above (different memories, the same column or cells) is the proposed local form. Not yet
+  tested.
 - **The shared level is one number over all candidates: global.** Whether it can be local, spanning a region or a
   neighbourhood, is open.
 - **Binding segments compare as bindings because they carry a kind label** (RM-2). Whether that label can go is open.

@@ -31,7 +31,8 @@ Assemblies of assemblies (super-assemblies, composites) are not stored as one bi
 ## Rules a rebuild must keep
 - **No list of assemblies.** A test of this: deleting every record about an assembly except its cells' segments must not
   change what the machine does.
-- **An assembly is kept only if it pays** (RM-9).
+- **An assembly should be kept only if it pays** (RM-9). At the level of cells that rule is not yet defined: today an
+  assembly, once stored, is kept. A known gap (CTR-1 CON-1).
 
 ## Evidence
 C74, C76, C77, C78: completion, competition, composition and decomposition done with assemblies held only as segments.

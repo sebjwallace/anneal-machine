@@ -19,7 +19,10 @@ A segment is not a cell: nothing links to it, and it never shows downstream.
 ## Data
 ```
 segment:  belongs to one cell; holds links (a set of other cells); has no strength
-          (optional: kind = 'part' or 'bind', see RM-7; a label local to the segment)
+          kind: 'seq' (predicts the next input from what came before) or 'part' / 'word' / 'bind' (completes what
+          is active now); a label local to the segment. The two must be kept apart: predicting the next input uses
+          only 'seq' segments, completion only the others (C81: stored words otherwise predicted all their letters at
+          once and spoiled the boundaries).
 index:    for each cell, the segments that hold a link from it     # so only segments with an active input are touched
 ```
 
@@ -41,11 +44,14 @@ count(active):
 ## Why two
 The bar of two comes from the prices (RM-9). Describing two items as one costs less than two separate items, and one
 item saves nothing. So an assembly of one cell can never pay, and a segment fires at two active links. It is not a
-fraction of the segment's size and not a tuned number.
+fraction of the segment's size and not a tuned number. **Caveat:** this is derived from today's bill over placements
+(a use of an assembly costs about 1.5, an unexplained item 1). It has not yet been re-derived in cells and links (RM-9,
+open), so it is carried over, not yet earned, in the cell form.
 
 ## Rules a rebuild must keep
 - **Counts are per segment, never summed in the cell.**
-- **No strengths, weights or decay.** Segments are kept or removed by the energy rule (RM-9).
+- **No strengths, weights or decay.** Segments should be kept or removed by the energy rule (RM-9), which is not yet
+  defined at the level of cells: today every segment grown is kept. That is a known gap (CTR-1 CON-1), not a design.
 - **Only segments with an active input are touched:** work follows activity (CTR-1 CON-18).
 
 ## Evidence
