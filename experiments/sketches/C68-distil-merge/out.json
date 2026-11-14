@@ -1,0 +1,156 @@
+{
+ "4": {
+  "types": [
+   [
+    "teacher",
+    "baker"
+   ],
+   [
+    "pupil",
+    "child"
+   ]
+  ],
+  "exact": 1,
+  "pure": 0.75,
+  "hand": 1
+ },
+ "8": {
+  "types": [
+   [
+    "teacher",
+    "coach"
+   ],
+   [
+    "pupil",
+    "child",
+    "trainee"
+   ],
+   [
+    "family",
+    "diner",
+    "guest"
+   ],
+   [
+    "baker",
+    "chef"
+   ]
+  ],
+  "exact": 4,
+  "pure": 1,
+  "hand": 4
+ },
+ "12": {
+  "types": [
+   [
+    "teacher",
+    "coach"
+   ],
+   [
+    "pupil",
+    "child",
+    "trainee",
+    "student"
+   ],
+   [
+    "baker",
+    "chef"
+   ],
+   [
+    "family",
+    "guest"
+   ],
+   [
+    "baker",
+    "chef"
+   ],
+   [
+    "diner",
+    "student"
+   ],
+   [
+    "chef",
+    "cook"
+   ]
+  ],
+  "exact": 2,
+  "pure": 0.9375,
+  "hand": 1
+ },
+ "16": {
+  "types": [
+   [
+    "teacher",
+    "coach",
+    "tutor"
+   ],
+   [
+    "pupil",
+    "child",
+    "student"
+   ],
+   [
+    "baker",
+    "chef",
+    "cook"
+   ],
+   [
+    "family",
+    "guest"
+   ],
+   [
+    "pupil",
+    "student",
+    "trainee"
+   ],
+   [
+    "baker",
+    "chef"
+   ],
+   [
+    "diner",
+    "guest"
+   ],
+   [
+    "guest",
+    "family",
+    "diner"
+   ]
+  ],
+  "exact": 3,
+  "pure": 1,
+  "hand": 4
+ },
+ "24": {
+  "types": [
+   [
+    "teacher",
+    "coach",
+    "tutor",
+    "mentor"
+   ],
+   [
+    "pupil",
+    "child",
+    "trainee",
+    "student"
+   ],
+   [
+    "baker",
+    "chef",
+    "cook"
+   ],
+   [
+    "family",
+    "guest",
+    "diner"
+   ],
+   [
+    "baker",
+    "chef"
+   ]
+  ],
+  "exact": 4,
+  "pure": 1,
+  "hand": 4
+ }
+}

@@ -1,0 +1,671 @@
+{
+ "spaces-150": {
+  "kinds": [
+   {
+    "base": "the",
+    "slots": [
+     [
+      "fox ",
+      "hen ",
+      "cat ",
+      " on "
+     ]
+    ]
+   },
+   {
+    "base": "a",
+    "slots": [
+     [
+      "fox ",
+      "hen ",
+      "cat ",
+      " on "
+     ]
+    ]
+   },
+   {
+    "base": "hid",
+    "slots": [
+     [
+      " on ",
+      "a fox "
+     ]
+    ]
+   }
+  ],
+  "fillers": 10,
+  "wordFillers": 9,
+  "slots": 3,
+  "pure": 0,
+  "wordsAsFillers": [
+   "cat",
+   "fox",
+   "hen",
+   "on"
+  ],
+  "wordsAsParts": [
+   "the",
+   "a",
+   "cat",
+   "fox",
+   "hen",
+   "ran",
+   "hid",
+   "on"
+  ],
+  "either": [
+   "the",
+   "a",
+   "cat",
+   "fox",
+   "hen",
+   "ran",
+   "hid",
+   "on"
+  ]
+ },
+ "nospaces-150": {
+  "kinds": [
+   {
+    "base": "e r anb",
+    "slots": [
+     [
+      "hen",
+      "fox",
+      "hidon",
+      "a…o",
+      "by",
+      "hen",
+      "cat",
+      "on"
+     ]
+    ]
+   },
+   {
+    "base": "the",
+    "slots": [
+     [
+      "hen",
+      "fox",
+      "hidon",
+      "a…o",
+      "by",
+      "hen",
+      "cat",
+      "on"
+     ]
+    ]
+   },
+   {
+    "base": "hid",
+    "slots": [
+     [
+      "on",
+      "fox",
+      "cat"
+     ]
+    ]
+   },
+   {
+    "base": "he",
+    "slots": [
+     [
+      "n",
+      "cathid",
+      "fox",
+      "t"
+     ]
+    ]
+   }
+  ],
+  "fillers": 23,
+  "wordFillers": 16,
+  "slots": 4,
+  "pure": 0,
+  "wordsAsFillers": [
+   "cat",
+   "fox",
+   "hen",
+   "on",
+   "by"
+  ],
+  "wordsAsParts": [
+   "cat",
+   "fox",
+   "hid",
+   "on",
+   "by"
+  ],
+  "either": [
+   "cat",
+   "fox",
+   "hen",
+   "hid",
+   "on",
+   "by"
+  ]
+ },
+ "spaces-400": {
+  "kinds": [
+   {
+    "base": "the",
+    "slots": [
+     [
+      "fox ",
+      "hen ",
+      "cat ",
+      " on ",
+      "fox ",
+      "og ",
+      "og "
+     ]
+    ]
+   },
+   {
+    "base": "a",
+    "slots": [
+     [
+      "fox ",
+      "hen ",
+      "cat ",
+      " on ",
+      "fox ",
+      "og ",
+      "og "
+     ]
+    ]
+   },
+   {
+    "base": "o n",
+    "slots": [
+     [
+      " ",
+      "the "
+     ]
+    ]
+   },
+   {
+    "base": "hid",
+    "slots": [
+     [
+      "a fox ",
+      "og ",
+      " on ",
+      " by a",
+      "hen ",
+      "fox a "
+     ]
+    ]
+   },
+   {
+    "base": "n a r",
+    "slots": [
+     [
+      "a fox ",
+      "og ",
+      " on ",
+      " by a",
+      "hen ",
+      "fox a "
+     ]
+    ]
+   },
+   {
+    "base": "a",
+    "slots": [
+     [
+      "a fox ",
+      "og ",
+      " on ",
+      " by a",
+      "hen ",
+      "fox a "
+     ]
+    ]
+   }
+  ],
+  "fillers": 34,
+  "wordFillers": 17,
+  "slots": 6,
+  "pure": 0,
+  "wordsAsFillers": [
+   "the",
+   "cat",
+   "fox",
+   "hen",
+   "on"
+  ],
+  "wordsAsParts": [
+   "the",
+   "a",
+   "cat",
+   "fox",
+   "hen",
+   "hid",
+   "by"
+  ],
+  "either": [
+   "the",
+   "a",
+   "cat",
+   "fox",
+   "hen",
+   "hid",
+   "on",
+   "by"
+  ]
+ },
+ "nospaces-400": {
+  "kinds": [
+   {
+    "base": "the",
+    "slots": [
+     [
+      "hen",
+      "fox",
+      "hidon",
+      "a…o",
+      "by",
+      "hen",
+      "cat",
+      "on",
+      "foxhid",
+      "acata",
+      "cat",
+      "a…a",
+      "hid",
+      "a"
+     ]
+    ]
+   },
+   {
+    "base": "b y",
+    "slots": [
+     [
+      "hen",
+      "fox",
+      "hidon",
+      "a…o",
+      "by",
+      "hen",
+      "cat",
+      "on",
+      "foxhid",
+      "acata",
+      "cat",
+      "a…a",
+      "hid",
+      "a"
+     ]
+    ]
+   },
+   {
+    "base": "bythe",
+    "slots": [
+     [
+      "anb",
+      "hid"
+     ]
+    ]
+   },
+   {
+    "base": "o n",
+    "slots": [
+     [
+      "hen",
+      "fox",
+      "hidon",
+      "a…o",
+      "by",
+      "hen",
+      "cat",
+      "on",
+      "foxhid",
+      "acata",
+      "cat",
+      "a…a",
+      "hid",
+      "a"
+     ]
+    ]
+   },
+   {
+    "base": "t s",
+    "slots": [
+     [
+      "a…bya",
+      "a"
+     ]
+    ]
+   }
+  ],
+  "fillers": 46,
+  "wordFillers": 29,
+  "slots": 5,
+  "pure": 0,
+  "wordsAsFillers": [
+   "a",
+   "cat",
+   "fox",
+   "hen",
+   "hid",
+   "on",
+   "by"
+  ],
+  "wordsAsParts": [
+   "the",
+   "fox",
+   "hid"
+  ],
+  "either": [
+   "the",
+   "a",
+   "cat",
+   "fox",
+   "hen",
+   "hid",
+   "on",
+   "by"
+  ]
+ },
+ "spaces-1000": {
+  "kinds": [
+   {
+    "base": "the",
+    "slots": [
+     [
+      "fox ",
+      "hen ",
+      "cat ",
+      " on ",
+      "fox ",
+      "og ",
+      "og ",
+      "he",
+      " by ",
+      "cat ",
+      " ",
+      "hen ",
+      " by a",
+      "x ",
+      "og "
+     ]
+    ]
+   },
+   {
+    "base": "a",
+    "slots": [
+     [
+      "fox ",
+      "hen ",
+      "cat ",
+      " on ",
+      "fox ",
+      "og ",
+      "og ",
+      "he",
+      " by ",
+      "cat ",
+      " ",
+      "hen ",
+      " by a",
+      "x ",
+      "og "
+     ]
+    ]
+   },
+   {
+    "base": "n o…",
+    "slots": [
+     [
+      " ",
+      "the ",
+      " by ",
+      "t",
+      "s"
+     ]
+    ]
+   },
+   {
+    "base": " hid",
+    "slots": [
+     [
+      "a fox ",
+      "og ",
+      " on ",
+      " by a",
+      "hen ",
+      "fox a ",
+      "at "
+     ]
+    ]
+   },
+   {
+    "base": "a r n",
+    "slots": [
+     [
+      "a fox ",
+      "og ",
+      " on ",
+      " by a",
+      "hen ",
+      "fox a ",
+      "at "
+     ]
+    ]
+   },
+   {
+    "base": "a",
+    "slots": [
+     [
+      " ",
+      "the ",
+      " by ",
+      "t",
+      "s"
+     ]
+    ]
+   },
+   {
+    "base": "at",
+    "slots": [
+     [
+      "fox ",
+      "hen ",
+      "cat ",
+      " on ",
+      "fox ",
+      "og ",
+      "og ",
+      "he",
+      " by ",
+      "cat ",
+      " ",
+      "hen ",
+      " by a",
+      "x ",
+      "og "
+     ]
+    ]
+   },
+   {
+    "base": "",
+    "slots": [
+     [
+      "o",
+      "n"
+     ]
+    ]
+   }
+  ],
+  "fillers": 71,
+  "wordFillers": 32,
+  "slots": 8,
+  "pure": 0,
+  "wordsAsFillers": [
+   "the",
+   "cat",
+   "fox",
+   "hen",
+   "on",
+   "by"
+  ],
+  "wordsAsParts": [
+   "the",
+   "fox",
+   "hid",
+   "by"
+  ],
+  "either": [
+   "the",
+   "cat",
+   "fox",
+   "hen",
+   "hid",
+   "on",
+   "by"
+  ]
+ },
+ "nospaces-1000": {
+  "kinds": [
+   {
+    "base": "t he",
+    "slots": [
+     [
+      "hen",
+      "fox",
+      "hidon",
+      "a…o",
+      "by",
+      "hen",
+      "cat",
+      "on",
+      "foxhid",
+      "acata",
+      "cat",
+      "a…a",
+      "hid",
+      "a",
+      "anb",
+      "fox",
+      "doga",
+      "doga"
+     ]
+    ]
+   },
+   {
+    "base": "b y",
+    "slots": [
+     [
+      "hen",
+      "fox",
+      "hidon",
+      "a…o",
+      "by",
+      "hen",
+      "cat",
+      "on",
+      "foxhid",
+      "acata",
+      "cat",
+      "a…a",
+      "hid",
+      "a",
+      "anb",
+      "fox",
+      "doga",
+      "doga"
+     ]
+    ]
+   },
+   {
+    "base": "n o",
+    "slots": [
+     [
+      "hen",
+      "fox",
+      "hidon",
+      "a…o",
+      "by",
+      "hen",
+      "cat",
+      "on",
+      "foxhid",
+      "acata",
+      "cat",
+      "a…a",
+      "hid",
+      "a",
+      "anb",
+      "fox",
+      "doga",
+      "doga"
+     ]
+    ]
+   },
+   {
+    "base": "s at",
+    "slots": [
+     [
+      "o",
+      "thehen",
+      "fox",
+      "bythe",
+      "thecat",
+      "hen…by",
+      "a…bya"
+     ]
+    ]
+   },
+   {
+    "base": "hid",
+    "slots": [
+     [
+      "o",
+      "thehen",
+      "fox",
+      "bythe",
+      "thecat",
+      "hen…by",
+      "a…bya"
+     ]
+    ]
+   },
+   {
+    "base": "doga",
+    "slots": [
+     [
+      "ona",
+      "hido"
+     ]
+    ]
+   }
+  ],
+  "fillers": 70,
+  "wordFillers": 32,
+  "slots": 6,
+  "pure": 0,
+  "wordsAsFillers": [
+   "a",
+   "cat",
+   "fox",
+   "hen",
+   "hid",
+   "on",
+   "by"
+  ],
+  "wordsAsParts": [
+   "fox",
+   "hid"
+  ],
+  "either": [
+   "a",
+   "cat",
+   "fox",
+   "hen",
+   "hid",
+   "on",
+   "by"
+  ]
+ }
+}

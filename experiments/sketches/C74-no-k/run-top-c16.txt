@@ -1,0 +1,48 @@
+C74 (from C73)  MODE=seg SAMPLE=uniform SEGN=all THETA=0.75 CAST=0 ANNEAL=3  columns 400 x 16 cells = 6400  K=8 ROUNDS=5  seeds 101,102,103,104,105  (268 s)
+M (episode objects)                                              25       50      100      200      400
+stored assemblies (distinct sentences)                          539      614      764     1064     1664
+train: cells active per event                                 39.15    39.22    39.32    39.45    39.59
+train: work per event (link updates | gate synapse checks)     9645    10465    12013    15249    22268
+train: own segments checked per event (growth gate)            4918     5543     6807     9138    13893
+segments stored                                               28851    31875    38583    50657    75010
+segments per assembly cell-event                               0.81     0.82     0.86     0.89     0.93
+assembly cells shared by >1 word                                 1%       3%       5%       8%      10%
+episode x -> Y: lenient                                         76%      89%      82%      82%      83%
+episode x -> Y: strict                                          76%      89%      82%      82%      83%
+episode x -> Y: blend                                            2%       1%       0%       0%       4%
+episode x -> Y: no answer                                       24%      10%      18%      18%      17%
+episode x -> Y: new cells                                      7.62     7.88     7.66     7.59     7.61
+fact c -> room: lenient                                         87%      98%      93%      89%      96%
+fact c -> room: strict                                          87%      98%      93%      89%      96%
+fact c -> room: blend                                            0%       0%       0%       0%       0%
+fact c -> room: no answer                                       13%       2%       7%      11%       4%
+fact c -> room: new cells                                      6.33     6.29     5.96     6.16     6.58
+kind: new container -> room                                     20%      33%      27%      20%      33%
+kind: new container -> blend                                     0%      13%       7%      20%      13%
+kind: new object -> container                                   30%      15%      20%      30%      20%
+kind: seen object -> container                                  71%      70%      75%      72%      62%
+partial: x at 4 of 8 cells: lenient                             76%      88%      80%      81%      83%
+partial: x at 4 of 8 cells: strict                              76%      88%      80%      81%      83%
+partial: x at 4 of 8 cells: blend                                3%       2%       2%       1%       5%
+partial: x at 4 of 8 cells: no answer                           23%      10%      19%      18%      16%
+partial: x at 4 of 8 cells: new cells                         11.17    11.33    11.21    11.09    11.23
+partial: cue "x in" only: lenient                                1%       0%       1%       0%       0%
+partial: cue "x in" only: strict                                 0%       0%       0%       0%       0%
+partial: cue "x in" only: blend                                100%     100%     100%     100%     100%
+partial: cue "x in" only: no answer                             55%      56%      57%      59%      62%
+partial: cue "x in" only: new cells                           22.78    23.13    22.94    22.75    22.94
+split: both answers (blend of the two)                           2%       3%       1%       0%       2%
+split: exactly one answer                                       75%      85%      82%      81%      81%
+split: neither answer                                           23%      13%      16%      19%      17%
+split: no word at all                                           23%      12%      17%      19%      23%
+split: new cells                                              11.14    11.30    11.07    10.98    11.12
+probe: work per probe (link reads | segment index hits)     1816817  1965747  2397624  3131308  4620402
+probe: segments checked per probe                             28851    31875    38583    50657    75010
+probe: rounds                                                  3.52     3.33     3.30     3.38     3.17
+capacity (this run's M values): largest M before strict episode recall falls below 75%: 400
+capacity (this run's M values): largest M before strict episode recall falls below 50%: 400
+  per seed, M=25, strict episode recall: 68 88 96 88 40
+  per seed, M=50, strict episode recall: 86 100 74 90 94
+  per seed, M=100, strict episode recall: 63 97 97 71 81
+  per seed, M=200, strict episode recall: 91 95 77 71 77
+  per seed, M=400, strict episode recall: 75 98 97 59 88

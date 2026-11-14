@@ -1,0 +1,16 @@
+
+WITH SPACES
+  step 2 · fresh   · letters explained afresh per look 8.0/8 · 1.0 ms per look · left unexplained 1.37 · cuts F1 45% (precision 76%, recall 32%)
+  step 2 · split   · letters explained afresh per look 8.0/8 · 0.6 ms per look · left unexplained 2.71 · cuts F1 58% (precision 66%, recall 51%)
+  step 2 · persist · letters explained afresh per look 3.3/8 · 0.3 ms per look · left unexplained 1.25 · cuts F1 57% (precision 72%, recall 47%) · placements kept 512, let go on a misfit 31
+  step 4 · fresh   · letters explained afresh per look 8.0/8 · 1.4 ms per look · left unexplained 1.30 · cuts F1 44% (precision 77%, recall 31%)
+  step 4 · split   · letters explained afresh per look 8.0/8 · 0.4 ms per look · left unexplained 2.55 · cuts F1 63% (precision 68%, recall 58%)
+  step 4 · persist · letters explained afresh per look 4.7/8 · 0.4 ms per look · left unexplained 0.99 · cuts F1 57% (precision 79%, recall 44%) · placements kept 350, let go on a misfit 12
+
+NO SPACES
+  step 2 · fresh   · letters explained afresh per look 8.0/8 · 1.0 ms per look · left unexplained 1.66 · cuts F1 68% (precision 77%, recall 61%)
+  step 2 · split   · letters explained afresh per look 8.0/8 · 0.8 ms per look · left unexplained 3.13 · cuts F1 64% (precision 59%, recall 70%)
+  step 2 · persist · letters explained afresh per look 3.6/8 · 0.3 ms per look · left unexplained 1.40 · cuts F1 80% (precision 80%, recall 80%) · placements kept 523, let go on a misfit 34
+  step 4 · fresh   · letters explained afresh per look 8.0/8 · 0.9 ms per look · left unexplained 1.71 · cuts F1 68% (precision 78%, recall 60%)
+  step 4 · split   · letters explained afresh per look 8.0/8 · 0.4 ms per look · left unexplained 3.24 · cuts F1 73% (precision 64%, recall 85%)
+  step 4 · persist · letters explained afresh per look 5.1/8 · 0.4 ms per look · left unexplained 1.19 · cuts F1 74% (precision 83%, recall 66%) · placements kept 322, let go on a misfit 43

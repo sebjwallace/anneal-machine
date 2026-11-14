@@ -1,0 +1,33 @@
+C73 · Anneal's segment rule on sketch 38's (C71's) worlds. Written 14 November 2026, after smoke runs on development
+seed 1 only (CPC=8, M=100, both arms), before any run on test seeds 101-105.
+
+The substrate, world, probes and scoring are C71's, unchanged (sketch.js is a copy with one mode added). Storage is C71's
+whole-set segments (SEGN=all): a cell with no fully matching segment grows one holding every other co-active unit.
+
+What changes is completion only:
+  ANNEAL=1  A segment fires when 2 or more of its synapses are active: the bar from Anneal's prices (two items are the
+            first that save on the bill), not a fraction of the segment. A cell's support is the number of active synapses
+            on its best firing segment. In each column the cell with the most support wins; if the top cells tie, the
+            column has no winner (Anneal's "don't guess", CTR-1 CON-7). The K = 8 strongest winning columns are cast, as
+            in C71's cast arm, and the cast cells join the active set for up to 5 rounds.
+  ANNEAL=2  The same, without K: every column with a sole winner joins. A control: it shows what K is doing.
+
+Declared givens: K = 8 (how many columns an answer may take) is given by hand, as in C71; it is the size of an assembly
+in this world. The world, its words, its column codes and the probes are C71's.
+
+What was seen on dev seed 1 (CPC=8, M=100): ANNEAL=1 episode strict 93%, blend 2%; partial (4 of 8) strict 38%; split:
+both 0, one 36, neither 64. ANNEAL=2: blend 100% everywhere.
+
+Runs: ANNEAL=1 at CPC = 2, 4, 8, 16, M = 25, 50, 100, 200, 400, seeds 101-105. ANNEAL=2 at CPC = 8, M = 100, 400 only
+(it is slow, and it is a control).
+
+Predictions (against C71's results for the same seeds):
+  P1  ANNEAL=1 strict episode recall within 5 points of C71's segments-all (theta 0.75) at CPC 4, 8, 16, M = 400
+      (C71: 85, 94, 92).
+  P2  ANNEAL=1 completes from half a cue: partial (4 of 8) strict >= 30% at CPC 8 and 16, M = 400 (C71 segments-all: 0;
+      summed links: 81, 86).
+  P3  ANNEAL=1 does not blend a split cue: "both answers" <= 5% at every CPC, M = 400 (C71 theta 0.6: 53-62).
+  P4  ANNEAL=2 blends: episode blend >= 90% at CPC 8, M = 100 and 400.
+  P5  ANNEAL=1 at CPC 2, M = 400: strict episode recall >= 50% (C71 segments-all: 68; summed raw: 0).
+
+Nothing will be changed after looking at test seeds. Results are written to run-*.txt and findings.md.

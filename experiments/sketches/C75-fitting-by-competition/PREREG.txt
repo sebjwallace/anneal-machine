@@ -1,0 +1,30 @@
+C75 · Fitting by competition alone. Written 14 November 2026 after a smoke run on development seed 1, before any run on
+test seeds 4242 (the engine test's seed), 101, 102, 103, 104.
+
+The engine's fitting (explain) runs competition (greedy: the biggest saver takes its cells, rivals recount on what is
+left, a placement taken only while it saves more than its price) once from every possible opening placement, plus once
+with no opening, and keeps the cheapest. Arms, set by o.fit in a copy of src/engine/see.js (engine-see.js), changing
+only explain and, for refuse, greedy:
+  search   today.
+  compete  one competition pass, no search over openings.
+  refuse   one pass; when a candidate about to win ties exactly (same saving, same size) with a different rival for the
+           same cells, neither is taken (CTR-1 CON-7) instead of the tie being broken by order.
+Fitting is used awake (step), in rest's re-describing of memories, and in the probes. Rest's search over candidate
+changes is unchanged and already uses one competition pass per scene (a declared compute limit).
+
+Part A: a model learnt with search; the same 300 fresh scenes (rng 7) fitted each way. Part B: each arm learns from
+scratch (600 scenes, rest every 98, as src/test/see.js); then the engine test's yardstick on the 300 fresh scenes, fitted
+with search for every arm so that what was learnt is judged alike.
+
+Dev seed 1: compete and refuse matched search's cost on nearly every scene (0.1% extra in total) with 1 pass instead of
+25.6 per scene and 1/37 of the tally work; all three learnt 11 units, recovered 11/11 shapes, yardstick 1160.5; learning
+time 13.7 s (search), 12.3 (compete), 13.2 (refuse).
+
+Predictions (pooled over the five test seeds):
+  P1  compete matches search's cost exactly on >= 95% of scenes; total extra cost <= 1%.
+  P2  compete does >= 10 times less fitting work per scene (tally work and passes).
+  P3  learning with compete keeps the same: on every seed, recovered shapes equal to search's, units within 1,
+      yardstick within 2%.
+  P4  refuse is within the same bounds as compete.
+  P5  learning time falls by less than 20% with compete: rest, not awake fitting, is most of the time.
+Nothing will be changed after looking at test seeds.

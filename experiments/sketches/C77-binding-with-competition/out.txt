@@ -1,0 +1,31 @@
+C77 · binding with competition   (from C76) · composition by binding a sample   100 columns, parts of 4 cells, compositions of 3 parts   seeds 101,102,103,104,105
+Recall from one whole part. full = the whole composition back; clean = full and no other cell; intrusions = other cells per recall.
+
+compete=none   16 cells per column
+  bind per part                               M=10                              M=50                             M=200                             M=500
+  2                              100% / 100% / 0.0                  100% / 92% / 0.8                  100% / 74% / 5.7                 100% / 45% / 67.5
+  all                             100% / 96% / 0.4                  100% / 86% / 2.1                100% / 47% / 391.5               100% / 17% / 1273.0
+  binding links                   30 / 132                  30 / 132                  30 / 132                  30 / 132   (per composition, by binding)
+  work                           152 / 251                 219 / 411               572 / 11277             2386 / 121589   (segment checks per recall)
+
+compete=none   64 cells per column
+  bind per part                               M=10                              M=50                             M=200                             M=500
+  2                              100% / 100% / 0.0                 100% / 100% / 0.0                  100% / 98% / 0.2                  100% / 96% / 0.4
+  all                            100% / 100% / 0.0                 100% / 100% / 0.0                  100% / 95% / 0.5                  100% / 94% / 0.7
+  binding links                   30 / 132                  30 / 132                  30 / 132                  30 / 132   (per composition, by binding)
+  work                           144 / 228                 154 / 245                 199 / 331                 278 / 475   (segment checks per recall)
+
+compete=top   16 cells per column
+  bind per part                               M=10                              M=50                             M=200                             M=500
+  2                              100% / 100% / 0.0                  100% / 92% / 0.8                 100% / 74% / 37.5                100% / 45% / 313.8
+  all                             100% / 96% / 0.4                  100% / 86% / 2.1                100% / 47% / 258.8                100% / 17% / 534.2
+  binding links                   30 / 132                  30 / 132                  30 / 132                  30 / 132   (per composition, by binding)
+  work                           152 / 251                 220 / 411              3549 / 80286            58530 / 331615   (segment checks per recall)
+
+compete=top   64 cells per column
+  bind per part                               M=10                              M=50                             M=200                             M=500
+  2                              100% / 100% / 0.0                 100% / 100% / 0.0                  100% / 98% / 0.2                  100% / 96% / 0.4
+  all                            100% / 100% / 0.0                 100% / 100% / 0.0                  100% / 95% / 0.5                  100% / 94% / 0.7
+  binding links                   30 / 132                  30 / 132                  30 / 132                  30 / 132   (per composition, by binding)
+  work                           144 / 228                 155 / 245                 199 / 334                 280 / 477   (segment checks per recall)
+

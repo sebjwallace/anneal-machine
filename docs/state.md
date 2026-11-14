@@ -4,7 +4,7 @@ The handover document: what the engine is, how each part works and **why** it wo
 
 > **Since this was written (13 Nov 2026):** experiments C33–C58 built the other half of the cycle (joining routes never walked, checking plans against remembered experiences, context from above) on an integrated engine copy, the branch. Read [checkpoint 11](checkpoints/11-thinking.md) next: it says what held up, what didn't, the branch's choices still to declare, and where to pick up. The core is unchanged apart from one bug fix.
 
-> **Rewriting or reworking the core?** Read [the column guide](guides/the-column.md) first: the theory, the principles a column must keep, and what a rewrite may and may not change.
+> **Rewriting or reworking the core?** Read the [reference models](reference-models/README.md) first: how to build each part in the cells-first design ([cells first](theories/cells-first.md)), with the evidence for each. The older [column guide](guides/the-column.md) describes the engine as it was built: the theory, the principles a column must keep, and what a rewrite may and may not change.
 
 ---
 
@@ -29,7 +29,7 @@ There are no weights, no gradient, no training set and no hand-set numbers in th
 
 ### 2.1 Seeing (awake) · `src/engine/see.js`
 - A picture is explained by placing known parts anywhere, as cheaply as possible.
-  - Awake, every possible opening placement is tried, then the rest is filled in greedily. The cheapest whole explanation wins.
+  - Awake, by competition (fitting, since C75): the placement that saves most takes its pixels, every rival recounts on what is left, and a placement is taken only while it saves more than its price. Then re-settling, only where heat is left: a winner that claimed pixels that aren't there is taken back and the rivals compete again without it. The search over every opening placement was removed: it gave the same fit on 1,500 of 1,500 test pictures for about 40 times the work.
   - A part may be placed many times (several houses), and at any position (learn once, recognise anywhere).
 - Parts of a picture can be marked **hidden** (known to be unknown). Pixels there cost nothing, which is how completion of pictures works (2.4).
 - **Remembering** a picture: it's stored as a memory only if total energy is lower with it stored than with it left in the flow (since C30). There's no threshold.

@@ -1,0 +1,42 @@
+
+WITH SPACES · 150 looks · 5 s
+  assemblies kept: 18 · exactly a word (spaces aside): 8 · part of a word, or a piece shared by words: 3 · whole words together: 2 · cutting through a word: 5
+  words found as assemblies: 8/11 (the, a, cat, fox, hen, ran, hid, on)
+  assemblies: " a cat h" "fox " "a fox " "x sat on" "at " " on " "cat " "a " "n a hen " "the dog " "at hid b" "og ran b" " hid" "n " "the " "og " "hen " "ran "
+  how it cuts new windows (| = a cut, _ = a space): _sat_on|_   d|og_|a_|d|o   en_|the_|f   ox_|the_|d
+  cutting new text: precision 75%, recall 39%, F1 51% · random cuts at the same rate (30%): F1 38%
+
+NO SPACES (words run together) · 150 looks · 6 s
+  assemblies kept: 15 · exactly a word (spaces aside): 5 · part of a word, or a piece shared by words: 2 · whole words together: 1 · cutting through a word: 7
+  words found as assemblies: 5/11 (cat, fox, hid, on, by)
+  assemblies: "hefoxado" "ahensato" "tonacata" "nthecatr" "he" "cat" "fox" "hid" "anb" "acata" "by" "a…o" "on" "ca" "ontheca"
+  how it cuts new windows (| = a cut, _ = a space): d|o|g|s|a|t|o|n   t|by|a|d|o|g|a   henthe|f|o   foxthe|d|o
+  cutting new text: precision 65%, recall 65%, F1 65% · random cuts at the same rate (40%): F1 42%
+
+WITH SPACES · 400 looks · 19 s
+  assemblies kept: 20 · exactly a word (spaces aside): 7 · part of a word, or a piece shared by words: 6 · whole words together: 2 · cutting through a word: 5
+  words found as assemblies: 7/11 (the, a, cat, fox, hen, hid, by)
+  assemblies: " a cat h" "fox " "cat " " hid" "the " "og " "hen " "sat by a" " by a" "at" "he" "at on " "a " "n " "x " "at " "id by th" " by " "fox …at " "n a hen "
+  how it cuts new windows (| = a cut, _ = a space): _|s|at_on_   d|og_a_|d|o   en_the_|f   ox_the_|d
+  cutting new text: precision 73%, recall 33%, F1 46% · random cuts at the same rate (26%): F1 35%
+
+NO SPACES (words run together) · 400 looks · 28 s
+  assemblies kept: 12 · exactly a word (spaces aside): 3 · part of a word, or a piece shared by words: 3 · whole words together: 4 · cutting through a word: 2
+  words found as assemblies: 3/11 (the, fox, hid)
+  assemblies: "fox" "hid" "acata" "oxsatont" "onadogac" "doga" "he" "an" "the" "ox" "thefox" "thedoga"
+  how it cuts new windows (| = a cut, _ = a space): d|ogsaton   t|bya|doga   henthe|f|o   foxthe|d|o
+  cutting new text: precision 76%, recall 59%, F1 66% · random cuts at the same rate (31%): F1 36%
+
+WITH SPACES · 1000 looks · 55 s
+  assemblies kept: 13 · exactly a word (spaces aside): 4 · part of a word, or a piece shared by words: 3 · whole words together: 0 · cutting through a word: 6
+  words found as assemblies: 4/11 (the, fox, hid, by)
+  assemblies: " a cat h" "fox " "the " "he" "og " " by " "hid" "at sat b" "n sat on" "at " "og sa" "at on " "n a fox "
+  how it cuts new windows (| = a cut, _ = a space): _sat_on|_   d|og_a_|d|o   en_the_|f   o|x_the_|d
+  cutting new text: precision 71%, recall 30%, F1 42% · random cuts at the same rate (24%): F1 33%
+
+NO SPACES (words run together) · 1000 looks · 76 s
+  assemblies kept: 7 · exactly a word (spaces aside): 2 · part of a word, or a piece shared by words: 2 · whole words together: 2 · cutting through a word: 1
+  words found as assemblies: 2/11 (fox, hid)
+  assemblies: "fox" "hid" "acata" "doga" "he" "at" "acathido"
+  how it cuts new windows (| = a cut, _ = a space): dogs|ato|n   t|bya|doga   henthe|f|o   foxthe|d|o
+  cutting new text: precision 73%, recall 55%, F1 62% · random cuts at the same rate (30%): F1 35%

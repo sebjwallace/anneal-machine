@@ -1,0 +1,47 @@
+sketch 38  MODE=seg SAMPLE=uniform SEGN=16 THETA=0.75 CAST=1  columns 400 x 2 cells = 800  K=8 ROUNDS=5  seeds 101,102,103,104,105  (22 s)
+M (episode objects)                                              25       50      100      200
+stored assemblies (distinct sentences)                          539      614      764     1064
+train: cells active per event                                 38.64    38.71    38.81    38.90
+train: work per event (link updates | gate synapse checks)     7171     8079     9912    13450
+train: own segments checked per event (growth gate)            4317     4917     6124     8391
+segments stored                                               24451    27385    33553    44919
+segments per assembly cell-event                               0.69     0.71     0.76     0.80
+assembly cells shared by >1 word                                57%      62%      75%      92%
+episode x -> Y: lenient                                         32%      42%      35%      33%
+episode x -> Y: strict                                          32%      40%      35%      33%
+episode x -> Y: blend                                            3%       5%       6%       7%
+episode x -> Y: no answer                                       50%      48%      48%      51%
+episode x -> Y: new cells                                      8.00     8.00     8.00     8.00
+fact c -> room: lenient                                         44%      51%      51%      53%
+fact c -> room: strict                                          44%      47%      51%      53%
+fact c -> room: blend                                            2%       7%       4%       2%
+fact c -> room: no answer                                       40%      33%      27%      24%
+fact c -> room: new cells                                      8.00     8.00     8.00     8.00
+kind: new container -> room                                     27%      20%       0%      13%
+kind: new container -> blend                                     0%       7%       7%       7%
+kind: new object -> container                                    5%       5%       0%       0%
+kind: seen object -> container                                  23%      22%      22%      25%
+partial: x at 4 of 8 cells: lenient                              5%       1%       1%       2%
+partial: x at 4 of 8 cells: strict                               5%       1%       1%       2%
+partial: x at 4 of 8 cells: blend                                2%       3%       3%       3%
+partial: x at 4 of 8 cells: no answer                           85%      88%      91%      86%
+partial: x at 4 of 8 cells: new cells                          8.00     8.00     8.00     8.00
+partial: cue "x in" only: lenient                                0%       0%       0%       0%
+partial: cue "x in" only: strict                                 0%       0%       0%       0%
+partial: cue "x in" only: blend                                  0%       0%       0%       0%
+partial: cue "x in" only: no answer                             88%      94%      90%      96%
+partial: cue "x in" only: new cells                            0.00     0.00     0.00     0.00
+split: both answers (blend of the two)                           0%       0%       0%       0%
+split: exactly one answer                                        7%       0%       1%       1%
+split: neither answer                                           93%     100%      99%      99%
+split: no word at all                                           82%      83%      88%      80%
+split: new cells                                               8.00     8.00     8.00     8.00
+probe: work per probe (link reads | segment index hits)       96243   103751   134747   179916
+probe: segments checked per probe                             20773    22710    29076    38842
+probe: rounds                                                  2.33     2.30     2.47     2.54
+capacity (this run's M values): largest M before strict episode recall falls below 75%: < 25
+capacity (this run's M values): largest M before strict episode recall falls below 50%: < 25
+  per seed, M=25, strict episode recall: 32 44 28 36 20
+  per seed, M=50, strict episode recall: 24 64 42 44 28
+  per seed, M=100, strict episode recall: 28 46 48 33 20
+  per seed, M=200, strict episode recall: 38 42 29 33 22

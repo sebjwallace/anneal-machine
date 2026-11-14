@@ -378,6 +378,230 @@ The story of how the system came to be: each entry is an arc that opens with a g
 - **Contract:** created CTR-2 CON-5; created CTR-2 CAP-2; created CTR-2 PRN-5; created CTR-2 PRN-6; confirmed CTR-2 CAP-3
 - **Lesson:** A picture leaves less room to read different things into the words.
 
+## 6 · Text worlds
+
+### QST-13 · Question: First text world: does comparing what it reads find the words, with nobody saying what a word is?
+
+- **Heat:** Language is where the engine would be useful; the Zorro circle starts from what it already does.
+- **Experiments:** [C62](../../experiments/sketches/C62-reading/)
+- **Given by hand:** G1-G4 in C62: the 11-word language, where the eye lands (at random), the 8-letter window, spaces kept or removed.
+- **Closed by OUT-22 · Outcome (partly):** Early on 8 of 11 words are kept as parts and its cuts beat chance in every run (F1 42-66% against 33-42%); but it keeps whatever recurs, including chunks across words and pieces shared between words, and more reading finds fewer words (8 to 4; 5 to 2 without spaces).
+- **CLM-10 · Claim:** Energy alone can't tell a word from any other recurring stretch; a word is where what follows varies, which is a kind with a slot.
+- **Contract:** challenged CTR-1 GOL-1; challenged CTR-1 CAP-1; shaped CTR-1 CAP-8
+- **Lesson:** The edge of the circle: language is made of kinds, and the engine needs slots that pay to see its words.
+
+### HYP-15 · Hypothesis: Words are what fills the slots: a word varies independently of its neighbours, which is a kind.
+
+- **Heat:** C62: whole words lost out to whatever recurs.
+- **Experiments:** [C63](../../experiments/sketches/C63-reading-kinds/)
+- **Given by hand:** As C62 (G1-G4); nothing new.
+- **Closed by OUT-23 · Outcome (partly):** The words lost from parts are held as fillers (without spaces, 7 of 11 as fillers against 2 as parts at 1000 looks); "the ·" gathers the nouns. But the slots get noisy (whole-word fillers fall from 90% to 45%) and no slot holds one part of speech.
+- **CLM-11 · Claim:** A word is better seen as what varies in a slot than as a chunk that recurs.
+- **Contract:** confirmed CTR-1 CAP-8; shaped CTR-1 GOL-1
+- **Lesson:** Kinds see words; how slots are priced decides how clean they are (the parked question, HYP-12).
+
+### THY-5 · Theory: Sparse, event-driven computation: things change only in reaction to other things, and a held state is another region's stable activity projecting in, not recomputed (the owner's).
+
+- **Heat:** Large language models are expensive because they compute densely over everything; and held states so far were given by hand.
+- **Still open.**
+- **Contract:** created CTR-1 CON-18; created CTR-1 CAP-15
+- **Lesson:** Cost should follow what is happening, not what is held.
+
+### THY-6 · Theory: Persistent assemblies: what a region settled into stays active and changes only when something arriving doesn't fit it; these are the held states (the owner's).
+
+- **Heat:** Held states were given by hand, and recomputing everything for every input is the opposite of event-driven.
+- **Still open.**
+- **Contract:** confirmed CTR-1 CON-18; shaped CTR-1 CAP-15; shaped CTR-1 CAP-10
+- **Lesson:** A held state is what settled earlier and still fits.
+
+### HYP-16 · Hypothesis: Persistent assemblies while reading: carry forward what settled, let go only on a misfit (from THY-6).
+
+- **Heat:** Explaining every window from scratch is the opposite of event-driven.
+- **Experiments:** [C64](../../experiments/sketches/C64-persistent-reading/)
+- **Given by hand:** C62's G1-G4; G5: the eye steps on in order by 2 or 4 letters.
+- **Closed by OUT-24 · Outcome (partly):** About half the work (3.3-5.1 of 8 letters explained afresh) with less left unexplained; misfits let go by themselves. Better cuts were mostly the seam between old and new letters, as a control showed; only without spaces at step 2 did persistence clearly cut better.
+- **PAT-5 · Pattern:** A control with the same seam but nothing carried over: it separates the mechanism from where it cuts.
+- **Contract:** confirmed CTR-1 CON-18; shaped CTR-1 CAP-15; confirmed CTR-1 OPZ-2; confirmed CTR-2 PRN-3
+- **Lesson:** What still fits costs nothing; the claim that stands is about work and heat, not cuts.
+
+### QST-14 · Question: Frames beyond literal placement: "the bird was flying and found and ate a worm" and "bird eats worm" share one frame underneath. How? (The owner expects to discover it, perhaps from the right architecture of regions.)
+
+- **Heat:** Frames tied to exact positions can't see that different expressions say the same thing.
+- **Still open.**
+- **CLM-12 · Claim:** Words agreed (14 November): frame, constant, variable, type; invariant and variant. Kind, slot and filler are the code's old words; a list of fillers is not yet a type.
+- **Contract:** shaped CTR-1 GOL-1; shaped CTR-1 CAP-8
+- **Lesson:** A type is bounded by a shared overlap, inside or around; a list is not.
+
+### HYP-17 · Hypothesis: Few-shot: comparison finds constants, frames and types from a handful of sentences after one rest, where statistics need much text (the owner's).
+
+- **Heat:** Statistical learning is expensive because it estimates from counts.
+- **Experiments:** [C65](../../experiments/sketches/C65-few-sentences/)
+- **Given by hand:** G1-G3 in C65: words as items; the 12 sentences; each seen once, then one rest.
+- **Closed by OUT-25 · Outcome (partly):** Held as experiences, constants come from two sentences ("the … warms the"); from 12, the constant of every frame, with energy more than halved by one rest; never-seen sentences are explained by one placement of their constant. Kept by energy, nothing. Frames with variables and types did not form.
+- **CLM-13 · Claim:** Comparison sees a constant from two examples; few-shot needs what is seen once to be held and to take part in rest.
+- **Contract:** confirmed CTR-1 OPZ-1; confirmed CTR-1 CAP-1; confirmed CTR-1 CAP-11; shaped CTR-1 GOL-2
+- **Lesson:** Constants come at once; types need the surroundings compared.
+
+### HYP-18 · Hypothesis: Types from what surrounds words: a region receiving each word's surroundings (its place marked) finds shared surroundings by comparison, and the words they explain form the types.
+
+- **Heat:** C65: constants but no types; sun, sea and fire share no letters.
+- **Experiments:** [C66](../../experiments/sketches/C66-types/)
+- **Given by hand:** G1-G3 in C66; G3, the second region's view (each word's surroundings with its place marked), is the region wiring, given by hand.
+- **Closed by OUT-26 · Outcome (worked):** From 16 sentences, each seen once and one rest, every group holds one type; from 24, every type's words are together. A word seen once (lamp) joins its type. Verbs group too (warms/heats; feeds/fills). A type is still split across surroundings (one group around "warms", another around "heats").
+- **CLM-14 · Claim:** A type is the group bounded by a shared surrounding; comparison finds it from a handful of examples.
+- **Contract:** confirmed CTR-1 GOL-1; confirmed CTR-1 OPZ-1; confirmed CTR-1 CAP-9; confirmed CTR-1 PRN-6
+- **Lesson:** What surrounds a word is where its type lives; the same comparison finds it.
+
+### HYP-19 · Hypothesis: Comparing the groups joins a type split across frames (in a world of people, to avoid borrowing the engine's words).
+
+- **Heat:** C66: each type split into one group per verb.
+- **Experiments:** [C67](../../experiments/sketches/C67-people-types/)
+- **Given by hand:** G1-G4 in C67; G3 the second region's view and G4 the merging of groups are written by hand.
+- **Closed by OUT-27 · Outcome (worked):** From 16 sentences, each seen once, all four types come out whole and alone, each joined from the groups around both its verbs; a word seen once is in its type. Not steady below 16: at 12 a mixed group is carried into the merge.
+- **TRD-2 · Trade-off:** Merging groups spreads errors as well as types.
+- **Contract:** confirmed CTR-1 CAP-3; confirmed CTR-1 OPZ-1
+- **Lesson:** The recall rule's two also joins groups into types.
+
+### PRB-10 · Problem: Results stay in the branches: bringing anything into the core feels like too high a barrier, and experiments keep their puppeteering and crutches.
+
+- **Heat:** The core never benefits, and results rest on what was given.
+- **Closed by SOL-10 · Solution:** Distillation: read an experiment against both contracts, list its violations clause by clause, and remove them one at a time, measuring after each, until it fulfils the contracts; only then is it a candidate for the core.
+- **Contract:** created CTR-2 DEF-9; created CTR-2 DEF-10; created CTR-2 GOL-3; created CTR-2 CON-7; created CTR-2 CAP-6; created CTR-2 PRN-7; changed CTR-2 CON-1
+- **Lesson:** Explore freely, then distil.
+
+### PRO-3 · Promotion: Distillation D-01, step 1: move the merging of groups into types from a hand-written rule into the engine.
+
+- **Heat:** C67's types rested on a rule written outside the engine (V3).
+- **Experiments:** [C68](../../experiments/sketches/C68-distil-merge/)
+- **Given by hand:** The remaining violations of D-01 (V1, V2, V4-V6, V8).
+- **Closed by OUT-28 · Outcome (worked):** The result survives: the engine comparing the groups gives the same four types at 8 and 24 sentences. It is stricter (an overlap of two words doesn't pay for itself), so one type stays split at 16 and fewer mistakes are merged at 12.
+- **PAT-6 · Pattern:** Distil one violation at a time and compare with the run before: a result that survives never depended on it.
+- **Contract:** shaped CTR-2 GOL-3; confirmed CTR-2 PRN-7; confirmed CTR-1 CON-1
+- **Lesson:** Removing a hand-written rule can leave the result standing and the engine stricter.
+
+### PRB-11 · Problem: The contracts' lists read as if every clause weighed the same: specific clauses (about cells, hardware) sat among general ones, and nothing said which goal or optimization wins a trade-off.
+
+- **Heat:** A rebuild could treat a detail as fundamental, and a trade-off had no way to be settled.
+- **Closed by SOL-11 · Solution:** Every list runs from general to specific; goals, optimizations and principles are also in order of priority, with leeway: in a trade-off the higher one wins, and a large loss to it is never bought with a small gain to a lower one. Constraints have no priority, since none gives way. Codes stay with their clauses when they move.
+- **DEC-5 · Decision:** Proposed order of the system's optimizations: heat, information, minimality, compute, scale.
+- **Contract:** changed CTR-1 OPZ-4; changed CTR-1 OPZ-3; changed CTR-1 OPZ-2; changed CTR-1 CON-9; changed CTR-1 CAP-2; changed CTR-1 PRN-6; changed CTR-2 CON-1
+- **Lesson:** Order says what matters most; a code says only which clause.
+
+### HYP-20 · Hypothesis: Cells can learn logic from their own heat: segments as learnt ANDs, inhibition learnt from their own wrong predictions as NOT, and one rule with two signs growing AND and AND NOT (the owner's NAND idea). Brought in from the owner's other repository (sketches 36-39 there).
+
+- **Heat:** A cell that only adds up does OR; rules that depend on a combination, and their exceptions, were out of reach or faked by a hashed shortcut.
+- **Experiments:** [C69](../../experiments/sketches/C69-learnt-and/), [C70](../../experiments/sketches/C70-learnt-not/), [C71](../../experiments/sketches/C71-membership-segments/), [C72](../../experiments/sketches/C72-segments-two-signs/)
+- **Given by hand:** The worlds and their words; segment sizes, thresholds and learning rates chosen (several values worked); strengths on segments and links.
+- **Closed by OUT-29 · Outcome (partly):** AND learnt and generalised (C69); NOT learnt for exceptions with their own word (C70); whole-set segments kept shared cells apart but could not complete from half a cue (C71); one rule with two signs, AND NOT on a segment, learnt combination exceptions and improved the general rule at little cost (C72). Not yet run in Anneal's currency.
+- **CLM-15 · Claim:** A cell is an OR of its segments, each an AND of its links; an "unless" on a segment makes AND NOT.
+- **PAT-7 · Pattern:** Learn inhibition only from the machine's own wrong predictions, never from being told.
+- **TRD-3 · Trade-off:** Segments are sharp, summed links tolerant: sharp keeps memories apart, tolerant completes from part.
+- **Contract:** shaped CTR-1 CAP-4; shaped CTR-1 CAP-3; challenged CTR-1 CON-9; challenged CTR-1 CON-2; confirmed CTR-1 GOL-1
+- **Lesson:** Logic can be grown from the two signs of heat; in Anneal it still has to be paid for in the one currency.
+
+### HYP-21 · Hypothesis: A low bar plus competition gives segments both sharpness and tolerance: firing at two active links (from the prices) and competing in each column, a tie refused, on sketch 38's worlds.
+
+- **Heat:** C71: segments at 75% kept memories apart but never completed from half a cue; at 60% they completed but blended.
+- **Experiments:** [C73](../../experiments/sketches/C73-anneal-segments/)
+- **Given by hand:** K = 8 columns per answer, the world, words, column codes and probes (all C71's).
+- **Closed by OUT-30 · Outcome (partly):** As good as whole-set segments on episodes (69-95%), no blend on a split cue (0%), and completion from half a cue 28-42% where C71's segments gave 0 (summed links 81-86%). Without the cap of K columns, everything blends: competition inside columns is not enough.
+- **CLM-16 · Claim:** Competition and the refused tie, not the bar, keep segments from blending.
+- **PAT-8 · Pattern:** A cap given by hand can hide a missing mechanism: here K stood in for competition across columns.
+- **Contract:** confirmed CTR-1 CAP-3; confirmed CTR-1 CON-7; challenged CTR-1 CON-18
+- **Lesson:** The bar can be low if competition is real; what is still missing is competition between whole assemblies.
+
+### HYP-22 · Hypothesis: Without the cap of K columns, answers size themselves if only the cells at the top level of support join: one shared level of inhibition, so whole memories compete with no list.
+
+- **Heat:** C73: K = 8 given by hand stood in for competition across columns; without it, everything blended.
+- **Experiments:** [C74](../../experiments/sketches/C74-no-k/)
+- **Given by hand:** The world, words, column codes and probes (C71's). K removed.
+- **Closed by OUT-31 · Outcome (worked):** Answers came out at 7.6 cells (an assembly is 8) with nothing setting it; half a cue completed as well as a whole one (71-87%), matching summed links at 8-16 cells per column and far better where cells are scarce; split cues almost never blended (1-3%). Episode recall a few points below the capped version, lost to refusals. Within half of the top blended everything.
+- **CLM-17 · Claim:** A memory's cells share its count, so one shared level of inhibition lets whole memories compete with no list.
+- **TRD-4 · Trade-off:** Taking only the top level refuses more often: a few points of recall for no number given by hand.
+- **Contract:** confirmed CTR-1 CAP-3; confirmed CTR-1 CON-7; confirmed CTR-1 OPZ-1; confirmed CTR-2 OPZ-1; challenged CTR-1 CON-18
+- **Lesson:** Sharp and tolerant need not be two mechanisms: the same segments, read through one shared level of inhibition, are both.
+
+### HYP-23 · Hypothesis: Fitting's inner step already is competition (the biggest saver takes its cells, rivals recount); the search reruns it from every opening placement. Competition alone fits as well, keeps the same, and does far less work.
+
+- **Heat:** Fitting looked like a central search that grows with memory and breaks CON-18.
+- **Experiments:** [C75](../../experiments/sketches/C75-fitting-by-competition/)
+- **Given by hand:** The engine test's world and pictures; a cap of 6 re-settling rounds (the settle arm, added after the test results).
+- **Closed by OUT-32 · Outcome (worked):** Competition alone matched the search on 1,495 of 1,500 fresh scenes and learnt exactly the same on every seed, with about a fortieth of the work. Re-settling only where a winner left cells claimed but not lit matched all 1,500 and the engine's test suite, except completion with hidden parts (better when not told where; very slightly more pixels drawn at 40% removed).
+- **CLM-18 · Claim:** Fitting is competition; the search over openings was overhead.
+- **PAT-9 · Pattern:** Reopen competition only where heat is left: annealing in small.
+- **DEC-6 · Decision:** Proposed for the owner: explain in the core becomes competition with re-settling.
+- **Contract:** confirmed CTR-1 CON-18; confirmed CTR-1 OPZ-2; confirmed CTR-1 PRN-3; confirmed CTR-1 CAP-7; confirmed CTR-1 OPZ-3; challenged CTR-1 CON-7
+- **Lesson:** What looked like a search was competition wrapped in a search; unwrapped, it costs a fortieth and loses nothing.
+
+### PRO-4 · Promotion: Bring fitting by competition with re-settling into the core, replacing the search over opening placements.
+
+- **Heat:** The core's fitting reran its competition from every opening placement: about 28 passes per picture, growing with memory.
+- **Experiments:** [C75](../../experiments/sketches/C75-fitting-by-competition/)
+- **Given by hand:** A cap of 6 re-settling rounds (compute limit, decision 001).
+- **Closed by SOL-12 · Solution:** explain in src/engine/see.js is one competition plus re-settling only where heat is left; openings and greedy's take-this-first path removed. The full test suite passes and matches C75's settle run line for line; the seeing test ran in 13.1 s against 17.6 s.
+- **Contract:** confirmed CTR-2 CON-1; confirmed CTR-1 CON-18; confirmed CTR-1 OPZ-3
+- **Lesson:** A promotion is easy when the experiment already ran the real test suite.
+
+### HYP-24 · Hypothesis: Compose parts by binding a small sample of their active cells (the owner's idea): with segments firing at two, two cells per part is the smallest binding that completes, and the cleanest.
+
+- **Heat:** Composition was done at rest over a list of placements; nothing at the level of cells tied parts together.
+- **Experiments:** [C76](../../experiments/sketches/C76-binding-a-sample/)
+- **Given by hand:** A random world of parts and compositions; the sampled cells (the first two of each part); 6 rounds.
+- **Closed by OUT-33 · Outcome (worked):** One sampled cell per part never brought the rest back; two always did, with 30 links per composition against 132 for wiring everything, far fewer intrusions (45% clean against 17% at 500 compositions) and about a fiftieth of the work. As memory filled, recall spread into other compositions; competition within columns did not stop it.
+- **CLM-19 · Claim:** The bar of two sets the size of a binding: two cells from each part.
+- **CLM-20 · Claim:** The smallest binding that completes is also the cleanest: extra links only add chances to fire by mistake.
+- **Contract:** confirmed CTR-1 CAP-4; confirmed CTR-1 CAP-3; confirmed CTR-1 OPZ-3; confirmed CTR-1 CON-18; shaped CTR-1 CAP-6
+- **Lesson:** A composition can be priced at the level of cells: the links in its binding.
+
+### HYP-25 · Hypothesis: Crowding in C76 is fixed by more cells per column (the owner's view), or by competition between whole memories (C74).
+
+- **Heat:** C76: as compositions were stored, recall spread into other compositions (45% clean at 500, 16 cells per column).
+- **Experiments:** [C77](../../experiments/sketches/C77-binding-with-competition/)
+- **Given by hand:** As C76.
+- **Closed by OUT-34 · Outcome (worked):** More cells per column fixed it: 96% clean at 500 compositions with 64 cells. Top-level competition added nothing and cost about 25 times the work: a part sharing cells by chance gets the same support as a true one. At 64 cells, storing 50 times more raised work per recall from 144 to 278 checks.
+- **CLM-21 · Claim:** Crowding is fixed in the code (more cells), not in the reading: competition cannot tell a chance overlap from a true part.
+- **CLM-22 · Claim:** With enough cells, the work of recall follows what is active, not what is stored.
+- **Contract:** confirmed CTR-1 CON-18; confirmed CTR-1 OPZ-5; confirmed CTR-1 CAP-2
+- **Lesson:** Sparse codes are what make memory scale: more cells, less crosstalk, and work that grows with activity, not storage.
+
+### PRB-12 · Problem: Assemblies were held as entries in a list and worked over by the program: bookkeeping, with cells not first-class; and scale was stated only as any size.
+
+- **Heat:** The core's fitting scored a list of units centrally (C75); experiments C74, C76 and C77 did the same jobs with cells and segments alone.
+- **Experiments:** [C74](../../experiments/sketches/C74-no-k/), [C75](../../experiments/sketches/C75-fitting-by-competition/), [C76](../../experiments/sketches/C76-binding-a-sample/), [C77](../../experiments/sketches/C77-binding-with-competition/)
+- **Closed by SOL-13 · Solution:** CTR-1: cell, segment and assembly defined (DEF-12 to DEF-14); CON-19 (draft): the dynamics fall out of cells and their segments, nothing loops over whole assemblies; OPZ-5 restated: the work of receiving and recalling grows with what is active, not with what is stored. CTR-2: bookkeeping defined (DEF-11); CON-8 (draft): bookkeeping allowed in experiments, declared, never in the core; what is already there is a violation to distil.
+- **Contract:** created CTR-1 DEF-12; created CTR-1 DEF-13; created CTR-1 DEF-14; created CTR-1 CON-19; changed CTR-1 OPZ-5; created CTR-2 DEF-11; created CTR-2 CON-8
+- **Lesson:** Cells are the first-class citizens; a list of assemblies is a stand-in for what they should do.
+
+### HYP-26 · Hypothesis: Decomposition by cells: a new input partly wakes the memory it resembles, the cells' states draw the cut (fits / predicted but not there / unexplained), and cutting there gives the shared part on the same cells.
+
+- **Heat:** Decomposition at rest was bookkeeping: every pair of parts compared at every shift, every recent picture refitted per trial.
+- **Experiments:** [C78](../../experiments/sketches/C78-decomposition-by-the-cut/)
+- **Given by hand:** Random column worlds; the house stored exactly; which cells are sampled; binding segments know they bind (kind); one global level of inhibition.
+- **Closed by OUT-35 · Outcome (worked):** Read through the top level of support, the cut found the right wall, roof and new roof in 100% of families; decomposed and rebound costs 114 links against 264; with bindings competing as whole memories each roof brought back its own whole (other roof 0-4%; clean 96-97% at 64 cells per column, 200 families). Without the top level the cut was right in 9-38%; read plainly, the shared wall woke both.
+- **CLM-23 · Claim:** The cut between fit and misfit is where decomposition happens; the comparison is a memory partly woken by what resembles it.
+- **CLM-24 · Claim:** A genuinely shared part is where competition between whole memories is needed; chance overlap is fixed only by more cells.
+- **Contract:** confirmed CTR-1 CAP-1; confirmed CTR-1 CON-19; confirmed CTR-1 CAP-3; confirmed CTR-1 OPZ-3; challenged CTR-1 CON-7
+- **Lesson:** Intercomparing, analysis and abstraction, done by cells: the premise of the project, shown in one mechanism.
+
+### THY-7 · Theory: Cells first: the machine's behaviour falls out of cells and their segments, not a program keeping lists of assemblies. Columns separate memories across cells, segments within a cell; waking, completion, competition, fitting, composition and decomposition are all done by cells.
+
+- **Heat:** The engine worked by bookkeeping: fitting searched a list of parts, rest compared every pair, frames kept lists of fillers; nothing happened in the cells and the cost grew with storage.
+- **Experiments:** [C73](../../experiments/sketches/C73-anneal-segments/), [C74](../../experiments/sketches/C74-no-k/), [C75](../../experiments/sketches/C75-fitting-by-competition/), [C76](../../experiments/sketches/C76-binding-a-sample/), [C77](../../experiments/sketches/C77-binding-with-competition/), [C78](../../experiments/sketches/C78-decomposition-by-the-cut/)
+- **Given by hand:** As in each experiment; the core holds only fitting by competition so far.
+- **Closed by OUT-36 · Outcome (partly):** Written up as docs/theories/cells-first.md. Shown with cells alone: recall, competition between whole memories, fitting, composition by binding a sample, decomposition by the cut, abstraction on shared cells, and work that follows activity. In the core: fitting by competition with re-settling. Open: what picks the cell, holding a variable open, the full currency in cells and links, a local level of inhibition, rest as replay, and the bookkeeping left in the core.
+- **CLM-25 · Claim:** Frames need no mechanism of their own: a decomposed memory is a constant with open places.
+- **Contract:** shaped CTR-1 CON-19; shaped CTR-1 OPZ-5; shaped CTR-2 CON-8; confirmed CTR-1 PRN-1; confirmed CTR-1 PRN-6
+- **Lesson:** Intercomparing, synthesis, analysis and abstraction, done by cells: the project's premise, now a design.
+
+### PRB-13 · Problem: Experiments rebuilt each piece from scratch, and a library of versioned components would bring the overhead of managing code.
+
+- **Heat:** No agreed description of how to build each part existed for the cells-first design; the column guide described the old engine.
+- **Experiments:** [C74](../../experiments/sketches/C74-no-k/), [C75](../../experiments/sketches/C75-fitting-by-competition/), [C76](../../experiments/sketches/C76-binding-a-sample/), [C77](../../experiments/sketches/C77-binding-with-competition/), [C78](../../experiments/sketches/C78-decomposition-by-the-cut/)
+- **Closed by SOL-14 · Solution:** Reference models (docs/reference-models/): RM-1 cells and columns, RM-2 segments, RM-3 assemblies, RM-4 waking and completion, RM-5 competition, RM-6 fitting, RM-7 composition, RM-8 decomposition, RM-9 prices, RM-10 frames; each with purpose, clauses served, data, pseudocode, rules, evidence, open questions and status. CTR-2 CAP-7 (draft).
+- **DEC-7 · Decision:** Agreed descriptions and pseudocode, judged by the contracts, in place of shared code to manage.
+- **Contract:** created CTR-2 CAP-7; shaped CTR-1 CON-19; shaped CTR-2 CON-8
+- **Lesson:** Describe how to build it, and let any rebuild borrow; the contracts judge.
+
 ## Index back: experiments
 
 | Experiment | Entries |
@@ -442,6 +666,23 @@ The story of how the system came to be: each entry is an arc that opens with a g
 | [C59](../../experiments/sketches/C59-craving/) | QST-11 |
 | [C60](../../experiments/sketches/C60-heat-arc/) | HYP-14 |
 | [C61](../../experiments/sketches/C61-lost-keys/) | QST-12, PRB-7 |
+| [C62](../../experiments/sketches/C62-reading/) | QST-13 |
+| [C63](../../experiments/sketches/C63-reading-kinds/) | HYP-15 |
+| [C64](../../experiments/sketches/C64-persistent-reading/) | HYP-16 |
+| [C65](../../experiments/sketches/C65-few-sentences/) | HYP-17 |
+| [C66](../../experiments/sketches/C66-types/) | HYP-18 |
+| [C67](../../experiments/sketches/C67-people-types/) | HYP-19 |
+| [C68](../../experiments/sketches/C68-distil-merge/) | PRO-3 |
+| [C69](../../experiments/sketches/C69-learnt-and/) | HYP-20 |
+| [C70](../../experiments/sketches/C70-learnt-not/) | HYP-20 |
+| [C71](../../experiments/sketches/C71-membership-segments/) | HYP-20 |
+| [C72](../../experiments/sketches/C72-segments-two-signs/) | HYP-20 |
+| [C73](../../experiments/sketches/C73-anneal-segments/) | HYP-21, THY-7 |
+| [C74](../../experiments/sketches/C74-no-k/) | HYP-22, PRB-12, THY-7, PRB-13 |
+| [C75](../../experiments/sketches/C75-fitting-by-competition/) | HYP-23, PRO-4, PRB-12, THY-7, PRB-13 |
+| [C76](../../experiments/sketches/C76-binding-a-sample/) | HYP-24, PRB-12, THY-7, PRB-13 |
+| [C77](../../experiments/sketches/C77-binding-with-competition/) | HYP-25, PRB-12, THY-7, PRB-13 |
+| [C78](../../experiments/sketches/C78-decomposition-by-the-cut/) | HYP-26, THY-7, PRB-13 |
 
 ## Index forward: contract clauses
 
@@ -460,52 +701,58 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 DEF-9 | Set point: a state the machine (or a part of it) is held towards from outside; distance from it is he | THY-2 (created) |
 | CTR-1 DEF-10 | Region: one machine of this kind among several, each settling its own heat and receiving from othe | THY-2 (created) |
 | CTR-1 DEF-11 | Memory: structure kept because it lowers energy, recalled from part of itself. | — |
-| CTR-1 GOL-1 | Learns unsupervised: placed in any world (DEF-8), it resolves the misfits (DEF-3) in what  | QST-2 (confirmed), PRB-4 (challenged), PRB-8 (created) |
-| CTR-1 GOL-2 | Useful on the job: no training phase before use. It starts doing useful work at once, or n | PRB-8 (created) |
+| CTR-1 DEF-12 | Cell: one unit inside a column; a column over each input expands it into a population of cells.  | PRB-12 (created) |
+| CTR-1 DEF-13 | Segment: one memory's evidence on one cell: a set of links from other cells, firing when two or mor | PRB-12 (created) |
+| CTR-1 DEF-14 | Assembly: a set of cells, across columns, that stands for a thing: nothing but those cells and the l | PRB-12 (created) |
+| CTR-1 GOL-1 | Learns unsupervised: placed in any world (DEF-8), it resolves the misfits (DEF-3) in what  | QST-2 (confirmed), PRB-4 (challenged), PRB-8 (created), QST-13 (challenged), HYP-15 (shaped), QST-14 (shaped), HYP-18 (confirmed), HYP-20 (confirmed) |
+| CTR-1 GOL-2 | Useful on the job: no training phase before use. It starts doing useful work at once, or n | PRB-8 (created), HYP-17 (shaped) |
 | CTR-1 GOL-3 | Acts on its own heat: what it looks at and does comes from its own heat (DEF-2), with noth | THY-3 (created) |
 | CTR-1 GOL-4 | Regions (DEF-10) settle each other: heat in one is resolved by the system as a whole. | HYP-13 (shaped), THY-2 (created), THY-4 (confirmed) |
-| CTR-1 OPZ-1 | Information: learn as much or more from far less information than today's AI needs. | HYP-5 (shaped), PRB-8 (created) |
-| CTR-1 OPZ-2 | Compute: fewer resources (time, memory, power) for the same learning, on ordinary CPUs (CO | HYP-2 (shaped) |
-| CTR-1 OPZ-3 | Minimality: the fewest constructs that explain the most. | HYP-3 (shaped), PRB-8 (created) |
-| CTR-1 OPZ-4 | Heat: explain its world more completely: more misfits resolved, never masked (CON-6). | — |
-| CTR-1 OPZ-5 | Scale: any size of world (DEF-8) and amount of memory (DEF-11). | PRB-4 (shaped) |
-| CTR-1 CON-1 | One rule: a change to its structure is kept only if energy (DEF-1) falls. | HYP-5 (shaped), HYP-8 (confirmed), HYP-9 (confirmed), QST-7 (confirmed), HYP-14 (confirmed) |
-| CTR-1 CON-2 | One currency, taken from the world: no hand-set weights or tuned parameters. | HYP-1 (shaped), HYP-3 (shaped), PRB-1 (created), PRB-3 (confirmed) |
-| CTR-1 CON-3 | General: nothing in it is written for one task or one kind of world. Fixed architecture is | PRB-2 (created), QST-8 (confirmed), PRB-5 (confirmed) |
-| CTR-1 CON-4 | Learns online, from nothing: no training set, no labels, no backpropagation. | QST-1 (shaped) |
-| CTR-1 CON-5 | Runs on ordinary CPUs: no GPU, TPU or other specialised hardware. | — |
-| CTR-1 CON-6 | Resolve, don't mask: energy may only fall because a misfit is resolved, never because its  | PRB-6 (shaped), THY-3 (created) |
-| CTR-1 CON-7 | Don't guess: when the evidence fits two explanations equally, take neither. | PRB-2 (created), PRB-6 (confirmed) |
-| CTR-1 CON-8 | Imagined is never stored as lived: what it joins or imagines never becomes an experience. | QST-9 (created) |
-| CTR-1 CON-9 | Cells carry no numbers: no strengths or activation levels; evidence is counted per memory, | HYP-10 (created) |
-| CTR-1 CON-10 | Its deepest set points (DEF-9) come from outside and are declared. | THY-2 (created) |
+| CTR-1 OPZ-4 | Heat: explain its world more completely: more misfits resolved, never masked (CON-6). | PRB-11 (changed) |
+| CTR-1 OPZ-1 | Information: learn as much or more from far less information than today's AI needs. | HYP-5 (shaped), PRB-8 (created), HYP-17 (confirmed), HYP-18 (confirmed), HYP-19 (confirmed), HYP-22 (confirmed) |
+| CTR-1 OPZ-3 | Minimality: the fewest constructs that explain the most. | HYP-3 (shaped), PRB-8 (created), PRB-11 (changed), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed) |
+| CTR-1 OPZ-2 | Compute: fewer resources (time, memory, power) for the same learning, on ordinary CPUs (CO | HYP-2 (shaped), HYP-16 (confirmed), PRB-11 (changed), HYP-23 (confirmed) |
+| CTR-1 OPZ-5 | Scale: the more it stores, the less each addition costs it: the work of receiving and reca | PRB-4 (shaped), HYP-25 (confirmed), PRB-12 (changed), THY-7 (shaped) |
 | CTR-1 CON-11 | It can't learn what isn't in what it receives. | — |
 | CTR-1 CON-12 | It can't try every explanation: search at rest is always partial. | HYP-5 (shaped) |
-| CTR-1 CON-13 | Evidence alone can't settle a true tie: only more evidence can (looking, acting). | QST-12 (created) |
 | CTR-1 CON-14 | Memory is finite: good enough, not exact; exact records live outside it. | QST-10 (shaped) |
-| CTR-1 CON-15 | No perfect memory (breaks CON-1 and OPZ-2). | — |
+| CTR-1 CON-13 | Evidence alone can't settle a true tie: only more evidence can (looking, acting). | QST-12 (created) |
+| CTR-1 CON-1 | One rule: a change to its structure is kept only if energy (DEF-1) falls. | HYP-5 (shaped), HYP-8 (confirmed), HYP-9 (confirmed), QST-7 (confirmed), HYP-14 (confirmed), PRO-3 (confirmed) |
+| CTR-1 CON-2 | One currency, taken from the world: no hand-set weights or tuned parameters. | HYP-1 (shaped), HYP-3 (shaped), PRB-1 (created), PRB-3 (confirmed), HYP-20 (challenged) |
+| CTR-1 CON-6 | Resolve, don't mask: energy may only fall because a misfit is resolved, never because its  | PRB-6 (shaped), THY-3 (created) |
+| CTR-1 CON-3 | General: nothing in it is written for one task or one kind of world. Fixed architecture is | PRB-2 (created), QST-8 (confirmed), PRB-5 (confirmed) |
+| CTR-1 CON-4 | Learns online, from nothing: no training set, no labels, no backpropagation. | QST-1 (shaped) |
+| CTR-1 CON-7 | Don't guess: when the evidence fits two explanations equally, take neither. | PRB-2 (created), PRB-6 (confirmed), HYP-21 (confirmed), HYP-22 (confirmed), HYP-23 (challenged), HYP-26 (challenged) |
+| CTR-1 CON-8 | Imagined is never stored as lived: what it joins or imagines never becomes an experience. | QST-9 (created) |
+| CTR-1 CON-10 | Its deepest set points (DEF-9) come from outside and are declared. | THY-2 (created) |
+| CTR-1 CON-18 | Sparse, event-driven computation: work happens only where something is active or changes; | THY-5 (created), THY-6 (confirmed), HYP-16 (confirmed), HYP-21 (challenged), HYP-22 (challenged), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-25 (confirmed) |
+| CTR-1 CON-19 | Cells and segments first: what the machine does (waking, completion, competition, fitting, | PRB-12 (created), HYP-26 (confirmed), THY-7 (shaped), PRB-13 (shaped) |
+| CTR-1 CON-5 | Runs on ordinary CPUs: no GPU, TPU or other specialised hardware. | — |
+| CTR-1 CON-9 | Cells carry no numbers: no strengths or activation levels; evidence is counted per memory, | HYP-10 (created), PRB-11 (changed), HYP-20 (challenged) |
 | CTR-1 CON-16 | No labels or teacher as a shortcut (breaks GOL-1). | — |
+| CTR-1 CON-15 | No perfect memory (breaks CON-1 and OPZ-2). | — |
 | CTR-1 CON-17 | No exhaustive search for the best answer (breaks OPZ-2). | — |
-| CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed) |
-| CTR-1 CAP-2 | Sparse distributed representations: a thing is a small set of cells; which cell says where | HYP-6 (created), QST-6 (challenged) |
-| CTR-1 CAP-3 | Auto-associative memory: a few active pieces bring back the whole memory they belong to. | QST-3 (created), HYP-10 (confirmed) |
-| CTR-1 CAP-4 | Binding what happens together (Hebbian in spirit): things active together become one memor | QST-11 (created) |
+| CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed), QST-13 (challenged), HYP-17 (confirmed), HYP-26 (confirmed) |
+| CTR-1 CAP-4 | Binding what happens together (Hebbian in spirit): things active together become one memor | QST-11 (created), HYP-20 (shaped), HYP-24 (confirmed) |
+| CTR-1 CAP-3 | Auto-associative memory: a few active pieces bring back the whole memory they belong to. | QST-3 (created), HYP-10 (confirmed), HYP-19 (confirmed), HYP-20 (shaped), HYP-21 (confirmed), HYP-22 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed) |
+| CTR-1 CAP-2 | Sparse distributed representations: a thing is a small set of cells; which cell says where | HYP-6 (created), QST-6 (challenged), PRB-11 (changed), HYP-25 (confirmed) |
+| CTR-1 CAP-6 | Thresholds from prices: when to keep, recall or recognise follows from the currency (CON-2 | PRB-1 (created), QST-3 (confirmed), HYP-24 (shaped) |
+| CTR-1 CAP-9 | The same engine at every level: regions (DEF-10) stacked with no new mechanism. | HYP-11 (created), HYP-18 (confirmed) |
+| CTR-1 CAP-8 | Sharing: parts, kinds and shared changes let one thing learnt cover many cases. | QST-2 (shaped), HYP-7 (created), HYP-8 (confirmed), HYP-12 (challenged), QST-13 (shaped), HYP-15 (confirmed), QST-14 (shaped) |
 | CTR-1 CAP-5 | Rest: reorganising and replaying while nothing comes in. | HYP-5 (created), PRB-6 (confirmed) |
-| CTR-1 CAP-6 | Thresholds from prices: when to keep, recall or recognise follows from the currency (CON-2 | PRB-1 (created), QST-3 (confirmed) |
-| CTR-1 CAP-7 | Heat as a valve: search opens only where there is heat (DEF-2). | HYP-2 (shaped), THY-1 (shaped), PRB-5 (created), QST-11 (confirmed) |
-| CTR-1 CAP-8 | Sharing: parts, kinds and shared changes let one thing learnt cover many cases. | QST-2 (shaped), HYP-7 (created), HYP-8 (confirmed), HYP-12 (challenged) |
-| CTR-1 CAP-9 | The same engine at every level: regions (DEF-10) stacked with no new mechanism. | HYP-11 (created) |
-| CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed) |
-| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed) |
-| CTR-1 CAP-12 | History in the state: what was a moment ago is part of now. | QST-5 (created) |
+| CTR-1 CAP-7 | Heat as a valve: search opens only where there is heat (DEF-2). | HYP-2 (shaped), THY-1 (shaped), PRB-5 (created), QST-11 (confirmed), HYP-23 (confirmed) |
 | CTR-1 CAP-13 | Not knowing is a reason to look: a refused tie (CON-7) becomes a cue for more evidence. | QST-12 (created) |
+| CTR-1 CAP-12 | History in the state: what was a moment ago is part of now. | QST-5 (created) |
+| CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed), THY-6 (shaped) |
+| CTR-1 CAP-15 | Held states as other regions' activity: what one region holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped) |
+| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed) |
 | CTR-1 CAP-14 | Exact records kept outside, in something it can read and write. | — |
-| CTR-1 PRN-1 | Prefer the deeper explanation to a new mechanism. | PRB-5 (shaped) |
+| CTR-1 PRN-1 | Prefer the deeper explanation to a new mechanism. | PRB-5 (shaped), THY-7 (confirmed) |
 | CTR-1 PRN-2 | Prefer removing structure to adding it. | PRB-2 (shaped), PRB-3 (confirmed) |
-| CTR-1 PRN-3 | Let heat decide where effort goes. | HYP-2 (shaped) |
+| CTR-1 PRN-6 | Prefer the same mechanism with different settings to a different mechanism. | HYP-11 (shaped), HYP-18 (confirmed), PRB-11 (changed), THY-7 (confirmed) |
+| CTR-1 PRN-3 | Let heat decide where effort goes. | HYP-2 (shaped), HYP-23 (confirmed) |
 | CTR-1 PRN-4 | Settle locally first. | HYP-13 (shaped), THY-4 (created) |
 | CTR-1 PRN-5 | Prefer what was lived to what was inferred. | QST-9 (shaped) |
-| CTR-1 PRN-6 | Prefer the same mechanism with different settings to a different mechanism. | HYP-11 (shaped) |
 | CTR-2 DEF-1 | The core: `src/engine/`, the main line. | — |
 | CTR-2 DEF-2 | The branch: the integrated working copy, `experiments/sketches/C56-integrated/engine/`. | — |
 | CTR-2 DEF-3 | A sketch: an experiment copy outside both, for a quick question. | — |
@@ -514,29 +761,38 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-2 DEF-6 | A patch: structure added to cover a misfit instead of resolving it. | — |
 | CTR-2 DEF-7 | A declared choice: anything in the system that doesn't follow from its rule, written down with what would | — |
 | CTR-2 DEF-8 | Evidence: a measured result against a baseline, with what was given by hand (DEF-4) stated. | — |
+| CTR-2 DEF-9 | A violation: a place where an experiment breaks a clause of CTR-1 or CTR-2: something given by hand, a | PRB-10 (created) |
+| CTR-2 DEF-10 | Distillation: removing an experiment's violations (DEF-9) one at a time, measuring after each, until wha | PRB-10 (created) |
+| CTR-2 DEF-11 | Bookkeeping: the program keeping a list of the system's things (assemblies, memories, placements) and | PRB-12 (created) |
 | CTR-2 GOL-1 | A system that fulfils CTR-1, with evidence (DEF-8) for each clause it claims. | — |
 | CTR-2 GOL-2 | The owner and any agent who picks up the work hold the same understanding of it, without d | PRB-8 (created) |
-| CTR-2 OPZ-1 | Less given by hand (DEF-4), in every experiment and in the system. | PRB-7 (created) |
+| CTR-2 GOL-3 | Every result we build on is distilled (DEF-10): what it rests on fulfils the contracts. | PRB-10 (created), PRO-3 (shaped) |
+| CTR-2 OPZ-1 | Less given by hand (DEF-4), in every experiment and in the system. | PRB-7 (created), HYP-22 (confirmed) |
 | CTR-2 OPZ-2 | Fewer declared choices (DEF-7): each moved into the system's rule, or removed. | — |
 | CTR-2 OPZ-3 | Less time lost: to results that rested on puppeteering, to drift, to misunderstanding. | — |
 | CTR-2 OPZ-4 | The smallest code that fulfils CTR-1: fewest constructs and lines, echoing CTR-1 OPZ-3. | — |
-| CTR-2 CON-1 | Nothing goes into the core (DEF-1) without evidence (DEF-8) and the owner's approval: test | PRO-2 (shaped) |
-| CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created) |
 | CTR-2 CON-3 | No crutches (DEF-5) and no patches (DEF-6). | PRB-2 (created) |
+| CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created) |
+| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created) |
 | CTR-2 CON-4 | Every declared choice (DEF-7) is written in `docs/decisions/`. | — |
+| CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed) |
+| CTR-2 CON-8 | Bookkeeping (DEF-11) may be used in experiments, declared as a violation (CON-7), but neve | PRB-12 (created), THY-7 (shaped), PRB-13 (shaped) |
 | CTR-2 CON-5 | No new terms without the owner's agreement; words keep the meanings in the glossary. | PRB-9 (created) |
 | CTR-2 CON-6 | Commits and bundles only when the owner asks. | — |
+| CTR-2 CAP-4 | The assistant: reasoning, writing, building and running experiments. | — |
+| CTR-2 CAP-3 | Written memory that outlasts a session: checkpoints, findings, theories, guides, contracts | PRB-9 (confirmed) |
+| CTR-2 CAP-6 | The contracts as a measuring rod: any experiment can be read against them clause by clause | PRB-10 (created) |
+| CTR-2 CAP-7 | Reference models: documents and pseudocode describing how to build each part (`docs/refere | PRB-13 (created) |
 | CTR-2 CAP-1 | Sketch, branch and core (DEF-3, DEF-2, DEF-1): ideas tried cheaply, kept apart until they' | PRO-1 (created) |
 | CTR-2 CAP-2 | Visuals and the sandbox: agreeing how something works by seeing it. | PRB-9 (created) |
-| CTR-2 CAP-3 | Written memory that outlasts a session: checkpoints, findings, theories, guides, contracts | PRB-9 (confirmed) |
-| CTR-2 CAP-4 | The assistant: reasoning, writing, building and running experiments. | — |
 | CTR-2 CAP-5 | The system itself as a helper ("Neil"), once it can hold our history. | — |
 | CTR-2 PRN-1 | Don't change anything until you understand it. | — |
 | CTR-2 PRN-2 | Measure against a baseline before believing a result; an explanation is not evidence. | — |
-| CTR-2 PRN-3 | A result that looks too good is checked for what was given by hand (CON-2). | QST-12 (created) |
+| CTR-2 PRN-3 | A result that looks too good is checked for what was given by hand (CON-2). | QST-12 (created), HYP-16 (confirmed) |
+| CTR-2 PRN-7 | Explore freely, then distil: once a handful of experiments have made a result worth keepin | PRB-10 (created), PRO-3 (confirmed) |
 | CTR-2 PRN-4 | Inspired, not copied. | — |
-| CTR-2 PRN-5 | Plain words, and pictures when words drift (CAP-2); walk through a visual by what to press | PRB-9 (created) |
 | CTR-2 PRN-6 | Detail where misreading is likely: a reader fills gaps with their own picture. | PRB-9 (created) |
+| CTR-2 PRN-5 | Plain words, and pictures when words drift (CAP-2); walk through a visual by what to press | PRB-9 (created) |
 
 ## Open
 
@@ -545,3 +801,6 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 - THY-2 · Theory: Architecture and regulation: many regions, the same engine with a few settings, wired by a few kinds of connection; heat as distance from each region's stasis.
 - THY-3 · Theory: Feelings as heat: trapped heat is distress, patching is rationalising, outward heat is curiosity.
 - THY-4 · Theory: Regulators and heat: everything is a regulator; a disturbance spreads and is settled together.
+- THY-5 · Theory: Sparse, event-driven computation: things change only in reaction to other things, and a held state is another region's stable activity projecting in, not recomputed (the owner's).
+- THY-6 · Theory: Persistent assemblies: what a region settled into stays active and changes only when something arriving doesn't fit it; these are the held states (the owner's).
+- QST-14 · Question: Frames beyond literal placement: "the bird was flying and found and ate a worm" and "bird eats worm" share one frame underneath. How? (The owner expects to discover it, perhaps from the right architecture of regions.)

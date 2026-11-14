@@ -1,0 +1,25 @@
+C78 · Decomposition by the cut. Written 14 November 2026 after smoke runs on development seed 1, before any run on test
+seeds 101-105. Settings in run.js: 100 columns; parts of 6 columns; families of a house (wall + roof) and a shed (the
+same wall + another roof); the house stored whole, then the shed arrives and lights whole columns; the cut read from
+cells' states; decomposition and rebinding by two sampled cells per part.
+
+Arms: cut=top (the cells at the top level of support are the memory that fits; C74) or cut=all (every cell with
+support >= 2); read=plain or read=whole (binding segments fire only at the top active share among binding segments
+firing that round: competition between whole memories).
+Runs: cut=top at 16 and 64 cells per column, M = 10, 50, 200 families. cut=all (slow: its parts grow huge) at 64 cells
+per column, M = 10 and 50, and 16 cells per column, M = 10.
+
+Seen on dev seed 1: cut=top found the right wall, roof and new roof in 100% of families everywhere; 114 links against
+264 for both wholes; read=plain: the other roof came back every time; read=whole: each roof brought back its own whole,
+clean 100 / 86 / 65% (M = 10 / 50 / 200) at 16 cells and 94% at 64 cells, M = 200; from the wall alone both roofs
+came back every time. cut=all: the cut was right in about 8% of families at M = 50.
+
+Predictions:
+  P1  cut=top finds the right three parts in >= 95% of families at every size and load.
+  P2  Decomposed and rebound: 114 links per family against 264 for both wholes.
+  P3  read=plain: from one roof, the other roof comes back too in >= 95% (the shared wall wakes both).
+  P4  read=whole: from one roof, the other roof comes back in <= 5%, and the right whole in >= 95%, at every size and load.
+  P5  read=whole, 64 cells per column, M = 200: clean recall >= 90% from either roof.
+  P6  cut=all: the cut is right in <= 50% of families at M = 50: the top level is needed to read the cut.
+  P7  From the wall alone, both roofs come back in >= 90% (genuinely ambiguous: nothing refuses it).
+Nothing will be changed after looking at test seeds.

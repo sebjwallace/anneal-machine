@@ -1,0 +1,44 @@
+sketch 38  MODE=seg SAMPLE=uniform SEGN=16 THETA=0.75 CAST=0  columns 400 x 2 cells = 800  K=8 ROUNDS=5  seeds 101,102,103,104,105  (15 s)
+M (episode objects)                                             400
+stored assemblies (distinct sentences)                         1664
+train: cells active per event                                 39.08
+train: work per event (link updates | gate synapse checks)    20604
+train: own segments checked per event (growth gate)           13023
+segments stored                                               67539
+segments per assembly cell-event                               0.85
+assembly cells shared by >1 word                                99%
+episode x -> Y: lenient                                          1%
+episode x -> Y: strict                                           0%
+episode x -> Y: blend                                          100%
+episode x -> Y: no answer                                       98%
+episode x -> Y: new cells                                       223
+fact c -> room: lenient                                          0%
+fact c -> room: strict                                           0%
+fact c -> room: blend                                          100%
+fact c -> room: no answer                                      100%
+fact c -> room: new cells                                       277
+kind: new container -> room                                      0%
+kind: new container -> blend                                   100%
+kind: new object -> container                                    0%
+kind: seen object -> container                                   0%
+partial: x at 4 of 8 cells: lenient                              3%
+partial: x at 4 of 8 cells: strict                               0%
+partial: x at 4 of 8 cells: blend                              100%
+partial: x at 4 of 8 cells: no answer                           93%
+partial: x at 4 of 8 cells: new cells                           203
+partial: cue "x in" only: lenient                                0%
+partial: cue "x in" only: strict                                 0%
+partial: cue "x in" only: blend                                  0%
+partial: cue "x in" only: no answer                             96%
+partial: cue "x in" only: new cells                            0.00
+split: both answers (blend of the two)                         100%
+split: exactly one answer                                        0%
+split: neither answer                                            0%
+split: no word at all                                           97%
+split: new cells                                                222
+probe: work per probe (link reads | segment index hits)      333334
+probe: segments checked per probe                             59330
+probe: rounds                                                  4.29
+capacity (this run's M values): largest M before strict episode recall falls below 75%: < 400
+capacity (this run's M values): largest M before strict episode recall falls below 50%: < 400
+  per seed, M=400, strict episode recall: 0 0 0 0 0

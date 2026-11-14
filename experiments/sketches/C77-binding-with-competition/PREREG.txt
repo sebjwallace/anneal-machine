@@ -1,0 +1,15 @@
+C77 · Binding with competition. Written 14 November 2026 after a smoke run on development seed 1, before any run on test
+seeds 101-105. C76's world and recall (run.js is a copy) with: cells per column 16 and 64; bindings K = 2 per part and
+all; competition none, or top: in each round, of the cells that would newly fire, only those at the top level of
+support join (C74's shared level of inhibition), up to 20 rounds.
+
+Seen on dev seed 1: at 64 cells per column K=2 was 100% clean up to M=200 and 95% at M=500; top-level competition gave
+the same clean recall as none at both sizes, with more intrusions in the failures and far more work at 16 cells.
+
+Predictions (K = 2 unless said):
+  P1  (the owner's claim) More cells per column keep recall clean: at 64 cells per column, clean >= 90% at M = 500 with
+      no competition (C76 at 16: 45%).
+  P2  Top-level competition raises clean recall by no more than 5 points at 16 cells per column, M = 500.
+  P3  Top-level competition does at least 5 times the segment checks of none at 16 cells per column, M = 500.
+  P4  K = 2 is at least as clean as all at 64 cells per column, every M.
+Nothing will be changed after looking at test seeds.

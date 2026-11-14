@@ -1,5 +1,9 @@
 # Anneal machine
 
+> *The brain does much more than just recollect. It intercompares, it synthesizes, it analyzes, it generates abstractions.*
+>
+> Carl Sagan, *Cosmos*, episode 11, "The Persistence of Memory" (1980)
+
 **A machine that learns by heating and settling: structure forms where it lowers energy, and cools into memory.**
 
 **New here? Read [`docs/state.md`](docs/state.md) first:** where everything stands, what works, what doesn't, and why.

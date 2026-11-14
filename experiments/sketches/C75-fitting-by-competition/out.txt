@@ -1,0 +1,39 @@
+C75 · fitting by competition alone   seeds 4242,101,102,103,104   300 fresh scenes (rng 7)
+
+PART A · one model learnt with search; the same 300 fresh scenes fitted each way
+  search   same cost 1500/1500  dearer 0  cheaper 0  extra cost 0% of search's   competition passes per scene 27.9   tally work per scene 38844   time 4910 ms
+  compete  same cost 1495/1500  dearer 5  cheaper 0  extra cost 0.1% of search's   competition passes per scene 1   tally work per scene 954   time 118 ms
+  refuse   same cost 1495/1500  dearer 5  cheaper 0  extra cost 0.1% of search's   competition passes per scene 1   tally work per scene 954   time 194 ms   dead heats refused 0
+  settle   same cost 1500/1500  dearer 0  cheaper 0  extra cost 0% of search's   competition passes per scene 1   tally work per scene 957   time 144 ms
+
+PART B · each way learns from scratch (600 scenes, rest every 98); judged by the engine test's yardstick (fitted with search)
+  search
+    seed 4242  units  12  memories   8  yardstick  45.2 + 1126.5 = 1171.6  heat 0.000  recovered 11/11  learning 13.3 s  passes 154956  tally 154.8M
+    seed 101   units  12  memories  11  yardstick  45.2 + 1126.5 = 1171.6  heat 0.000  recovered 11/11  learning 13.8 s  passes 167524  tally 164.5M
+    seed 102   units  11  memories   9  yardstick    42 + 1114.5 = 1156.5  heat 0.000  recovered 11/11  learning 14.3 s  passes 169234  tally 168.7M
+    seed 103   units  11  memories  10  yardstick    42 + 1114.5 = 1156.5  heat 0.000  recovered 11/11  learning 15.3 s  passes 173300  tally 171.9M
+    seed 104   units  11  memories   8  yardstick    44 + 1114.5 = 1158.5  heat 0.000  recovered 11/11  learning 13.9 s  passes 168352  tally 162.8M
+    mean: units 11.4  yardstick 1163  heat 0.000  recovered 11/11  learning 14.1 s
+  compete
+    seed 4242  units  12  memories   8  yardstick  45.2 + 1126.5 = 1171.6  heat 0.000  recovered 11/11  learning 10.9 s  passes 140584  tally 136.6M
+    seed 101   units  12  memories  11  yardstick  45.2 + 1126.5 = 1171.6  heat 0.000  recovered 11/11  learning 13.0 s  passes 152269  tally 146.3M
+    seed 102   units  11  memories   9  yardstick    42 + 1114.5 = 1156.5  heat 0.000  recovered 11/11  learning 12.9 s  passes 155637  tally 152.3M
+    seed 103   units  11  memories  10  yardstick    42 + 1114.5 = 1156.5  heat 0.000  recovered 11/11  learning 14.4 s  passes 158482  tally 153.3M
+    seed 104   units  11  memories   8  yardstick    44 + 1114.5 = 1158.5  heat 0.000  recovered 11/11  learning 12.6 s  passes 155242  tally 147.2M
+    mean: units 11.4  yardstick 1163  heat 0.000  recovered 11/11  learning 12.8 s
+  refuse
+    seed 4242  units  12  memories   8  yardstick  45.2 + 1126.5 = 1171.6  heat 0.000  recovered 11/11  learning 11.6 s  passes 140954  tally 137.0M  refused 2386
+    seed 101   units  12  memories  11  yardstick  42.7 + 1126.5 = 1169.1  heat 0.000  recovered 11/11  learning 12.5 s  passes 147268  tally 141.2M  refused 2015
+    seed 102   units  12  memories  14  yardstick  45.2 + 1126.5 = 1171.6  heat 0.000  recovered 11/11  learning 13.0 s  passes 146611  tally 151.6M  refused 4051
+    seed 103   units  12  memories  10  yardstick  42.7 + 1126.5 = 1169.1  heat 0.000  recovered 11/11  learning 12.8 s  passes 146074  tally 143.2M  refused 2837
+    seed 104   units  12  memories  12  yardstick  42.7 + 1126.5 = 1169.1  heat 0.000  recovered 11/11  learning 12.8 s  passes 149236  tally 147.3M  refused 1959
+    mean: units 12  yardstick 1170.1  heat 0.000  recovered 11/11  learning 12.5 s
+  settle
+    seed 4242  units  12  memories   8  yardstick  45.2 + 1126.5 = 1171.6  heat 0.000  recovered 11/11  learning 11.2 s  passes 140615  tally 136.6M
+    seed 101   units  12  memories  11  yardstick  45.2 + 1126.5 = 1171.6  heat 0.000  recovered 11/11  learning 13.1 s  passes 152303  tally 146.3M
+    seed 102   units  11  memories   9  yardstick    42 + 1114.5 = 1156.5  heat 0.000  recovered 11/11  learning 12.3 s  passes 155674  tally 152.4M
+    seed 103   units  11  memories  10  yardstick    42 + 1114.5 = 1156.5  heat 0.000  recovered 11/11  learning 13.5 s  passes 158509  tally 153.3M
+    seed 104   units  11  memories   8  yardstick    44 + 1114.5 = 1158.5  heat 0.000  recovered 11/11  learning 12.8 s  passes 155298  tally 147.2M
+    mean: units 11.4  yardstick 1163  heat 0.000  recovered 11/11  learning 12.6 s
+
+missing shapes (part B): search: 4242[-] 101[-] 102[-] 103[-] 104[-]  |  compete: 4242[-] 101[-] 102[-] 103[-] 104[-]  |  refuse: 4242[-] 101[-] 102[-] 103[-] 104[-]  |  settle: 4242[-] 101[-] 102[-] 103[-] 104[-]

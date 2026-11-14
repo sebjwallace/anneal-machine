@@ -1,0 +1,38 @@
+Sketch 37 pre-registration, written 2026-11-09 after smoke runs on dev seed 37 and before any run on test seeds 41-50.
+
+Changed on the dev seed before this file (reported in NOTE.md):
+ - part 2/3 first used a hard block (entity rejected if inhibition >= 1.0). It deadlocked: an entity blocked by inhibition can never be
+   selected, so its inhibition can never be unlearnt. Replaced by: inhibition subtracts from the matched support
+   (acceptable only if #matched - I > 0 and #matched - I >= #missing); I is also added to the score.
+ - balance acts on every potential inhibitory link from an active cell/column to a driven cell (Vogels' rule acts on all inhibitory
+   synapses), not only on links that misfit already created.
+
+Frozen settings.
+ Part 1: K=4 cells per token, positive links = instar (P(x|a)), ETAP=0.1, ETAI=0.1, threshold 0.5, RHO0=0.5, NOISE=0.05 (property dropout),
+   4500 events, penguin arrives at 1500, chick starts flying at 3000.
+ Part 2/3: sketch 27's world and substrate; ETAI=0.5 (C -| E on contradiction, saturating), ETAU=0.5 (multiplicative unlearn on selection),
+   RHO0=0.5, 2000 events, PRE=300.
+ Balance sweep, fixed as BETA/ETAI in {0, .01, .03, .1, .3, 1}:
+   part 1 BETA in {0, 0.001, 0.003, 0.01, 0.03, 0.1};  part 2/3 BETA in {0, 0.005, 0.015, 0.05, 0.15, 0.5}.
+ Test seeds 41-50 (all runs). Dev seed 37 is not among them.
+
+Runs.
+ Part 1: MODE=pos, posmean, ungated; MODE=not x 6 BETA. Stress: NOISE=0.2 for pos and not with BETA 0, 0.01, 0.1. Long: NEV=18000 for not BETA 0 and 0.01.
+ Part 2: SCENE=0.2: ID=none, count (sketch 27), ungated, not x 6 BETA. SCENE=0.05: none, count, not (BETA 0).
+ Part 3: CHG=1 SCENE=0: ID=none (sketch 26), not x 6 BETA (BETA=0 has no misfit source here: identical to none by construction).
+         CHG=1 SCENE=0.2: none, count, not (BETA 0).
+
+Predictions (what I expect after the dev seed; each to be marked held/failed).
+ E1 Part 1: NOT (BETA 0) honours all three exceptions at the phase ends (>= 90% of seeds) with regular birds -> "flies" >= 90% and
+    dogs/fish -> "flies" <= 5%. POS (summed) honours penguin/ostrich in < 50%. POSMEAN honours them but fails novel "green bird" (< 50%).
+ E2 Part 1: NOT does NOT rescue the novel "green bird" either (< 50%): part of the credit for each exception lands on "bird" itself.
+ E3 Part 1: chick recovers after T2 in <= 10 chick occurrences under NOT.
+ E4 Part 1: UNGATED (inhibition from the answer, not from own failed prediction) breaks positive predictions ("ostrich runs",
+    "penguin swims" < 50%) and makes >= 3x as many inhibitory links as NOT.
+ E5 Balance: with BETA=0 total inhibitory weight levels off (last third of the long run grows < 10% of the first third's level);
+    BETA/ETAI >= 0.3 breaks the regular rule (regular birds -> "flies" < 90%). Small BETA changes little.
+ I1 Part 2: learnt NOT from contradictions does not reach sketch 27's bookkeeping: single-snapshot wrong-entity rate NOT > count,
+    and NOT within 5 points of none. Contradictions are too rare (~0.03 per scene) to learn per-entity inhibition.
+ I2 Part 2: UNGATED co-presence inhibition silences entities (right-name entity blocked > 30%) and multiplies duplicates.
+ L1 Part 3: lock-in is not broken at SCENE=0 for any BETA: colour changeability stays above activity, wrong-entity rate within 5 points of sketch 26.
+ L2 Part 3: with scenes (CHG=1 SCENE=0.2) NOT does not break the lock-in either (colour > activity).

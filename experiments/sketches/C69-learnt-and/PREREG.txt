@@ -1,0 +1,38 @@
+Sketch 36 pre-registration, written 2026-11-09 after smoke runs on development seed 1 only, before any run on seeds 101-110.
+
+Frozen settings (sketch.js as of this file):
+  substrate: 120 columns x 8 cells; K=6 columns per token (3 own random, 3 learnt from neighbours, decay 0.97, switch margin 1.2)
+  presynaptic units: cells + column units (COLS=1); outcome readout = assembly holding most of the K cast winners (>=2, no tie)
+  settling: 3 rounds, input pushes fully in round 1 and at 0.25 after; internal assembly wiring RW=0.2
+  plain links: hot cell +0.2(1-w), fit cell +0.02(1-w), wrongly winning cell x0.8, deleted below 0.01
+  segments: grown on a hot cell (actual outcome cell not cast) with no segment firing for it; SEGN units sampled uniformly from
+    ALL active units; fires if >= THETA of synapses active; adds 2 * s * (fraction active); s0=0.3; fit s += 0.2(1-s);
+    misfit s *= 0.5; removed below 0.1
+  hashed shortcut: (entity phrase x context phrase) -> 8 units of a 4000-unit pool (MODE=hash);
+    control MODE=hashtok: every pair of input tokens hashed
+  NEV=3000 events per seed (long run NEV=12000), 12 blocks; seeds 101-110 (seed 1 was used for development).
+Main: MODE=seg SEGN=8 THETA=0.75 COLS=1.
+Sweep, fixed now: SEGN in {4,8,16} x THETA in {0.5,0.75,1.0}, in both worlds.
+Runs (runall.sh): WORLD=a and b, each with MODE=plain, hash, hashtok, seg (9-point sweep), seg COLS=0, seg NEV=12000.
+
+Worlds: a = 5 colours x 3 animals x {bowl full, bowl empty, door shut} by a 3x3 Latin square, "door open" -> "leaving" alone.
+        b = 5 colours x 4 animals x 4 contexts by a 4x4 Latin square, "door open" and "light on" decide alone,
+            plus two three-way exceptions ("ginger cat"+"bowl full" -> "hiding", "white dog"+"light off" -> "eating").
+        Held out: 3 (colour, context) per animal, never in training.
+
+Predictions (main settings unless stated):
+ P1 seen combinations, final: seg >= 0.85 in both worlds; plain at or below the single-input ceiling (~0.45);
+    hash ~1.0 on seen.
+ P2 economy: segments grown per combination event < 1 (one per experience per cell would be 6); growth in the last
+    block < 25% of the first block's; alive per (animal x context) per outcome cell <= 2.  Dev seed suggests growth may
+    not stop (churn); if so P2 fails.
+ P3 softness: dropping or replacing with noise the colour or the object word (answer still determined) keeps seg
+    accuracy >= 0.8, and a right-outcome segment still fires >= 0.8 of the time. Dropping animal or state should fall
+    to about chance (the answer is not determined).
+ P4 transfer: held-out combinations seg >= 0.6; hash <= 0.1 (it shares nothing; the training marginals point away from
+    held-out combinations, so additive learners can score below chance); plain also <= 0.2.
+ Against: if no single (SEGN, THETA) reaches seen >= 0.85 and held-out >= 0.6 in BOTH worlds, or only one sweep point
+    does, settings are hand-set per world. Expected: THETA=0.5 fails everywhere (fires on everything), THETA=1.0 memorises
+    (seen high, transfer and softness low), THETA=0.75 works at more than one SEGN.
+ Exceptions (world b): expected weak (<= 0.5), since kind-level segments fire against them. No threshold set.
+Anything changed after looking at test-seed results will be marked post hoc in NOTE.md.

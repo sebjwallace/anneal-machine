@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decomposition by the cut: the house and the shed</title>
+<style>
+:root{--bg:#fff;--text:#1f1e1d;--text-primary:#1f1e1d;--text-secondary:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border-stronger:rgba(0,0,0,.55);--surface-1:#f5f4f0}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1e1d;--text:#ecebe6;--text-primary:#ecebe6;--text-secondary:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border-stronger:rgba(255,255,255,.6);--surface-1:#2a2a28}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--text-secondary);font-size:14px;margin:0 0 1rem}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover,.tg button.on{background:var(--surface-1)}
+.tg button.on{border-color:var(--border-stronger)}
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Decomposition by the cut: the house and the shed</h1>
+<p class="sub">A shed partly wakes the stored house it resembles; the cells' own states draw the cut, and the shared wall becomes one assembly on the same cells. Builds on <a href="z-binding.html">binding a sample</a>. Drawn by hand; tested in C78.</p>
+<div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px;align-items:start">
+<svg id="sv" width="100%" viewBox="0 0 330 330" role="img" xmlns="http://www.w3.org/2000/svg"></svg>
+<div id="panel" style="font-size:13px"></div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;margin:10px 0 4px">
+<button onclick="step(-1)">&larr; Back</button>
+<button onclick="step(1)">Next &rarr;</button>
+<span id="pos" style="font-size:13px;color:var(--text-secondary)"></span>
+</div>
+<p id="cap" style="font-size:15px;line-height:1.6;min-height:5.2em;margin:6px 0 10px"></p>
+<div style="display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--text-secondary);border-top:0.5px solid var(--border);padding-top:10px">
+<span><svg width="16" height="16"><circle cx="8" cy="8" r="6" fill="#1D9E75"/></svg> lit and predicted: fits</span>
+<span><svg width="18" height="18"><circle cx="9" cy="9" r="7" fill="none" stroke="#E24B4A" stroke-width="1.3" stroke-dasharray="2 2"/></svg> predicted, not lit</span>
+<span><svg width="16" height="16"><circle cx="8" cy="8" r="6" fill="#E24B4A"/></svg> lit, predicted by nothing</span>
+<span><svg width="30" height="12"><line x1="4" y1="6" x2="26" y2="6" stroke="#888780" stroke-width="10" stroke-linecap="round" opacity=".3"/></svg> an assembly (band or outline)</span>
+<span><svg width="30" height="12"><line x1="3" y1="6" x2="27" y2="6" stroke="#7F77DD" stroke-width="1.4"/></svg> binding links</span>
+</div>
+<section class="story">
+<h2>How to walk through it</h2>
+<p>Press <b>Next</b> and keep an eye on the panel on the right. Step 1: the house, stored whole, one grey outline around it. Step 2: the shed lights 15 columns, and every cell in them is faint red, because nothing yet predicts which cell. Step 3: three colours: teal across the wall (it fits), dashed red rings on the house's roof (predicted, not there), solid red on the shed's roof (unexplained). That is the comparison, and nothing searched for it. Step 4: a dashed line marks the cut, exactly between those states. Step 5: three assemblies: a teal outline round the wall, on the same cells as before, and a coral band for the house's roof and a pink one for the shed's roof, on fresh cells. Step 6: purple links for the house's binding, blue for the shed's, two cells from each part. Step 7: the panel shows 168 links against 420, so the cut pays. Step 8: recall from the house's roof: the wall gets teal rings as it comes back, and the shed's roof stays dashed. The panel shows why: all four of the house binding's cells are active, against two of the shed's.</p>
+<h2>What it shows</h2>
+<p>Decomposition done by cells, Sagan's "analyzes". A shed arrives that shares a wall with a stored house. Its columns light all their cells, so the house's wall cells see each other active and the house partly wakes: the comparison ("intercompares") happens by itself, with no list of parts compared pair by pair. Every cell's state then draws the cut: lit and predicted (the wall fits), predicted but not lit (the house's roof), lit but predicted by nothing (the shed's roof). Cutting there, the fitting cells become their own assembly on the same cells, the abstraction, really shared; the house's roof becomes its own; the shed's roof gets fresh cells; each whole is rebound by two sampled cells per part. It is kept only if it pays, counted in links.</p>
+<p>A shared part needs competition between whole memories: the wall belongs to both bindings, so on its own it would wake both. From the house's roof, the house's binding has more of itself active than the shed's, so it wins.</p>
+<h2>What's simplified</h2>
+<p>Drawn by hand, with link counts for these shapes (a wall of 12 cells, roofs of 3). Tested in C78 on random shapes: the cut was right in every family; the pair cost 114 links against 264 for both wholes (parts of 6 cells there); with the bindings competing, each roof brought back its own whole (96-97% clean at 64 cells per column, 200 families). The cut needs the top level of support (C74) to keep chance predictions from other memories out.</p>
+<h2>Where it comes from</h2>
+<p>Agreed with the owner, 14 November 2026: intercomparing, analysis and abstraction as one mechanism. C74 (top level of support), C76 (binding a sample), C78 (decomposition by the cut).</p>
+</section>
+</main>
+<script>
+const SP=60,ox=45,oy=45,RC=7,Q='#B4B2A9',RED='#E24B4A',TEAL='#1D9E75',CORAL='#D85A30',PINK='#D4537E',PB='#7F77DD',BB='#378ADD',HOUSE='#888780';
+const wall=[];for(let y=2;y<5;y++)for(let x=0;x<5;x++)if(!(y===3&&x>0&&x<4))wall.push([x,y]);
+const roofH=[[2,0],[1,1],[3,1]],roofS=[[0,1],[2,1],[4,1]];
+const K=p=>p.join(','),has=(a,p)=>a.some(q=>K(q)===K(p));
+const cell=(p,c)=>[ox+p[0]*SP+(c%2?11:-11),oy+p[1]*SP+(c>1?11:-11)];
+const HC=0,SC=3;
+const shedIn=[...wall,...roofS];
+const sampleWall=[wall[0],wall[4]],sampleRoofH=[roofH[1],roofH[2]],sampleRoofS=[roofS[0],roofS[2]],sampleWall2=[wall[7],wall[11]];
+const ST=[
+ {cap:'A house is already stored, on its own cells (one cell in each of its 15 columns): a roof above a wall, kept whole as one assembly. Nothing is lit.',house:'whole'},
+ {cap:'A shed arrives for the first time: the same wall, a different roof. Its 15 columns light; every cell in them is a candidate (faint red), because nothing yet predicts which cell.',house:'whole',lit:true,cand:true},
+ {cap:'The comparison happens by itself. In the wall’s columns, the house’s wall cells are candidates, and their segments see each other active, so the house partly wakes. Every cell now knows its own state: the wall fits (teal); the house’s roof is predicted but not lit (dashed rings); the shed’s roof is lit but predicted by nothing (red).',house:'whole',lit:true,states:true},
+ {cap:'Those three states draw the cut. The line between “fits” and the two kinds of heat is exactly where the house and the shed differ. Nothing compared them pair by pair: the shed simply woke the memory it resembled.',house:'whole',lit:true,states:true,cut:true},
+ {cap:'Decompose along the cut. The cells that fit become an assembly of their own: the wall, on the same cells, so the shared part really is shared (the abstraction). The house’s roof becomes its own small assembly. The shed’s roof, unexplained, gets fresh cells.',parts:true},
+ {cap:'Rejoin each whole by binding a sample, as in C76: two cells from each part. The house is wall + roof (purple); the shed is wall + its roof (blue). Each binding is a few new segments on those cells.',parts:true,bind:true},
+ {cap:'Keep it only if it pays, now counted in links. Before: the house whole plus the shed stored whole, 420 links. After: one wall, two small roofs and two bindings, 168. Cheaper, so the cut is kept. If it weren’t, nothing would change.',parts:true,bind:true,pay:true},
+ {cap:'Check recall. Later, only the house’s roof is seen. Its two sampled cells wake the house’s binding, which wakes the wall, which completes. But the wall is shared: the shed’s binding sees the wall’s two sampled cells too. All four of the house binding’s cells are active, against two of the shed’s, so with competition between whole memories (C74) the house wins and the shed’s roof stays dark. A shared part is where that competition is needed.',parts:true,bind:true,recall:true}];
+let k=0;
+function bandC(pts,c,col){return `<path d="M${pts.map(p=>cell(p,c).join(' ')).join(' L')}" fill="none" stroke="${col}" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" opacity=".22"/>`}
+function wallBox(col){const[x0,y0]=cell([0,2],HC),[x1,y1]=cell([4,4],HC);return `<rect x="${x0-14}" y="${y0-14}" width="${x1-x0+28}" height="${y1-y0+28}" rx="8" fill="none" stroke="${col}" stroke-width="1.6"/>`}
+function links(cells,c,col,op){let s='';for(let a=0;a<cells.length;a++)for(let b=a+1;b<cells.length;b++){const[x1,y1]=cell(cells[a],cells[a].c!==undefined?cells[a].c:c),[x2,y2]=cell(cells[b],cells[b].c!==undefined?cells[b].c:c);s+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="1.3" opacity="${op}"/>`}return s}
+function draw(){const s=ST[k];let o='';
+ if(s.house==='whole'){const[x0,y0]=cell([0,0],HC),[x1,y1]=cell([4,4],HC);o+=`<rect x="${x0-18}" y="${y0-18}" width="${x1-x0+36}" height="${y1-y0+36}" rx="10" fill="none" stroke="${HOUSE}" stroke-width="1.4" ${s.states?'':'stroke-dasharray="5 4"'}/><text x="${x0-18}" y="${y0-24}" style="font-size:12px;fill:var(--text-secondary)">house, stored whole</text>`}
+ if(s.parts){o+=wallBox(TEAL)+bandC(roofH,HC,CORAL)+bandC(roofS,SC,PINK);}
+ if(s.cut){const y=oy+1.5*SP;o+=`<line x1="${ox-30}" y1="${y}" x2="${ox+4*SP+30}" y2="${y}" stroke="var(--text-secondary)" stroke-width="1" stroke-dasharray="6 4"/><text x="${ox+4*SP+30}" y="${y-6}" text-anchor="end" style="font-size:12px;fill:var(--text-secondary)">the cut</text>`}
+ if(s.bind){const hb=[...sampleWall,...sampleRoofH];const sb=[...sampleWall2,...sampleRoofS.map(p=>Object.assign([...p],{c:SC}))];
+   const hot=s.recall;o+=links(hb,HC,PB,hot?.95:.8);o+=links(sb,HC,BB,hot?.25:.7)}
+ for(let y=0;y<5;y++)for(let x=0;x<5;x++){const p=[x,y],cx=ox+x*SP,cy=oy+y*SP;const colLit=s.lit&&has(shedIn,p);
+  o+=`<rect x="${cx-25}" y="${cy-25}" width="50" height="50" rx="6" fill="none" stroke="${colLit?'#5F5E5A':Q}" stroke-width="${colLit?1.2:.6}"/>`;
+  for(let c=0;c<4;c++){const[px,py]=cell(p,c);
+   const isH=(has(wall,p)||has(roofH,p))&&c===HC,isS=has(roofS,p)&&c===SC;
+   let fill='none',stroke=Q,sw=.7,r=RC-2,extra='';
+   if(s.cand&&colLit){fill=RED;stroke=RED;extra='fill-opacity=".3"';}
+   if(isH){r=RC;stroke=HOUSE;sw=1;
+     if(s.house==='whole'&&!s.states&&!s.cand){fill=HOUSE;extra='fill-opacity=".25"'}
+     if(s.states){if(has(wall,p)){fill=TEAL;stroke=TEAL;extra=''}else{fill='none';stroke=RED;sw=1.4;extra='stroke-dasharray="3 3"'}}
+     if(s.parts){if(has(wall,p)){fill=TEAL;stroke=TEAL;extra=s.recall?'':'fill-opacity=".85"'}else{fill=CORAL;stroke=CORAL;extra=''}}}
+   if(s.states&&has(roofS,p)&&c===SC){fill=RED;stroke=RED;r=RC;extra='';}
+   if(isS&&s.parts){fill=s.recall?'none':PINK;stroke=PINK;r=RC;sw=1;extra=s.recall?'stroke-dasharray="3 3"':''}
+   o+=`<circle cx="${px}" cy="${py}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${extra}/>`;
+   if(s.recall&&isH&&has(wall,p))o+=`<circle cx="${px}" cy="${py}" r="${RC+3}" fill="none" stroke="${TEAL}" stroke-width="1.6"/>`;
+  }}
+ if(s.parts)o+=`<text x="${ox-25}" y="${oy+4*SP+44}" style="font-size:12px;fill:var(--text-secondary)">wall: the abstraction, shared</text>`;
+ document.getElementById('sv').innerHTML=o;
+ let h='';
+ if(k<=3){h+=`<div style="color:var(--text-secondary);font-size:12px;padding-bottom:4px;border-bottom:0.5px solid var(--border)">Cells</div>`;
+  if(s.states)h+=`<div style="padding:4px 0;border-bottom:0.5px solid var(--border)"><b style="font-weight:500;color:${TEAL}">12</b> lit and predicted: the wall</div><div style="padding:4px 0;border-bottom:0.5px solid var(--border)"><b style="font-weight:500;color:${RED}">3</b> predicted, not lit: the house's roof</div><div style="padding:4px 0;border-bottom:0.5px solid var(--border)"><b style="font-weight:500;color:${RED}">3</b> lit, predicted by nothing: the shed's roof</div>`;
+  else h+=`<div style="padding:4px 0">${s.lit?'15 columns lit by the shed':'Stored: the house, 15 cells'}</div>`}
+ else{h+=`<div style="color:var(--text-secondary);font-size:12px;padding-bottom:4px;border-bottom:0.5px solid var(--border)">Assemblies</div>
+  <div style="padding:3px 0;border-bottom:0.5px solid var(--border)"><span style="color:${TEAL}">■</span> wall · 12 cells · 132 links</div>
+  <div style="padding:3px 0;border-bottom:0.5px solid var(--border)"><span style="color:${CORAL}">■</span> house roof · 3 cells · 6 links</div>
+  <div style="padding:3px 0;border-bottom:0.5px solid var(--border)"><span style="color:${PINK}">■</span> shed roof · 3 fresh cells · 6 links</div>`;
+  if(s.bind)h+=`<div style="padding:3px 0;border-bottom:0.5px solid var(--border)"><span style="color:${PB}">■</span> house binding · 4 cells · 12 links</div><div style="padding:3px 0;border-bottom:0.5px solid var(--border)"><span style="color:${BB}">■</span> shed binding · 4 cells · 12 links</div>`;
+  if(s.pay)h+=`<div style="margin-top:10px">After: <b style="font-weight:500">168</b> links<br><span style="color:var(--text-secondary)">before: house whole 210 + shed whole 210 = 420</span></div>`;
+  if(s.recall)h+=`<div style="margin-top:10px">Seen: the house's roof<br>House binding: <b style="font-weight:500">4 of 4</b> cells active · wins<br>Shed binding: <b style="font-weight:500">2 of 4</b> · loses<br>Back: <b style="font-weight:500">the house</b>, not the shed</div>`}
+ document.getElementById('panel').innerHTML=h;document.getElementById('cap').textContent=s.cap;document.getElementById('pos').textContent='Step '+(k+1)+' of '+ST.length}
+function step(d){k=Math.max(0,Math.min(ST.length-1,k+d));draw()}
+draw();
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Columns: expanding the input so memories don't collide</title>
+<style>
+:root{--bg:#fff;--text:#1f1e1d;--text-secondary:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--cell:#f5f4f0}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1e1d;--text:#ecebe6;--text-secondary:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--cell:#2a2a28}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--text-secondary);font-size:14px;margin:0 0 1rem}
+.ctl{display:flex;align-items:center;gap:8px;margin:.5rem 0 0}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{background:var(--cell)}
+#pos{font-size:13px;color:var(--text-secondary);margin-left:8px}
+.cap{font-size:15px;line-height:1.6;min-height:4.8em;margin:.75rem 0}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--text-secondary);border-top:.5px solid var(--border);padding-top:10px}
+.legend svg{vertical-align:middle}
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Columns: expanding the input so memories don't collide</h1>
+<p class="sub">From input cells to columns to assemblies, and why two memories that share inputs stay apart. Builds on <a href="assemblies.html">the visual language</a>. Drawn by hand to show the idea; not a run of the engine.</p>
+<svg id="sv" width="100%" viewBox="0 0 680 330" role="img" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="ctl"><button onclick="step(-1)">&larr; Back</button><button onclick="step(1)">Next &rarr;</button><span id="pos"></span></div>
+<p id="cap" class="cap"></p>
+<div class="legend">
+<span><svg width="14" height="14"><rect x="1" y="1" width="12" height="12" rx="2" fill="#5F5E5A"/></svg> input cell on</span>
+<span><svg width="14" height="14"><rect x="1" y="1" width="12" height="12" rx="2" fill="#EF9F27"/></svg> input shared by both patterns</span>
+<span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="#1D9E75"/></svg> assembly A</span>
+<span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="#D85A30"/></svg> assembly B</span>
+<span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="#1D9E75" stroke-width="1.5"/></svg> brought back</span>
+</div>
+
+<section class="story">
+<h2>How to walk through it</h2>
+<p>Press <b>Next</b> and watch the bottom row first, then the columns above it. Step 1 is the input: nine input cells, four of them on. On step 2 a column of 18 cells appears over each input cell. On step 3, look for one teal dot in each column whose input is on: each input has become one particular cell. On step 4 teal arcs join those cells; that is assembly A, nothing more than the cells and their links. On step 5 comes pattern B, in coral. Look at the three amber inputs it shares with A, then up at their columns: B's dots are different cells from A's in the same columns. Step 6 holds both at once, and teal and coral never touch a common cell. Step 7 is a cue: only two teal cells are lit, the rest of A comes back as rings, and B stays dark even though it uses the same inputs. Step 8 takes the columns away, so the arcs sit on the input cells themselves. Teal and coral now share the amber inputs, and the cue reaches the partners of both, which brings back a blend.</p>
+
+<h2>What it shows</h2>
+<p>A column over each input cell is dimensionality expansion: nine inputs become 162 cells, so each input is no longer one thing but a population. An input that is on activates one cell in its column, and which cell depends on context. Two patterns that overlap on the input can then use different cells and different links, so both can be held, and recalled, without colliding. These are sparse distributed representations (CTR-1 CAP-2), and recall from part of an assembly is auto-associative memory (CAP-3).</p>
+<p>Without columns, as in a classic Hopfield network, each input cell is a single unit, so every memory that uses it is linked on that same unit. Memories that share inputs blur together, and a cue on shared inputs brings back a mixture. That crosstalk is what the columns remove.</p>
+
+<h2>What's simplified</h2>
+<p>The separation is only as good as what picks the cell. If two patterns happen to land on the same cell in a shared column, they collide there. In Anneal's pictures the cell is chosen by where the input sits. In text, choosing it by context alone fails: in the owner's earlier work (sketch 20), cells chosen by what came before encoded the frame, not the word, so different words in the same frame shared cells (recall 52%); choosing per word gave 88%. A choice from both, context and word, was never built (<a href="../theories/learnt-logic-qa.md">answers</a>). More cells per column means more room before two things collide by chance. The links are drawn as lines between cells; how a cell actually holds its links (segments and synapses) is the next visual. One cell can also belong to many assemblies, which brings back a collision inside the cell; segments are what solve that.</p>
+
+<h2>Where it comes from</h2>
+<p>The owner's picture of assemblies as cells and their connections, not entries in a list. Columns and cells in <code>src/engine/cells.js</code>; which cell says where (C21, checkpoint 05). Inspired by Hopfield (1982) for auto-associative memory and by Numenta's columns; Hebb (1949) for assemblies.</p>
+</section>
+</main>
+<script>
+const N=9,cx=i=>68+i*68,IY=292,Q='#B4B2A9',TEAL='#1D9E75',CORAL='#D85A30',AMB='#EF9F27',ON='#5F5E5A';
+const cell=(i,r,c)=>[cx(i)-12+c*12,98+r*14];
+const A={1:[1,0],2:[4,2],4:[2,1],6:[0,2]},B={2:[1,0],4:[5,0],6:[3,1],7:[2,2]};
+const Ain=Object.keys(A).map(Number),Bin=Object.keys(B).map(Number),shared=Ain.filter(i=>Bin.includes(i));
+const T=(x,y,t)=>`<text x="${x}" y="${y}" style="font-size:12px;fill:var(--text-secondary)">${t}</text>`;
+function inputs(lit,mode){let s='';for(let i=0;i<N;i++){const on=lit.includes(i);const sh=mode==='both'&&shared.includes(i);
+ s+=`<rect x="${cx(i)-14}" y="${IY-14}" width="28" height="28" rx="4" fill="${on?(sh?AMB:ON):'none'}" stroke="${on?(sh?AMB:ON):Q}" stroke-width="1"/>`}
+ return s+T(40,IY+34,'input cells (pixels, letters, anything)')}
+function columns(){let s='';for(let i=0;i<N;i++){s+=`<rect x="${cx(i)-20}" y="88" width="40" height="90" rx="6" fill="none" stroke="${Q}" stroke-width="0.8"/><line x1="${cx(i)}" y1="${IY-16}" x2="${cx(i)}" y2="182" stroke="${Q}" stroke-width="0.8" stroke-dasharray="2 3"/>`;
+ for(let r=0;r<6;r++)for(let c=0;c<3;c++){const[x,y]=cell(i,r,c);s+=`<circle cx="${x}" cy="${y}" r="3.2" fill="${Q}" opacity=".5"/>`}}
+ return s+T(40,76,'a column of cells over each input cell')}
+function act(M,col,mode){let s='';Object.entries(M).forEach(([i,[r,c]])=>{const[x,y]=cell(+i,r,c);s+=mode==='ring'?`<circle cx="${x}" cy="${y}" r="4.6" fill="none" stroke="${col}" stroke-width="1.6"/>`:`<circle cx="${x}" cy="${y}" r="4.6" fill="${col}"/>`});return s}
+function links(M,col,op=.75){const pts=Object.entries(M).map(([i,[r,c]])=>cell(+i,r,c));let s='';for(let a=0;a<pts.length;a++)for(let b=a+1;b<pts.length;b++){const[x1,y1]=pts[a],[x2,y2]=pts[b],my=Math.min(y1,y2)-26-Math.abs(x2-x1)*.08;s+=`<path d="M${x1} ${y1} Q${(x1+x2)/2} ${my} ${x2} ${y2}" fill="none" stroke="${col}" stroke-width="1.1" opacity="${op}"/>`}return s}
+function sub(M,keys){const o={};keys.forEach(k=>o[k]=M[k]);return o}
+function flatLinks(ins,col,off){let s='';for(let a=0;a<ins.length;a++)for(let b=a+1;b<ins.length;b++){const x1=cx(ins[a]),x2=cx(ins[b]),y=IY-16;s+=`<path d="M${x1+off} ${y} Q${(x1+x2)/2+off} ${y-40-(x2-x1)*.28} ${x2+off} ${y}" fill="none" stroke="${col}" stroke-width="1.1" opacity=".8"/>`}return s}
+const box=(i,col)=>`<rect x="${cx(i)-14}" y="${IY-14}" width="28" height="28" rx="4" fill="none" stroke="${col}" stroke-width="2"/>`;
+const ST=[
+ [()=>inputs(Ain,''),'Start with the input: nine input cells. They could be pixels of a picture or letters of text. Pattern A turns four of them on.'],
+ [()=>columns()+inputs(Ain,''),'Over each input cell stands a column of cells: here 18 per column. Nine inputs become 162 cells. That is the dimensionality expansion: each input is no longer one thing but a population.'],
+ [()=>columns()+inputs(Ain,'')+act(A,TEAL),'An input cell that is on activates one cell in its column. Which cell depends on context: in Anneal, where it sits. So each on input becomes one specific cell out of 18.'],
+ [()=>columns()+inputs(Ain,'')+links(A,TEAL)+act(A,TEAL),'Cells active together are connected. Those connections are assembly A. Nothing stores “A” as a thing: it is only these cells and the links between them.'],
+ [()=>columns()+inputs(Bin,'both')+links(B,CORAL)+act(B,CORAL),'Pattern B turns on a different set of inputs, sharing three with A (amber). In those shared columns, B’s context picks different cells, so B is its own set of cells and its own links.'],
+ [()=>columns()+inputs([...new Set([...Ain,...Bin])],'both')+links(A,TEAL)+links(B,CORAL)+act(A,TEAL)+act(B,CORAL),'Both held at once. They overlap on the input, but not on the cells: no cell belongs to both, and no link joins them. This is what sparse distributed representations buy: many things held together without colliding.'],
+ [()=>columns()+inputs([2,4],'')+links(A,TEAL,.35)+act(sub(A,[2,4]),TEAL)+act(sub(A,[1,6]),TEAL,'ring'),'A cue: just two of A’s cells become active, in shared columns. Their links reach only A’s other cells, so A completes (rings) and B stays silent, even though B uses the same inputs.'],
+ [()=>inputs([2,4],'')+flatLinks(Ain,TEAL,-2)+flatLinks(Bin,CORAL,2)+box(1,TEAL)+box(7,CORAL)+box(6,AMB),'Without columns, as in a classic Hopfield network: each input cell is one unit, so A and B must be linked on the same units. The same cue on two shared inputs now reaches A’s, B’s and shared partners alike, and recall brings back a blend. That crosstalk is what the columns remove.']];
+let k=0;
+function draw(){document.getElementById('sv').innerHTML=ST[k][0]();document.getElementById('cap').textContent=ST[k][1];document.getElementById('pos').textContent='Step '+(k+1)+' of '+ST.length}
+function step(d){k=Math.max(0,Math.min(ST.length-1,k+d));draw()}
+draw();
+</script>
+</body>
+</html>

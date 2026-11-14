@@ -1,0 +1,261 @@
+
+strict episode recall (%, by M = episode objects)
+| arm, cells per column | 25 | 50 | 100 | 200 | 400 |
+|---|---|---|---|---|---|
+| sum, fit-normalised, 2 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, fit-normalised, 4 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, fit-normalised, 8 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, fit-normalised, 16 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, raw, 2 cells | 25 | 27 | 23 | 5 | 0 |
+| sum, raw, 4 cells | 71 | 72 | 61 | 33 | 18 |
+| sum, raw, 8 cells | 92 | 89 | 86 | 78 | 86 |
+| sum, raw, 16 cells | 88 | 90 | 96 | 97 | 94 |
+| segments 16, 2 cells | 0 | 1 | 0 | 0 | 0 |
+| segments 16, 4 cells | 0 | 0 | 2 | 0 | 0 |
+| segments 16, 8 cells | 3 | 2 | 2 | 0 | 0 |
+| segments 16, 16 cells | 16 | 8 | 8 | 0 | 0 |
+| segments all, 2 cells | 58 | 65 | 73 | 65 | 68 |
+| segments all, 4 cells | 82 | 83 | 83 | 84 | 85 |
+| segments all, 8 cells | 88 | 86 | 91 | 93 | 94 |
+| segments all, 16 cells | 89 | 88 | 91 | 94 | 92 |
+| segments 16 + cast, 2 cells | 32 | 40 | 35 | 33 | 32 |
+| segments 16 + cast, 4 cells | 46 | 39 | 30 | 35 | 27 |
+| segments 16 + cast, 8 cells | 38 | 34 | 36 | 31 | 22 |
+| segments 16 + cast, 16 cells | 38 | 35 | 30 | 30 | 22 |
+| segments all + cast, 2 cells | 58 | 65 | 73 | 65 | 68 |
+| segments all + cast, 4 cells | 82 | 83 | 83 | 84 | 85 |
+| segments all + cast, 8 cells | 88 | 86 | 91 | 93 | 94 |
+| segments all + cast, 16 cells | 88 | 88 | 91 | 94 | 92 |
+
+episode blends (%, by M = episode objects)
+| arm, cells per column | 25 | 50 | 100 | 200 | 400 |
+|---|---|---|---|---|---|
+| sum, fit-normalised, 2 cells | 0 | 0 | 0 | 1 | 0 |
+| sum, fit-normalised, 4 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, fit-normalised, 8 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, fit-normalised, 16 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, raw, 2 cells | 22 | 26 | 27 | 51 | 71 |
+| sum, raw, 4 cells | 11 | 6 | 7 | 9 | 37 |
+| sum, raw, 8 cells | 8 | 8 | 5 | 2 | 3 |
+| sum, raw, 16 cells | 12 | 10 | 4 | 3 | 5 |
+| segments 16, 2 cells | 100 | 99 | 100 | 100 | 100 |
+| segments 16, 4 cells | 100 | 100 | 98 | 100 | 100 |
+| segments 16, 8 cells | 97 | 98 | 98 | 100 | 100 |
+| segments 16, 16 cells | 83 | 90 | 92 | 100 | 100 |
+| segments all, 2 cells | 22 | 15 | 8 | 23 | 18 |
+| segments all, 4 cells | 8 | 1 | 7 | 7 | 6 |
+| segments all, 8 cells | 2 | 1 | 0 | 0 | 2 |
+| segments all, 16 cells | 2 | 1 | 0 | 0 | 5 |
+| segments 16 + cast, 2 cells | 3 | 5 | 6 | 7 | 6 |
+| segments 16 + cast, 4 cells | 3 | 1 | 1 | 2 | 1 |
+| segments 16 + cast, 8 cells | 1 | 0 | 0 | 0 | 0 |
+| segments 16 + cast, 16 cells | 0 | 0 | 1 | 1 | 1 |
+| segments all + cast, 2 cells | 22 | 15 | 8 | 23 | 18 |
+| segments all + cast, 4 cells | 8 | 1 | 7 | 7 | 6 |
+| segments all + cast, 8 cells | 2 | 1 | 0 | 0 | 2 |
+| segments all + cast, 16 cells | 2 | 1 | 0 | 0 | 5 |
+
+lenient episode recall (%, by M = episode objects)
+| arm, cells per column | 25 | 50 | 100 | 200 | 400 |
+|---|---|---|---|---|---|
+| sum, fit-normalised, 2 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, fit-normalised, 4 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, fit-normalised, 8 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, fit-normalised, 16 cells | 0 | 0 | 0 | 0 | 0 |
+| sum, raw, 2 cells | 25 | 28 | 23 | 5 | 0 |
+| sum, raw, 4 cells | 71 | 72 | 61 | 33 | 18 |
+| sum, raw, 8 cells | 93 | 89 | 86 | 78 | 86 |
+| sum, raw, 16 cells | 88 | 90 | 96 | 97 | 94 |
+| segments 16, 2 cells | 23 | 8 | 13 | 1 | 1 |
+| segments 16, 4 cells | 29 | 20 | 18 | 6 | 0 |
+| segments 16, 8 cells | 32 | 41 | 39 | 26 | 7 |
+| segments 16, 16 cells | 39 | 39 | 33 | 14 | 12 |
+| segments all, 2 cells | 58 | 71 | 73 | 65 | 71 |
+| segments all, 4 cells | 82 | 83 | 83 | 85 | 85 |
+| segments all, 8 cells | 88 | 86 | 91 | 93 | 95 |
+| segments all, 16 cells | 89 | 88 | 91 | 94 | 92 |
+| segments 16 + cast, 2 cells | 32 | 42 | 35 | 33 | 32 |
+| segments 16 + cast, 4 cells | 46 | 39 | 30 | 35 | 27 |
+| segments 16 + cast, 8 cells | 38 | 34 | 36 | 31 | 22 |
+| segments 16 + cast, 16 cells | 38 | 35 | 30 | 30 | 22 |
+| segments all + cast, 2 cells | 58 | 71 | 73 | 65 | 71 |
+| segments all + cast, 4 cells | 82 | 83 | 83 | 85 | 85 |
+| segments all + cast, 8 cells | 88 | 86 | 91 | 93 | 95 |
+| segments all + cast, 16 cells | 88 | 88 | 91 | 94 | 92 |
+
+capacity: largest M with strict episode recall >= 75% / >= 50%
+| arm | 2 cells | 4 cells | 8 cells | 16 cells |
+|---|---|---|---|---|
+| sum, fit-normalised | <25 / <25 | <25 / <25 | <25 / <25 | <25 / <25 |
+| sum, raw | <25 / <25 | <25 / 100 | 400 / 400 | 400 / 400 |
+| segments 16 | <25 / <25 | <25 / <25 | <25 / <25 | <25 / <25 |
+| segments all | <25 / 400 | 400 / 400 | 400 / 400 | 400 / 400 |
+| segments 16 + cast | <25 / <25 | <25 / <25 | <25 / <25 | <25 / <25 |
+| segments all + cast | <25 / 400 | 400 / 400 | 400 / 400 | 400 / 400 |
+
+sharing (%, M = 25 · 50 · 100 · 200 · 400)
+|  | 2 cells | 4 cells | 8 cells | 16 cells |
+|---|---|---|---|---|
+| assembly cells shared by >1 word | 57 · 62 · 75 · 92 · 99 | 37 · 37 · 40 · 60 · 91 | 19 · 20 · 20 · 22 · 45 | 1 · 3 · 5 · 8 · 10 |
+
+other measures, 2 cells per column, M = 100
+| measure | sum, fit-normalised | sum, raw | segments 16 | segments all | segments 16 + cast | segments all + cast |
+|---|---|---|---|---|---|---|
+| fact c -> room: strict | 9 | 100 | 0 | 89 | 51 | 98 |
+| kind: new container -> room | 0 | 27 | 0 | 0 | 0 | 0 |
+| kind: new object -> container | 0 | 10 | 0 | 0 | 0 | 0 |
+| kind: seen object -> container | 0 | 31 | 0 | 9 | 22 | 74 |
+| partial: x at 4 of 8 cells: strict | 0 | 20 | 0 | 0 | 1 | 0 |
+| partial: x at 4 of 8 cells: lenient | 0 | 20 | 5 | 0 | 1 | 0 |
+| partial: cue "x in" only: lenient | 0 | 0 | 0 | 0 | 0 | 0 |
+| split: both answers (blend of the two) | 0 | 1 | 94 | 0 | 0 | 0 |
+| split: exactly one answer | 0 | 24 | 5 | 0 | 1 | 0 |
+| split: neither answer | 100 | 74 | 0 | 100 | 99 | 100 |
+| episode x -> Y: new cells | 8 | 8 | 123 | 7.03 | 8 | 7.03 |
+
+other measures, 4 cells per column, M = 100
+| measure | sum, fit-normalised | sum, raw | segments 16 | segments all | segments 16 + cast | segments all + cast |
+|---|---|---|---|---|---|---|
+| fact c -> room: strict | 9 | 100 | 0 | 91 | 71 | 96 |
+| kind: new container -> room | 0 | 53 | 0 | 0 | 0 | 0 |
+| kind: new object -> container | 0 | 0 | 5 | 0 | 5 | 0 |
+| kind: seen object -> container | 0 | 39 | 0 | 11 | 20 | 84 |
+| partial: x at 4 of 8 cells: strict | 0 | 57 | 3 | 0 | 0 | 0 |
+| partial: x at 4 of 8 cells: lenient | 0 | 57 | 8 | 0 | 0 | 0 |
+| partial: cue "x in" only: lenient | 0 | 0 | 0 | 0 | 0 | 0 |
+| split: both answers (blend of the two) | 0 | 0 | 75 | 0 | 0 | 0 |
+| split: exactly one answer | 0 | 32 | 18 | 0 | 1 | 0 |
+| split: neither answer | 100 | 68 | 8 | 100 | 99 | 100 |
+| episode x -> Y: new cells | 8 | 8 | 112 | 7.26 | 8 | 7.25 |
+
+other measures, 8 cells per column, M = 100
+| measure | sum, fit-normalised | sum, raw | segments 16 | segments all | segments 16 + cast | segments all + cast |
+|---|---|---|---|---|---|---|
+| fact c -> room: strict | 13 | 100 | 0 | 91 | 71 | 91 |
+| kind: new container -> room | 0 | 20 | 0 | 0 | 0 | 0 |
+| kind: new object -> container | 0 | 30 | 15 | 0 | 0 | 0 |
+| kind: seen object -> container | 0 | 74 | 1 | 19 | 9 | 91 |
+| partial: x at 4 of 8 cells: strict | 0 | 82 | 2 | 0 | 0 | 0 |
+| partial: x at 4 of 8 cells: lenient | 0 | 82 | 17 | 0 | 0 | 0 |
+| partial: cue "x in" only: lenient | 0 | 0 | 0 | 0 | 0 | 0 |
+| split: both answers (blend of the two) | 0 | 0 | 54 | 0 | 0 | 0 |
+| split: exactly one answer | 0 | 80 | 34 | 0 | 0 | 0 |
+| split: neither answer | 100 | 20 | 12 | 100 | 100 | 100 |
+| episode x -> Y: new cells | 8 | 8 | 105 | 7.3 | 8 | 7.29 |
+
+other measures, 16 cells per column, M = 100
+| measure | sum, fit-normalised | sum, raw | segments 16 | segments all | segments 16 + cast | segments all + cast |
+|---|---|---|---|---|---|---|
+| fact c -> room: strict | 20 | 100 | 0 | 89 | 67 | 89 |
+| kind: new container -> room | 7 | 27 | 20 | 0 | 0 | 0 |
+| kind: new object -> container | 0 | 60 | 10 | 0 | 0 | 0 |
+| kind: seen object -> container | 0 | 86 | 5 | 17 | 19 | 88 |
+| partial: x at 4 of 8 cells: strict | 0 | 92 | 6 | 0 | 0 | 0 |
+| partial: x at 4 of 8 cells: lenient | 0 | 92 | 13 | 0 | 0 | 0 |
+| partial: cue "x in" only: lenient | 0 | 0 | 0 | 0 | 0 | 0 |
+| split: both answers (blend of the two) | 0 | 2 | 39 | 0 | 0 | 0 |
+| split: exactly one answer | 0 | 93 | 31 | 0 | 0 | 0 |
+| split: neither answer | 100 | 5 | 29 | 100 | 100 | 100 |
+| episode x -> Y: new cells | 8 | 8 | 118 | 7.3 | 8 | 7.29 |
+
+other measures, 2 cells per column, M = 400
+| measure | sum, fit-normalised | sum, raw | segments 16 | segments all | segments 16 + cast | segments all + cast |
+|---|---|---|---|---|---|---|
+| fact c -> room: strict | 2 | 100 | 0 | 89 | 47 | 100 |
+| kind: new container -> room | 0 | 13 | 0 | 0 | 0 | 0 |
+| kind: new object -> container | 0 | 5 | 0 | 0 | 0 | 0 |
+| kind: seen object -> container | 0 | 23 | 0 | 12 | 24 | 73 |
+| partial: x at 4 of 8 cells: strict | 0 | 5 | 0 | 0 | 2 | 0 |
+| partial: x at 4 of 8 cells: lenient | 0 | 5 | 3 | 0 | 2 | 0 |
+| partial: cue "x in" only: lenient | 0 | 0 | 0 | 0 | 0 | 0 |
+| split: both answers (blend of the two) | 0 | 0 | 100 | 0 | 0 | 0 |
+| split: exactly one answer | 0 | 2 | 0 | 0 | 0 | 0 |
+| split: neither answer | 100 | 97 | 0 | 100 | 100 | 100 |
+| episode x -> Y: new cells | 8 | 8 | 223 | 7.52 | 8 | 7.52 |
+
+other measures, 4 cells per column, M = 400
+| measure | sum, fit-normalised | sum, raw | segments 16 | segments all | segments 16 + cast | segments all + cast |
+|---|---|---|---|---|---|---|
+| fact c -> room: strict | 2 | 100 | 0 | 87 | 64 | 100 |
+| kind: new container -> room | 0 | 20 | 0 | 0 | 0 | 0 |
+| kind: new object -> container | 0 | 5 | 5 | 0 | 0 | 0 |
+| kind: seen object -> container | 0 | 28 | 0 | 15 | 22 | 73 |
+| partial: x at 4 of 8 cells: strict | 0 | 35 | 0 | 0 | 0 | 0 |
+| partial: x at 4 of 8 cells: lenient | 0 | 35 | 1 | 0 | 0 | 0 |
+| partial: cue "x in" only: lenient | 0 | 0 | 0 | 0 | 0 | 0 |
+| split: both answers (blend of the two) | 0 | 0 | 100 | 0 | 0 | 0 |
+| split: exactly one answer | 0 | 8 | 0 | 0 | 0 | 0 |
+| split: neither answer | 100 | 92 | 0 | 100 | 100 | 100 |
+| episode x -> Y: new cells | 8 | 8 | 227 | 7.64 | 8 | 7.63 |
+
+other measures, 8 cells per column, M = 400
+| measure | sum, fit-normalised | sum, raw | segments 16 | segments all | segments 16 + cast | segments all + cast |
+|---|---|---|---|---|---|---|
+| fact c -> room: strict | 4 | 100 | 0 | 93 | 51 | 100 |
+| kind: new container -> room | 0 | 13 | 0 | 0 | 0 | 0 |
+| kind: new object -> container | 0 | 0 | 5 | 0 | 0 | 0 |
+| kind: seen object -> container | 0 | 56 | 1 | 17 | 15 | 77 |
+| partial: x at 4 of 8 cells: strict | 0 | 81 | 0 | 0 | 0 | 0 |
+| partial: x at 4 of 8 cells: lenient | 0 | 81 | 5 | 0 | 0 | 0 |
+| partial: cue "x in" only: lenient | 0 | 0 | 0 | 0 | 0 | 0 |
+| split: both answers (blend of the two) | 0 | 0 | 87 | 0 | 0 | 0 |
+| split: exactly one answer | 0 | 62 | 13 | 0 | 0 | 0 |
+| split: neither answer | 100 | 38 | 0 | 100 | 100 | 100 |
+| episode x -> Y: new cells | 8 | 8 | 210 | 7.68 | 8 | 7.67 |
+
+other measures, 16 cells per column, M = 400
+| measure | sum, fit-normalised | sum, raw | segments 16 | segments all | segments 16 + cast | segments all + cast |
+|---|---|---|---|---|---|---|
+| fact c -> room: strict | 20 | 100 | 0 | 91 | 67 | 96 |
+| kind: new container -> room | 0 | 7 | 0 | 0 | 7 | 0 |
+| kind: new object -> container | 0 | 40 | 25 | 0 | 0 | 0 |
+| kind: seen object -> container | 0 | 92 | 7 | 24 | 14 | 77 |
+| partial: x at 4 of 8 cells: strict | 0 | 86 | 0 | 0 | 0 | 0 |
+| partial: x at 4 of 8 cells: lenient | 0 | 86 | 9 | 0 | 0 | 0 |
+| partial: cue "x in" only: lenient | 0 | 0 | 0 | 0 | 0 | 0 |
+| split: both answers (blend of the two) | 0 | 0 | 80 | 0 | 0 | 0 |
+| split: exactly one answer | 0 | 94 | 18 | 0 | 0 | 0 |
+| split: neither answer | 100 | 6 | 2 | 100 | 100 | 100 |
+| episode x -> Y: new cells | 8 | 8 | 214 | 7.74 | 8 | 7.73 |
+
+cost per probe: segments checked of stored (segments) | link reads (sum)
+| arm | 25 | 50 | 100 | 200 | 400 |
+|---|---|---|---|---|---|
+| sum, fit-normalised, 2 cells | 52437 reads | 57267 reads | 71610 reads | 80516 reads | 85251 reads |
+| sum, fit-normalised, 8 cells | 72877 reads | 84864 reads | 123327 reads | 184032 reads | 262723 reads |
+| sum, raw, 2 cells | 68123 reads | 77582 reads | 96047 reads | 111651 reads | 122229 reads |
+| sum, raw, 8 cells | 84383 reads | 103439 reads | 145052 reads | 228261 reads | 330858 reads |
+| segments 16, 2 cells | 21032 of 24451 | 22966 of 27385 | 29422 of 33553 | 39383 of 44919 | 59330 of 67539 |
+| segments 16, 8 cells | 21994 of 25817 | 23852 of 28760 | 30454 of 35068 | 40786 of 46920 | 61030 of 69991 |
+| segments all, 2 cells | 27461 of 28102 | 30368 of 31274 | 37101 of 37884 | 48517 of 49796 | 71977 of 73688 |
+| segments all, 8 cells | 28156 of 28811 | 30958 of 31877 | 37781 of 38578 | 49279 of 50574 | 73094 of 74825 |
+| segments 16 + cast, 2 cells | 20773 of 24451 | 22710 of 27385 | 29076 of 33553 | 38842 of 44919 | 58464 of 67539 |
+| segments 16 + cast, 8 cells | 21791 of 25817 | 23645 of 28760 | 30160 of 35068 | 40373 of 46920 | 60198 of 69991 |
+| segments all + cast, 2 cells | 27461 of 28102 | 30368 of 31274 | 37101 of 37884 | 48517 of 49796 | 71977 of 73688 |
+| segments all + cast, 8 cells | 28156 of 28811 | 30958 of 31877 | 37781 of 38578 | 49279 of 50574 | 73094 of 74825 |
+
+secondary runs, 8 cells per column, M = 100
+| measure | segments all, THETA 0.75 | THETA 0.6 | THETA 0.7 | THETA 0.8 | segments 16, rare sampling | segments all, bag of words | sum raw, bag of words | sum raw |
+|---|---|---|---|---|---|---|---|---|
+| episode x -> Y: strict | 91 | 90 | 92 | 67 | 48 | 0 | 89 | 86 |
+| episode x -> Y: blend | 0 | 9 | 0 | 0 | 10 | 94 | 5 | 5 |
+| fact c -> room: strict | 91 | 33 | 96 | 60 | 60 | 0 | 100 | 100 |
+| kind: new container -> room | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 20 |
+| kind: new object -> container | 0 | 5 | 0 | 0 | 0 | 0 | 30 | 30 |
+| partial: x at 4 of 8 cells: strict | 0 | 61 | 0 | 0 | 0 | 0 | 74 | 82 |
+| split: both answers (blend of the two) | 0 | 53 | 0 | 0 | 0 | 8 | 0 | 0 |
+| probe: segments checked per probe | 37781 | 37781 | 37781 | 37781 | 6402 | 37773 | – | – |
+| segments stored | 38578 | 38578 | 38578 | 38578 | 37961 | 38570 | – | – |
+
+secondary runs, 8 cells per column, M = 400
+| measure | segments all, THETA 0.75 | THETA 0.6 | THETA 0.7 | THETA 0.8 | segments 16, rare sampling | segments all, bag of words | sum raw, bag of words | sum raw |
+|---|---|---|---|---|---|---|---|---|
+| episode x -> Y: strict | 94 | 91 | 95 | 68 | 40 | 0 | 46 | 86 |
+| episode x -> Y: blend | 2 | 8 | 2 | 1 | 7 | 97 | 15 | 3 |
+| fact c -> room: strict | 93 | 20 | 84 | 82 | 56 | 0 | 100 | 100 |
+| kind: new container -> room | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13 |
+| kind: new object -> container | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| partial: x at 4 of 8 cells: strict | 0 | 64 | 0 | 0 | 0 | 0 | 65 | 81 |
+| split: both answers (blend of the two) | 0 | 62 | 0 | 0 | 0 | 7 | 0 | 0 |
+| probe: segments checked per probe | 73094 | 73094 | 73094 | 73094 | 7482 | 73039 | – | – |
+| segments stored | 74825 | 74825 | 74825 | 74825 | 74268 | 74771 | – | – |

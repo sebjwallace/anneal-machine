@@ -1,0 +1,77 @@
+
+> anneal-machine@0.1.0 test
+> node src/test/see.js && node src/test/cells.js && node src/test/complete.js && node src/test/change.js && node src/test/kinds.js
+
+[engine] seed 4242: total 12.6 s (rest 3.3 s)
+  units 12 (per layer 7 / 3 / 2), loose memory remainders 0, memories 8
+  units never used on 300 fresh scenes: 0; crumbs (1-2 px parts) 1
+  yardstick, 300 fresh scenes: dictionary 45 + explaining 1128 = 1173; heat 0.001
+  recovered as one unit: block L2, plus L1, corner L2, box L1, chevron L1, bar L1, stick L1, diag L1, house L2, flag L3, twins L3
+ENGINE TEST · cells (C21's tests). Learnt by the engine: 7 primitive columns, 5 composites (assemblies = smallest set completion rebuilds from)
+
+A. a house at 40 random places: its assembly identical in 40/40; floor-0 ("where") cells: 28 different sets
+   house assembly (2 cells): ..#../.#.#./#...#@0,-1  ###/#.#/###@0,1
+
+B. two sticks side by side ("#/#/#" at x=4 and x=6): explained by L1[###/#.#/###]
+   floor-0 cells: ###/#.#/###@0,0
+   stick column, floor 0 (+ = centre of attention, ● = active cell):
+      · · · · · · · · · · ·
+      · · · · · · · · · · ·
+      · · · · · · · · · · ·
+      · · · · · ◉ · · · · ·
+      · · · · · · · · · · ·
+      · · · · · · · · · · ·
+      · · · · · · · · · · ·
+
+C. two houses side by side: 2 things recognised, 2 of them the house unit
+   their assemblies: identical yes (same kind of thing)
+   their floor-0 cells: shared 0.00 (where each one is)
+   left house where: ..#../.#.#./#...#@-2,-1  ###/#.#/###@-2,1
+   right house where: ..#../.#.#./#...#@4,-1  ###/#.#/###@4,1
+
+D. overlap between things (1 = all of the smaller one shared):
+          block   corner  house   flag    twins  
+   block    -     0.00    0.00    0.00    0.50   
+   corner 0.00      -     0.00    1.00    0.50   
+   house  0.00    0.00      -     0.00    0.00   
+   flag   0.00    1.00    0.00      -     0.33   
+   twins  0.50    0.50    0.00    0.33      -    
+   never seen, tower [###/#.#/###/###/#.#/###]: held as a new assembly of 2 cells in existing columns; closest known: block (0.00)
+   never seen, arrow [..#../.#.#./#.#.#/..#../..#..]: held as a new assembly of 2 cells in existing columns; closest known: house (0.50)
+
+E. assemblies keep on average 2.0 of 2.6 cells; drawn alone they show 86% of each thing; completed, 100%
+   block 2/2, corner 2/2, house 2/2, flag 2/3, twins 2/4
+
+F. 300 fresh scenes: on average 14.7 pixels → 4.2 "where" cells + 2.3 assembly cells; 519 distinct cells used of 11109
+ENGINE TEST · completion. Learnt by the engine: 7 primitive columns, 5 assemblies. 300 scenes per test.
+
+1a. one known thing, a rectangle hidden over part of it. Share of the thing hidden → picture restored exactly (and hidden pixels filled back):
+    told where   0-25%: 99% (100%)   25-50%: 94% (99%)   50-75%: 67% (72%)   75-100%: 3% (3%)
+    not told     0-25%: 98% (98%)   25-50%: 30% (32%)   50-75%: 0% (0%)   75-100%: 0% (0%)
+1b. 20% of the pixels removed (not told): removed pixels filled back 52%; pixels drawn that were never there: 16 (0.04% of empty pixels); heat (prediction against what is seen) 0.24
+1b. 40% of the pixels removed (not told): removed pixels filled back 24%; pixels drawn that were never there: 46 (0.12% of empty pixels); heat (prediction against what is seen) 0.46
+
+2. keeping 25% of the "where" cells (1.4 of 4.3 per scene): pixels from the cue alone 36% → after settling 37%; things wholly back 26%; pixels drawn that weren't there 3; rounds 0.10 on average (0 scenes needed more than one)
+2. keeping 50% of the "where" cells (2.2 of 4.3 per scene): pixels from the cue alone 53% → after settling 56%; things wholly back 43%; pixels drawn that weren't there 7; rounds 0.29 on average (1 scenes needed more than one)
+2. keeping 75% of the "where" cells (3.2 of 4.3 per scene): pixels from the cue alone 75% → after settling 78%; things wholly back 69%; pixels drawn that weren't there 5; rounds 0.49 on average (0 scenes needed more than one)
+
+example, two houses, one cell from each roof and one from each box (4 cells): found a 2-part thing, a 2-part thing in 1 round(s); picture back 100%, extra pixels 0
+
+example, two houses, one cell from each house (2 cells): found nothing in 0 round(s); picture back 62%, extra pixels 0
+ENGINE TEST · change. Next state right: no cue / with cue. (C23/C24 results on the old code in brackets.)
+
+world                                 changes kept   trained place        new place            moving thing seen as two
+roof slides (branch)                  24             77% / 100% (80/100)  66% / 100% (75/100)  0 of 112
+one stick moving right                10             100% / 100% (100/100)100% / 100% (100/100)0 of 54
+two sticks moving together            7              100% / 100% (100/100)100% / 100% (100/100)0 of 36
+one moving, one staying               10             100% / 100% (100/100)100% / 100% (100/100 (luck))0 of 54
+bouncing, no context                  24             100% / 100% (59/100) 93% / 100% (47/100)  0 of 168
+bouncing, direction as context        24             100% / 100% (100/100)93% / 100% (93/93)   0 of 168
+bouncing, context, trained on 2 rows  46             100% / 100% (100/100)93% / 100% (93/100)  0 of 224
+ENGINE TEST · kinds and one energy (moving world: table moves right, frame down, cart left; never shown: frame+dots, cart+peak)
+
+[seeing only (pictures one by one)] 40 s · things 14 · kinds 2 (3 versions, 3 versions) · different changes 7
+  next picture · seen objects: exact 100%, overlap 100% · never-seen objects: exact 0%, overlap 87%
+[one energy (pictures in sequence)] 62 s · things 11 · kinds 3 (2 versions, 3 versions, 3 versions) · different changes 4
+  next picture · seen objects: exact 90%, overlap 98% · never-seen objects: exact 0%, overlap 87%
+exit 0

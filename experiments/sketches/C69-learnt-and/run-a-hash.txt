@@ -1,0 +1,35 @@
+sketch 36  MODE=hash WORLD=a SEGN=8 THETA=0.75 COLS=1 NEV=3000 seeds 101,102,103,104,105,106,107,108,109,110
+
+by block of 250 events (prequential: predict, then learn)
+acc combination events     0.56  0.84  0.98  0.99  0.99  1.00  1.00  1.00  1.00  1.00  1.00  1.00
+acc one-decides events     0.94  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00
+held-out probe (no learn)  0.21  0.12  0.13  0.06  0.07  0.09  0.08  0.12  0.07  0.11  0.09  0.12
+
+final (learning off), mean over seeds [min..max]
+  ceiling colour                                                0.410   [0.38..0.44]
+  ceiling animal                                                0.416   [0.39..0.43]
+  ceiling object                                                0.393   [0.37..0.42]
+  ceiling state                                                 0.404   [0.37..0.43]
+  ceiling animal+state                                          1.000   [1.00..1.00]
+  final seen                                                    1.000   [1.00..1.00]
+  final held-out                                                0.122   [0.00..0.22]
+  final one-decides                                             1.000   [1.00..1.00]
+  drop colour                                                   0.622   [0.50..0.75]
+  noise colour                                                  0.558   [0.44..0.72]
+  drop animal                                                   0.358   [0.31..0.39]
+  noise animal                                                  0.369   [0.31..0.47]
+  drop object                                                   0.353   [0.28..0.50]
+  noise object                                                  0.333   [0.25..0.42]
+  drop state                                                    0.286   [0.17..0.44]
+  noise state                                                   0.275   [0.17..0.42]
+  extra token                                                   0.378   [0.22..0.47]
+  columns shared: colours                                       3.120   [3.00..3.40]
+  columns shared: animals                                       3.067   [3.00..3.33]
+  columns shared: bowl states                                   3.200   [3.00..4.00]
+  columns shared: colour vs animal                              0.320   [0.00..1.00]
+  cells shared: full vs empty                                   0.000   [0.00..0.00]
+  cost: active units per event                                 49.157   [48.27..50.01]
+  cost: link reads per event                                 1204.209   [1128.93..1301.22]
+  cost: segment synapse checks per event                        0.000   [0.00..0.00]
+  cost: segments alive (mean over events)                       0.000   [0.00..0.00]
+  links at end                                               6530.500   [6193.00..6981.00]

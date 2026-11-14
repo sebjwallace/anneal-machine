@@ -1,0 +1,16 @@
+'use strict';
+const path = require('path');
+globalThis.WORLD_SIZE = 8;
+const { rng } = require(path.join(__dirname, '../../../src/worlds/catalogue.js'));
+const DET = ['the', 'a'], N = ['cat', 'dog', 'fox', 'hen'], V = ['sat', 'ran', 'hid'], P = ['on', 'by'];
+const WORDS = [...DET, ...N, ...V, ...P], LETTERS = [...new Set(WORDS.join(''))].sort().concat([' ']);
+globalThis.WORLD_VALUES = LETTERS.length + 2;
+const E = require('../C56-integrated/engine/see.js');
+const val = (ch) => LETTERS.indexOf(ch) + 2, chr = (v) => LETTERS[v - 2], pick = (r, a) => a[Math.floor(r() * a.length)];
+const r = rng(62); const ws = []; for (let i = 0; i < 400; i++) ws.push(pick(r, DET), pick(r, N), pick(r, V), pick(r, P), pick(r, DET), pick(r, N)); const s = ws.join(' ');
+const m = new E.Model('FL', { atoms: true });
+const str = (u) => m.exp(u).filter((p) => p[1] === 0).sort((a, b) => a[0] - b[0]).map((p) => chr(p[2])).join('');
+for (let t = 1; t <= +(process.env.L || 150); t++) { const at = Math.floor(r() * (s.length - 8)), x = new Uint8Array(64); for (let i = 0; i < 8; i++) x[i] = val(s[at + i]); m.step(x); if (t % 50 === 0) m.rest(); } m.rest();
+const ks = m.units.filter((u) => u.kind);
+console.log('kinds:', ks.length, 'kindsOf:', m.kindsOf ? m.kindsOf().length : '-');
+for (const K of ks) console.log(' ', K.place.map((p) => p.dx + ':' + str(p.u)).join(' '), '| slots', (K.slots || [K.slot]).map((sl) => sl.sx + ':[' + sl.set.fillers.map((f) => str(f.u)).join('/') + ']').join(' '));

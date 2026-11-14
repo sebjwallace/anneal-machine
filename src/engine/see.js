@@ -2,8 +2,10 @@
 // whole description cheapest (structure + flow), everything priced in one currency taken from the world.
 //  PRICES: a loose or wrong pixel costs 1; a stored pixel costs 1; a placement costs 1 plus the cost of naming which unit
 //    (log2 of the number of units, against log2 of the pixels in the world). Nothing hand-set.
-//  AWAKE: a picture is explained by placing units anywhere, as cheaply as can be found (EVERY opening placement is tried
-//    first in turn, the rest filled greedily; the cheapest whole explanation wins). Parts of the picture may be HIDDEN
+//  AWAKE: a picture is explained by placing units anywhere, by competition (C75): the placement that saves most takes its
+//    pixels, every rival recounts on what is left, and a placement is taken only while it saves more than its price. Then
+//    re-settling, only where heat is left: a winner that claimed pixels that aren't there is taken back and the rivals
+//    compete again without it, while winners still leave such heat (at most 6 times, a compute limit); the cheapest wins. Parts of the picture may be HIDDEN
 //    (known to be unknown): a unit's pixels there cost nothing. A picture is remembered (a new part, the whole picture,
 //    placed where it was) only if total energy is lower with it stored than with it left in the flow (C30; this replaced
 //    the owner's 90% threshold from C14).
@@ -21,10 +23,11 @@
 //    joins the total: each thing is paired with the same thing after (nearest first), each distinct change is stored once
 //    and named every time it happens. A kind's instances count as the kind, so one change can cover every version.
 //    Total energy = structure + flow + change.
-//  COMPUTE LIMITS (not rules about the world): at rest, re-explaining the flow for every candidate uses the quick greedy
-//    search (the full search would take hours); awake, the full search is used. The flow is the most recent pictures (a
+//  COMPUTE LIMITS (not rules about the world): at rest, re-explaining the flow for every candidate uses one competition
+//    pass, with no re-settling; awake, re-settling is capped at 6 rounds. The flow is the most recent pictures (a
 //    window, o.window = 100), kept across rests; ideally it would be every picture ever seen.
-// History: experiments C19 (instances), C20 (energy with the flow), C26 (crutches out), C28 (kinds), C29 (one energy).
+// History: experiments C19 (instances), C20 (energy with the flow), C26 (crutches out), C28 (kinds), C29 (one energy),
+// C75 (fitting by competition; the search over opening placements removed).
 // This file is the main line.
 'use strict';
 const SW = (typeof globalThis !== 'undefined' && globalThis.WORLD_SIZE) || 12, SH = SW, SPX = SW * SH;   // C25: a bigger world can be asked for (globalThis.WORLD_SIZE); default 12
@@ -106,10 +109,10 @@ class Model {
   glance() { const pc = this.pc(), structure = this.parts.reduce((a, p) => a + p.pts.length, 0) + this.linkCost(pc); return { E: structure + this.flowSeen, structure, flow: this.flowSeen, pc }; }
   energy() { return Math.round(this.glance().E * 10) / 10; }
 
-  // ---- explain a scene: greedy by net gain (newly explained - wrong), a placement taken only if its gain beats its price.
+  // ---- competition: by net gain (newly explained - wrong), a placement taken only if its gain beats its price.
   // Lazy: a placement's gain can only fall as the scene fills, so its last score bounds it and only the top is re-scored.
-  // quick search: greedy by net gain (lazy). hid: 1 where the picture is unknown (a unit's pixels there cost nothing)
-  greedy(x, pc = this.pc(), first = null, hid = null) { const ban = null;
+  // hid: 1 where the picture is unknown (a unit's pixels there cost nothing). ban: placements taken back by re-settling.
+  greedy(x, pc = this.pc(), hid = null, ban = null) {
     const on = ptsOf(x), cov = new Uint8Array(SPX), cand = [];
     const OW = 2 * SW, tally = this._tally || (this._tally = new Int32Array(OW * 2 * SH)), touched = [];   // offsets -SW..SW-1 x -SH..SH-1
     for (const [u, extra] of this.explainers()) { const pts = this.exp(u), L = pts.length; if (!hid && 2 * Math.min(L, on.length) - L - extra <= pc) continue;   // (a unit too big to pay can't, unless some of the picture is hidden)
@@ -119,8 +122,6 @@ class Model {
     const better = (a, b) => a.s > b.s || (a.s === b.s && a.len > b.len);
     cand.sort((a, b) => (better(a, b) ? -1 : better(b, a) ? 1 : 0));
     const claims = []; let misses = 0, extras = 0;
-    if (first) { const i = cand.findIndex((c) => c.u === first.u && c.dx === first.dx && c.dy === first.dy); if (i >= 0) { const c = cand.splice(i, 1)[0];   // this placement is taken first
-      claims.push({ c: c.u, dx: c.dx, dy: c.dy }); misses += c.w; extras += c.extra; for (const [ux, uy] of this.exp(c.u)) { const x2 = ux + c.dx, y2 = uy + c.dy; if (x2 >= 0 && y2 >= 0 && x2 < SW && y2 < SH && x[y2 * SW + x2]) cov[y2 * SW + x2] = 1; } } }
     while (cand.length) { const c = cand.shift(); let g = 0;
       for (const [ux, uy] of this.exp(c.u)) { const x2 = ux + c.dx, y2 = uy + c.dy; if (x2 >= 0 && y2 >= 0 && x2 < SW && y2 < SH) { const i = y2 * SW + x2; if (x[i] && !cov[i]) g++; } }
       c.s = g - c.w - c.extra; if (c.s <= pc) continue;
@@ -133,9 +134,14 @@ class Model {
     for (const [a, b] of on) if (!cov[b * SW + a]) left.push(b * SW + a);
     return { claims, left, misses, recon, ownerPx, missPx, on: on.length, cost: pc * claims.length + extras + left.length + misses };
   }
-  // THE explanation: every opening placement tried first in turn; the cheapest whole explanation wins
-  explain(x, hid = null) { const pc = this.pc(); let best = this.greedy(x, pc, null, hid);
-    for (const o of this.openings(x, pc, hid)) { const r = this.greedy(x, pc, o, hid); if (r.cost < best.cost - 1e-9) best = r; } return best; }
+  // THE explanation (fitting): one competition, then re-settling only where heat is left. A winner that claimed pixels that
+  // aren't there is taken back and the rivals compete again without it; repeated while winners still leave such heat (at
+  // most 6 times), keeping the cheapest. Pixels with no heat are never re-contested (C75).
+  explain(x, hid = null) { const pc = this.pc(); let best = this.greedy(x, pc, hid), cur = best; const ban = new Set();
+    for (let round = 0; round < 6; round++) { const hot = cur.claims.filter((c, k) => cur.missPx.some((v) => v === k)); if (!hot.length) break;
+      for (const c of hot) ban.add(c.c.id + '@' + c.dx + ',' + c.dy);
+      cur = this.greedy(x, pc, hid, ban); if (cur.cost < best.cost - 1e-9) best = cur; }
+    return best; }
   step(x, prev = null) {
     if (prev) { this.tbuf.push([prev, x]); if (this.tbuf.length > this.o.window) this.tbuf.shift(); }   // a change: the picture before, and this one
     this.t++; const r = this.explain(x), hs = r.on ? (r.left.length + r.misses) / r.on : 0; let born = null;
@@ -153,10 +159,6 @@ class Model {
     const pl = this.part(ptsOf(x)); this.items.push({ id: -1, place: [pl] }); const E1 = this.measure().E; this.items.pop();
     if (this.units.length > n0) { this.units.pop(); this.nid = nid0; } if (wasLoose) was.loose = true;
     return E1 < E0 - 1e-9; }
-  openings(x, pc, hid = null) { const on = ptsOf(x), out = [];
-    for (const [u, extra] of this.explainers()) { const pts = this.exp(u), L = pts.length, t = new Map(); for (const [ux, uy] of pts) for (const [a, b] of on) { const k = P2(a - ux, b - uy); t.set(k, (t.get(k) || 0) + 1); }
-      for (const [k, n] of t) { let sc = 2 * n - L - extra; if (hid) { const dx0 = Math.floor((k + 500) / 1000), dy0 = k - dx0 * 1000; for (const [ux, uy] of pts) { const a = ux + dx0, b = uy + dy0; if (a >= 0 && b >= 0 && a < SW && b < SH && hid[b * SW + a]) sc++; } } if (sc > pc) { const dx = Math.floor((k + 500) / 1000); out.push({ u, dx, dy: k - dx * 1000, sc }); } } }
-    return out.sort((a, b) => b.sc - a.sc); }
   read(x, hid = null) { return { ...this.explain(x, hid), cells: [] }; }
 
   // ---- REST. Candidate moves are proposed cheaply (from the placement lists), then each is MEASURED: applied, the flow

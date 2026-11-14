@@ -1,0 +1,44 @@
+sketch 38  MODE=sum NORM=raw ETA=0.2  columns 400 x 2 cells = 800  K=8 ROUNDS=5  seeds 101,102,103,104,105  (29 s)
+M (episode objects)                                              25       50      100      200
+stored assemblies (distinct sentences)                          539      614      764     1064
+train: cells active per event                                 38.64    38.71    38.81    38.90
+train: work per event (link updates | gate synapse checks)     8727     8758     8773     8741
+links stored                                                 867586  1021821  1291213  1653609
+assembly cells shared by >1 word                                57%      62%      75%      92%
+episode x -> Y: lenient                                         25%      28%      23%       5%
+episode x -> Y: strict                                          25%      27%      23%       5%
+episode x -> Y: blend                                           22%      26%      27%      51%
+episode x -> Y: no answer                                       51%      47%      46%      53%
+episode x -> Y: new cells                                      8.00     8.00     8.00     8.00
+fact c -> room: lenient                                        100%      93%     100%     100%
+fact c -> room: strict                                         100%      93%     100%      98%
+fact c -> room: blend                                            0%       4%       0%       2%
+fact c -> room: no answer                                        0%       2%       0%       0%
+fact c -> room: new cells                                      8.00     8.00     8.00     8.00
+kind: new container -> room                                     47%      20%      27%      13%
+kind: new container -> blend                                    33%      53%      40%      47%
+kind: new object -> container                                    5%      10%      10%      15%
+kind: seen object -> container                                  26%      31%      31%      29%
+partial: x at 4 of 8 cells: lenient                             18%      24%      20%       6%
+partial: x at 4 of 8 cells: strict                              18%      23%      20%       6%
+partial: x at 4 of 8 cells: blend                               27%      29%      28%      34%
+partial: x at 4 of 8 cells: no answer                           46%      47%      45%      57%
+partial: x at 4 of 8 cells: new cells                          8.00     8.00     8.00     8.00
+partial: cue "x in" only: lenient                                0%       0%       0%       0%
+partial: cue "x in" only: strict                                 0%       0%       0%       0%
+partial: cue "x in" only: blend                                100%     100%     100%     100%
+partial: cue "x in" only: no answer                              0%       0%       0%       0%
+partial: cue "x in" only: new cells                            8.00     8.00     8.00     8.00
+split: both answers (blend of the two)                           0%       2%       1%       2%
+split: exactly one answer                                       18%      25%      24%      12%
+split: neither answer                                           82%      74%      74%      86%
+split: no word at all                                           60%      56%      44%      52%
+split: new cells                                               8.00     8.00     8.00     8.00
+probe: work per probe (link reads | segment index hits)       68123    77582    96047   111651
+probe: rounds                                                  3.88     4.11     3.94     3.91
+capacity (this run's M values): largest M before strict episode recall falls below 75%: < 25
+capacity (this run's M values): largest M before strict episode recall falls below 50%: < 25
+  per seed, M=25, strict episode recall: 28 40 20 24 12
+  per seed, M=50, strict episode recall: 16 38 30 24 26
+  per seed, M=100, strict episode recall: 14 30 43 20 6
+  per seed, M=200, strict episode recall: 0 12 10 3 0

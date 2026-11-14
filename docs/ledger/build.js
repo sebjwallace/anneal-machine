@@ -4,7 +4,7 @@
 const fs = require('fs'), path = require('path');
 const { LEDGER } = require('./records.js');
 const root = path.join(__dirname, '../..');
-const ERAS = { 1: 'The first models: growing, averaging, layers', 2: 'Compare, don\'t average; one currency; cells', 3: 'Kinds, one energy, limits', 4: 'Joining, checking, regions (the branch)', 5: 'Theories and heat' };
+const ERAS = { 1: 'The first models: growing, averaging, layers', 2: 'Compare, don\'t average; one currency; cells', 3: 'Kinds, one energy, limits', 4: 'Joining, checking, regions (the branch)', 5: 'Theories and heat', 6: 'Text worlds' };
 const KIND = { PRB: 'Problem', QST: 'Question', HYP: 'Hypothesis', INC: 'Incident', THY: 'Theory', PRO: 'Promotion', SOL: 'Solution', OUT: 'Outcome', CLM: 'Claim', DEC: 'Decision', PAT: 'Pattern', APT: 'Anti-pattern', TRD: 'Trade-off' };
 const kindOf = (code) => KIND[code.split('-')[0]];
 // experiment folders, so every C-code links to its folder

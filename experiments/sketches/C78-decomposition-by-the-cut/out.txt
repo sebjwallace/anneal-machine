@@ -1,0 +1,41 @@
+C78 · decomposition by the cut   100 columns, parts of 6 columns   seeds 101,102,103,104,105
+
+cut=top   16 cells per column
+  M=10   cut right: wall 100% roof 100% new roof 100%  made 100%  links 114 (whole: 264)
+      read=plain  from house roof: house 100% clean 0% shed roof too 100%   from shed roof: shed 100% clean 0% house roof too 100%   from wall: both 100% one 0% none 0%
+      read=whole  from house roof: house 100% clean 94% shed roof too 0%   from shed roof: shed 100% clean 96% house roof too 0%   from wall: both 100% one 0% none 0%
+  M=50   cut right: wall 100% roof 100% new roof 100%  made 100%  links 114 (whole: 264)
+      read=plain  from house roof: house 100% clean 0% shed roof too 100%   from shed roof: shed 100% clean 0% house roof too 100%   from wall: both 100% one 0% none 0%
+      read=whole  from house roof: house 100% clean 88% shed roof too 0%   from shed roof: shed 100% clean 89% house roof too 0%   from wall: both 100% one 0% none 0%
+  M=200  cut right: wall 100% roof 100% new roof 100%  made 100%  links 114 (whole: 264)
+      read=plain  from house roof: house 100% clean 0% shed roof too 100%   from shed roof: shed 100% clean 0% house roof too 100%   from wall: both 100% one 0% none 0%
+      read=whole  from house roof: house 100% clean 63% shed roof too 4%   from shed roof: shed 100% clean 63% house roof too 3%   from wall: both 100% one 0% none 0%
+
+cut=top   64 cells per column
+  M=10   cut right: wall 100% roof 100% new roof 100%  made 100%  links 114 (whole: 264)
+      read=plain  from house roof: house 100% clean 0% shed roof too 100%   from shed roof: shed 100% clean 0% house roof too 100%   from wall: both 100% one 0% none 0%
+      read=whole  from house roof: house 100% clean 100% shed roof too 0%   from shed roof: shed 100% clean 100% house roof too 0%   from wall: both 100% one 0% none 0%
+  M=50   cut right: wall 100% roof 100% new roof 100%  made 100%  links 114 (whole: 264)
+      read=plain  from house roof: house 100% clean 0% shed roof too 100%   from shed roof: shed 100% clean 0% house roof too 100%   from wall: both 100% one 0% none 0%
+      read=whole  from house roof: house 100% clean 99% shed roof too 0%   from shed roof: shed 100% clean 99% house roof too 0%   from wall: both 100% one 0% none 0%
+  M=200  cut right: wall 100% roof 100% new roof 100%  made 100%  links 114 (whole: 264)
+      read=plain  from house roof: house 100% clean 0% shed roof too 100%   from shed roof: shed 100% clean 0% house roof too 100%   from wall: both 100% one 0% none 0%
+      read=whole  from house roof: house 100% clean 96% shed roof too 0%   from shed roof: shed 100% clean 97% house roof too 0%   from wall: both 100% one 0% none 0%
+
+C78 · decomposition by the cut   100 columns, parts of 6 columns   seeds 101,102,103,104,105
+
+cut=all   64 cells per column
+  M=10   cut right: wall 38% roof 12% new roof 38%  made 100%  links 2658 (whole: 264)
+      read=plain  from house roof: house 100% clean 0% shed roof too 92%   from shed roof: shed 92% clean 0% house roof too 92%   from wall: both 92% one 8% none 0%
+      read=whole  from house roof: house 98% clean 0% shed roof too 38%   from shed roof: shed 92% clean 4% house roof too 84%   from wall: both 90% one 10% none 0%
+  M=50   cut right: wall 9% roof 4% new roof 9%  made 100%  links 104542 (whole: 264)
+      read=plain  from house roof: house 100% clean 0% shed roof too 24%   from shed roof: shed 23% clean 0% house roof too 23%   from wall: both 89% one 11% none 0%
+      read=whole  from house roof: house 100% clean 0% shed roof too 24%   from shed roof: shed 23% clean 0% house roof too 23%   from wall: both 89% one 11% none 0%
+
+C78 · decomposition by the cut   100 columns, parts of 6 columns   seeds 101,102,103,104,105
+
+cut=all   16 cells per column
+  M=10   cut right: wall 42% roof 26% new roof 42%  made 100%  links 2623 (whole: 264)
+      read=plain  from house roof: house 100% clean 0% shed roof too 90%   from shed roof: shed 90% clean 0% house roof too 90%   from wall: both 94% one 6% none 0%
+      read=whole  from house roof: house 96% clean 2% shed roof too 52%   from shed roof: shed 90% clean 2% house roof too 84%   from wall: both 92% one 8% none 0%
+

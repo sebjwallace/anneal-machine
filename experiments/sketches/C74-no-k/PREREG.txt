@@ -1,0 +1,24 @@
+C74 · Answers without K. Written 14 November 2026, after smoke runs on development seed 1 only (CPC=8, M=100, both arms),
+before any run on test seeds 101-105.
+
+C73's sketch (C71's world, storage, probes and scoring, with Anneal's reading) with the cap of K = 8 columns removed:
+  ANNEAL=3  As C73's ANNEAL=1 (fire at >= 2 active synapses; in each column the sole best-supported cell wins, a tie
+            refuses the column), but instead of the K strongest columns, the answer is the column winners at the TOP
+            level of support: one shared level of inhibition. Every cell of one stored memory has that memory's
+            synapses, so the best-matching memory's cells share the top level. No K, no chosen number.
+  ANNEAL=4  Within half of the top level (the other agent's rule, its sketch 31b). 1/2 is a chosen number: a comparison.
+
+Seen on dev seed 1 (CPC 8, M 100). ANNEAL=3: episode strict 69, blend 2, new cells per episode probe 7.5; partial
+(4 of 8) strict 70; split both 0 / one 70 / neither 30; fact strict 100; new container 67; seen object 60.
+ANNEAL=4: blend 100% everywhere, about 355 new cells.
+
+Runs: ANNEAL=3 at CPC = 2, 4, 8, 16, M = 25-400, seeds 101-105. ANNEAL=4 at CPC 8, M = 100 and 400 (a control).
+
+Predictions (ANNEAL=3 unless said; M = 400):
+  P1  Answers size themselves: new cells per episode probe between 6 and 10 at every CPC (an assembly is 8 cells).
+  P2  Episode strict >= 60% at CPC 8 and 16 (below C73's 95 and 93 with K: an expected cost).
+  P3  Partial (4 of 8) strict >= 50% at CPC 8 and 16 (C73 with K: 31, 28; summed links 81, 86).
+  P4  Split, both answers <= 5% at every CPC.
+  P5  New container -> room >= 40% at CPC 8 (C73: 33; C71 segments: 0).
+  P6  ANNEAL=4 episode blend >= 90% at CPC 8.
+Nothing will be changed after looking at test seeds.

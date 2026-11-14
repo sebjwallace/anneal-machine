@@ -1,0 +1,54 @@
+sketch 39  MODE=word STOP=0 WORLD=b SEGN=8 THETA=0.75 NEV=9000 switch at 4500 seeds 101,102,103,104,105,106,107,108,109,110
+
+by block of 750 events (prequential: predict, then learn); the switch is after block 6
+acc rule events                0.54  0.66  0.72  0.74  0.76  0.79  0.80  0.81  0.82  0.82  0.81  0.83
+acc one-decides                0.96  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00
+acc ind exceptions             0.29  0.36  0.40  0.37  0.39  0.35  0.39  0.36  0.40  0.43  0.32  0.38
+acc ctx exceptions             0.47  0.72  0.81  0.84  0.89  0.87  0.91  0.91  0.91  0.87  0.94  0.95
+acc "end" (exc., then rule)    0.30  0.55  0.39  0.38  0.34  0.59  0.63  0.84  0.81  0.83  0.83  0.88
+acc "late" (rule, then exc.)   0.62  0.76  0.87  0.91  0.84  0.82  0.26  0.35  0.33  0.41  0.36  0.31
+held-out probe (no learn)      0.47  0.40  0.59  0.53  0.53  0.51  0.63  0.62  0.58  0.59  0.61  0.71
+excitatory alive                127   125   121   120   124   122   122   119   121   122   120   120
+inhibitory alive               5205  5373  5380  5455  5521  5569  5536  5528  5536  5548  5529  5555
+excitatory grown in block       784   493   412   392   368   325   336   305   313   306   332   296
+inhibitory grown in block     24439 11719  9626  8925  8144  7361  7185  7044  6838  6747  7291  6352
+
+final (learning off), mean over seeds [min..max]
+  last quarter (prequential): rule                                      0.819   [0.79..0.87]
+  last quarter (prequential): one                                       0.999   [1.00..1.00]
+  last quarter (prequential): ind                                       0.366   [0.19..0.52]
+  last quarter (prequential): ctx                                       0.917   [0.79..0.98]
+  last quarter (prequential): end                                       0.843   [0.68..0.94]
+  last quarter (prequential): late                                      0.356   [0.19..0.54]
+  end: occurrences after the switch until right (99 = never)            2.300   [1.00..4.00]
+  late: occurrences after the switch until right (99 = never)           5.300   [2.00..12.00]
+  exceptions: individual (ind)                                          0.300   [0.00..1.00]
+  exceptions: colour x context, every animal (ctx)                      0.933   [0.67..1.00]
+  exceptions: late, began at the switch                                 0.500   [0.00..1.00]
+  ended exception now follows the rule                                  1.000   [1.00..1.00]
+  ctx exception on its never-seen animal -> exception outcome           0.600   [0.00..1.00]
+  rule: seen non-exception combinations                                 0.827   [0.60..0.93]
+  rule: one input decides                                               1.000   [1.00..1.00]
+  rule: held-out combinations                                           0.708   [0.42..0.92]
+  collateral: neighbours sharing colour+animal                          0.856   [0.50..1.00]
+  collateral: neighbours sharing colour+context                         0.856   [0.50..1.00]
+  collateral: neighbours sharing animal+context                         0.731   [0.56..0.89]
+  collateral: far from every exception                                  0.891   [0.73..1.00]
+  ind/late exception, colour dropped -> kind rule                       0.733   [0.33..1.00]
+  ctx exception, animal dropped -> exception outcome                    1.000   [1.00..1.00]
+  ctx exception, colour dropped -> kind rule                            0.433   [0.00..0.67]
+  rule: seen, colour dropped                                            0.818   [0.67..0.93]
+  excitatory segments alive at end                                    120.400   [114.00..129.00]
+  inhibitory alive at end (segments, sub-segments or word links)     5554.800   [5132.00..6322.00]
+  excitatory grown total                                             4661.700   [3953.00..5773.00]
+  inhibitory grown total                                             111668.800   [97599.00..132337.00]
+  inhibitory grown on ind events                                     6310.700   [4420.00..8942.00]
+  inhibitory grown on ctx events                                     2778.500   [1832.00..3951.00]
+  inhibitory grown on end events                                     2014.400   [1322.00..3106.00]
+  inhibitory grown on late events                                    2222.500   [1385.00..2974.00]
+  inhibitory grown on rule events                                    95787.700   [81992.00..116070.00]
+  inhibitory grown on one events                                     2555.000   [1871.00..3470.00]
+  cost: active units per event                                         41.301   [40.77..41.83]
+  cost: link reads per event                                         1387.948   [1280.38..1513.22]
+  cost: inhibitory word-link reads per event                         1395.508   [1266.79..1536.27]
+  cost: segment synapse checks per event                              973.653   [905.76..1023.47]

@@ -1,0 +1,22 @@
+C76 · Composition by binding a sample. Written 14 November 2026 after a smoke run on development seed 1, before any run
+on test seeds 101-105. Settings as in run.js: 100 columns; 4 or 16 cells per column; parts of 4 cells on random cells
+of random columns; compositions of 3 parts; M = 10, 50, 200, 500 compositions stored; a segment fires at 2 active links;
+recall from one whole part, up to 6 rounds; 60 recalls per (seed, M) (or M if fewer).
+
+Bindings: K = 1, 2, 3 sampled cells per part (the first K of each part's cells), or all (every cell of the composition
+over all the others). Competition: none, or within each column (most support wins, a tie refuses the column).
+
+Seen on dev seed 1: K=1 never completed; K=2 completed 100% everywhere with no competition, cleanest of the bindings,
+30 links per composition against 132 for all; with 4 cells per column everything blended as M grew (the cells fill up);
+with 16 cells per column clean recall fell from 100% (M=10) to 45% (M=500) for K=2; competition within columns did not
+raise clean recall and lowered full recall.
+
+Predictions (compete = none unless said):
+  P1  K=1: full recall <= 5% at 16 cells per column, every M.
+  P2  K=2: full recall >= 95% at 16 cells per column, every M.
+  P3  K=2 is at least as clean as K=all at every (cells per column, M) where either is above 0%.
+  P4  K=2 uses 30 binding links per composition, against 132 for all (fixed by design).
+  P5  At 16 cells per column, K=2 clean recall falls below 60% by M=500: intrusions grow with load.
+  P6  Competition within columns raises K=2 clean recall by no more than 5 points at 16 cells per column.
+  P7  K=2 does at most half the segment checks of K=all at 16 cells per column, M=500.
+Nothing will be changed after looking at test seeds.

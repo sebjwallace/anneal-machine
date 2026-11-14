@@ -1,0 +1,44 @@
+sketch 38  MODE=sum NORM=raw ETA=0.2  columns 400 x 16 cells = 6400  K=8 ROUNDS=5  seeds 101,102,103,104,105  (38 s)
+M (episode objects)                                              25       50      100      200
+stored assemblies (distinct sentences)                          539      614      764     1064
+train: cells active per event                                 39.15    39.22    39.32    39.45
+train: work per event (link updates | gate synapse checks)     8863     8851     8877     8895
+links stored                                                1287654  1507862  1952560  2784257
+assembly cells shared by >1 word                                 1%       3%       5%       8%
+episode x -> Y: lenient                                         88%      90%      96%      97%
+episode x -> Y: strict                                          88%      90%      96%      97%
+episode x -> Y: blend                                           12%      10%       4%       3%
+episode x -> Y: no answer                                        9%       5%       2%       1%
+episode x -> Y: new cells                                      8.00     8.00     8.00     8.00
+fact c -> room: lenient                                        100%     100%     100%     100%
+fact c -> room: strict                                         100%     100%     100%     100%
+fact c -> room: blend                                            0%       0%       0%       0%
+fact c -> room: no answer                                        0%       0%       0%       0%
+fact c -> room: new cells                                      8.00     8.00     8.00     8.00
+kind: new container -> room                                     53%      53%      27%       7%
+kind: new container -> blend                                    27%       7%      13%      13%
+kind: new object -> container                                   50%      45%      60%      30%
+kind: seen object -> container                                  88%      88%      86%      92%
+partial: x at 4 of 8 cells: lenient                             88%      89%      92%      94%
+partial: x at 4 of 8 cells: strict                              88%      89%      92%      94%
+partial: x at 4 of 8 cells: blend                               12%      11%       8%       6%
+partial: x at 4 of 8 cells: no answer                            8%       6%       2%       1%
+partial: x at 4 of 8 cells: new cells                          8.00     8.00     8.00     8.00
+partial: cue "x in" only: lenient                                0%       0%       0%       0%
+partial: cue "x in" only: strict                                 0%       0%       0%       0%
+partial: cue "x in" only: blend                                100%     100%     100%     100%
+partial: cue "x in" only: no answer                              0%       0%       0%       0%
+partial: cue "x in" only: new cells                            8.00     8.00     8.00     8.00
+split: both answers (blend of the two)                           7%       8%       2%       1%
+split: exactly one answer                                       89%      88%      93%      93%
+split: neither answer                                            4%       4%       5%       6%
+split: no word at all                                           12%      12%       3%       3%
+split: new cells                                               8.00     8.00     8.00     8.00
+probe: work per probe (link reads | segment index hits)       92041   110829   153593   236715
+probe: rounds                                                  2.50     2.54     2.34     2.53
+capacity (this run's M values): largest M before strict episode recall falls below 75%: 200
+capacity (this run's M values): largest M before strict episode recall falls below 50%: 200
+  per seed, M=25, strict episode recall: 96 96 88 80 80
+  per seed, M=50, strict episode recall: 98 86 90 90 88
+  per seed, M=100, strict episode recall: 95 97 98 95 96
+  per seed, M=200, strict episode recall: 97 100 98 94 97

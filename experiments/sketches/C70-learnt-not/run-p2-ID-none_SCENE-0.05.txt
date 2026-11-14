@@ -1,0 +1,43 @@
+parts 2/3 entities  ID=none CHG=false SCENE=0.05 BETA=0 seeds=41,42,43,44,45,46,47,48,49,50 events/seed=2000
+changed entity -> new value                                              0.767 (n=16984)
+end: automaton entities (true 9)                                         17.000 (n=10)
+end: true entity held by exactly one automaton entity                    0.378 (n=90)
+get (whole stream): correct                                              0.756 (n=162448)
+get (whole stream): none                                                 0.034 (n=162448)
+get (whole stream): other entity's                                       0.000 (n=162448)
+get (whole stream): other                                                0.000 (n=162448)
+get (whole stream): stale                                                0.211 (n=162448)
+ginger later sets: right update                                          0.881 (n=337)
+learnt inhibition from token onto entities holding it   : activity       0.000 (n=170)
+learnt inhibition from token onto entities holding it   : animal         0.000 (n=170)
+learnt inhibition from token onto entities holding it   : colour         0.000 (n=170)
+learnt inhibition from token onto entities not holding it: activity      0.000 (n=850)
+learnt inhibition from token onto entities not holding it: animal        0.000 (n=340)
+learnt inhibition from token onto entities not holding it: colour        0.000 (n=680)
+other entities unchanged                                                 0.990 (n=141101)
+owned cells at end                                                       288.300 (n=10)
+scene seg: right new                                                     0.010 (n=2374)
+scene seg: right update                                                  0.874 (n=2374)
+scene seg: spurious new                                                  0.003 (n=2374)
+scene seg: wrong merge                                                   0.113 (n=2374)
+scene: contradictions (per scene)                                        0.014 (n=1027)
+scene: splits -> new entity (per scene)                                  0.008 (n=1027)
+scripted END  : 2nd cat ("ginger cat sleeping") created as new           0.000 (n=10)
+scripted START: 2nd cat ("black cat sleeping") created as new            0.000 (n=10)
+single: an entity holding the right name was blocked by inhibition       0.000 (n=18524)
+single: right new                                                        0.007 (n=18973)
+single: right update                                                     0.881 (n=18973)
+single: spurious new                                                     0.000 (n=18973)
+single: wrong merge                                                      0.112 (n=18973)
+single-snapshot wrong entity             0.135 0.114 0.086 0.091 0.108 0.116 0.133 0.112
+cost active                              18.2 18.1 18.2 18.2
+cost changed                             22.3 21.8 21.8 21.7
+cost recruited                           4.6 4.0 3.9 3.9
+cost inhibitory links changed            0.0 0.0 0.0 0.0
+get correct                              0.812 0.791 0.781 0.757 0.733 0.728 0.714 0.734
+get stale                                0.121 0.169 0.195 0.213 0.242 0.248 0.250 0.242
+get other entity's                       0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+get other                                0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+get none                                 0.066 0.040 0.024 0.031 0.025 0.024 0.035 0.024
+inhibitory links (count, at 500/1000/..) 0.0 0.0 0.0 0.0
+inhibitory weight (total)                0.0 0.0 0.0 0.0

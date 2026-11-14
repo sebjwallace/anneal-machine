@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The visual language: assembly, composition, decomposition</title>
+<style>
+:root{--bg:#fff;--text:#1f1e1d;--muted:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border3:rgba(0,0,0,.55);--cell:#f5f4f0;
+--teal-f:#E1F5EE;--teal-s:#0F6E56;--purple-f:#EEEDFE;--purple-s:#534AB7;--coral-f:#FAECE7;--coral-s:#993C1D}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1e1d;--text:#ecebe6;--muted:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border3:rgba(255,255,255,.6);--cell:#2a2a28;
+--teal-f:#085041;--teal-s:#5DCAA5;--purple-f:#3C3489;--purple-s:#AFA9EC;--coral-f:#712B13;--coral-s:#F0997B}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--muted);font-size:14px;margin:0 0 1rem}
+svg .ts{fill:var(--muted);font-size:12px}
+.c-teal{fill:var(--teal-f);stroke:var(--teal-s)}
+.c-purple{fill:var(--purple-f);stroke:var(--purple-s)}
+.c-coral{fill:var(--coral-f);stroke:var(--coral-s)}
+.mv{transition:transform .9s ease}
+.cap{font-size:15px;line-height:1.6;min-height:3.4em;margin:.75rem 0 .75rem}
+.ctl{display:flex;align-items:center;gap:8px;margin:.5rem 0 0}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{background:var(--cell)}
+button.on{background:var(--cell);border-color:var(--border3)}
+#pos{font-size:13px;color:var(--muted);margin-left:8px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--muted);border-top:.5px solid var(--border);padding-top:10px}
+.legend svg{vertical-align:middle}
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+section.story code{font-size:13px}
+blockquote{margin:.6rem 0;padding-left:12px;border-left:2px solid var(--border2);color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<h1>The visual language: assembly, composition, decomposition</h1>
+<p class="sub">How we draw cells, assemblies and assemblies of assemblies, so every later visual can build on the same look. Drawn by hand to show the ideas; not a run of the engine.</p>
+<div class="ctl" style="margin:0 0 12px">
+<button id="b0" onclick="go(0)">Assembly</button>
+<button id="b1" onclick="go(1)">Composition</button>
+<button id="b2" onclick="go(2)">Decomposition</button>
+</div>
+<svg id="sv" width="100%" viewBox="0 0 680 250" role="img" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="ctl">
+<button onclick="step(-1)">&larr; Back</button>
+<button onclick="step(1)">Next &rarr;</button>
+<span id="pos"></span>
+</div>
+<p id="cap" class="cap"></p>
+<div class="legend">
+<span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="#B4B2A9" opacity=".45"/></svg> quiet cell</span>
+<span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="#1D9E75"/></svg> active cell</span>
+<span><svg width="22" height="14"><rect x="1" y="1" width="20" height="12" rx="4" fill="none" stroke="#1D9E75" stroke-width="1"/></svg> assembly</span>
+<span><svg width="26" height="16"><rect x="1" y="1" width="24" height="14" rx="5" fill="none" stroke="#7F77DD" stroke-width="1"/><rect x="6" y="4" width="14" height="8" rx="3" fill="none" stroke="#1D9E75" stroke-width="1"/></svg> super-assembly</span>
+<span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="#EF9F27"/></svg> shared piece</span>
+</div>
+
+<section class="story">
+<h2>How to walk through it</h2>
+<p><b>Assembly.</b> Press <b>Assembly</b>, then <b>Next</b> twice. First, every grey dot is a quiet cell. Then some of them light up together. Last, an outline appears around the lit cells. That outline is how an assembly is drawn from now on: the same set of cells means the same thing wherever it shows up.</p>
+<p><b>Composition.</b> Press <b>Composition</b>. Step 1 shows two separate assemblies, a roof and a wall, each with its own outline. Press <b>Next</b> and watch them slide into an arrangement, the roof above the wall. Press it once more and a purple outline wraps around both. That's the super-assembly, an outline around outlines. The inner outlines stay, because the parts are still assemblies in their own right.</p>
+<p><b>Decomposition.</b> Press <b>Decomposition</b>. Step 1 shows a house and a shed, each stored whole: one outline and one colour each. On step 2, look for the amber cells. Comparing the two finds what they share: the same cells in the same arrangement. On step 3 the shared piece appears in the middle as an assembly of its own, the wall, which is an abstraction. Each original now has two outlines inside it: the wall, plus what was left over.</p>
+
+<h2>What it shows</h2>
+<blockquote><i>The brain does much more than just recollect. It intercompares, it synthesizes, it analyzes, it generates abstractions.</i> Carl Sagan, <i>Cosmos</i> (1980)</blockquote>
+<p>The owner's four words map onto the engine. <b>Intercomparing</b> is the core act: two assemblies side by side give what they share and what differs. <b>Synthesis</b> is composition: assemblies arranged into a larger one. <b>Analysis</b> is decomposition: an assembly taken apart into sub-assemblies. <b>Abstraction</b> is the shared part that comparing finds. The wall is in both the house and the shed, and particular to neither. Decomposition and abstraction come out of the same comparison: the shared piece is the abstraction, and splitting each original into that piece plus the rest is the decomposition.</p>
+<p>The shared wall is the lowest rung of abstraction: literally the same cells. Higher rungs are frames, which share constants ("animal eats animal"), and types, which share surroundings rather than cells (sun, sea and fire in C66).</p>
+
+<h2>What's simplified</h2>
+<p>The outlines are a drawing convention. In the engine, an assembly is a set of cells across columns, and nothing draws a boundary around it. Composition and decomposition at rest are kept only if they lower energy. Here the house and shed are taken apart because describing both through one wall is cheaper than storing each whole; the visual doesn't show those prices. Awake, a composition is temporary: it explains an input for now and is not stored. That is fitting, which comes next in this language.</p>
+
+<h2>Where it comes from</h2>
+<p>The glossary terms assembly, super-assembly, composition, decomposition, comparing and abstraction. In the code, decomposition is the rest move that pulls two parts apart where they overlap; lasting composition is the compose move (both in <code>src/engine/see.js</code>). Comparing is CTR-1 CAP-1.</p>
+</section>
+</main>
+<script>
+const U=18,R=6,Q='#B4B2A9',TEAL='#1D9E75',CORAL='#D85A30',PURP='#7F77DD',AMB='#EF9F27';
+const roof=[[2,0],[1,1],[2,1],[3,1],[0,2],[1,2],[2,2],[3,2],[4,2]];
+const wall=[];for(let y=0;y<3;y++)for(let x=0;x<5;x++)if(!(y==1&&(x==1||x==3)))wall.push([x,y]);
+const flat=[[0,0],[1,0],[2,0],[3,0],[4,0]];
+const sh=(c,dx,dy)=>c.map(([x,y])=>[x+dx,y+dy]);
+function dots(c,ox,oy,col,u=U){return c.map(([x,y])=>`<circle cx="${ox+x*u}" cy="${oy+y*u}" r="${R}" fill="${col}"/>`).join('')}
+function box(c,ox,oy,pad,cls,u=U){const xs=c.map(p=>p[0]),ys=c.map(p=>p[1]);const x0=ox+Math.min(...xs)*u-pad,y0=oy+Math.min(...ys)*u-pad,x1=ox+Math.max(...xs)*u+pad,y1=oy+Math.max(...ys)*u+pad;return{x0,y0,x1,y1,svg:`<rect class="${cls}" x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" rx="${pad>14?10:6}" stroke-width="1" fill-opacity=".55"/>`}}
+function lab(t,x,y){return `<text class="ts" x="${x}" y="${y}" text-anchor="middle">${t}</text>`}
+const G=22,gx=197,gy=40;
+function grid(lit,col){let s='';for(let r=0;r<7;r++)for(let c=0;c<14;c++){const on=lit.some(([x,y])=>x==c&&y==r);s+=`<circle cx="${gx+c*G}" cy="${gy+r*G}" r="${R}" fill="${on?col:Q}" opacity="${on?1:.45}"/>`}return s}
+const gw=sh(wall,4,2);
+function S0(k){let s=grid(k>0?gw:[],TEAL);if(k==2){const b=box(gw,gx,gy,12,'c-teal',G);s=b.svg+s+lab('an assembly',(b.x0+b.x1)/2,b.y1+18)}return s}
+function S1(k){
+ let s='';
+ if(k==2){const b=box([...roof,...sh(wall,0,3)],304,70,24,'c-purple');s+=b.svg+lab('house: a super-assembly',340,b.y1+18)}
+ const br=box(roof,0,0,10,'c-coral'),bw=box(wall,0,0,10,'c-teal');
+ const rp=k==2?[304,70]:[180,96],wp=k==2?[304,124]:[420,114];
+ s+=`<g class="mv" id="gr" style="transform:translate(${rp[0]}px,${rp[1]}px)">${br.svg}${dots(roof,0,0,CORAL)}${k==0?lab('roof',36,64):''}</g>`;
+ s+=`<g class="mv" id="gw" style="transform:translate(${wp[0]}px,${wp[1]}px)">${bw.svg}${dots(wall,0,0,TEAL)}${k==0?lab('wall',36,64):''}</g>`;
+ return s}
+function S2(k){
+ let s='';const H=[...roof,...sh(wall,0,3)],Sd=[...sh(flat,0,2),...sh(wall,0,3)];
+ [[H,110,'house',roof],[Sd,490,'shed',sh(flat,0,2)]].forEach(([all,ox,name,top])=>{
+  const b=box(all,ox,62,k==2?24:12,'c-purple');s+=b.svg;
+  if(k<2){s+=dots(top,ox,62,PURP)+dots(sh(wall,0,3),ox,62,k==1?AMB:PURP)}
+  else{s+=box(top,ox,62,9,'c-coral').svg+box(sh(wall,0,3),ox,62,9,'c-teal').svg+dots(top,ox,62,CORAL)+dots(sh(wall,0,3),ox,62,TEAL)}
+  s+=lab(k==2?name+' = wall + '+(name=='house'?'roof':'flat roof'):name,ox+36,b.y1+18)});
+ if(k==2){const b=box(wall,304,116,10,'c-teal');s+=b.svg+dots(wall,304,116,TEAL)+lab('wall: an abstraction',340,b.y1+18);
+  s+=`<line x1="${b.x0-6}" y1="152" x2="216" y2="152" stroke="${TEAL}" stroke-width="1" stroke-dasharray="4 4"/><line x1="${b.x1+6}" y1="152" x2="464" y2="152" stroke="${TEAL}" stroke-width="1" stroke-dasharray="4 4"/>`}
+ return s}
+const SC=[S0,S1,S2];
+const CAP=[[
+ 'Each dot is a cell. Grey means quiet: nothing active yet.',
+ 'Some cells become active together.',
+ 'That set of active cells is an assembly. We draw it as an outline around its cells. The same set of cells means the same thing, wherever it shows up.'],[
+ 'Two assemblies the engine already has: a roof and a wall.',
+ 'Composition puts assemblies together in an arrangement: here, the roof above the wall.',
+ 'The arrangement is an assembly too: a super-assembly, drawn as an outline around outlines. The roof and wall stay assemblies inside it.'],[
+ 'Two assemblies, each stored whole: a house and a shed.',
+ 'Comparing them finds what they share: the same cells in the same arrangement, shown in amber.',
+ 'The shared piece is an abstraction: in both, particular to neither. Decomposition makes it an assembly of its own, and each original becomes that piece plus what is left.']];
+let sc=0,k=0;
+function draw(){document.getElementById('sv').innerHTML=SC[sc](k);
+ document.getElementById('cap').textContent=CAP[sc][k];document.getElementById('pos').textContent='Step '+(k+1)+' of 3';
+ [0,1,2].forEach(i=>document.getElementById('b'+i).classList.toggle('on',i==sc));
+ if(sc==1&&k==1){const r=document.getElementById('gr'),w=document.getElementById('gw');r.style.transform='translate(180px,96px)';w.style.transform='translate(420px,114px)';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{r.style.transform='translate(304px,70px)';w.style.transform='translate(304px,124px)'}))}}
+function go(i){sc=i;k=0;draw()}
+function step(d){k=Math.max(0,Math.min(2,k+d));draw()}
+draw();
+</script>
+</body>
+</html>

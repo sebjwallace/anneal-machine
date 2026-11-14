@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Segments: columns of segmented cells</title>
+<style>
+:root{--bg:#fff;--text:#1f1e1d;--text-primary:#1f1e1d;--text-secondary:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border-stronger:rgba(0,0,0,.55);--surface-1:#f5f4f0}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1e1d;--text:#ecebe6;--text-primary:#ecebe6;--text-secondary:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border-stronger:rgba(255,255,255,.6);--surface-1:#2a2a28}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--text-secondary);font-size:14px;margin:0 0 1rem}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover,.tg button.on{background:var(--surface-1)}
+.tg button.on{border-color:var(--border-stronger)}
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Segments: columns of segmented cells</h1>
+<p class="sub">Each cell cut into slices, its segments, so a cell shared by two memories keeps their evidence apart. Builds on <a href="columns.html">columns</a>. Drawn by hand to show the idea; not a run of the engine.</p>
+<div class="tg" style="display:flex;gap:8px;align-items:center;margin:0 0 10px">
+<span style="font-size:13px;color:var(--text-secondary)">Cells</span>
+<button id="m1" onclick="setM(1)">With segments</button>
+<button id="m0" onclick="setM(0)">One pool</button>
+</div>
+<svg id="sv" width="100%" viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg"></svg>
+<div style="display:flex;align-items:center;gap:12px;margin:8px 0 4px">
+<button onclick="step(-1)">&larr; Back</button>
+<button onclick="step(1)">Next &rarr;</button>
+<span id="pos" style="font-size:13px;color:var(--text-secondary)"></span>
+</div>
+<p id="cap" style="font-size:15px;line-height:1.6;min-height:4.8em;margin:6px 0 10px"></p>
+<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--text-secondary);border-top:0.5px solid var(--border);padding-top:10px">
+<span><svg width="16" height="16"><circle cx="8" cy="8" r="7" fill="none" stroke="#888780"/><path d="M8 8 L8 1 A7 7 0 0 1 14.06 11.5 Z" fill="#1D9E75" opacity=".35"/></svg> a slice: one segment (AND of its links)</span>
+<span><svg width="16" height="16"><circle cx="8" cy="8" r="7" fill="#1D9E75"/></svg> cell active (seen)</span>
+<span><svg width="16" height="16"><circle cx="8" cy="8" r="7" fill="none" stroke="#1D9E75" stroke-width="2"/><path d="M8 8 L8 1 A7 7 0 0 1 14.06 11.5 Z" fill="#1D9E75"/></svg> slice fires, cell wakes (OR of its slices)</span>
+<span><svg width="16" height="16"><circle cx="8" cy="8" r="7" fill="none" stroke="#E24B4A" stroke-width="2"/></svg> false wake</span>
+<span>Wakes at 2 active links</span>
+</div>
+<section class="story">
+<h2>How to walk through it</h2>
+<p>Start with <b>With segments</b> selected and press <b>Next</b>. On step 1 every cell is a circle cut into three slices. On step 2, look at A's four cells: their teal slices are tinted, and A's links run between teal slices. On step 3, C arrives in purple. Look at the 5th and 7th columns: those two cells have both a teal slice and a purple slice. That's the shared part, the abstraction, with each memory's evidence on its own slice. On step 4, one A cell and one C cell light, and nothing else happens, because no slice reaches two. Now press <b>One pool</b> on this same step (the toggle keeps the step): the two shared cells get red rings, woken for nothing. On step 5, two of A's cells light. With segments, the teal slices in the shared cells fill solid and the cells get teal rings: A completes, and the purple slices stay pale. With one pool they wake too, but nothing says whether it was for A or for C.</p>
+<h2>What it shows</h2>
+<p>Columns separate memories across cells: different contexts get different cells. But one cell is still reused by every memory that has the same input in the same context, and that sharing is what makes overlap mean similarity, and the shared cells an abstraction. If a shared cell pools all its links, evidence from different memories adds up, and it wakes for memories that aren't there. Segments split a cell's links by memory. Each segment is an AND: it fires only when two or more of its own links are active. The cell is an OR of its segments: any one memory is enough to wake it. So evidence is counted per memory, never summed across memories (CTR-1 CON-9), and which segment fired tells you which memory woke the cell.</p>
+<p>A segment is not a cell. Nothing links to it and it never shows downstream: it only gathers evidence for its cell. That is why segments are slices of a cell rather than more cells. They add ways of being woken without changing what the cell means, so the shared code stays shared.</p>
+<h2>What's simplified</h2>
+<p>Three slices per cell, two in use; real cells could have many. Links are drawn between slices, but each link starts from a whole active cell and lands on a slice of another. In the engine today, C35 showed the pooling failure: about 80% wrong recalls with five things stored, fixed by counting evidence per memory. The owner's earlier session on the logic of cells (OR, AND, then NOT and NAND) goes further than this and is not covered here.</p>
+<h2>Where it comes from</h2>
+<p>The owner's dendritic-segments idea (C35); CTR-1 CON-9 (cells carry no numbers; evidence counted per memory) and CAP-3 (auto-associative memory). Builds on <a href="columns.html">columns</a>; the zoomed-in view of one cell is in <a href="segments-zoom.html">segments-zoom</a>.</p>
+</section>
+</main>
+<script>
+const N=9,cx=i=>68+i*68,IY=268,Q='#B4B2A9',G='#888780',TEAL='#1D9E75',PURP='#7F77DD',RED='#E24B4A',ON='#5F5E5A',RC=7.5;
+const pos=(i,r,c)=>[cx(i)-10+c*20,104+r*22];
+const A=[[1,0,0],[2,2,1],[4,1,0],[6,3,1]],C=[[4,1,0],[6,3,1],[7,0,1],[8,2,0]];
+const SL={A:0,C:1},COL={A:TEAL,C:PURP};
+const key=c=>c.join(',');
+let mode=1,k=0;
+function wedge(x,y,s,fill,op){const a0=(-90+s*120)*Math.PI/180,a1=(30+s*120)*Math.PI/180;return `<path d="M${x} ${y} L${x+Math.cos(a0)*RC} ${y+Math.sin(a0)*RC} A${RC} ${RC} 0 0 1 ${x+Math.cos(a1)*RC} ${y+Math.sin(a1)*RC} Z" fill="${fill}" opacity="${op}"/>`}
+function cent(x,y,s){const a=(-30+s*120)*Math.PI/180;return[x+Math.cos(a)*RC*.55,y+Math.sin(a)*RC*.55]}
+const STEPS=[
+ {show:[],act:[],cap:['Columns again, over nine input cells. Each cell is now cut into three slices: its segments. A slice is not a cell; nothing links to it. It only gathers one memory’s links for its cell.','Columns again, but here each cell keeps all its links in one pool, with no slices.']},
+ {show:['A'],act:[],cap:['Assembly A: four cells, one per column. Each of A’s links lands on the teal slice of the cell it reaches, so A’s evidence sits on A’s slices.','Assembly A: four cells, linked to each other. Every link lands on the cell as a whole.']},
+ {show:['A','C'],act:[],cap:['Assembly C shares two cells with A (in the 5th and 7th columns): the same input in the same context, so the same cell. That shared part is the abstraction. C’s links land on a different slice, purple, so in the shared cells A’s and C’s evidence is kept apart.','Assembly C shares two cells with A. In those two cells, A’s links and C’s links now land in the same pool.']},
+ {show:['A','C'],act:[[1,0,0],[8,2,0]],cap:['Scattered activity: one cell of A and one of C. Each shared cell gets one active link on its A slice and one on its C slice. No slice reaches two, so nothing fires: the noise from two memories is never added together.','Scattered activity: one cell of A and one of C. Each shared cell gets one link from each: 2 in the pool, so both wake (red) for a memory that isn’t there.']},
+ {show:['A','C'],act:[[1,0,0],[2,2,1]],cap:['A real cue: two of A’s cells. The A slices in A’s other two cells (the shared ones) reach two and fire, so those cells wake: A completes. The cell is an OR of its slices; each slice is an AND of its links. C’s own cells stay quiet.','A real cue: two of A’s cells. The shared cells count 2 and wake, which is right this time, but nothing says whether they woke for A or for C.']}];
+function draw(){const st=STEPS[k];let s='';
+ for(let i=0;i<N;i++){s+=`<rect x="${cx(i)-22}" y="90" width="44" height="94" rx="6" fill="none" stroke="${Q}" stroke-width="0.8"/><line x1="${cx(i)}" y1="${IY-16}" x2="${cx(i)}" y2="188" stroke="${Q}" stroke-width="0.8" stroke-dasharray="2 3"/>`}
+ const ain=new Set([...(st.show.includes('A')?A:[]),...(st.show.includes('C')?C:[])].map(c=>c[0]));
+ for(let i=0;i<N;i++){const on=ain.has(i);s+=`<rect x="${cx(i)-14}" y="${IY-14}" width="28" height="28" rx="4" fill="${on?ON:'none'}" stroke="${on?ON:Q}" stroke-width="1"/>`}
+ const act=new Set(st.act.map(key));
+ const cnt=new Map();
+ st.show.forEach(n=>{const M=n=='A'?A:C;M.forEach(t=>{const tk=key(t);const c=M.filter(src=>key(src)!==tk&&act.has(key(src))).length;cnt.set(tk+'|'+n,c)})});
+ st.show.forEach(n=>{const M=n=='A'?A:C;for(let a=0;a<M.length;a++)for(let b=a+1;b<M.length;b++){const[x1,y1]=pos(...M[a]),[x2,y2]=pos(...M[b]);let p1=[x1,y1],p2=[x2,y2];if(mode){p1=cent(x1,y1,SL[n]);p2=cent(x2,y2,SL[n])}const hot=act.has(key(M[a]))||act.has(key(M[b]));const my=Math.min(y1,y2)-24-Math.abs(x2-x1)*.07;s+=`<path d="M${p1[0]} ${p1[1]} Q${(x1+x2)/2} ${my} ${p2[0]} ${p2[1]}" fill="none" stroke="${COL[n]}" stroke-width="${hot?1.5:1}" opacity="${hot?.9:.45}"/>`}});
+ for(let i=0;i<N;i++)for(let r=0;r<4;r++)for(let c=0;c<2;c++){const[x,y]=pos(i,r,c);const kk=key([i,r,c]);
+  const inA=st.show.includes('A')&&A.some(a=>key(a)==kk),inC=st.show.includes('C')&&C.some(a=>key(a)==kk);
+  const isAct=act.has(kk);let fires=[];
+  if(!isAct){if(mode){if(inA&&cnt.get(kk+'|A')>=2)fires.push('A');if(inC&&cnt.get(kk+'|C')>=2)fires.push('C')}else{let t=(inA?cnt.get(kk+'|A'):0)+(inC?cnt.get(kk+'|C'):0);if(t>=2)fires.push('pool')}}
+  if(isAct){const col=inA?TEAL:PURP;s+=`<circle cx="${x}" cy="${y}" r="${RC}" fill="${col}"/>`;continue}
+  s+=`<circle cx="${x}" cy="${y}" r="${RC}" fill="none" stroke="${(inA||inC)?G:Q}" stroke-width="${(inA||inC)?1:.7}" opacity="${(inA||inC)?1:.6}"/>`;
+  if(mode){for(let sl=0;sl<3;sl++){s+=`<line x1="${x}" y1="${y}" x2="${x+Math.cos((-90+sl*120)*Math.PI/180)*RC}" y2="${y+Math.sin((-90+sl*120)*Math.PI/180)*RC}" stroke="${Q}" stroke-width=".6"/>`}
+   if(inA)s+=wedge(x,y,0,TEAL,fires.includes('A')?1:.3);if(inC)s+=wedge(x,y,1,PURP,fires.includes('C')?1:.3)}
+  if(fires.length){const real=fires.includes('A')||fires.includes('C')||(fires.includes('pool')&&st.act.filter(a=>A.some(b=>key(b)==key(a))).length>=2);const col=fires.includes('A')?TEAL:fires.includes('C')?PURP:real?G:RED;s+=`<circle cx="${x}" cy="${y}" r="${RC+3}" fill="none" stroke="${col}" stroke-width="2"/>`}
+ }
+ s+=`<text x="40" y="76" style="font-size:12px;fill:var(--text-secondary)">${mode?'columns of segmented cells':'columns of cells, links pooled'}</text><text x="40" y="${IY+32}" style="font-size:12px;fill:var(--text-secondary)">input cells</text>`;
+ document.getElementById('sv').innerHTML=s;
+ document.getElementById('cap').textContent=st.cap[mode?0:1];document.getElementById('pos').textContent='Step '+(k+1)+' of '+STEPS.length;
+ document.getElementById('m1').classList.toggle('on',mode===1);document.getElementById('m0').classList.toggle('on',mode===0)}
+function setM(m){mode=m;draw()}
+function step(d){k=Math.max(0,Math.min(STEPS.length-1,k+d));draw()}
+draw();
+</script>
+</body>
+</html>

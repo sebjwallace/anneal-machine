@@ -1,0 +1,56 @@
+
+WITH SPACES · 150 looks · 3 kinds
+  "the" + slot ["fox " "hen " "cat " " on "]
+  "a" + slot ["fox " "hen " "cat " " on "]
+  "hid" + slot [" on " "a fox "]
+  fillers that are whole words: 9/10 · slots holding one part of speech only: 0/3
+  words found: as fillers 4/11 (cat, fox, hen, on) · as parts (C62) 8/11 · either 8/11
+
+NO SPACES · 150 looks · 4 kinds
+  "e r anb" + slot ["hen" "fox" "hidon" "a…o" "by" "hen" "cat" "on"]
+  "the" + slot ["hen" "fox" "hidon" "a…o" "by" "hen" "cat" "on"]
+  "hid" + slot ["on" "fox" "cat"]
+  "he" + slot ["n" "cathid" "fox" "t"]
+  fillers that are whole words: 16/23 · slots holding one part of speech only: 0/4
+  words found: as fillers 5/11 (cat, fox, hen, on, by) · as parts (C62) 5/11 · either 6/11
+
+WITH SPACES · 400 looks · 6 kinds
+  "the" + slot ["fox " "hen " "cat " " on " "fox " "og " "og "]
+  "a" + slot ["fox " "hen " "cat " " on " "fox " "og " "og "]
+  "o n" + slot [" " "the "]
+  "hid" + slot ["a fox " "og " " on " " by a" "hen " "fox a "]
+  "n a r" + slot ["a fox " "og " " on " " by a" "hen " "fox a "]
+  "a" + slot ["a fox " "og " " on " " by a" "hen " "fox a "]
+  fillers that are whole words: 17/34 · slots holding one part of speech only: 0/6
+  words found: as fillers 5/11 (the, cat, fox, hen, on) · as parts (C62) 7/11 · either 8/11
+
+NO SPACES · 400 looks · 5 kinds
+  "the" + slot ["hen" "fox" "hidon" "a…o" "by" "hen" "cat" "on" "foxhid" "acata" "cat" "a…a" "hid" "a"]
+  "b y" + slot ["hen" "fox" "hidon" "a…o" "by" "hen" "cat" "on" "foxhid" "acata" "cat" "a…a" "hid" "a"]
+  "bythe" + slot ["anb" "hid"]
+  "o n" + slot ["hen" "fox" "hidon" "a…o" "by" "hen" "cat" "on" "foxhid" "acata" "cat" "a…a" "hid" "a"]
+  "t s" + slot ["a…bya" "a"]
+  fillers that are whole words: 29/46 · slots holding one part of speech only: 0/5
+  words found: as fillers 7/11 (a, cat, fox, hen, hid, on, by) · as parts (C62) 3/11 · either 8/11
+
+WITH SPACES · 1000 looks · 8 kinds
+  "the" + slot ["fox " "hen " "cat " " on " "fox " "og " "og " "he" " by " "cat " " " "hen " " by a" "x " "og "]
+  "a" + slot ["fox " "hen " "cat " " on " "fox " "og " "og " "he" " by " "cat " " " "hen " " by a" "x " "og "]
+  "n o…" + slot [" " "the " " by " "t" "s"]
+  " hid" + slot ["a fox " "og " " on " " by a" "hen " "fox a " "at "]
+  "a r n" + slot ["a fox " "og " " on " " by a" "hen " "fox a " "at "]
+  "a" + slot [" " "the " " by " "t" "s"]
+  "at" + slot ["fox " "hen " "cat " " on " "fox " "og " "og " "he" " by " "cat " " " "hen " " by a" "x " "og "]
+  "" + slot ["o" "n"]
+  fillers that are whole words: 32/71 · slots holding one part of speech only: 0/8
+  words found: as fillers 6/11 (the, cat, fox, hen, on, by) · as parts (C62) 4/11 · either 7/11
+
+NO SPACES · 1000 looks · 6 kinds
+  "t he" + slot ["hen" "fox" "hidon" "a…o" "by" "hen" "cat" "on" "foxhid" "acata" "cat" "a…a" "hid" "a" "anb" "fox" "doga" "doga"]
+  "b y" + slot ["hen" "fox" "hidon" "a…o" "by" "hen" "cat" "on" "foxhid" "acata" "cat" "a…a" "hid" "a" "anb" "fox" "doga" "doga"]
+  "n o" + slot ["hen" "fox" "hidon" "a…o" "by" "hen" "cat" "on" "foxhid" "acata" "cat" "a…a" "hid" "a" "anb" "fox" "doga" "doga"]
+  "s at" + slot ["o" "thehen" "fox" "bythe" "thecat" "hen…by" "a…bya"]
+  "hid" + slot ["o" "thehen" "fox" "bythe" "thecat" "hen…by" "a…bya"]
+  "doga" + slot ["ona" "hido"]
+  fillers that are whole words: 32/70 · slots holding one part of speech only: 0/6
+  words found: as fillers 7/11 (a, cat, fox, hen, hid, on, by) · as parts (C62) 2/11 · either 7/11

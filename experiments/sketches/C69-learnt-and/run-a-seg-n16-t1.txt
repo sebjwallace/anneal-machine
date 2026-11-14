@@ -1,0 +1,57 @@
+sketch 36  MODE=seg WORLD=a SEGN=16 THETA=1 COLS=1 NEV=3000 seeds 101,102,103,104,105,106,107,108,109,110
+
+by block of 250 events (prequential: predict, then learn)
+acc combination events     0.75  0.99  0.99  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00
+acc one-decides events     0.95  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00
+held-out probe (no learn)  0.11  0.08  0.08  0.07  0.04  0.03  0.04  0.07  0.06  0.03  0.04  0.06
+segments alive              282   291   298   296   299   298   299   298   300   301   300   300
+segments grown (cum.)       286   299   309   310   317   319   321   322   324   327   328   329
+segments grown in block     286    13  9.50  1.50  6.30  2.50  1.90  0.90  2.50  3.00  0.90  1.20
+
+final (learning off), mean over seeds [min..max]
+  ceiling colour                                                0.410   [0.38..0.44]
+  ceiling animal                                                0.416   [0.39..0.43]
+  ceiling object                                                0.393   [0.37..0.42]
+  ceiling state                                                 0.404   [0.37..0.43]
+  ceiling animal+state                                          1.000   [1.00..1.00]
+  final seen                                                    1.000   [1.00..1.00]
+  final held-out                                                0.056   [0.00..0.22]
+  final one-decides                                             1.000   [1.00..1.00]
+  drop colour                                                   0.489   [0.25..0.78]
+  noise colour                                                  0.408   [0.14..0.64]
+  drop animal                                                   0.361   [0.25..0.42]
+  noise animal                                                  0.358   [0.28..0.44]
+  drop object                                                   0.461   [0.33..0.67]
+  noise object                                                  0.428   [0.33..0.56]
+  drop state                                                    0.314   [0.14..0.47]
+  noise state                                                   0.306   [0.11..0.47]
+  extra token                                                   0.903   [0.81..0.97]
+  held: a right-outcome segment fires                           0.222   [0.00..0.44]
+  held: a wrong-outcome segment fires                           0.056   [0.00..0.22]
+  held: firing right segments grown on the same animal x context    1.000   [1.00..1.00]
+  seen: right segment fires                                     0.994   [0.94..1.00]
+  seen: wrong segment fires                                     0.017   [0.00..0.17]
+  drop colour: right segment fires                              0.028   [0.00..0.28]
+  drop animal: right segment fires                              0.000   [0.00..0.00]
+  drop object: right segment fires                              0.197   [0.11..0.31]
+  drop state: right segment fires                               0.014   [0.00..0.06]
+  segments alive at end                                       300.300   [272.00..353.00]
+  segments grown total                                        329.400   [276.00..385.00]
+  alive per outcome cell                                       12.512   [11.33..14.71]
+  alive per animal x context, per cell                          5.120   [4.56..6.15]
+  alive grown on one-decides events                            23.800   [21.00..27.00]
+  grown on combination events                                 305.600   [249.00..358.00]
+  grown on one-decides events                                  23.800   [21.00..27.00]
+  grown per combination event seen                              0.145   [0.12..0.17]
+  mean strength alive                                           0.823   [0.75..0.85]
+  alive segments: share of synapses on column units             0.421   [0.41..0.43]
+  columns shared: colours                                       3.120   [3.00..3.40]
+  columns shared: animals                                       3.067   [3.00..3.33]
+  columns shared: bowl states                                   3.200   [3.00..4.00]
+  columns shared: colour vs animal                              0.320   [0.00..1.00]
+  cells shared: full vs empty                                   0.000   [0.00..0.00]
+  cost: active units per event                                 41.157   [40.27..42.01]
+  cost: link reads per event                                 1150.209   [1076.66..1249.09]
+  cost: segment synapse checks per event                     4650.305   [4290.59..5367.50]
+  cost: segments alive (mean over events)                     290.644   [268.16..335.47]
+  links at end                                               3898.700   [3653.00..4248.00]

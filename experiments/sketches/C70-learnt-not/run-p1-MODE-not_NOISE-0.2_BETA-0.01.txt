@@ -1,0 +1,53 @@
+part 1 exceptions  MODE=not BETA=0.01 NOISE=0.2 seeds=41,42,43,44,45,46,47,48,49,50 events/seed=4500 (T1=1500 penguin arrives, T2=3000 chick starts flying)
+all contexts x properties correct @1500                                0.962 
+all contexts x properties correct @3000                                0.968 
+all contexts x properties correct @4500                                0.936 
+chick occurrences after T2 until "flies" again (99 = never)            3.800 [3 5 3 5 1 8 4 3 4 2]
+chick: "flies" (wanted: no before T2, yes after) @1500                 0.000 
+chick: "flies" (wanted: no before T2, yes after) @3000                 0.000 
+chick: "flies" (wanted: no before T2, yes after) @4500                 0.900 
+inhibitory links @1500                                                 796.800 
+inhibitory links @3000                                                 859.200 
+inhibitory links @4500                                                 864.000 
+inhibitory links created per event                                     4.961 
+inhibitory weight (total) @1500                                        132.605 
+inhibitory weight (total) @3000                                        152.813 
+inhibitory weight (total) @4500                                        164.452 
+links changed per event                                                366.478 
+ostrich: "runs" @1500                                                  0.900 
+ostrich: "runs" @3000                                                  1.000 
+ostrich: "runs" @4500                                                  0.800 
+ostrich: NOT "flies" @1500                                             1.000 
+ostrich: NOT "flies" @3000                                             1.000 
+ostrich: NOT "flies" @4500                                             1.000 
+penguin occurrences until honoured (cap = never)                       1.000 [1 1 1 1 1 1 1 1 1 1]
+penguin: "swims" @3000                                                 1.000 
+penguin: "swims" @4500                                                 0.900 
+penguin: NOT "flies" @3000                                             1.000 
+penguin: NOT "flies" @4500                                             1.000 
+rule: dogs/fish -> "flies" (false) @1500                               0.000 
+rule: dogs/fish -> "flies" (false) @3000                               0.000 
+rule: dogs/fish -> "flies" (false) @4500                               0.000 
+rule: novel "green bird" -> "flies" @1500                              0.200 
+rule: novel "green bird" -> "flies" @3000                              0.400 
+rule: novel "green bird" -> "flies" @4500                              0.400 
+rule: regular birds -> "flies" @1500                                   0.800 
+rule: regular birds -> "flies" @3000                                   0.950 
+rule: regular birds -> "flies" @4500                                   0.833 
+rule: regular birds -> "sings" @1500                                   1.000 
+rule: regular birds -> "sings" @3000                                   0.933 
+rule: regular birds -> "sings" @4500                                   0.867 
+
+over time (probe every 150 events, mean over seeds)
+rule: regular birds -> "flies"                     0.98 0.98 0.85 0.83 0.88 0.88 0.87 0.88 0.95 0.80 0.78 0.77 0.72 0.95 0.82 0.95 0.88 0.82 0.77 0.95 0.82 0.88 0.78 0.85 0.88 0.88 0.90 0.83 0.87 0.83
+rule: novel "green bird" -> "flies"                0.60 0.70 0.70 0.60 0.60 0.50 0.60 0.60 0.80 0.20 0.30 0.10 0.20 0.50 0.60 0.60 0.70 0.50 0.30 0.40 0.30 0.50 0.30 0.60 0.60 0.60 0.60 0.50 0.50 0.40
+rule: dogs/fish -> "flies" (false)                 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+rule: regular birds -> "sings"                     0.78 0.92 0.87 0.87 0.93 0.78 0.92 0.92 0.95 1.00 0.80 0.83 0.87 0.78 0.93 0.97 0.95 0.85 0.67 0.93 0.93 0.95 0.92 0.72 0.88 0.85 0.98 0.98 0.77 0.87
+ostrich: NOT "flies"                               0.80 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+ostrich: "runs"                                    0.40 0.80 0.90 0.90 1.00 0.70 0.70 0.90 0.90 0.90 0.60 0.90 0.80 0.90 0.90 0.80 0.80 0.80 1.00 1.00 1.00 0.90 0.90 1.00 0.90 0.80 1.00 0.70 0.80 0.80
+chick: "flies" (wanted: no before T2, yes after)   0.20 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.60 1.00 0.70 1.00 0.80 0.90 1.00 0.90 0.90 0.90
+all contexts x properties correct                  0.96 0.98 0.96 0.97 0.97 0.95 0.94 0.96 0.97 0.96 0.95 0.95 0.95 0.94 0.97 0.98 0.97 0.95 0.92 0.97 0.96 0.96 0.95 0.94 0.93 0.96 0.96 0.96 0.97 0.94
+inhibitory links                                    786  792  802  797  802  794  797  792  798  797  848  877  864  862  862  846  869  859  842  859  856  854  853  859  862  866  866  851  858  864
+inhibitory weight (total)                            83  106  118  119  124  127  130  132  131  133  139  149  148  152  148  151  156  151  157  153  152  156  158  159  160  157  160  161  164  164
+penguin: NOT "flies"                                 -    -    -    -    -    -    -    -    -    -  1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+penguin: "swims"                                     -    -    -    -    -    -    -    -    -    -  0.40 0.80 1.00 1.00 0.90 1.00 0.90 0.90 1.00 1.00 0.90 0.90 1.00 1.00 0.80 0.80 0.90 0.90 0.80 0.90

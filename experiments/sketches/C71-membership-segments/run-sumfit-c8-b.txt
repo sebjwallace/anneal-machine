@@ -1,0 +1,41 @@
+sketch 38  MODE=sum NORM=fit ETA=0.2  columns 400 x 8 cells = 3200  K=8 ROUNDS=5  seeds 101,102,103,104,105  (22 s)
+M (episode objects)                                             400
+stored assemblies (distinct sentences)                         1664
+train: cells active per event                                 39.50
+train: work per event (link updates | gate synapse checks)     8859
+links stored                                                3901500
+assembly cells shared by >1 word                                45%
+episode x -> Y: lenient                                          0%
+episode x -> Y: strict                                           0%
+episode x -> Y: blend                                            0%
+episode x -> Y: no answer                                      100%
+episode x -> Y: new cells                                      8.00
+fact c -> room: lenient                                          4%
+fact c -> room: strict                                           4%
+fact c -> room: blend                                            0%
+fact c -> room: no answer                                       96%
+fact c -> room: new cells                                      8.00
+kind: new container -> room                                      0%
+kind: new container -> blend                                     0%
+kind: new object -> container                                    0%
+kind: seen object -> container                                   0%
+partial: x at 4 of 8 cells: lenient                              0%
+partial: x at 4 of 8 cells: strict                               0%
+partial: x at 4 of 8 cells: blend                                0%
+partial: x at 4 of 8 cells: no answer                          100%
+partial: x at 4 of 8 cells: new cells                          8.00
+partial: cue "x in" only: lenient                                0%
+partial: cue "x in" only: strict                                 0%
+partial: cue "x in" only: blend                                  0%
+partial: cue "x in" only: no answer                            100%
+partial: cue "x in" only: new cells                            8.00
+split: both answers (blend of the two)                           0%
+split: exactly one answer                                        0%
+split: neither answer                                          100%
+split: no word at all                                          100%
+split: new cells                                               8.00
+probe: work per probe (link reads | segment index hits)      262723
+probe: rounds                                                  3.59
+capacity (this run's M values): largest M before strict episode recall falls below 75%: < 400
+capacity (this run's M values): largest M before strict episode recall falls below 50%: < 400
+  per seed, M=400, strict episode recall: 0 0 0 0 0

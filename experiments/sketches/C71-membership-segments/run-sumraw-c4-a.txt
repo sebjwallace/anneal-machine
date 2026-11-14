@@ -1,0 +1,44 @@
+sketch 38  MODE=sum NORM=raw ETA=0.2  columns 400 x 4 cells = 1600  K=8 ROUNDS=5  seeds 101,102,103,104,105  (35 s)
+M (episode objects)                                              25       50      100      200
+stored assemblies (distinct sentences)                          539      614      764     1064
+train: cells active per event                                 38.99    39.02    39.10    39.22
+train: work per event (link updates | gate synapse checks)     8745     8789     8769     8747
+links stored                                                1065288  1262971  1632062  2200367
+assembly cells shared by >1 word                                37%      37%      40%      60%
+episode x -> Y: lenient                                         71%      72%      61%      33%
+episode x -> Y: strict                                          71%      72%      61%      33%
+episode x -> Y: blend                                           11%       6%       7%       9%
+episode x -> Y: no answer                                       21%      21%      31%      53%
+episode x -> Y: new cells                                      8.00     8.00     8.00     8.00
+fact c -> room: lenient                                        100%      98%     100%     100%
+fact c -> room: strict                                         100%      98%     100%     100%
+fact c -> room: blend                                            0%       2%       0%       0%
+fact c -> room: no answer                                        0%       0%       0%       0%
+fact c -> room: new cells                                      8.00     8.00     8.00     8.00
+kind: new container -> room                                     60%      47%      53%      27%
+kind: new container -> blend                                    33%      20%      27%      13%
+kind: new object -> container                                   10%       0%       0%       5%
+kind: seen object -> container                                  53%      41%      39%      22%
+partial: x at 4 of 8 cells: lenient                             64%      68%      57%      28%
+partial: x at 4 of 8 cells: strict                              64%      68%      57%      28%
+partial: x at 4 of 8 cells: blend                               14%      12%      12%       9%
+partial: x at 4 of 8 cells: no answer                           22%      17%      30%      56%
+partial: x at 4 of 8 cells: new cells                          8.00     8.00     8.00     8.00
+partial: cue "x in" only: lenient                                0%       0%       0%       0%
+partial: cue "x in" only: strict                                 0%       0%       0%       0%
+partial: cue "x in" only: blend                                100%     100%     100%     100%
+partial: cue "x in" only: no answer                              0%       0%       0%       0%
+partial: cue "x in" only: new cells                            8.00     8.00     8.00     8.00
+split: both answers (blend of the two)                           0%       0%       0%       0%
+split: exactly one answer                                       44%      37%      32%      16%
+split: neither answer                                           56%      63%      68%      84%
+split: no word at all                                           42%      50%      57%      70%
+split: new cells                                               8.00     8.00     8.00     8.00
+probe: work per probe (link reads | segment index hits)       78712    95577   131255   180648
+probe: rounds                                                  3.36     3.65     3.78     4.11
+capacity (this run's M values): largest M before strict episode recall falls below 75%: < 25
+capacity (this run's M values): largest M before strict episode recall falls below 50%: 100
+  per seed, M=25, strict episode recall: 76 64 84 72 60
+  per seed, M=50, strict episode recall: 74 74 80 62 68
+  per seed, M=100, strict episode recall: 45 77 86 56 39
+  per seed, M=200, strict episode recall: 9 58 48 38 12

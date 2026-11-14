@@ -82,8 +82,9 @@ Two consequences matter for the column:
 The machine has two modes (owner's words).
 
 - **Awake:** pictures come in and are explained. A picture is explained by placing known parts anywhere, as cheaply as
-  can be found. Every possible opening placement is tried first in turn, the rest is filled in greedily, and the
-  cheapest whole explanation wins. A picture is stored as a memory only if total energy is lower with it stored than
+  can be found, by competition (fitting): the placement that saves most takes its pixels, every rival recounts on what
+  is left, and a placement is taken only while it saves more than its price. Where a winner claimed pixels that aren't
+  there, it is taken back and the rivals compete again (re-settling where heat is left, since C75). A picture is stored as a memory only if total energy is lower with it stored than
   with it left in the flow.
 - **Rest:** pictures stop, and the machine reorganises what it keeps. Candidate changes are proposed, each one is
   applied, energy is measured, and the change is kept only if energy fell. The changes are:

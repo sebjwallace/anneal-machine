@@ -1,0 +1,1116 @@
+{
+ "4": {
+  "S": [
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "baker",
+    "feeds",
+    "the",
+    "family"
+   ],
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "child"
+   ],
+   [
+    "the",
+    "teacher",
+    "guides",
+    "the",
+    "pupil"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here the",
+    "ws": [
+     "teacher",
+     "baker"
+    ]
+   },
+   {
+    "k": "the teacher here the pupil",
+    "ws": [
+     "teaches",
+     "guides"
+    ]
+   },
+   {
+    "k": "the teacher teaches the here",
+    "ws": [
+     "pupil",
+     "child"
+    ]
+   }
+  ],
+  "purity": 0.8333333333333334,
+  "completeness": 1,
+  "once": [
+   "baker",
+   "family",
+   "child"
+  ],
+  "onceJoined": [
+   "child"
+  ],
+  "merged": [
+   {
+    "ws": [
+     "teacher",
+     "baker"
+    ],
+    "from": [
+     "the here the"
+    ]
+   },
+   {
+    "ws": [
+     "pupil",
+     "child"
+    ],
+    "from": [
+     "the teacher teaches the here"
+    ]
+   }
+  ],
+  "mPure": 0.75,
+  "exact": 1
+ },
+ "8": {
+  "S": [
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "baker",
+    "feeds",
+    "the",
+    "family"
+   ],
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "child"
+   ],
+   [
+    "the",
+    "teacher",
+    "guides",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "baker",
+    "serves",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "chef",
+    "serves",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "chef",
+    "feeds",
+    "the",
+    "guest"
+   ],
+   [
+    "the",
+    "coach",
+    "teaches",
+    "the",
+    "trainee"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here teaches the",
+    "ws": [
+     "teacher",
+     "coach"
+    ]
+   },
+   {
+    "k": "the teacher here the pupil",
+    "ws": [
+     "teaches",
+     "guides"
+    ]
+   },
+   {
+    "k": "the teacher teaches the here",
+    "ws": [
+     "pupil",
+     "child",
+     "trainee"
+    ]
+   },
+   {
+    "k": "the here the",
+    "ws": [
+     "baker",
+     "feeds",
+     "teacher",
+     "serves",
+     "chef",
+     "teaches"
+    ]
+   },
+   {
+    "k": "the the here",
+    "ws": [
+     "family",
+     "diner",
+     "guest"
+    ]
+   },
+   {
+    "k": "the here serves the diner",
+    "ws": [
+     "baker",
+     "chef"
+    ]
+   }
+  ],
+  "purity": 0.8333333333333334,
+  "completeness": 1,
+  "once": [
+   "family",
+   "child",
+   "guest",
+   "coach",
+   "trainee"
+  ],
+  "onceJoined": [
+   "family",
+   "child",
+   "guest",
+   "coach",
+   "trainee"
+  ],
+  "merged": [
+   {
+    "ws": [
+     "teacher",
+     "coach"
+    ],
+    "from": [
+     "the here teaches the"
+    ]
+   },
+   {
+    "ws": [
+     "pupil",
+     "child",
+     "trainee"
+    ],
+    "from": [
+     "the teacher teaches the here"
+    ]
+   },
+   {
+    "ws": [
+     "family",
+     "diner",
+     "guest"
+    ],
+    "from": [
+     "the the here"
+    ]
+   },
+   {
+    "ws": [
+     "baker",
+     "chef"
+    ],
+    "from": [
+     "the here serves the diner"
+    ]
+   }
+  ],
+  "mPure": 1,
+  "exact": 4
+ },
+ "12": {
+  "S": [
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "baker",
+    "feeds",
+    "the",
+    "family"
+   ],
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "child"
+   ],
+   [
+    "the",
+    "teacher",
+    "guides",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "baker",
+    "serves",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "chef",
+    "serves",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "chef",
+    "feeds",
+    "the",
+    "guest"
+   ],
+   [
+    "the",
+    "coach",
+    "teaches",
+    "the",
+    "trainee"
+   ],
+   [
+    "the",
+    "tutor",
+    "guides",
+    "the",
+    "student"
+   ],
+   [
+    "the",
+    "cook",
+    "feeds",
+    "the",
+    "guest"
+   ],
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "student"
+   ],
+   [
+    "the",
+    "chef",
+    "feeds",
+    "the",
+    "family"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here teaches the",
+    "ws": [
+     "teacher",
+     "coach"
+    ]
+   },
+   {
+    "k": "the teacher here the",
+    "ws": [
+     "teaches",
+     "guides"
+    ]
+   },
+   {
+    "k": "the teacher teaches the here",
+    "ws": [
+     "pupil",
+     "child",
+     "trainee",
+     "student"
+    ]
+   },
+   {
+    "k": "the here feeds the family",
+    "ws": [
+     "baker",
+     "chef"
+    ]
+   },
+   {
+    "k": "the here the",
+    "ws": [
+     "feeds",
+     "teacher",
+     "serves",
+     "teaches",
+     "tutor",
+     "guides"
+    ]
+   },
+   {
+    "k": "the feeds the here",
+    "ws": [
+     "family",
+     "guest"
+    ]
+   },
+   {
+    "k": "the here serves the diner",
+    "ws": [
+     "baker",
+     "chef"
+    ]
+   },
+   {
+    "k": "the the here",
+    "ws": [
+     "diner",
+     "student"
+    ]
+   },
+   {
+    "k": "the chef here the",
+    "ws": [
+     "serves",
+     "feeds"
+    ]
+   },
+   {
+    "k": "the here feeds the guest",
+    "ws": [
+     "chef",
+     "cook"
+    ]
+   }
+  ],
+  "purity": 0.8846153846153846,
+  "completeness": 0.7499999999999999,
+  "once": [
+   "child",
+   "coach",
+   "trainee",
+   "tutor",
+   "cook"
+  ],
+  "onceJoined": [
+   "child",
+   "coach",
+   "trainee",
+   "tutor",
+   "cook"
+  ],
+  "merged": [
+   {
+    "ws": [
+     "teacher",
+     "coach"
+    ],
+    "from": [
+     "the here teaches the"
+    ]
+   },
+   {
+    "ws": [
+     "pupil",
+     "child",
+     "trainee",
+     "student"
+    ],
+    "from": [
+     "the teacher teaches the here"
+    ]
+   },
+   {
+    "ws": [
+     "baker",
+     "chef"
+    ],
+    "from": [
+     "the here feeds the family",
+     "the here serves the diner"
+    ]
+   },
+   {
+    "ws": [
+     "family",
+     "guest"
+    ],
+    "from": [
+     "the feeds the here"
+    ]
+   },
+   {
+    "ws": [
+     "diner",
+     "student"
+    ],
+    "from": [
+     "the the here"
+    ]
+   },
+   {
+    "ws": [
+     "chef",
+     "cook"
+    ],
+    "from": [
+     "the here feeds the guest"
+    ]
+   }
+  ],
+  "mPure": 0.9285714285714286,
+  "exact": 1
+ },
+ "16": {
+  "S": [
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "baker",
+    "feeds",
+    "the",
+    "family"
+   ],
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "child"
+   ],
+   [
+    "the",
+    "teacher",
+    "guides",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "baker",
+    "serves",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "chef",
+    "serves",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "chef",
+    "feeds",
+    "the",
+    "guest"
+   ],
+   [
+    "the",
+    "coach",
+    "teaches",
+    "the",
+    "trainee"
+   ],
+   [
+    "the",
+    "tutor",
+    "guides",
+    "the",
+    "student"
+   ],
+   [
+    "the",
+    "cook",
+    "feeds",
+    "the",
+    "guest"
+   ],
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "student"
+   ],
+   [
+    "the",
+    "chef",
+    "feeds",
+    "the",
+    "family"
+   ],
+   [
+    "the",
+    "chef",
+    "serves",
+    "the",
+    "guest"
+   ],
+   [
+    "the",
+    "chef",
+    "feeds",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "coach",
+    "guides",
+    "the",
+    "trainee"
+   ],
+   [
+    "the",
+    "tutor",
+    "teaches",
+    "the",
+    "trainee"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here teaches the",
+    "ws": [
+     "teacher",
+     "coach",
+     "tutor"
+    ]
+   },
+   {
+    "k": "the teacher here the",
+    "ws": [
+     "teaches",
+     "guides"
+    ]
+   },
+   {
+    "k": "the teacher teaches the here",
+    "ws": [
+     "pupil",
+     "child",
+     "student"
+    ]
+   },
+   {
+    "k": "the here feeds the",
+    "ws": [
+     "baker",
+     "chef",
+     "cook"
+    ]
+   },
+   {
+    "k": "the here the",
+    "ws": [
+     "feeds",
+     "serves",
+     "guides"
+    ]
+   },
+   {
+    "k": "the feeds the here",
+    "ws": [
+     "family",
+     "guest"
+    ]
+   },
+   {
+    "k": "the here guides the",
+    "ws": [
+     "teacher",
+     "tutor",
+     "coach"
+    ]
+   },
+   {
+    "k": "the guides the here",
+    "ws": [
+     "pupil",
+     "student",
+     "trainee"
+    ]
+   },
+   {
+    "k": "the here serves the diner",
+    "ws": [
+     "baker",
+     "chef"
+    ]
+   },
+   {
+    "k": "the chef serves the here",
+    "ws": [
+     "diner",
+     "guest"
+    ]
+   },
+   {
+    "k": "the chef here the",
+    "ws": [
+     "serves",
+     "feeds"
+    ]
+   },
+   {
+    "k": "the chef feeds the here",
+    "ws": [
+     "guest",
+     "family",
+     "diner"
+    ]
+   },
+   {
+    "k": "the coach here the trainee",
+    "ws": [
+     "teaches",
+     "guides"
+    ]
+   }
+  ],
+  "purity": 1,
+  "completeness": 0.9375,
+  "once": [
+   "child",
+   "cook"
+  ],
+  "onceJoined": [
+   "child",
+   "cook"
+  ],
+  "merged": [
+   {
+    "ws": [
+     "teacher",
+     "coach",
+     "tutor"
+    ],
+    "from": [
+     "the here teaches the",
+     "the here guides the"
+    ]
+   },
+   {
+    "ws": [
+     "pupil",
+     "child",
+     "student",
+     "trainee"
+    ],
+    "from": [
+     "the teacher teaches the here",
+     "the guides the here"
+    ]
+   },
+   {
+    "ws": [
+     "baker",
+     "chef",
+     "cook"
+    ],
+    "from": [
+     "the here feeds the",
+     "the here serves the diner"
+    ]
+   },
+   {
+    "ws": [
+     "family",
+     "guest",
+     "diner"
+    ],
+    "from": [
+     "the feeds the here",
+     "the chef feeds the here",
+     "the chef serves the here"
+    ]
+   }
+  ],
+  "mPure": 1,
+  "exact": 4
+ },
+ "24": {
+  "S": [
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "baker",
+    "feeds",
+    "the",
+    "family"
+   ],
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "child"
+   ],
+   [
+    "the",
+    "teacher",
+    "guides",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "baker",
+    "serves",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "chef",
+    "serves",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "chef",
+    "feeds",
+    "the",
+    "guest"
+   ],
+   [
+    "the",
+    "coach",
+    "teaches",
+    "the",
+    "trainee"
+   ],
+   [
+    "the",
+    "tutor",
+    "guides",
+    "the",
+    "student"
+   ],
+   [
+    "the",
+    "cook",
+    "feeds",
+    "the",
+    "guest"
+   ],
+   [
+    "the",
+    "teacher",
+    "teaches",
+    "the",
+    "student"
+   ],
+   [
+    "the",
+    "chef",
+    "feeds",
+    "the",
+    "family"
+   ],
+   [
+    "the",
+    "chef",
+    "serves",
+    "the",
+    "guest"
+   ],
+   [
+    "the",
+    "chef",
+    "feeds",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "coach",
+    "guides",
+    "the",
+    "trainee"
+   ],
+   [
+    "the",
+    "tutor",
+    "teaches",
+    "the",
+    "trainee"
+   ],
+   [
+    "the",
+    "tutor",
+    "teaches",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "chef",
+    "serves",
+    "the",
+    "family"
+   ],
+   [
+    "the",
+    "tutor",
+    "guides",
+    "the",
+    "trainee"
+   ],
+   [
+    "the",
+    "baker",
+    "feeds",
+    "the",
+    "diner"
+   ],
+   [
+    "the",
+    "mentor",
+    "guides",
+    "the",
+    "pupil"
+   ],
+   [
+    "the",
+    "teacher",
+    "guides",
+    "the",
+    "student"
+   ],
+   [
+    "the",
+    "tutor",
+    "teaches",
+    "the",
+    "child"
+   ],
+   [
+    "the",
+    "cook",
+    "feeds",
+    "the",
+    "diner"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here teaches the",
+    "ws": [
+     "teacher",
+     "coach",
+     "tutor"
+    ]
+   },
+   {
+    "k": "the teacher here the",
+    "ws": [
+     "teaches",
+     "guides"
+    ]
+   },
+   {
+    "k": "the teaches the here",
+    "ws": [
+     "pupil",
+     "child",
+     "trainee",
+     "student"
+    ]
+   },
+   {
+    "k": "the here feeds the",
+    "ws": [
+     "baker",
+     "chef",
+     "cook"
+    ]
+   },
+   {
+    "k": "the here the",
+    "ws": [
+     "feeds",
+     "teaches",
+     "guides"
+    ]
+   },
+   {
+    "k": "the feeds the here",
+    "ws": [
+     "family",
+     "guest",
+     "diner"
+    ]
+   },
+   {
+    "k": "the here guides the",
+    "ws": [
+     "teacher",
+     "tutor",
+     "coach",
+     "mentor"
+    ]
+   },
+   {
+    "k": "the guides the here",
+    "ws": [
+     "pupil",
+     "student",
+     "trainee"
+    ]
+   },
+   {
+    "k": "the here serves the",
+    "ws": [
+     "baker",
+     "chef"
+    ]
+   },
+   {
+    "k": "the here the diner",
+    "ws": [
+     "serves",
+     "feeds"
+    ]
+   },
+   {
+    "k": "the chef serves the here",
+    "ws": [
+     "diner",
+     "guest",
+     "family"
+    ]
+   },
+   {
+    "k": "the chef here the guest",
+    "ws": [
+     "feeds",
+     "serves"
+    ]
+   },
+   {
+    "k": "the tutor here the",
+    "ws": [
+     "guides",
+     "teaches"
+    ]
+   },
+   {
+    "k": "the chef here the family",
+    "ws": [
+     "feeds",
+     "serves"
+    ]
+   }
+  ],
+  "purity": 1,
+  "completeness": 1,
+  "once": [
+   "mentor"
+  ],
+  "onceJoined": [
+   "mentor"
+  ],
+  "merged": [
+   {
+    "ws": [
+     "teacher",
+     "coach",
+     "tutor",
+     "mentor"
+    ],
+    "from": [
+     "the here teaches the",
+     "the here guides the"
+    ]
+   },
+   {
+    "ws": [
+     "pupil",
+     "child",
+     "trainee",
+     "student"
+    ],
+    "from": [
+     "the teaches the here",
+     "the guides the here"
+    ]
+   },
+   {
+    "ws": [
+     "baker",
+     "chef",
+     "cook"
+    ],
+    "from": [
+     "the here feeds the",
+     "the here serves the"
+    ]
+   },
+   {
+    "ws": [
+     "family",
+     "guest",
+     "diner"
+    ],
+    "from": [
+     "the feeds the here",
+     "the chef serves the here"
+    ]
+   }
+  ],
+  "mPure": 1,
+  "exact": 4
+ }
+}

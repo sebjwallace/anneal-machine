@@ -1,0 +1,891 @@
+{
+ "4": {
+  "S": [
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "river",
+    "feeds",
+    "the",
+    "field"
+   ],
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "pot"
+   ],
+   [
+    "the",
+    "sun",
+    "heats",
+    "the",
+    "sea"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here the",
+    "ws": [
+     "sun",
+     "river"
+    ]
+   },
+   {
+    "k": "the sun here the sea",
+    "ws": [
+     "warms",
+     "heats"
+    ]
+   },
+   {
+    "k": "the sun warms the here",
+    "ws": [
+     "sea",
+     "pot"
+    ]
+   }
+  ],
+  "purity": 0.8333333333333334,
+  "completeness": 1,
+  "once": [
+   "river",
+   "field",
+   "pot"
+  ],
+  "onceJoined": [
+   "pot"
+  ]
+ },
+ "8": {
+  "S": [
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "river",
+    "feeds",
+    "the",
+    "field"
+   ],
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "pot"
+   ],
+   [
+    "the",
+    "sun",
+    "heats",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "river",
+    "fills",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stream",
+    "fills",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stream",
+    "feeds",
+    "the",
+    "plant"
+   ],
+   [
+    "the",
+    "stove",
+    "warms",
+    "the",
+    "air"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here warms the",
+    "ws": [
+     "sun",
+     "stove"
+    ]
+   },
+   {
+    "k": "the sun here the sea",
+    "ws": [
+     "warms",
+     "heats"
+    ]
+   },
+   {
+    "k": "the sun warms the here",
+    "ws": [
+     "sea",
+     "pot",
+     "air"
+    ]
+   },
+   {
+    "k": "the here the",
+    "ws": [
+     "river",
+     "feeds",
+     "sun",
+     "fills",
+     "stream",
+     "warms"
+    ]
+   },
+   {
+    "k": "the the here",
+    "ws": [
+     "field",
+     "tree",
+     "plant"
+    ]
+   },
+   {
+    "k": "the here fills the tree",
+    "ws": [
+     "river",
+     "stream"
+    ]
+   }
+  ],
+  "purity": 0.8333333333333334,
+  "completeness": 1,
+  "once": [
+   "field",
+   "pot",
+   "plant",
+   "stove",
+   "air"
+  ],
+  "onceJoined": [
+   "field",
+   "pot",
+   "plant",
+   "stove",
+   "air"
+  ]
+ },
+ "12": {
+  "S": [
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "river",
+    "feeds",
+    "the",
+    "field"
+   ],
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "pot"
+   ],
+   [
+    "the",
+    "sun",
+    "heats",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "river",
+    "fills",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stream",
+    "fills",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stream",
+    "feeds",
+    "the",
+    "plant"
+   ],
+   [
+    "the",
+    "stove",
+    "warms",
+    "the",
+    "air"
+   ],
+   [
+    "the",
+    "fire",
+    "heats",
+    "the",
+    "room"
+   ],
+   [
+    "the",
+    "rain",
+    "feeds",
+    "the",
+    "plant"
+   ],
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "room"
+   ],
+   [
+    "the",
+    "stream",
+    "feeds",
+    "the",
+    "field"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here warms the",
+    "ws": [
+     "sun",
+     "stove"
+    ]
+   },
+   {
+    "k": "the sun here the",
+    "ws": [
+     "warms",
+     "heats"
+    ]
+   },
+   {
+    "k": "the sun warms the here",
+    "ws": [
+     "sea",
+     "pot",
+     "air",
+     "room"
+    ]
+   },
+   {
+    "k": "the here feeds the field",
+    "ws": [
+     "river",
+     "stream"
+    ]
+   },
+   {
+    "k": "the here the",
+    "ws": [
+     "feeds",
+     "sun",
+     "fills",
+     "warms",
+     "fire",
+     "heats"
+    ]
+   },
+   {
+    "k": "the feeds the here",
+    "ws": [
+     "field",
+     "plant"
+    ]
+   },
+   {
+    "k": "the here fills the tree",
+    "ws": [
+     "river",
+     "stream"
+    ]
+   },
+   {
+    "k": "the the here",
+    "ws": [
+     "tree",
+     "room"
+    ]
+   },
+   {
+    "k": "the stream here the",
+    "ws": [
+     "fills",
+     "feeds"
+    ]
+   },
+   {
+    "k": "the here feeds the plant",
+    "ws": [
+     "stream",
+     "rain"
+    ]
+   }
+  ],
+  "purity": 0.8846153846153846,
+  "completeness": 0.7499999999999999,
+  "once": [
+   "pot",
+   "stove",
+   "air",
+   "fire",
+   "rain"
+  ],
+  "onceJoined": [
+   "pot",
+   "stove",
+   "air",
+   "fire",
+   "rain"
+  ]
+ },
+ "16": {
+  "S": [
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "river",
+    "feeds",
+    "the",
+    "field"
+   ],
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "pot"
+   ],
+   [
+    "the",
+    "sun",
+    "heats",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "river",
+    "fills",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stream",
+    "fills",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stream",
+    "feeds",
+    "the",
+    "plant"
+   ],
+   [
+    "the",
+    "stove",
+    "warms",
+    "the",
+    "air"
+   ],
+   [
+    "the",
+    "fire",
+    "heats",
+    "the",
+    "room"
+   ],
+   [
+    "the",
+    "rain",
+    "feeds",
+    "the",
+    "plant"
+   ],
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "room"
+   ],
+   [
+    "the",
+    "stream",
+    "feeds",
+    "the",
+    "field"
+   ],
+   [
+    "the",
+    "stream",
+    "fills",
+    "the",
+    "plant"
+   ],
+   [
+    "the",
+    "stream",
+    "feeds",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stove",
+    "heats",
+    "the",
+    "air"
+   ],
+   [
+    "the",
+    "fire",
+    "warms",
+    "the",
+    "air"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here warms the",
+    "ws": [
+     "sun",
+     "stove",
+     "fire"
+    ]
+   },
+   {
+    "k": "the sun here the",
+    "ws": [
+     "warms",
+     "heats"
+    ]
+   },
+   {
+    "k": "the sun warms the here",
+    "ws": [
+     "sea",
+     "pot",
+     "room"
+    ]
+   },
+   {
+    "k": "the here feeds the",
+    "ws": [
+     "river",
+     "stream",
+     "rain"
+    ]
+   },
+   {
+    "k": "the here the",
+    "ws": [
+     "feeds",
+     "fills",
+     "heats"
+    ]
+   },
+   {
+    "k": "the feeds the here",
+    "ws": [
+     "field",
+     "plant"
+    ]
+   },
+   {
+    "k": "the here heats the",
+    "ws": [
+     "sun",
+     "fire",
+     "stove"
+    ]
+   },
+   {
+    "k": "the heats the here",
+    "ws": [
+     "sea",
+     "room",
+     "air"
+    ]
+   },
+   {
+    "k": "the here fills the tree",
+    "ws": [
+     "river",
+     "stream"
+    ]
+   },
+   {
+    "k": "the stream fills the here",
+    "ws": [
+     "tree",
+     "plant"
+    ]
+   },
+   {
+    "k": "the stream here the",
+    "ws": [
+     "fills",
+     "feeds"
+    ]
+   },
+   {
+    "k": "the stream feeds the here",
+    "ws": [
+     "plant",
+     "field",
+     "tree"
+    ]
+   },
+   {
+    "k": "the stove here the air",
+    "ws": [
+     "warms",
+     "heats"
+    ]
+   }
+  ],
+  "purity": 1,
+  "completeness": 0.9375,
+  "once": [
+   "pot",
+   "rain"
+  ],
+  "onceJoined": [
+   "pot",
+   "rain"
+  ]
+ },
+ "24": {
+  "S": [
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "river",
+    "feeds",
+    "the",
+    "field"
+   ],
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "pot"
+   ],
+   [
+    "the",
+    "sun",
+    "heats",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "river",
+    "fills",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stream",
+    "fills",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stream",
+    "feeds",
+    "the",
+    "plant"
+   ],
+   [
+    "the",
+    "stove",
+    "warms",
+    "the",
+    "air"
+   ],
+   [
+    "the",
+    "fire",
+    "heats",
+    "the",
+    "room"
+   ],
+   [
+    "the",
+    "rain",
+    "feeds",
+    "the",
+    "plant"
+   ],
+   [
+    "the",
+    "sun",
+    "warms",
+    "the",
+    "room"
+   ],
+   [
+    "the",
+    "stream",
+    "feeds",
+    "the",
+    "field"
+   ],
+   [
+    "the",
+    "stream",
+    "fills",
+    "the",
+    "plant"
+   ],
+   [
+    "the",
+    "stream",
+    "feeds",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "stove",
+    "heats",
+    "the",
+    "air"
+   ],
+   [
+    "the",
+    "fire",
+    "warms",
+    "the",
+    "air"
+   ],
+   [
+    "the",
+    "fire",
+    "warms",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "stream",
+    "fills",
+    "the",
+    "field"
+   ],
+   [
+    "the",
+    "fire",
+    "heats",
+    "the",
+    "air"
+   ],
+   [
+    "the",
+    "river",
+    "feeds",
+    "the",
+    "tree"
+   ],
+   [
+    "the",
+    "lamp",
+    "heats",
+    "the",
+    "sea"
+   ],
+   [
+    "the",
+    "sun",
+    "heats",
+    "the",
+    "room"
+   ],
+   [
+    "the",
+    "fire",
+    "warms",
+    "the",
+    "pot"
+   ],
+   [
+    "the",
+    "rain",
+    "feeds",
+    "the",
+    "tree"
+   ]
+  ],
+  "G": [
+   {
+    "k": "the here warms the",
+    "ws": [
+     "sun",
+     "stove",
+     "fire"
+    ]
+   },
+   {
+    "k": "the sun here the",
+    "ws": [
+     "warms",
+     "heats"
+    ]
+   },
+   {
+    "k": "the warms the here",
+    "ws": [
+     "sea",
+     "pot",
+     "air",
+     "room"
+    ]
+   },
+   {
+    "k": "the here feeds the",
+    "ws": [
+     "river",
+     "stream",
+     "rain"
+    ]
+   },
+   {
+    "k": "the here the",
+    "ws": [
+     "feeds",
+     "warms",
+     "heats"
+    ]
+   },
+   {
+    "k": "the feeds the here",
+    "ws": [
+     "field",
+     "plant",
+     "tree"
+    ]
+   },
+   {
+    "k": "the here heats the",
+    "ws": [
+     "sun",
+     "fire",
+     "stove",
+     "lamp"
+    ]
+   },
+   {
+    "k": "the heats the here",
+    "ws": [
+     "sea",
+     "room",
+     "air"
+    ]
+   },
+   {
+    "k": "the here fills the",
+    "ws": [
+     "river",
+     "stream"
+    ]
+   },
+   {
+    "k": "the here the tree",
+    "ws": [
+     "fills",
+     "feeds"
+    ]
+   },
+   {
+    "k": "the stream fills the here",
+    "ws": [
+     "tree",
+     "plant",
+     "field"
+    ]
+   },
+   {
+    "k": "the stream here the plant",
+    "ws": [
+     "feeds",
+     "fills"
+    ]
+   },
+   {
+    "k": "the fire here the",
+    "ws": [
+     "heats",
+     "warms"
+    ]
+   },
+   {
+    "k": "the stream here the field",
+    "ws": [
+     "feeds",
+     "fills"
+    ]
+   }
+  ],
+  "purity": 1,
+  "completeness": 1,
+  "once": [
+   "lamp"
+  ],
+  "onceJoined": [
+   "lamp"
+  ]
+ }
+}

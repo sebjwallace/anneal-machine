@@ -1,0 +1,66 @@
+Sketch 38 pre-registration. Written 2026-11-09 after smoke runs on development seed 1 only, before any run on seeds 101-105.
+
+What the dev seed was used for (design changes made while looking at seed 1; recorded so they are not hidden):
+  1. First event design = the bag of distinct words of a sentence. Both versions failed for reasons unrelated to membership:
+     "the c is in" is 4/5 of both "the c is in the r" and "the o is in the c", so facts and new-container transfer tested
+     role confusion. FIX: the base's own held-state units (sketch 20c step(): sequence prev x cur and subject x cur
+     conjunctions, cell level and column level) join the co-active set as presynaptic units. CTX=0 keeps the first design
+     as a pre-registered control.
+  2. Summed links with fit-normalisation (sketch 29) gave 0% recall: hub cells (a container in dozens of episodes) lose to
+     rarely-used cells after dividing by total link weight. Kept as the hypothesis' named baseline (sum fit); added the raw
+     sums of sketch 20c (sum raw) as the fair summed baseline.
+  3. Segments of 16 sampled synapses blended almost always (a 3/5-overlapping episode reaches 12 of 16 about 14% of the
+     time per segment; OR over dozens of segments per hub cell makes it near certain). Added SEGN=all (the segment is the
+     whole co-active set, still not chosen by code) and CAST=1 (fired cells compete in the same casting as sum) as arms.
+  4. Speed only: growth gate checks the cell's own segments directly; synapse order shuffled; probes capped per seed.
+  Dev results seen for: every main arm at CPC 2, 8, 16 (M sweep); THETA 0.5 and 0.9; SAMPLE=rare; CTX=0 at CPC 8.
+
+Frozen settings (sketch.js as of this file):
+  substrate: 400 columns x CPC cells; K=8 columns per word (4 own + 4 learnt by affinity, sketch 19/20 rule, unchanged);
+    one cell per (word, column) by the least-owned rule (sketch 20b); no growth of columns. Codes learnt online.
+  world: sketch 20's generator (800 base sentences + ambiguous "j0"), plus M episode objects x0..x(M-1), each with one
+    "the x is in the c" (c random of 9 containers, first 60% of the stream), one "on" and one "has" sentence. No chain
+    consequences. Base sentences identical across M for a seed.
+  event (training): each sentence; co-active units = assembly cells + column units of every word except "." + the
+    sequence and subject conjunction units from stepping through the sentence (CTX=1).
+  sum: w(unit -> cell) += 0.2(1-w) for every co-active unit and co-active cell (not own cell / own column).
+    Completion: cue held; drive = sum of links from active units (NORM=raw) or that divided by the cell's total incoming
+    weight (NORM=fit); casting = one winner per column, 8 columns, cue cells excluded; up to 5 castings.
+  seg: a co-active cell with no segment whose synapses are ALL active grows one segment: SEGN units sampled uniformly from
+    the other co-active units (own cell and own column excluded). SEGN=16 or all. No strengths, no pruning.
+    Fires when >= THETA of its synapses are active (THETA=0.75, from finding 04). Completion: cue held; fired cells and
+    their columns join the active set; up to 5 rounds; only segments with an active input are counted (index).
+    CAST=1: drive = best firing segment's active share; same casting as sum.
+  scoring (identical for all): candidates = words not in the cue; read-out = candidate with the largest share of its
+    assembly cells active, if >= 1/2 and strictly the largest. Blend = another candidate with >= 1/2 of its distinctive
+    cells active (cells not in the answer's assembly or the cue; needs >= 2). Strict = right and no blend.
+  probes (learning off, after the whole stream): episode "the x is in the" -> its container (100 sampled x per seed);
+    fact "the c is in the" -> its room (9 containers); kind: held-out containers -> a room (3), held-out objects -> a
+    container (4), seen objects -> a container (20); partial: x shows 4 of 8 cells (50 per seed), bare cue "x in" (50);
+    split: the frame with half of x_A's cells plus the frame with half of x_B's cells, different answers (50 pairs).
+  capacity: largest M in {25,50,100,200,400} before pooled strict episode recall falls below 75% (also reported at 50%).
+  seeds 101-105. Each run is split in two (M 25-200, M 400) to keep runs near a minute.
+
+Runs (runall.sh):
+  main grid, CPC in {2,4,8,16}: sum fit, sum raw, seg16, seg all, seg16 + cast, seg all + cast.
+  CPC 8 only: seg all THETA 0.6, 0.7, 0.8; seg16 SAMPLE=rare; seg all CTX=0; sum raw CTX=0.
+  "Membership segments" in the predictions = seg all, CAST=0 (the hypothesis' mechanism with no casting). "Summed" = sum raw
+  (the stronger summed baseline on dev); sum fit is reported but expected to fail at every CPC (dev: 0%).
+
+Predictions (hypothesis 06), with what dev seed 1 suggested:
+ P1 blends: at CPC 2 and 4, M >= 100, episode blend rate of seg all is at least 10 points below sum raw.
+    Dev: CPC 2 seg all 11-18% vs sum raw 16-88%. Expected to hold at CPC 2; CPC 4 unknown.
+ P2 capacity: at CPC 2 and 4, capacity (75% level) of seg all > capacity of sum raw, and at the 50% level at least 2x.
+    Dev: at CPC 2 seg all ~71% across all M, sum raw <= 34%. Expected: holds at the 50% level, 75% level unclear.
+ P3a partial: "x at 4 of 8 cells" strict recall of seg all >= 60%. Dev: 0% (dropping half of x's cells removes more than
+    a quarter of each segment's inputs). Expected to FAIL.
+ P3b split: seg all "both answers" <= 5% and "neither" >= 80%; sum raw "both" higher than seg all.
+    Dev: seg all neither 100%; sum raw gives exactly one answer ~90% and "both" 0-9%. Expected: first part holds,
+    second part (sum raw blends more) may fail: sum raw picks one rather than blending.
+ P4 kind: seg all new container -> room >= 60% and new object -> container >= 60%. Dev: 0%. Expected to FAIL.
+ P5 cost: at M=400, segments checked per probe <= 25% of segments stored (the index prunes). Dev: ~100% (frame and
+    sequence units are inputs to almost every segment). Expected to FAIL. SAMPLE=rare dev: ~10%.
+ Against (from the hypothesis): segments not reducing blends at small CPC; capacity not above sum raw; kind lost; cost
+    growing with stored assemblies. Differences of a few points on small sets (9 facts, 3 / 4 held-out words per seed)
+    are noise.
+Anything changed after looking at test-seed results will be marked post hoc in NOTE.md.

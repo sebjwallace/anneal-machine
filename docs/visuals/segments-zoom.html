@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Segments, zoomed in: one cell, three memories</title>
+<style>
+:root{--bg:#fff;--text:#1f1e1d;--text-primary:#1f1e1d;--text-secondary:#6b6a65;--border:rgba(0,0,0,.15);--border2:rgba(0,0,0,.3);--border-stronger:rgba(0,0,0,.55);--surface-1:#f5f4f0}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1e1d;--text:#ecebe6;--text-primary:#ecebe6;--text-secondary:#a3a29c;--border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.3);--border-stronger:rgba(255,255,255,.6);--surface-1:#2a2a28}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:2rem auto;padding:0 1rem}
+h1{font-size:20px;font-weight:500;margin:0 0 .25rem}
+.sub{color:var(--text-secondary);font-size:14px;margin:0 0 1rem}
+button{font:inherit;font-size:14px;color:var(--text);background:transparent;border:.5px solid var(--border2);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover,.tg button.on{background:var(--surface-1)}
+.tg button.on{border-color:var(--border-stronger)}
+section.story{margin:2rem 0 3rem;font-size:15px;line-height:1.65}
+section.story h2{font-size:17px;font-weight:500;margin:1.5rem 0 .4rem}
+section.story p{margin:.4rem 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Segments, zoomed in: one cell, three memories</h1>
+<p class="sub">One cell that belongs to three assemblies: what goes wrong when its links are pooled, and how segments fix it. Drawn by hand to show the idea; not a run of the engine.</p>
+<div class="tg" style="display:flex;gap:8px;align-items:center;margin:0 0 10px">
+<span style="font-size:13px;color:var(--text-secondary)">The cell's links</span>
+<button id="m0" onclick="setM(0)">In one pool</button>
+<button id="m1" onclick="setM(1)">On segments</button>
+</div>
+<svg id="sv" width="100%" viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg"></svg>
+<div style="display:flex;align-items:center;gap:12px;margin:8px 0 4px">
+<button onclick="step(-1)">&larr; Back</button>
+<button onclick="step(1)">Next &rarr;</button>
+<span id="pos" style="font-size:13px;color:var(--text-secondary)"></span>
+</div>
+<p id="cap" style="font-size:15px;line-height:1.6;min-height:4.8em;margin:6px 0 10px"></p>
+<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--text-secondary);border-top:0.5px solid var(--border);padding-top:10px">
+<span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="#888780"/></svg> a cell elsewhere, quiet</span>
+<span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="#1D9E75"/></svg> active</span>
+<span><svg width="10" height="10"><circle cx="5" cy="5" r="3.5" fill="#888780"/></svg> a link (synapse) onto our cell</span>
+<span><svg width="26" height="12"><line x1="2" y1="6" x2="24" y2="6" stroke="#888780" stroke-width="3" stroke-linecap="round"/></svg> a segment: one memory's links</span>
+<span>A cell or segment wakes at 2 active links</span>
+</div>
+<section class="story">
+<h2>How to walk through it</h2>
+<p>The toggle keeps you on the same step, so flip it to compare. On step 1 with <b>In one pool</b>: one cell in the middle, with nine links from three groups (cells of A, C and F), all landing in a ring on the cell. Press <b>Next</b>: one cell from each group lights. The pool counts three, and the middle cell turns red: it has woken for a memory that isn't there. Press <b>On segments</b>: the same nine links now sit on three branches, each counting only one, so none fires and the cell stays quiet. Press <b>Next</b> again: two cells of A light. In both modes the cell wakes, in teal. With segments, A's branch says "2: fires", so you also know which memory woke it.</p>
+<h2>What it shows</h2>
+<p>A cell that belongs to several assemblies, zoomed in. With all its links in one pool, activity from different memories adds up and wakes it falsely. With its links sorted onto segments, one per memory, each segment counts only its own links: an AND of them. The cell wakes if any segment fires: an OR of its segments. Noise from several memories is never added together. The bigger picture, with columns of segmented cells, is in <a href="segments.html">segments</a>.</p>
+<h2>Where it comes from</h2>
+<p>The owner's dendritic-segments idea (C35), where pooling gave about 80% wrong recalls with five things stored; CTR-1 CON-9.</p>
+</section>
+</main>
+<script>
+const C0=[340,236],R0=16,G='#888780',TH=2;
+const GR=[{n:'A',col:'#1D9E75',src:[[70,70],[120,40],[160,92]],end:[250,168]},{n:'C',col:'#7F77DD',src:[[290,40],[340,22],[390,40]],end:[340,146]},{n:'F',col:'#D4537E',src:[[520,92],[560,40],[610,70]],end:[430,168]}];
+let mode=0,k=0;
+const STEP=[[],[[0,0],[1,1],[2,2]],[[0,0],[0,2]]];
+function syn(){const out=[];
+ GR.forEach((g,gi)=>g.src.forEach((s,si)=>{let p;
+  if(mode===0){const ang=(200+(gi*3+si)*17.5)*Math.PI/180;p=[C0[0]+Math.cos(ang)*(R0+12),C0[1]+Math.sin(ang)*(R0+12)]}
+  else{const t=[.5,.72,.94][si];p=[C0[0]+(g.end[0]-C0[0])*t,C0[1]+(g.end[1]-C0[1])*t]}
+  out.push({gi,si,p,s,col:g.col})}));return out}
+function draw(){const act=STEP[k],isA=(gi,si)=>act.some(([a,b])=>a===gi&&b===si);let s='';
+ const S=syn();
+ S.forEach(o=>{const on=isA(o.gi,o.si);s+=`<line x1="${o.s[0]}" y1="${o.s[1]}" x2="${o.p[0]}" y2="${o.p[1]}" stroke="${o.col}" stroke-width="${on?1.6:.8}" opacity="${on?.95:.3}"/>`});
+ if(mode===1)GR.forEach(g=>{const a=[C0[0]+(g.end[0]-C0[0])*.25,C0[1]+(g.end[1]-C0[1])*.25];s+=`<line x1="${a[0]}" y1="${a[1]}" x2="${g.end[0]}" y2="${g.end[1]}" stroke="${G}" stroke-width="3" stroke-linecap="round" opacity=".6"/>`});
+ S.forEach(o=>{const on=isA(o.gi,o.si);s+=`<circle cx="${o.p[0]}" cy="${o.p[1]}" r="3.6" fill="${on?o.col:G}" opacity="${on?1:.55}"/>`});
+ GR.forEach((g,gi)=>{g.src.forEach((p,si)=>{const on=isA(gi,si);s+=`<circle cx="${p[0]}" cy="${p[1]}" r="7" fill="${on?g.col:'none'}" stroke="${on?g.col:G}" stroke-width="1"/>`});
+  const lx=gi==0?60:gi==1?330:560,ly=gi==1?12:120;s+=`<text x="${lx}" y="${ly}" style="font-size:12px;fill:var(--text-secondary)">cells of ${g.n}</text>`});
+ const cnt=GR.map((g,gi)=>act.filter(([a])=>a===gi).length),tot=act.length;
+ let woke=false;
+ if(mode===0){woke=tot>=TH;s+=`<text x="${C0[0]+30}" y="${C0[1]+5}" style="font-size:13px;fill:var(--text-primary)">${tot} active in the pool</text>`}
+ else{GR.forEach((g,gi)=>{const f=cnt[gi]>=TH;if(f)woke=true;const e=g.end;s+=`<text x="${gi==0?e[0]-68:gi==1?e[0]+12:e[0]+10}" y="${gi==1?e[1]+4:e[1]+18}" style="font-size:12px;fill:${f?g.col:'var(--text-secondary)'}">${cnt[gi]}${f?': fires':''}</text>`})}
+ const real=cnt.some(c=>c>=TH);
+ const fill=!woke?'none':(real?'#1D9E75':'#E24B4A');
+ s+=`<circle cx="${C0[0]}" cy="${C0[1]}" r="${R0}" fill="${fill}" stroke="${woke?fill:G}" stroke-width="1.5"/>`;
+ s+=`<text x="${C0[0]}" y="${C0[1]+40}" text-anchor="middle" style="font-size:13px;fill:${woke&&!real?'#E24B4A':'var(--text-primary)'}">${!woke?'our cell: quiet':real?'our cell: wakes, for A':'our cell: wakes, falsely'}</text>`;
+ document.getElementById('sv').innerHTML=s;
+ const CAP=[[
+ 'Zoom in on one cell. It belongs to three assemblies, A, C and F, so it has links from three cells of each: nine links. Here they all land in one pool on the cell.',
+ 'Scattered activity: one cell of A, one of C and one of F are active. No memory is really here; that is just noise from three different things.',
+ 'Two cells of A are active: memory A really is here. The pool counts 2 and the cell wakes, correctly this time, but it cannot tell which memory woke it.'],[
+ 'The same cell with the same nine links, now sorted onto segments: one branch per memory, holding that memory’s links. A segment fires when two or more of its own links are active.',
+ 'The same scattered activity: one active link on each segment. No segment reaches two, so none fires, and the cell stays quiet. The noise from three memories is never added together.',
+ 'Two cells of A are active. A’s segment reaches two and fires, so the cell wakes, and which segment fired says it was A.']];
+ let c=CAP[mode][k];if(mode===0&&k===1)c+=' The pool adds them up: 3 active links, past the 2 needed, so the cell wakes. It woke for a memory that isn’t there.';
+ document.getElementById('cap').textContent=c;document.getElementById('pos').textContent='Step '+(k+1)+' of 3';
+ document.getElementById('m0').classList.toggle('on',mode===0);document.getElementById('m1').classList.toggle('on',mode===1)}
+function setM(m){mode=m;draw()}
+function step(d){k=Math.max(0,Math.min(2,k+d));draw()}
+draw();
+</script>
+</body>
+</html>
