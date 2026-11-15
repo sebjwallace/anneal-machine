@@ -2,7 +2,13 @@
 
 Grouped by where they came up. Nothing here is started.
 
-## Next experiment (from C88, 15 November 2026)
+## Next experiment (from C89, 15 November 2026)
+- **The size of the aha, preregistered; and closing the loop.** C89 saw, after the fact, a matching context make
+  "cat mammal" meet on twice as many cells. Test that on its own. Then let warmth come from the fast volume's own
+  activity (C86's wiring) rather than a given context, let it fade as the poles stop turning, and let the meeting cause
+  the sink.
+
+## Done in part (C89, 15 November 2026)
 - **A primed deep, and a bar that knows support.** C88 lowered the bar evenly on both fronts and got locality but no
   graded aha. Try the owner's expectation: the deep already partly active (primed by what is standing), so a fitting
   piece needs the bar lowered little; and a bar that drops more slowly where there is more support. Then close the

@@ -99,6 +99,20 @@ line to flow along, and that is where insight, ideas and understanding come from
 clarity. Such a link settles at once, sinks, and slots into place, like a falling piece in a game of Tetris finding the
 gap it fits.
 
+How does the deep know where a piece belongs? Go back to the poles. Driven by what comes in, the arms switch,
+reconnect and reconfigure, and the poles turn with them, some fast, some slowly, and some not at all, because they have
+nothing to do with what is going on. Where a pole turns in the socket that holds it there is friction, and friction is
+warmth: the surface moving while the deep holds still, a mismatch between the two. Each pole runs from the arms at the
+surface all the way down into the deep it stands on, so that warmth travels down it and wakes the deep around its
+foot. This is **priming**. The more the surface moves, the more the deep below it is warmed, and only where it moves:
+the still poles stay cool. When what moves at the surface is related, the warm patches below overlap and the priming
+gathers into a focus. When it is unrelated, the warmth spreads thin.
+
+So when a piece settles at the surface and starts to sink, it falls towards ground that is already warm where it
+belongs. And the piece is still warm itself, not yet fully cooled. Think of joining two pieces of metal: both are warm
+where they meet, and that residual heat lets them shape to each other and bond, and then they cool together. A warm
+piece meeting a warm, welcoming place is what lets it slot in without the deep having to be heated far.
+
 So **sinking is agreement and rising is disagreement.** Heat between new and old keeps the new at the surface; fit
 lets it fall.
 
@@ -152,6 +166,10 @@ structure stands for solutions: the machines fixed properly, not patched.
 - **Lowering the bar** (C88, primitive). Letting the deep's settling through one round at a time from each end gave
   the aha a place: the fronts met in a small lit region. Near and far showed only faintly, and the size of the aha
   wasn't graded yet; a primed deep may change that.
+- **Priming** (C89). A context warms the deep where it touches, and a fitting piece then met sooner where there was
+  room, or on more at once where there was not (twice as many cells: warm meeting warm). Contexts about something else
+  changed nothing, and priming never made an unconnected link meet. Getting it right took three rules: warmth never
+  wakes anything alone, it flows once the new piece reaches it, and the piece is never warm ground itself.
 - **Both depths of change.** C82 to C85 all work on the slow depth, the bonds. The fast depth, active assemblies
   shifting and cascading without changing a bond, needs assemblies that persist, which the core doesn't have yet
   ([persistent assemblies](persistent-assemblies.md)).
@@ -167,6 +185,9 @@ structure stands for solutions: the machines fixed properly, not patched.
   two kinds of thing.
 - **Structure that holds heat must heat up again,** so a patch can melt. No structure may be exempt from the measure.
 - **Not all heat becomes structure.** What never settles flows through and out.
+- **Priming from the surface.** What turns at the surface warms the deep beneath it, so the deep is ready where a
+  piece is likely to land: the bar barely has to drop where it is already warm. Related activity focuses the warmth;
+  unrelated activity spreads it.
 - **Sink what fits; hold up what conflicts; let go of what never settles.** A new link sinks when the settled structure
   already connects its two ends; it stays at the surface while it conflicts; it evaporates if it never settles, rather
   than being patched into place with a rationale.

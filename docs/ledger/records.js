@@ -632,5 +632,12 @@ const LEDGER = [
     lessons: [{ code: 'CLM-39', kind: 'CLM', text: 'Letting the deep\'s settling through one round at a time gives it locality: the dots connect in a small lit region.' }],
     contract: [['CTR-1 CAP-1', 'shaped'], ['CTR-1 CON-18', 'confirmed'], ['CTR-2 CON-7', 'confirmed']],
     lesson: 'The bar gives the aha a place; a primed deep may give it a size.' },
+  { code: 'HYP-39', era: 7, open: 'Priming from the surface (the owner\'s): the poles that turn at the surface warm the deep beneath them, so a new piece meets warm, welcoming ground: warmth helps a deep cell wake alongside the new piece, never by itself, and once reached joins the front.',
+    heat: 'C88: lowered from cold and evenly, the bar gave locality but no graded fit.',
+    exps: ['C89'], given: 'The world, teaching and contexts; a blank before every input; the deep gated during the context; warmth lasting the whole context.',
+    close: { code: 'OUT-49', kind: 'OUT', verdict: 'partly', text: 'A matching context brought the meeting sooner where there was room ("fish mammal" after swimming, 3 of 5 seeds: the preregistered 4 of 5 fails) and, seen after the fact, bigger where there was not ("cat mammal" after walking met on 8.8 cells against 3.8). Mismatched and unrelated contexts changed nothing; unconnected links never met in any context. Three fixes after the development seed brought the code into line with the model: warmth never wakes anything alone, flows once reached, and is never the piece itself.' },
+    lessons: [{ code: 'CLM-40', kind: 'CLM', text: 'Priming is selective and invents nothing: warm ground welcomes a piece that fits, and can\'t make one fit.' }, { code: 'PAT-15', kind: 'PAT', text: 'Write the rule as a model before the code, and when the code disagrees with the result, check it against the model first.' }],
+    contract: [['CTR-1 CAP-10', 'shaped'], ['CTR-1 CAP-1', 'shaped'], ['CTR-1 CON-18', 'confirmed'], ['CTR-2 CON-7', 'confirmed']],
+    lesson: 'Warm meets warm: where the deep is primed, a fitting piece lands sooner or takes hold more widely.' },
 ];
 module.exports = { LEDGER };

@@ -1,0 +1,28 @@
+seeds 101,102,103,104,105
+== context: none (warm things: 0) ==
+"cat mammal": met in 5 of 5, at step 2.0 (range 2-2), sharing 3.8 cells and 0.6 whole things (walks)
+"fish mammal": met in 5 of 5, at step 2.6 (range 2-3), sharing 3.2 cells and 0.0 whole things (none)
+"cat flies": met in 0 of 5
+"bird walks": met in 0 of 5
+== context: walking (warm things: 4) ==
+"cat mammal": met in 5 of 5, at step 2.0 (range 2-2), sharing 8.8 cells and 0.8 whole things (walks)
+"fish mammal": met in 5 of 5, at step 2.6 (range 2-3), sharing 3.6 cells and 0.0 whole things (none)
+"cat flies": met in 0 of 5
+"bird walks": met in 0 of 5
+== context: swimming (warm things: 3) ==
+"cat mammal": met in 5 of 5, at step 2.0 (range 2-2), sharing 3.8 cells and 0.6 whole things (walks)
+"fish mammal": met in 5 of 5, at step 2.0 (range 2-2), sharing 4.0 cells and 0.0 whole things (none)
+"cat flies": met in 0 of 5
+"bird walks": met in 0 of 5
+== context: flying (warm things: 2) ==
+"cat mammal": met in 5 of 5, at step 2.0 (range 2-2), sharing 3.8 cells and 0.6 whole things (walks)
+"fish mammal": met in 5 of 5, at step 2.6 (range 2-3), sharing 3.2 cells and 0.0 whole things (none)
+"cat flies": met in 0 of 5
+"bird walks": met in 0 of 5
+
+"cat mammal" with flying against none: sooner 0, same 5, later 0, no longer met 0
+"fish mammal" with flying against none: sooner 0, same 5, later 0, no longer met 0
+"cat mammal" with walking against none: sooner 0, same 5, later 0, no longer met 0
+"cat mammal" with swimming against none: sooner 0, same 5, later 0, no longer met 0
+"fish mammal" with swimming against none: sooner 3, same 2, later 0, no longer met 0
+"fish mammal" with walking against none: sooner 0, same 5, later 0, no longer met 0

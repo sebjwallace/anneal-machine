@@ -1,0 +1,24 @@
+C89 · Priming from the surface. Written 15 November 2026 after runs on development seed 1 (dev.txt), before any run on
+test seeds 101-105. Settings in run.js; the rule in model.md.
+
+Declared changes after looking at the development seed, each bringing the code into line with model.md:
+  1. Warm cells first spread on their own, waking the whole connected world, so nothing was left to count. Fixed:
+     a segment fires only if something not warm touches it (model.md: warmth helps a cell wake alongside the new
+     piece, never by itself).
+  2. The front's activity could not pass through warm cells, and warm cells were never counted as meeting points, so
+     a matching context stopped meetings altogether. Fixed: a warm cell the front reaches joins the front and counts
+     (the warm, welcoming place).
+  3. The piece's own cells were marked warm when it had been in the context, so it could start nothing. Fixed: the
+     piece is never warm ground.
+
+Seen on dev seed 1 after the fixes: "cat mammal" met at step 2 after walking, 3 with no context; "fish mammal" at 2
+after swimming, 3 with none; mismatched and flying contexts left both at 3; "cat flies" and "bird walks" never met.
+
+Predictions (test seeds 101-105, seed by seed against no context):
+  P1  A matching context brings the meeting sooner: "cat mammal" after walking and "fish mammal" after swimming, each
+      in >= 4 of 5 seeds.
+  P2  A mismatched context (cat mammal after swimming, fish mammal after walking) is never sooner, and the link still
+      meets, in 5 of 5 seeds.
+  P3  "cat flies" and "bird walks" meet in no seed and no context.
+  P4  The flying context leaves both connected links' meeting step the same as with no context, in 5 of 5 seeds.
+Nothing will be changed after looking at test seeds.
