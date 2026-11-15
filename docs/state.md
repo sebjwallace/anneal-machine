@@ -4,6 +4,10 @@ The handover document: what the engine is, how each part works and **why** it wo
 
 > **Since this was written (13 Nov 2026):** experiments C33–C58 built the other half of the cycle (joining routes never walked, checking plans against remembered experiences, context from above) on an integrated engine copy, the branch. Read [checkpoint 11](checkpoints/11-thinking.md) next: it says what held up, what didn't, the branch's choices still to declare, and where to pick up. The core is unchanged apart from one bug fix.
 
+> **Since then (15 Nov 2026):** [checkpoint 12](checkpoints/12-flow.md) covers C82-C91: heat in three shapes (in the
+> core as `Moment.heat`), the owner's [flow and heat](theories/flow-and-heat.md) premise, two volumes (poles and arms),
+> sinking by fit, priming, and the whole cycle in one machine.
+
 > **Starting a new session?** Read the latest [handoff](handoff/README.md) first.
 >
 > **Rewriting or reworking the core?** Read the [reference models](reference-models/README.md) first: how to build each part in the cells-first design ([cells first](theories/cells-first.md)), with the evidence for each. The older [column guide](guides/the-column.md) describes the engine as it was built: the theory, the principles a column must keep, and what a rewrite may and may not change.
