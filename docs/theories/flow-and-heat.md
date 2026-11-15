@@ -170,6 +170,9 @@ structure stands for solutions: the machines fixed properly, not patched.
   room, or on more at once where there was not (twice as many cells: warm meeting warm). Contexts about something else
   changed nothing, and priming never made an unconnected link meet. Getting it right took three rules: warmth never
   wakes anything alone, it flows once the new piece reaches it, and the piece is never warm ground itself.
+- **Warm meets warm, confirmed** (C90). Predicted first, on fresh seeds and new animals: after a matching context the
+  walkers' pieces took hold on all of "walks", more than twice as much as on cold ground, in every seed. A context
+  touching only one end of a link helped a little; one touching neither, not at all.
 - **Both depths of change.** C82 to C85 all work on the slow depth, the bonds. The fast depth, active assemblies
   shifting and cascading without changing a bond, needs assemblies that persist, which the core doesn't have yet
   ([persistent assemblies](persistent-assemblies.md)).

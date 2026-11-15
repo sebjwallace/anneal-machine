@@ -844,6 +844,16 @@ The story of how the system came to be: each entry is an arc that opens with a g
 - **Contract:** shaped CTR-1 CAP-10; shaped CTR-1 CAP-1; confirmed CTR-1 CON-18; confirmed CTR-2 CON-7
 - **Lesson:** Warm meets warm: where the deep is primed, a fitting piece lands sooner or takes hold more widely.
 
+### HYP-40 · Hypothesis: Warm meets warm, confirmed: a context that warms the right patch of the deep makes a fitting piece take hold more widely when it lands (C89's after-the-fact observation, predicted first).
+
+- **Heat:** C89 saw it only after the run.
+- **Experiments:** [C90](../../experiments/sketches/C90-warm-meets-warm/)
+- **Given by hand:** As C89; fresh seeds 201-210; a cow and a shark added to the world.
+- **Closed by OUT-50 · Outcome (worked):** After a walking context "cat mammal" and "cow mammal" met on 9 cells (all of "walks") against about 4, in 10 of 10 seeds each; after swimming, "fish mammal" and "shark mammal" met bigger or sooner in 8 and 9 of 10. Contexts touching neither end changed nothing; unconnected links never met. One prediction failed on a mislabel: the walking context is about mammals, so it also helped the swimmers' "mammal" end (4 and 2 of 10).
+- **CLM-41 · Claim:** The size of the aha depends on where the deep is warm: the first graded fit.
+- **Contract:** confirmed CTR-1 CAP-10; shaped CTR-1 CAP-1; confirmed CTR-2 PRN-2; confirmed CTR-2 CON-7
+- **Lesson:** A context warms one end or both; the deep counts which, even when the experimenter doesn't.
+
 ## Index back: experiments
 
 | Experiment | Entries |
@@ -936,6 +946,7 @@ The story of how the system came to be: each entry is an arc that opens with a g
 | [C87](../../experiments/sketches/C87-sinking-by-fit/) | HYP-37 |
 | [C88](../../experiments/sketches/C88-lowering-the-bar/) | HYP-38 |
 | [C89](../../experiments/sketches/C89-priming/) | HYP-39 |
+| [C90](../../experiments/sketches/C90-warm-meets-warm/) | HYP-40 |
 
 ## Index forward: contract clauses
 
@@ -985,7 +996,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CON-16 | No labels or teacher as a shortcut (breaks GOL-1). | QST-15 (shaped) |
 | CTR-1 CON-15 | No perfect memory (breaks CON-1 and OPZ-2). | — |
 | CTR-1 CON-17 | No exhaustive search for the best answer (breaks OPZ-2). | — |
-| CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed), QST-13 (challenged), HYP-17 (confirmed), HYP-26 (confirmed), HYP-30 (confirmed), HYP-37 (shaped), HYP-38 (shaped), HYP-39 (shaped) |
+| CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed), QST-13 (challenged), HYP-17 (confirmed), HYP-26 (confirmed), HYP-30 (confirmed), HYP-37 (shaped), HYP-38 (shaped), HYP-39 (shaped), HYP-40 (shaped) |
 | CTR-1 CAP-4 | Binding what happens together (Hebbian in spirit): things active together become one memor | QST-11 (created), HYP-20 (shaped), HYP-24 (confirmed), HYP-29 (confirmed), HYP-31 (confirmed), HYP-32 (shaped), QST-15 (shaped) |
 | CTR-1 CAP-3 | Auto-associative memory: a few active pieces bring back the whole memory they belong to. | QST-3 (created), HYP-10 (confirmed), HYP-19 (confirmed), HYP-20 (shaped), HYP-21 (confirmed), HYP-22 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), HYP-31 (confirmed), PRO-7 (confirmed) |
 | CTR-1 CAP-2 | Sparse distributed representations: a thing is a small set of cells; which cell says where | HYP-6 (created), QST-6 (challenged), PRB-11 (changed), HYP-25 (confirmed), HYP-27 (confirmed) |
@@ -996,7 +1007,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CAP-7 | Heat as a valve: search opens only where there is heat (DEF-2). | HYP-2 (shaped), THY-1 (shaped), PRB-5 (created), QST-11 (confirmed), HYP-23 (confirmed) |
 | CTR-1 CAP-13 | Not knowing is a reason to look: a refused tie (CON-7) becomes a cue for more evidence. | QST-12 (created) |
 | CTR-1 CAP-12 | History in the state: what was a moment ago is part of now. | QST-5 (created), HYP-27 (confirmed), HYP-28 (confirmed), HYP-29 (shaped) |
-| CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed), THY-6 (shaped), HYP-39 (shaped) |
+| CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed), THY-6 (shaped), HYP-39 (shaped), HYP-40 (confirmed) |
 | CTR-1 CAP-15 | Held states as other regions' activity: what one volume holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped), HYP-36 (shaped), QST-17 (shaped) |
 | CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed), HYP-33 (shaped), HYP-36 (shaped), QST-17 (shaped), HYP-37 (shaped) |
 | CTR-1 CAP-14 | Exact records kept outside, in something it can read and write. | — |
@@ -1026,7 +1037,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-2 OPZ-4 | The smallest code that fulfils CTR-1: fewest constructs and lines, echoing CTR-1 OPZ-3. | — |
 | CTR-2 CON-3 | No crutches (DEF-5) and no patches (DEF-6). | PRB-2 (created), INC-5 (confirmed) |
 | CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created), INC-3 (confirmed), HYP-36 (confirmed) |
-| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed), HYP-36 (confirmed), HYP-37 (confirmed), HYP-38 (confirmed), HYP-39 (confirmed) |
+| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed), HYP-36 (confirmed), HYP-37 (confirmed), HYP-38 (confirmed), HYP-39 (confirmed), HYP-40 (confirmed) |
 | CTR-2 CON-4 | Every declared choice (DEF-7) is written in `docs/decisions/`. | — |
 | CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed), PRO-6 (challenged), PRO-7 (confirmed) |
 | CTR-2 CON-8 | Bookkeeping (DEF-11) may be used in experiments, declared as a violation (CON-7), but neve | PRB-12 (created), THY-7 (shaped), PRB-13 (shaped), PRO-5 (confirmed), INC-4 (confirmed), PRO-6 (confirmed) |
@@ -1040,7 +1051,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-2 CAP-2 | Visuals and the sandbox: agreeing how something works by seeing it. | PRB-9 (created), PRO-6 (confirmed) |
 | CTR-2 CAP-5 | The system itself as a helper ("Neil"), once it can hold our history. | — |
 | CTR-2 PRN-1 | Don't change anything until you understand it. | — |
-| CTR-2 PRN-2 | Measure against a baseline before believing a result; an explanation is not evidence. | — |
+| CTR-2 PRN-2 | Measure against a baseline before believing a result; an explanation is not evidence. | HYP-40 (confirmed) |
 | CTR-2 PRN-3 | A result that looks too good is checked for what was given by hand (CON-2). | QST-12 (created), HYP-16 (confirmed) |
 | CTR-2 PRN-7 | Explore freely, then distil: once a handful of experiments have made a result worth keepin | PRB-10 (created), PRO-3 (confirmed) |
 | CTR-2 PRN-4 | Inspired, not copied. | — |

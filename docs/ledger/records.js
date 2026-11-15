@@ -639,5 +639,12 @@ const LEDGER = [
     lessons: [{ code: 'CLM-40', kind: 'CLM', text: 'Priming is selective and invents nothing: warm ground welcomes a piece that fits, and can\'t make one fit.' }, { code: 'PAT-15', kind: 'PAT', text: 'Write the rule as a model before the code, and when the code disagrees with the result, check it against the model first.' }],
     contract: [['CTR-1 CAP-10', 'shaped'], ['CTR-1 CAP-1', 'shaped'], ['CTR-1 CON-18', 'confirmed'], ['CTR-2 CON-7', 'confirmed']],
     lesson: 'Warm meets warm: where the deep is primed, a fitting piece lands sooner or takes hold more widely.' },
+  { code: 'HYP-40', era: 7, open: 'Warm meets warm, confirmed: a context that warms the right patch of the deep makes a fitting piece take hold more widely when it lands (C89\'s after-the-fact observation, predicted first).',
+    heat: 'C89 saw it only after the run.',
+    exps: ['C90'], given: 'As C89; fresh seeds 201-210; a cow and a shark added to the world.',
+    close: { code: 'OUT-50', kind: 'OUT', verdict: 'worked', text: 'After a walking context "cat mammal" and "cow mammal" met on 9 cells (all of "walks") against about 4, in 10 of 10 seeds each; after swimming, "fish mammal" and "shark mammal" met bigger or sooner in 8 and 9 of 10. Contexts touching neither end changed nothing; unconnected links never met. One prediction failed on a mislabel: the walking context is about mammals, so it also helped the swimmers\' "mammal" end (4 and 2 of 10).' },
+    lessons: [{ code: 'CLM-41', kind: 'CLM', text: 'The size of the aha depends on where the deep is warm: the first graded fit.' }],
+    contract: [['CTR-1 CAP-10', 'confirmed'], ['CTR-1 CAP-1', 'shaped'], ['CTR-2 PRN-2', 'confirmed'], ['CTR-2 CON-7', 'confirmed']],
+    lesson: 'A context warms one end or both; the deep counts which, even when the experimenter doesn\'t.' },
 ];
 module.exports = { LEDGER };

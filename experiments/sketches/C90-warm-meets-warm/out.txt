@@ -1,0 +1,42 @@
+seeds 201,202,203,204,205,206,207,208,209,210
+== context: none (warm things: 0) ==
+"cat mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 4.0 cells and 0.2 whole things (walks)
+"cow mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 4.2 cells and 0.2 whole things (walks)
+"fish mammal": met in 10 of 10, at step 2.6 (range 2-3), sharing 2.8 cells and 0.0 whole things (none)
+"shark mammal": met in 10 of 10, at step 2.4 (range 2-3), sharing 2.6 cells and 0.0 whole things (none)
+"cat flies": met in 0 of 10
+"bird walks": met in 0 of 10
+== context: walking (warm things: 4) ==
+"cat mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 9.0 cells and 1.0 whole things (walks)
+"cow mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 9.0 cells and 1.0 whole things (walks)
+"fish mammal": met in 10 of 10, at step 2.6 (range 2-3), sharing 3.6 cells and 0.0 whole things (none)
+"shark mammal": met in 10 of 10, at step 2.4 (range 2-3), sharing 3.0 cells and 0.0 whole things (none)
+"cat flies": met in 0 of 10
+"bird walks": met in 0 of 10
+== context: swimming (warm things: 3) ==
+"cat mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 4.0 cells and 0.2 whole things (walks)
+"cow mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 4.2 cells and 0.2 whole things (walks)
+"fish mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 4.0 cells and 0.0 whole things (none)
+"shark mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 4.0 cells and 0.0 whole things (none)
+"cat flies": met in 0 of 10
+"bird walks": met in 0 of 10
+== context: flying (warm things: 2) ==
+"cat mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 4.0 cells and 0.2 whole things (walks)
+"cow mammal": met in 10 of 10, at step 2.0 (range 2-2), sharing 4.2 cells and 0.2 whole things (walks)
+"fish mammal": met in 10 of 10, at step 2.6 (range 2-3), sharing 2.8 cells and 0.0 whole things (none)
+"shark mammal": met in 10 of 10, at step 2.4 (range 2-3), sharing 2.6 cells and 0.0 whole things (none)
+"cat flies": met in 0 of 10
+"bird walks": met in 0 of 10
+
+"cat mammal" after walking: more cells 10, sooner 0, either 10, of 10 (no longer met 0)
+"cow mammal" after walking: more cells 10, sooner 0, either 10, of 10 (no longer met 0)
+"fish mammal" after walking: more cells 4, sooner 0, either 4, of 10 (no longer met 0)
+"shark mammal" after walking: more cells 2, sooner 0, either 2, of 10 (no longer met 0)
+"cat mammal" after swimming: more cells 0, sooner 0, either 0, of 10 (no longer met 0)
+"cow mammal" after swimming: more cells 0, sooner 0, either 0, of 10 (no longer met 0)
+"fish mammal" after swimming: more cells 6, sooner 6, either 8, of 10 (no longer met 0)
+"shark mammal" after swimming: more cells 7, sooner 4, either 9, of 10 (no longer met 0)
+"cat mammal" after flying: more cells 0, sooner 0, either 0, of 10 (no longer met 0)
+"cow mammal" after flying: more cells 0, sooner 0, either 0, of 10 (no longer met 0)
+"fish mammal" after flying: more cells 0, sooner 0, either 0, of 10 (no longer met 0)
+"shark mammal" after flying: more cells 0, sooner 0, either 0, of 10 (no longer met 0)

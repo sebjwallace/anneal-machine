@@ -1,0 +1,23 @@
+C90 · Warm meets warm: a confirmation. Written 15 November 2026, before any run of this experiment except a smoke run on
+development seed 1 to check the code executes (its output is not used to set anything). The engine is C89's, unchanged.
+Test seeds 201-210: never run in C89 or here before this was written.
+
+What is being confirmed: C89 saw, after the fact, that a matching context made "cat mammal" meet on more than twice as
+many cells (8.8 against 3.8). Here it is predicted first, on more links.
+
+World: C89's, plus "cow" (taught: cow walks) and "shark" (taught: shark swims). Links: cat mammal and cow mammal (walk
+like three mammals), fish mammal and shark mammal (swim like one), cat flies and bird walks (unconnected). Contexts:
+none; walking (dog walks, human walks, horse walks); swimming (whale swims, fish swims); flying (bird flies). For "fish
+mammal" the swimming context includes fish itself, as in C89.
+
+Measure: for each link, context and seed, the cells shared when the fronts meet (C89's measure).
+
+Predictions (seeds 201-210, seed by seed against no context):
+  P1  Matching context, walkers: "cat mammal" and "cow mammal" after walking share more cells than with no context in
+      >= 8 of 10 seeds each.
+  P2  Matching context, swimmers: "fish mammal" and "shark mammal" after swimming share more cells, or meet sooner,
+      than with no context in >= 8 of 10 seeds each.
+  P3  Mismatched context (walkers after swimming, swimmers after walking) and the flying context: never more cells and
+      never sooner than with no context, in >= 9 of 10 seeds for every connected link.
+  P4  "cat flies" and "bird walks" meet in no seed and no context.
+Nothing will be changed after looking at test seeds.

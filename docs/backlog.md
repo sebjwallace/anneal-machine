@@ -3,8 +3,7 @@
 Grouped by where they came up. Nothing here is started.
 
 ## Next experiment (from C89, 15 November 2026)
-- **The size of the aha, preregistered; and closing the loop.** C89 saw, after the fact, a matching context make
-  "cat mammal" meet on twice as many cells. Test that on its own. Then let warmth come from the fast volume's own
+- **Closing the loop.** (The size of the aha was confirmed in C90.) Let warmth come from the fast volume's own
   activity (C86's wiring) rather than a given context, let it fade as the poles stop turning, and let the meeting cause
   the sink.
 
