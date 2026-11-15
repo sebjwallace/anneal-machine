@@ -625,5 +625,12 @@ const LEDGER = [
     lessons: [{ code: 'CLM-37', kind: 'CLM', text: 'A slow volume\'s own settling says whether a new link connects its dots.' }, { code: 'CLM-38', kind: 'CLM', text: 'Settling without a bar spreads to everything connected: every dot is already joined, so fit has no near or far.' }, { code: 'TRD-9', kind: 'TRD', text: 'Admitting only what already fits keeps slow memory coherent, but keeps out what is true and new.' }],
     contract: [['CTR-1 CAP-11', 'shaped'], ['CTR-1 CAP-1', 'shaped'], ['CTR-1 CON-1', 'shaped'], ['CTR-2 CON-7', 'confirmed']],
     lesson: 'Connecting the dots needs distance: heat lowering the bar, so near fits count more than far ones.' },
+  { code: 'HYP-38', era: 7, open: 'Lowering the bar (primitive; the owner\'s aha): the deep lets its settling through one round at a time from each end of a new link; where the fronts meet, the dots connect, locally, and a better-supported link meets sooner or on more.',
+    heat: 'C87: the deep lit everything connected from any cue, so fit had no near or far.',
+    exps: ['C88'], given: 'The world and its teaching; a blank before every input; the two fronts settled separately and compared by the experiment.',
+    close: { code: 'OUT-48', kind: 'OUT', verdict: 'partly', text: 'Locality: at the meeting each end had lit about one thing in the deep, against eight when settling ran to the end. Connected links met in every seed, unconnected never. "Cat mammal" (three walking mammals behind it) met no later than "fish mammal" in 5 of 5 seeds (sooner in 3), but met on more in only 3 of 5: the size of the aha is not yet graded. The rounds count cells, not things, and the fast-spreading "mammal" front did most of the travelling.' },
+    lessons: [{ code: 'CLM-39', kind: 'CLM', text: 'Letting the deep\'s settling through one round at a time gives it locality: the dots connect in a small lit region.' }],
+    contract: [['CTR-1 CAP-1', 'shaped'], ['CTR-1 CON-18', 'confirmed'], ['CTR-2 CON-7', 'confirmed']],
+    lesson: 'The bar gives the aha a place; a primed deep may give it a size.' },
 ];
 module.exports = { LEDGER };

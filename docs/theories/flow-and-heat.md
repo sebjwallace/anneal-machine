@@ -147,7 +147,11 @@ structure stands for solutions: the machines fixed properly, not patched.
 - **Poles and arms** (C86). A slow volume and a fast one, the fast one fed by the slow one's winners: each kind of
   knowledge survived in its own volume, which one volume can't manage, but read together they disagreed, because
   nothing made them settle against each other.
-- **Sinking by fit** (C87): see its findings.
+- **Sinking by fit** (C87). The deep's own settling says whether a new link connects its dots, and gating on it kept
+  "cat flies" out. But settling spread to everything connected, so every dot was joined already: no near or far.
+- **Lowering the bar** (C88, primitive). Letting the deep's settling through one round at a time from each end gave
+  the aha a place: the fronts met in a small lit region. Near and far showed only faintly, and the size of the aha
+  wasn't graded yet; a primed deep may change that.
 - **Both depths of change.** C82 to C85 all work on the slow depth, the bonds. The fast depth, active assemblies
   shifting and cascading without changing a bond, needs assemblies that persist, which the core doesn't have yet
   ([persistent assemblies](persistent-assemblies.md)).

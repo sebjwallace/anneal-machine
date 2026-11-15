@@ -2,7 +2,13 @@
 
 Grouped by where they came up. Nothing here is started.
 
-## Next experiment (from C87, 15 November 2026)
+## Next experiment (from C88, 15 November 2026)
+- **A primed deep, and a bar that knows support.** C88 lowered the bar evenly on both fronts and got locality but no
+  graded aha. Try the owner's expectation: the deep already partly active (primed by what is standing), so a fitting
+  piece needs the bar lowered little; and a bar that drops more slowly where there is more support. Then close the
+  loop: the deep holding both ends and noticing the meeting itself, and the meeting causing the sink.
+
+## Done (C88, 15 November 2026)
 - **Settling with locality: heat lowers the bar.** C87's sinking test worked as connected-or-not only, because the
   core's settling spreads to everything connected. Write a draft model for a bar that starts high (only what is close
   wakes) and lowers with heat, in cells and without a hand-set number, and rerun C87's world: does "cat mammal" fit

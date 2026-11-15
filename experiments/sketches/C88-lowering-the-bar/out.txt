@@ -1,0 +1,6 @@
+seeds 101,102,103,104,105
+"cat mammal" (true): met in 5 of 5 seeds, at step 2.0 (range 2-2); shared then: 0.6 things (walks), 3.8 cells; woken by then: "cat" 1.0, "mammal" 4.6 things; settling to the end wakes "cat" 8.0, "mammal" 8.0 things, in 9.8 and 5.8 rounds
+"fish mammal" (false): met in 5 of 5 seeds, at step 2.6 (range 2-3); shared then: 0.0 things (), 3.2 cells; woken by then: "fish" 1.0, "mammal" 4.8 things; settling to the end wakes "fish" 8.0, "mammal" 8.0 things, in 9.6 and 5.8 rounds
+"cat flies" (false, not connected): met in 0 of 5 seeds; settling to the end wakes "cat" 8.0, "flies" 1.0 things, in 9.8 and 2.0 rounds
+"bird walks" (true, not connected): met in 0 of 5 seeds; settling to the end wakes "bird" 1.0, "walks" 8.0 things, in 2.0 and 8.0 rounds
+per seed, where both met: "cat mammal" shared more cells than "fish mammal" in 3 of 5; met no later in 5 of 5; shared more whole things in 3 of 5
