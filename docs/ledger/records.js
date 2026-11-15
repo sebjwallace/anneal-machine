@@ -618,5 +618,12 @@ const LEDGER = [
     lessons: [],
     contract: [['CTR-1 CAP-15', 'shaped'], ['CTR-1 CAP-11', 'shaped']],
     lesson: 'Open: disagreement between volumes as heat.' },
+  { code: 'HYP-37', era: 7, open: 'Sinking by fit (the owner\'s sinking and rising): a link the fast volume has settled sinks into the slow volume when the slow structure already connects its two ends (connecting the dots); otherwise it evaporates.',
+    heat: 'C86: nothing decided what passes from the fast volume to the slow one (QST-17).',
+    exps: ['C87'], given: 'The world, teaching and stream; a blank before every input; the slow volume\'s learning gated from outside; the sinking test run by the experiment.',
+    close: { code: 'OUT-47', kind: 'OUT', verdict: 'partly', text: 'The slow volume\'s own settling separated connected links from unconnected ones in 20 of 20 tests, and gating on it kept "cat flies" out (a volume learning everything took it in). But settling spreads to everything connected: from "cat" the slow volume brought back seven things, and "cat mammal" and "fish mammal" were recalled without being learnt. With no near or far, "fish mammal" (false, connected) passed, and "bird walks" (true, unconnected) evaporated after seven failed tests.' },
+    lessons: [{ code: 'CLM-37', kind: 'CLM', text: 'A slow volume\'s own settling says whether a new link connects its dots.' }, { code: 'CLM-38', kind: 'CLM', text: 'Settling without a bar spreads to everything connected: every dot is already joined, so fit has no near or far.' }, { code: 'TRD-9', kind: 'TRD', text: 'Admitting only what already fits keeps slow memory coherent, but keeps out what is true and new.' }],
+    contract: [['CTR-1 CAP-11', 'shaped'], ['CTR-1 CAP-1', 'shaped'], ['CTR-1 CON-1', 'shaped'], ['CTR-2 CON-7', 'confirmed']],
+    lesson: 'Connecting the dots needs distance: heat lowering the bar, so near fits count more than far ones.' },
 ];
 module.exports = { LEDGER };

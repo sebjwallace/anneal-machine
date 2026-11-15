@@ -85,12 +85,37 @@ find a configuration that drops it into a lower-energy state, and when energy ca
 structure. Energy is not created or destroyed, only moved and transformed. The dynamics of the machine are the
 movement and transformation of energy.
 
-**The failure** is heat that turns into structure only to be masked: held as heat inside the structure, a patch. The
-hope is that such structure must, sooner or later, heat up again, and that the heat melts the patch away, so things
-reconfigure and settle into their natural place. Then heat drops in the structure and in the flow alike: the
-structure turns back into energy and flows out again.
+## 7. Sinking and rising: new against old
 
-## 7. The world, mirrored, and the purpose
+What decides whether something sinks is whether it fits what is already settled. Suppose the slow depths know that
+cats walk, run and sit. Then, in the fast surface, the machine reads that cats fly. New and old disagree, there is heat
+between them, and one of them has to give way. Context may settle it (it is only a story), but until something does,
+the heat holds the new thing at the surface. It cannot sink.
+
+Now suppose instead it already knows that humans and whales are mammals, and hears for the first time that cats are
+too. That is new structure, but it agrees: cats walk like humans, humans are mammals, and the new link only fills a
+gap between dots that were already there. It is literally connecting the dots. Energy that had nowhere to go now has a
+line to flow along, and that is where insight, ideas and understanding come from, and the feeling of coherence and
+clarity. Such a link settles at once, sinks, and slots into place, like a falling piece in a game of Tetris finding the
+gap it fits.
+
+So **sinking is agreement and rising is disagreement.** Heat between new and old keeps the new at the surface; fit
+lets it fall.
+
+People feel the rising as discomfort: confusion, unrest, sometimes anger. New information against old disturbs the
+whole web of assemblies. One way out is a rationale: a new belief, a different point of view, a story that lets
+everything make sense again and the energy flow. Sometimes that is right. But often it is the patch of section 5: not
+fixing the machine, but adding structure to it so the cogs turn again. **The failure** is heat that turns into structure
+only to be masked: held as heat inside the structure. The hope is that such structure must, sooner or later, heat up
+again, and that the heat melts the patch away, so things reconfigure and settle into their natural place. Then heat
+drops in the structure and in the flow alike: the structure turns back into energy and flows out again.
+
+Not everything settles. Some things sink only halfway, half making sense. And heat keeps arriving from a world that
+will never fully make sense. The contemplative traditions (Taoism, Buddhism) meet a paradoxical world by accepting it,
+and are freed from it. The machine needs its own way to let go, or it would buckle under heat that never stops coming.
+In the pot, that is **evaporation**: what can't settle leaves, rather than being forced into place.
+
+## 8. The world, mirrored, and the purpose
 
 The world outside isn't perfect. Its systems are misaligned, conflicted and stressed: they hold heat. When the machine
 takes them in, it learns them. It builds their structures and assemblies inside itself, so the heat out there is
@@ -102,7 +127,7 @@ it, it may see things differently from anything else. It takes in the structure 
 and cools them inside, and reflects that cooler structure back out, so energy can flow better again. Its cooled
 structure stands for solutions: the machines fixed properly, not patched.
 
-## 8. How this meets the experiments (C82-C85)
+## 9. How this meets the experiments (C82-C87)
 
 - **The three shapes of heat** (C84) read as places where the medium blocks flow. Something there that nothing holds:
   energy arriving with no line to take it. Something held that isn't there: a line leading to nothing, a dead end
@@ -119,11 +144,15 @@ structure stands for solutions: the machines fixed properly, not patched.
   of their own, structure stayed flat, heat held in structure fell about twentyfold, recall stayed exact, and the
   one-offs' heat passed through unexplained. Where they shared the objects' cells, the chaining stopped, but the objects
   lost cells to them. And the bill forbids recall from a small cue.
+- **Poles and arms** (C86). A slow volume and a fast one, the fast one fed by the slow one's winners: each kind of
+  knowledge survived in its own volume, which one volume can't manage, but read together they disagreed, because
+  nothing made them settle against each other.
+- **Sinking by fit** (C87): see its findings.
 - **Both depths of change.** C82 to C85 all work on the slow depth, the bonds. The fast depth, active assemblies
   shifting and cascading without changing a bond, needs assemblies that persist, which the core doesn't have yet
   ([persistent assemblies](persistent-assemblies.md)).
 
-## 9. What it asks of the machine
+## 10. What it asks of the machine
 
 - **Bond on cooling, not on heating.** Bonds formed while hot are loose; they freeze only when the same thing returns
   and fits.
@@ -134,6 +163,9 @@ structure stands for solutions: the machines fixed properly, not patched.
   two kinds of thing.
 - **Structure that holds heat must heat up again,** so a patch can melt. No structure may be exempt from the measure.
 - **Not all heat becomes structure.** What never settles flows through and out.
+- **Sink what fits; hold up what conflicts; let go of what never settles.** A new link sinks when the settled structure
+  already connects its two ends; it stays at the surface while it conflicts; it evaporates if it never settles, rather
+  than being patched into place with a rationale.
 - **Judge by accidental energy, not total.** Structure that carries flow is not a cost to be cut; structure that holds
   heat is.
 

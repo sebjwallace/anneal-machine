@@ -1,0 +1,24 @@
+== sink by fit (seeds 101,102,103,104,105) ==
+"cat mammal" (true, connected): "cat" brings back "mammal" in 100% of seeds; things "cat" brings back 7.0; sinking tests 3, fit 3, reached in common: dog human whale fish walks swims
+"dog mammal" (true, connected): "dog" brings back "mammal" in 100% of seeds; things "dog" brings back 7.0; sinking tests 5, fit 5, reached in common: cat human whale fish walks swims
+"cat flies" (false, not connected): "cat" brings back "flies" in 0% of seeds; things "cat" brings back 7.0; sinking tests 3, fit 0, reached in common: nothing
+"fish mammal" (false, connected): "fish" brings back "mammal" in 100% of seeds; things "fish" brings back 7.0; sinking tests 2, fit 2, reached in common: cat dog human whale walks swims
+"bird walks" (true, not connected): "bird" brings back "walks" in 0% of seeds; things "bird" brings back 1.0; sinking tests 7, fit 0, reached in common: nothing
+slow segments 68
+
+== slow learns all (seeds 101,102,103,104,105) ==
+"cat mammal" (true, connected): "cat" brings back "mammal" in 100% of seeds; things "cat" brings back 9.0
+"dog mammal" (true, connected): "dog" brings back "mammal" in 100% of seeds; things "dog" brings back 9.0
+"cat flies" (false, not connected): "cat" brings back "flies" in 100% of seeds; things "cat" brings back 9.0
+"fish mammal" (false, connected): "fish" brings back "mammal" in 100% of seeds; things "fish" brings back 9.0
+"bird walks" (true, not connected): "bird" brings back "walks" in 100% of seeds; things "bird" brings back 9.0
+slow segments 82
+
+== slow learns none (seeds 101,102,103,104,105) ==
+"cat mammal" (true, connected): "cat" brings back "mammal" in 100% of seeds; things "cat" brings back 7.0
+"dog mammal" (true, connected): "dog" brings back "mammal" in 100% of seeds; things "dog" brings back 7.0
+"cat flies" (false, not connected): "cat" brings back "flies" in 0% of seeds; things "cat" brings back 7.0
+"fish mammal" (false, connected): "fish" brings back "mammal" in 100% of seeds; things "fish" brings back 7.0
+"bird walks" (true, not connected): "bird" brings back "walks" in 0% of seeds; things "bird" brings back 1.0
+slow segments 62
+

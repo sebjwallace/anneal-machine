@@ -1,0 +1,17 @@
+C87 · Sinking by fit. Written 15 November 2026 after a run on development seed 1 (dev.txt), before any run on test
+seeds 101-105. Settings in run.js; the rule in model.md. Arms: sink by fit, slow learns all, slow learns none. No change
+was made after looking at the development seed.
+
+Seen on dev seed 1: settling from any connected thing brought back the whole connected piece (7 things for cat, dog
+and fish, in every arm); with the slow volume learning nothing, "cat" already brought back "mammal", and "fish" too;
+sinking tests fitted the connected links (dog mammal, fish mammal) and not the others (cat flies, bird walks); with no
+gate, "cat" brought back "flies" and "bird" "walks".
+
+Predictions (test seeds 101-105):
+  P1  Slow learns none: "cat" brings back "mammal" and "fish" brings back "mammal" in >= 80% of seeds (known already,
+      by chaining, without learning).
+  P2  "cat", "dog" and "fish" bring back >= 6.5 things on average in every arm (the whole connected piece).
+  P3  Sink by fit: every sinking test fits for a connected link and fails for an unconnected one (100% agreement).
+  P4  "cat" brings back "flies": 100% of seeds in slow learns all; 0% in sink by fit and slow learns none.
+  P5  Sink by fit: "bird" brings back "walks" in 0% of seeds (true, but not connected: kept out).
+Nothing will be changed after looking at test seeds.

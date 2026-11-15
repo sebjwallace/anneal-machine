@@ -1,0 +1,24 @@
+== sink by fit (seeds 1) ==
+"cat mammal" (true, connected): "cat" brings back "mammal" in 100% of seeds; things "cat" brings back 7.0
+"dog mammal" (true, connected): "dog" brings back "mammal" in 100% of seeds; things "dog" brings back 7.0; sinking tests 1, fit 1, reached in common: cat human whale fish walks swims
+"cat flies" (false, not connected): "cat" brings back "flies" in 0% of seeds; things "cat" brings back 7.0; sinking tests 1, fit 0, reached in common: nothing
+"fish mammal" (false, connected): "fish" brings back "mammal" in 100% of seeds; things "fish" brings back 7.0; sinking tests 1, fit 1, reached in common: cat dog human whale walks swims
+"bird walks" (true, not connected): "bird" brings back "walks" in 0% of seeds; things "bird" brings back 1.0; sinking tests 1, fit 0, reached in common: nothing
+slow segments 70
+
+== slow learns all (seeds 1) ==
+"cat mammal" (true, connected): "cat" brings back "mammal" in 100% of seeds; things "cat" brings back 9.0
+"dog mammal" (true, connected): "dog" brings back "mammal" in 100% of seeds; things "dog" brings back 9.0
+"cat flies" (false, not connected): "cat" brings back "flies" in 100% of seeds; things "cat" brings back 9.0
+"fish mammal" (false, connected): "fish" brings back "mammal" in 100% of seeds; things "fish" brings back 9.0
+"bird walks" (true, not connected): "bird" brings back "walks" in 100% of seeds; things "bird" brings back 9.0
+slow segments 82
+
+== slow learns none (seeds 1) ==
+"cat mammal" (true, connected): "cat" brings back "mammal" in 100% of seeds; things "cat" brings back 7.0
+"dog mammal" (true, connected): "dog" brings back "mammal" in 100% of seeds; things "dog" brings back 7.0
+"cat flies" (false, not connected): "cat" brings back "flies" in 0% of seeds; things "cat" brings back 7.0
+"fish mammal" (false, connected): "fish" brings back "mammal" in 100% of seeds; things "fish" brings back 7.0
+"bird walks" (true, not connected): "bird" brings back "walks" in 0% of seeds; things "bird" brings back 1.0
+slow segments 62
+

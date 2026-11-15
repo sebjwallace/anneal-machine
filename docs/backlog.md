@@ -2,7 +2,14 @@
 
 Grouped by where they came up. Nothing here is started.
 
-## Next experiment (from C85, 15 November 2026)
+## Next experiment (from C87, 15 November 2026)
+- **Settling with locality: heat lowers the bar.** C87's sinking test worked as connected-or-not only, because the
+  core's settling spreads to everything connected. Write a draft model for a bar that starts high (only what is close
+  wakes) and lowers with heat, in cells and without a hand-set number, and rerun C87's world: does "cat mammal" fit
+  near, "fish mammal" only far, "cat flies" never? Pushing from both ends (C44, C51 on the old engine) is the evidence
+  to start from.
+
+## Also next (from C85, 15 November 2026)
 - **Pruning by heat, not by capacity.** C85 cleared cells only when a column ran out (the squeeze), which cost the
   objects cells where one-offs shared their columns. The [flow and heat](theories/flow-and-heat.md) premise says to
   prune the lines that lead nowhere instead: bonds that keep claiming what never arrives (C84's fade). Fade failed in

@@ -811,6 +811,18 @@ The story of how the system came to be: each entry is an arc that opens with a g
 - **Contract:** shaped CTR-1 CAP-15; shaped CTR-1 CAP-11
 - **Lesson:** Open: disagreement between volumes as heat.
 
+### HYP-37 · Hypothesis: Sinking by fit (the owner's sinking and rising): a link the fast volume has settled sinks into the slow volume when the slow structure already connects its two ends (connecting the dots); otherwise it evaporates.
+
+- **Heat:** C86: nothing decided what passes from the fast volume to the slow one (QST-17).
+- **Experiments:** [C87](../../experiments/sketches/C87-sinking-by-fit/)
+- **Given by hand:** The world, teaching and stream; a blank before every input; the slow volume's learning gated from outside; the sinking test run by the experiment.
+- **Closed by OUT-47 · Outcome (partly):** The slow volume's own settling separated connected links from unconnected ones in 20 of 20 tests, and gating on it kept "cat flies" out (a volume learning everything took it in). But settling spreads to everything connected: from "cat" the slow volume brought back seven things, and "cat mammal" and "fish mammal" were recalled without being learnt. With no near or far, "fish mammal" (false, connected) passed, and "bird walks" (true, unconnected) evaporated after seven failed tests.
+- **CLM-37 · Claim:** A slow volume's own settling says whether a new link connects its dots.
+- **CLM-38 · Claim:** Settling without a bar spreads to everything connected: every dot is already joined, so fit has no near or far.
+- **TRD-9 · Trade-off:** Admitting only what already fits keeps slow memory coherent, but keeps out what is true and new.
+- **Contract:** shaped CTR-1 CAP-11; shaped CTR-1 CAP-1; shaped CTR-1 CON-1; confirmed CTR-2 CON-7
+- **Lesson:** Connecting the dots needs distance: heat lowering the bar, so near fits count more than far ones.
+
 ## Index back: experiments
 
 | Experiment | Entries |
@@ -900,6 +912,7 @@ The story of how the system came to be: each entry is an arc that opens with a g
 | [C84](../../experiments/sketches/C84-energy-rules/) | HYP-34, PRB-16, PRO-7 |
 | [C85](../../experiments/sketches/C85-bond-on-cooling/) | HYP-35, QST-16, PRO-7 |
 | [C86](../../experiments/sketches/C86-poles-and-arms/) | HYP-36, QST-17 |
+| [C87](../../experiments/sketches/C87-sinking-by-fit/) | HYP-37 |
 
 ## Index forward: contract clauses
 
@@ -934,7 +947,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CON-12 | It can't try every explanation: search at rest is always partial. | HYP-5 (shaped) |
 | CTR-1 CON-14 | Memory is finite: good enough, not exact; exact records live outside it. | QST-10 (shaped), HYP-34 (shaped), HYP-35 (shaped) |
 | CTR-1 CON-13 | Evidence alone can't settle a true tie: only more evidence can (looking, acting). | QST-12 (created) |
-| CTR-1 CON-1 | One rule: a change to its structure is kept only if energy (DEF-1) falls. | HYP-5 (shaped), HYP-8 (confirmed), HYP-9 (confirmed), QST-7 (confirmed), HYP-14 (confirmed), PRO-3 (confirmed), INC-3 (challenged), INC-4 (challenged), HYP-30 (challenged), HYP-32 (challenged), HYP-33 (challenged), HYP-34 (challenged), PRB-16 (challenged), HYP-35 (shaped), QST-16 (shaped) |
+| CTR-1 CON-1 | One rule: a change to its structure is kept only if energy (DEF-1) falls. | HYP-5 (shaped), HYP-8 (confirmed), HYP-9 (confirmed), QST-7 (confirmed), HYP-14 (confirmed), PRO-3 (confirmed), INC-3 (challenged), INC-4 (challenged), HYP-30 (challenged), HYP-32 (challenged), HYP-33 (challenged), HYP-34 (challenged), PRB-16 (challenged), HYP-35 (shaped), QST-16 (shaped), HYP-37 (shaped) |
 | CTR-1 CON-2 | One currency, taken from the world: no hand-set weights or tuned parameters. | HYP-1 (shaped), HYP-3 (shaped), PRB-1 (created), PRB-3 (confirmed), HYP-20 (challenged) |
 | CTR-1 CON-6 | Resolve, don't mask: energy may only fall because a misfit is resolved, never because its  | PRB-6 (shaped), THY-3 (created) |
 | CTR-1 CON-3 | General: nothing in it is written for one task or one kind of world. Fixed architecture is | PRB-2 (created), QST-8 (confirmed), PRB-5 (confirmed) |
@@ -949,7 +962,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CON-16 | No labels or teacher as a shortcut (breaks GOL-1). | QST-15 (shaped) |
 | CTR-1 CON-15 | No perfect memory (breaks CON-1 and OPZ-2). | — |
 | CTR-1 CON-17 | No exhaustive search for the best answer (breaks OPZ-2). | — |
-| CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed), QST-13 (challenged), HYP-17 (confirmed), HYP-26 (confirmed), HYP-30 (confirmed) |
+| CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed), QST-13 (challenged), HYP-17 (confirmed), HYP-26 (confirmed), HYP-30 (confirmed), HYP-37 (shaped) |
 | CTR-1 CAP-4 | Binding what happens together (Hebbian in spirit): things active together become one memor | QST-11 (created), HYP-20 (shaped), HYP-24 (confirmed), HYP-29 (confirmed), HYP-31 (confirmed), HYP-32 (shaped), QST-15 (shaped) |
 | CTR-1 CAP-3 | Auto-associative memory: a few active pieces bring back the whole memory they belong to. | QST-3 (created), HYP-10 (confirmed), HYP-19 (confirmed), HYP-20 (shaped), HYP-21 (confirmed), HYP-22 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), HYP-31 (confirmed), PRO-7 (confirmed) |
 | CTR-1 CAP-2 | Sparse distributed representations: a thing is a small set of cells; which cell says where | HYP-6 (created), QST-6 (challenged), PRB-11 (changed), HYP-25 (confirmed), HYP-27 (confirmed) |
@@ -962,7 +975,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CAP-12 | History in the state: what was a moment ago is part of now. | QST-5 (created), HYP-27 (confirmed), HYP-28 (confirmed), HYP-29 (shaped) |
 | CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed), THY-6 (shaped) |
 | CTR-1 CAP-15 | Held states as other regions' activity: what one volume holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped), HYP-36 (shaped), QST-17 (shaped) |
-| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed), HYP-33 (shaped), HYP-36 (shaped), QST-17 (shaped) |
+| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed), HYP-33 (shaped), HYP-36 (shaped), QST-17 (shaped), HYP-37 (shaped) |
 | CTR-1 CAP-14 | Exact records kept outside, in something it can read and write. | — |
 | CTR-1 PRN-1 | Prefer the deeper explanation to a new mechanism. | PRB-5 (shaped), THY-7 (confirmed), INC-5 (confirmed) |
 | CTR-1 PRN-2 | Prefer removing structure to adding it. | PRB-2 (shaped), PRB-3 (confirmed) |
@@ -990,7 +1003,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-2 OPZ-4 | The smallest code that fulfils CTR-1: fewest constructs and lines, echoing CTR-1 OPZ-3. | — |
 | CTR-2 CON-3 | No crutches (DEF-5) and no patches (DEF-6). | PRB-2 (created), INC-5 (confirmed) |
 | CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created), INC-3 (confirmed), HYP-36 (confirmed) |
-| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed), HYP-36 (confirmed) |
+| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed), HYP-36 (confirmed), HYP-37 (confirmed) |
 | CTR-2 CON-4 | Every declared choice (DEF-7) is written in `docs/decisions/`. | — |
 | CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed), PRO-6 (challenged), PRO-7 (confirmed) |
 | CTR-2 CON-8 | Bookkeeping (DEF-11) may be used in experiments, declared as a violation (CON-7), but neve | PRB-12 (created), THY-7 (shaped), PRB-13 (shaped), PRO-5 (confirmed), INC-4 (confirmed), PRO-6 (confirmed) |
