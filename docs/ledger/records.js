@@ -646,5 +646,12 @@ const LEDGER = [
     lessons: [{ code: 'CLM-41', kind: 'CLM', text: 'The size of the aha depends on where the deep is warm: the first graded fit.' }],
     contract: [['CTR-1 CAP-10', 'confirmed'], ['CTR-1 CAP-1', 'shaped'], ['CTR-2 PRN-2', 'confirmed'], ['CTR-2 CON-7', 'confirmed']],
     lesson: 'A context warms one end or both; the deep counts which, even when the experimenter doesn\'t.' },
+  { code: 'HYP-41', era: 7, open: 'Closing the loop (the owner\'s picture taken literally): talk turns the surface, the deep warms where it turns, and a new piece settled at the surface sinks only where its fronts meet on warm ground; on cold ground it stays up; fitting nowhere, it evaporates.',
+    heat: 'The pieces (two volumes, sinking by fit, the bar, priming) had been tested apart.',
+    exps: ['C91'], given: 'The world, teaching, contexts and episodes; where an episode ends; a blank before every input; the deep gated; the meeting test run by the experiment.',
+    close: { code: 'OUT-51', kind: 'OUT', verdict: 'worked', text: 'Every seed alike: "cat mammal" and "cow mammal" sank after talk of walking and stayed up otherwise; "cat flies" and "bird walks" evaporated. False links taken in: 5 of 20 (warm), 10 of 20 (any meeting), 20 of 20 (learning all). But after talk of swimming the machine took in "fish mammal" (fits by a far route) every time: context decides belief, and the rule does not yet tell a snug fit from a loose one on warm ground. "Bird walks" (true, new) never got in.' },
+    lessons: [{ code: 'CLM-42', kind: 'CLM', text: 'Sinking only where the deep is warm runs as one cycle and keeps out most of what is false, and everything that fits nowhere.' }, { code: 'TRD-10', kind: 'TRD', text: 'Warmth lets the right talk bring in a plausible wrong idea: priming decides belief.' }],
+    contract: [['CTR-1 CAP-11', 'shaped'], ['CTR-1 CAP-10', 'confirmed'], ['CTR-1 CAP-15', 'shaped'], ['CTR-2 CON-7', 'confirmed']],
+    lesson: 'The loop closes; a snug fit must count for more than a loose one, and the new needs another way in.' },
 ];
 module.exports = { LEDGER };

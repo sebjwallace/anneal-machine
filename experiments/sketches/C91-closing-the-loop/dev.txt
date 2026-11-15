@@ -1,0 +1,39 @@
+== warm (seeds 1) ==
+"cat mammal" (true) after walking: sank 1; new direct bond in the deep in 1 of 1
+"cat mammal" (true) after swimming: stayed up 1; new direct bond in the deep in 0 of 1
+"cow mammal" (true) after walking: sank 1; new direct bond in the deep in 1 of 1
+"cow mammal" (true) after flying: stayed up 1; new direct bond in the deep in 0 of 1
+"fish mammal" (false) after swimming: sank 1; new direct bond in the deep in 1 of 1
+"fish mammal" (false) after flying: stayed up 1; new direct bond in the deep in 0 of 1
+"cat flies" (false) after walking: evaporated 1; new direct bond in the deep in 0 of 1
+"cat flies" (false) after flying: evaporated 1; new direct bond in the deep in 0 of 1
+"bird walks" (true) after walking: evaporated 1; new direct bond in the deep in 0 of 1
+"bird walks" (true) after flying: evaporated 1; new direct bond in the deep in 0 of 1
+true links taken into the deep: 2 of 6; false links: 1 of 4
+
+== any meeting (seeds 1) ==
+"cat mammal" (true) after walking: sank 1; new direct bond in the deep in 1 of 1
+"cat mammal" (true) after swimming: sank 1; new direct bond in the deep in 1 of 1
+"cow mammal" (true) after walking: sank 1; new direct bond in the deep in 1 of 1
+"cow mammal" (true) after flying: sank 1; new direct bond in the deep in 1 of 1
+"fish mammal" (false) after swimming: sank 1; new direct bond in the deep in 1 of 1
+"fish mammal" (false) after flying: sank 1; new direct bond in the deep in 1 of 1
+"cat flies" (false) after walking: evaporated 1; new direct bond in the deep in 0 of 1
+"cat flies" (false) after flying: evaporated 1; new direct bond in the deep in 0 of 1
+"bird walks" (true) after walking: evaporated 1; new direct bond in the deep in 0 of 1
+"bird walks" (true) after flying: evaporated 1; new direct bond in the deep in 0 of 1
+true links taken into the deep: 4 of 6; false links: 2 of 4
+
+== slow learns all (seeds 1) ==
+"cat mammal" (true) after walking: learnt 1; new direct bond in the deep in 1 of 1
+"cat mammal" (true) after swimming: learnt 1; new direct bond in the deep in 1 of 1
+"cow mammal" (true) after walking: learnt 1; new direct bond in the deep in 1 of 1
+"cow mammal" (true) after flying: learnt 1; new direct bond in the deep in 1 of 1
+"fish mammal" (false) after swimming: learnt 1; new direct bond in the deep in 1 of 1
+"fish mammal" (false) after flying: learnt 1; new direct bond in the deep in 1 of 1
+"cat flies" (false) after walking: learnt 1; new direct bond in the deep in 1 of 1
+"cat flies" (false) after flying: learnt 1; new direct bond in the deep in 1 of 1
+"bird walks" (true) after walking: learnt 1; new direct bond in the deep in 1 of 1
+"bird walks" (true) after flying: learnt 1; new direct bond in the deep in 1 of 1
+true links taken into the deep: 6 of 6; false links: 4 of 4
+

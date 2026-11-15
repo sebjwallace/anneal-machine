@@ -2,7 +2,15 @@
 
 Grouped by where they came up. Nothing here is started.
 
-## Next experiment (from C89, 15 November 2026)
+## Next experiment (from C91, 15 November 2026)
+- **Snug against loose, and pieces that wait.** C91 closed the loop but sank "fish mammal" after talk of swimming: on
+  warm ground a loose fit counts the same as a snug one. Use the graded fit (C88, C90: how soon and on how much the
+  fronts meet) in the sinking rule, without a hand-set threshold. And run a longer stream in which pieces that stayed
+  up are held at the surface until their ground warms (or they evaporate), with warmth fading as poles stop turning.
+- **The new needs another way in.** "Bird walks" (true, unconnected) can never sink by fit. Repetition, or evidence
+  from the world, has to be able to bring it down.
+
+## Done (C91, 15 November 2026)
 - **Closing the loop.** (The size of the aha was confirmed in C90.) Let warmth come from the fast volume's own
   activity (C86's wiring) rather than a given context, let it fade as the poles stop turning, and let the meeting cause
   the sink.

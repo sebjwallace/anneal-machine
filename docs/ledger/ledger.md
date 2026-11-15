@@ -854,6 +854,17 @@ The story of how the system came to be: each entry is an arc that opens with a g
 - **Contract:** confirmed CTR-1 CAP-10; shaped CTR-1 CAP-1; confirmed CTR-2 PRN-2; confirmed CTR-2 CON-7
 - **Lesson:** A context warms one end or both; the deep counts which, even when the experimenter doesn't.
 
+### HYP-41 · Hypothesis: Closing the loop (the owner's picture taken literally): talk turns the surface, the deep warms where it turns, and a new piece settled at the surface sinks only where its fronts meet on warm ground; on cold ground it stays up; fitting nowhere, it evaporates.
+
+- **Heat:** The pieces (two volumes, sinking by fit, the bar, priming) had been tested apart.
+- **Experiments:** [C91](../../experiments/sketches/C91-closing-the-loop/)
+- **Given by hand:** The world, teaching, contexts and episodes; where an episode ends; a blank before every input; the deep gated; the meeting test run by the experiment.
+- **Closed by OUT-51 · Outcome (worked):** Every seed alike: "cat mammal" and "cow mammal" sank after talk of walking and stayed up otherwise; "cat flies" and "bird walks" evaporated. False links taken in: 5 of 20 (warm), 10 of 20 (any meeting), 20 of 20 (learning all). But after talk of swimming the machine took in "fish mammal" (fits by a far route) every time: context decides belief, and the rule does not yet tell a snug fit from a loose one on warm ground. "Bird walks" (true, new) never got in.
+- **CLM-42 · Claim:** Sinking only where the deep is warm runs as one cycle and keeps out most of what is false, and everything that fits nowhere.
+- **TRD-10 · Trade-off:** Warmth lets the right talk bring in a plausible wrong idea: priming decides belief.
+- **Contract:** shaped CTR-1 CAP-11; confirmed CTR-1 CAP-10; shaped CTR-1 CAP-15; confirmed CTR-2 CON-7
+- **Lesson:** The loop closes; a snug fit must count for more than a loose one, and the new needs another way in.
+
 ## Index back: experiments
 
 | Experiment | Entries |
@@ -947,6 +958,7 @@ The story of how the system came to be: each entry is an arc that opens with a g
 | [C88](../../experiments/sketches/C88-lowering-the-bar/) | HYP-38 |
 | [C89](../../experiments/sketches/C89-priming/) | HYP-39 |
 | [C90](../../experiments/sketches/C90-warm-meets-warm/) | HYP-40 |
+| [C91](../../experiments/sketches/C91-closing-the-loop/) | HYP-41 |
 
 ## Index forward: contract clauses
 
@@ -1007,9 +1019,9 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CAP-7 | Heat as a valve: search opens only where there is heat (DEF-2). | HYP-2 (shaped), THY-1 (shaped), PRB-5 (created), QST-11 (confirmed), HYP-23 (confirmed) |
 | CTR-1 CAP-13 | Not knowing is a reason to look: a refused tie (CON-7) becomes a cue for more evidence. | QST-12 (created) |
 | CTR-1 CAP-12 | History in the state: what was a moment ago is part of now. | QST-5 (created), HYP-27 (confirmed), HYP-28 (confirmed), HYP-29 (shaped) |
-| CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed), THY-6 (shaped), HYP-39 (shaped), HYP-40 (confirmed) |
-| CTR-1 CAP-15 | Held states as other regions' activity: what one volume holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped), HYP-36 (shaped), QST-17 (shaped) |
-| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed), HYP-33 (shaped), HYP-36 (shaped), QST-17 (shaped), HYP-37 (shaped) |
+| CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed), THY-6 (shaped), HYP-39 (shaped), HYP-40 (confirmed), HYP-41 (confirmed) |
+| CTR-1 CAP-15 | Held states as other regions' activity: what one volume holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped), HYP-36 (shaped), QST-17 (shaped), HYP-41 (shaped) |
+| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed), HYP-33 (shaped), HYP-36 (shaped), QST-17 (shaped), HYP-37 (shaped), HYP-41 (shaped) |
 | CTR-1 CAP-14 | Exact records kept outside, in something it can read and write. | — |
 | CTR-1 PRN-1 | Prefer the deeper explanation to a new mechanism. | PRB-5 (shaped), THY-7 (confirmed), INC-5 (confirmed) |
 | CTR-1 PRN-2 | Prefer removing structure to adding it. | PRB-2 (shaped), PRB-3 (confirmed) |
@@ -1037,7 +1049,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-2 OPZ-4 | The smallest code that fulfils CTR-1: fewest constructs and lines, echoing CTR-1 OPZ-3. | — |
 | CTR-2 CON-3 | No crutches (DEF-5) and no patches (DEF-6). | PRB-2 (created), INC-5 (confirmed) |
 | CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created), INC-3 (confirmed), HYP-36 (confirmed) |
-| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed), HYP-36 (confirmed), HYP-37 (confirmed), HYP-38 (confirmed), HYP-39 (confirmed), HYP-40 (confirmed) |
+| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed), HYP-36 (confirmed), HYP-37 (confirmed), HYP-38 (confirmed), HYP-39 (confirmed), HYP-40 (confirmed), HYP-41 (confirmed) |
 | CTR-2 CON-4 | Every declared choice (DEF-7) is written in `docs/decisions/`. | — |
 | CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed), PRO-6 (challenged), PRO-7 (confirmed) |
 | CTR-2 CON-8 | Bookkeeping (DEF-11) may be used in experiments, declared as a violation (CON-7), but neve | PRB-12 (created), THY-7 (shaped), PRB-13 (shaped), PRO-5 (confirmed), INC-4 (confirmed), PRO-6 (confirmed) |

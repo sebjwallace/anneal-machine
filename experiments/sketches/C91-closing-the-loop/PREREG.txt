@@ -1,0 +1,16 @@
+C91 · Closing the loop. Written 15 November 2026 after a run on development seed 1 (dev.txt), before any run on test
+seeds 101-105. Settings in run.js; the rule in model.md. No change was made after looking at the development seed.
+
+Seen on dev seed 1 (warm arm): cat mammal and cow mammal sank after walking and stayed up otherwise; fish mammal sank
+after swimming (a false link taken in when primed) and stayed up after flying; cat flies and bird walks evaporated.
+Any meeting: every connected link sank in every context. Slow learns all: everything taken in.
+
+Predictions (test seeds 101-105):
+  P1  Warm: "cat mammal" and "cow mammal" sink after walking in >= 4 of 5 seeds each, and do not sink after their other
+      context (swimming, flying) in >= 4 of 5 each.
+  P2  Warm: "fish mammal" sinks after swimming in >= 4 of 5 seeds, and does not sink after flying in >= 4 of 5.
+  P3  "cat flies" and "bird walks" sink in no seed and no context in the warm and any-meeting arms; slow learns all
+      takes them in every time.
+  P4  Any meeting: every connected link sinks in every context in >= 4 of 5 seeds.
+  P5  False links taken into the deep, in total: warm fewer than any meeting, any meeting fewer than slow learns all.
+Nothing will be changed after looking at test seeds.

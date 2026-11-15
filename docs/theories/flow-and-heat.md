@@ -173,6 +173,10 @@ structure stands for solutions: the machines fixed properly, not patched.
 - **Warm meets warm, confirmed** (C90). Predicted first, on fresh seeds and new animals: after a matching context the
   walkers' pieces took hold on all of "walks", more than twice as much as on cold ground, in every seed. A context
   touching only one end of a link helped a little; one touching neither, not at all.
+- **The loop closed** (C91). Talk turned the surface, the deep warmed where it turned, and new pieces sank only where
+  they met warm ground: "cat mammal" after talk of walking, while on cold ground it waited at the surface; "cat flies"
+  evaporated. The deep took in a quarter of the false links, against all of them when it learnt everything. But after
+  talk of swimming, "fish mammal" slotted in too: the right talk can warm the place for a plausible wrong idea.
 - **Both depths of change.** C82 to C85 all work on the slow depth, the bonds. The fast depth, active assemblies
   shifting and cascading without changing a bond, needs assemblies that persist, which the core doesn't have yet
   ([persistent assemblies](persistent-assemblies.md)).
