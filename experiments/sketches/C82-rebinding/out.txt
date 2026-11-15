@@ -1,0 +1,32 @@
+== core, values never shared (seeds 101,102,103,104,105, 1000 rebinds each) ==
+quarter 1: probe brings back exactly the current value 1%; values brought back per probe 9.69; other variable brought back 98%; links grown per rebind 1.0; joints loosened 0; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 0 of 2471
+quarter 2: probe brings back exactly the current value 0%; values brought back per probe 10.00; other variable brought back 100%; links grown per rebind 0.0; joints loosened 0; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 0 of 2500
+quarter 3: probe brings back exactly the current value 0%; values brought back per probe 10.00; other variable brought back 100%; links grown per rebind 0.0; joints loosened 0; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 0 of 2500
+quarter 4: probe brings back exactly the current value 0%; values brought back per probe 10.00; other variable brought back 100%; links grown per rebind 0.0; joints loosened 0; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 0 of 2500
+completing segments, every 50 rebinds (mean over seeds): 111 116 116 116 116 116 116 116 116 116 116 116 116 116 116 116 116 116 116 116
+final segments (mean): completing 116, predicting 0
+
+== loosen, values never shared (seeds 101,102,103,104,105, 1000 rebinds each) ==
+quarter 1: probe brings back exactly the current value 100%; values brought back per probe 1.00; other variable brought back 0%; links grown per rebind 12.0; joints loosened 1240; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 0 of 0
+quarter 2: probe brings back exactly the current value 100%; values brought back per probe 1.00; other variable brought back 0%; links grown per rebind 12.0; joints loosened 1250; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 0 of 0
+quarter 3: probe brings back exactly the current value 100%; values brought back per probe 1.00; other variable brought back 0%; links grown per rebind 12.0; joints loosened 1250; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 0 of 0
+quarter 4: probe brings back exactly the current value 100%; values brought back per probe 1.00; other variable brought back 0%; links grown per rebind 12.0; joints loosened 1250; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 0 of 0
+completing segments, every 50 rebinds (mean over seeds): 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44
+final segments (mean): completing 44, predicting 0
+
+== core, values shared freely (seeds 101,102,103,104,105, 1000 rebinds each) ==
+quarter 1: probe brings back exactly the current value 1%; values brought back per probe 9.69; other variable brought back 98%; links grown per rebind 1.0; joints loosened 0; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 234 of 2471
+quarter 2: probe brings back exactly the current value 0%; values brought back per probe 10.00; other variable brought back 100%; links grown per rebind 0.0; joints loosened 0; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 246 of 2500
+quarter 3: probe brings back exactly the current value 0%; values brought back per probe 10.00; other variable brought back 100%; links grown per rebind 0.0; joints loosened 0; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 252 of 2500
+quarter 4: probe brings back exactly the current value 0%; values brought back per probe 10.00; other variable brought back 100%; links grown per rebind 0.0; joints loosened 0; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 229 of 2500
+completing segments, every 50 rebinds (mean over seeds): 112 115 116 116 116 116 116 116 116 116 116 116 116 116 116 116 116 116 116 116
+final segments (mean): completing 116, predicting 0
+
+== loosen, values shared freely (seeds 101,102,103,104,105, 1000 rebinds each) ==
+quarter 1: probe brings back exactly the current value 91%; values brought back per probe 0.91; other variable brought back 0%; links grown per rebind 12.0; joints loosened 1240; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 234 of 234
+quarter 2: probe brings back exactly the current value 90%; values brought back per probe 0.90; other variable brought back 0%; links grown per rebind 12.0; joints loosened 1252; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 246 of 246
+quarter 3: probe brings back exactly the current value 90%; values brought back per probe 0.90; other variable brought back 0%; links grown per rebind 12.0; joints loosened 1248; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 252 of 252
+quarter 4: probe brings back exactly the current value 91%; values brought back per probe 0.91; other variable brought back 0%; links grown per rebind 12.0; joints loosened 1250; cuts 0; probes that changed structure 0; failed probes after the other variable took this one's value 229 of 229
+completing segments, every 50 rebinds (mean over seeds): 43 43 44 44 44 43 43 43 44 42 41 44 43 42 44 44 42 44 43 44
+final segments (mean): completing 44, predicting 0
+

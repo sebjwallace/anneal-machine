@@ -1,0 +1,2 @@
+core loosened at ABEF: 0 | ABC -> D0 | ABE -> F0 | AB -> C0D0E0F0
+loosen loosened at ABEF: 1 | ABC -> E0F0 | ABE -> F0 | AB -> C1

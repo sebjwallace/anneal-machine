@@ -1,0 +1,23 @@
+C83 · Hardening by repetition. Written 15 November 2026 after runs on development seed 1, before any run on test seeds
+101-105. Settings in run.js. Part A, the race: "x", "3", "5" each seen alone; "x 3" k times (k = 1-5); then "x 5" five
+times, "x" alone after each. Part B, house and shed: "AB", "CD", "ABCD" k times (k = 1-4), "ABEF", then "ABC" and "ABE"
+each on a volume rebuilt the same way. A blank before every input. Arms: core, loosen (C82), harden (C82 + C83). No change
+was made to the engine after looking at the development seed.
+
+Seen on dev seed 1: race: loosen, 3 gone after the first clash at every k; harden, gone at k = 1 and 2, kept (with 5)
+at k = 3-5 through all five clashes; core keeps both. House and shed: "ABC" -> "D": core 100% at every k, loosen 0%,
+harden 0% at k = 1 and 100% at k = 2-4; "ABE" -> "F" 100% everywhere. Core's tests on the harden copy: 15 of 16 (the
+failure is test 9's "the Z again, nothing grows", which hardening does by design).
+
+Predictions (test seeds 101-105, pooled):
+  P1  Race, loosen: 3 is brought back after no clash at any k (0%).
+  P2  Race, harden: at k = 1, 3 is gone after the first clash in >= 80% of seeds; at k >= 4, 3 is still brought back
+      after all five clashes in >= 80% of seeds.
+  P3  Race: once "x 5" is seen, "x" alone brings back 5 after every clash in every arm (100%).
+  P4  Race, harden: a bond that survives the first clash is still there after the fifth (no seed loses 3 after it was
+      kept at the first clash).
+  P5  House and shed, "ABC" -> "D": core >= 80% at every k; loosen <= 20% at every k; harden <= 20% at k = 1 and >= 80%
+      at k >= 3. "ABE" -> "F" >= 80% in every arm and k.
+  P6  Race, harden: completing segments before the clashes rise with k (each k above the one before); in core and
+      loosen they are the same at every k.
+Nothing will be changed after looking at test seeds.

@@ -712,6 +712,77 @@ The story of how the system came to be: each entry is an arc that opens with a g
 - **Contract:** confirmed CTR-1 OPZ-3; confirmed CTR-1 CAP-4; confirmed CTR-1 DEF-14; confirmed CTR-1 OPZ-5; confirmed CTR-1 CAP-3
 - **Lesson:** Composition is not a second mechanism: it is the assembly rule applied to parts that already exist.
 
+### HYP-32 · Hypothesis: A bond can be undone as cheaply as it is tied, by heat: when a joint brings back what the input has replaced ("x" seen with "5" brings back "3"), it loosens by one segment per cell (from the owner's conversation on "the", variables and heat).
+
+- **Heat:** Every tie in the core is kept, so "x" alone brings back every value it ever held.
+- **Experiments:** [C82](../../experiments/sketches/C82-rebinding/)
+- **Given by hand:** The inputs and their order; a blank before every input (no transitions); which columns are a variable and which a value.
+- **Closed by OUT-42 · Outcome (partly):** Over 1,000 rebindings, "x" alone brings back exactly its current value 100% of the time (core 0%, about 10 values per probe), with structure flat (44 completing segments throughout, 12 links per rebinding). But the rule is symmetric: binding "y" to the value "x" holds breaks "x"'s bond (91% exact when values are shared; every failure from that). And a whole built once from known parts ("ABCD" from "AB" and "CD") is forgotten when "ABEF" arrives. All 16 core tests still pass, none checking that case.
+- **CLM-31 · Claim:** Unbinding can be driven by the moment's own misfit (a joint bringing back what the input has replaced), with no heat signal set by hand.
+- **TRD-5 · Trade-off:** Loosening a joint by heat frees a variable, but forgets as easily a whole built once from parts.
+- **Contract:** shaped CTR-1 CAP-4; challenged CTR-1 CON-1; confirmed CTR-1 OPZ-3; confirmed CTR-2 CON-7
+- **Lesson:** Unbinding is cheap and real; telling a fast bond from a lasting one is not in the structure yet.
+
+### QST-15 · Question: A variable holds one value; a value can belong to many variables. What in the structure says which side of a bond is which, so that binding "y" to "1" does not undo "x = 1"?
+
+- **Heat:** C82's loosening is symmetric and loses 9-10% when values are shared.
+- **Experiments:** [C82](../../experiments/sketches/C82-rebinding/)
+- **Still open.**
+- **Contract:** shaped CTR-1 CAP-4; shaped CTR-1 CON-16
+- **Lesson:** Binding is not symmetric, and the machine has to find out which side holds one.
+
+### HYP-33 · Hypothesis: Hardness without strengths: a whole wholly seen again is tied again from its parts, so a bond seen many times is backed by more segments than loosening takes at once (the owner's annealing picture).
+
+- **Heat:** With loosening alone (C82), a whole seen many times is as fragile as a variable bound once.
+- **Experiments:** [C83](../../experiments/sketches/C83-hardening/)
+- **Given by hand:** The inputs, their order and the counts; a blank before every input; a whole's parts read from each cell's first completing segment (declared).
+- **Closed by OUT-43 · Outcome (partly):** Seen once, a bond breaks at the first clash; seen three or more times it survives (100%); seen twice, 3 of 5 seeds. "ABCD" seen twice or more survives "ABEF" ("ABC" brings back "D" 100%, against 0% with loosening alone). But a bond is heated once, not worn down: after the first clash the new whole wins by share and the old one is never brought back or heated again, so both values are kept for good, and no race between them happens. Every repetition adds about four segments, without limit. 15 of 16 core tests (test 9 forbids growth on a repeat).
+- **CLM-32 · Claim:** Repetition can protect a bond structurally, with no strength on any segment.
+- **TRD-6 · Trade-off:** Hardening by re-tying costs segments on every repetition, needed or not: unconditional growth again (RM-9).
+- **APT-7 · Anti-pattern:** Expecting heat to wear a bond down clash by clash: competition by share stops a beaten memory from being heated at all.
+- **Contract:** confirmed CTR-1 CON-9; shaped CTR-1 CAP-11; challenged CTR-1 CON-1; confirmed CTR-2 CON-7
+- **Lesson:** Fast bonds and lasting ones can come from one mechanism, but only a memory that is brought back can be heated.
+
+### HYP-34 · Hypothesis: First candidates for the energy rule at the level of cells, after heat was reduced to one idea (what is active and what is held disagree, in three shapes: unheld, unthere, twice): squeeze (a full column clears its least-backed cell), used (wholes seen again fill in links), fade (a claim not met loses a link), and a yardstick (a use count, breaking CON-9 on purpose).
+
+- **Heat:** Every growth, cut and tie in the core is unconditional (RM-9, the largest gap); C82 and C83 each ended on it.
+- **Experiments:** [C84](../../experiments/sketches/C84-energy-rules/)
+- **Given by hand:** The mixed world (recurring objects, one-off noise, a variable), its proportions and order; a blank before every input.
+- **Closed by OUT-44 · Outcome (not borne out):** No arm ever cleared a cell: a novel input is never stored as new, because any two of its columns wake an old memory and the cut and tie rebuild it from fragments, so unheld heat goes to zero and the volume never runs short. Structure grew about 40% in the core, all from cuts and ties. Unthere heat did not fall (about 25 cells brought back per moment; 50 with noise on the objects' columns, where half of any object brought back all 60 other columns in every arm but fade). Fade cut the chaining to 19 columns but frayed the objects and tripled growth through churn.
+- **CLM-33 · Claim:** Heat is where what is active and what is held disagree: something there that nothing holds, something held that isn't there, something held twice. Every earlier use of the word is one of these.
+- **CLM-34 · Claim:** In the core, growth comes from cutting and tying fragments, not from running out of cells; an energy rule must judge the cut and the tie.
+- **APT-8 · Anti-pattern:** Reading zero unexplained input as understanding: it can mean everything is being explained as fragments of the past.
+- **Contract:** challenged CTR-1 CON-1; shaped CTR-1 CON-14; confirmed CTR-1 CON-9; confirmed CTR-2 CON-7
+- **Lesson:** The energy rule belongs at the cut and the tie: whether explaining something as pieces of the past is worth what it adds.
+
+### PRB-16 · Problem: One-off inputs are kept as compositions of old fragments and chain memories together; nothing at the level of cells asks whether a cut or a tie pays.
+
+- **Heat:** C84: unthere heat never falls, and with shared columns any object brings back everything.
+- **Experiments:** [C84](../../experiments/sketches/C84-energy-rules/)
+- **Still open.**
+- **Contract:** challenged CTR-1 CON-1; challenged CTR-1 OPZ-3
+- **Lesson:** Open: the bill restated in cells, at the cut and the tie.
+
+### HYP-35 · Hypothesis: Bond on cooling (the owner's flow-and-heat premise): a memory explains an input only if it explains at least as many cells as it claims that aren't there (RM-9's prices of 1); one-offs stay loose and are cleared when cells run short; bonds freeze by returning.
+
+- **Heat:** C84: one-offs are patched from fragments of the past, heat held in structure never falls, and with shared columns everything chains.
+- **Experiments:** [C85](../../experiments/sketches/C85-bond-on-cooling/)
+- **Given by hand:** As C84.
+- **Closed by OUT-45 · Outcome (partly):** With one-offs on columns of their own: structure flat (about 520 segments against the core's 394 rising to 549), heat held in structure ("unthere") about 1 cell per moment against 26, objects exact 100%, "x" 100%, the one-offs' heat left unexplained (about 4 per moment). The bill without clearing grew structure 9-13 times the core's. With one-offs on the objects' columns: chaining gone (at most 0.6 stray columns against 60), but objects lost cells to the squeeze (exact 20-27%); freezing by return did not help, since an object that has lost a cell is never seen whole again. The bill forbids recall from a small cue (5 core tests fail).
+- **CLM-35 · Claim:** Priced at the fit, a one-off's heat can pass through instead of being patched into structure, if loose structure can flow out again.
+- **TRD-7 · Trade-off:** The bill at the fit stops patching and chaining, but forbids recall from a small cue.
+- **TRD-8 · Trade-off:** One-offs that pass through still need cells; where they share the cells memories use, capacity becomes the fault.
+- **Contract:** shaped CTR-1 CON-1; shaped CTR-1 CON-14; confirmed CTR-1 OPZ-3; confirmed CTR-2 CON-7
+- **Lesson:** The premise works where heat has a way out: bonds kept on cooling, one-offs passing through.
+
+### QST-16 · Question: When is completing a memory from a small part worth what it claims? In a stream the machine can't tell "not there" from "not seen yet"; the old core priced hidden parts at nothing by marking them known-unknown.
+
+- **Heat:** C85: the bill at the fit stops a quarter of the square bringing back the whole.
+- **Experiments:** [C85](../../experiments/sketches/C85-bond-on-cooling/)
+- **Still open.**
+- **Contract:** shaped CTR-1 CON-1
+- **Lesson:** Open: known-unknown, in cells.
+
 ## Index back: experiments
 
 | Experiment | Entries |
@@ -796,6 +867,10 @@ The story of how the system came to be: each entry is an arc that opens with a g
 | [C79](../../experiments/sketches/C79-context-cells/) | HYP-27 |
 | [C80](../../experiments/sketches/C80-reading-letters/) | PRO-5, HYP-28, INC-3 |
 | [C81](../../experiments/sketches/C81-levels-from-letters/) | HYP-29, INC-3 |
+| [C82](../../experiments/sketches/C82-rebinding/) | HYP-32, QST-15 |
+| [C83](../../experiments/sketches/C83-hardening/) | HYP-33 |
+| [C84](../../experiments/sketches/C84-energy-rules/) | HYP-34, PRB-16 |
+| [C85](../../experiments/sketches/C85-bond-on-cooling/) | HYP-35, QST-16 |
 
 ## Index forward: contract clauses
 
@@ -823,14 +898,14 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 GOL-4 | Regions (DEF-10) settle each other: heat in one is resolved by the system as a whole. | HYP-13 (shaped), THY-2 (created), THY-4 (confirmed) |
 | CTR-1 OPZ-4 | Heat: explain its world more completely: more misfits resolved, never masked (CON-6). | PRB-11 (changed) |
 | CTR-1 OPZ-1 | Information: learn as much or more from far less information than today's AI needs. | HYP-5 (shaped), PRB-8 (created), HYP-17 (confirmed), HYP-18 (confirmed), HYP-19 (confirmed), HYP-22 (confirmed), HYP-28 (confirmed) |
-| CTR-1 OPZ-3 | Minimality: the fewest constructs that explain the most. | HYP-3 (shaped), PRB-8 (created), PRB-11 (changed), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), PRB-14 (confirmed), HYP-31 (confirmed) |
+| CTR-1 OPZ-3 | Minimality: the fewest constructs that explain the most. | HYP-3 (shaped), PRB-8 (created), PRB-11 (changed), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), PRB-14 (confirmed), HYP-31 (confirmed), HYP-32 (confirmed), PRB-16 (challenged), HYP-35 (confirmed) |
 | CTR-1 OPZ-2 | Compute: fewer resources (time, memory, power) for the same learning, on ordinary CPUs (CO | HYP-2 (shaped), HYP-16 (confirmed), PRB-11 (changed), HYP-23 (confirmed) |
 | CTR-1 OPZ-5 | Scale: the more it stores, the less each addition costs it: the work of receiving and reca | PRB-4 (shaped), HYP-25 (confirmed), PRB-12 (changed), THY-7 (shaped), HYP-31 (confirmed) |
 | CTR-1 CON-11 | It can't learn what isn't in what it receives. | — |
 | CTR-1 CON-12 | It can't try every explanation: search at rest is always partial. | HYP-5 (shaped) |
-| CTR-1 CON-14 | Memory is finite: good enough, not exact; exact records live outside it. | QST-10 (shaped) |
+| CTR-1 CON-14 | Memory is finite: good enough, not exact; exact records live outside it. | QST-10 (shaped), HYP-34 (shaped), HYP-35 (shaped) |
 | CTR-1 CON-13 | Evidence alone can't settle a true tie: only more evidence can (looking, acting). | QST-12 (created) |
-| CTR-1 CON-1 | One rule: a change to its structure is kept only if energy (DEF-1) falls. | HYP-5 (shaped), HYP-8 (confirmed), HYP-9 (confirmed), QST-7 (confirmed), HYP-14 (confirmed), PRO-3 (confirmed), INC-3 (challenged), INC-4 (challenged), HYP-30 (challenged) |
+| CTR-1 CON-1 | One rule: a change to its structure is kept only if energy (DEF-1) falls. | HYP-5 (shaped), HYP-8 (confirmed), HYP-9 (confirmed), QST-7 (confirmed), HYP-14 (confirmed), PRO-3 (confirmed), INC-3 (challenged), INC-4 (challenged), HYP-30 (challenged), HYP-32 (challenged), HYP-33 (challenged), HYP-34 (challenged), PRB-16 (challenged), HYP-35 (shaped), QST-16 (shaped) |
 | CTR-1 CON-2 | One currency, taken from the world: no hand-set weights or tuned parameters. | HYP-1 (shaped), HYP-3 (shaped), PRB-1 (created), PRB-3 (confirmed), HYP-20 (challenged) |
 | CTR-1 CON-6 | Resolve, don't mask: energy may only fall because a misfit is resolved, never because its  | PRB-6 (shaped), THY-3 (created) |
 | CTR-1 CON-3 | General: nothing in it is written for one task or one kind of world. Fixed architecture is | PRB-2 (created), QST-8 (confirmed), PRB-5 (confirmed) |
@@ -841,12 +916,12 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CON-18 | Sparse, event-driven computation: work happens only where something is active or changes; | THY-5 (created), THY-6 (confirmed), HYP-16 (confirmed), HYP-21 (challenged), HYP-22 (challenged), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-25 (confirmed), PRO-6 (confirmed) |
 | CTR-1 CON-19 | Cells and segments first: what the machine does (waking, completion, competition, fitting, | PRB-12 (created), HYP-26 (confirmed), THY-7 (shaped), PRB-13 (shaped), HYP-27 (confirmed), PRO-5 (confirmed), HYP-28 (confirmed), HYP-29 (confirmed), INC-3 (challenged), INC-4 (confirmed), PRO-6 (confirmed), INC-5 (confirmed) |
 | CTR-1 CON-5 | Runs on ordinary CPUs: no GPU, TPU or other specialised hardware. | — |
-| CTR-1 CON-9 | Cells carry no numbers: no strengths or activation levels; evidence is counted per memory, | HYP-10 (created), PRB-11 (changed), HYP-20 (challenged) |
-| CTR-1 CON-16 | No labels or teacher as a shortcut (breaks GOL-1). | — |
+| CTR-1 CON-9 | Cells carry no numbers: no strengths or activation levels; evidence is counted per memory, | HYP-10 (created), PRB-11 (changed), HYP-20 (challenged), HYP-33 (confirmed), HYP-34 (confirmed) |
+| CTR-1 CON-16 | No labels or teacher as a shortcut (breaks GOL-1). | QST-15 (shaped) |
 | CTR-1 CON-15 | No perfect memory (breaks CON-1 and OPZ-2). | — |
 | CTR-1 CON-17 | No exhaustive search for the best answer (breaks OPZ-2). | — |
 | CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed), QST-13 (challenged), HYP-17 (confirmed), HYP-26 (confirmed), HYP-30 (confirmed) |
-| CTR-1 CAP-4 | Binding what happens together (Hebbian in spirit): things active together become one memor | QST-11 (created), HYP-20 (shaped), HYP-24 (confirmed), HYP-29 (confirmed), HYP-31 (confirmed) |
+| CTR-1 CAP-4 | Binding what happens together (Hebbian in spirit): things active together become one memor | QST-11 (created), HYP-20 (shaped), HYP-24 (confirmed), HYP-29 (confirmed), HYP-31 (confirmed), HYP-32 (shaped), QST-15 (shaped) |
 | CTR-1 CAP-3 | Auto-associative memory: a few active pieces bring back the whole memory they belong to. | QST-3 (created), HYP-10 (confirmed), HYP-19 (confirmed), HYP-20 (shaped), HYP-21 (confirmed), HYP-22 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), HYP-31 (confirmed) |
 | CTR-1 CAP-2 | Sparse distributed representations: a thing is a small set of cells; which cell says where | HYP-6 (created), QST-6 (challenged), PRB-11 (changed), HYP-25 (confirmed), HYP-27 (confirmed) |
 | CTR-1 CAP-6 | Thresholds from prices: when to keep, recall or recognise follows from the currency (CON-2 | PRB-1 (created), QST-3 (confirmed), HYP-24 (shaped), PRB-14 (confirmed) |
@@ -858,7 +933,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CAP-12 | History in the state: what was a moment ago is part of now. | QST-5 (created), HYP-27 (confirmed), HYP-28 (confirmed), HYP-29 (shaped) |
 | CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed), THY-6 (shaped) |
 | CTR-1 CAP-15 | Held states as other regions' activity: what one volume holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped) |
-| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed) |
+| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed), HYP-33 (shaped) |
 | CTR-1 CAP-14 | Exact records kept outside, in something it can read and write. | — |
 | CTR-1 PRN-1 | Prefer the deeper explanation to a new mechanism. | PRB-5 (shaped), THY-7 (confirmed), INC-5 (confirmed) |
 | CTR-1 PRN-2 | Prefer removing structure to adding it. | PRB-2 (shaped), PRB-3 (confirmed) |
@@ -886,7 +961,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-2 OPZ-4 | The smallest code that fulfils CTR-1: fewest constructs and lines, echoing CTR-1 OPZ-3. | — |
 | CTR-2 CON-3 | No crutches (DEF-5) and no patches (DEF-6). | PRB-2 (created), INC-5 (confirmed) |
 | CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created), INC-3 (confirmed) |
-| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed) |
+| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed) |
 | CTR-2 CON-4 | Every declared choice (DEF-7) is written in `docs/decisions/`. | — |
 | CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed), PRO-6 (challenged) |
 | CTR-2 CON-8 | Bookkeeping (DEF-11) may be used in experiments, declared as a violation (CON-7), but neve | PRB-12 (created), THY-7 (shaped), PRB-13 (shaped), PRO-5 (confirmed), INC-4 (confirmed), PRO-6 (confirmed) |
@@ -917,3 +992,6 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 - THY-5 · Theory: Sparse, event-driven computation: things change only in reaction to other things, and a held state is another region's stable activity projecting in, not recomputed (the owner's).
 - THY-6 · Theory: Persistent assemblies: what a region settled into stays active and changes only when something arriving doesn't fit it; these are the held states (the owner's).
 - QST-14 · Question: Frames beyond literal placement: "the bird was flying and found and ate a worm" and "bird eats worm" share one frame underneath. How? (The owner expects to discover it, perhaps from the right architecture of regions.)
+- QST-15 · Question: A variable holds one value; a value can belong to many variables. What in the structure says which side of a bond is which, so that binding "y" to "1" does not undo "x = 1"?
+- PRB-16 · Problem: One-off inputs are kept as compositions of old fragments and chain memories together; nothing at the level of cells asks whether a cut or a tie pays.
+- QST-16 · Question: When is completing a memory from a small part worth what it claims? In a stream the machine can't tell "not there" from "not seen yet"; the old core priced hidden parts at nothing by marking them known-unknown.

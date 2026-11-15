@@ -1,0 +1,22 @@
+C82 · Rebinding a variable. Written 15 November 2026 after runs on development seed 1, before any run on test seeds
+101-105. Settings in run.js: two variables (x, y) and ten values (0-9), each an assembly over three columns of its own,
+four cells per column; each seen alone once; then 1,000 rebindings (a variable seen with a new value), each followed by
+both variables seen alone (the probes); a blank moment before every input, so no transitions are learnt. Arms: core
+(copied unchanged) and loosen (one change, in engine/volume.js). Conditions: values never shared between the variables,
+and shared freely. No change was made to the engine after looking at the development seed; the conditions were added
+after it, when the shared-value failures were seen.
+
+Seen on dev seed 1: loosen, never shared: 100% exact in every quarter; shared freely: 88-92%, and every failed probe came
+after the other variable took this one's value; core: 0% exact, about 10 values per probe; completing segments flat
+(core 116, loosen 44); 12 links grown per rebinding in loosen.
+
+Predictions (test seeds 101-105, pooled):
+  P1  Loosen, never shared: a probe brings back exactly the current value >= 99% in every quarter.
+  P2  Loosen, both conditions: completing segments at the end within 10% of their count after 50 rebindings, and links
+      grown per rebinding in quarter 4 within 10% of quarter 1.
+  P3  Core, both conditions: exact <= 5%, and >= 9 values brought back per probe from quarter 2 on.
+  P4  Loosen, shared freely: exact at least 5 points below never shared in every quarter, and >= 95% of its failed probes
+      come after the other variable took this one's value.
+  P5  No probe changes structure (nothing grown or cut), in any arm.
+  P6  Loosen never brings back more than one value (values per probe <= 1.00).
+Nothing will be changed after looking at test seeds.

@@ -1,0 +1,61 @@
+== world: noise on its own columns; arm: core (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 394, links 1830, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 0.24, unthere 25.7, twice 0.05
+quarter 2: segments 468, links 2011, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 25.5, twice 0.05
+quarter 3: segments 514, links 2112, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 25.6, twice 0.05
+quarter 4: segments 549, links 2186, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 26.6, twice 0.05
+
+== world: noise on its own columns; arm: squeeze (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 372, links 1760, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.24, unthere 24.0, twice 0.05
+quarter 2: segments 437, links 1917, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 23.7, twice 0.05
+quarter 3: segments 486, links 2028, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 23.9, twice 0.05
+quarter 4: segments 526, links 2117, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 24.8, twice 0.05
+
+== world: noise on its own columns; arm: used (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 376, links 2166, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.24, unthere 24.0, twice 0.05
+quarter 2: segments 433, links 2328, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 23.8, twice 0.05
+quarter 3: segments 473, links 2442, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 23.8, twice 0.05
+quarter 4: segments 496, links 2525, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 24.7, twice 0.05
+
+== world: noise on its own columns; arm: yardstick (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 372, links 1760, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.24, unthere 24.0, twice 0.05
+quarter 2: segments 437, links 1917, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 23.7, twice 0.05
+quarter 3: segments 486, links 2028, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 23.9, twice 0.05
+quarter 4: segments 526, links 2117, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 24.8, twice 0.05
+
+== world: noise on its own columns; arm: fade (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 443, links 1413, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.54, unthere 15.8, twice 0.18
+quarter 2: segments 640, links 1779, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.18, unthere 15.5, twice 0.36
+quarter 3: segments 888, links 2061, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.13, unthere 15.4, twice 0.28
+quarter 4: segments 1217, links 2455, cells cleared so far 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 0.10, unthere 14.7, twice 0.24
+
+== world: noise on the objects' columns; arm: core (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 417, links 1612, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 0% | heat per moment: unheld 0.01, unthere 50.5, twice 0.13
+quarter 2: segments 501, links 1824, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 51.9, twice 0.11
+quarter 3: segments 555, links 1948, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 51.7, twice 0.12
+quarter 4: segments 591, links 2029, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 51.3, twice 0.12
+
+== world: noise on the objects' columns; arm: squeeze (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 391, links 1542, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.01, unthere 48.7, twice 0.13
+quarter 2: segments 470, links 1738, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 50.0, twice 0.11
+quarter 3: segments 525, links 1864, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 49.8, twice 0.12
+quarter 4: segments 555, links 1929, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 49.4, twice 0.12
+
+== world: noise on the objects' columns; arm: used (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 355, links 1810, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.01, unthere 48.7, twice 0.01
+quarter 2: segments 417, links 1984, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 50.0, twice 0.00
+quarter 3: segments 457, links 2119, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 49.8, twice 0.00
+quarter 4: segments 486, links 2214, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 49.3, twice 0.00
+
+== world: noise on the objects' columns; arm: yardstick (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 391, links 1542, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.01, unthere 48.7, twice 0.13
+quarter 2: segments 470, links 1738, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 50.0, twice 0.11
+quarter 3: segments 525, links 1864, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 49.8, twice 0.12
+quarter 4: segments 555, links 1929, cells cleared so far 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 100% | heat per moment: unheld 0.00, unthere 49.4, twice 0.12
+
+== world: noise on the objects' columns; arm: fade (seeds 101,102,103,104,105, 1200 moments) ==
+quarter 1: segments 434, links 783, cells cleared so far 0 | objects from half: complete 23%, exact 10%, extra columns per probe 6.3 | "x" exact 100% | heat per moment: unheld 0.41, unthere 24.0, twice 0.32
+quarter 2: segments 663, links 1307, cells cleared so far 0 | objects from half: complete 50%, exact 13%, extra columns per probe 9.6 | "x" exact 100% | heat per moment: unheld 0.12, unthere 30.8, twice 0.52
+quarter 3: segments 1004, links 1754, cells cleared so far 0 | objects from half: complete 43%, exact 0%, extra columns per probe 18.5 | "x" exact 100% | heat per moment: unheld 0.04, unthere 41.3, twice 0.42
+quarter 4: segments 1473, links 2290, cells cleared so far 0 | objects from half: complete 43%, exact 3%, extra columns per probe 19.4 | "x" exact 100% | heat per moment: unheld 0.01, unthere 47.5, twice 0.30
+
+DONE

@@ -1,0 +1,48 @@
+== world: noise on its own columns; arm: core (seeds 104, 1200 moments) ==
+quarter 1: segments 415, links 1778, cells cleared so far 0, memories refused for not paying 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 0.24, unthere 24.9, twice 0.00
+quarter 2: segments 484, links 1940, cells cleared so far 0, memories refused for not paying 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 26.2, twice 0.00
+quarter 3: segments 549, links 2090, cells cleared so far 0, memories refused for not paying 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 25.0, twice 0.00
+quarter 4: segments 583, links 2162, cells cleared so far 0, memories refused for not paying 0 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 26.7, twice 0.00
+
+== world: noise on its own columns; arm: pays (seeds 104, 1200 moments) ==
+quarter 1: segments 1516, links 8928, cells cleared so far 0, memories refused for not paying 252 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 4.65, unthere 1.2, twice 0.02
+quarter 2: segments 2862, links 16924, cells cleared so far 0, memories refused for not paying 436 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 4.40, unthere 1.9, twice 0.11
+quarter 3: segments 4129, links 24502, cells cleared so far 0, memories refused for not paying 624 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 4.20, unthere 1.8, twice 0.07
+quarter 4: segments 5452, links 32428, cells cleared so far 0, memories refused for not paying 797 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 4.40, unthere 2.5, twice 0.17
+
+== world: noise on its own columns; arm: pays-squeeze (seeds 104, 1200 moments) ==
+quarter 1: segments 514, links 1930, cells cleared so far 858, memories refused for not paying 1012 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 3.98, unthere 1.0, twice 0.01
+quarter 2: segments 545, links 1954, cells cleared so far 1912, memories refused for not paying 1984 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 3.73, unthere 1.1, twice 0.01
+quarter 3: segments 513, links 1938, cells cleared so far 2907, memories refused for not paying 2851 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 3.53, unthere 1.1, twice 0.04
+quarter 4: segments 490, links 1847, cells cleared so far 3996, memories refused for not paying 3832 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 3.81, unthere 1.1, twice 0.01
+
+== world: noise on its own columns; arm: cooling (seeds 104, 1200 moments) ==
+quarter 1: segments 522, links 2262, cells cleared so far 821, memories refused for not paying 971 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 3.81, unthere 1.2, twice 0.01
+quarter 2: segments 535, links 2312, cells cleared so far 1874, memories refused for not paying 1808 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 3.67, unthere 1.2, twice 0.02
+quarter 3: segments 512, links 2290, cells cleared so far 2867, memories refused for not paying 2701 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 3.55, unthere 1.1, twice 0.01
+quarter 4: segments 520, links 2243, cells cleared so far 3953, memories refused for not paying 3729 | objects from half: complete 100%, exact 100%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 3.78, unthere 1.3, twice 0.01
+
+== world: noise on the objects' columns; arm: core (seeds 104, 1200 moments) ==
+quarter 1: segments 400, links 1584, cells cleared so far 0, memories refused for not paying 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 0% | heat per moment: unheld 0.01, unthere 49.4, twice 0.21
+quarter 2: segments 473, links 1760, cells cleared so far 0, memories refused for not paying 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 52.3, twice 0.16
+quarter 3: segments 533, links 1904, cells cleared so far 0, memories refused for not paying 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 50.9, twice 0.19
+quarter 4: segments 575, links 2002, cells cleared so far 0, memories refused for not paying 0 | objects from half: complete 100%, exact 0%, extra columns per probe 60.0 | "x" exact 0% | heat per moment: unheld 0.00, unthere 52.9, twice 0.24
+
+== world: noise on the objects' columns; arm: pays (seeds 104, 1200 moments) ==
+quarter 1: segments 2323, links 13270, cells cleared so far 0, memories refused for not paying 355 | objects from half: complete 50%, exact 50%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 6.72, unthere 5.3, twice 0.91
+quarter 2: segments 4088, links 23176, cells cleared so far 0, memories refused for not paying 558 | objects from half: complete 33%, exact 33%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 5.16, unthere 10.7, twice 1.68
+quarter 3: segments 5813, links 32998, cells cleared so far 0, memories refused for not paying 772 | objects from half: complete 17%, exact 17%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 5.24, unthere 10.2, twice 1.76
+quarter 4: segments 7562, links 43118, cells cleared so far 0, memories refused for not paying 972 | objects from half: complete 0%, exact 0%, extra columns per probe 0.0 | "x" exact 0% | heat per moment: unheld 5.48, unthere 10.3, twice 1.93
+
+== world: noise on the objects' columns; arm: pays-squeeze (seeds 104, 1200 moments) ==
+quarter 1: segments 516, links 1531, cells cleared so far 1076, memories refused for not paying 1737 | objects from half: complete 50%, exact 17%, extra columns per probe 0.3 | "x" exact 100% | heat per moment: unheld 4.44, unthere 1.8, twice 0.01
+quarter 2: segments 529, links 1577, cells cleared so far 2415, memories refused for not paying 3319 | objects from half: complete 0%, exact 0%, extra columns per probe 0.8 | "x" exact 100% | heat per moment: unheld 4.56, unthere 2.7, twice 0.04
+quarter 3: segments 574, links 1723, cells cleared so far 3649, memories refused for not paying 4877 | objects from half: complete 0%, exact 0%, extra columns per probe 0.5 | "x" exact 100% | heat per moment: unheld 4.27, unthere 2.8, twice 0.02
+quarter 4: segments 522, links 1487, cells cleared so far 5066, memories refused for not paying 6388 | objects from half: complete 50%, exact 33%, extra columns per probe 0.3 | "x" exact 100% | heat per moment: unheld 4.90, unthere 2.5, twice 0.02
+
+== world: noise on the objects' columns; arm: cooling (seeds 104, 1200 moments) ==
+quarter 1: segments 501, links 1867, cells cleared so far 971, memories refused for not paying 1740 | objects from half: complete 67%, exact 50%, extra columns per probe 0.2 | "x" exact 100% | heat per moment: unheld 4.07, unthere 1.9, twice 0.01
+quarter 2: segments 529, links 1765, cells cleared so far 2142, memories refused for not paying 3333 | objects from half: complete 33%, exact 33%, extra columns per probe 0.0 | "x" exact 100% | heat per moment: unheld 4.03, unthere 2.2, twice 0.02
+quarter 3: segments 560, links 2051, cells cleared so far 3292, memories refused for not paying 4794 | objects from half: complete 17%, exact 0%, extra columns per probe 0.2 | "x" exact 100% | heat per moment: unheld 3.99, unthere 2.3, twice 0.03
+quarter 4: segments 579, links 2040, cells cleared so far 4447, memories refused for not paying 6567 | objects from half: complete 17%, exact 0%, extra columns per probe 0.2 | "x" exact 100% | heat per moment: unheld 3.98, unthere 2.2, twice 0.01
+

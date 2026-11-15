@@ -2,6 +2,14 @@
 
 Grouped by where they came up. Nothing here is started.
 
+## Next experiment (from C85, 15 November 2026)
+- **Pruning by heat, not by capacity.** C85 cleared cells only when a column ran out (the squeeze), which cost the
+  objects cells where one-offs shared their columns. The [flow and heat](theories/flow-and-heat.md) premise says to
+  prune the lines that lead nowhere instead: bonds that keep claiming what never arrives (C84's fade). Fade failed in
+  C84 only because the core re-patched at once; with the bill at the fit (C85's pays), re-patching is stopped. Try pays
+  with fade, with and without the squeeze, on C85's two worlds. Watch: objects' exact recall in the shared world,
+  structure, and the three shapes of heat.
+
 ## Seeing (C20–C21)
 - **Memory scraps.** About a dozen bottom-layer parts are odd scattered leftovers of stored scenes. New scenes never use them, and they become pointless columns in C21. Option: let a memory hold loose pixels, so these can go. Catch: something seen only once would then never become a part. Needs a deliberate decision.
 - **Better explaining while awake.** The "try the strongest few first choices, keep the cheapest" explanation is only used for encoding (C21 on). Awake learning still uses plain greedy, which made the flag + flag mistake. Try it awake too, and check speed.

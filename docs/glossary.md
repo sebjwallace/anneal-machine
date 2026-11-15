@@ -17,6 +17,10 @@ Use these words, with these meanings, and no others.
 | **placement** (to confirm) | "This part, at this offset." Memories and composites are lists of placements. |
 | **memory** (to confirm) | A stored picture, described as placements plus any loose pixels. |
 | **volume** (owner) | A number of columns: one machine of this kind, receiving and settling its own heat. Replaces **region** (CTR-1 DEF-10). |
+| **joint** (owner, for now) | The segments that hold a whole's parts together: what a tie grows between the handles of its parts (C82). |
+| **loosen** (owner, for now) | A joint losing segments because it is heated: it brings back what the input has replaced (C82). |
+| **harden** (owner, for now) | A joint gaining segments because its whole is seen again, so it takes more loosening to break (C83). |
+| **variable** (arithmetic sense, owner, for now) | In C82 and C83: a state such as "x" that holds one value at a time until it is rebound. Close to, but not the same as, **variable** in a frame (below). |
 | **column** (owner) | One per primitive. Holds many cells. |
 | **cell** (owner) | One unit inside a column. In Anneal, a column's cells are laid out as a grid of offsets: "this primitive, at this offset". |
 | **floor** (to confirm) | A layer of a column's cell grid. Floor 0: where things are in the picture. Higher floors: assemblies of composites, one per level (decision 004). |

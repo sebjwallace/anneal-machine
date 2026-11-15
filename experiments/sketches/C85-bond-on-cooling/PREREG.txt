@@ -1,0 +1,20 @@
+C85 · Bond on cooling. Written 15 November 2026 after runs on development seed 1 (dev.txt), before any run on test seeds
+101-105. World, measures and probes as C84 (run.js). Arms: core; pays (a memory explains an input only if it explains at
+least as many cells as it claims that aren't there: RM-9's two prices of 1); pays-squeeze (and C82's loosening, and a
+full column clears its least-backed cell); cooling (and a whole seen again fills in a missing link). No change was made
+after looking at the development seed.
+
+Seen on dev seed 1: own world: pays-squeeze 478 -> 515 segments, cooling 492 -> 487, core 353 -> 504, pays alone
+1,457 -> 5,492; unthere per moment about 1 in the pays arms against 24-27 in core; objects exact 100% in every arm;
+unheld about 4 per moment in the pays arms. Shared world: objects exact in quarter 4: core 0% (60 extra columns),
+pays-squeeze 17%, cooling 50%; extra columns 0-0.3 in the pays arms.
+
+Predictions (test seeds 101-105, pooled means, quarter 4 unless said):
+  P1  Own world: pays-squeeze and cooling segments within 15% of their quarter 1 count; core grows >= 1.2 times.
+  P2  Own world: unthere <= 3 per moment in pays-squeeze and cooling; >= 20 in core.
+  P3  Own world: objects from half exact >= 95% in every arm.
+  P4  Pays alone has >= 5 times the core's segments, both worlds.
+  P5  Shared world: cooling exact above pays-squeeze exact; extra columns per probe <= 1 in every pays arm, >= 50 in core.
+  P6  Unheld >= 3 per moment in every pays arm, both worlds (one-off heat left unexplained, passing through).
+  P7  "x" exact 100% in pays-squeeze and cooling, both worlds.
+Nothing will be changed after looking at test seeds.

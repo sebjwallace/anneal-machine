@@ -1,0 +1,22 @@
+C84 · Energy rules at the level of cells, first candidates. Written 15 November 2026 after runs on development seed 1
+(dev.txt), before any run on test seeds 101-105. Settings in run.js: six objects of 12 columns recurring (40% of
+moments), one-off noise of 12 columns (40%: world 'own', from 72 columns of its own; world 'shared', from the objects'
+columns), "x" rebound to one of five values (20%); 1,200 moments, a blank before each; four cells per column; probes at
+the end of each quarter. Arms: core, squeeze, used, yardstick, fade. Declared changes after looking at the development
+seed: the fade arm was added after the first run (noise found chaining every object to every other), and the 'own' world
+after the second (to test the squeeze where it was meant to work). No arm was tuned.
+
+Seen on dev seed 1: no arm ever cleared a cell; unheld heat fell to 0.00-0.01 per moment (novel inputs explained as
+fragments of old ones); core segments grew 353 -> 504 (own) and 390 -> 576 (shared); in the shared world every arm but
+fade brought back 60 extra columns per half-probe, fade 15-17; in the own world every arm recalled objects exactly;
+fade grew structure most (1,122 and 1,539 segments); "x" exact 0% in core, 100% in the rest.
+
+Predictions (test seeds 101-105, pooled means):
+  P1  No arm clears a cell, in either world (the squeeze never triggers).
+  P2  Unheld heat per moment in quarter 4 <= 0.05 in every arm but fade, both worlds.
+  P3  Core segments in quarter 4 >= 1.2 times quarter 1, both worlds.
+  P4  Shared world, quarter 4: core, squeeze, used and yardstick bring back >= 50 extra columns per half-probe; fade <= 30.
+  P5  Own world, quarter 4: every arm recalls objects from half exactly >= 95%.
+  P6  Fade has the most segments in quarter 4 of any arm, both worlds.
+  P7  Quarter 4: "x" exact 0% in core and 100% in every other arm, both worlds.
+Nothing will be changed after looking at test seeds.
