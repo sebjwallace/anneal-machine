@@ -1,0 +1,44 @@
+== core (seeds 101,102,103,104,105) ==
+after  50: "x" exact: 0% | "ABC" -> "D" only: 100% | segments: 58
+after 100: "x" exact: 0% | "ABC" -> "D" only: 100% | segments: 58
+after 150: "x" exact: 0% | "ABC" -> "D" only: 100% | segments: 58
+after 200: "x" exact: 0% | "ABC" -> "D" only: 100% | segments: 58
+after 250: "x" exact: 0% | "ABC" -> "D" only: 100% | segments: 58
+after 300: "x" exact: 0% | "ABC" -> "D" only: 100% | segments: 58
+after 350: "x" exact: 0% | "ABC" -> "D" only: 100% | segments: 58
+after 400: "x" exact: 0% | "ABC" -> "D" only: 100% | segments: 58
+all checkpoints: "x" exact: 0% | "ABC" -> "D" only: 100%
+
+== loosen (seeds 101,102,103,104,105) ==
+after  50: "x" exact: 100% | "ABC" -> "D" only: 60% | segments: 35
+after 100: "x" exact: 100% | "ABC" -> "D" only: 40% | segments: 36
+after 150: "x" exact: 100% | "ABC" -> "D" only: 80% | segments: 35
+after 200: "x" exact: 100% | "ABC" -> "D" only: 60% | segments: 35
+after 250: "x" exact: 100% | "ABC" -> "D" only: 40% | segments: 36
+after 300: "x" exact: 100% | "ABC" -> "D" only: 60% | segments: 35
+after 350: "x" exact: 100% | "ABC" -> "D" only: 40% | segments: 36
+after 400: "x" exact: 100% | "ABC" -> "D" only: 40% | segments: 36
+all checkpoints: "x" exact: 100% | "ABC" -> "D" only: 53%
+
+== slow learns (seeds 101,102,103,104,105) ==
+after  50: "x" exact: slow 0%, fast 100%, together 0% | "ABC" -> "D" only: slow 100%, fast 60%, together 60% | segments: slow 58, fast 35
+after 100: "x" exact: slow 0%, fast 100%, together 0% | "ABC" -> "D" only: slow 100%, fast 40%, together 40% | segments: slow 58, fast 36
+after 150: "x" exact: slow 0%, fast 100%, together 0% | "ABC" -> "D" only: slow 100%, fast 80%, together 80% | segments: slow 58, fast 35
+after 200: "x" exact: slow 0%, fast 100%, together 0% | "ABC" -> "D" only: slow 100%, fast 60%, together 60% | segments: slow 58, fast 35
+after 250: "x" exact: slow 0%, fast 100%, together 0% | "ABC" -> "D" only: slow 100%, fast 40%, together 40% | segments: slow 58, fast 36
+after 300: "x" exact: slow 0%, fast 100%, together 0% | "ABC" -> "D" only: slow 100%, fast 60%, together 60% | segments: slow 58, fast 35
+after 350: "x" exact: slow 0%, fast 100%, together 0% | "ABC" -> "D" only: slow 100%, fast 40%, together 40% | segments: slow 58, fast 36
+after 400: "x" exact: slow 0%, fast 100%, together 0% | "ABC" -> "D" only: slow 100%, fast 40%, together 40% | segments: slow 58, fast 36
+all checkpoints: "x" exact: slow 0%, fast 100%, together 0% | "ABC" -> "D" only: slow 100%, fast 53%, together 53%
+
+== slow set (seeds 101,102,103,104,105) ==
+after  50: "x" exact: slow 0%, fast 100%, together 100% | "ABC" -> "D" only: slow 100%, fast 60%, together 60% | segments: slow 30, fast 35
+after 100: "x" exact: slow 0%, fast 100%, together 100% | "ABC" -> "D" only: slow 100%, fast 40%, together 40% | segments: slow 30, fast 36
+after 150: "x" exact: slow 0%, fast 100%, together 100% | "ABC" -> "D" only: slow 100%, fast 80%, together 80% | segments: slow 30, fast 35
+after 200: "x" exact: slow 0%, fast 100%, together 100% | "ABC" -> "D" only: slow 100%, fast 60%, together 60% | segments: slow 30, fast 35
+after 250: "x" exact: slow 0%, fast 100%, together 100% | "ABC" -> "D" only: slow 100%, fast 40%, together 40% | segments: slow 30, fast 36
+after 300: "x" exact: slow 0%, fast 100%, together 100% | "ABC" -> "D" only: slow 100%, fast 60%, together 60% | segments: slow 30, fast 35
+after 350: "x" exact: slow 0%, fast 100%, together 100% | "ABC" -> "D" only: slow 100%, fast 40%, together 40% | segments: slow 30, fast 36
+after 400: "x" exact: slow 0%, fast 100%, together 100% | "ABC" -> "D" only: slow 100%, fast 40%, together 40% | segments: slow 30, fast 36
+all checkpoints: "x" exact: slow 0%, fast 100%, together 100% | "ABC" -> "D" only: slow 100%, fast 53%, together 53%
+

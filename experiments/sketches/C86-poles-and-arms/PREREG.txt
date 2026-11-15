@@ -1,0 +1,17 @@
+C86 · Poles and arms. Written 15 November 2026 after runs on development seed 1 (dev.txt), before any run on test seeds
+101-105. Settings in run.js; the rule in model.md. Arms: core, loosen (one volume each); slow learns, slow set (a slow
+volume as the core, a fast one with C82's loosening fed by the slow one's winners). Declared change after the
+development seed: every probe on two volumes is read from the slow one, the fast one and both together, because the
+first version read each probe from the volume that suited it (the experimenter choosing).
+
+Seen on dev seed 1, over all eight checkpoints: core "x" 0%, "ABC" -> "D" 100%; loosen 100%, 75%; two volumes: "x" from
+the fast volume 100%, from the slow 0%, together 0% (slow learns) or 100% (slow set); "ABC" from the slow volume 100%,
+from the fast 75%, together 75%.
+
+Predictions (test seeds 101-105, pooled over all checkpoints):
+  P1  Core: "x" exact <= 5%; "ABC" -> "D" >= 95%.
+  P2  Loosen: "x" >= 95%; "ABC" -> "D" <= 90%.
+  P3  Two volumes, both arms: "x" from the fast volume >= 95%; "ABC" from the slow volume >= 95%.
+  P4  Two volumes: "x" from the slow volume <= 5%, both arms; "x" together <= 5% when the slow volume learns.
+  P5  Two volumes, both arms: "ABC" together <= 90%, below the slow volume alone.
+Nothing will be changed after looking at test seeds.

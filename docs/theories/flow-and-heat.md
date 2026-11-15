@@ -69,6 +69,15 @@ take other forms or give way to others, quickly and without building anything. I
 the **structure beneath** changes: the bonds loosen and re-form, slowly. As a population, assemblies that are hot
 rearrange and re-form, jiggling like atoms, until things make sense and click into place. Then they settle.
 
+The two depths are also two kinds of bond. Picture a field of poles, each with arms that swing round it and reach out
+to the arms of its neighbours. The **poles are the settled structure**, slow memory: "cat", "man", "x", "5", things
+seen and settled over and over, which never need relearning. The **arms are the fast part**: activity and quick
+bonds that turn on the poles and pin things together for now ("the" goes with the duck; "x" is "5"). Reconfiguring
+activity is the arms swinging, so the fast part dances on the slow part and works off the back of it. A pot on the heat
+is the same picture from the side: at the top, where it is hot, things move quickly and keep re-forming; where they
+lock together into a sound, lower-energy form, they cool and sink into the slower, calmer depths, and become poles
+themselves.
+
 When they settle, **the heat that was there becomes structure**: the bonds. Bonds are the after-effects of cooling, the
 artifacts it leaves. If whatever caused the heat happens again, there is now structure that lets things reconfigure
 and cool straight away. The cycle is heating and cooling. Faced with a heat it hasn't met before, the machine has to
@@ -120,6 +129,9 @@ structure stands for solutions: the machines fixed properly, not patched.
   and fits.
 - **Try the fast change before the slow one.** Heat should first move activity, and only reach the bonds if activity
   can't settle it.
+- **Fast bonds work on slow structure.** What is quick ties together what is settled, without relearning it, and only
+  what settles in the fast part sinks into the slow. A slow volume and a fast one may be two ends of a spectrum, not
+  two kinds of thing.
 - **Structure that holds heat must heat up again,** so a patch can melt. No structure may be exempt from the measure.
 - **Not all heat becomes structure.** What never settles flows through and out.
 - **Judge by accidental energy, not total.** Structure that carries flow is not a cost to be cut; structure that holds

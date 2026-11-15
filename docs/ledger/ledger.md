@@ -792,6 +792,25 @@ The story of how the system came to be: each entry is an arc that opens with a g
 - **Contract:** confirmed CTR-2 CON-1; confirmed CTR-1 OPZ-4; confirmed CTR-1 CAP-3; shaped CTR-1 CAP-6
 - **Lesson:** Read before promoting: the strongest result of the day pulled against a capability the core already had.
 
+### HYP-36 · Hypothesis: Poles and arms (the owner's): slow, settled structure and fast, temporary bonds in two volumes of the same machinery, the fast one fed by the slow one's winners, resolve the conflict of C82 and C83.
+
+- **Heat:** In one volume a quick bond and a lasting one look the same: loosening rebinds "x" and forgets "ABCD".
+- **Experiments:** [C86](../../experiments/sketches/C86-poles-and-arms/)
+- **Given by hand:** The inputs, teaching and order; a blank before every input; in one arm, the slow volume kept from learning by restoring it after each moment.
+- **Closed by OUT-46 · Outcome (partly):** Each kind of knowledge survives in its own volume: "x" exact 100% in the fast one, "ABC" -> "D" 100% in the slow one, which no single volume managed (core 0% / 100%, loosen 100% / 53%). But read together, as one machine, they disagree: the slow volume, learning, brings back every value of "x" (0%), and the fast one adds "EF" to "ABC" after a recent rival (53%). The split looked perfect only when the experimenter chose which volume to read.
+- **CLM-36 · Claim:** Fast and slow bonds in separate volumes keep both kinds of knowledge intact.
+- **APT-9 · Anti-pattern:** Reading each question from the part that answers it well: the experimenter doing the machine's choosing.
+- **Contract:** shaped CTR-1 CAP-11; shaped CTR-1 CAP-15; confirmed CTR-2 CON-2; confirmed CTR-2 CON-7
+- **Lesson:** Splitting the bonds works; making the two volumes settle into one answer is the next step.
+
+### QST-17 · Question: How do a slow volume and a fast one settle into one answer, and how does what settles in the fast one sink into the slow one, without the experimenter choosing?
+
+- **Heat:** C86: read together, the two volumes disagree and do worse than either alone.
+- **Experiments:** [C86](../../experiments/sketches/C86-poles-and-arms/)
+- **Still open.**
+- **Contract:** shaped CTR-1 CAP-15; shaped CTR-1 CAP-11
+- **Lesson:** Open: disagreement between volumes as heat.
+
 ## Index back: experiments
 
 | Experiment | Entries |
@@ -880,6 +899,7 @@ The story of how the system came to be: each entry is an arc that opens with a g
 | [C83](../../experiments/sketches/C83-hardening/) | HYP-33, PRO-7 |
 | [C84](../../experiments/sketches/C84-energy-rules/) | HYP-34, PRB-16, PRO-7 |
 | [C85](../../experiments/sketches/C85-bond-on-cooling/) | HYP-35, QST-16, PRO-7 |
+| [C86](../../experiments/sketches/C86-poles-and-arms/) | HYP-36, QST-17 |
 
 ## Index forward: contract clauses
 
@@ -941,8 +961,8 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CAP-13 | Not knowing is a reason to look: a refused tie (CON-7) becomes a cue for more evidence. | QST-12 (created) |
 | CTR-1 CAP-12 | History in the state: what was a moment ago is part of now. | QST-5 (created), HYP-27 (confirmed), HYP-28 (confirmed), HYP-29 (shaped) |
 | CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed), THY-6 (shaped) |
-| CTR-1 CAP-15 | Held states as other regions' activity: what one volume holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped) |
-| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed), HYP-33 (shaped) |
+| CTR-1 CAP-15 | Held states as other regions' activity: what one volume holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped), HYP-36 (shaped), QST-17 (shaped) |
+| CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed), HYP-33 (shaped), HYP-36 (shaped), QST-17 (shaped) |
 | CTR-1 CAP-14 | Exact records kept outside, in something it can read and write. | — |
 | CTR-1 PRN-1 | Prefer the deeper explanation to a new mechanism. | PRB-5 (shaped), THY-7 (confirmed), INC-5 (confirmed) |
 | CTR-1 PRN-2 | Prefer removing structure to adding it. | PRB-2 (shaped), PRB-3 (confirmed) |
@@ -969,8 +989,8 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-2 OPZ-3 | Less time lost: to results that rested on puppeteering, to drift, to misunderstanding. | — |
 | CTR-2 OPZ-4 | The smallest code that fulfils CTR-1: fewest constructs and lines, echoing CTR-1 OPZ-3. | — |
 | CTR-2 CON-3 | No crutches (DEF-5) and no patches (DEF-6). | PRB-2 (created), INC-5 (confirmed) |
-| CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created), INC-3 (confirmed) |
-| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed) |
+| CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created), INC-3 (confirmed), HYP-36 (confirmed) |
+| CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed), HYP-36 (confirmed) |
 | CTR-2 CON-4 | Every declared choice (DEF-7) is written in `docs/decisions/`. | — |
 | CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed), PRO-6 (challenged), PRO-7 (confirmed) |
 | CTR-2 CON-8 | Bookkeeping (DEF-11) may be used in experiments, declared as a violation (CON-7), but neve | PRB-12 (created), THY-7 (shaped), PRB-13 (shaped), PRO-5 (confirmed), INC-4 (confirmed), PRO-6 (confirmed) |
@@ -1004,3 +1024,4 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 - QST-15 · Question: A variable holds one value; a value can belong to many variables. What in the structure says which side of a bond is which, so that binding "y" to "1" does not undo "x = 1"?
 - PRB-16 · Problem: One-off inputs are kept as compositions of old fragments and chain memories together; nothing at the level of cells asks whether a cut or a tie pays.
 - QST-16 · Question: When is completing a memory from a small part worth what it claims? In a stream the machine can't tell "not there" from "not seen yet"; the old core priced hidden parts at nothing by marking them known-unknown.
+- QST-17 · Question: How do a slow volume and a fast one settle into one answer, and how does what settles in the fast one sink into the slow one, without the experimenter choosing?
