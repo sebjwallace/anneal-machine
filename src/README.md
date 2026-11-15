@@ -16,7 +16,7 @@ npm run view    # then open http://localhost:8000/view/
 | `engine/segment.js` | `Segment`: one memory's evidence on one cell, a set of links and nothing else; fires when two of its memory's cells are active. `Segment.sampleSize(n)`: how many links each cell of an assembly samples. |
 | `engine/sampler.js` | `Sampler`: seeded draws, for sampled links and the handle taken from each part. |
 | `engine/tally.js` | `Tally`: one count of segments from a set of active sources (cells now, or as they were); support, firing and competition are read from it. |
-| `engine/moment.js` | `Moment`: a report of what one input did, as cells, with each assembly tied and cut made. The volume never reads it back. |
+| `engine/moment.js` | `Moment`: a report of what one input did, as cells, with each assembly tied and cut made, and its heat in three shapes (`heat`: unheld, unthere, twice; RM-6). The volume never reads it back. |
 | `view/` | The viewer: the volume as a grid of columns, run over time, in layers that switch on and off. Everything is drawn as an assembly: an outline round its cells, nested round the assemblies it was tied from. `structure.js` reads that nesting, and which assemblies are shared or cut, from each moment's report (the viewer replays every moment); the volume itself holds no such list. `roles.js` reads what a segment does from its wiring. |
 | `test/` | The engine's tests. |
 

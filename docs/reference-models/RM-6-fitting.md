@@ -24,6 +24,11 @@ neither                        quiet
 ```
 The total misfit is the sum of the two heats, but nobody adds it up: each cell knows only its own.
 
+A third shape comes from competition (RM-5): a lit column where two explanations tied and neither was taken (CON-7),
+something held twice. The three together are where what is active and what is held disagree (C84;
+[flow and heat](../theories/flow-and-heat.md)). The core reports them on each moment as `heat`: `unheld` (lit columns
+explained by nothing), `unthere` (cells brought back or predicted in columns not lit) and `twice` (refused columns).
+
 ## What it does (the cell form, proposed)
 ```
 fit(input):                               # input: lit input cells

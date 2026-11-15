@@ -26,4 +26,17 @@ export class Moment {
   get fired() { return this.#fields.fired; }             // segments that fired: seq from before, part in the present
   get grown() { return this.#fields.grown; }             // every segment grown in this moment
   get next() { return this.#fields.next; }               // cells predicted for the next moment
+
+  // Heat, read from what the moment did, in its three shapes: where what is active and what is held disagree
+  // (docs/theories/flow-and-heat.md; C84). A reading for whoever watches, like the rest of the report.
+  //   unheld:  something there that nothing holds: lit columns explained by nothing
+  //   unthere: something held that isn't there: cells brought back or predicted in columns that are not lit
+  //   twice:   something held twice: lit columns where two explanations tied and neither was taken (CON-7)
+  get heat() {
+    return {
+      unheld: this.uncovered,
+      unthere: new Set([...this.brought, ...this.missing]),
+      twice: this.refused,
+    };
+  }
 }

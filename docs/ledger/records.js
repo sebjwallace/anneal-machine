@@ -597,5 +597,12 @@ const LEDGER = [
     lessons: [],
     contract: [['CTR-1 CON-1', 'shaped']],
     lesson: 'Open: known-unknown, in cells.' },
+  { code: 'PRO-7', era: 7, open: 'Bringing C82-C85 into the core, at the owner\'s request: each change read against the reference models and both contracts first (D-02).',
+    heat: 'The owner wants to experiment on active assemblies changing, on a core that carries what was learnt.',
+    exps: ['C82', 'C83', 'C84', 'C85'], given: '',
+    close: { code: 'SOL-22', kind: 'SOL', text: 'The heat meter is in the core: each moment reports heat in three shapes (unheld, unthere, twice), reporting only, with a test of its own; 17 of 17. Kept out by the owner\'s decision: the bill at the fit (breaks CAP-3, five core tests; waits on QST-16) and loosening (forgets wholes built from parts without a clean way to harden them). Kept out as not distilled or not shown on their own: harden, squeeze, densify, fade.' },
+    lessons: [{ code: 'DEC-9', kind: 'DEC', text: 'The bill at the fit and loosening stay out of the core until recall from a small cue (QST-16) and hardening have clean answers (the owner\'s).' }],
+    contract: [['CTR-2 CON-1', 'confirmed'], ['CTR-1 OPZ-4', 'confirmed'], ['CTR-1 CAP-3', 'confirmed'], ['CTR-1 CAP-6', 'shaped']],
+    lesson: 'Read before promoting: the strongest result of the day pulled against a capability the core already had.' },
 ];
 module.exports = { LEDGER };

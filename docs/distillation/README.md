@@ -8,3 +8,4 @@ was doing. Each distillation has a code (D-01, ...) and a file listing its viola
 | Code | Result being distilled | Status |
 |---|---|---|
 | [D-01](D-01-text.md) | Text: constants from a handful of sentences, types from what surrounds words (C62-C67) | step 1 done (C68) |
+| [D-02](D-02-energy-and-bonds.md) | Energy and bonds: rebinding, hardening, energy rules, bond on cooling (C82-C85) | reviewed; the heat meter in the core, the rest kept out (owner's decision) |

@@ -74,6 +74,26 @@ test('a failed prediction is heat, and what is seen outranks what was expected (
   assert.equal(m.uncovered.length, 0);
 });
 
+test('heat in three shapes: something there that nothing holds, something held that isn\'t there, something held twice', () => {
+  const v = volume();
+  const first = v.receive([...'ABCD']);
+  assert.deepEqual(first.heat.unheld.map((column) => column.label), ['A', 'B', 'C', 'D']);
+  assert.equal(first.heat.unthere.size + first.heat.twice.length, 0);
+  v.receive([]);
+  const half = v.receive([...'AB']);
+  assert.equal(half.heat.unheld.length, 0);
+  assert.deepEqual(names(half.heat.unthere), ['C0', 'D0']);
+  assert.equal(half.heat.twice.length, 0);
+
+  const w = volume();
+  const cell = (label, i = 0) => w.column(label).cells[i];
+  store([cell('A'), cell('B'), cell('C'), cell('D')]);
+  store([cell('A'), cell('B'), cell('C', 1), cell('E')]);
+  const tied = w.receive([...'ABC']);
+  assert.deepEqual(tied.heat.twice.map((column) => column.label), ['C']);
+  assert.deepEqual(names(tied.heat.unthere), ['D0', 'E0']);
+});
+
 test('ABCD, DGJM, MNOP: learnt on the first pass, settled by the second', () => {
   const v = volume();
   const inputs = ['ABCD', 'DGJM', 'MNOP'];

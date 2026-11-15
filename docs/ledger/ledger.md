@@ -783,6 +783,15 @@ The story of how the system came to be: each entry is an arc that opens with a g
 - **Contract:** shaped CTR-1 CON-1
 - **Lesson:** Open: known-unknown, in cells.
 
+### PRO-7 · Promotion: Bringing C82-C85 into the core, at the owner's request: each change read against the reference models and both contracts first (D-02).
+
+- **Heat:** The owner wants to experiment on active assemblies changing, on a core that carries what was learnt.
+- **Experiments:** [C82](../../experiments/sketches/C82-rebinding/), [C83](../../experiments/sketches/C83-hardening/), [C84](../../experiments/sketches/C84-energy-rules/), [C85](../../experiments/sketches/C85-bond-on-cooling/)
+- **Closed by SOL-22 · Solution:** The heat meter is in the core: each moment reports heat in three shapes (unheld, unthere, twice), reporting only, with a test of its own; 17 of 17. Kept out by the owner's decision: the bill at the fit (breaks CAP-3, five core tests; waits on QST-16) and loosening (forgets wholes built from parts without a clean way to harden them). Kept out as not distilled or not shown on their own: harden, squeeze, densify, fade.
+- **DEC-9 · Decision:** The bill at the fit and loosening stay out of the core until recall from a small cue (QST-16) and hardening have clean answers (the owner's).
+- **Contract:** confirmed CTR-2 CON-1; confirmed CTR-1 OPZ-4; confirmed CTR-1 CAP-3; shaped CTR-1 CAP-6
+- **Lesson:** Read before promoting: the strongest result of the day pulled against a capability the core already had.
+
 ## Index back: experiments
 
 | Experiment | Entries |
@@ -867,10 +876,10 @@ The story of how the system came to be: each entry is an arc that opens with a g
 | [C79](../../experiments/sketches/C79-context-cells/) | HYP-27 |
 | [C80](../../experiments/sketches/C80-reading-letters/) | PRO-5, HYP-28, INC-3 |
 | [C81](../../experiments/sketches/C81-levels-from-letters/) | HYP-29, INC-3 |
-| [C82](../../experiments/sketches/C82-rebinding/) | HYP-32, QST-15 |
-| [C83](../../experiments/sketches/C83-hardening/) | HYP-33 |
-| [C84](../../experiments/sketches/C84-energy-rules/) | HYP-34, PRB-16 |
-| [C85](../../experiments/sketches/C85-bond-on-cooling/) | HYP-35, QST-16 |
+| [C82](../../experiments/sketches/C82-rebinding/) | HYP-32, QST-15, PRO-7 |
+| [C83](../../experiments/sketches/C83-hardening/) | HYP-33, PRO-7 |
+| [C84](../../experiments/sketches/C84-energy-rules/) | HYP-34, PRB-16, PRO-7 |
+| [C85](../../experiments/sketches/C85-bond-on-cooling/) | HYP-35, QST-16, PRO-7 |
 
 ## Index forward: contract clauses
 
@@ -896,7 +905,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 GOL-2 | Useful on the job: no training phase before use. It starts doing useful work at once, or n | PRB-8 (created), HYP-17 (shaped) |
 | CTR-1 GOL-3 | Acts on its own heat: what it looks at and does comes from its own heat (DEF-2), with noth | THY-3 (created) |
 | CTR-1 GOL-4 | Regions (DEF-10) settle each other: heat in one is resolved by the system as a whole. | HYP-13 (shaped), THY-2 (created), THY-4 (confirmed) |
-| CTR-1 OPZ-4 | Heat: explain its world more completely: more misfits resolved, never masked (CON-6). | PRB-11 (changed) |
+| CTR-1 OPZ-4 | Heat: explain its world more completely: more misfits resolved, never masked (CON-6). | PRB-11 (changed), PRO-7 (confirmed) |
 | CTR-1 OPZ-1 | Information: learn as much or more from far less information than today's AI needs. | HYP-5 (shaped), PRB-8 (created), HYP-17 (confirmed), HYP-18 (confirmed), HYP-19 (confirmed), HYP-22 (confirmed), HYP-28 (confirmed) |
 | CTR-1 OPZ-3 | Minimality: the fewest constructs that explain the most. | HYP-3 (shaped), PRB-8 (created), PRB-11 (changed), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), PRB-14 (confirmed), HYP-31 (confirmed), HYP-32 (confirmed), PRB-16 (challenged), HYP-35 (confirmed) |
 | CTR-1 OPZ-2 | Compute: fewer resources (time, memory, power) for the same learning, on ordinary CPUs (CO | HYP-2 (shaped), HYP-16 (confirmed), PRB-11 (changed), HYP-23 (confirmed) |
@@ -922,9 +931,9 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CON-17 | No exhaustive search for the best answer (breaks OPZ-2). | — |
 | CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed), QST-13 (challenged), HYP-17 (confirmed), HYP-26 (confirmed), HYP-30 (confirmed) |
 | CTR-1 CAP-4 | Binding what happens together (Hebbian in spirit): things active together become one memor | QST-11 (created), HYP-20 (shaped), HYP-24 (confirmed), HYP-29 (confirmed), HYP-31 (confirmed), HYP-32 (shaped), QST-15 (shaped) |
-| CTR-1 CAP-3 | Auto-associative memory: a few active pieces bring back the whole memory they belong to. | QST-3 (created), HYP-10 (confirmed), HYP-19 (confirmed), HYP-20 (shaped), HYP-21 (confirmed), HYP-22 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), HYP-31 (confirmed) |
+| CTR-1 CAP-3 | Auto-associative memory: a few active pieces bring back the whole memory they belong to. | QST-3 (created), HYP-10 (confirmed), HYP-19 (confirmed), HYP-20 (shaped), HYP-21 (confirmed), HYP-22 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), HYP-31 (confirmed), PRO-7 (confirmed) |
 | CTR-1 CAP-2 | Sparse distributed representations: a thing is a small set of cells; which cell says where | HYP-6 (created), QST-6 (challenged), PRB-11 (changed), HYP-25 (confirmed), HYP-27 (confirmed) |
-| CTR-1 CAP-6 | Thresholds from prices: when to keep, recall or recognise follows from the currency (CON-2 | PRB-1 (created), QST-3 (confirmed), HYP-24 (shaped), PRB-14 (confirmed) |
+| CTR-1 CAP-6 | Thresholds from prices: when to keep, recall or recognise follows from the currency (CON-2 | PRB-1 (created), QST-3 (confirmed), HYP-24 (shaped), PRB-14 (confirmed), PRO-7 (shaped) |
 | CTR-1 CAP-9 | The same engine at every level: regions (DEF-10) stacked with no new mechanism. | HYP-11 (created), HYP-18 (confirmed), HYP-29 (confirmed) |
 | CTR-1 CAP-8 | Sharing: parts, kinds and shared changes let one thing learnt cover many cases. | QST-2 (shaped), HYP-7 (created), HYP-8 (confirmed), HYP-12 (challenged), QST-13 (shaped), HYP-15 (confirmed), QST-14 (shaped) |
 | CTR-1 CAP-5 | Rest: reorganising and replaying while nothing comes in. | HYP-5 (created), PRB-6 (confirmed) |
@@ -963,7 +972,7 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created), INC-3 (confirmed) |
 | CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed), HYP-32 (confirmed), HYP-33 (confirmed), HYP-34 (confirmed), HYP-35 (confirmed) |
 | CTR-2 CON-4 | Every declared choice (DEF-7) is written in `docs/decisions/`. | — |
-| CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed), PRO-6 (challenged) |
+| CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed), PRO-6 (challenged), PRO-7 (confirmed) |
 | CTR-2 CON-8 | Bookkeeping (DEF-11) may be used in experiments, declared as a violation (CON-7), but neve | PRB-12 (created), THY-7 (shaped), PRB-13 (shaped), PRO-5 (confirmed), INC-4 (confirmed), PRO-6 (confirmed) |
 | CTR-2 CON-5 | No new terms without the owner's agreement; words keep the meanings in the glossary. | PRB-9 (created) |
 | CTR-2 CON-6 | Commits and bundles only when the owner asks. | — |
