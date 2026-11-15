@@ -19,13 +19,16 @@ picking one from ten. It is measured against naming one cell's position in the w
 
 **What follows from these prices:**
 - **The bar of two.** Using an assembly costs about 1.5 and explaining one cell saves 1, so an assembly of one cell never
-  pays; two is the first that saves.
+  pays; two is the first that saves. In cells: a segment fires when two of its memory's cells are active, its own cell
+  included (RM-2), so a pair is the smallest assembly, recognised when both are seen.
 - **Recurrence.** An assembly is worth storing once it has recurred enough to repay its cells. For a wall of 13 cells,
   that is twice.
 
 ## In cells and links (partly shown)
 - **Structure is links:** a segment costs its links.
-- **A composition costs the links of its binding** (RM-7): 30 for three parts bound by two cells each, against 132 for
+- **A whole costs what its parts number, not what they hold** (RM-7): tied by a handle of two cells on each part, each
+  level of the core's square of four quarters costs 12 links, against 120 to wire its 16 cells together.
+- **A whole costs the links of its tie** (RM-7): 30 for three parts tied by two cells each, against 132 for
   wiring everything (C76).
 - **A decomposition pays when one shared part plus two small bindings costs fewer links than the wholes it replaces**
   (C78: 114 against 264).

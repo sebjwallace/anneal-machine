@@ -16,6 +16,7 @@ Use these words, with these meanings, and no others.
 | **composite** (owner) | A thing made of parts in a fixed arrangement (a house = roof above box). Held inside as an assembly, not as a column. |
 | **placement** (to confirm) | "This part, at this offset." Memories and composites are lists of placements. |
 | **memory** (to confirm) | A stored picture, described as placements plus any loose pixels. |
+| **volume** (owner) | A number of columns: one machine of this kind, receiving and settling its own heat. Replaces **region** (CTR-1 DEF-10). |
 | **column** (owner) | One per primitive. Holds many cells. |
 | **cell** (owner) | One unit inside a column. In Anneal, a column's cells are laid out as a grid of offsets: "this primitive, at this offset". |
 | **floor** (to confirm) | A layer of a column's cell grid. Floor 0: where things are in the picture. Higher floors: assemblies of composites, one per level (decision 004). |

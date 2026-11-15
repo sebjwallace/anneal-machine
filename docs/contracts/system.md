@@ -23,7 +23,7 @@ good enough, not perfect; exact records belong outside it).
 - **DEF-7 Settling:** the machine changing its structure so that energy falls; it settles when no change lowers it.
 - **DEF-8 World:** whatever information the machine is placed in: what it receives, of any kind and size.
 - **DEF-9 Set point:** a state the machine (or a part of it) is held towards from outside; distance from it is heat.
-- **DEF-10 Region:** one machine of this kind among several, each settling its own heat and receiving from others.
+- **DEF-10 Volume:** one machine of this kind among several, each settling its own heat and receiving from others.
 - **DEF-11 Memory:** structure kept because it lowers energy, recalled from part of itself.
 - **DEF-12 Cell:** one unit inside a column; a column over each input expands it into a population of cells. A cell is
   active or not, and carries no number (CON-9).
@@ -97,7 +97,7 @@ the constraints; detail below: what each gives, what it serves, what it costs)
 - **CAP-13** Not knowing is a reason to look: a refused tie (CON-7) becomes a cue for more evidence.
 - **CAP-12** History in the state: what was a moment ago is part of now.
 - **CAP-10** Holding: a held context, want or episode steers what comes next.
-- **CAP-15** *(draft)* Held states as other regions' activity: what one region holds is the stable activity of another
+- **CAP-15** *(draft)* Held states as other regions' activity: what one volume holds is the stable activity of another
   projecting into it, so it costs nothing while it stays the same.
 - **CAP-11** Two kinds of memory: general memory keeps what pays over repetition; experiences are kept at once,
   bounded by heat.
@@ -139,7 +139,7 @@ a world it already does something useful there (recognises, completes, predicts)
 to resolve its own heat (curiosity and wants; theories: feelings as heat; regulators and heat). Nothing is given but
 its set points (CON-10).
 
-**GOL-4 · Regions settle each other** *(draft)*. From the regulators theory: heat in one region spreads, and the
+**GOL-4 · Regions settle each other** *(draft)*. From the regulators theory: heat in one volume spreads, and the
 system as a whole resolves it.
 
 ### Optimizations in detail
@@ -301,8 +301,8 @@ answered by the currency, so no tuned numbers are needed (CON-2). Recognition fr
 out of the prices, not a setting. *Serves:* CON-2, CON-3. *From:* checkpoints 06 and 10. *Costs:* the prices must be
 right; a wrong price is a hidden choice.
 
-**CAP-9 · The same engine at every level.** *Gives:* regions stacked with no new mechanism: a region over pictures, a
-region over the things recognised in them. *Serves:* OPZ-3, GOL-4. *From:* C53, C54. *Costs:* how regions are wired is
+**CAP-9 · The same engine at every level.** *Gives:* regions stacked with no new mechanism: a volume over pictures, a
+volume over the things recognised in them. *Serves:* OPZ-3, GOL-4. *From:* C53, C54. *Costs:* how regions are wired is
 still given by hand (checkpoint 11).
 
 **CAP-8 · Sharing.** *Gives:* one part used by many things; a kind holding one form with many versions; one change
@@ -325,7 +325,7 @@ machine doesn't have yet.
 
 **CAP-12 · History in the state.** *Gives:* what was a moment ago is part of now, so direction and momentum need no
 separate mechanism (a still stick is told from a moving one). *Serves:* OPZ-3. *From:* checkpoint 07. *Costs:* how far
-back it holds is a choice (the theory suggests it should depend on the region's height).
+back it holds is a choice (the theory suggests it should depend on the volume's height).
 
 **CAP-10 · Holding.** *Gives:* a context, want or episode held active for as long as it lasts: it steers prediction (the
 park walks), marks where an experience begins and ends (C60), and stops a search repeating itself (the keys, C61).
@@ -333,8 +333,8 @@ park walks), marks where an experience begins and ends (C60), and stops a search
 in everything; when a hold lets go must come from resolution, not a timer.
 
 **CAP-15 · Held states as other regions' activity** *(draft)*. *Gives:* a held context, want or episode (CAP-10)
-need not be given or recomputed: it is the stable activity of an assembly in another region, projecting in; from the
-receiving region's view it is simply activity arriving, and it costs nothing while it stays the same (CON-18). It also
+need not be given or recomputed: it is the stable activity of an assembly in another volume, projecting in; from the
+receiving volume's view it is simply activity arriving, and it costs nothing while it stays the same (CON-18). It also
 turns holding from something given by hand into something the system does. *Serves:* CON-18, OPZ-2, GOL-4, and the
 practice's OPZ-1 (less given by hand). *From:* the owner (14 November); held states in C59-C61 were given by hand.
 *Costs:* the wiring between regions must exist, and is itself still given by hand (CAP-9).
@@ -363,10 +363,10 @@ a patch is trapped heat (philosophy); added structure costs (CON-1) and hides th
 nothing removable explains the misfit. *Leaned on:* retiring the memory threshold (checkpoint 10); removing the crutches
 in C26.
 
-**PRN-6 · Prefer the same mechanism with different settings to a different mechanism.** A new region, level or kind of
+**PRN-6 · Prefer the same mechanism with different settings to a different mechanism.** A new volume, level or kind of
 world should be the engine again, not something new. *Why:* OPZ-3, CAP-9, CON-3 (general). *Gives way:* when the
 evidence shows the old mechanism genuinely can't do it, which is also a reason to revisit PRN-1. *Leaned on:* the
-abstract region as the same engine over recognised things (C53); the architecture theory (regions as one engine with a
+abstract volume as the same engine over recognised things (C53); the architecture theory (regions as one engine with a
 few settings).
 
 **PRN-3 · Let heat decide where effort goes.** Do work where something doesn't fit, not everywhere just in case. *Why:*
@@ -374,9 +374,9 @@ OPZ-2 (compute); CAP-7 (heat as a valve). *Gives way:* to rest (CAP-5), when the
 *Leaned on:* the moving bar dropping only while a gap is open (C51, C54).
 
 **PRN-4 · Settle locally first.** Heat is resolved as close to where it arises as possible; only what can't be settled
-there spreads to other parts. *Why:* OPZ-2, and GOL-4 (regions settling each other) without every region reacting to
+there spreads to other parts. *Why:* OPZ-2, and GOL-4 (regions settling each other) without every volume reacting to
 everything. *Gives way:* when settling locally would mask the misfit rather than resolve it (CON-6). *Leaned on:* the
-second look, where the visual region re-reads its own misfit before the abstract region is involved (C55, C56); the
+second look, where the visual volume re-reads its own misfit before the abstract volume is involved (C55, C56); the
 regulators theory.
 
 **PRN-5 · Prefer what was lived to what was inferred.** When a memory of what happened and something worked out

@@ -16,52 +16,64 @@ different memories would add up and wake it for memories that aren't there. So a
 
 A segment is not a cell: nothing links to it, and it never shows downstream.
 
-## Data
+## Data (core)
 ```
-segment:  belongs to one cell; holds links (a set of other cells); has no strength
-          kind: 'seq' (predicts the next input from what came before) or 'part' / 'word' / 'bind' (completes what
-          is active now); a label local to the segment. The two must be kept apart: predicting the next input uses
-          only 'seq' segments, completion only the others (C81: stored words otherwise predicted all their letters at
-          once and spoiled the boundaries).
-index:    for each cell, the segments that hold a link from it     # so only segments with an active input are touched
+segment:  belongs to one cell; holds links (a set of sources); has no strength and no label
+source:   a cell, or what a cell was a moment ago (its "was", RM-1)
+feeds:    for each source, the segments that hold a link from it     # so only segments with an active input are touched
 ```
+**What a segment does follows from what it is wired to,** never from a mark on it:
+- wired to **cells**, it completes the present (an assembly's segment, RM-3, RM-7);
+- wired to **what cells were**, it predicts the next moment.
 
-## What it does
+Counting from what is active now never reaches a segment wired to the moment before, and counting from the moment before
+never reaches one wired to now, so prediction and completion keep apart by wiring alone. This is how cortex keeps
+context and input apart: by where on the cell they arrive, not by labels. (C81 found they must be kept apart; it did so
+with labels, `seq`, `part`, `bind`, on each segment. Those were a patch, CTR-2 DEF-6, and are gone from the core.)
+
+## What it does (core)
 ```
-count(active):
-    for each cell u in active:
-        for each segment s that holds a link from u:     # via the index: work follows what is active
+count(active sources):
+    for each active source u:
+        for each segment s that holds a link from u:      # via the feeds: work follows what is active
             s.count += 1
-    a segment fires when s.count >= 2
-    a cell's support = the most of one memory's cells active =
-        max over its firing segments of (s.count + 1 if the cell itself is active else s.count)
+    for each active cell c:
+        for each segment s on c that an active source reached:
+            s.count += 1                                   # the cell is itself one of its memory's members
+    a segment fires when s.count >= 2                      # two of its memory's cells active, its own included
+    a cell's support = the largest count on one of its firing segments
+    a segment's share = s.count / (its links + 1)          # how much of its memory is active (RM-5)
 ```
+- **The cell counts itself** (the "+1 if the cell itself is active" of this model's support, read into firing too).
+  So a pair (two cells, one link each) fires when both are seen, and is never completed from one: the bar of two holds
+  for pairs as for any assembly. A segment wired to the moment before gets no such count: its cell is no member of that
+  moment.
 
-**Growing a segment:**
-- **For a new memory:** each of its cells grows one segment over the memory's other cells.
-- **For a binding:** each sampled cell grows one segment over the other sampled cells (RM-7).
+**Growing a segment:** each cell of an assembly being tied grows one segment over a sample of the others (RM-3, RM-7);
+a winner the moment before did not predict grows one over what that moment's winners were (RM-1).
 
 ## Why two
 The bar of two comes from the prices (RM-9). Describing two items as one costs less than two separate items, and one
-item saves nothing. So an assembly of one cell can never pay, and a segment fires at two active links. It is not a
-fraction of the segment's size and not a tuned number. **Caveat:** this is derived from today's bill over placements
-(a use of an assembly costs about 1.5, an unexplained item 1). It has not yet been re-derived in cells and links (RM-9,
-open), so it is carried over, not yet earned, in the cell form.
+item saves nothing. So an assembly of one cell can never pay, and a segment fires at two of its memory's cells. It is not
+a fraction of the segment's size and not a tuned number. **Caveat:** derived from today's bill over placements (a use of
+an assembly costs about 1.5, an unexplained item 1); not yet re-derived in cells and links (RM-9, open).
 
 ## Rules a rebuild must keep
 - **Counts are per segment, never summed in the cell.**
-- **No strengths, weights or decay.** Segments should be kept or removed by the energy rule (RM-9), which is not yet
-  defined at the level of cells: today every segment grown is kept. That is a known gap (CTR-1 CON-1), not a design.
+- **No strengths, weights, decay or labels.** What a segment does is read from what it is connected to.
+- **Segments should be kept or removed by the energy rule** (RM-9), not yet defined at the level of cells: today every
+  segment grown is kept, except those the cut removes (RM-8). A known gap (CTR-1 CON-1).
 - **Only segments with an active input are touched:** work follows activity (CTR-1 CON-18).
 
 ## Evidence
 - C35: pooling gave about 80% wrong recalls with five things stored; segments with competition never recalled the wrong
   thing.
-- C71/C73: strict segments (75% of links) never completed from half a cue; a bar of two plus competition did, without
-  blending.
+- C71/C73: strict segments (75% of links) never completed from half a cue; a bar of two plus competition did.
+- C81: sequence and completion must be kept apart.
+- The core (15 November 2026): a pair is recognised when both its cells are seen and never completed from one; a whole
+  made of known pairs is composed from them instead of being stored again as a copy; prediction and completion kept
+  apart by wiring, with every result unchanged when the labels were removed. In `src/test/`.
 - The visuals [segments](../visuals/segments.html) and [segments-zoom](../visuals/segments-zoom.html).
 
 ## Open
-- Whether whole-set segments (every member) or sampled segments suit memories best at scale. Sampled segments needed
-  strengths to select good samples in the other repository; whole-set segments, and samples taken from comparison, do
-  not.
+- The bar of two in cells and links (RM-9).

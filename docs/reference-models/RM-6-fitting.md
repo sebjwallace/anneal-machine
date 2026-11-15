@@ -42,10 +42,12 @@ fit(input):                               # input: lit input cells
 Not yet built or tested in this form. The re-settling step is shown in C75 (over placements); the waking and competition
 steps are shown in C73, C74 and C78.
 
-## Today's core (bookkeeping: not to be rebuilt this way)
-The core's `explain` and `greedy` in `src/engine/see.js` do the same competition over placements: every unit is counted
-against every lit pixel to make the candidates, scored, then taken greedily, then re-settled where heat is left. That is
-a scan over a list of all units (CTR-1 CON-19, CTR-2 CON-8), recorded here only so a reader knows what it is.
+## The core today
+The core (rebuilt 15 November 2026) fits by cells: each moment lights columns (RM-1), settles (RM-4), and chooses each
+column's winners by competition (RM-5). Every cell's state is reported: lit and explained, lit and explained by nothing
+(the columns that take fresh cells), and predicted but not there (brought back, or predicted by the moment before and
+not lit). **Re-settling where a winner left heat is not built.** The old core's `explain` and `greedy`, which did the
+same competition over a list of all units counted against every pixel (bookkeeping), were removed with it.
 
 ## Rules a rebuild must keep
 - **Fitting never changes memory.**

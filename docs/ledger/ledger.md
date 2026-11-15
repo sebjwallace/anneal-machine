@@ -659,6 +659,59 @@ The story of how the system came to be: each entry is an arc that opens with a g
 - **Contract:** changed CTR-2 CAP-7; challenged CTR-1 CON-1; confirmed CTR-1 CON-7; confirmed CTR-1 CON-19; confirmed CTR-2 CON-8
 - **Lesson:** The models are only as clean as what they admit they lack.
 
+## 7 · The core rebuilt from cells
+
+### PRO-6 · Promotion: The core rebuilt from scratch from the reference models, at the owner's instruction: a volume (the owner's word for a region) of columns, cells and segments, in plain object-oriented JavaScript with no dependencies, and a viewer to watch it run (src/engine, src/test, src/view).
+
+- **Heat:** The old core worked by bookkeeping and carried patches and crutches; the owner removed it so the core could be built clean.
+- **Given by hand:** The inputs and their order: sequences typed by the owner (ABCD DGJM MNOP, the Z, the house and shed, a square of four quarters). Four cells per column (fixed architecture).
+- **Closed by SOL-18 · Solution:** Built from RM-1 to RM-8 with no list of assemblies, work only through the segments active cells feed, no tuned numbers and no round limits. Every gap the models name is left visible and declared in src/README.md. Its tests stand in for the old core's, which were removed with it: the step into the core was the owner's instruction, not a distillation measured against the old baseline. The reference models were brought up to date from it.
+- **PAT-13 · Pattern:** Build the core from the models, run it in a viewer, and let what it does correct the models.
+- **Contract:** confirmed CTR-1 CON-19; confirmed CTR-1 CON-18; confirmed CTR-2 CON-8; changed CTR-2 CAP-7; confirmed CTR-2 CAP-2; challenged CTR-2 CON-1
+- **Lesson:** The models were enough to build a clean core from, and building it showed where they were wrong.
+
+### PRB-14 · Problem: An assembly of two cells could never fire: each cell's segment holds one link, under the bar of two. So a whole made of pairs was stored again as a copy on fresh cells (ABCD after AB and CD), and pairs never recalled.
+
+- **Heat:** Copies of what was already known; pairs dead on arrival.
+- **Closed by SOL-19 · Solution:** A segment that completes the present counts its own cell when that cell is active (RM-2's "+1 if the cell itself is active", read into firing as well as support): the bar of two is two of a memory's cells active, the cell included. A pair is recognised when both are seen and never completed from one; ABCD after AB and CD is tied from them.
+- **Contract:** confirmed CTR-1 CAP-6; confirmed CTR-1 OPZ-3
+- **Lesson:** The bar of two counts the memory's members, and the cell is one of them.
+
+### HYP-30 · Hypothesis: The cut (RM-8) works in the core, by cells, with wholes that share a part competing by the share of themselves that is active (RM-5).
+
+- **Heat:** Decomposition had been shown only in C78's own code.
+- **Given by hand:** As PRO-6.
+- **Closed by OUT-40 · Outcome (worked):** ABCD, then ABEF: ABCD's four segments removed, AB and CD tied on the same cells, ABCD tied again from them, ABEF from AB with E and F; both recognised afterwards with nothing more grown or cut. ABCD then brings back nothing more, ABEF nothing more, ABC only D, AB alone both (the tie held). Recall from part of a memory alone is not a cut: the input must have a remainder of its own.
+- **CLM-29 · Claim:** Decomposition and the abstraction it leaves (AB shared by two wholes, on the same cells) work in the core, as in C78.
+- **Contract:** confirmed CTR-1 CAP-1; confirmed CTR-1 CON-7; challenged CTR-1 CON-1
+- **Lesson:** The cut by cells holds in the core; whether it pays is still unasked (RM-9).
+
+### PRB-15 · Problem: Junctions were refused: where two memories meet in one column (D0 for ABCD and D1 for DGJM, in the Z), both cells are fully supported, tie, and neither wins; so the Z was composed without its corners and a part seen alone lost them.
+
+- **Heat:** RM-5 named it open: rivals that can both be right are not a tie.
+- **Closed by SOL-20 · Solution:** In a lit column, a cell whose memory is wholly seen (every member active, every link in a lit column) wins, and several such all win. In recall, two cells in one column are rivals only when woken by the same evidence. A true tie, a cue fitting two memories from the same evidence, is still refused. Every part of the Z brings back the whole Z, junctions included.
+- **Contract:** confirmed CTR-1 CON-7
+- **Lesson:** A tie is two explanations of the same evidence; two memories each wholly there are not a tie.
+
+### INC-5 · Incident: Labels on segments (seq, part, bind), carried over from C81: the owner named them a patch. The cortex keeps no such marks; what a synapse does follows from what it connects.
+
+- **Heat:** The engine read a word on each segment to decide what to do with it.
+- **Closed by SOL-21 · Solution:** seq became wiring: each cell's output arrives also a moment later (its "was"), and a segment wired to that predicts, one wired to cells completes; every result unchanged. bind was first removed with the old rival test kept, which broke recall (a twelve-cell assembly came back whole from half of itself in 0 of 200 seeds against 200, and no part brought back the Z), and was put back while a cause was found: the test of "one memory" needed every member to link every other. It was then replaced by a rule read from topology: memories compete only for evidence that is a whole of its own (the pair AB, against A0 B0 as a sample of ABCD). 200 of 200, the Z whole, the house and shed as before.
+- **APT-6 · Anti-pattern:** Removing a patch without resolving the misfit it covered: the misfit comes straight back.
+- **PAT-14 · Pattern:** What a segment does is read from what it is connected to; a distinction the machine needs is found in its topology, or the machine does not need it.
+- **Contract:** confirmed CTR-2 CON-3; confirmed CTR-1 CON-19; confirmed CTR-1 PRN-1
+- **Lesson:** A label stood in for a distinction the topology already held: which evidence is a whole of its own.
+
+### HYP-31 · Hypothesis: There is one kind of thing, the assembly, from a pair to a whole of wholes, made by one rule: when a moment's winners are not one memory, tie a handle from each part (the owner's).
+
+- **Heat:** Assemblies and compositions were grown by two rules (store every cell; bind two per part), and two cells drawn from a part made of parts could fall one in each piece and wake neither.
+- **Given by hand:** As PRO-6.
+- **Closed by OUT-41 · Outcome (worked):** One rule: a part of one cell gives that cell (so new cells are all taken), a larger part gives two cells one of its segments ties (a handle), and the handles are linked 2⌈ln n⌉ per cell. On a square of four quarters, two halves and the whole, each level costs 12 links (against 120 to wire 16 cells), and any quarter brings back the whole in 200 of 200 seeds (before handles, in one run, 6 of 12 cells). All earlier results kept.
+- **CLM-30 · Claim:** Assemblies all the way up: a whole is held on its parts' cells, each level one more segment on a few of them, costing what its parts number, not what they hold.
+- **DEC-8 · Decision:** Links per cell of a tie: 2⌈ln n⌉, the connectivity threshold of a random graph doubled for the bar of two (the owner's choice from a comparison of three rules).
+- **Contract:** confirmed CTR-1 OPZ-3; confirmed CTR-1 CAP-4; confirmed CTR-1 DEF-14; confirmed CTR-1 OPZ-5; confirmed CTR-1 CAP-3
+- **Lesson:** Composition is not a second mechanism: it is the assembly rule applied to parts that already exist.
+
 ## Index back: experiments
 
 | Experiment | Entries |
@@ -759,44 +812,44 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 DEF-7 | Settling: the machine changing its structure so that energy falls; it settles when no change lowers  | — |
 | CTR-1 DEF-8 | World: whatever information the machine is placed in: what it receives, of any kind and size. | — |
 | CTR-1 DEF-9 | Set point: a state the machine (or a part of it) is held towards from outside; distance from it is he | THY-2 (created) |
-| CTR-1 DEF-10 | Region: one machine of this kind among several, each settling its own heat and receiving from othe | THY-2 (created) |
+| CTR-1 DEF-10 | Volume: one machine of this kind among several, each settling its own heat and receiving from othe | THY-2 (created) |
 | CTR-1 DEF-11 | Memory: structure kept because it lowers energy, recalled from part of itself. | — |
 | CTR-1 DEF-12 | Cell: one unit inside a column; a column over each input expands it into a population of cells.  | PRB-12 (created) |
 | CTR-1 DEF-13 | Segment: one memory's evidence on one cell: a set of links from other cells, firing when two or mor | PRB-12 (created) |
-| CTR-1 DEF-14 | Assembly: a set of cells, across columns, that stands for a thing: nothing but those cells and the l | PRB-12 (created) |
+| CTR-1 DEF-14 | Assembly: a set of cells, across columns, that stands for a thing: nothing but those cells and the l | PRB-12 (created), HYP-31 (confirmed) |
 | CTR-1 GOL-1 | Learns unsupervised: placed in any world (DEF-8), it resolves the misfits (DEF-3) in what  | QST-2 (confirmed), PRB-4 (challenged), PRB-8 (created), QST-13 (challenged), HYP-15 (shaped), QST-14 (shaped), HYP-18 (confirmed), HYP-20 (confirmed), HYP-28 (confirmed), HYP-29 (confirmed) |
 | CTR-1 GOL-2 | Useful on the job: no training phase before use. It starts doing useful work at once, or n | PRB-8 (created), HYP-17 (shaped) |
 | CTR-1 GOL-3 | Acts on its own heat: what it looks at and does comes from its own heat (DEF-2), with noth | THY-3 (created) |
 | CTR-1 GOL-4 | Regions (DEF-10) settle each other: heat in one is resolved by the system as a whole. | HYP-13 (shaped), THY-2 (created), THY-4 (confirmed) |
 | CTR-1 OPZ-4 | Heat: explain its world more completely: more misfits resolved, never masked (CON-6). | PRB-11 (changed) |
 | CTR-1 OPZ-1 | Information: learn as much or more from far less information than today's AI needs. | HYP-5 (shaped), PRB-8 (created), HYP-17 (confirmed), HYP-18 (confirmed), HYP-19 (confirmed), HYP-22 (confirmed), HYP-28 (confirmed) |
-| CTR-1 OPZ-3 | Minimality: the fewest constructs that explain the most. | HYP-3 (shaped), PRB-8 (created), PRB-11 (changed), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed) |
+| CTR-1 OPZ-3 | Minimality: the fewest constructs that explain the most. | HYP-3 (shaped), PRB-8 (created), PRB-11 (changed), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), PRB-14 (confirmed), HYP-31 (confirmed) |
 | CTR-1 OPZ-2 | Compute: fewer resources (time, memory, power) for the same learning, on ordinary CPUs (CO | HYP-2 (shaped), HYP-16 (confirmed), PRB-11 (changed), HYP-23 (confirmed) |
-| CTR-1 OPZ-5 | Scale: the more it stores, the less each addition costs it: the work of receiving and reca | PRB-4 (shaped), HYP-25 (confirmed), PRB-12 (changed), THY-7 (shaped) |
+| CTR-1 OPZ-5 | Scale: the more it stores, the less each addition costs it: the work of receiving and reca | PRB-4 (shaped), HYP-25 (confirmed), PRB-12 (changed), THY-7 (shaped), HYP-31 (confirmed) |
 | CTR-1 CON-11 | It can't learn what isn't in what it receives. | — |
 | CTR-1 CON-12 | It can't try every explanation: search at rest is always partial. | HYP-5 (shaped) |
 | CTR-1 CON-14 | Memory is finite: good enough, not exact; exact records live outside it. | QST-10 (shaped) |
 | CTR-1 CON-13 | Evidence alone can't settle a true tie: only more evidence can (looking, acting). | QST-12 (created) |
-| CTR-1 CON-1 | One rule: a change to its structure is kept only if energy (DEF-1) falls. | HYP-5 (shaped), HYP-8 (confirmed), HYP-9 (confirmed), QST-7 (confirmed), HYP-14 (confirmed), PRO-3 (confirmed), INC-3 (challenged), INC-4 (challenged) |
+| CTR-1 CON-1 | One rule: a change to its structure is kept only if energy (DEF-1) falls. | HYP-5 (shaped), HYP-8 (confirmed), HYP-9 (confirmed), QST-7 (confirmed), HYP-14 (confirmed), PRO-3 (confirmed), INC-3 (challenged), INC-4 (challenged), HYP-30 (challenged) |
 | CTR-1 CON-2 | One currency, taken from the world: no hand-set weights or tuned parameters. | HYP-1 (shaped), HYP-3 (shaped), PRB-1 (created), PRB-3 (confirmed), HYP-20 (challenged) |
 | CTR-1 CON-6 | Resolve, don't mask: energy may only fall because a misfit is resolved, never because its  | PRB-6 (shaped), THY-3 (created) |
 | CTR-1 CON-3 | General: nothing in it is written for one task or one kind of world. Fixed architecture is | PRB-2 (created), QST-8 (confirmed), PRB-5 (confirmed) |
 | CTR-1 CON-4 | Learns online, from nothing: no training set, no labels, no backpropagation. | QST-1 (shaped) |
-| CTR-1 CON-7 | Don't guess: when the evidence fits two explanations equally, take neither. | PRB-2 (created), PRB-6 (confirmed), HYP-21 (confirmed), HYP-22 (confirmed), HYP-23 (challenged), HYP-26 (challenged), INC-4 (confirmed) |
+| CTR-1 CON-7 | Don't guess: when the evidence fits two explanations equally, take neither. | PRB-2 (created), PRB-6 (confirmed), HYP-21 (confirmed), HYP-22 (confirmed), HYP-23 (challenged), HYP-26 (challenged), INC-4 (confirmed), HYP-30 (confirmed), PRB-15 (confirmed) |
 | CTR-1 CON-8 | Imagined is never stored as lived: what it joins or imagines never becomes an experience. | QST-9 (created) |
 | CTR-1 CON-10 | Its deepest set points (DEF-9) come from outside and are declared. | THY-2 (created) |
-| CTR-1 CON-18 | Sparse, event-driven computation: work happens only where something is active or changes; | THY-5 (created), THY-6 (confirmed), HYP-16 (confirmed), HYP-21 (challenged), HYP-22 (challenged), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-25 (confirmed) |
-| CTR-1 CON-19 | Cells and segments first: what the machine does (waking, completion, competition, fitting, | PRB-12 (created), HYP-26 (confirmed), THY-7 (shaped), PRB-13 (shaped), HYP-27 (confirmed), PRO-5 (confirmed), HYP-28 (confirmed), HYP-29 (confirmed), INC-3 (challenged), INC-4 (confirmed) |
+| CTR-1 CON-18 | Sparse, event-driven computation: work happens only where something is active or changes; | THY-5 (created), THY-6 (confirmed), HYP-16 (confirmed), HYP-21 (challenged), HYP-22 (challenged), HYP-23 (confirmed), PRO-4 (confirmed), HYP-24 (confirmed), HYP-25 (confirmed), PRO-6 (confirmed) |
+| CTR-1 CON-19 | Cells and segments first: what the machine does (waking, completion, competition, fitting, | PRB-12 (created), HYP-26 (confirmed), THY-7 (shaped), PRB-13 (shaped), HYP-27 (confirmed), PRO-5 (confirmed), HYP-28 (confirmed), HYP-29 (confirmed), INC-3 (challenged), INC-4 (confirmed), PRO-6 (confirmed), INC-5 (confirmed) |
 | CTR-1 CON-5 | Runs on ordinary CPUs: no GPU, TPU or other specialised hardware. | — |
 | CTR-1 CON-9 | Cells carry no numbers: no strengths or activation levels; evidence is counted per memory, | HYP-10 (created), PRB-11 (changed), HYP-20 (challenged) |
 | CTR-1 CON-16 | No labels or teacher as a shortcut (breaks GOL-1). | — |
 | CTR-1 CON-15 | No perfect memory (breaks CON-1 and OPZ-2). | — |
 | CTR-1 CON-17 | No exhaustive search for the best answer (breaks OPZ-2). | — |
-| CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed), QST-13 (challenged), HYP-17 (confirmed), HYP-26 (confirmed) |
-| CTR-1 CAP-4 | Binding what happens together (Hebbian in spirit): things active together become one memor | QST-11 (created), HYP-20 (shaped), HYP-24 (confirmed), HYP-29 (confirmed) |
-| CTR-1 CAP-3 | Auto-associative memory: a few active pieces bring back the whole memory they belong to. | QST-3 (created), HYP-10 (confirmed), HYP-19 (confirmed), HYP-20 (shaped), HYP-21 (confirmed), HYP-22 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed) |
+| CTR-1 CAP-1 | Learning by comparing: two things side by side give what they share, directly. | HYP-3 (shaped), HYP-5 (created), HYP-7 (confirmed), QST-13 (challenged), HYP-17 (confirmed), HYP-26 (confirmed), HYP-30 (confirmed) |
+| CTR-1 CAP-4 | Binding what happens together (Hebbian in spirit): things active together become one memor | QST-11 (created), HYP-20 (shaped), HYP-24 (confirmed), HYP-29 (confirmed), HYP-31 (confirmed) |
+| CTR-1 CAP-3 | Auto-associative memory: a few active pieces bring back the whole memory they belong to. | QST-3 (created), HYP-10 (confirmed), HYP-19 (confirmed), HYP-20 (shaped), HYP-21 (confirmed), HYP-22 (confirmed), HYP-24 (confirmed), HYP-26 (confirmed), HYP-31 (confirmed) |
 | CTR-1 CAP-2 | Sparse distributed representations: a thing is a small set of cells; which cell says where | HYP-6 (created), QST-6 (challenged), PRB-11 (changed), HYP-25 (confirmed), HYP-27 (confirmed) |
-| CTR-1 CAP-6 | Thresholds from prices: when to keep, recall or recognise follows from the currency (CON-2 | PRB-1 (created), QST-3 (confirmed), HYP-24 (shaped) |
+| CTR-1 CAP-6 | Thresholds from prices: when to keep, recall or recognise follows from the currency (CON-2 | PRB-1 (created), QST-3 (confirmed), HYP-24 (shaped), PRB-14 (confirmed) |
 | CTR-1 CAP-9 | The same engine at every level: regions (DEF-10) stacked with no new mechanism. | HYP-11 (created), HYP-18 (confirmed), HYP-29 (confirmed) |
 | CTR-1 CAP-8 | Sharing: parts, kinds and shared changes let one thing learnt cover many cases. | QST-2 (shaped), HYP-7 (created), HYP-8 (confirmed), HYP-12 (challenged), QST-13 (shaped), HYP-15 (confirmed), QST-14 (shaped) |
 | CTR-1 CAP-5 | Rest: reorganising and replaying while nothing comes in. | HYP-5 (created), PRB-6 (confirmed) |
@@ -804,10 +857,10 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-1 CAP-13 | Not knowing is a reason to look: a refused tie (CON-7) becomes a cue for more evidence. | QST-12 (created) |
 | CTR-1 CAP-12 | History in the state: what was a moment ago is part of now. | QST-5 (created), HYP-27 (confirmed), HYP-28 (confirmed), HYP-29 (shaped) |
 | CTR-1 CAP-10 | Holding: a held context, want or episode steers what comes next. | QST-4 (shaped), HYP-14 (confirmed), THY-6 (shaped) |
-| CTR-1 CAP-15 | Held states as other regions' activity: what one region holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped) |
+| CTR-1 CAP-15 | Held states as other regions' activity: what one volume holds is the stable activity of an | THY-5 (created), THY-6 (shaped), HYP-16 (shaped) |
 | CTR-1 CAP-11 | Two kinds of memory: general memory keeps what pays over repetition; experiences are kept  | HYP-1 (shaped), HYP-4 (shaped), QST-10 (created), HYP-14 (confirmed), HYP-17 (confirmed) |
 | CTR-1 CAP-14 | Exact records kept outside, in something it can read and write. | — |
-| CTR-1 PRN-1 | Prefer the deeper explanation to a new mechanism. | PRB-5 (shaped), THY-7 (confirmed) |
+| CTR-1 PRN-1 | Prefer the deeper explanation to a new mechanism. | PRB-5 (shaped), THY-7 (confirmed), INC-5 (confirmed) |
 | CTR-1 PRN-2 | Prefer removing structure to adding it. | PRB-2 (shaped), PRB-3 (confirmed) |
 | CTR-1 PRN-6 | Prefer the same mechanism with different settings to a different mechanism. | HYP-11 (shaped), HYP-18 (confirmed), PRB-11 (changed), THY-7 (confirmed) |
 | CTR-1 PRN-3 | Let heat decide where effort goes. | HYP-2 (shaped), HYP-23 (confirmed) |
@@ -831,20 +884,20 @@ What shaped each clause. A clause with no entries hasn't been tested or argued f
 | CTR-2 OPZ-2 | Fewer declared choices (DEF-7): each moved into the system's rule, or removed. | — |
 | CTR-2 OPZ-3 | Less time lost: to results that rested on puppeteering, to drift, to misunderstanding. | — |
 | CTR-2 OPZ-4 | The smallest code that fulfils CTR-1: fewest constructs and lines, echoing CTR-1 OPZ-3. | — |
-| CTR-2 CON-3 | No crutches (DEF-5) and no patches (DEF-6). | PRB-2 (created) |
+| CTR-2 CON-3 | No crutches (DEF-5) and no patches (DEF-6). | PRB-2 (created), INC-5 (confirmed) |
 | CTR-2 CON-2 | Given by hand (DEF-4) only to narrow in on something, always declared, and no claim may re | PRB-7 (created), INC-3 (confirmed) |
 | CTR-2 CON-7 | Every experiment lists its violations (DEF-9), clause by clause. Violations are allowed wh | PRB-10 (created), INC-3 (confirmed) |
 | CTR-2 CON-4 | Every declared choice (DEF-7) is written in `docs/decisions/`. | — |
-| CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed) |
-| CTR-2 CON-8 | Bookkeeping (DEF-11) may be used in experiments, declared as a violation (CON-7), but neve | PRB-12 (created), THY-7 (shaped), PRB-13 (shaped), PRO-5 (confirmed), INC-4 (confirmed) |
+| CTR-2 CON-1 | Nothing goes into the core (DEF-1) unless it is distilled (DEF-10), with evidence (DEF-8)  | PRO-2 (shaped), PRB-10 (changed), PRB-11 (changed), PRO-4 (confirmed), PRO-6 (challenged) |
+| CTR-2 CON-8 | Bookkeeping (DEF-11) may be used in experiments, declared as a violation (CON-7), but neve | PRB-12 (created), THY-7 (shaped), PRB-13 (shaped), PRO-5 (confirmed), INC-4 (confirmed), PRO-6 (confirmed) |
 | CTR-2 CON-5 | No new terms without the owner's agreement; words keep the meanings in the glossary. | PRB-9 (created) |
 | CTR-2 CON-6 | Commits and bundles only when the owner asks. | — |
 | CTR-2 CAP-4 | The assistant: reasoning, writing, building and running experiments. | — |
 | CTR-2 CAP-3 | Written memory that outlasts a session: checkpoints, findings, theories, guides, contracts | PRB-9 (confirmed) |
 | CTR-2 CAP-6 | The contracts as a measuring rod: any experiment can be read against them clause by clause | PRB-10 (created) |
-| CTR-2 CAP-7 | Reference models: documents and pseudocode describing how to build each part (`docs/refere | PRB-13 (created), PRO-5 (confirmed), INC-4 (changed) |
+| CTR-2 CAP-7 | Reference models: documents and pseudocode describing how to build each part (`docs/refere | PRB-13 (created), PRO-5 (confirmed), INC-4 (changed), PRO-6 (changed) |
 | CTR-2 CAP-1 | Sketch, branch and core (DEF-3, DEF-2, DEF-1): ideas tried cheaply, kept apart until they' | PRO-1 (created) |
-| CTR-2 CAP-2 | Visuals and the sandbox: agreeing how something works by seeing it. | PRB-9 (created) |
+| CTR-2 CAP-2 | Visuals and the sandbox: agreeing how something works by seeing it. | PRB-9 (created), PRO-6 (confirmed) |
 | CTR-2 CAP-5 | The system itself as a helper ("Neil"), once it can hold our history. | — |
 | CTR-2 PRN-1 | Don't change anything until you understand it. | — |
 | CTR-2 PRN-2 | Measure against a baseline before believing a result; an explanation is not evidence. | — |

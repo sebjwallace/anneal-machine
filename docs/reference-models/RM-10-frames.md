@@ -17,7 +17,8 @@ type       whatever binds there (the roofs); a new part bound there joins the ty
 fillers) are bookkeeping to distil out.
 
 ## Holding a variable open (open)
-From the constant alone, every part bound to it comes back: in C78, from the wall alone, both roofs. Read as a frame,
+From the constant alone, every part bound to it comes back: in C78, from the wall alone, both roofs; in the core
+(15 November 2026), from AB alone after the cut of ABCD and ABEF, both CD and EF, held as a tie (RM-5). Read as a frame,
 that is right: the variable is undecided. A frame needs the possibilities held as possibilities, not blended and not
 guessed, until a cue picks one. They might be held as cells predicted but not confirmed. Not yet built or tested.
 
