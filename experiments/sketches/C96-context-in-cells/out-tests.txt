@@ -1,0 +1,9 @@
+transition bar 2, pick present: # pass 17
+transition bar 2, pick context: # pass 5
+transition bar 2, pick hybrid: # pass 11
+transition bar 1, pick present: # pass 13
+transition bar 1, pick context: # pass 5
+transition bar 1, pick hybrid: # pass 10
+transition bar min, pick present: # pass 17
+transition bar min, pick context: # pass 5
+transition bar min, pick hybrid: # pass 11

@@ -1,0 +1,6 @@
+small  seed 1: breadth peaks precision 83% recall 72% · surprise precision 49% recall 4% · cells 260
+small  seed 2: breadth peaks precision 85% recall 73% · surprise precision 49% recall 3% · cells 258
+small  seed 3: breadth peaks precision 85% recall 70% · surprise precision 42% recall 3% · cells 251
+larger seed 1: breadth peaks precision 57% recall 87% · surprise precision 47% recall 7% · cells 338
+larger seed 2: breadth peaks precision 61% recall 86% · surprise precision 43% recall 6% · cells 335
+larger seed 3: breadth peaks precision 57% recall 85% · surprise precision 41% recall 7% · cells 337

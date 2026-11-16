@@ -1,0 +1,16 @@
+C101 · held states (no context in cells)
+
+At an episode's last letter: was the prediction exactly that letter? (last third, 5 seeds) · letters held: mean / most
+
+middle "ab", noise 0, K=2:  moment   0% (1.0/1)  ·  never   0% (6.0/6)  ·  given 100% (3.0/3)  ·  rivals 100% (4.0/4)
+middle "ab", noise 0, K=4:  moment   0% (1.0/1)  ·  never   0% (10.0/10)  ·  given 100% (3.0/3)  ·  rivals 100% (4.0/4)
+middle "ab", noise 0, K=8:  moment   0% (1.0/1)  ·  never   0% (18.0/18)  ·  given 100% (3.0/3)  ·  rivals 100% (4.0/4)
+middle "ab", noise 0.3, K=2:  moment   0% (1.0/1)  ·  never   0% (9.0/9)  ·  given  15% (4.0/4)  ·  rivals   0% (2.0/2)
+middle "ab", noise 0.3, K=4:  moment   0% (1.0/1)  ·  never   0% (13.0/13)  ·  given  23% (4.0/4)  ·  rivals   0% (2.0/2)
+middle "ab", noise 0.3, K=8:  moment   0% (1.0/1)  ·  never   0% (21.0/21)  ·  given  43% (4.0/4)  ·  rivals   0% (2.0/2)
+middle "abcd", noise 0, K=2:  moment   0% (1.0/1)  ·  never   0% (8.0/8)  ·  given 100% (3.0/3)  ·  rivals 100% (6.0/6)
+middle "abcd", noise 0, K=4:  moment   0% (1.0/1)  ·  never   0% (12.0/12)  ·  given 100% (3.0/3)  ·  rivals 100% (6.0/6)
+middle "abcd", noise 0, K=8:  moment   0% (1.0/1)  ·  never   0% (20.0/20)  ·  given 100% (3.0/3)  ·  rivals 100% (6.0/6)
+middle "abcd", noise 0.3, K=2:  moment   0% (1.0/1)  ·  never   0% (11.0/11)  ·  given  14% (4.0/4)  ·  rivals   0% (2.0/2)
+middle "abcd", noise 0.3, K=4:  moment   0% (1.0/1)  ·  never   0% (15.0/15)  ·  given  25% (4.0/4)  ·  rivals   0% (2.0/2)
+middle "abcd", noise 0.3, K=8:  moment   0% (1.0/1)  ·  never   0% (23.0/23)  ·  given  44% (4.0/4)  ·  rivals   0% (2.0/2)

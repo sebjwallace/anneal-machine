@@ -1,0 +1,42 @@
+C92 · the warm layer
+
+world two: after teaching, "AB" brings back CDEF (C0 D0 E0 F0), held warm
+world three: after teaching, "AB" brings back CDEFGH (C0 D0 E0 F0 G0 H0), held warm
+
+probe "AB" then "E" (world two): want E tips EF; C, D stay quiet
+  core: brought - ×20; "E" reused its learnt cell 0/20
+  warm: brought ABCDF ×20; "E" reused its learnt cell 20/20
+
+probe "AB" then "C" (world two): want C tips CD; E, F stay quiet
+  core: brought - ×20; "C" reused its learnt cell 0/20
+  warm: brought ABDEF ×20; "C" reused its learnt cell 20/20
+
+probe " " then "E" (world two): want nothing before: E alone wakes nothing
+  core: brought - ×20; "E" reused its learnt cell 0/20
+  warm: brought - ×20; "E" reused its learnt cell 0/20
+
+probe "AB" then " " then "E" (world two): want a gap: warmth gone, nothing
+  core: brought - ×20; "E" reused its learnt cell 0/20
+  warm: brought - ×20; "E" reused its learnt cell 0/20
+
+probe "AB" then "X" (world two): want unrelated X: nothing woken
+  core: brought - ×20; "X" reused its learnt cell 0/20
+  warm: brought - ×20; "X" reused its learnt cell 0/20
+
+probe "AB" then "G" (world three): want G tips GH only
+  core: brought - ×20; "G" reused its learnt cell 0/20
+  warm: brought ABCDEFH ×20; "G" reused its learnt cell 20/20
+
+probe "AB" then "X" (world three): want X: XY was never warm, nothing
+  core: brought - ×20; "X" reused its learnt cell 0/20
+  warm: brought - ×20; "X" reused its learnt cell 0/20
+
+probe "AB" then "C" then "D" (world three): want after CD is up, D follows on
+  core: brought - ×20; "D" reused its learnt cell 0/20
+  warm: brought ABCEFGH ×20; "D" reused its learnt cell 20/20
+
+trace (world two, seed 1, warm):
+  "AB": warm in - | winners A0 B0 | brought C0 D0 E0 F0 | fresh - | grown 0
+  "E": warm in C0 D0 E0 F0 | winners E0 | brought A0 B0 C0 D0 F0 | fresh - | grown 1
+  "F": warm in A0 B0 C0 D0 F0 | winners F0 | brought A0 B0 C0 D0 E0 | fresh - | grown 1
+  " ": warm in A0 B0 C0 D0 E0 | winners - | brought - | fresh - | grown 0

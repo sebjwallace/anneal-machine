@@ -1,0 +1,21 @@
+transition bar 2
+  1 column  per letter, present  next among predicted 0% · exact 0% · cells 160
+  1 column  per letter, context  next among predicted 0% · exact 0% · cells 160
+  1 column  per letter, hybrid   next among predicted 0% · exact 0% · cells 160
+  2 columns per letter, present  next among predicted 100% · exact 75% · cells 20
+  2 columns per letter, context  next among predicted 100% · exact 100% · cells 100
+  2 columns per letter, hybrid   next among predicted 76% · exact 50% · cells 37.6
+transition bar 1
+  1 column  per letter, present  next among predicted 100% · exact 100% · cells 47.4
+  1 column  per letter, context  next among predicted 100% · exact 100% · cells 47.4
+  1 column  per letter, hybrid   next among predicted 100% · exact 100% · cells 47.4
+  2 columns per letter, present  next among predicted 100% · exact 75% · cells 20
+  2 columns per letter, context  next among predicted 100% · exact 100% · cells 100
+  2 columns per letter, hybrid   next among predicted 76% · exact 50% · cells 37.6
+transition bar min
+  1 column  per letter, present  next among predicted 100% · exact 100% · cells 47.4
+  1 column  per letter, context  next among predicted 100% · exact 100% · cells 47.4
+  1 column  per letter, hybrid   next among predicted 100% · exact 100% · cells 47.4
+  2 columns per letter, present  next among predicted 100% · exact 75% · cells 20
+  2 columns per letter, context  next among predicted 100% · exact 100% · cells 100
+  2 columns per letter, hybrid   next among predicted 76% · exact 50% · cells 37.6

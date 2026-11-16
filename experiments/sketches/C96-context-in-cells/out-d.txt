@@ -1,0 +1,4 @@
+small  starts from breadth  : word recognised whole at its end 66% · next letters brought back exactly, one before the end 28%
+small  true starts (ceiling): word recognised whole at its end 100% · next letters brought back exactly, one before the end 100%
+larger starts from breadth  : word recognised whole at its end 42% · next letters brought back exactly, one before the end 29%
+larger true starts (ceiling): word recognised whole at its end 100% · next letters brought back exactly, one before the end 51%

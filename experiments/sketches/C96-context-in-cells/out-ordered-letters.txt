@@ -1,0 +1,11 @@
+C96 · ordered letters
+
+words: cat car cup cot dog dot dug tug tap cap; 1,500 words read, scored over the last 500; 16 cells per column
+ideal next letters: _co→t _do→gt _ca→prt _cu→p _du→g _tu→g; never-seen starts "_go", "_ga", "_pu": anything that follows that letter anywhere (o→gt, a→prt, u→gp)
+
+k=1 present  next letter among predicted   0% · predicted exactly the ideal set   0% · fresh cells per letter 1.00 · cells used 160 | seed 1: _co→- _do→- _ca→- _cu→- _du→- _tu→- _go→- _ga→- _pu→-
+k=1 context  next letter among predicted   0% · predicted exactly the ideal set   0% · fresh cells per letter 1.00 · cells used 160 | seed 1: _co→- _do→- _ca→- _cu→- _du→- _tu→- _go→- _ga→- _pu→-
+k=2 present  next letter among predicted 100% · predicted exactly the ideal set  75% · fresh cells per letter 0.00 · cells used 20 | seed 1: _co→gt _do→_gt _ca→prt _cu→gp _du→_gp _tu→_gp _go→_gt _ga→_prt _pu→_gp
+k=2 context  next letter among predicted 100% · predicted exactly the ideal set 100% · fresh cells per letter 0.00 · cells used 100 | seed 1: _co→t _do→gt _ca→prt _cu→p _du→g _tu→g _go→gt _ga→prt _pu→_gp
+k=3 present  next letter among predicted 100% · predicted exactly the ideal set  75% · fresh cells per letter 0.00 · cells used 30 | seed 1: _co→gt _do→_gt _ca→prt _cu→gp _du→_gp _tu→_gp _go→_gt _ga→_prt _pu→_gp
+k=3 context  next letter among predicted 100% · predicted exactly the ideal set 100% · fresh cells per letter 0.00 · cells used 150 | seed 1: _co→t _do→gt _ca→prt _cu→p _du→g _tu→g _go→gt _ga→prt _pu→_gp

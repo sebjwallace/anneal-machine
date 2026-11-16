@@ -1,5 +1,9 @@
 # C81 · Levels from letters: findings
 
+> **How not to do time ([decision 009](../../../docs/decisions/009-no-context-in-cells.md)).** This experiment carries
+> context in which cell fires (HTM-style temporal memory), or builds on something that does. The owner has ruled that
+> out: it is brittle, and these results are kept as the evidence. Read the numbers as measurements, not as a direction.
+
 Test seeds 101-105, settings fixed in [PREREG.txt](PREREG.txt) after development seed 1 (four changes declared there,
 including one to the engine). Output: `out.txt`.
 
