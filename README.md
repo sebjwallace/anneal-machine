@@ -24,36 +24,16 @@ So far, from pictures alone, it can:
 
 Not yet: busy scenes, and whole scenes as one memory (see `docs/state.md`).
 
-## The parts
-The **engine** is the inner mechanism, in `src/engine/`:
-| | |
-|---|---|
-| `see.js` | Learns parts from pictures and explains pictures with them. |
-| `cells.js` | Primitives are columns; positions are cells; composites are assemblies (the smallest set of cells that brings the whole thing back). |
-| `complete.js` | Recognises a thing from part of it and fills in the rest. |
-| `change.js` | States and transitions: what changes into what, and where it applies. |
-
-The **machine** is the engine acting in a world. That part is still to come.
+## The language
+The main line is now **the language**, in [`language/`](language/README.md): a notation for the machine (members, edges and gates, assemblies, completion, competition, and how heat forms and breaks structure), precise enough that an interpreter could one day run it. For now it is markdown only. The old core code (`src/`) has been retired; see [decision 010](docs/decisions/010-language-replaces-core.md).
 
 ## Layout
 ```
-src/          the main line: the engine, the worlds it learns from, and its tests
-experiments/  rough experiments (C02-C33), kept as they were, code copies and all
-sandbox/      a user-facing workbench, built with Sandkit, to see how it works
-docs/         principles, architecture, decisions, research, ideas, backlog
+language/     the main line: the notation for the machine
+experiments/  experiments, kept as they were, code copies and all
+sandbox/      a user-facing workbench built on the retired core (no longer runs as is)
+docs/         principles, theories, decisions, research, ideas, backlog
 ```
-
-## Running the tests
-Needs Node 18 or later; there are no dependencies.
-```
-npm test            # all five
-npm run test:see    # learning the scene world (about 10 s)
-npm run test:cells
-npm run test:complete
-npm run test:change
-npm run test:kinds  # kinds and one energy on the moving world (about 1 min)
-```
-Expected results are in `src/test/baseline/` and `docs/architecture.md`.
 
 ## Status
 Early research, in the open. What's solid and what's still a choice is written down in `docs/`.

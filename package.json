@@ -6,9 +6,5 @@
   "private": true,
   "engines": {
     "node": ">=18"
-  },
-  "scripts": {
-    "test": "node --test src/test/*.test.js",
-    "view": "node src/view/serve.js"
   }
 }
