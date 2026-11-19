@@ -3,7 +3,8 @@
 ## Edges
 
 An **edge** joins one member to another. Edges are directed and binary: there or not, with no strength. An edge never
-stands alone. It is always part of a gate (below).
+stands alone. It is always part of a gate (below), and **it is stored with the gate that receives it**, not with the
+member it comes from. A member keeps no list of where it points.
 
 | Edge | Notation | Meaning |
 |---|---|---|
@@ -19,7 +20,7 @@ is not yet agreed.
 ## Gates
 
 A **gate** is how a member decides whether to become active from the members that have edges into it. A set of
-sources, a rule, and a target.
+sources (its guest list), a rule, and a target. Gates belong to assemblies.
 
 ```
 {a, b} -> c              c opens if enough of a and b are active (default: 2 or more)
@@ -43,6 +44,17 @@ language is flexible about gate types.
 A gate that is **pressed but not opening** (some sources active, not enough) is marked hot with `!`. That is one of
 the places heat shows.
 
+## Gates have a limit
+
+A gate can only hold so many sources: say eight. When a gate is full, nothing more is added to it, and new learning
+has to become new structure, a new assembly with its own gates. Sources are never taken out of a gate.
+
+```
+gate limit: 8
+```
+
+*Provisional:* the size, and the form of the declaration.
+
 ## Declarations
 
 A declaration sets a default for what follows.
@@ -51,5 +63,5 @@ A declaration sets a default for what follows.
 default gate: >= 2
 ```
 
-Settings that are trade-offs rather than rules (how much small heat to chase, when to let go, what to keep in memory
-and what to move out) will probably be declarations of this kind, not core notation.
+Settings that are trade-offs rather than rules (how much small heat to chase, when to let go, how much room memory has
+and where the floor sits, the gate limit) will probably be declarations of this kind, not core notation.

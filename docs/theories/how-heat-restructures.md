@@ -1,5 +1,7 @@
 # How heat restructures
 
+> **Superseded in part by [nothing breaks](nothing-breaks.md).** §7–§9 below conclude that some breaking is needed, at the contact points, once one side has settled. A later exchange concluded that bonds never break: mistakes are outcompeted and sink to cold storage. This note is kept as it was, as the record.
+
 A theory note, from a long question-and-answer exchange between the owner and the assistant. The assistant asked a
 question, the owner answered, the assistant responded and asked the next. It ran until both were on the same page.
 **Nothing here has been tested.** It sets out what the machine does when it detects the kind of heat that changes

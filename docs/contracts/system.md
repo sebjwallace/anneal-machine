@@ -40,6 +40,8 @@ good enough, not perfect; exact records belong outside it).
 - **GOL-3** *(draft)* Acts on its own heat: what it looks at and does comes from its own heat (DEF-2), with nothing
   given but its set points (DEF-9).
 - **GOL-4** *(draft)* Regions (DEF-10) settle each other: heat in one is resolved by the system as a whole.
+- **GOL-5** *(draft)* Explains itself: for anything it does (a member coming on, an assembly winning, something
+  forming, loading or being stored), it can give the exact reason in its own terms.
 
 **Optimizations** (directions, never done; in order of priority: in a trade-off the higher one wins)
 - **OPZ-4** Heat: explain its world more completely: more misfits resolved, never masked (CON-6).
@@ -48,6 +50,8 @@ good enough, not perfect; exact records belong outside it).
 - **OPZ-2** Compute: fewer resources (time, memory, power) for the same learning, on ordinary CPUs (CON-5).
 - **OPZ-5** Scale: the more it stores, the less each addition costs it: the work of receiving and recalling grows
   with what is active, not with what is stored; any size of world (DEF-8) and amount of memory (DEF-11).
+- **OPZ-6** *(draft)* Explanations: its explanations as short and readable as possible, from one gate to the whole
+  machine, at any scale.
 
 **Constraints** (what rules options out; none gives way, so no priority; limits, then rules, then conflicts, each
 general to specific; detail below: what kind, where it came from, what violating it costs)
@@ -62,6 +66,8 @@ general to specific; detail below: what kind, where it came from, what violating
 - **CON-6** Resolve, don't mask: energy may only fall because a misfit is resolved, never because its measure is
   covered. *Hard.*
 - **CON-3** General: nothing in it is written for one task or one kind of world. Fixed architecture is allowed. *Hard.*
+- **CON-20** *(draft)* Nothing happens without a recorded cause: every change to structure, and every activation, has a
+  cause that can be stated in AMP. *Hard.*
 - **CON-4** Learns online, from nothing: no training set, no labels, no backpropagation. *Hard.*
 - **CON-7** Don't guess: when the evidence fits two explanations equally, take neither. *Hard.*
 - **CON-8** Imagined is never stored as lived: what it joins or imagines never becomes an experience. *Hard.*
@@ -142,6 +148,16 @@ its set points (CON-10).
 **GOL-4 · Regions settle each other** *(draft)*. From the regulators theory: heat in one volume spreads, and the
 system as a whole resolves it.
 
+**GOL-5 · Explains itself** *(draft)*. *The owner's words: AMP is explainable by design; in fact we depend on its
+ability to explain itself in order to develop it at all; that builds trust, clarity, control and security into the
+foundations; move from a world of black boxes to glass boxes.* Reached when any decision the machine makes can be
+answered with its exact cause: a gate's guest list against what was active and the count; an assembly's support
+against its rival's; the gap a new assembly filled; the votes or build-up that loaded or stored it. Because the machine
+is binary and made of sets, the counts it decides by are themselves the explanation. *Gives:* the means to develop it
+(AMX, Associative Memory Examination), trust, the ability to program it directly, and discoverable tampering. *Not a
+claim of:* simplicity at scale, correctness, or a solution to alignment
+([explainable by design](../theories/explainable-by-design.md), §3).
+
 ### Optimizations in detail
 Each is a direction: it can be pushed further but never finished, and the five pull against each other, so they are
 balanced, not maximised one at a time. The order is priority: when one has to give, the higher one wins, and a large
@@ -181,6 +197,12 @@ grows as memory grows: the target is that it follows what is active, not what is
 Today's engine works only in small worlds, and its fitting still counts every unit against every lit pixel (C75).
 *Trades against* OPZ-2 when more cells per column are needed to keep memories apart (C77).
 
+**OPZ-6 · Explanations** *(draft)*. The direction behind GOL-5: explanations that a person can actually use. One gate's
+reason is short by nature; the work is at scale, where many simple parts interact and no grammar names what formed.
+Measured as how long and how readable the answer to "why" is, for one moment and for a whole run. *The owner's words:
+if it can't be explained, everything becomes far more difficult and trust degrades.* *Trades against* OPZ-2 (keeping
+the record of changes costs memory) and OPZ-3 (summarising tools are more constructs).
+
 ### Constraints in detail
 Three kinds, in this order: **limits** that are impossible whatever we choose (they explain why some rules can't be
 relaxed); **rules** we choose, to protect the goals; and **conflicts**, possible but breaking another clause. Rules and conflicts are hard:
@@ -217,6 +239,14 @@ version of rationalising) and can't be trusted.
 architecture (columns, cells, the energy rule) is allowed because it is the same everywhere. *From:* principle 5; the
 owner's ban on route-finding search, which led to the moving bar instead (C44, C51). *If violated:* it works on the
 demonstration and piles up special cases elsewhere, the opposite of OPZ-3.
+
+**CON-20 · Nothing happens without a recorded cause** *(draft)*. *Rule.* Every change to structure (forming, loading,
+storing) and every activation has a cause that can be stated in AMP, and changes are kept in a record with their causes.
+No state without a reason. *From:* the owner (explainability by design; the ledger instinct), and
+[explainable by design](../theories/explainable-by-design.md). Checkable by a test: any run can be replayed from its
+record, and every entry names its cause. *If violated:* the machine can't be developed by examining it, mistakes and
+tampering can't be traced, and GOL-5 is lost. Distinct from OPZ-6: this guarantees an explanation exists; OPZ-6 is
+about whether it can be used.
 
 **CON-4 · Online, from nothing.** *Rule.* It starts empty and learns from what it receives as it receives it. *From:*
 the README and philosophy. *If violated:* GOL-2 (useful on the job) and OPZ-1 (learn from little) both go.
@@ -403,4 +433,9 @@ Not part of the contract; kept here so the gap is visible.
    CAP-14, are now at the bottom of their lists), and whether any is really part of a more general one.
 5. Whether the principles are the right six, in the right order, and whether each gives way to the right thing.
 6. Whether the regulator purpose (serving real systems) belongs here or above the contract, as the why.
-7. Then sign.
+7. Explainability (GOL-5, OPZ-6, CON-20, drafts): their place in the priority order, and whether GOL-5 is a goal or
+   belongs with the principles.
+8. CON-19 (cells and segments first) now conflicts with [assemblies first](../theories/assemblies-first.md), which makes
+   assemblies the units that own segments (gates) and move between memory and disk, with members as pivot points.
+   CON-9 still holds. CON-19 and DEF-12 to DEF-14 need revisiting.
+9. Then sign.

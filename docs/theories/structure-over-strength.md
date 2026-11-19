@@ -1,5 +1,7 @@
 # Structure over strength
 
+> **Note:** this note speaks of heat breaking bonds and misfits calling for breaking. A later note, [nothing breaks](nothing-breaks.md), concludes that bonds never break; the robustness argument here stands, as what keeps a memory reachable.
+
 A theory note, from a conversation between the owner and the assistant. **Untested.** It records the owner's view that
 reinforcement in the machine is not a bond getting stronger but a memory getting more connected: more structure around
 it, every edge still simply there or not. And that structure gives more than strength alone would.

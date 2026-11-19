@@ -9,6 +9,9 @@ from 1.
 1, 2, 3
 ```
 
+Members are not the main things: assemblies are. A member is a **pivot point**, a name that many assemblies can use
+and meet through. It keeps no list of its own bonds ([assemblies first](../docs/theories/assemblies-first.md)).
+
 A member that belongs to no assembly is an **individual**. Every member starts as an individual. Members stop being
 individuals when an assembly forms around them.
 
@@ -50,7 +53,7 @@ V = community a, b       a group of populations, here a and b
 A **population** is a fixed number of members. A **community** is a fixed grouping of populations. Neither is a
 container that does anything. They only say which members exist and how they are grouped.
 
-Dynamic structure, which forms and breaks as the machine learns, is assemblies (see [assemblies](assemblies.md)).
+Dynamic structure, which forms as the machine learns and is loaded or stored, is assemblies (see [assemblies](assemblies.md)).
 
 ## The set words
 
