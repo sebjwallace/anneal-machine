@@ -1,4 +1,4 @@
-package snapshot_test
+package engine_test
 
 import (
 	"bytes"
@@ -8,21 +8,20 @@ import (
 	"testing"
 
 	"github.com/sebjwallace/anneal-machine/amp/engine"
-	"github.com/sebjwallace/anneal-machine/amp/snapshot"
 )
 
 func TestASnapshotRebuildsTheSameDeclarations(t *testing.T) {
 	original := engine.New()
 	for _, name := range []engine.Name{"c", "a", "t"} {
-		must(original.DeclarePopulation(name, 8))
+		mustValue(original.DeclarePopulation(name, 8))
 	}
-	must(original.DeclareCommunity("letters", []engine.Name{"t", "c"}))
+	mustValue(original.DeclareCommunity("letters", []engine.Name{"t", "c"}))
 
 	var saved bytes.Buffer
-	if err := snapshot.Write(&saved, original); err != nil {
+	if err := original.WriteSnapshot(&saved); err != nil {
 		t.Fatal(err)
 	}
-	opened, err := snapshot.Read(&saved)
+	opened, err := engine.ReadSnapshot(&saved)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -36,18 +35,18 @@ func TestASnapshotRebuildsTheSameDeclarations(t *testing.T) {
 // light the same members.
 func TestAnOpenedMemoryInvokesLikeTheOriginal(t *testing.T) {
 	original := engine.New()
-	must(original.DeclarePopulation("wide", 100))
-	must(original.DeclarePopulation("c", 8))
+	mustValue(original.DeclarePopulation("wide", 100))
+	mustValue(original.DeclarePopulation("c", 8))
 
 	var saved bytes.Buffer
-	if err := snapshot.Write(&saved, original); err != nil {
+	if err := original.WriteSnapshot(&saved); err != nil {
 		t.Fatal(err)
 	}
-	opened, err := snapshot.Read(&saved)
+	opened, err := engine.ReadSnapshot(&saved)
 	if err != nil {
 		t.Fatal(err)
 	}
-	must(opened.Invoke([][]engine.Name{{"c"}}))
+	mustValue(opened.Invoke([][]engine.Name{{"c"}}))
 
 	if inspection, _ := opened.Inspect("c"); inspection.Active != 8 {
 		t.Errorf("c: %d active, want 8", inspection.Active)
@@ -58,15 +57,15 @@ func TestAnOpenedMemoryInvokesLikeTheOriginal(t *testing.T) {
 }
 
 func TestAFileFromAnotherFormatIsRefused(t *testing.T) {
-	_, err := snapshot.Read(strings.NewReader(`{"version": 2, "populations": [], "communities": []}`))
+	_, err := engine.ReadSnapshot(strings.NewReader(`{"version": 2, "populations": [], "communities": []}`))
 
-	if !errors.As(err, new(snapshot.VersionError)) {
+	if !errors.As(err, new(engine.SnapshotVersionError)) {
 		t.Fatalf("want VersionError, got %v", err)
 	}
 }
 
 func TestAFileWithUnknownFieldsIsRefused(t *testing.T) {
-	_, err := snapshot.Read(strings.NewReader(`{"version": 1, "populations": [], "communities": [], "weights": []}`))
+	_, err := engine.ReadSnapshot(strings.NewReader(`{"version": 1, "populations": [], "communities": [], "weights": []}`))
 
 	if err == nil {
 		t.Fatal("want a refusal for the unknown field")
@@ -74,7 +73,7 @@ func TestAFileWithUnknownFieldsIsRefused(t *testing.T) {
 }
 
 func TestAFileIsCheckedByTheEngineRules(t *testing.T) {
-	_, err := snapshot.Read(strings.NewReader(`{"version": 1, "populations": [{"name": "c", "size": 8}, {"name": "c", "size": 4}], "communities": []}`))
+	_, err := engine.ReadSnapshot(strings.NewReader(`{"version": 1, "populations": [{"name": "c", "size": 8}, {"name": "c", "size": 4}], "communities": []}`))
 
 	if !errors.As(err, new(engine.AlreadyDeclaredError)) {
 		t.Fatalf("want AlreadyDeclaredError, got %v", err)
@@ -97,7 +96,7 @@ func describe(memory *engine.Memory) string {
 	return strings.Join(parts, " ")
 }
 
-func must[T any](value T, err error) T {
+func mustValue[T any](value T, err error) T {
 	if err != nil {
 		panic(err)
 	}
@@ -106,18 +105,18 @@ func must[T any](value T, err error) T {
 
 func TestAnOpenedMemoryCarriesOnCountingMoments(t *testing.T) {
 	original := engine.New()
-	must(original.DeclarePopulation("c", 8))
-	must(original.Invoke([][]engine.Name{{"c"}, {"c"}, {"c"}}))
+	mustValue(original.DeclarePopulation("c", 8))
+	mustValue(original.Invoke([][]engine.Name{{"c"}, {"c"}, {"c"}}))
 
 	var saved bytes.Buffer
-	if err := snapshot.Write(&saved, original); err != nil {
+	if err := original.WriteSnapshot(&saved); err != nil {
 		t.Fatal(err)
 	}
-	opened, err := snapshot.Read(&saved)
+	opened, err := engine.ReadSnapshot(&saved)
 	if err != nil {
 		t.Fatal(err)
 	}
-	invocation := must(opened.Invoke([][]engine.Name{{"c"}}))
+	invocation := mustValue(opened.Invoke([][]engine.Name{{"c"}}))
 
 	if got := invocation.Moments[0].Number; got != 4 {
 		t.Errorf("first moment after opening is %d, want 4", got)
@@ -125,7 +124,7 @@ func TestAnOpenedMemoryCarriesOnCountingMoments(t *testing.T) {
 }
 
 func TestAFileFromBeforeTheClockStartsAtTheFirstMoment(t *testing.T) {
-	opened, err := snapshot.Read(strings.NewReader(`{"version": 1, "populations": [], "communities": []}`))
+	opened, err := engine.ReadSnapshot(strings.NewReader(`{"version": 1, "populations": [], "communities": []}`))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,9 +135,31 @@ func TestAFileFromBeforeTheClockStartsAtTheFirstMoment(t *testing.T) {
 }
 
 func TestANegativeMomentIsRefused(t *testing.T) {
-	_, err := snapshot.Read(strings.NewReader(`{"version": 1, "moment": -1, "populations": [], "communities": []}`))
+	_, err := engine.ReadSnapshot(strings.NewReader(`{"version": 1, "moment": -1, "populations": [], "communities": []}`))
 
 	if err == nil {
 		t.Fatal("want a refusal for a moment before the first")
+	}
+}
+
+func TestASnapshotCannotGiveAnAssemblyAMemberThatDoesNotExist(t *testing.T) {
+	_, err := engine.ReadSnapshot(strings.NewReader(`{"version": 1,
+		"populations": [{"name": "c", "size": 2}, {"name": "a", "size": 2}], "communities": [],
+		"assemblies": [{"id": 1, "name": "ca", "shape": "state",
+			"members": [{"population": "c", "member": 3}, {"population": "a", "member": 1}]}]}`))
+
+	if err == nil || !strings.Contains(err.Error(), "no member 3") {
+		t.Fatalf("want a refusal for c{3}, got %v", err)
+	}
+}
+
+func TestASnapshotKeepsAssembliesInOrder(t *testing.T) {
+	_, err := engine.ReadSnapshot(strings.NewReader(`{"version": 1,
+		"populations": [{"name": "c", "size": 2}, {"name": "a", "size": 2}], "communities": [],
+		"assemblies": [{"id": 2, "name": "ca", "shape": "state",
+			"members": [{"population": "c", "member": 1}, {"population": "a", "member": 1}]}]}`))
+
+	if err == nil {
+		t.Fatal("want a refusal for #2 where #1 should be")
 	}
 }

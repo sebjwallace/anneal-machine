@@ -1,7 +1,7 @@
 // Package engine holds the memory and performs the operations on it.
 //
-// The memory is everything the engine holds: populations, communities and, later, assemblies. The engine knows
-// nothing about text; the interpreter reads AMP and calls it.
+// The memory is everything the engine holds: populations, communities and assemblies. The engine knows nothing about
+// text; the interpreter reads AMP and calls it.
 package engine
 
 import (
@@ -9,7 +9,7 @@ import (
 	"slices"
 )
 
-// Name is what a declared thing is called. Populations and communities share one set of names.
+// Name is what a declared thing is called. Populations, communities and assemblies share one set of names.
 type Name string
 
 // Kind says what a name was declared as.
@@ -18,6 +18,7 @@ type Kind int
 const (
 	PopulationKind Kind = iota + 1
 	CommunityKind
+	AssemblyKind
 )
 
 func (k Kind) String() string {
@@ -26,8 +27,18 @@ func (k Kind) String() string {
 		return "population"
 	case CommunityKind:
 		return "community"
+	case AssemblyKind:
+		return "assembly"
 	}
 	return "unknown kind"
+}
+
+// withArticle writes the kind as it reads in a sentence: a population, an assembly.
+func (k Kind) withArticle() string {
+	if k == AssemblyKind {
+		return "an " + k.String()
+	}
+	return "a " + k.String()
 }
 
 // Memory is everything the engine holds: what it knows, and what is active now. Declarations are only ever added:
@@ -39,6 +50,11 @@ type Memory struct {
 	populationOrder []Population
 	communityOrder  []Community
 	members         int // members across every population
+
+	assemblies []Assembly            // every assembly, in the order formed; #n is assemblies[n-1]
+	named      map[Name][]AssemblyID // the assemblies each name was given to, in the order formed
+	next       map[Name]int          // for each population, the member a new assembly gets next, counted from 0
+	assembled  memberSet             // the members that belong to at least one assembly
 
 	moment int            // the last moment that passed: one clock for the memory's whole life, 0 before any
 	active memberSet      // the members active this moment
@@ -58,6 +74,8 @@ func NewAfter(moment int) *Memory {
 	return &Memory{
 		populations: map[Name]Population{},
 		communities: map[Name]Community{},
+		named:       map[Name][]AssemblyID{},
+		next:        map[Name]int{},
 		moment:      moment,
 		causes:      map[Name]Cause{},
 	}
@@ -73,19 +91,22 @@ func (m *Memory) Populations() []Population { return slices.Clone(m.populationOr
 // Communities lists every community, in the order declared.
 func (m *Memory) Communities() []Community { return slices.Clone(m.communityOrder) }
 
-// kindOf reports what name was declared as, if it was declared at all.
-func (m *Memory) kindOf(name Name) (Kind, bool) {
+// KindOf reports what name was declared as, if it was declared at all.
+func (m *Memory) KindOf(name Name) (Kind, bool) {
 	if _, ok := m.populations[name]; ok {
 		return PopulationKind, true
 	}
 	if _, ok := m.communities[name]; ok {
 		return CommunityKind, true
 	}
+	if _, ok := m.named[name]; ok {
+		return AssemblyKind, true
+	}
 	return 0, false
 }
 
 func (m *Memory) refuseRedeclaration(name Name) error {
-	if kind, declared := m.kindOf(name); declared {
+	if kind, declared := m.KindOf(name); declared {
 		return AlreadyDeclaredError{Name: name, As: kind}
 	}
 	return nil

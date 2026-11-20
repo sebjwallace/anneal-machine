@@ -27,4 +27,6 @@ starts with nothing on. The file name is the rest of the line.
 typed, and the lines after it are what must print back, exactly. A new walkthrough step starts as a transcript.
 
 **Built so far:** walkthrough step 1, populations and communities; step 2, `invoke` (one moment per comma, braces
-for together) and `inspect`, on an engine with no assemblies, so all input is unexpected and every moment is incomplete.
+for together) and `inspect`; and assemblies written by hand, as in step 9: `cat = <c, a, t> ; c -> a -> t`. Each
+population hands out its members in order and goes round again once all are used; everything on one line shares
+members; `inspect cat` shows them. `invoke` refuses while assemblies exist, until step 4 (completion) is built.

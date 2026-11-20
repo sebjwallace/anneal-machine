@@ -9,11 +9,11 @@ letters: c, a, t (24 members)
 amp> invoke c
 moment 1   c        incomplete   heat !c
 amp> save walkthrough.json
-saved walkthrough.json: 3 populations, 1 community
+saved walkthrough.json: 3 populations, 1 community, 0 assemblies
 amp> x = population 2
 x: 2 members, x{1..2}, all individuals
 amp> open walkthrough.json
-opened walkthrough.json: 3 populations, 1 community
+opened walkthrough.json: 3 populations, 1 community, 0 assemblies
 amp> inspect x
 error: x is not declared
 amp> inspect c
@@ -39,6 +39,6 @@ error: expected a file name after "open"
 amp> save = population 1
 save: 1 member, save{1}, all individuals
 amp> save my walkthrough.json
-saved my walkthrough.json: 5 populations, 1 community
+saved my walkthrough.json: 5 populations, 1 community, 0 assemblies
 amp> open my walkthrough.json
-opened my walkthrough.json: 5 populations, 1 community
+opened my walkthrough.json: 5 populations, 1 community, 0 assemblies

@@ -25,6 +25,6 @@ error: unexpected t at the end of the line
 amp> inspect
 error: expected a population name after "inspect"
 amp> inspect letters
-error: letters is a community, not a population
+error: letters is a community, not a population or an assembly
 amp> inspect c t
 error: unexpected t at the end of the line

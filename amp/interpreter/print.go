@@ -123,7 +123,8 @@ func padRight(text string, width int) string {
 // 3 populations, 1 community
 func countDeclarations(memory *engine.Memory) string {
 	return countOf(len(memory.Populations()), "population", "populations") + ", " +
-		countOf(len(memory.Communities()), "community", "communities")
+		countOf(len(memory.Communities()), "community", "communities") + ", " +
+		countOf(memory.CountAssemblies(), "assembly", "assemblies")
 }
 
 func countOf(n int, one, many string) string {
@@ -131,4 +132,52 @@ func countOf(n int, one, many string) string {
 		return "1 " + one
 	}
 	return fmt.Sprintf("%d %s", n, many)
+}
+
+// cat: state <c, a, t> and transition c -> a -> t
+//
+// What was written, at the population level; inspect shows the members chosen.
+func printAssemblyDeclaration(name engine.Name, assemblies []engine.Assembly) string {
+	parts := make([]string, len(assemblies))
+	for i, a := range assemblies {
+		parts[i] = a.Shape().String() + " " + writeShape(a.Shape(), namesOf(a.Populations()))
+	}
+	return fmt.Sprintf("%s: %s", name, strings.Join(parts, " and "))
+}
+
+// cat: #1 state <c{1}, a{1}, t{1}>; #2 transition c{1} -> a{1} -> t{1}
+func printAssemblies(name engine.Name, assemblies []engine.Assembly) string {
+	parts := make([]string, len(assemblies))
+	for i, a := range assemblies {
+		members := make([]string, len(a.Members()))
+		for j, member := range a.Members() {
+			members[j] = writeMember(member)
+		}
+		parts[i] = fmt.Sprintf("#%d %s %s", a.ID(), a.Shape(), writeShape(a.Shape(), members))
+	}
+	return fmt.Sprintf("%s: %s", name, strings.Join(parts, "; "))
+}
+
+// writeShape writes a state as <c, a, t> and a transition as c -> a -> t.
+func writeShape(shape engine.Shape, parts []string) string {
+	switch shape {
+	case engine.StateShape:
+		return "<" + strings.Join(parts, ", ") + ">"
+	case engine.TransitionShape:
+		return strings.Join(parts, " -> ")
+	}
+	panic(fmt.Sprintf("interpreter: no way to write shape %d", shape))
+}
+
+// c{3}
+func writeMember(member engine.Member) string {
+	return fmt.Sprintf("%s{%d}", member.Population().Name(), member.Number())
+}
+
+func namesOf(names []engine.Name) []string {
+	texts := make([]string, len(names))
+	for i, name := range names {
+		texts[i] = string(name)
+	}
+	return texts
 }

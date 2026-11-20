@@ -115,6 +115,10 @@ resolve    from heat !c, !a, !t
 - **Every forming line gives its cause**, so the record of changes reads like the run (CTR-1 CON-20, draft).
 - The interpreter names new assemblies `#1`, `#2` until something gives them names.
 - Which members inside `c`, `a` and `t` carry this is hidden unless you `inspect`.
+- **Decided (the owner): members are handed out in order.** Each population gives a new assembly its next member,
+  starting at the first: `c{1}`, then `c{2}`, and so on, so individuals are used up in order. Once every member has
+  been used, it goes round again from `c{1}`, so later assemblies share members with earlier ones. Kept simple on
+  purpose; a cleverer choice can replace it later.
 
 Then invoking part of it shows whether anything was learnt:
 
@@ -478,6 +482,10 @@ declaration maps onto instructions: `⟨c, a, t⟩` is an `ASML`, `c -> a -> t` 
 reference list is on [instructions](instructions.md).
 
 **A REPL** is where the two meet: declarations for structure, commands for actions, one line at a time.
+
+**Decided (the owner): in the REPL a state is typed and printed with ordinary angle brackets, `<c, a, t>`,** because
+`⟨ ⟩` aren't on a keyboard. `⟨ ⟩` is still accepted, so lines can be pasted from these pages, and the pages keep it as
+the typeset form. Everything printed can be typed back in.
 
 ```
 amp> cat = ⟨c, a, t⟩ ; c -> a -> t

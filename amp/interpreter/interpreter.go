@@ -17,6 +17,35 @@ func New(memory *engine.Memory) *Interpreter {
 	return &Interpreter{memory: memory}
 }
 
+// inspect looks inside a population or an assembly.
+func (in *Interpreter) inspect(name engine.Name) (string, error) {
+	switch kind, _ := in.memory.KindOf(name); kind {
+	case engine.AssemblyKind:
+		assemblies, err := in.memory.Assemblies(name)
+		if err != nil {
+			return "", err
+		}
+		return printAssemblies(name, assemblies), nil
+	case engine.CommunityKind:
+		return "", NotInspectableError{Name: name, Is: kind}
+	}
+	inspection, err := in.memory.Inspect(name)
+	if err != nil {
+		return "", err
+	}
+	return printInspection(inspection), nil
+}
+
+// NotInspectableError: inspect looks inside populations and assemblies, and the name is something else.
+type NotInspectableError struct {
+	Name engine.Name
+	Is   engine.Kind
+}
+
+func (e NotInspectableError) Error() string {
+	return fmt.Sprintf("%s is a %s, not a population or an assembly", e.Name, e.Is)
+}
+
 // Open replaces the whole memory with the snapshot at path, and says what it holds. If the snapshot can't be read,
 // the memory is left as it was.
 func (in *Interpreter) Open(path string) (string, error) {
@@ -51,6 +80,12 @@ func (in *Interpreter) Run(line string) (string, error) {
 			return "", err
 		}
 		return printCommunity(community), nil
+	case assemblyDeclaration:
+		assemblies, err := in.memory.DeclareAssemblies(st.name, st.outlines)
+		if err != nil {
+			return "", err
+		}
+		return printAssemblyDeclaration(st.name, assemblies), nil
 	case invokeCommand:
 		invocation, err := in.memory.Invoke(st.moments)
 		if err != nil {
@@ -58,11 +93,7 @@ func (in *Interpreter) Run(line string) (string, error) {
 		}
 		return printInvocation(invocation), nil
 	case inspectCommand:
-		inspection, err := in.memory.Inspect(st.population)
-		if err != nil {
-			return "", err
-		}
-		return printInspection(inspection), nil
+		return in.inspect(st.name)
 	case saveCommand:
 		if err := snapshot.Save(st.path, in.memory); err != nil {
 			return "", err

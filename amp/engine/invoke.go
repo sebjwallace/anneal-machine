@@ -38,6 +38,9 @@ func (m *Memory) Invoke(sequence [][]Name) (Invocation, error) {
 	if err != nil {
 		return Invocation{}, err
 	}
+	if len(m.assemblies) > 0 {
+		return Invocation{}, AssembliesNotReadYetError{}
+	}
 	moments := make([]Moment, 0, len(inputs))
 	for _, input := range inputs {
 		moments = append(moments, m.step(input))
@@ -65,7 +68,7 @@ func (m *Memory) inputs(sequence [][]Name) ([][]Population, error) {
 	return inputs, nil
 }
 
-// step advances one moment. No assemblies exist yet, so nothing holds activity from the moment before, nothing
+// step advances one moment. Invoke only runs with no assemblies yet, so nothing holds activity from the moment before, nothing
 // predicts a member, and nothing accounts for what arrives: every input population is unexpected and unexplained.
 func (m *Memory) step(input []Population) Moment {
 	m.moment++

@@ -1,0 +1,52 @@
+amp> c = population 8
+c: 8 members, c{1..8}, all individuals
+amp> a = population 8
+a: 8 members, a{1..8}, all individuals
+amp> t = population 8
+t: 8 members, t{1..8}, all individuals
+amp> o = population 8
+o: 8 members, o{1..8}, all individuals
+amp> cat = <c, a, t> ; c -> a -> t
+cat: state <c, a, t> and transition c -> a -> t
+amp> inspect cat
+cat: #1 state <c{1}, a{1}, t{1}>; #2 transition c{1} -> a{1} -> t{1}
+amp> cot = ⟨c, o, t⟩ ; c -> o -> t
+cot: state <c, o, t> and transition c -> o -> t
+amp> inspect cot
+cot: #3 state <c{2}, o{1}, t{2}>; #4 transition c{2} -> o{1} -> t{2}
+amp> at = <a, t>
+at: state <a, t>
+amp> inspect at
+at: #5 state <a{2}, t{3}>
+amp> to = t -> o
+to: transition t -> o
+amp> inspect to
+to: #6 transition t{4} -> o{2}
+amp> x = population 2
+x: 2 members, x{1..2}, all individuals
+amp> one = <x, c>
+one: state <x, c>
+amp> two = <x, c>
+two: state <x, c>
+amp> three = <x, c>
+three: state <x, c>
+amp> inspect one
+one: #7 state <x{1}, c{3}>
+amp> inspect two
+two: #8 state <x{2}, c{4}>
+amp> inspect three
+three: #9 state <x{1}, c{5}>
+amp> inspect c
+c: 8 members; active: none
+amp> save assemblies.json
+saved assemblies.json: 5 populations, 0 communities, 9 assemblies
+amp> open assemblies.json
+opened assemblies.json: 5 populations, 0 communities, 9 assemblies
+amp> inspect cot
+cot: #3 state <c{2}, o{1}, t{2}>; #4 transition c{2} -> o{1} -> t{2}
+amp> four = <x, c>
+four: state <x, c>
+amp> inspect four
+four: #10 state <x{2}, c{6}>
+amp> invoke c
+error: invoke doesn't read assemblies yet (walkthrough step 4, next to build)

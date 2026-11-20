@@ -27,9 +27,9 @@ func (m *Memory) DeclarePopulation(name Name, size int) (Population, error) {
 	return population, nil
 }
 
-// Individuals counts the members of p that belong to no assembly. No assemblies exist yet, so every member is one.
+// Individuals counts the members of p that belong to no assembly.
 func (m *Memory) Individuals(p Population) int {
-	return p.size
+	return p.size - m.assembled.countIn(p)
 }
 
 // population looks up name, which must have been declared as a population.
@@ -37,7 +37,7 @@ func (m *Memory) population(name Name) (Population, error) {
 	if population, ok := m.populations[name]; ok {
 		return population, nil
 	}
-	if kind, declared := m.kindOf(name); declared {
+	if kind, declared := m.KindOf(name); declared {
 		return Population{}, NotAPopulationError{Name: name, Is: kind}
 	}
 	return Population{}, UndeclaredError{Name: name}

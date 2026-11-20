@@ -24,6 +24,12 @@ type communityDeclaration struct {
 	populations []engine.Name
 }
 
+// name = <c, a, t> ; c -> a -> t: one or more assemblies, given one name, sharing members.
+type assemblyDeclaration struct {
+	name     engine.Name
+	outlines []engine.Outline
+}
+
 // invoke c, {a, t}: commas separate moments, braces hold what arrives together in one moment.
 type invokeCommand struct {
 	moments [][]engine.Name
@@ -31,7 +37,7 @@ type invokeCommand struct {
 
 // inspect c
 type inspectCommand struct {
-	population engine.Name
+	name engine.Name
 }
 
 // save walkthrough.json
@@ -46,6 +52,7 @@ type openCommand struct {
 
 func (populationDeclaration) isStatement() {}
 func (communityDeclaration) isStatement()  {}
+func (assemblyDeclaration) isStatement()   {}
 func (invokeCommand) isStatement()         {}
 func (inspectCommand) isStatement()        {}
 func (saveCommand) isStatement()           {}
@@ -130,6 +137,8 @@ func (p *parser) statement() (statement, error) {
 		return p.invoke()
 	case first.is("inspect") && !declaring:
 		return p.inspect()
+	case p.startsOutline(first):
+		return nil, syntaxError("an assembly written by hand needs a name, as in cat = <c, a, t>")
 	case first.kind == wordToken:
 		return p.declaration(engine.Name(first.text))
 	default:
@@ -141,14 +150,64 @@ func (p *parser) declaration(name engine.Name) (statement, error) {
 	if equals := p.take(); equals.kind != equalsToken {
 		return nil, syntaxError("expected \"=\" after %s%s", name, got(equals))
 	}
-	switch kind := p.take(); {
-	case kind.is("population"):
+	switch first := p.take(); {
+	case p.startsOutline(first):
+		return p.assemblies(name, first)
+	case first.is("population"):
 		return p.population(name)
-	case kind.is("community"):
+	case first.is("community"):
 		return p.community(name)
 	default:
-		return nil, syntaxError("expected \"population\" or \"community\" after \"=\"%s", got(kind))
+		return nil, syntaxError("expected \"population\", \"community\", a state or a transition after \"=\"%s", got(first))
 	}
+}
+
+// startsOutline is true when first begins a state (<) or a transition (a name followed by ->).
+func (p *parser) startsOutline(first token) bool {
+	return first.kind == openAngleToken || (first.kind == wordToken && p.peekIs(arrowToken))
+}
+
+// assemblies reads one or more outlines separated by semicolons, starting from first.
+func (p *parser) assemblies(name engine.Name, first token) (statement, error) {
+	var outlines []engine.Outline
+	for {
+		outline, err := p.outline(first)
+		if err != nil {
+			return nil, err
+		}
+		outlines = append(outlines, outline)
+		if !p.peekIs(semicolonToken) {
+			return assemblyDeclaration{name: name, outlines: outlines}, nil
+		}
+		p.take()
+		if first = p.take(); !p.startsOutline(first) {
+			return nil, syntaxError("expected a state or a transition after \";\"%s", got(first))
+		}
+	}
+}
+
+// outline reads a state, <c, a, t>, or a transition, c -> a -> t, starting from first.
+func (p *parser) outline(first token) (engine.Outline, error) {
+	if first.kind == openAngleToken {
+		populations, err := p.names(`"<"`)
+		if err != nil {
+			return engine.Outline{}, err
+		}
+		if closing := p.take(); closing.kind != closeAngleToken {
+			return engine.Outline{}, syntaxError("expected \",\" or \">\" after %s%s", populations[len(populations)-1], got(closing))
+		}
+		return engine.Outline{Shape: engine.StateShape, Populations: populations}, nil
+	}
+	steps := []engine.Name{engine.Name(first.text)}
+	for p.peekIs(arrowToken) {
+		p.take()
+		step := p.take()
+		if step.kind != wordToken {
+			return engine.Outline{}, syntaxError("expected a population name after \"->\"%s", got(step))
+		}
+		steps = append(steps, engine.Name(step.text))
+	}
+	return engine.Outline{Shape: engine.TransitionShape, Populations: steps}, nil
 }
 
 func (p *parser) population(name engine.Name) (statement, error) {
@@ -209,11 +268,11 @@ func (p *parser) moment(after string) ([]engine.Name, error) {
 }
 
 func (p *parser) inspect() (statement, error) {
-	population := p.take()
-	if population.kind != wordToken {
-		return nil, syntaxError("expected a population name after \"inspect\"%s", got(population))
+	name := p.take()
+	if name.kind != wordToken {
+		return nil, syntaxError("expected a population name after \"inspect\"%s", got(name))
 	}
-	return inspectCommand{population: engine.Name(population.text)}, nil
+	return inspectCommand{name: engine.Name(name.text)}, nil
 }
 
 // names reads one or more names separated by commas, the first coming after the given token.
@@ -251,6 +310,10 @@ const (
 	commaToken
 	openBraceToken
 	closeBraceToken
+	openAngleToken
+	closeAngleToken
+	arrowToken
+	semicolonToken
 )
 
 type token struct {
@@ -265,6 +328,11 @@ var symbols = map[rune]tokenKind{
 	',': commaToken,
 	'{': openBraceToken,
 	'}': closeBraceToken,
+	'<': openAngleToken,
+	'>': closeAngleToken,
+	'⟨': openAngleToken, // as the docs write states; printed back as < >
+	'⟩': closeAngleToken,
+	';': semicolonToken,
 }
 
 // scan splits a line into words, numbers and symbols.
@@ -277,6 +345,9 @@ func scan(line string) ([]token, error) {
 		switch {
 		case unicode.IsSpace(r):
 			i++
+		case r == '-' && i+1 < len(runes) && runes[i+1] == '>':
+			tokens = append(tokens, token{kind: arrowToken, text: "->"})
+			i += 2
 		case isSymbol:
 			tokens = append(tokens, token{kind: symbol, text: string(r)})
 			i++

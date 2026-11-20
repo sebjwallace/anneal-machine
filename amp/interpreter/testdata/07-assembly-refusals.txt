@@ -1,0 +1,52 @@
+amp> c = population 8
+c: 8 members, c{1..8}, all individuals
+amp> a = population 8
+a: 8 members, a{1..8}, all individuals
+amp> t = population 8
+t: 8 members, t{1..8}, all individuals
+amp> letters = community c, a
+letters: c, a (16 members)
+amp> cat = <c>
+error: a state needs at least two populations
+amp> cat = c
+error: expected "population", "community", a state or a transition after "=", got c
+amp> cat = c ->
+error: expected a population name after "->"
+amp> cat = <c, a
+error: expected "," or ">" after a
+amp> cat = <>
+error: expected a population name after "<", got >
+amp> cat = <c, c>
+error: c appears twice in one assembly; repeats aren't settled yet
+amp> cat = c -> a -> c
+error: c appears twice in one assembly; repeats aren't settled yet
+amp> cat = <c, z>
+error: z is not declared
+amp> cat = <c, letters>
+error: letters is a community, not a population
+amp> cat = <c, a, t> ;
+error: expected a state or a transition after ";"
+amp> cat = <c, a> c
+error: unexpected c at the end of the line
+amp> <c, a, t>
+error: an assembly written by hand needs a name, as in cat = <c, a, t>
+amp> c -> a
+error: an assembly written by hand needs a name, as in cat = <c, a, t>
+amp> cat = <c, a, t> ; c -> a -> t
+cat: state <c, a, t> and transition c -> a -> t
+amp> cat = <c, a>
+error: cat is already declared, as an assembly
+amp> cat = population 3
+error: cat is already declared, as an assembly
+amp> w = community c, cat
+error: cat is an assembly, not a population
+amp> invoke cat
+error: cat is an assembly, not a population
+amp> inspect letters
+error: letters is a community, not a population or an assembly
+amp> inspect z
+error: z is not declared
+amp> ca = <c, a>
+ca: state <c, a>
+amp> inspect ca
+ca: #3 state <c{2}, a{2}>

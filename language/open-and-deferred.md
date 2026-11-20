@@ -17,7 +17,9 @@ These are known to be needed and have been set aside until there is more to go o
   ([heat and learning](heat-and-learning.md)). Resolve prefers the most complete explanation with the least added. How
   "least added" is counted (bonds, members, assemblies) is still to be written down.
 - **What forms from an incompletion, exactly.** Over which members, and which of what is held comes along.
-- **How the engine chooses a member** inside a population when something forms.
+- **How the engine chooses a member** inside a population when something forms. (Settled for now, the owner: each
+  population hands out its members in order, one after another, starting at the first: individuals first, and once
+  every member has been used, round robin from the first again. Kept simple on purpose; walkthrough step 3.)
 - **Extending a chain mid-sequence.** Assemblies are immutable, so a chain formed part-way through a word can't be
   extended: a longer chain forms beside it, or forming waits until the sequence settles.
 - **Addressing a single gate** (proposed `barks{2}#4`, see [instructions](instructions.md)).
@@ -26,8 +28,8 @@ These are known to be needed and have been set aside until there is more to go o
   moments count on across invokes, one clock for the memory; walkthrough step 2.)
 - **The form of `resolve`.** On its own meaning the last incompletion, or always naming what it works on (`resolve last`,
   `resolve #1, #2`).
-- **Inside a population.** How the engine chooses a member for an assembly. (Settled: unexpected input turns all
-  members on until one is chosen; walkthrough step 2.)
+- **Inside a population.** (Settled: unexpected input turns all members on until one is chosen, walkthrough step 2;
+  members for new assemblies are handed out in order, round robin, walkthrough step 3.)
 - **Arrivals versus held states.** Whether transitions act on what arrives (change) rather than on what is held, so a
   count advances once per tick ([procedures](../docs/theories/procedures-from-states-and-transitions.md) §5).
 - **Returning from a reused subroutine** to the right caller, and **letting go** of a loop that never exits.

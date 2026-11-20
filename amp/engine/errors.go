@@ -11,7 +11,7 @@ type AlreadyDeclaredError struct {
 }
 
 func (e AlreadyDeclaredError) Error() string {
-	return fmt.Sprintf("%s is already declared, as a %s", e.Name, e.As)
+	return fmt.Sprintf("%s is already declared, as %s", e.Name, e.As.withArticle())
 }
 
 // TooFewMembersError: a population was asked for with fewer than one member.
@@ -39,7 +39,7 @@ type NotAPopulationError struct {
 }
 
 func (e NotAPopulationError) Error() string {
-	return fmt.Sprintf("%s is a %s, not a population", e.Name, e.Is)
+	return fmt.Sprintf("%s is %s, not a population", e.Name, e.Is.withArticle())
 }
 
 // EmptyCommunityError: a community was asked for with no populations.
@@ -68,4 +68,55 @@ type RepeatedInputError struct {
 
 func (e RepeatedInputError) Error() string {
 	return fmt.Sprintf("%s appears twice in one moment", e.Population)
+}
+
+// NothingToAssembleError: an assembly was declared with no outline to form it from.
+type NothingToAssembleError struct {
+	Name Name
+}
+
+func (e NothingToAssembleError) Error() string {
+	return fmt.Sprintf("%s has nothing to assemble", e.Name)
+}
+
+// TooSmallError: a state needs two members to point at each other, and a transition two steps to lead from one to
+// the next.
+type TooSmallError struct {
+	Shape Shape
+}
+
+func (e TooSmallError) Error() string {
+	if e.Shape == TransitionShape {
+		return "a transition needs at least two steps"
+	}
+	return "a state needs at least two populations"
+}
+
+// RepeatedInAssemblyError: a population appeared twice in one assembly. How repeats work ("dad", "banana") is still
+// open, so they are refused rather than guessed at.
+type RepeatedInAssemblyError struct {
+	Population Name
+}
+
+func (e RepeatedInAssemblyError) Error() string {
+	return fmt.Sprintf("%s appears twice in one assembly; repeats aren't settled yet", e.Population)
+}
+
+// NotAnAssemblyError: an assembly was expected, and the name was declared as something else.
+type NotAnAssemblyError struct {
+	Name Name
+	Is   Kind
+}
+
+func (e NotAnAssemblyError) Error() string {
+	return fmt.Sprintf("%s is %s, not an assembly", e.Name, e.Is.withArticle())
+}
+
+// AssembliesNotReadYetError: invoke was asked to read a memory that holds assemblies, which it can't do yet.
+// Reading them would mean completion and competition (walkthrough step 4); until then invoke refuses rather than
+// report incompletions that ignore what the memory holds.
+type AssembliesNotReadYetError struct{}
+
+func (AssembliesNotReadYetError) Error() string {
+	return "invoke doesn't read assemblies yet (walkthrough step 4, next to build)"
 }
