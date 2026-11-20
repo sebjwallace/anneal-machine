@@ -7,7 +7,9 @@ t: 8 members, t{1..8}, all individuals
 amp> letters = community c, a, t
 letters: c, a, t (24 members)
 amp> invoke c
-moment 1   c        incomplete   heat !c
+moment   active   refractory   why
+1        c                     incomplete, heat !c
+2                 c
 amp> save walkthrough.json
 saved walkthrough.json: 3 populations, 1 community, 0 assemblies
 amp> x = population 2
@@ -17,21 +19,23 @@ opened walkthrough.json: 3 populations, 1 community, 0 assemblies
 amp> inspect x
 error: x is not declared
 amp> inspect c
-c: 8 members; active: none
+c: 8 members; active: none; refractory: none
 amp> c = population 4
 error: c is already declared, as a population
 amp> o = population 8
 o: 8 members, o{1..8}, all individuals
 amp> invoke o
-moment 2   o        incomplete   heat !o
+moment   active   refractory   why
+3        o                     incomplete, heat !o
+4                 o
 amp> inspect o
-o: 8 members; active: all 8 (unexpected input, no member chosen yet)
+o: 8 members; active: none; refractory: o{1..8}
 amp> inspect t
-t: 8 members; active: none
+t: 8 members; active: none; refractory: none
 amp> open missing.json
 error: open missing.json: no such file or directory
 amp> inspect o
-o: 8 members; active: all 8 (unexpected input, no member chosen yet)
+o: 8 members; active: none; refractory: o{1..8}
 amp> save
 error: expected a file name after "save"
 amp> open

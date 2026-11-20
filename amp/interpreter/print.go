@@ -35,77 +35,212 @@ func describeIndividuals(individuals, size int) string {
 	return fmt.Sprintf("%d individuals", individuals)
 }
 
-// moment 1   c        incomplete   heat !c
-// moment 2   a        incomplete   heat !a
+// moment   active   refractory   why
+// 1        c
+// 2        +a       c            a: cat c -> a
+// complete   cat <c, a, t>   3 of 3
+// held       repeating every 2 moments
 //
-// Inputs are padded into one column, so what invoke found lines up.
+// One row per moment, at the population level: + marks what was recalled rather than arriving from the world. Then
+// how much of each state the invocation reached, and whether the memory ended holding.
 func printInvocation(invocation engine.Invocation) string {
-	inputs := make([]string, len(invocation.Moments))
-	inputWidth := 9
-	for i, moment := range invocation.Moments {
-		inputs[i] = writeTogether(moment.Input)
-		inputWidth = max(inputWidth, len([]rune(inputs[i]))+3)
+	rows := [][]string{{"moment", "active", "refractory", "why"}}
+	for _, moment := range invocation.Moments {
+		rows = append(rows, []string{
+			strconv.Itoa(moment.Number),
+			writeActive(moment),
+			strings.Join(populationNames(populationsOf(moment.Refractory)), ", "),
+			writeWhy(moment),
+		})
 	}
-	numberWidth := len(strconv.Itoa(lastMoment(invocation)))
-	lines := make([]string, len(invocation.Moments))
-	for i, moment := range invocation.Moments {
-		line := fmt.Sprintf("moment %-*d   %s%s", numberWidth, moment.Number, padRight(inputs[i], inputWidth), describeMoment(moment))
-		lines[i] = strings.TrimRight(line, " ")
+	lines := []string{writeTable(rows)}
+	if summary := writeSummary(invocation); summary != "" {
+		lines = append(lines, summary)
 	}
 	return strings.Join(lines, "\n")
 }
 
-func lastMoment(invocation engine.Invocation) int {
-	if len(invocation.Moments) == 0 {
-		return 0
+// writeActive lists the populations with active members: c if any arrived from the world, +c if all were recalled.
+func writeActive(moment engine.Moment) string {
+	var written []string
+	for _, group := range groupByPopulation(moment.Active) {
+		if group.arrived {
+			written = append(written, string(group.population.Name()))
+		} else {
+			written = append(written, "+"+string(group.population.Name()))
+		}
 	}
-	return invocation.Moments[len(invocation.Moments)-1].Number
+	return strings.Join(written, ", ")
 }
 
-// writeTogether writes populations that arrived in one moment: c alone, {c, a, t} together, ∅ for nothing.
-func writeTogether(populations []engine.Population) string {
-	switch len(populations) {
-	case 0:
-		return "∅"
-	case 1:
-		return string(populations[0].Name())
+// writeWhy says, for each population that came on by a gate, which gates; then any heat.
+func writeWhy(moment engine.Moment) string {
+	var reasons []string
+	for _, group := range groupByPopulation(moment.Active) {
+		if len(group.gates) == 0 {
+			continue
+		}
+		gates := make([]string, len(group.gates))
+		for i, gate := range group.gates {
+			gates[i] = writeGate(gate)
+		}
+		reason := strings.Join(gates, ", ")
+		if group.arrived {
+			reason = "expected by " + reason
+		}
+		reasons = append(reasons, fmt.Sprintf("%s: %s", group.population.Name(), reason))
 	}
-	return "{" + strings.Join(populationNames(populations), ", ") + "}"
+	if len(moment.Unexplained) > 0 {
+		hot := make([]string, len(moment.Unexplained))
+		for i, p := range moment.Unexplained {
+			hot[i] = "!" + string(p.Name())
+		}
+		reasons = append(reasons, "incomplete, heat "+strings.Join(hot, ", "))
+	}
+	return strings.Join(reasons, "; ")
 }
 
-// describeMoment says what invoke found: nothing to add if it accounted for everything, otherwise the heat.
-func describeMoment(moment engine.Moment) string {
-	if moment.Complete() {
+// writeGate names a gate by its assembly: cat <c, a, t> 2 of 3 for a state, cat c -> a for a transition's step.
+func writeGate(gate engine.Gate) string {
+	a := gate.Assembly
+	if a.Shape() == engine.StateShape {
+		return fmt.Sprintf("%s %s %d of %d", a.Name(), writeShape(a.Shape(), namesOf(a.Populations())), gate.Counted, len(a.Members()))
+	}
+	return fmt.Sprintf("%s %s -> %s", a.Name(), gate.From.Population().Name(), stepAfter(a, gate.From).Population().Name())
+}
+
+// stepAfter is the member that follows from in a transition.
+func stepAfter(transition engine.Assembly, from engine.Member) engine.Member {
+	members := transition.Members()
+	for i := 0; i+1 < len(members); i++ {
+		if members[i] == from {
+			return members[i+1]
+		}
+	}
+	panic("interpreter: a transition's gate came from a member not on it")
+}
+
+// populationGroup is what one population did in a moment.
+type populationGroup struct {
+	population engine.Population
+	arrived    bool
+	gates      []engine.Gate
+}
+
+func groupByPopulation(activations []engine.Activation) []populationGroup {
+	var groups []populationGroup
+	for _, activation := range activations {
+		p := activation.Member.Population()
+		if len(groups) == 0 || groups[len(groups)-1].population != p {
+			groups = append(groups, populationGroup{population: p})
+		}
+		group := &groups[len(groups)-1]
+		group.arrived = group.arrived || activation.Arrived
+		group.gates = append(group.gates, activation.Gates...)
+	}
+	return groups
+}
+
+// writeSummary says how complete each state got, and whether the memory ended holding.
+func writeSummary(invocation engine.Invocation) string {
+	held := invocation.RepeatsEvery > 0
+	var rows [][]string
+	for _, c := range invocation.Completions {
+		state, size := c.State, len(c.State.Members())
+		label := fmt.Sprintf("%s %s", state.Name(), writeShape(state.Shape(), namesOf(state.Populations())))
+		switch {
+		case held && c.Last == size:
+			rows = append(rows, []string{"complete", label, fmt.Sprintf("%d of %d", size, size)})
+		case held && c.Last > 0:
+			rows = append(rows, []string{"incomplete", label, fmt.Sprintf("%d of %d", c.Last, size)})
+		default:
+			rows = append(rows, []string{"incomplete", label, fmt.Sprintf("at most %d of %d", c.Most, size)})
+		}
+	}
+	if held {
+		rows = append(rows, []string{"held", fmt.Sprintf("repeating every %d moments", invocation.RepeatsEvery)})
+	}
+	if len(rows) == 0 {
 		return ""
 	}
-	hot := make([]string, len(moment.Unexplained))
-	for i, p := range moment.Unexplained {
-		hot[i] = "!" + string(p.Name())
-	}
-	return "incomplete   heat " + strings.Join(hot, ", ")
+	return writeTable(rows)
 }
 
-// c: 8 members; active: all 8 (unexpected input, no member chosen yet)
+// writeTable lines rows up in columns, three spaces apart. A row may stop early; its last cell isn't padded.
+func writeTable(rows [][]string) string {
+	var widths []int
+	for _, row := range rows {
+		for i, cell := range row[:len(row)-1] {
+			if i == len(widths) {
+				widths = append(widths, 0)
+			}
+			widths[i] = max(widths[i], len([]rune(cell)))
+		}
+	}
+	lines := make([]string, len(rows))
+	for i, row := range rows {
+		var line strings.Builder
+		for j, cell := range row {
+			if j < len(row)-1 {
+				line.WriteString(padRight(cell, widths[j]+3))
+			} else {
+				line.WriteString(cell)
+			}
+		}
+		lines[i] = strings.TrimRight(line.String(), " ")
+	}
+	return strings.Join(lines, "\n")
+}
+
+// c: 8 members; active: c{1}; refractory: c{2..8}
 func printInspection(inspection engine.Inspection) string {
 	p := inspection.Population
-	return fmt.Sprintf("%s: %s; active: %s", p.Name(), countMembers(p.Size()), describeActive(inspection))
+	active := writeMembers(p, inspection.Active)
+	if inspection.Unexpected {
+		active = fmt.Sprintf("%s (unexpected input, no member chosen yet)", countActive(p, len(inspection.Active)))
+	}
+	return fmt.Sprintf("%s: %s; active: %s; refractory: %s", p.Name(), countMembers(p.Size()), active, writeMembers(p, inspection.Refractory))
 }
 
-func describeActive(inspection engine.Inspection) string {
-	switch inspection.Cause {
-	case engine.NoCause:
+func countActive(p engine.Population, active int) string {
+	if active == p.Size() {
+		return fmt.Sprintf("all %d", active)
+	}
+	return strconv.Itoa(active)
+}
+
+// writeMembers writes members of one population: none, c{1}, c{1, 3}, or c{2..8} for a run.
+func writeMembers(p engine.Population, members []engine.Member) string {
+	if len(members) == 0 {
 		return "none"
-	case engine.UnexpectedInput:
-		return fmt.Sprintf("%s (unexpected input, no member chosen yet)", countActive(inspection))
 	}
-	panic(fmt.Sprintf("interpreter: no way to describe cause %d", inspection.Cause))
+	var runs []string
+	for i := 0; i < len(members); {
+		end := i
+		for end+1 < len(members) && members[end+1].Number() == members[end].Number()+1 {
+			end++
+		}
+		if end-i >= 2 {
+			runs = append(runs, fmt.Sprintf("%d..%d", members[i].Number(), members[end].Number()))
+		} else {
+			for _, member := range members[i : end+1] {
+				runs = append(runs, strconv.Itoa(member.Number()))
+			}
+		}
+		i = end + 1
+	}
+	return fmt.Sprintf("%s{%s}", p.Name(), strings.Join(runs, ", "))
 }
 
-func countActive(inspection engine.Inspection) string {
-	if inspection.Active == inspection.Population.Size() {
-		return fmt.Sprintf("all %d", inspection.Active)
+// populationsOf lists the populations of members, each once, in the order met.
+func populationsOf(members []engine.Member) []engine.Population {
+	var populations []engine.Population
+	for _, member := range members {
+		if p := member.Population(); len(populations) == 0 || populations[len(populations)-1] != p {
+			populations = append(populations, p)
+		}
 	}
-	return strconv.Itoa(inspection.Active)
+	return populations
 }
 
 func populationNames(populations []engine.Population) []string {

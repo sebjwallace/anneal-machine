@@ -111,12 +111,3 @@ type NotAnAssemblyError struct {
 func (e NotAnAssemblyError) Error() string {
 	return fmt.Sprintf("%s is %s, not an assembly", e.Name, e.Is.withArticle())
 }
-
-// AssembliesNotReadYetError: invoke was asked to read a memory that holds assemblies, which it can't do yet.
-// Reading them would mean completion and competition (walkthrough step 4); until then invoke refuses rather than
-// report incompletions that ignore what the memory holds.
-type AssembliesNotReadYetError struct{}
-
-func (AssembliesNotReadYetError) Error() string {
-	return "invoke doesn't read assemblies yet (walkthrough step 4, next to build)"
-}

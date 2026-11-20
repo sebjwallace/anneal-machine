@@ -90,8 +90,8 @@ Nothing has to find and remove them: the whole assembly loses and is stored.
 - **Ranking with limited room.** RAM holds only so much. The most demanded assemblies stay loaded. As something
   else gathers more votes, it takes the room, and the less demanded are stored. Things are stored because something
   else is more wanted, not because their own votes dropped.
-- **A floor.** Anything with too few votes is stored even when there is room. With the default bar of two, a single
-  stale bond can't keep something loaded.
+- **A floor.** Anything with too few votes is stored even when there is room, so a single stale bond can't keep
+  something loaded. (This leaned on the bar of two, now retired: where the floor sits is open again.)
 
 **Loading: build-up from activity.** A stored assembly can't be found by ordinary activity, since nothing loaded
 checks it. Instead, activity among loaded assemblies builds up on the stored assemblies it is connected to, a little each moment.

@@ -1,0 +1,39 @@
+amp> c = population 8
+c: 8 members, c{1..8}, all individuals
+amp> a = population 8
+a: 8 members, a{1..8}, all individuals
+amp> t = population 8
+t: 8 members, t{1..8}, all individuals
+amp> cat = <c, a, t> ; c -> a -> t
+cat: state <c, a, t> and transition c -> a -> t
+amp> save cat.json
+saved cat.json: 3 populations, 0 communities, 2 assemblies
+amp> invoke c
+moment   active   refractory   why
+1        c
+2        +a       c            a: cat c -> a
+3        +c, +t   a            c: cat <c, a, t> 2 of 3; t: cat <c, a, t> 2 of 3, cat a -> t
+4        +a       c, t         a: cat <c, a, t> 3 of 3, cat c -> a
+complete   cat <c, a, t>   3 of 3
+held       repeating every 2 moments
+amp> inspect a
+a: 8 members; active: a{1}; refractory: none
+amp> inspect c
+c: 8 members; active: none; refractory: c{1}
+amp> open cat.json
+opened cat.json: 3 populations, 0 communities, 2 assemblies
+amp> invoke t
+moment   active   refractory   why
+1        t
+2                 t
+incomplete   cat <c, a, t>   at most 1 of 3
+amp> open cat.json
+opened cat.json: 3 populations, 0 communities, 2 assemblies
+amp> invoke {c, t}
+moment   active   refractory   why
+1        c, t
+2        +a       c, t         a: cat <c, a, t> 2 of 3, cat c -> a
+3        +c, +t   a            c: cat <c, a, t> 3 of 3; t: cat <c, a, t> 3 of 3, cat a -> t
+4        +a       c, t         a: cat <c, a, t> 3 of 3, cat c -> a
+complete   cat <c, a, t>   3 of 3
+held       repeating every 2 moments

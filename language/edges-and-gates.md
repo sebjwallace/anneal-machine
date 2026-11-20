@@ -69,11 +69,18 @@ A **gate** is how a member decides whether to become active from the members tha
 sources (its guest list), a rule, and a target. Gates belong to assemblies.
 
 ```
-{a, b} -> c              c opens if enough of a and b are active (default: 2 or more)
-{a, b, d, e} >= 3 -> c   c opens if at least 3 of them are active
+{a, b, d, e} >= 3 -> c   c opens if at least 3 of them are counted
 ```
 
-The default threshold is two: one source alone never opens a gate. This is the bar of two from the old core.
+**What a gate counts (decided):** members that are **active** or **refractory**. Every member is in one of three
+phases: active (on this moment), refractory (active the moment before, so it can't come on now), or ready (it can come
+on when a gate opens). Every bond acts one moment later.
+
+**Thresholds (decided): no fixed number.** The old bar of two is retired.
+- **A state's gate** opens for its ready members when the state's counted part is bigger than its missing part:
+  `|state ∩ counted| > |state − counted|`. Equal is a tie, held. The threshold follows the state's size: 2 of 3, 3 of
+  5, 8 of 14.
+- **A transition's step** opens when the step before, and all its keys, are counted.
 
 **Gate rules.** Besides a count, a gate can follow one of the logic-gate rules. The owner wants these kept, so the
 language is flexible about gate types.
@@ -106,8 +113,10 @@ gate limit: 8
 A declaration sets a default for what follows.
 
 ```
-default gate: >= 2
+gate limit: 8
 ```
+
+(The old example here, `default gate: >= 2`, set the retired bar of two.)
 
 Settings that are trade-offs rather than rules (how much small heat to chase, when to let go, how much room RAM has
 and where the floor sits, the gate limit) will probably be declarations of this kind, not core notation.

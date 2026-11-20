@@ -24,8 +24,17 @@ These are known to be needed and have been set aside until there is more to go o
   extended: a longer chain forms beside it, or forming waits until the sequence settles.
 - **Addressing a single gate** (proposed `barks{2}#4`, see [instructions](instructions.md)).
 - **A population's budget.** How many members a population allows at once: a fixed number, or a share of its size.
-- **Timing.** Whether every bond acts one moment later (proposed), and how long completion takes to settle. (Settled:
-  moments count on across invokes, one clock for the memory; walkthrough step 2.)
+- **Timing.** (Settled: moments count on across invokes, one clock for the memory, walkthrough step 2; every bond
+  acts one moment later, and members have three phases, active, refractory and ready, walkthrough step 4.)
+- **States bigger than three and their chains.** A chain brings one member a moment and gates count two moments, so a
+  flat state of four or more can't be completed by its own chain, nor by reading it in order. Overlapping parts of
+  three work. What this means for long words and for what resolve forms (walkthrough step 4).
+- **Input that arrives at refractory members.** For now (the assistant's choice, to be confirmed): they can't come
+  on; unexpected input turns on the population's ready members only.
+- **How invoke ends.** For now (the assistant's choice, to be confirmed): after its input it runs until the next
+  moment would be quiet (nothing active or refractory) or would repeat an earlier moment of the same invoke, which
+  means something is holding.
+- **Competition isn't built yet.** With "cat" and "cot" both written, `invoke c` brings back both and both hold.
 - **The form of `resolve`.** On its own meaning the last incompletion, or always naming what it works on (`resolve last`,
   `resolve #1, #2`).
 - **Inside a population.** (Settled: unexpected input turns all members on until one is chosen, walkthrough step 2;

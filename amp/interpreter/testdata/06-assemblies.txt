@@ -37,7 +37,7 @@ two: #8 state <x{2}, c{4}>
 amp> inspect three
 three: #9 state <x{1}, c{5}>
 amp> inspect c
-c: 8 members; active: none
+c: 8 members; active: none; refractory: none
 amp> save assemblies.json
 saved assemblies.json: 5 populations, 0 communities, 9 assemblies
 amp> open assemblies.json
@@ -48,5 +48,3 @@ amp> four = <x, c>
 four: state <x, c>
 amp> inspect four
 four: #10 state <x{2}, c{6}>
-amp> invoke c
-error: invoke doesn't read assemblies yet (walkthrough step 4, next to build)

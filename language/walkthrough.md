@@ -172,6 +172,41 @@ support wins.
 **The declared choice it rests on:** a transition's gate opens on **one** source; a state's gate needs **agreement**
 (two, by default). A transition opens on one; a state needs agreement.
 
+**Superseded (the owner): there is no fixed number.** The "two" was the bar of two from an old experiment, arbitrary.
+Decided instead, with the interpreter running it (`amp/interpreter/testdata/08-phases.txt` to `10-house-from-parts.txt`):
+
+- **Every bond acts one moment later.**
+- **Members have three phases: active, refractory and ready.** A member active one moment is refractory the next, and
+  can't come on; after that it is ready, and can come on when a gate opens. The word for the three is **phase**.
+- **Gates count active and refractory members.**
+- **A state's gate opens for its ready members when its counted part is bigger than its missing part** (more than
+  half). Equal is a tie, held. So the threshold is relative to the state's size: 2 of 3, 3 of 5, 8 of 14.
+- **A transition's step opens when the step before, and all its keys, are counted.**
+
+What the interpreter prints for the three examples below (the notation above is the older sketch):
+
+```
+amp> invoke c
+moment   active   refractory   why
+1        c
+2        +a       c            a: cat c -> a
+3        +c, +t   a            c: cat <c, a, t> 2 of 3; t: cat <c, a, t> 2 of 3, cat a -> t
+4        +a       c, t         a: cat <c, a, t> 3 of 3, cat c -> a
+complete   cat <c, a, t>   3 of 3
+held       repeating every 2 moments
+```
+
+"cat" holds by alternating: "c" and "t" active while "a" is refractory, then the other way round. All three are always
+counted, so it stays complete. `invoke t` reaches 1 of 3 and recalls nothing; `invoke {c, t}` recalls "a" and holds
+the same way.
+
+**Found by running it: a state of more than three can't be reached by its own chain.** The chain brings one member a
+moment and gates count two moments, so at most two members are counted from the chain alone. A flat
+`<h, o, u, s, e>` with `h -> o -> u -> s -> e` reaches 2 of 5 from "h", and also when "house" is read in order, and
+never completes; with three given together it completes and holds. Written as overlapping parts, `<h, o, u>` and
+`<u, s, e>` sharing "u", each part holds once complete and keeps the earlier letters counted, and "house" completes
+from "h". Open: what this means for longer words and for what resolve forms.
+
 ```
 invoke c
 moment 2   +a     chain c -> a opens it; the whole only presses it (1 of 2)

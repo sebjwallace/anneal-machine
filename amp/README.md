@@ -29,4 +29,5 @@ typed, and the lines after it are what must print back, exactly. A new walkthrou
 **Built so far:** walkthrough step 1, populations and communities; step 2, `invoke` (one moment per comma, braces
 for together) and `inspect`; and assemblies written by hand, as in step 9: `cat = <c, a, t> ; c -> a -> t`. Each
 population hands out its members in order and goes round again once all are used; everything on one line shares
-members; `inspect cat` shows them. `invoke` refuses while assemblies exist, until step 4 (completion) is built.
+members; `inspect cat` shows them. Step 4: invoke runs the gates, with every bond acting one moment later, members
+active, refractory or ready, and a state completing when more of it is counted than missing. Not yet: competition.

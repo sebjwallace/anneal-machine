@@ -48,11 +48,11 @@ func TestAnOpenedMemoryInvokesLikeTheOriginal(t *testing.T) {
 	}
 	mustValue(opened.Invoke([][]engine.Name{{"c"}}))
 
-	if inspection, _ := opened.Inspect("c"); inspection.Active != 8 {
-		t.Errorf("c: %d active, want 8", inspection.Active)
+	if inspection, _ := opened.Inspect("c"); len(inspection.Refractory) != 8 {
+		t.Errorf("c: %d refractory, want 8", len(inspection.Refractory))
 	}
-	if inspection, _ := opened.Inspect("wide"); inspection.Active != 0 {
-		t.Errorf("wide: %d active, want 0", inspection.Active)
+	if inspection, _ := opened.Inspect("wide"); len(inspection.Active)+len(inspection.Refractory) != 0 {
+		t.Errorf("wide should be untouched, got %+v", inspection)
 	}
 }
 

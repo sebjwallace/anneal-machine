@@ -56,9 +56,10 @@ type Memory struct {
 	next       map[Name]int          // for each population, the member a new assembly gets next, counted from 0
 	assembled  memberSet             // the members that belong to at least one assembly
 
-	moment int            // the last moment that passed: one clock for the memory's whole life, 0 before any
-	active memberSet      // the members active this moment
-	causes map[Name]Cause // why each active population's members are active
+	moment     int           // the last moment that passed: one clock for the memory's whole life, 0 before any
+	active     memberSet     // the members active this moment
+	refractory memberSet     // the members active the moment before, which can't come on this moment
+	unexpected map[Name]bool // populations that arrived this moment with nothing expecting them
 }
 
 func New() *Memory {
@@ -77,7 +78,6 @@ func NewAfter(moment int) *Memory {
 		named:       map[Name][]AssemblyID{},
 		next:        map[Name]int{},
 		moment:      moment,
-		causes:      map[Name]Cause{},
 	}
 }
 

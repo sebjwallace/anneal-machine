@@ -11,7 +11,7 @@ error: c appears twice in one moment
 amp> invoke c, z
 error: z is not declared
 amp> inspect c
-c: 8 members; active: none
+c: 8 members; active: none; refractory: none
 amp> invoke
 error: expected a population or "{" after "invoke"
 amp> invoke c,

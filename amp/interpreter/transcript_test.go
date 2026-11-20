@@ -1,6 +1,7 @@
 package interpreter_test
 
 import (
+	"flag"
 	"os"
 	"path/filepath"
 	"strings"
@@ -11,6 +12,10 @@ import (
 )
 
 const prompt = "amp> "
+
+// update rewrites each transcript with what the interpreter actually prints: go test ./interpreter -update.
+// Read the diff before keeping it; a transcript is a prediction, and changing one is a decision.
+var update = flag.Bool("update", false, "rewrite the transcripts with the actual output")
 
 // exchange is one line typed at the prompt and what the interpreter should print back.
 type exchange struct {
@@ -27,11 +32,26 @@ func TestTranscripts(t *testing.T) {
 	for _, path := range paths {
 		t.Run(filepath.Base(path), func(t *testing.T) {
 			exchanges := readTranscript(t, path)
+			transcript, err := filepath.Abs(path)
+			if err != nil {
+				t.Fatal(err)
+			}
 			t.Chdir(t.TempDir()) // files a transcript saves land here, not in testdata
 			in := interpreter.New(engine.New())
+			var rewritten strings.Builder
 			for _, ex := range exchanges {
-				if got := respond(in, ex.typed); got != ex.expected {
+				got := respond(in, ex.typed)
+				rewritten.WriteString(prompt + ex.typed + "\n")
+				if got != "" {
+					rewritten.WriteString(got + "\n")
+				}
+				if got != ex.expected && !*update {
 					t.Errorf("%s%s\n got: %q\nwant: %q", prompt, ex.typed, got, ex.expected)
+				}
+			}
+			if *update {
+				if err := os.WriteFile(transcript, []byte(rewritten.String()), 0o644); err != nil {
+					t.Fatal(err)
 				}
 			}
 		})
