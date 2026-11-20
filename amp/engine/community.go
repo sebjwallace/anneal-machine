@@ -43,5 +43,6 @@ func (m *Memory) DeclareCommunity(name Name, populationNames []Name) (Community,
 	}
 	community := Community{name: name, populations: populations}
 	m.communities[name] = community
+	m.communityOrder = append(m.communityOrder, community)
 	return community, nil
 }

@@ -60,3 +60,12 @@ type RepeatedPopulationError struct {
 func (e RepeatedPopulationError) Error() string {
 	return fmt.Sprintf("%s appears twice in community %s", e.Population, e.Community)
 }
+
+// RepeatedInputError: the same population was given twice in one moment.
+type RepeatedInputError struct {
+	Population Name
+}
+
+func (e RepeatedInputError) Error() string {
+	return fmt.Sprintf("%s appears twice in one moment", e.Population)
+}

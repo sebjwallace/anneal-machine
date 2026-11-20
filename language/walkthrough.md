@@ -78,9 +78,9 @@ inspect c
 c: 8 members; active: all 8 (unexpected input, no member chosen yet)
 ```
 
-*Provisional, the assistant's suggestion for the engine's internals:* input a population didn't expect turns all its
-members on, because nothing has chosen a member yet. Expected input turns on only the member the context points to.
-Numenta's columns behave this way. It is internal to the engine, not part of the language's surface.
+**Decided (the owner): input a population didn't expect turns all its members on**, because nothing has chosen a
+member yet. Expected input turns on only the member the context points to. Numenta's columns behave this way. It is
+internal to the engine, not part of the language's surface.
 
 ---
 

@@ -25,8 +25,8 @@ These are known to be needed and have been set aside until there is more to go o
 - **Timing.** Whether every bond acts one moment later (proposed), and how long completion takes to settle.
 - **The form of `resolve`.** On its own meaning the last incompletion, or always naming what it works on (`resolve last`,
   `resolve #1, #2`).
-- **Inside a population.** What the engine does with unexpected input (the suggestion: all members on until one is
-  chosen), and how it chooses a member for an assembly.
+- **Inside a population.** How the engine chooses a member for an assembly. (Settled: unexpected input turns all
+  members on until one is chosen; walkthrough step 2.)
 - **Arrivals versus held states.** Whether transitions act on what arrives (change) rather than on what is held, so a
   count advances once per tick ([procedures](../docs/theories/procedures-from-states-and-transitions.md) §5).
 - **Returning from a reused subroutine** to the right caller, and **letting go** of a loop that never exits.

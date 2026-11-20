@@ -98,6 +98,11 @@ amp> why cat
 cat: 3 of 3: c, t, then a, all from input
 ```
 
+**Saving a session.** `save walkthrough.json` writes a snapshot of what the memory holds (populations, communities,
+and later assemblies) to a JSON file; `open walkthrough.json` replaces the memory with it. These are REPL commands,
+not instructions: they keep a session between runs and are separate from **loaded** and **stored**, which say where an
+assembly sits while the engine runs. A snapshot doesn't hold what is active, so an opened memory starts with nothing on.
+
 ## The three logs
 
 By CTR-1 CON-20 (draft, nothing happens without a recorded cause), logging is not optional. There are three logs, because

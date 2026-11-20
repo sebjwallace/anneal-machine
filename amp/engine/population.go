@@ -2,8 +2,9 @@ package engine
 
 // Population is a fixed group of members, declared once. Its members are numbered within it, from 1.
 type Population struct {
-	name Name
-	size int
+	name  Name
+	size  int
+	first int // where its members start in the engine's numbering across every population
 }
 
 func (p Population) Name() Name { return p.name }
@@ -19,8 +20,10 @@ func (m *Memory) DeclarePopulation(name Name, size int) (Population, error) {
 	if size < 1 {
 		return Population{}, TooFewMembersError{Size: size}
 	}
-	population := Population{name: name, size: size}
+	population := Population{name: name, size: size, first: m.members}
 	m.populations[name] = population
+	m.populationOrder = append(m.populationOrder, population)
+	m.members += size
 	return population, nil
 }
 

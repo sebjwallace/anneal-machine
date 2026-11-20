@@ -26,8 +26,10 @@ func TestTranscripts(t *testing.T) {
 	}
 	for _, path := range paths {
 		t.Run(filepath.Base(path), func(t *testing.T) {
+			exchanges := readTranscript(t, path)
+			t.Chdir(t.TempDir()) // files a transcript saves land here, not in testdata
 			in := interpreter.New(engine.New())
-			for _, ex := range readTranscript(t, path) {
+			for _, ex := range exchanges {
 				if got := respond(in, ex.typed); got != ex.expected {
 					t.Errorf("%s%s\n got: %q\nwant: %q", prompt, ex.typed, got, ex.expected)
 				}
