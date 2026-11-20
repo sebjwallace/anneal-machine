@@ -108,17 +108,22 @@ for reading only. This rule is what keeps results honest (see `docs/theories/exp
 set operations; easy to keep allocation out of inner loops. Rust stays an option later, if speed ever demands it, since
 the language is the specification.
 
-**A suggested layout** (adjust if you see a better one, and say why):
+**The layout** (started; `cmd/amx`, `cmd/amt` and `worlds` don't exist yet):
 
 ```
 amp/                 the Go module
-  engine/            the library: memory, invoke, resolve, logs
-  notation/          parser and printer for AMP notation
+  engine/            the library: the data objects (populations, communities, assemblies …) and the operations
+                     on them (invoke, resolve); knows nothing about text
+  interpreter/       reads a line of AMP, carries it out on the engine, prints the result back in AMP
+    testdata/        transcripts: lines typed at the prompt and the exact output expected, run as tests
   cmd/amp/           the REPL and script runner
   cmd/amx/           the agent CLI
   cmd/amt/           the Bubble Tea interface
   worlds/            AMX test worlds and their generators
 ```
+
+The notation is the language as written, so reading and printing it is the interpreter's job, not a separate package.
+Each walkthrough step is added as a transcript first, then built until it passes.
 
 The owner has a coding style guide for AI agents (domain modelling, readability, minimalism). Ask for it before writing
 code.
