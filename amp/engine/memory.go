@@ -4,7 +4,10 @@
 // nothing about text; the interpreter reads AMP and calls it.
 package engine
 
-import "slices"
+import (
+	"fmt"
+	"slices"
+)
 
 // Name is what a declared thing is called. Populations and communities share one set of names.
 type Name string
@@ -37,17 +40,32 @@ type Memory struct {
 	communityOrder  []Community
 	members         int // members across every population
 
+	moment int            // the last moment that passed: one clock for the memory's whole life, 0 before any
 	active memberSet      // the members active this moment
 	causes map[Name]Cause // why each active population's members are active
 }
 
 func New() *Memory {
+	return NewAfter(0)
+}
+
+// NewAfter starts an empty memory whose clock has already reached moment, so its next moment is moment+1. It is for
+// continuing a saved memory. moment must not be negative.
+func NewAfter(moment int) *Memory {
+	if moment < 0 {
+		panic(fmt.Sprintf("engine: a memory can't start after moment %d", moment))
+	}
 	return &Memory{
 		populations: map[Name]Population{},
 		communities: map[Name]Community{},
+		moment:      moment,
 		causes:      map[Name]Cause{},
 	}
 }
+
+// Moment is the last moment that passed, 0 before any. Moments count on across invocations, so every moment in the
+// memory's life has its own number.
+func (m *Memory) Moment() int { return m.moment }
 
 // Populations lists every population, in the order declared.
 func (m *Memory) Populations() []Population { return slices.Clone(m.populationOrder) }

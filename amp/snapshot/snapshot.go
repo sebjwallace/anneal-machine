@@ -1,8 +1,9 @@
 // Package snapshot saves what the memory holds to a JSON file and opens it again.
 //
-// A snapshot holds what the memory knows: its declarations, and later its assemblies. It doesn't hold what is active,
-// so an opened memory starts with nothing active. Opening goes back through the engine's own declarations, so a file
-// is checked by the same rules as anything typed.
+// A snapshot holds what the memory knows (its declarations, and later its assemblies) and how far its clock has run,
+// so moments carry on numbering where they left off. It doesn't hold what is active, so an opened memory starts with
+// nothing active. Opening goes back through the engine's own declarations, so a file is checked by the same rules as
+// anything typed.
 package snapshot
 
 import (
@@ -20,6 +21,7 @@ const version = 1
 
 type file struct {
 	Version     int          `json:"version"`
+	Moment      int          `json:"moment"` // the last moment that passed; absent in early files, meaning 0
 	Populations []population `json:"populations"`
 	Communities []community  `json:"communities"`
 }
@@ -47,6 +49,7 @@ func (e VersionError) Error() string {
 func Write(w io.Writer, memory *engine.Memory) error {
 	snapshot := file{
 		Version:     version,
+		Moment:      memory.Moment(),
 		Populations: []population{},
 		Communities: []community{},
 	}
@@ -76,7 +79,10 @@ func Read(r io.Reader) (*engine.Memory, error) {
 	if snapshot.Version != version {
 		return nil, VersionError{Version: snapshot.Version}
 	}
-	memory := engine.New()
+	if snapshot.Moment < 0 {
+		return nil, fmt.Errorf("moment %d is before the first moment", snapshot.Moment)
+	}
+	memory := engine.NewAfter(snapshot.Moment)
 	for _, p := range snapshot.Populations {
 		if _, err := memory.DeclarePopulation(p.Name, p.Size); err != nil {
 			return nil, err

@@ -15,7 +15,7 @@ const (
 
 // Moment is one step of an invocation: what arrived, and what invoke couldn't account for.
 type Moment struct {
-	Number int
+	Number int          // counted across the memory's whole life, not from the start of the invocation
 	Input  []Population // what arrived together, in the order given
 	// Unexplained are the populations with active members that no assembly accounts for: one of the three counts
 	// of heat. The other two, missing and unsettled, need assemblies.
@@ -39,8 +39,8 @@ func (m *Memory) Invoke(sequence [][]Name) (Invocation, error) {
 		return Invocation{}, err
 	}
 	moments := make([]Moment, 0, len(inputs))
-	for i, input := range inputs {
-		moments = append(moments, m.step(i+1, input))
+	for _, input := range inputs {
+		moments = append(moments, m.step(input))
 	}
 	return Invocation{Moments: moments}, nil
 }
@@ -67,14 +67,15 @@ func (m *Memory) inputs(sequence [][]Name) ([][]Population, error) {
 
 // step advances one moment. No assemblies exist yet, so nothing holds activity from the moment before, nothing
 // predicts a member, and nothing accounts for what arrives: every input population is unexpected and unexplained.
-func (m *Memory) step(number int, input []Population) Moment {
+func (m *Memory) step(input []Population) Moment {
+	m.moment++
 	m.active.empty()
 	clear(m.causes)
 	for _, p := range input {
 		m.active.addAll(p)
 		m.causes[p.name] = UnexpectedInput
 	}
-	return Moment{Number: number, Input: input, Unexplained: m.unexplained()}
+	return Moment{Number: m.moment, Input: input, Unexplained: m.unexplained()}
 }
 
 // unexplained lists, in the order declared, the populations with active members that no assembly accounts for.

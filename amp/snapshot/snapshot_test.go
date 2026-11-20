@@ -103,3 +103,42 @@ func must[T any](value T, err error) T {
 	}
 	return value
 }
+
+func TestAnOpenedMemoryCarriesOnCountingMoments(t *testing.T) {
+	original := engine.New()
+	must(original.DeclarePopulation("c", 8))
+	must(original.Invoke([][]engine.Name{{"c"}, {"c"}, {"c"}}))
+
+	var saved bytes.Buffer
+	if err := snapshot.Write(&saved, original); err != nil {
+		t.Fatal(err)
+	}
+	opened, err := snapshot.Read(&saved)
+	if err != nil {
+		t.Fatal(err)
+	}
+	invocation := must(opened.Invoke([][]engine.Name{{"c"}}))
+
+	if got := invocation.Moments[0].Number; got != 4 {
+		t.Errorf("first moment after opening is %d, want 4", got)
+	}
+}
+
+func TestAFileFromBeforeTheClockStartsAtTheFirstMoment(t *testing.T) {
+	opened, err := snapshot.Read(strings.NewReader(`{"version": 1, "populations": [], "communities": []}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if opened.Moment() != 0 {
+		t.Errorf("moment %d, want 0", opened.Moment())
+	}
+}
+
+func TestANegativeMomentIsRefused(t *testing.T) {
+	_, err := snapshot.Read(strings.NewReader(`{"version": 1, "moment": -1, "populations": [], "communities": []}`))
+
+	if err == nil {
+		t.Fatal("want a refusal for a moment before the first")
+	}
+}

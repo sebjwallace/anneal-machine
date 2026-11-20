@@ -22,7 +22,8 @@ These are known to be needed and have been set aside until there is more to go o
   extended: a longer chain forms beside it, or forming waits until the sequence settles.
 - **Addressing a single gate** (proposed `barks{2}#4`, see [instructions](instructions.md)).
 - **A population's budget.** How many members a population allows at once: a fixed number, or a share of its size.
-- **Timing.** Whether every bond acts one moment later (proposed), and how long completion takes to settle.
+- **Timing.** Whether every bond acts one moment later (proposed), and how long completion takes to settle. (Settled:
+  moments count on across invokes, one clock for the memory; walkthrough step 2.)
 - **The form of `resolve`.** On its own meaning the last incompletion, or always naming what it works on (`resolve last`,
   `resolve #1, #2`).
 - **Inside a population.** How the engine chooses a member for an assembly. (Settled: unexpected input turns all

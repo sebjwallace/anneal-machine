@@ -23,7 +23,7 @@ error: c is already declared, as a population
 amp> o = population 8
 o: 8 members, o{1..8}, all individuals
 amp> invoke o
-moment 1   o        incomplete   heat !o
+moment 2   o        incomplete   heat !o
 amp> inspect o
 o: 8 members; active: all 8 (unexpected input, no member chosen yet)
 amp> inspect t

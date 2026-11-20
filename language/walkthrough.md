@@ -68,6 +68,11 @@ moment 3   t        incomplete   heat !t
 Nothing predicted any of them, so each moment leaves an incompletion, marked hot with `!`. Invoking alone learns
 nothing.
 
+**Decided (the owner): moments count on across invokes.** The memory has one clock for its whole life, so every moment
+has its own number, which the record of changes, the trace and `why` can point to. A second `invoke` after this one
+starts at moment 4, not moment 1, and a saved memory carries on from where it stopped. Later examples on this page
+number from 1 for readability.
+
 **A deeper level of access, not the default:**
 
 ```

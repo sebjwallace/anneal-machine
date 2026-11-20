@@ -46,13 +46,20 @@ func printInvocation(invocation engine.Invocation) string {
 		inputs[i] = writeTogether(moment.Input)
 		inputWidth = max(inputWidth, len([]rune(inputs[i]))+3)
 	}
-	numberWidth := len(strconv.Itoa(len(invocation.Moments)))
+	numberWidth := len(strconv.Itoa(lastMoment(invocation)))
 	lines := make([]string, len(invocation.Moments))
 	for i, moment := range invocation.Moments {
 		line := fmt.Sprintf("moment %-*d   %s%s", numberWidth, moment.Number, padRight(inputs[i], inputWidth), describeMoment(moment))
 		lines[i] = strings.TrimRight(line, " ")
 	}
 	return strings.Join(lines, "\n")
+}
+
+func lastMoment(invocation engine.Invocation) int {
+	if len(invocation.Moments) == 0 {
+		return 0
+	}
+	return invocation.Moments[len(invocation.Moments)-1].Number
 }
 
 // writeTogether writes populations that arrived in one moment: c alone, {c, a, t} together, ∅ for nothing.

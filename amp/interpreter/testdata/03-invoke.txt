@@ -15,17 +15,23 @@ t: 8 members; active: all 8 (unexpected input, no member chosen yet)
 amp> inspect c
 c: 8 members; active: none
 amp> invoke {c, a, t}
-moment 1   {c, a, t}   incomplete   heat !c, !a, !t
+moment 4   {c, a, t}   incomplete   heat !c, !a, !t
 amp> inspect a
 a: 8 members; active: all 8 (unexpected input, no member chosen yet)
 amp> invoke c
-moment 1   c        incomplete   heat !c
+moment 5   c        incomplete   heat !c
 amp> inspect c
 c: 8 members; active: all 8 (unexpected input, no member chosen yet)
 amp> inspect t
 t: 8 members; active: none
 amp> invoke {c, a}, t
-moment 1   {c, a}   incomplete   heat !c, !a
-moment 2   t        incomplete   heat !t
+moment 6   {c, a}   incomplete   heat !c, !a
+moment 7   t        incomplete   heat !t
 amp> invoke {c}
-moment 1   c        incomplete   heat !c
+moment 8   c        incomplete   heat !c
+amp> invoke z
+error: z is not declared
+amp> invoke c, a, t
+moment 9    c        incomplete   heat !c
+moment 10   a        incomplete   heat !a
+moment 11   t        incomplete   heat !t
