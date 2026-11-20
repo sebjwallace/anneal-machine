@@ -30,4 +30,5 @@ typed, and the lines after it are what must print back, exactly. A new walkthrou
 for together) and `inspect`; and assemblies written by hand, as in step 9: `cat = <c, a, t> ; c -> a -> t`. Each
 population hands out its members in order and goes round again once all are used; everything on one line shares
 members; `inspect cat` shows them. Step 4: invoke runs the gates, with every bond acting one moment later, members
-active, refractory or ready, and a state completing when more of it is counted than missing. Not yet: competition.
+active, refractory or ready, and a state completing when more of it is counted than missing. Competition: rivals
+share a population but not its member; most support opens; a tie is held and none of the tied open.

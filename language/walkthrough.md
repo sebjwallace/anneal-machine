@@ -534,6 +534,26 @@ amp> why cat
 cat: 3 of 3: c, t, then a, all from input
 ```
 
+**What the interpreter does with the tie, now that competition is built** (decided rules in [invoke](invoke.md)). A
+tie recalls nothing, so nothing holds "c" and "t", and they fade after two moments. "a" settles it when it arrives
+while they are still counted:
+
+```
+amp> invoke {c, t}, a
+moment   active   refractory   why
+1        c, t
+2        a        c, t         tie: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3 | cot <c, o, t> 2 of 3, c -> o -> t 2 of 3, held
+3        +c, +t   a            c: cat <c, a, t> 3 of 3; t: cat <c, a, t> 3 of 3, cat a -> t; cat <c, a, t> 3 of 3, c -> a -> t 3 of 3 over cot <c, o, t> 2 of 3, c -> o -> t 2 of 3
+4        +a       c, t         a: cat <c, a, t> 3 of 3, cat c -> a
+5        +c, +t   a            c: cat <c, a, t> 3 of 3; t: cat <c, a, t> 3 of 3, cat a -> t
+complete     cat <c, a, t>   3 of 3
+incomplete   cot <c, o, t>   at most 2 of 3
+held         repeating every 2 moments
+```
+
+As two commands, `invoke {c, t}` then `invoke a`, "cat" still completes, but not by settling the tie: "c" and "t" have
+faded, and "a" belongs only to "cat", so its chain `a -> t` opens with no rival and the state follows from "a" and "t".
+
 **Every run is logged, as instructions**, each with what it found or made, so the log and the trace are written in the
 same language. Indentation shows what a resolve ran inside itself. One command, `invoke c, o, t` with "cat" known and
 resolve in the loop, might expand to:

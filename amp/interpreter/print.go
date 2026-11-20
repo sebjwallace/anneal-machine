@@ -90,6 +90,9 @@ func writeWhy(moment engine.Moment) string {
 		}
 		reasons = append(reasons, fmt.Sprintf("%s: %s", group.population.Name(), reason))
 	}
+	for _, competition := range moment.Competitions {
+		reasons = append(reasons, writeCompetition(competition))
+	}
 	if len(moment.Unexplained) > 0 {
 		hot := make([]string, len(moment.Unexplained))
 		for i, p := range moment.Unexplained {
@@ -98,6 +101,46 @@ func writeWhy(moment engine.Moment) string {
 		reasons = append(reasons, "incomplete, heat "+strings.Join(hot, ", "))
 	}
 	return strings.Join(reasons, "; ")
+}
+
+// writeCompetition says how a group of rivals came out:
+//
+//	tie: cat <c, a, t> 2 of 3 | cot <c, o, t> 2 of 3, held
+//	cat <c, a, t> 3 of 3 over cot <c, o, t> 2 of 3
+func writeCompetition(competition engine.Competition) string {
+	byOutcome := map[engine.Outcome][]engine.Rival{}
+	for _, rival := range competition.Rivals {
+		byOutcome[rival.Outcome] = append(byOutcome[rival.Outcome], rival)
+	}
+	var written string
+	switch {
+	case len(byOutcome[engine.Held]) > 0:
+		written = "tie: " + strings.Join(writeSides(byOutcome[engine.Held]), " | ") + ", held"
+	case len(byOutcome[engine.Won]) > 0:
+		written = strings.Join(writeSides(byOutcome[engine.Won]), ", ")
+	}
+	if lost := byOutcome[engine.Lost]; len(lost) > 0 {
+		written += " over " + strings.Join(writeSides(lost), ", ")
+	}
+	return written
+}
+
+// writeSides writes rivals grouped by name, each name once: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3.
+func writeSides(rivals []engine.Rival) []string {
+	var names []engine.Name
+	written := map[engine.Name][]string{}
+	for _, rival := range rivals {
+		a := rival.Assembly
+		if _, seen := written[a.Name()]; !seen {
+			names = append(names, a.Name())
+		}
+		written[a.Name()] = append(written[a.Name()], fmt.Sprintf("%s %d of %d", writeShape(a.Shape(), namesOf(a.Populations())), rival.Counted, len(a.Members())))
+	}
+	sides := make([]string, len(names))
+	for i, name := range names {
+		sides[i] = fmt.Sprintf("%s %s", name, strings.Join(written[name], ", "))
+	}
+	return sides
 }
 
 // writeGate names a gate by its assembly: cat <c, a, t> 2 of 3 for a state, cat c -> a for a transition's step.

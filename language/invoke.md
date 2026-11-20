@@ -40,6 +40,17 @@ A | B
 **Most support wins. One more is enough. Ties are held.** Support is how much of each is backed by what is active,
 which in practice means how many ways in each one has. A held tie keeps both, unresolved, until more evidence settles it.
 
+**Decided, and running in the interpreter** (`amp/interpreter/testdata/11-competition.txt`):
+- **Rivals:** two assemblies are rivals when they share a population but not its member. They explain the same input
+  differently: "cat" and "cot" both use "c" and "t", with different members. A part shares its members with its whole,
+  so it is never a rival of it; nor is a state of its own chain.
+- **Support:** an assembly's counted part minus its missing part (gates count active and refractory members).
+- **Outcome:** when rivals' gates would open in the same moment, the one with most support opens. When the most support
+  is shared, the tie is held: **none of the tied open**, and the tie is unsettled heat. Nothing is turned off; a rival
+  that doesn't open fades.
+- This replaces the older wording above that a held tie "keeps both": in a tie, neither is recalled. Whatever was
+  already active is left to its phases.
+
 **At two scales.** An assembly can lie within one population or span several ("cat" spans three: one member in each of
 the "c", "a" and "t" populations).
 

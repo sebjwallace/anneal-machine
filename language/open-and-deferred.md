@@ -34,7 +34,9 @@ These are known to be needed and have been set aside until there is more to go o
 - **How invoke ends.** For now (the assistant's choice, to be confirmed): after its input it runs until the next
   moment would be quiet (nothing active or refractory) or would repeat an earlier moment of the same invoke, which
   means something is holding.
-- **Competition isn't built yet.** With "cat" and "cot" both written, `invoke c` brings back both and both hold.
+- **Competition** is built across assemblies (rivals share a population but not its member; most support opens; a
+  tie is held and none of the tied open; [invoke](invoke.md)). Still open: a population's **budget**, and whether a
+  rival should lose to one that itself lost (for now each rival is compared only with its own rivals).
 - **The form of `resolve`.** On its own meaning the last incompletion, or always naming what it works on (`resolve last`,
   `resolve #1, #2`).
 - **Inside a population.** (Settled: unexpected input turns all members on until one is chosen, walkthrough step 2;
