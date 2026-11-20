@@ -2,9 +2,9 @@
 //
 // Usage: amp [snapshot]. Given a snapshot saved with "save", it opens it first.
 //
-// At a terminal, lines are edited as in any shell: arrows move and recall earlier lines, Ctrl-R searches them,
-// Ctrl-C clears the line and Ctrl-D quits. Earlier lines are kept between sessions in ~/.amp_history. Lines can also
-// be piped in, in which case no prompt is shown.
+// At a terminal, lines are edited as in any shell: arrows move and recall earlier lines, and Ctrl-R searches them.
+// Earlier lines are kept between sessions in ~/.amp_history. "exit", Ctrl-C or Ctrl-D quits. Lines can also be piped
+// in, in which case no prompt is shown and "exit" stops reading.
 package main
 
 import (
@@ -23,6 +23,12 @@ import (
 )
 
 const prompt = "amp> "
+
+// exitCommand quits the REPL. It belongs to the REPL, not to AMP, so it is only recognised on a line of its own:
+// "exit = population 8" still declares a population.
+const exitCommand = "exit"
+
+func isExit(line string) bool { return strings.TrimSpace(line) == exitCommand }
 
 func main() {
 	in := interpreter.New(engine.New())
@@ -65,9 +71,7 @@ func typeLines(in *interpreter.Interpreter) error {
 	for {
 		line, err := editor.Prompt(prompt)
 		switch {
-		case errors.Is(err, liner.ErrPromptAborted): // Ctrl-C: drop the line, prompt again
-			continue
-		case errors.Is(err, io.EOF): // Ctrl-D: quit
+		case errors.Is(err, liner.ErrPromptAborted), errors.Is(err, io.EOF): // Ctrl-C, Ctrl-D
 			fmt.Println()
 			return nil
 		case err != nil:
@@ -76,6 +80,9 @@ func typeLines(in *interpreter.Interpreter) error {
 		if strings.TrimSpace(line) != "" {
 			editor.AppendHistory(line)
 		}
+		if isExit(line) {
+			return nil
+		}
 		respond(in, line)
 	}
 }
@@ -83,7 +90,7 @@ func typeLines(in *interpreter.Interpreter) error {
 // pipeLines runs each line piped in, with no prompt.
 func pipeLines(in *interpreter.Interpreter) error {
 	lines := bufio.NewScanner(os.Stdin)
-	for lines.Scan() {
+	for lines.Scan() && !isExit(lines.Text()) {
 		respond(in, lines.Text())
 	}
 	return lines.Err()

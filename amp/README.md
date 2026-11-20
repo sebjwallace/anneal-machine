@@ -9,7 +9,7 @@ go test ./...                        the engine tests, the snapshot tests and th
 ```
 
 **Keys.** At a terminal, lines edit as in a shell: ← → move, ↑ ↓ go through earlier lines (kept between sessions in
-`~/.amp_history`), Ctrl-R searches them, Ctrl-A / Ctrl-E jump to the start / end, Ctrl-C clears the line, Ctrl-D quits.
+`~/.amp_history`), Ctrl-R searches them, Ctrl-A / Ctrl-E jump to the start / end. `exit`, Ctrl-C or Ctrl-D quits.
 Line editing comes from [liner](https://github.com/peterh/liner).
 
 **Saving.** `save walkthrough.json` writes what the memory holds to a JSON snapshot; `open walkthrough.json` replaces
