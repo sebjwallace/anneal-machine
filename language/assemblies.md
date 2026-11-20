@@ -3,8 +3,8 @@
 ## What an assembly is
 
 An **assembly** is a set of members held together by the bonds between them, so that enough of it being active brings
-back the rest. It is the machine's memory of a thing. Assemblies are the dynamic structure: they form, and are loaded or stored, as the
-machine learns, unlike populations and communities, which are fixed.
+back the rest. It is how the memory holds a thing. Assemblies are the dynamic structure: they form, and are loaded or stored, as the
+engine learns, unlike populations and communities, which are fixed.
 
 Angle brackets mark an assembly, to tell it apart from a plain set of active members in braces.
 
@@ -15,7 +15,7 @@ A = ⟨1, 4, 7⟩      A is an assembly of members 1, 4 and 7
 
 ## Assemblies are the main things
 
-Assemblies are the first-class citizens of the machine. An assembly **owns its gates**, so the bonds on those gates'
+Assemblies are the first-class citizens of the engine. An assembly **owns its gates**, so the bonds on those gates'
 guest lists belong to it. It is loaded and stored as **one whole**. Members are pivot points: the member "cat"
 can be used by many assemblies (among the animals, in an old nursery mistake), and each can be loaded or stored on its own
 without the member changing.
@@ -59,14 +59,14 @@ adds to an existing one. Bonds are never removed during learning: structure is a
 
 Where an assembly lives changes what it can do, so the language says where it is.
 
-- **Loaded**: in memory. A loaded assembly takes part: its gates are checked against what is active.
+- **Loaded**: in RAM. A loaded assembly takes part: its gates are checked against what is active.
 - **Stored**: on disk. A stored assembly takes no part in ordinary activity. It is still connected, but nothing in
-  memory checks it.
+  RAM checks it.
 
 ```
 A is loaded
 B is stored
-B loads        moves into memory
+B loads        moves into RAM
 A stores       moves out to disk
 ```
 
@@ -76,7 +76,7 @@ That is one yes-or-no fact per assembly. What moves an assembly either way is se
 *Provisional:* the exact form of these statements.
 
 **Deletion is a storage policy, not learning.** Structure that has been stored, untouched, for long enough can be archived or
-deleted, whole assemblies at a time, for example when the disk space allowed for the machine runs out. That is
+deleted, whole assemblies at a time, for example when the disk space allowed for the engine runs out. That is
 housekeeping outside learning. Learning itself never removes anything.
 
 ## Backlog

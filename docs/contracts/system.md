@@ -42,6 +42,8 @@ good enough, not perfect; exact records belong outside it).
 - **GOL-4** *(draft)* Regions (DEF-10) settle each other: heat in one is resolved by the system as a whole.
 - **GOL-5** *(draft)* Explains itself: for anything it does (a member coming on, an assembly winning, something
   forming, loading or being stored), it can give the exact reason in its own terms.
+- **GOL-6** *(draft)* Understandable: what it has learnt can be explored directly, by people and agents, through tools
+  that read its structure, not through artefacts it generates.
 
 **Optimizations** (directions, never done; in order of priority: in a trade-off the higher one wins)
 - **OPZ-4** Heat: explain its world more completely: more misfits resolved, never masked (CON-6).
@@ -52,6 +54,8 @@ good enough, not perfect; exact records belong outside it).
   with what is active, not with what is stored; any size of world (DEF-8) and amount of memory (DEF-11).
 - **OPZ-6** *(draft)* Explanations: its explanations as short and readable as possible, from one gate to the whole
   machine, at any scale.
+- **OPZ-7** *(draft)* Understanding: exploring what it has learnt as easy as possible at scale: few steps from any
+  concept to its neighbours, its frames and its sources.
 
 **Constraints** (what rules options out; none gives way, so no priority; limits, then rules, then conflicts, each
 general to specific; detail below: what kind, where it came from, what violating it costs)
@@ -158,6 +162,13 @@ is binary and made of sets, the counts it decides by are themselves the explanat
 claim of:* simplicity at scale, correctness, or a solution to alignment
 ([explainable by design](../theories/explainable-by-design.md), §3).
 
+**GOL-6 · Understandable** *(draft)*. *The owner's words: not only explainable but understandable; unlike large
+language models, where knowledge has to be transferred by reading what they produce, here you go into its mind: an open
+box.* Reached when what the machine has learnt (its concepts, their groupings, the frames they appear in, and the passages
+that taught them) can be navigated directly through tools that read the structure. A capability reached through AMX,
+not part of the core. Distinct from GOL-5: that answers *why* it did something; this answers *what* it knows. *Not a claim
+of:* ease at scale, or correctness ([understandable by design](../theories/understandable-by-design.md), §5).
+
 ### Optimizations in detail
 Each is a direction: it can be pushed further but never finished, and the five pull against each other, so they are
 balanced, not maximised one at a time. The order is priority: when one has to give, the higher one wins, and a large
@@ -202,6 +213,11 @@ reason is short by nature; the work is at scale, where many simple parts interac
 Measured as how long and how readable the answer to "why" is, for one moment and for a whole run. *The owner's words:
 if it can't be explained, everything becomes far more difficult and trust degrades.* *Trades against* OPZ-2 (keeping
 the record of changes costs memory) and OPZ-3 (summarising tools are more constructs).
+
+**OPZ-7 · Understanding** *(draft)*. The direction behind GOL-6: navigation a person can actually use. Small structures
+may be readable directly; large ones need folding, many small assemblies gathered into the few that matter, built from the
+structure itself. Measured as the steps from a concept to its neighbours, frames and sources, and as how much of a known
+grammar's structure can be recovered by navigating. *Trades against* OPZ-3 (navigation tools are more constructs).
 
 ### Constraints in detail
 Three kinds, in this order: **limits** that are impossible whatever we choose (they explain why some rules can't be
@@ -433,7 +449,7 @@ Not part of the contract; kept here so the gap is visible.
    CAP-14, are now at the bottom of their lists), and whether any is really part of a more general one.
 5. Whether the principles are the right six, in the right order, and whether each gives way to the right thing.
 6. Whether the regulator purpose (serving real systems) belongs here or above the contract, as the why.
-7. Explainability (GOL-5, OPZ-6, CON-20, drafts): their place in the priority order, and whether GOL-5 is a goal or
+7. Explainability and understandability (GOL-5, GOL-6, OPZ-6, OPZ-7, CON-20, drafts): their place in the priority order, and whether GOL-5 is a goal or
    belongs with the principles.
 8. CON-19 (cells and segments first) now conflicts with [assemblies first](../theories/assemblies-first.md), which makes
    assemblies the units that own segments (gates) and move between memory and disk, with members as pivot points.

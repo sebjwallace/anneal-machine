@@ -1,5 +1,7 @@
 # Anneal machine
 
+> **Building the engine? Start with [the brief](docs/brief.md).** It says what is being built, why, in what order, and how to read the rest of this repository.
+
 > *The brain does much more than just recollect. It intercompares, it synthesizes, it analyzes, it generates abstractions.*
 >
 > Carl Sagan, *Cosmos*, episode 11, "The Persistence of Memory" (1980)

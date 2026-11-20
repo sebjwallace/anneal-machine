@@ -5,7 +5,8 @@ working method, **AMP** and **AMX**, and records why explainability is not a fea
 its foundations. It also proposes the contract clauses that follow (CTR-1 GOL-5, OPZ-6, CON-20). **Nothing here has been
 tested;** it describes a design commitment and what it should give.
 
-Related: [assemblies first](assemblies-first.md), [nothing breaks](nothing-breaks.md),
+Related: [understandable by design](understandable-by-design.md) (its companion: *what* the machine knows, not *why* it
+did something), [assemblies first](assemblies-first.md), [nothing breaks](nothing-breaks.md),
 [learned computation](learned-computation.md), the [language](../../language/README.md), the
 [system contract](../contracts/system.md).
 
@@ -169,6 +170,47 @@ long way towards a system that does what we expect without nasty surprises.
 and averaging over huge amounts of data. But beside what AMP is trying to be, it feels like it. That is why this
 project stays away from averaging and from searching large spaces: it wants intelligence that is engineered, not
 extracted.
+
+**Harder, not softer.** The owner describes deep learning, language models included, as soft AI: everything rests on
+numeric weights and biases, continuous values that are nudged a little at a time. AMP is binary at its core. A member
+is on or off, a bond is there or not, and nothing holds a continuous value, which is also why it suits an ordinary
+CPU. The owner's sense is that this makes the engine feel more mechanical, closer to engineering and programming than
+to the smooth, fuzzy feel of people or language models. He doesn't take this as given. Binary parts can produce smooth
+behaviour, as computers do when they show a film with smooth colour and movement, and language models themselves run on
+binary machines. The dynamics are built on bits, but they need not be all-or-nothing. So the claim is about how the
+engine learns and represents, not a promise about how it will feel to use.
+
+**Comparing, not averaging.** The second reason for the mechanical feel is that AMP does no averaging. Averaging is
+smooth and slow: many examples, each moving the numbers a little. AMP learns by comparing, in the everyday sense that
+covers both what is the same and what differs. In the language those are intersection (∩, what is shared) and
+symmetric difference (△, what differs), as described in [resolve](../../language/resolve.md). One comparison can form
+a new assembly, which is where the hope of fast learning comes from (CTR-1 OPZ-1). It is also why each step has a cause
+that can be stated: the comparison *is* the reason.
+
+**What kind of intelligence this might be.** The owner's hope is that it turns out different from both human and
+language-model intelligence: tighter and less flexible, and good for engineering, programming, planning and solving
+real problems, rather than for open artistic invention. Being somewhat constrained, and not overly capable, may be the
+property we want, because a technology you can inspect, trust and correct is worth more than one that is more capable
+but opaque.
+
+The assistant's pushback, recorded so the hope isn't taken as a result:
+
+- **The feel is untested.** Everything designed so far is text and procedures, and none of it has run. The mechanical
+  impression may say more about what we've chosen to design than about the engine.
+- **Planning is close to imagination.** To plan, the engine must try combinations it has never actually seen: put this
+  part into that frame and check whether the whole holds together. That is recombination, which is much of what
+  creativity in engineering is. What AMP lacks is soft blending, "a bit like this, a bit like that": alternatives
+  compete and one wins. The fair expectation is inventive the way a good engineer is, by recombining known parts under
+  constraints, not the way an artist is.
+- **Constraint has a cost.** Messy, half-familiar input is where soft systems cope and rigid ones can stall. That
+  brittleness is a thing to test for early, not assume away.
+
+**Seeing its workings in words.** If assemblies carry names, given by an agent through AMX by invoking them and each
+backed by its evidence, AMT can show a run in plain words: what is held, what is being associated, which states and
+transitions are active, and how a procedure such as arithmetic is being worked out. The owner sees this as one of the
+most striking things the design allows. The catch is that the words are our labels laid over what the engine does,
+not the engine thinking in English. Most assemblies may never get a clean name, and a wrong name makes a wrong run look
+sensible, so the readout must show what is unnamed as plainly as what is named.
 
 **In the project's own terms.** Uncertain systems raise heat. AMP is a way to lower it, by reducing uncertainty.
 

@@ -2,12 +2,16 @@
 
 ## Members
 
-A **member** is the smallest thing in the machine. It is either active or not. Members are named by number, counting
-from 1.
+A **member** is the smallest thing in the engine. It is either active or not. Members are numbered **within their
+population**, counting from 1, and always written with it: `c{3}` is member 3 of population `c`, a different member from
+`a{3}`.
 
 ```
-1, 2, 3
+c{1}, c{2}, a{1}
 ```
+
+Members are private to the engine. The world addresses populations, not members: what comes in and goes out is a
+population, and which member takes part is decided inside (see the [walkthrough](walkthrough.md), step 2).
 
 Members are not the main things: assemblies are. A member is a **pivot point**, a name that many assemblies can use
 and meet through. It keeps no list of its own bonds ([assemblies first](../docs/theories/assemblies-first.md)).
@@ -43,7 +47,7 @@ The `+` mark matters for the open question of whether recalled members may take 
 
 ## Static structure: populations and communities
 
-Static structure is what is laid down and doesn't change while the machine runs.
+Static structure is what is laid down and doesn't change while the engine runs.
 
 ```
 P = population 12        twelve members, 1 to 12
@@ -53,7 +57,7 @@ V = community a, b       a group of populations, here a and b
 A **population** is a fixed number of members. A **community** is a fixed grouping of populations. Neither is a
 container that does anything. They only say which members exist and how they are grouped.
 
-Dynamic structure, which forms as the machine learns and is loaded or stored, is assemblies (see [assemblies](assemblies.md)).
+Dynamic structure, which forms as the engine learns and is loaded or stored, is assemblies (see [assemblies](assemblies.md)).
 
 ## The set words
 
@@ -69,7 +73,7 @@ These are borrowed from set theory with exactly their set meanings, and nothing 
 | empty | `∅` | nothing |
 | count | `|A|` | how many members A has |
 
-These matter because the machine's three main acts are set operations. Composition is close to a union. Abstraction is
+These matter because the engine's three main acts are set operations. Composition is close to a union. Abstraction is
 an intersection. What doesn't belong is a difference. Heat itself is a difference (see
 [heat and learning](heat-and-learning.md)).
 

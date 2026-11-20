@@ -1,13 +1,26 @@
 # Heat and learning
 
 Energy is the first principle. **Heat is energy that can't flow**: parts that don't fit cheaply together. Learning is
-how the machine cools, by adding structure so that energy can flow again. Structure is what cooling leaves behind.
+how the engine cools, by adding structure so that energy can flow again. Structure is what cooling leaves behind.
 
 The full reasoning is in [how heat restructures](../docs/theories/how-heat-restructures.md). This page sets out what
 can be written in the language so far, and marks clearly what can't yet.
 
 There are two families of heat. This page covers only the one that changes structure (forming). The
 other has been mentioned but not yet described.
+
+## Heat is incompletion
+
+Without the metaphor, heat is simply **what invoke couldn't complete**, and invoke already measures it. Three countable
+parts:
+
+- **missing**: for each assembly that is partly active, how much of it isn't (`|assembly − active|`, the "2 of 3");
+- **unexplained**: active members that no assembly accounts for at all (the `!o`);
+- **unsettled**: ties being held. Counted, but resolve doesn't act on them: more structure can't settle a tie, only more
+  evidence can.
+
+All three are counts of bits. The cost resolve weighs is this incompletion together with the structure it would add (see
+[resolve](resolve.md), economy).
 
 ## Heat as two set differences
 
@@ -16,7 +29,8 @@ Two sets matter at any moment:
 - **active**: what is on now, from the world;
 - **accounted**: what the structure holds, brings back or expects.
 
-Heat is what's left over when one is taken from the other.
+Heat is what's left over when one is taken from the other. It is what [invoke](operations.md) leaves when it can't
+complete.
 
 ```
 gap    = active − accounted      on, but nothing holds it: something new
@@ -28,7 +42,8 @@ When both are empty (`∅`), there is no heat and nothing changes. The size of t
 
 ## Forming: cooling a gap
 
-A gap is cooled by forming: bonding the uncovered members into an assembly, bonded to the held context they arrived
+Forming is what [resolve](resolve.md) does; that page sets out its shapes (composition, abstraction,
+decomposition, sequence). In short, a gap is cooled by forming: bonding the uncovered members into an assembly, bonded to the held context they arrived
 with.
 
 ```
@@ -72,44 +87,44 @@ Nothing has to find and remove them: the whole assembly loses and is stored.
 **Storing: demand.** Which assemblies stay loaded is decided by demand at each moment.
 
 - Everything active **votes** for what it is bonded to. A vote is a count, the same count a gate does.
-- **Ranking with limited room.** Memory holds only so much. The most demanded assemblies stay loaded. As something
+- **Ranking with limited room.** RAM holds only so much. The most demanded assemblies stay loaded. As something
   else gathers more votes, it takes the room, and the less demanded are stored. Things are stored because something
   else is more wanted, not because their own votes dropped.
 - **A floor.** Anything with too few votes is stored even when there is room. With the default bar of two, a single
   stale bond can't keep something loaded.
 
-**Loading: build-up from activity.** A stored assembly can't be found by ordinary activity, since nothing in memory
-checks it. Instead, activity in memory builds up on the stored assemblies it is connected to, a little each moment.
+**Loading: build-up from activity.** A stored assembly can't be found by ordinary activity, since nothing loaded
+checks it. Instead, activity among loaded assemblies builds up on the stored assemblies it is connected to, a little each moment.
 
 - Related activity builds up in the same place; unrelated activity spreads thin. A single touch is never enough on its
   own.
-- The build-up **fades as the machine moves on**, counted in the machine's own moments, not clock time. An idle machine
+- The build-up **fades as the engine moves on**, counted in the engine's own moments, not clock time. An idle engine
   forgets nothing.
 - When a stored assembly's build-up passes a threshold, it **loads**. Its arrival adds activity, which can build up
-  on other stored assemblies in turn. This is a stream between memory and disk, not a batch of lookups, and it is how
+  on other stored assemblies in turn. This is a stream between RAM and disk, not a batch of lookups, and it is how
   a missing piece can arrive on its own.
 
 **The four rules the language relies on.**
 
 1. A stored assembly takes no part in ordinary activity.
-2. Activity in memory builds up on stored assemblies it is connected to.
-3. That build-up fades as the machine moves on, counted in its own moments.
+2. Activity among loaded assemblies builds up on stored assemblies it is connected to.
+3. That build-up fades as the engine moves on, counted in its own moments.
 4. Build-up and demand only decide where an assembly lives, never who wins a competition. A number used in competition
    would be a weight.
 
-How the middleware between memory and disk keeps track of this (its index, where it lives, how it streams) is
+How the middleware between RAM and disk keeps track of this (its index, where it lives, how it streams) is
 engineering, not language. It can start with the most obvious approach.
 
-*Provisional:* how much room memory has, where the floor and the loading threshold sit, and how fast build-up fades.
+*Provisional:* how much room RAM has, where the floor and the loading threshold sit, and how fast build-up fades.
 These are trade-offs, probably declared settings. The build-up may need a word of its own; "primed" is not used for
-it, because in the language that means pressed but not open, in memory.
+it, because in the language that means pressed but not open, while loaded.
 
 **Pressed is not active.** An assembly that gets a vote or two but doesn't make it into the sparse active set is only
 pressed (primed). Being primed doesn't make something winning.
 
 ## Heat that won't settle
 
-If a contest never settles, the machine has three honest options: look outward for more structure, let the heat go, or
+If a contest never settles, the engine has three honest options: look outward for more structure, let the heat go, or
 contain the contest (it stays as structure, stored if no longer demanded, so a new angle can load it again). It never
 invents structure to close a gap.
 
