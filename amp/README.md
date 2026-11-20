@@ -8,6 +8,10 @@ go run ./cmd/amp walkthrough.json    the REPL, opening a saved snapshot first
 go test ./...                        the engine tests, the snapshot tests and the transcripts
 ```
 
+**Keys.** At a terminal, lines edit as in a shell: ← → move, ↑ ↓ go through earlier lines (kept between sessions in
+`~/.amp_history`), Ctrl-R searches them, Ctrl-A / Ctrl-E jump to the start / end, Ctrl-C clears the line, Ctrl-D quits.
+Line editing comes from [liner](https://github.com/peterh/liner).
+
 **Saving.** `save walkthrough.json` writes what the memory holds to a JSON snapshot; `open walkthrough.json` replaces
 the memory with it. A snapshot holds declarations (and later assemblies), not what is active, so an opened memory
 starts with nothing on. The file name is the rest of the line.

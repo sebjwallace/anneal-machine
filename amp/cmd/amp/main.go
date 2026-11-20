@@ -1,13 +1,22 @@
 // Command amp is the AMP REPL: type a line of AMP, and it prints the result back in AMP.
 //
-// Usage: amp [snapshot]. Given a snapshot saved with "save", it opens it first. Lines can also be piped in, in which
-// case no prompt is shown.
+// Usage: amp [snapshot]. Given a snapshot saved with "save", it opens it first.
+//
+// At a terminal, lines are edited as in any shell: arrows move and recall earlier lines, Ctrl-R searches them,
+// Ctrl-C clears the line and Ctrl-D quits. Earlier lines are kept between sessions in ~/.amp_history. Lines can also
+// be piped in, in which case no prompt is shown.
 package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
+	"io"
 	"os"
+	"path/filepath"
+	"strings"
+
+	"github.com/peterh/liner"
 
 	"github.com/sebjwallace/anneal-machine/amp/engine"
 	"github.com/sebjwallace/anneal-machine/amp/interpreter"
@@ -30,29 +39,101 @@ func main() {
 		fmt.Fprintln(os.Stderr, "usage: amp [snapshot]")
 		os.Exit(2)
 	}
-	interactive := isTerminal(os.Stdin)
-	lines := bufio.NewScanner(os.Stdin)
-	for showPrompt(interactive); lines.Scan(); showPrompt(interactive) {
-		output, err := in.Run(lines.Text())
-		switch {
-		case err != nil:
-			fmt.Fprintln(os.Stderr, "error:", err)
-		case output != "":
-			fmt.Println(output)
-		}
+
+	var err error
+	if isTerminal(os.Stdin) && isTerminal(os.Stdout) {
+		err = typeLines(in)
+	} else {
+		err = pipeLines(in)
 	}
-	if err := lines.Err(); err != nil {
+	if err != nil {
 		fmt.Fprintln(os.Stderr, "error:", err)
 		os.Exit(1)
 	}
-	if interactive {
-		fmt.Println()
+}
+
+// typeLines runs the REPL at a terminal, with line editing and history.
+func typeLines(in *interpreter.Interpreter) error {
+	editor := liner.NewLiner()
+	defer editor.Close()
+	editor.SetCtrlCAborts(true)
+
+	history := historyFile()
+	readHistory(editor, history)
+	defer writeHistory(editor, history)
+
+	for {
+		line, err := editor.Prompt(prompt)
+		switch {
+		case errors.Is(err, liner.ErrPromptAborted): // Ctrl-C: drop the line, prompt again
+			continue
+		case errors.Is(err, io.EOF): // Ctrl-D: quit
+			fmt.Println()
+			return nil
+		case err != nil:
+			return err
+		}
+		if strings.TrimSpace(line) != "" {
+			editor.AppendHistory(line)
+		}
+		respond(in, line)
 	}
 }
 
-func showPrompt(interactive bool) {
-	if interactive {
-		fmt.Print(prompt)
+// pipeLines runs each line piped in, with no prompt.
+func pipeLines(in *interpreter.Interpreter) error {
+	lines := bufio.NewScanner(os.Stdin)
+	for lines.Scan() {
+		respond(in, lines.Text())
+	}
+	return lines.Err()
+}
+
+func respond(in *interpreter.Interpreter, line string) {
+	output, err := in.Run(line)
+	switch {
+	case err != nil:
+		fmt.Fprintln(os.Stderr, "error:", err)
+	case output != "":
+		fmt.Println(output)
+	}
+}
+
+// historyFile is where earlier lines are kept between sessions, or "" if there is no home directory to keep them in.
+func historyFile() string {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return ""
+	}
+	return filepath.Join(home, ".amp_history")
+}
+
+// readHistory recalls lines from earlier sessions. Having none yet is normal.
+func readHistory(editor *liner.State, path string) {
+	if path == "" {
+		return
+	}
+	f, err := os.Open(path)
+	if err != nil {
+		return
+	}
+	defer f.Close()
+	editor.ReadHistory(f)
+}
+
+// writeHistory keeps this session's lines for the next. History is a convenience, so failing to keep it is reported
+// but doesn't stop anything.
+func writeHistory(editor *liner.State, path string) {
+	if path == "" {
+		return
+	}
+	f, err := os.Create(path)
+	if err == nil {
+		_, err = editor.WriteHistory(f)
+		err = errors.Join(err, f.Close())
+	}
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "couldn't keep the history:", err)
 	}
 }
 
