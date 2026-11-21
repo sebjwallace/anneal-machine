@@ -11,7 +11,7 @@ s: 8 members, s{1..8}, all individuals
 amp> e = population 8
 e: 8 members, e{1..8}, all individuals
 amp> house = <h, o, u> ; <u, s, e> ; h -> o -> u -> s -> e
-house: state <h, o, u> and state <u, s, e> and transition h -> o -> u -> s -> e
+house: <h, o, u> and <u, s, e> and transition h -> o -> u -> s -> e
 amp> invoke h
 moment   active       refractory   why
 1        h

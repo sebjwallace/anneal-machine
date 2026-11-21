@@ -5,7 +5,7 @@ c: 8 members, c{1..8}, all individuals
 a: 8 members, a{1..8}, all individuals
 t: 8 members, t{1..8}, all individuals
 amp> cat = <c -> a -> t>
-cat: state <c, a, t> and transition c -> a -> t
+cat: <c, a, t> and transition c -> a -> t
 amp> invoke {c, t}
 moment   active   refractory   why
 1        c, t

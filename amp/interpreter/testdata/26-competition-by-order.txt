@@ -10,15 +10,15 @@ g: 8 members, g{1..8}, all individuals
 c: 8 members, c{1..8}, all individuals
 a: 8 members, a{1..8}, all individuals
 amp> the = <t -> h -> e>
-the: state <t, h, e> and transition t -> h -> e
+the: <t, h, e> and transition t -> h -> e
 amp> dog = <d -> o -> g>
-dog: state <d, o, g> and transition d -> o -> g
+dog: <d, o, g> and transition d -> o -> g
 amp> cat = <c -> a -> t>
-cat: state <c, a, t> and transition c -> a -> t
+cat: <c, a, t> and transition c -> a -> t
 amp> thedog = <the -> dog>
-thedog: state <the, dog> and transition the -> dog
+thedog: <the, dog> and transition the -> dog
 amp> thecat = <the -> cat>
-thecat: state <the, cat> and transition the -> cat
+thecat: <the, cat> and transition the -> cat
 amp> save words.json
 saved words.json: 8 populations, 0 communities, 10 assemblies
 amp> invoke t, h, e
@@ -52,7 +52,7 @@ held         repeating every 2 moments
 amp> reset
 reset: nothing active or refractory
 amp> thecat2 = <t -> h -> e -> c -> a -> t>
-thecat2: state <t, h, e, c, a, t> and transition t -> h -> e -> c -> a -> t
+thecat2: <t, h, e, c, a, t> and transition t -> h -> e -> c -> a -> t
 amp> compare thecat, thecat2
 thecat ∩ thecat2   t, h, c, a, e (5)
 thecat ∪ thecat2   t, h, c, a, e (5)

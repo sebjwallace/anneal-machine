@@ -9,9 +9,9 @@ t: 8 members, t{1..8}, all individuals
 amp> o = population 8
 o: 8 members, o{1..8}, all individuals
 amp> cat = <c, a, t> ; c -> a -> t
-cat: state <c, a, t> and transition c -> a -> t
+cat: <c, a, t> and transition c -> a -> t
 amp> cot = <c, o, t> ; c -> o -> t
-cot: state <c, o, t> and transition c -> o -> t
+cot: <c, o, t> and transition c -> o -> t
 amp> save words.json
 saved words.json: 4 populations, 0 communities, 4 assemblies
 amp> invoke {c, t}

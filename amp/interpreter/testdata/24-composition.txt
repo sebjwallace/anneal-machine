@@ -9,13 +9,13 @@ o: 8 members, o{1..8}, all individuals
 g: 8 members, g{1..8}, all individuals
 s: 8 members, s{1..8}, all individuals
 amp> the = <t -> h -> e>
-the: state <t, h, e> and transition t -> h -> e
+the: <t, h, e> and transition t -> h -> e
 amp> dog = <d -> o -> g>
-dog: state <d, o, g> and transition d -> o -> g
+dog: <d, o, g> and transition d -> o -> g
 amp> thedog = <the -> dog>
-thedog: state <the, dog> and transition the -> dog
+thedog: <the, dog> and transition the -> dog
 amp> inspect thedog
-thedog: #5 state <t{1}, h{1}, d{1}, o{1}>; #6 transition e{1} -> d{1}
+thedog: #5 <t{1}, h{1}, d{1}, o{1}>; #6 transition e{1} -> d{1}
 amp> invoke t, h, e
 moment   active       refractory   why
 1        t
@@ -30,11 +30,11 @@ complete   dog <d, o, g>         3 of 3
 complete   thedog <t, h, d, o>   4 of 4
 held       repeating every 2 moments
 amp> thedogs = <the -> dog -> s>
-thedogs: state <the, dog, s> and transition the -> dog -> s
+thedogs: <the, dog, s> and transition the -> dog -> s
 amp> inspect thedogs
-thedogs: #7 state <t{1}, h{1}, d{1}, o{1}, s{1}>; #8 transition e{1} -> d{1}; #9 transition g{1} -> s{1}
+thedogs: #7 <t{1}, h{1}, d{1}, o{1}, s{1}>; #8 transition e{1} -> d{1}; #9 transition g{1} -> s{1}
 amp> x = <the>
-error: a state needs at least two populations or parts
+error: an assembly needs at least two populations or parts
 amp> x = <the, the>
 error: the is a part twice in one assembly
 amp> x = <the, z>

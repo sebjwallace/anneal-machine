@@ -5,7 +5,7 @@ b: 8 members, b{1..8}, all individuals
 o: 8 members, o{1..8}, all individuals
 k: 8 members, k{1..8}, all individuals
 amp> book = <b -> o -> o -> k>
-book: state <b, o, o, k> and transition b -> o -> o -> k
+book: <b, o, o, k> and transition b -> o -> o -> k
 amp> invoke b, o, o, k
 moment   active   refractory   why
 1        b

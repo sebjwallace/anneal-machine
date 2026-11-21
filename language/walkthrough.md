@@ -107,7 +107,7 @@ moment 2   a        incomplete   heat !a
 moment 3   t        incomplete   heat !t
 
 resolve    from heat !c, !a, !t
-           forms #1 = ⟨c, a, t⟩      nothing accounted for them together
+           forms #1 = <c, a, t>      nothing accounted for them together
                      inward: c <-> a, a <-> t, c <-> t
            forms #2 = c -> a -> t     a followed c, t followed a, unpredicted
            heat 3 -> 0
@@ -125,7 +125,7 @@ resolve    from heat !c, !a, !t
 - **Decided (the owner): a repeat gets a new member.** A population that appears more than once in an assembly gives
   its next member each time: `abab = <a -> b -> a -> b>` is `a{1}, b{1}, a{2}, b{2}`, and "book" is
   `b{1} -> o{1} -> o{2} -> k{1}`. On one line, the second "a" in each outline is the same member. Reusing one member
-  would collapse the state (a set holds a member once) and turn the chain into a loop with no end.
+  would collapse the assembly (a set holds a member once) and turn the chain into a loop with no end.
 
 Then invoking part of it shows whether anything was learnt:
 
@@ -137,7 +137,7 @@ invoke c
 moment 1   c
 moment 2   +a           invoked by c
 moment 3   +t           invoked by a
-complete   #1 ⟨c, a, t⟩   3 of 3
+complete   #1 <c, a, t>   3 of 3
 ```
 
 The `+` marks what the engine brought back itself, in order, one moment at a time. This is the behaviour of "hello
@@ -149,7 +149,7 @@ two kinds of resolving, from the world and from memory, visibly different in the
 
 ---
 
-## Step 4 · States and transitions
+## Step 4 · Assemblies and transitions
 
 **What prompted it.** The owner noticed that `c -> a -> t` doesn't point back on itself, so by the earlier definition
 (members pointing at each other, a cycle) it isn't an assembly. The assistant had printed the whole `#1` without its
@@ -157,14 +157,15 @@ inward bonds, which is why it looked that way. Resolving forms **two** structure
 
 | | Shape | What it does | Answers |
 |---|---|---|---|
-| **state** | cyclic: inward bonds, members pointing at each other | any part brings back the rest; once complete it **holds** (reverberates) | "what is this?" |
+| **assembly** | cyclic: inward bonds, members pointing at each other | any part brings back the rest; once complete it **holds** (reverberates) | "what is this?" |
 | **transition** | chain: outward bonds, pointing forwards only | carries activity on to what comes next, a moment later | "what comes next?" |
 
-**Decided: assembly is a looser idea.** An assembly is a unit the engine treats as one thing, able to be named,
-compared, composed and abstracted. States and transitions are both assemblies. What makes one a state and the other a
-transition isn't a label. It is the shape of its bonds, loops or chains, so the rule holds that dynamics come from the
-structure, not from a bond type. It matches the project's history: C101 kept held states and transitions apart, as the
-old engine did.
+**Retired (the owner): "state".** This step first called the cyclic shape a **state**. It was only another word for an
+assembly, from thinking of the memory as a state machine (the owner's transition memory: assemblies settle, and
+transitions carry the memory on to the next), so it is not a term. The cyclic shape is simply an **assembly**, written
+`<c, a, t>`; the chain is a **transition**, written `c -> a -> t`. `⟨ ⟩` is retired with it: `< >` is the keyboard form.
+What tells them apart isn't a label but the shape of the bonds, loops or chains, so the rule holds that dynamics come
+from the structure, not from a bond type. (The engine still treats a stored chain as a unit with a `#` number.)
 
 **Why both.**
 - With only the chain, "c" brings back "a, t" in order, but "c" and "t" together can't bring back the missing middle.
@@ -176,8 +177,8 @@ backwards as easily as forwards. The forward link from "c" to "a" exists twice, 
 The backward link exists once, in the whole. So the next letter always has more ways in than the previous one, and more
 support wins.
 
-**The declared choice it rests on:** a transition's gate opens on **one** source; a state's gate needs **agreement**
-(two, by default). A transition opens on one; a state needs agreement.
+**The declared choice it rests on:** a transition's gate opens on **one** source; an assembly's gate needs **agreement**
+(two, by default). A transition opens on one; an assembly needs agreement.
 
 **Superseded (the owner): there is no fixed number.** The "two" was the bar of two from an old experiment, arbitrary.
 Decided instead, with the interpreter running it (`amp/interpreter/testdata/08-phases.txt` to `10-house-from-parts.txt`):
@@ -186,8 +187,8 @@ Decided instead, with the interpreter running it (`amp/interpreter/testdata/08-p
 - **Members have three phases: active, refractory and ready.** A member active one moment is refractory the next, and
   can't come on; after that it is ready, and can come on when a gate opens. The word for the three is **phase**.
 - **Gates count active and refractory members.**
-- **A state's gate opens for its ready members when its counted part is bigger than its missing part** (more than
-  half). Equal is a tie, held. So the threshold is relative to the state's size: 2 of 3, 3 of 5, 8 of 14.
+- **An assembly's gate opens for its ready members when its counted part is bigger than its missing part** (more than
+  half). Equal is a tie, held. So the threshold is relative to the assembly's size: 2 of 3, 3 of 5, 8 of 14.
 - **A transition's step opens when the step before, and all its keys, are counted.**
 
 What the interpreter prints for the three examples below (the notation above is the older sketch):
@@ -207,7 +208,7 @@ held       repeating every 2 moments
 counted, so it stays complete. `invoke t` reaches 1 of 3 and recalls nothing; `invoke {c, t}` recalls "a" and holds
 the same way.
 
-**Found by running it: a state of more than three can't be reached by its own chain.** The chain brings one member a
+**Found by running it: an assembly of more than three can't be reached by its own chain.** The chain brings one member a
 moment and gates count two moments, so at most two members are counted from the chain alone. A flat
 `<h, o, u, s, e>` with `h -> o -> u -> s -> e` reaches 2 of 5 from "h", and also when "house" is read in order, and
 never completes; with three given together it completes and holds. Written as overlapping parts, `<h, o, u>` and
@@ -218,19 +219,19 @@ from "h". Open: what this means for longer words and for what resolve forms.
 invoke c
 moment 2   +a     chain c -> a opens it; the whole only primes it (1 of 2)
 moment 3   +t     chain a -> t, and the whole now has c and a (2 of 2)
-complete   #1 ⟨c, a, t⟩   3 of 3, in order
+complete   #1 <c, a, t>   3 of 3, in order
 ```
 
 ```
 invoke t
 moment 1   t      the whole primes c and a (1 of 2 each); nothing leads back from t
-incomplete #1 ⟨c, a, t⟩   1 of 3
+incomplete #1 <c, a, t>   1 of 3
 ```
 
 ```
 invoke {c, t}
 moment 2   +a     the whole: c and t, 2 of 2
-complete   #1 ⟨c, a, t⟩   3 of 3
+complete   #1 <c, a, t>   3 of 3
 ```
 
 Forwards flows freely, backwards needs more than one clue, and a missing middle is filled from both ends.
@@ -259,7 +260,7 @@ never incremented by repetition.** With per-gate bits there is no need, so bonds
 
 ## Step 5 · A second word, and what the two share
 
-The engine knows "cat" as `#1 = ⟨c, a, t⟩` (the state) and `#2 = c -> a -> t` (the transition). It meets "cot":
+The engine knows "cat" as `#1 = <c, a, t>` (the assembly) and `#2 = c -> a -> t` (the transition). It meets "cot":
 
 ```
 o = population 8
@@ -270,7 +271,7 @@ invoke c, o, t
 moment 1   c        #2 expects a next
 moment 2   o        expected a (#2 c -> a); o was not expected
 moment 3   t        #1 primes: c and t present, a missing
-incomplete #1 ⟨c, a, t⟩   2 of 3, missing a
+incomplete #1 <c, a, t>   2 of 3, missing a
            heat !o, and the steps c -> o, o -> t unpredicted
 ```
 
@@ -283,7 +284,7 @@ resolve
 
 ```
 resolve    from heat !o, and c -> o, o -> t
-           forms #3 = ⟨c, o, t⟩
+           forms #3 = <c, o, t>
            forms #4 = c -> o -> t
            heat -> 0
 ```
@@ -295,7 +296,7 @@ resolve #1, #3
 ```
 
 ```
-           #1 ∩ #3 = {c, t}       forms #5 = ⟨#1 ∩ #3⟩
+           #1 ∩ #3 = {c, t}       forms #5 = <#1 ∩ #3>
            #1 △ #3 = {a, o}       forms #6 = c -> a | o -> t
 ```
 
@@ -330,11 +331,11 @@ c -> a -> t & d                           t opens only with d held as well
 
 `&` always attaches to the value just before it, never to the next step. A key can be **still active from earlier**: the
 gate only asks whether its sources are active now, not when each became active. A key stays active only through the
-dynamics: it was invoked earlier and, being a state, its own inward bonds keep it on. Nothing outside holds it. That is the learned-computation pattern, one
+dynamics: it was invoked earlier and, being an assembly, its own inward bonds keep it on. Nothing outside holds it. That is the learned-computation pattern, one
 thing held and one arriving, and how C101 used earlier context.
 
 ```
-moment 0   d              invoked earlier; still on (its own state reverberates)
+moment 0   d              invoked earlier; still on (it reverberates)
 moment 1   c
 moment 2   +a             invoked by c
 moment 3   +t             a, and key d, still on since moment 0
@@ -369,7 +370,7 @@ and "cot". The type system comes out of comparison.
 ## Step 6 · A member's definition
 
 **The owner's question:** what does a member's definition look like, given that each part of it comes from somewhere
-(a transition, a state, the alternatives)?
+(a transition, an assembly, the alternatives)?
 
 **Decided: a member's definition is an or of its gates.** A member can sit in several structures, so it has several
 gates, and it comes on if any opens. Within a gate the sources work together. That is the standard "sum of products" form
@@ -390,14 +391,14 @@ cat -> meows
 
 ```
 dog    =  the                        from the -> dog | cat
-       |  {the, barks} >= 2          from the whole ⟨the, dog, barks⟩
-       |  {the, sleeps} >= 2         from the whole ⟨the, dog, sleeps⟩
+       |  {the, barks} >= 2          from the whole <the, dog, barks>
+       |  {the, sleeps} >= 2         from the whole <the, dog, sleeps>
 
 barks  =  dog & day                  from dog -> barks & day
-       |  {the, dog} >= 2            from the whole ⟨the, dog, barks⟩
+       |  {the, dog} >= 2            from the whole <the, dog, barks>
 
 sleeps =  dog & night                from dog -> sleeps & night
-       |  {the, dog} >= 2            from the whole ⟨the, dog, sleeps⟩
+       |  {the, dog} >= 2            from the whole <the, dog, sleeps>
 ```
 
 **Reading them side by side.** The path line `dog -> barks & day | sleeps & night` becomes the first term of both `barks`
@@ -495,7 +496,7 @@ predicted, fewer moments need resolving, and it speeds up.
 
 **How much it takes in: what is currently held.** Resolving the current character alone could only form tiny pieces. A
 fixed "how far back" would bring a chunk size in by another door. Instead, the context a resolve takes in is whatever is
-held now (reverberating states), limited by each population's budget, not by a chosen window. The window falls out of
+held now (reverberating assemblies), limited by each population's budget, not by a chosen window. The window falls out of
 the dynamics.
 
 **Across time, mostly for free.** Resolve isn't comparing an input with itself. When "cot" arrives months after "cat",
@@ -520,26 +521,26 @@ More text confirms or outgrows what was formed.
 
 The notation so far is **declarative**: it says what exists. Beneath it sits an **instruction set**, which is
 imperative and says what to do. They are two registers of one language, like a schema and a query language. Every
-declaration maps onto instructions: `⟨c, a, t⟩` is an `ASML`, `c -> a -> t` a `CHN`, `a & animals` a `GATE`. The
+declaration maps onto instructions: `<c, a, t>` is an `ASML`, `c -> a -> t` a `CHN`, `a & animals` a `GATE`. The
 reference list is on [instructions](instructions.md).
 
 **A REPL** is where the two meet: declarations for structure, commands for actions, one line at a time.
 
-**Decided (the owner): in the REPL a state is typed and printed with ordinary angle brackets, `<c, a, t>`,** because
-`⟨ ⟩` aren't on a keyboard. `⟨ ⟩` is still accepted, so lines can be pasted from these pages, and the pages keep it as
-the typeset form. Everything printed can be typed back in.
+**Decided (the owner): an assembly is written with ordinary angle brackets, `<c, a, t>`,** because the mathematical
+`⟨ ⟩` aren't on a keyboard. `⟨ ⟩` is retired from these pages; the interpreter still accepts it if pasted from older
+notes. Everything printed can be typed back in.
 
-**Decided (the owner): `<c -> a -> t>` is short for `<c, a, t> ; c -> a -> t`,** a state and its transition over the
-same populations, sharing members. The arrows say transition and the angle brackets say state, so it reads as both.
+**Decided (the owner): `<c -> a -> t>` is short for `<c, a, t> ; c -> a -> t`,** an assembly and its transition over the
+same populations, sharing members. The arrows say transition and the angle brackets say assembly, so it reads as both.
 
 ```
 amp> cat = <c -> a -> t>
-cat: state <c, a, t> and transition c -> a -> t
+cat: <c, a, t> and transition c -> a -> t
 ```
 
 ```
-amp> cat = ⟨c, a, t⟩ ; c -> a -> t
-amp> cot = ⟨c, o, t⟩ ; c -> o -> t
+amp> cat = <c, a, t> ; c -> a -> t
+amp> cot = <c, o, t> ; c -> o -> t
 amp> invoke {c, t}
 moment 2   tie: cat (2 of 3) | cot (2 of 3), held
 incomplete
@@ -567,7 +568,7 @@ held         repeating every 2 moments
 ```
 
 As two commands, `invoke {c, t}` then `invoke a`, "cat" still completes, but not by settling the tie: "c" and "t" have
-faded, and "a" belongs only to "cat", so its chain `a -> t` opens with no rival and the state follows from "a" and "t".
+faded, and "a" belongs only to "cat", so its chain `a -> t` opens with no rival and the assembly follows from "a" and "t".
 
 **Every run is logged, as instructions**, each with what it found or made, so the log and the trace are written in the
 same language. Indentation shows what a resolve ran inside itself. One command, `invoke c, o, t` with "cat" known and
@@ -582,12 +583,12 @@ resolve in the loop, might expand to:
     CHN   c,a|o                 formed #3 = c -> a | o   o joins as an alternative to a
 ; moment 3
   SEQ   t
-  INV   t                       #1 ⟨c, a, t⟩ 2 of 3, a missing
+  INV   t                       #1 <c, a, t> 2 of 3, a missing
   RSLV  last
-    ASML  ⟨c,o,t⟩               formed #5 = ⟨c, o, t⟩
+    ASML  <c,o,t>               formed #5 = <c, o, t>
     CAP   #1,#5                 {c, t}
     SYMD  #1,#5                 {a, o}
-    ASML  ⟨#1 ∩ #5⟩             formed #6 = ⟨c, t⟩
+    ASML  <#1 ∩ #5>             formed #6 = <c, t>
     CHN   c,a|o,t               formed #7 = c -> a | o -> t
 ```
 

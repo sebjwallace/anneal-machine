@@ -19,9 +19,9 @@ operations. They are the shapes forming takes, depending on what kind of incompl
 ## Forming
 
 ```
-forms ⟨9, 12⟩            a new assembly over 9 and 12, bonded to the held context
-forms S = ⟨A ∩ B⟩        abstraction: what A and B share
-forms ⟨A − B⟩            decomposition: what A has that B doesn't, beside A
+forms <9, 12>            a new assembly over 9 and 12, bonded to the held context
+forms S = <A ∩ B>        abstraction: what A and B share
+forms <A − B>            decomposition: what A has that B doesn't, beside A
 A -> B                   sequence: an outward bond, A invokes B
 ```
 
@@ -44,8 +44,8 @@ misfit between them is the comparison (walkthrough step 8). Deliberate compariso
 ## Words and symbols
 
 Comparison uses **intersection** (`∩`), **difference** (`−`) and **symmetric difference** (`△`). Abstraction forms
-`⟨#1 ∩ #3⟩`; the alternatives from `#1 △ #3` go on the chain as `a | o`, and a named set of them is a **type**
-(walkthrough step 5). In the instruction set, a state is assembled with `ASML` and a transition with `CHN`
+`<#1 ∩ #3>`; the alternatives from `#1 △ #3` go on the chain as `a | o`, and a named set of them is a **type**
+(walkthrough step 5). In the instruction set, an assembly is assembled with `ASML` and a transition with `CHN`
 ([instructions](instructions.md)).
 
 ## Economy: reuse first

@@ -10,7 +10,7 @@ enough?
 open its gates, the missing members become active. They are marked `+` as recalled.
 
 ```
-A = ⟨1, 4, 7⟩
+A = <1, 4, 7>
 {1, 4} => {1, 4, +7}
 ```
 
@@ -46,7 +46,7 @@ which in practice means how many ways in each one has. A held tie keeps both, un
   "a"): they compete for the same place. Two assemblies are rivals when one has a member the other lacks, the other has
   one the first lacks, and those are alternatives; or when, in that moment, what each would bring on and the other
   wouldn't are alternatives (anagrams, which share members and differ only in order). A part and its whole are never
-  rivals, nor a state and its own chain, nor two versions of one word (members differ, populations the same). This
+  rivals, nor an assembly and its own chain, nor two versions of one word (members differ, populations the same). This
   replaced "share a population but not its member", which missed wholes composed from a shared part ("the dog" and
   "the cat") and made two versions of a word tie for ever.
 - **Support:** an assembly's counted part minus its missing part (gates count active and refractory members).

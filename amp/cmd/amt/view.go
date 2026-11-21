@@ -158,7 +158,7 @@ func (m model) assemblyView() []string {
 	}
 	var list []string
 	for i, a := range assemblies {
-		line := fmt.Sprintf("#%d %s %s %s", a.ID(), a.Name(), a.Shape(), interpreter.WriteAssembly(a))
+		line := fmt.Sprintf("#%d %s %s", a.ID(), a.Name(), writeShaped(a))
 		if i == m.selected {
 			line = shownStyle.Render(line)
 		}
@@ -171,7 +171,15 @@ func (m model) assemblyView() []string {
 		p := phases[idOf(member)]
 		members = append(members, []string{interpreter.WriteMember(member), phaseMarks[p] + " " + phaseName(p)})
 	}
-	return []string{hint, strings.Join(list, "\n"), titleStyle.Render(fmt.Sprintf("#%d %s %s %s", chosen.ID(), chosen.Name(), chosen.Shape(), interpreter.WriteAssembly(chosen))) + "\n" + alignColumns(members)}
+	return []string{hint, strings.Join(list, "\n"), titleStyle.Render(fmt.Sprintf("#%d %s %s", chosen.ID(), chosen.Name(), writeShaped(chosen))) + "\n" + alignColumns(members)}
+}
+
+// writeShaped writes an assembly as <c, a, t> and a transition as "transition c -> a -> t", as amp does.
+func writeShaped(a engine.Assembly) string {
+	if a.Shape() == engine.TransitionShape {
+		return "transition " + interpreter.WriteAssembly(a)
+	}
+	return interpreter.WriteAssembly(a)
 }
 
 func phaseName(p phase) string {

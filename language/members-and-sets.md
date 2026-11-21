@@ -34,10 +34,10 @@ on. Primed isn't a fourth phase, only a mark on a ready member, shown by `phases
 
 A member active for one moment is refractory for the next, then ready. **The refractory period is a setting, off by
 default** (the owner's choice, for testing): `refractory on`, `refractory off`, or `refractory` to show it. Off, a
-member active one moment is ready the next, nothing is ever refractory, and a held state stays fully active, repeating
+member active one moment is ready the next, nothing is ever refractory, and a held assembly stays fully active, repeating
 every moment. The setting is saved in snapshots. Gates count active and refractory members (see
-[edges and gates](edges-and-gates.md)). A state holds by its members taking turns: some active while the others are
-refractory, and the other way round, so the whole state stays counted.
+[edges and gates](edges-and-gates.md)). An assembly holds by its members taking turns: some active while the others are
+refractory, and the other way round, so the whole assembly stays counted.
 
 ## The active set
 

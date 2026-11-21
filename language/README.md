@@ -47,7 +47,7 @@ For now it is markdown only. Nothing here is code yet.
 
 | Page | What it covers |
 |---|---|
-| [Walkthrough](walkthrough.md) | **Start here.** The language step by step, as typed into the interpreter and printed back: populations, invoking, resolving, states and transitions, alternatives and keys, member definitions, naming, reading text, instructions. |
+| [Walkthrough](walkthrough.md) | **Start here.** The language step by step, as typed into the interpreter and printed back: populations, invoking, resolving, assemblies and transitions, alternatives and keys, member definitions, naming, reading text, instructions. |
 | [The two operations](operations.md) | invoke and resolve: what each does, what each gives, and how they are composed by a declared policy. |
 | [Instructions](instructions.md) | The instruction set beneath the notation (INV, RSLV, CAP, ASML, CHN …), the REPL, and the three logs. |
 | [Members and sets](members-and-sets.md) | Members, individuals, the active set, populations and communities, marks for recalled and hot, the set words. |

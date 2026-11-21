@@ -25,9 +25,12 @@ kinds of dynamics without labelling any bond:
   members but different outward bonds.
 
 Loops give completion; chains give sequence. The dynamics come from the shape of the structure, not from the bond.
-Assemblies of the first shape are **states**; of the second, **transitions** ([walkthrough](walkthrough.md), step 4).
+The first shape is simply an **assembly**, written `<c, a, t>`; the second is a **transition**, written `c -> a -> t`
+([walkthrough](walkthrough.md), step 4). "State" is not a term (the owner): it was another word for an assembly, from
+thinking of the memory as a state machine (transition memory), and is kept only as an ordinary word.
 
-**Declared: a transition's gate opens on one source; a state's gate needs agreement (two by default).** That is what
+**Declared: a transition's gate opens on one source; an assembly's gate needs agreement (two by default; superseded,
+below).** That is what
 makes forwards more prominent than backwards: the forward step has more ways in (it is supported by the whole and by
 the chain), not a stronger bond. Bonds stay binary: a source appearing in two gates is one bit in each, not a
 duplicate, and no bond carries a count.
@@ -44,7 +47,7 @@ is the **or of its gates**, each labelled with where it formed (walkthrough step
 
 ```
 barks  =  dog & day                  from dog -> barks & day
-       |  {the, dog} >= 2            from the whole ⟨the, dog, barks⟩
+       |  {the, dog} >= 2            from the whole <the, dog, barks>
 ```
 
 ## Logic from gates and topology
@@ -77,8 +80,8 @@ phases: active (on this moment), refractory (active the moment before, so it can
 on when a gate opens). Every bond acts one moment later.
 
 **Thresholds (decided): no fixed number.** The old bar of two is retired.
-- **A state's gate** opens for its ready members when the state's counted part is bigger than its missing part:
-  `|state ∩ counted| > |state − counted|`. Equal is a tie, held. The threshold follows the state's size: 2 of 3, 3 of
+- **An assembly's gate** opens for its ready members when the assembly's counted part is bigger than its missing part:
+  `|assembly ∩ counted| > |assembly − counted|`. Equal is a tie, held. The threshold follows the assembly's size: 2 of 3, 3 of
   5, 8 of 14.
 - **A transition's step** opens when the step before, and all its keys, are counted.
 

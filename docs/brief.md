@@ -142,16 +142,16 @@ This summarises `language/`. Where it is terse, the walkthrough has worked examp
   input arrives as populations, output leaves as populations, and which member takes part is the engine's own business.
   `inspect` gives deeper access for examination.
 - **Community**: a fixed grouping of populations.
-- **Assembly**: a unit the engine treats as one thing. It has two shapes, decided by the shape of its bonds, not by a
-  label:
-  - a **state**: cyclic, with bonds pointing at each other. Any part brings back the rest, and once complete it
-    **reverberates**, staying on until competition changes it. `⟨c, a, t⟩`.
-  - a **transition**: a chain, with bonds pointing forwards. It carries activity on to what comes next, one moment
-    later. `c -> a -> t`.
+- **Assembly**: members with bonds pointing at each other, which the engine treats as one thing. Any part brings back
+  the rest, and once complete it **reverberates**, staying on until competition changes it. `<c, a, t>`.
+- **Transition**: a chain, with bonds pointing forwards. It carries activity on to what comes next, one moment later.
+  `c -> a -> t`. ("State" is retired as a term, the owner: it was another word for an assembly, from thinking of the
+  memory as a state machine, the owner's transition memory.)
 - **Bond**: always directed, binary, stored **with the gate that receives it**. A member keeps no list of where it
   points.
 - **Gate**: how a member decides to come on: "enough of these sources are active". Thresholds are declared: a
-  transition's gate opens on **one** source, and a state's needs **agreement** (two by default). A member's full
+  transition's gate opens on **one** source, and an assembly's needs **agreement** (two by default; now "more counted
+  than missing", `language/edges-and-gates.md`). A member's full
   definition is the **or of its gates**, each labelled with the assembly it came from (walkthrough step 6).
 - **Alternatives** `a | o`: on a chain, things that compete for one step. The old idea of a "slot" is just this.
 - **Keys** `x & k`: x is on the path and k is a condition on x's gate. All keys are required, along with the step
@@ -253,7 +253,7 @@ The owner wants a glass box from the first commit, not added later.
   working with the owner proposes names through AMX, by invoking: find the input that completes an assembly best and
   name it from that ("cat", "dog" and "bird" all invoking one assembly suggests "animal"). **Every name carries its
   evidence,** and AMT shows it on request. The payoff is that AMT can show a run, including a procedure, in words:
-  what is held, what is being associated, which states and transitions are active ("held: carrying one, next
+  what is held, what is being associated, which assemblies and transitions are active ("held: carrying one, next
   column"). **That readout is our labels laid over what the engine does, not the engine thinking in English.** So
   AMT must show unnamed and weakly evidenced assemblies plainly, as gaps, and never hide them to make the readout
   look tidier. A wrong name is worse than none, because it makes a wrong run look sensible.
@@ -274,7 +274,7 @@ The owner wants a glass box from the first commit, not added later.
 
 ### Phase 1: the reading engine on hand-written structure (buildable now)
 
-- **Engine:** populations, communities, states, transitions, alternatives, keys, gates and member definitions; invoke
+- **Engine:** populations, communities, assemblies, transitions, alternatives, keys, gates and member definitions; invoke
   with competition, the per-population budget, held ties, graded completion; the three logs; replay.
 - **Notation:** parse and print the walkthrough's notation.
 - **REPL:** declarations and commands, stepping, `inspect`, `why`, invoke-only policy.
@@ -285,7 +285,7 @@ The owner wants a glass box from the first commit, not added later.
 - **A hand-written procedure**, to test that the representation can hold a method and not only a pattern: a counting
   loop that hands off at ten, a world-keyed loop ("stir until thick"), a switch between two recipes that share steps, and a
   subroutine reused by two callers. Predictions are in `docs/theories/procedures-from-states-and-transitions.md` §10.
-  This run will force two decisions, which go to the owner: **arrivals versus held states** (a count must advance once per
+  This run will force two decisions, which go to the owner: **arrivals versus held assemblies** (a count must advance once per
   arrival of a tick, not once per moment it is on) and **returning to the right caller**.
 
 ### Phase 2: resolve (blocked on owner decisions)
@@ -300,7 +300,7 @@ Before building resolve, these need the owner's answers (`language/open-and-defe
 Also from the procedures work: whether transitions act on **arrivals** (change) rather than on what is held, how a
 subroutine **returns** to the right caller, and how a loop that never exits is **let go**.
 
-Smaller defaults to settle along the way: the population budget, the default state threshold, how to address a single
+Smaller defaults to settle along the way: the population budget, the default assembly threshold, how to address a single
 gate (proposed `barks{2}#4`), and whether `resolve` must always name what it works on.
 
 Then the AMX ladder, each world with predictions fixed first: words from letters; noisy words ("cxt"); same letters in

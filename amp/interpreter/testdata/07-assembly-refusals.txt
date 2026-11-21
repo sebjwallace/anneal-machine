@@ -7,7 +7,7 @@ t: 8 members, t{1..8}, all individuals
 amp> letters = community c, a
 letters: c, a (16 members)
 amp> cat = <c>
-error: a state needs at least two populations or parts
+error: an assembly needs at least two populations or parts
 amp> cat = c
 error: expected "population", "community", a state or a transition after "=", got c
 amp> cat = c ->
@@ -29,7 +29,7 @@ error: an assembly written by hand needs a name, as in cat = <c, a, t>
 amp> c -> a
 error: an assembly written by hand needs a name, as in cat = <c, a, t>
 amp> cat = <c, a, t> ; c -> a -> t
-cat: state <c, a, t> and transition c -> a -> t
+cat: <c, a, t> and transition c -> a -> t
 amp> cat = <c, a>
 error: cat is already declared, as an assembly
 amp> cat = population 3
@@ -43,6 +43,6 @@ error: letters is a community, not a population or an assembly
 amp> inspect z
 error: z is not declared
 amp> ca = <c, a>
-ca: state <c, a>
+ca: <c, a>
 amp> inspect ca
-ca: #3 state <c{2}, a{2}>
+ca: #3 <c{2}, a{2}>

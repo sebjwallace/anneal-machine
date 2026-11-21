@@ -4,7 +4,7 @@ amp> a, b = population 8
 a: 8 members, a{1..8}, all individuals
 b: 8 members, b{1..8}, all individuals
 amp> abab = <a -> b -> a -> b>
-abab: state <a, b, a, b> and transition a -> b -> a -> b
+abab: <a, b, a, b> and transition a -> b -> a -> b
 amp> save abab.json
 saved abab.json: 2 populations, 0 communities, 2 assemblies
 amp> invoke {a, b}

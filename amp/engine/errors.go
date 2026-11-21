@@ -79,7 +79,7 @@ func (e NothingToAssembleError) Error() string {
 	return fmt.Sprintf("%s has nothing to assemble", e.Name)
 }
 
-// TooSmallError: a state needs two members to point at each other, and a transition two steps to lead from one to
+// TooSmallError: an assembly needs two members to point at each other, and a transition two steps to lead from one to
 // the next.
 type TooSmallError struct {
 	Shape Shape
@@ -89,7 +89,7 @@ func (e TooSmallError) Error() string {
 	if e.Shape == TransitionShape {
 		return "a transition needs at least two steps"
 	}
-	return "a state needs at least two populations or parts"
+	return "an assembly needs at least two populations or parts"
 }
 
 // TooFewToRepeatError: a population appears more times in one assembly than it has members. Each time it appears
@@ -162,3 +162,27 @@ type GivenTwiceError struct {
 }
 
 func (e GivenTwiceError) Error() string { return fmt.Sprintf("%s is given twice", e.Name) }
+
+// NotDecomposableError: braces were put on something that isn't an assembly. Braces take some of an assembly's
+// members; a population's members are the engine's business.
+type NotDecomposableError struct {
+	Name Name
+	Is   Kind
+}
+
+func (e NotDecomposableError) Error() string {
+	return fmt.Sprintf("%s is %s, not an assembly: braces take some of an assembly's members", e.Name, e.Is.withArticle())
+}
+
+// NotInWholeError: braces asked for a population the assembly has no member of, or none left after the one before.
+type NotInWholeError struct {
+	Whole, Population Name
+	After             Name // set when the population is there, but not after the one before it in the braces
+}
+
+func (e NotInWholeError) Error() string {
+	if e.After != "" {
+		return fmt.Sprintf("%s has no %s after %s", e.Whole, e.Population, e.After)
+	}
+	return fmt.Sprintf("%s has no member of %s", e.Whole, e.Population)
+}

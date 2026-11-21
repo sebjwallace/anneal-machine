@@ -33,7 +33,7 @@ HAS   #1,a         membership          ∈
 SUB   #1,#2        subset test         ⊆
 
 ; assembling by hand (programming: writing is bonding)
-ASML  ⟨c,a,t⟩      assemble a state
+ASML  <c,a,t>      assemble an assembly (members bonded to each other)
 CHN   c,a,t        assemble a transition (a chain)
 BOND  c,a          add one directed bond
 GATE  t {a,d} 2    give t a gate: these sources, this threshold
@@ -50,7 +50,7 @@ POL   inv+rslv     declare the policy for this run
 ```
 
 **There is no instruction for keeping something on.** Things stay active only because the dynamics sustain them: a
-state reverberates because its members point at each other. Context comes in as input (`invoke day`) and stays present
+assembly reverberates because its members point at each other. Context comes in as input (`invoke day`) and stays present
 through its own structure, or fades when something outcompetes it.
 
 **Which are really primitive.** Only `INV` and `RSLV` are roots. The set operations are read-only queries, used by
@@ -60,8 +60,8 @@ can be written by hand. Everything else declares, feeds input or examines.
 **Choices to note.**
 - `CAP` and `CUP` are the traditional names for ∩ and ∪. They avoid `AND` and `OR`, which in AMP mean gates and
   topology.
-- `ASML` (the owner's choice, replacing `FORM`) assembles a **state**. `CHN` assembles a **transition**. Both make
-  assemblies, of different shapes. In prose, "forms" still describes what resolve does.
+- `ASML` (the owner's choice, replacing `FORM`) assembles an **assembly**, its members bonded to each other. `CHN`
+  assembles a **transition**. In prose, "forms" still describes what resolve does.
 - `SET` and `SEQ` are braces and commas from walkthrough step 2.
 - `GATE` addresses a gate by its member. How to address a single gate is open (below).
 
@@ -70,7 +70,7 @@ can be written by hand. Everything else declares, feeds input or examines.
 | Declaration | Instructions |
 |---|---|
 | `c = population 8` | `POP c 8` |
-| `⟨c, a, t⟩` | `ASML ⟨c,a,t⟩` |
+| `<c, a, t>` | `ASML <c,a,t>` |
 | `c -> a -> t` | `CHN c,a,t` |
 | `c -> a \| o -> t` | `CHN c,a\|o,t` (alternatives compete at that step) |
 | `a & animals`, after c | `GATE a {c,animals} 2`, all of value-step and keys |
@@ -87,8 +87,8 @@ the simplest parts to build in Go, so it can be the interpreter's first piece.
 ```
 amp> c = population 8
 c: 8 members, all individuals
-amp> cat = ⟨c, a, t⟩ ; c -> a -> t
-cat: state ⟨c, a, t⟩ and transition c -> a -> t
+amp> cat = <c, a, t> ; c -> a -> t
+cat: <c, a, t> and transition c -> a -> t
 amp> invoke {c, t}
 moment 2   tie: cat (2 of 3) | cot (2 of 3), held
 incomplete

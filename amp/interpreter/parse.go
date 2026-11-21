@@ -253,9 +253,9 @@ func (p *parser) declaration(names []engine.Name) (statement, error) {
 	}
 }
 
-// startsOutline is true when first begins a state (<) or a transition (a name followed by ->).
+// startsOutline is true when first begins a state (<) or a transition: a name followed by -> or by braces.
 func (p *parser) startsOutline(first token) bool {
-	return first.kind == openAngleToken || (first.kind == wordToken && p.peekIs(arrowToken))
+	return first.kind == openAngleToken || (first.kind == wordToken && (p.peekIs(arrowToken) || p.peekIs(openBraceToken)))
 }
 
 // assemblies reads one or more outlines separated by semicolons, starting from first.
@@ -277,49 +277,119 @@ func (p *parser) assemblies(name engine.Name, first token) (statement, error) {
 	}
 }
 
-// outline reads a state, <c, a, t>; a transition, c -> a -> t; or both at once over the same populations,
-// <c -> a -> t>, which is short for <c, a, t> ; c -> a -> t (the owner's notation). It starts from first.
-func (p *parser) outline(first token) ([]engine.Outline, error) {
-	switch {
-	case first.kind == openAngleToken && p.peekIs(wordToken) && p.peekAfterIs(arrowToken):
-		steps, err := p.steps(p.take())
-		if err != nil {
-			return nil, err
-		}
-		if closing := p.take(); closing.kind != closeAngleToken {
-			return nil, syntaxError("expected \"->\" or \">\" after %s%s", steps[len(steps)-1], got(closing))
-		}
-		return []engine.Outline{{Shape: engine.StateShape, Names: steps}, {Shape: engine.TransitionShape, Names: steps}}, nil
-	case first.kind == openAngleToken:
-		populations, err := p.names(`"<"`)
-		if err != nil {
-			return nil, err
-		}
-		if closing := p.take(); closing.kind != closeAngleToken {
-			return nil, syntaxError("expected \",\" or \">\" after %s%s", populations[len(populations)-1], got(closing))
-		}
-		return []engine.Outline{{Shape: engine.StateShape, Names: populations}}, nil
-	default:
-		steps, err := p.steps(first)
-		if err != nil {
-			return nil, err
-		}
-		return []engine.Outline{{Shape: engine.TransitionShape, Names: steps}}, nil
-	}
+// written collects the names of an outline as written, each with any braces: cat{c, a} takes just those members of cat.
+type written struct {
+	names []engine.Name
+	only  [][]engine.Name
 }
 
-// steps reads a chain of population names joined by arrows, c -> a -> t, starting from first.
-func (p *parser) steps(first token) ([]engine.Name, error) {
-	steps := []engine.Name{engine.Name(first.text)}
+func (w *written) add(name engine.Name, only []engine.Name) {
+	w.names = append(w.names, name)
+	w.only = append(w.only, only)
+}
+
+// last writes the last name as it was written, for an error message.
+func (w written) last() string {
+	return writeOutlineName(w.names[len(w.names)-1], w.only[len(w.only)-1])
+}
+
+func (w written) outline(shape engine.Shape) engine.Outline {
+	return engine.Outline{Shape: shape, Names: w.names, Only: w.only}
+}
+
+// outline reads a state, <c, a, t>; a transition, c -> a -> t; or both at once over the same populations,
+// <c -> a -> t>, which is short for <c, a, t> ; c -> a -> t (the owner's notation). It starts from first. Any name
+// may carry braces: cat{c, a} is just those members of cat (decomposition).
+func (p *parser) outline(first token) ([]engine.Outline, error) {
+	if first.kind != openAngleToken {
+		var chain written
+		if _, err := p.outlineName(&chain, first, ""); err != nil {
+			return nil, err
+		}
+		if err := p.moreSteps(&chain); err != nil {
+			return nil, err
+		}
+		return []engine.Outline{chain.outline(engine.TransitionShape)}, nil
+	}
+	var names written
+	arrows, err := p.outlineName(&names, p.take(), `"<"`)
+	if err != nil {
+		return nil, err
+	}
+	if arrows && p.peekIs(closeAngleToken) {
+		// <thedog{t -> h -> e}>: an assembly over those members and a transition through them, as <c -> a -> t> is.
+		p.take()
+		return []engine.Outline{names.outline(engine.StateShape), names.outline(engine.TransitionShape)}, nil
+	}
+	if p.peekIs(arrowToken) {
+		if err := p.moreSteps(&names); err != nil {
+			return nil, err
+		}
+		if closing := p.take(); closing.kind != closeAngleToken {
+			return nil, syntaxError("expected \"->\" or \">\" after %s%s", names.last(), got(closing))
+		}
+		return []engine.Outline{names.outline(engine.StateShape), names.outline(engine.TransitionShape)}, nil
+	}
+	for p.peekIs(commaToken) {
+		p.take()
+		if _, err := p.outlineName(&names, p.take(), `","`); err != nil {
+			return nil, err
+		}
+	}
+	if closing := p.take(); closing.kind != closeAngleToken {
+		return nil, syntaxError("expected \",\" or \">\" after %s%s", names.last(), got(closing))
+	}
+	return []engine.Outline{names.outline(engine.StateShape)}, nil
+}
+
+// moreSteps carries a chain on through each "->" that follows: c -> a -> t.
+func (p *parser) moreSteps(chain *written) error {
 	for p.peekIs(arrowToken) {
 		p.take()
-		step := p.take()
-		if step.kind != wordToken {
-			return nil, syntaxError("expected a population name after \"->\"%s", got(step))
+		if _, err := p.outlineName(chain, p.take(), `"->"`); err != nil {
+			return err
 		}
-		steps = append(steps, engine.Name(step.text))
 	}
-	return steps, nil
+	return nil
+}
+
+// outlineName reads one name of an outline, with any braces after it, into names.
+// The braces name populations separated by commas, cat{c, a}, or by arrows, cat{c -> a}; it reports which.
+func (p *parser) outlineName(names *written, name token, after string) (arrows bool, err error) {
+	if name.kind != wordToken {
+		return false, syntaxError("expected a population name after %s%s", after, got(name))
+	}
+	if !p.peekIs(openBraceToken) {
+		names.add(engine.Name(name.text), nil)
+		return false, nil
+	}
+	p.take()
+	var only []engine.Name
+	commas := false
+	before := `"{"`
+	for {
+		population := p.take()
+		if population.kind != wordToken {
+			return false, syntaxError("expected a population name after %s%s", before, got(population))
+		}
+		only = append(only, engine.Name(population.text))
+		switch {
+		case p.peekIs(commaToken):
+			commas, before = true, `","`
+		case p.peekIs(arrowToken):
+			arrows, before = true, `"->"`
+		default:
+			if closing := p.take(); closing.kind != closeBraceToken {
+				return false, syntaxError("expected \",\" or \"}\" after %s%s", population.text, got(closing))
+			}
+			if commas && arrows {
+				return false, syntaxError("use commas or arrows inside braces, not both")
+			}
+			names.add(engine.Name(name.text), only)
+			return arrows, nil
+		}
+		p.take()
+	}
 }
 
 func (p *parser) population(names []engine.Name) (statement, error) {
@@ -507,7 +577,7 @@ var symbols = map[rune]tokenKind{
 	'}': closeBraceToken,
 	'<': openAngleToken,
 	'>': closeAngleToken,
-	'⟨': openAngleToken, // as the docs write states; printed back as < >
+	'⟨': openAngleToken, // the retired typeset form, still accepted if pasted from older notes; printed back as < >
 	'⟩': closeAngleToken,
 	';': semicolonToken,
 }

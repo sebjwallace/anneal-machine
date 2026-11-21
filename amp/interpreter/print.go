@@ -235,7 +235,7 @@ func RepeatingEvery(moments int) string {
 func printAssemblyList(shown []engine.Assembly, first, total, page, pages int) string {
 	lines := make([]string, 0, len(shown)+1)
 	for _, a := range shown {
-		lines = append(lines, fmt.Sprintf("#%d %s %s %s", a.ID(), a.Name(), a.Shape(), writeShape(a.Shape(), namesOf(a.Populations()))))
+		lines = append(lines, fmt.Sprintf("#%d %s %s", a.ID(), a.Name(), writeShaped(a.Shape(), namesOf(a.Populations()))))
 	}
 	switch {
 	case pages == 1:
@@ -461,9 +461,25 @@ func countOf(n int, one, many string) string {
 func printAssemblyDeclaration(name engine.Name, outlines []engine.Outline) string {
 	written := make([]string, len(outlines))
 	for i, outline := range outlines {
-		written[i] = outline.Shape.String() + " " + writeShape(outline.Shape, namesOf(outline.Names))
+		names := make([]string, len(outline.Names))
+		for j, n := range outline.Names {
+			var only []engine.Name
+			if j < len(outline.Only) {
+				only = outline.Only[j]
+			}
+			names[j] = writeOutlineName(n, only)
+		}
+		written[i] = writeShaped(outline.Shape, names)
 	}
 	return fmt.Sprintf("%s: %s", name, strings.Join(written, " and "))
+}
+
+// writeOutlineName writes a name as written in an outline: cat, or cat{c, a} for some of its members.
+func writeOutlineName(name engine.Name, only []engine.Name) string {
+	if only == nil {
+		return string(name)
+	}
+	return fmt.Sprintf("%s{%s}", name, strings.Join(namesOf(only), ", "))
 }
 
 // cat: #1 state <c{1}, a{1}, t{1}>; #2 transition c{1} -> a{1} -> t{1}
@@ -474,9 +490,18 @@ func printAssemblies(name engine.Name, assemblies []engine.Assembly) string {
 		for j, member := range a.Members() {
 			members[j] = writeMember(member)
 		}
-		parts[i] = fmt.Sprintf("#%d %s %s", a.ID(), a.Shape(), writeShape(a.Shape(), members))
+		parts[i] = fmt.Sprintf("#%d %s", a.ID(), writeShaped(a.Shape(), members))
 	}
 	return fmt.Sprintf("%s: %s", name, strings.Join(parts, "; "))
+}
+
+// writeShaped writes an assembly as <c, a, t>, and a transition as "transition c -> a -> t": the angle brackets
+// already say it's an assembly, so only a transition is named.
+func writeShaped(shape engine.Shape, parts []string) string {
+	if shape == engine.TransitionShape {
+		return "transition " + writeShape(shape, parts)
+	}
+	return writeShape(shape, parts)
 }
 
 // writeShape writes a state as <c, a, t> and a transition as c -> a -> t.

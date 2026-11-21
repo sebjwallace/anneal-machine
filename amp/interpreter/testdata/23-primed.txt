@@ -6,9 +6,9 @@ a: 8 members, a{1..8}, all individuals
 t: 8 members, t{1..8}, all individuals
 o: 8 members, o{1..8}, all individuals
 amp> cat = <c -> a -> t>
-cat: state <c, a, t> and transition c -> a -> t
+cat: <c, a, t> and transition c -> a -> t
 amp> cot = <c -> o -> t>
-cot: state <c, o, t> and transition c -> o -> t
+cot: <c, o, t> and transition c -> o -> t
 amp> phases on
 phases: on
 amp> invoke {c, t}

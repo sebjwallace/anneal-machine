@@ -4,17 +4,17 @@ b: 8 members, b{1..8}, all individuals
 o: 8 members, o{1..8}, all individuals
 k: 8 members, k{1..8}, all individuals
 amp> abab = <a -> b -> a -> b>
-abab: state <a, b, a, b> and transition a -> b -> a -> b
+abab: <a, b, a, b> and transition a -> b -> a -> b
 amp> inspect abab
-abab: #1 state <a{1}, b{1}, a{2}, b{2}>; #2 transition a{1} -> b{1} -> a{2} -> b{2}
+abab: #1 <a{1}, b{1}, a{2}, b{2}>; #2 transition a{1} -> b{1} -> a{2} -> b{2}
 amp> book = <b -> o -> o -> k>
-book: state <b, o, o, k> and transition b -> o -> o -> k
+book: <b, o, o, k> and transition b -> o -> o -> k
 amp> inspect book
-book: #3 state <b{3}, o{1}, o{2}, k{1}>; #4 transition b{3} -> o{1} -> o{2} -> k{1}
+book: #3 <b{3}, o{1}, o{2}, k{1}>; #4 transition b{3} -> o{1} -> o{2} -> k{1}
 amp> aba = <a, b> ; a -> b -> a
-aba: state <a, b> and transition a -> b -> a
+aba: <a, b> and transition a -> b -> a
 amp> inspect aba
-aba: #5 state <a{3}, b{4}>; #6 transition a{3} -> b{4} -> a{4}
+aba: #5 <a{3}, b{4}>; #6 transition a{3} -> b{4} -> a{4}
 amp> x = population 2
 x: 2 members, x{1..2}, all individuals
 amp> xx = x -> x

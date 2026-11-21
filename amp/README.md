@@ -11,8 +11,8 @@ go test ./...                        the engine tests, the snapshot tests and th
 
 **AMT** (the terminal interface) opens a snapshot and reloads it whenever `amp` saves, so run it beside `amp`. Type
 the input to an invoke (`c, {a, t}`) and press enter: the moments play, one every 0.6 s, and if something is held
-they keep going round its repeating moments, so a state can be watched reverberating. With the input empty, space
-pauses and plays, ← → pause and step, Home / End jump to the first / last. Each population is a row of its members, ● active, ◐ refractory, · ready; each state shows
+they keep going round its repeating moments, so an assembly can be watched reverberating. With the input empty, space
+pauses and plays, ← → pause and step, Home / End jump to the first / last. Each population is a row of its members, ● active, ◐ refractory, · ready; each assembly shows
 how much of it is counted; the moment table is the one `amp` prints, with the moment shown highlighted. Tab shows
 every assembly and the phases of its members. Esc or Ctrl-C quits. AMT only reads: its invokes run on its own copy and
 are never saved.
@@ -45,7 +45,7 @@ intersection and union of them all. It only reads.
 **Starting afresh.** `reset` lets go of all activity: nothing active or refractory. What the memory knows, the
 settings and the clock stay as they are, so the next invoke starts from a quiet memory without reopening the file.
 
-**Listing assemblies.** `assemblies` lists every assembly in the order formed, 20 to a page (`#1 cat state <c, a, t>`);
+**Listing assemblies.** `assemblies` lists every assembly in the order formed, 20 to a page (`#1 cat <c, a, t>`);
 `assemblies 2` shows the second page, and the last line says which page this is and what to type for the next.
 `inspect cat` shows one assembly's members.
 
@@ -65,8 +65,8 @@ turn it on in their first line.
 for together) and `inspect`; and assemblies written by hand, as in step 9: `cat = <c, a, t> ; c -> a -> t`, or
 for short `cat = <c -> a -> t>`. Composition: an assembly's name inside a declaration is a part, as in
 `thedog = <the -> dog>`; a whole binds the fewest members of each part that still complete it, and a chain joins parts
-last member to first. Each
+last member to first. Decomposition: `ca = <cat{c, a}>` forms an assembly over just those members of cat, beside it. Each
 population hands out its members in order and goes round again once all are used; everything on one line shares
 members; `inspect cat` shows them. Step 4: invoke runs the gates, with every bond acting one moment later, members
-active, refractory or ready, and a state completing when more of it is counted than missing. Competition: rivals
+active, refractory or ready, and an assembly completing when more of it is counted than missing. Competition: rivals
 share a population but not its member; most support opens; a tie is held and none of the tied open.

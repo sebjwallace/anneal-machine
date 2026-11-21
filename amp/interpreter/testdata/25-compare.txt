@@ -14,13 +14,13 @@ b: 8 members, b{1..8}, all individuals
 i: 8 members, i{1..8}, all individuals
 r: 8 members, r{1..8}, all individuals
 amp> thedog = <t -> h -> e -> d -> o -> g>
-thedog: state <t, h, e, d, o, g> and transition t -> h -> e -> d -> o -> g
+thedog: <t, h, e, d, o, g> and transition t -> h -> e -> d -> o -> g
 amp> thecat = <t -> h -> e -> c -> a -> t>
-thecat: state <t, h, e, c, a, t> and transition t -> h -> e -> c -> a -> t
+thecat: <t, h, e, c, a, t> and transition t -> h -> e -> c -> a -> t
 amp> themouse = <t -> h -> e -> m -> o -> u -> s -> e>
-themouse: state <t, h, e, m, o, u, s, e> and transition t -> h -> e -> m -> o -> u -> s -> e
+themouse: <t, h, e, m, o, u, s, e> and transition t -> h -> e -> m -> o -> u -> s -> e
 amp> thebird = <t -> h -> e -> b -> i -> r -> d>
-thebird: state <t, h, e, b, i, r, d> and transition t -> h -> e -> b -> i -> r -> d
+thebird: <t, h, e, b, i, r, d> and transition t -> h -> e -> b -> i -> r -> d
 amp> compare thedog, thecat
 thedog ∩ thecat   t, h, e (3)
 thedog ∪ thecat   t, h, e, d, o, g, c, a (8)
@@ -33,7 +33,7 @@ amp> compare thedog, thecat, themouse, thebird
 thedog ∩ thecat ∩ themouse ∩ thebird   t, h, e (3)
 thedog ∪ thecat ∪ themouse ∪ thebird   t, h, e, d, o, g, c, a, m, u, s, b, i, r (14)
 amp> the = <t -> h -> e>
-the: state <t, h, e> and transition t -> h -> e
+the: <t, h, e> and transition t -> h -> e
 amp> compare the, thedog
 the ∩ thedog   t, h, e (3)
 the ∪ thedog   t, h, e, d, o, g (6)

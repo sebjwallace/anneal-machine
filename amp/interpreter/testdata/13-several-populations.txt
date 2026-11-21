@@ -27,4 +27,4 @@ amp> invoke, inspect = population 2
 invoke: 2 members, invoke{1..2}, all individuals
 inspect: 2 members, inspect{1..2}, all individuals
 amp> abc = <a -> b -> c>
-abc: state <a, b, c> and transition a -> b -> c
+abc: <a, b, c> and transition a -> b -> c

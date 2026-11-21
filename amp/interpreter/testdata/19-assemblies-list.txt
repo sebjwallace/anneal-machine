@@ -4,51 +4,51 @@ a: 8 members, a{1..8}, all individuals
 amp> assemblies
 no assemblies yet
 amp> w01 = <c -> a>
-w01: state <c, a> and transition c -> a
+w01: <c, a> and transition c -> a
 amp> w02 = <c -> a>
-w02: state <c, a> and transition c -> a
+w02: <c, a> and transition c -> a
 amp> w03 = <c -> a>
-w03: state <c, a> and transition c -> a
+w03: <c, a> and transition c -> a
 amp> w04 = <c -> a>
-w04: state <c, a> and transition c -> a
+w04: <c, a> and transition c -> a
 amp> w05 = <c -> a>
-w05: state <c, a> and transition c -> a
+w05: <c, a> and transition c -> a
 amp> w06 = <c -> a>
-w06: state <c, a> and transition c -> a
+w06: <c, a> and transition c -> a
 amp> w07 = <c -> a>
-w07: state <c, a> and transition c -> a
+w07: <c, a> and transition c -> a
 amp> w08 = <c -> a>
-w08: state <c, a> and transition c -> a
+w08: <c, a> and transition c -> a
 amp> w09 = <c -> a>
-w09: state <c, a> and transition c -> a
+w09: <c, a> and transition c -> a
 amp> w10 = <c -> a>
-w10: state <c, a> and transition c -> a
+w10: <c, a> and transition c -> a
 amp> w11 = <c -> a>
-w11: state <c, a> and transition c -> a
+w11: <c, a> and transition c -> a
 amp> assemblies
-#1 w01 state <c, a>
+#1 w01 <c, a>
 #2 w01 transition c -> a
-#3 w02 state <c, a>
+#3 w02 <c, a>
 #4 w02 transition c -> a
-#5 w03 state <c, a>
+#5 w03 <c, a>
 #6 w03 transition c -> a
-#7 w04 state <c, a>
+#7 w04 <c, a>
 #8 w04 transition c -> a
-#9 w05 state <c, a>
+#9 w05 <c, a>
 #10 w05 transition c -> a
-#11 w06 state <c, a>
+#11 w06 <c, a>
 #12 w06 transition c -> a
-#13 w07 state <c, a>
+#13 w07 <c, a>
 #14 w07 transition c -> a
-#15 w08 state <c, a>
+#15 w08 <c, a>
 #16 w08 transition c -> a
-#17 w09 state <c, a>
+#17 w09 <c, a>
 #18 w09 transition c -> a
-#19 w10 state <c, a>
+#19 w10 <c, a>
 #20 w10 transition c -> a
 page 1 of 2, assemblies 1 to 20 of 22; next: assemblies 2
 amp> assemblies 2
-#21 w11 state <c, a>
+#21 w11 <c, a>
 #22 w11 transition c -> a
 page 2 of 2, assemblies 21 to 22 of 22
 amp> assemblies 3

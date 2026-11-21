@@ -27,8 +27,8 @@ These are known to be needed and have been set aside until there is more to go o
   (For now a setting, off by default, one number for every population; input isn't limited by it; [invoke](invoke.md).)
 - **Timing.** (Settled: moments count on across invokes, one clock for the memory, walkthrough step 2; every bond
   acts one moment later, and members have three phases, active, refractory and ready, walkthrough step 4.)
-- **States bigger than three and their chains.** A chain brings one member a moment and gates count two moments, so a
-  flat state of four or more can't be completed by its own chain, nor by reading it in order. Overlapping parts of
+- **Assemblies bigger than three and their chains.** A chain brings one member a moment and gates count two moments, so a
+  flat assembly of four or more can't be completed by its own chain, nor by reading it in order. Overlapping parts of
   three work. What this means for long words and for what resolve forms (walkthrough step 4).
 - **Input that arrives at refractory members.** For now (the assistant's choice, to be confirmed): they can't come
   on; unexpected input turns on the population's ready members only.
@@ -43,7 +43,7 @@ These are known to be needed and have been set aside until there is more to go o
   `resolve #1, #2`).
 - **Inside a population.** (Settled: unexpected input turns all members on until one is chosen, walkthrough step 2;
   members for new assemblies are handed out in order, round robin, walkthrough step 3.)
-- **Arrivals versus held states.** Whether transitions act on what arrives (change) rather than on what is held, so a
+- **Arrivals versus held assemblies.** Whether transitions act on what arrives (change) rather than on what is held, so a
   count advances once per tick ([procedures](../docs/theories/procedures-from-states-and-transitions.md) §5).
 - **Returning from a reused subroutine** to the right caller, and **letting go** of a loop that never exits.
 - **Repeats in sequences.** (Settled, the owner: a population that appears more than once in an assembly gives a new

@@ -54,15 +54,29 @@ func (a Assembly) Populations() []Name { return populationsOf(a.members) }
 
 // Outline is an assembly as written, before the engine has chosen its members: what the world says, since members are
 // the engine's own business. Each name is a population, or an assembly to compose (a part).
+//
+// Only, where given for a name, takes just that assembly's members for those populations: decomposition, written
+// cat{c, a}. Only[i] belongs to Names[i]; nil (or a missing entry) means the name as a whole.
 type Outline struct {
 	Shape Shape
 	Names []Name
+	Only  [][]Name
 }
 
-// element is one name of an outline, looked up: a population, or a part, which is an assembly being composed.
+// only is the populations Names[i] is restricted to, or nil for the whole name.
+func (o Outline) only(i int) []Name {
+	if i < len(o.Only) {
+		return o.Only[i]
+	}
+	return nil
+}
+
+// element is one name of an outline, looked up: a population; a part, which is an assembly being composed; or some
+// of an assembly's members, taken exactly (decomposition).
 type element struct {
 	population Population // set for a population
 	part       []Member   // set for a part: the members of the assemblies with that name, each once, in order
+	exact      []Member   // set for decomposition: those members of an assembly, in its order
 }
 
 // DeclareAssemblies forms assemblies from the outlines and gives them all the name.
@@ -96,7 +110,7 @@ func (m *Memory) DeclareAssemblies(name Name, outlines []Outline) ([]Assembly, e
 		elements[i] = written
 		times := map[Name]int{}
 		for _, e := range written {
-			if e.part != nil {
+			if e.part != nil || e.exact != nil {
 				continue
 			}
 			p := e.population
@@ -128,15 +142,19 @@ func (m *Memory) DeclareAssemblies(name Name, outlines []Outline) ([]Assembly, e
 	return assemblies, nil
 }
 
-// stateMembers lists a state's members: each population's member, and a sample of each part, each member once.
+// stateMembers lists a state's members: each population's member, a sample of each part, and the exact members
+// decomposed from a whole, each member once.
 func stateMembers(elements []element, memberOf func(Population) Member) []Member {
 	var members []Member
 	for _, e := range elements {
-		taken := []Member{}
-		if e.part != nil {
+		var taken []Member
+		switch {
+		case e.exact != nil:
+			taken = e.exact
+		case e.part != nil:
 			taken = sample(e.part)
-		} else {
-			taken = append(taken, memberOf(e.population))
+		default:
+			taken = []Member{memberOf(e.population)}
 		}
 		for _, member := range taken {
 			if !slices.Contains(members, member) {
@@ -163,6 +181,10 @@ func chainMembers(elements []element, memberOf func(Population) Member) [][]Memb
 		chain = nil
 	}
 	for _, e := range elements {
+		if e.exact != nil {
+			chain = append(chain, e.exact...)
+			continue
+		}
 		if e.part == nil {
 			chain = append(chain, memberOf(e.population))
 			continue
@@ -200,32 +222,69 @@ func (m *Memory) Assemblies(name Name) ([]Assembly, error) {
 // outlineElements checks an outline against the rules for its shape and looks up each name: a population, or an
 // assembly to compose as a part.
 func (m *Memory) outlineElements(outline Outline) ([]element, error) {
-	if len(outline.Names) < 2 {
-		return nil, TooSmallError{Shape: outline.Shape}
-	}
 	elements := make([]element, len(outline.Names))
 	times := map[Name]int{}
+	parts := map[Name]bool{}
+	size := 0 // what the outline gives, to check against the shape's smallest: a member, or a part, counts one
 	for i, name := range outline.Names {
 		kind, declared := m.KindOf(name)
+		only := outline.only(i)
 		switch {
 		case !declared:
 			return nil, UndeclaredError{Name: name}
+		case only != nil && kind != AssemblyKind:
+			return nil, NotDecomposableError{Name: name, Is: kind}
+		case only != nil:
+			exact, err := m.decompose(name, only)
+			if err != nil {
+				return nil, err
+			}
+			elements[i] = element{exact: exact}
+			size += len(exact)
+			continue
 		case kind == AssemblyKind:
-			if slices.Contains(outline.Names[:i], name) {
+			if parts[name] {
 				return nil, RepeatedPartError{Part: name}
 			}
+			parts[name] = true
 			elements[i] = element{part: m.partMembers(name)}
+			size++
 		case kind == PopulationKind:
 			population := m.populations[name]
 			if times[name]++; times[name] > population.size {
 				return nil, TooFewToRepeatError{Population: name, Size: population.size, Times: times[name]}
 			}
 			elements[i] = element{population: population}
+			size++
 		default:
 			return nil, NotAPopulationOrAssemblyError{Name: name, Is: kind}
 		}
 	}
+	if size < 2 {
+		return nil, TooSmallError{Shape: outline.Shape}
+	}
 	return elements, nil
+}
+
+// decompose takes members of an assembly by matching the populations in order: each takes the next member of that
+// population after the one before, so thecat{c, a, t} is its last three letters and thecat{t, h, e} its first three,
+// and a repeat is written twice (abab{a, a}). The part forms beside the whole, with nothing cut out of it.
+func (m *Memory) decompose(name Name, populations []Name) ([]Member, error) {
+	whole := m.partMembers(name)
+	taken := make([]Member, 0, len(populations))
+	from := 0
+	for i, population := range populations {
+		at := slices.IndexFunc(whole[from:], func(member Member) bool { return member.population.name == population })
+		if at < 0 {
+			if i == 0 || !slices.ContainsFunc(whole, func(member Member) bool { return member.population.name == population }) {
+				return nil, NotInWholeError{Whole: name, Population: population}
+			}
+			return nil, NotInWholeError{Whole: name, Population: population, After: populations[i-1]}
+		}
+		taken = append(taken, whole[from+at])
+		from += at + 1
+	}
+	return taken, nil
 }
 
 // partMembers lists the members of every assembly with the name, each once, in the order they first appear.

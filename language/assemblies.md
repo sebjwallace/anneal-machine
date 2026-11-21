@@ -9,7 +9,7 @@ engine learns, unlike populations and communities, which are fixed.
 Angle brackets mark an assembly, to tell it apart from a plain set of active members in braces.
 
 ```
-A = ⟨1, 4, 7⟩      A is an assembly of members 1, 4 and 7
+A = <1, 4, 7>      A is an assembly of members 1, 4 and 7
 4 ∈ A              4 is a member of A
 ```
 
@@ -30,7 +30,7 @@ untouched ([assemblies first](../docs/theories/assemblies-first.md)).
 An assembly can be made of parts of other assemblies. That is composition.
 
 ```
-C = ⟨A{2, 4}, B{6, 7}⟩
+C = <A{2, 4}, B{6, 7}>
 ```
 
 **A name followed by braces means those members of that thing.** So `A{2, 4}` is members 2 and 4 of A, and C is
@@ -42,7 +42,7 @@ So composition is the union *plus* the bonds that make it complete as one whole.
 
 **Decided, and running in the interpreter** (`amp/interpreter/testdata/24-composition.txt`):
 
-- **An assembly's name inside a declaration is a part.** `thedog = <the, dog>` is a state over members "the" and
+- **An assembly's name inside a declaration is a part.** `thedog = <the, dog>` is an assembly over members "the" and
   "dog" already have, formed beside them with nothing rewired; it connects to them through those shared members.
   Parts and populations can be mixed: `<the, dog, s>`.
 - **A whole binds a sample of each part, not all of it** (the owner's sparse bonding): the fewest members that still
@@ -54,12 +54,32 @@ So composition is the union *plus* the bonds that make it complete as one whole.
 - A whole of two parts isn't completed by one part alone (2 of 4 is a tie); the chain joining them carries reading
   forwards, and once enough of the whole is counted it completes and holds.
 
+## Decomposition
+
+The counterpart of composition: a part formed from a whole, beside it, with nothing cut out of it. Written with the
+braces above, naming the populations whose members to take.
+
+**Decided, and running in the interpreter** (`amp/interpreter/testdata/27-decomposition.txt`):
+
+- `ca = <cat{c, a}>` is a new assembly over cat's own members for "c" and "a" (`c{1}, a{1}`), connected to cat through
+  them. Cat is unchanged.
+- Braces take **exactly** those members, not a sample: sampling is for binding parts into a whole; decomposition takes
+  a precise part.
+- **Braces match in order:** each population takes the next member of it after the one before. So
+  `thecat{t, h, e}` is its first three letters and `thecat{c, a, t}` its last three, and a repeat is written twice
+  (`abab{a, a}` is both "a"s).
+- In a chain the members go in the whole's order: `at = cat{a, t}` is `a{1} -> t{1}`.
+- **Short form:** `the = <thedog{t -> h -> e}>` is an assembly over those members and a transition through them, as
+  `<c -> a -> t>` is for populations. Inside braces, commas and arrows both give the order; use one or the other.
+- It mixes with populations, parts and other decompositions: `<cat{c, t}, cot{o}>`.
+- Braces take population names, and only on assemblies; a population's members are the engine's business.
+
 ## Forming
 
 One verb describes structure changing.
 
 ```
-forms ⟨1, 4, 7⟩     an assembly forms over 1, 4 and 7
+forms <1, 4, 7>     an assembly forms over 1, 4 and 7
 ```
 
 Nothing grows, hardens or breaks. Structure forms, and that is all. Forming always makes a new assembly; it never

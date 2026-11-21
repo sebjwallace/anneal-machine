@@ -48,7 +48,7 @@ with.
 
 ```
 gap = {!9, !12}
-forms ⟨9, 12⟩      bonded to the held context
+forms <9, 12>      bonded to the held context
 ```
 
 After forming, the same input comes out with an empty gap: it is accounted for. Nothing old is changed: forming always
