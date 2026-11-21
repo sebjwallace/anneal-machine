@@ -18,14 +18,20 @@ operations. They are the shapes forming takes, depending on what kind of incompl
 
 ## Over stored wholes, in the interpreter
 
-`anneal thedog, thecat, thebird, themouse` (short form `annl`) compares stored wholes and forms what that calls for,
-beside them, unnamed (shown by number, `#9`, until something names them):
+`anneal thedog, thecat, thebird, themouse` (short form `annl`) compares stored wholes and fits them into what the
+memory holds, forming only what is new, beside them, unnamed (shown by number, `#9`, until something names them):
 
-- **the shared part** (abstraction): the populations all of them cover, from the first-named whole's members, as an
-  assembly and a transition;
-- **what varies in each** (decomposition): the whole with the shared part's letters taken away in order, so a repeated
-  letter only the whole has is kept;
-- **each whole again from its parts** (composition), in the order the parts come in it, joined last member to first.
+- **the shared part** (abstraction): the longest run of letters, next to each other in order, that every whole has.
+  Not the set intersection: "thedog" and "thebird" also share "d", and "thedog" and "thefox" share "o", but in other
+  places; the run is "the" in each.
+- **what varies in each** (decomposition): what comes before and after the shared part.
+- **each whole again from its parts** (composition), in order, joined last member to first.
+- **Reuse first** (economy): a part the memory already holds is used, not formed again: an assembly with the same
+  letters in order (the very same members if there is one, otherwise the earliest formed) for the shared part and what
+  varies, and one with exactly the same members for a composed whole. Annealing the same wholes twice forms nothing
+  new (`amp/interpreter/testdata/32-anneal-reuse.txt`).
+- Found when trying it: once a part is shared, its continuations are shared too. With only "thedog" known, "the" at
+  the end of "cathe" runs on into "dog"; what came before "the" doesn't yet decide what follows (held context, open).
 
 Nothing existing changes. Running in `amp/interpreter/testdata/31-anneal.txt`: after `anneal thedog, thecat`, reading
 "the cat" completes the new version from its parts and holds; the flat original can't complete.

@@ -526,49 +526,92 @@ func displayName(a engine.Assembly) string {
 	return string(a.Name())
 }
 
-// anneal     thedog, thecat share t, h, e
-// forms      #5 <t, h, e> and transition #6 t -> h -> e          the shared part, from thedog
-// forms      #7 <d, o, g> and transition #8 d -> o -> g          what varies in thedog
-// forms      #9 <#5, #7> and transition #10 e -> d               thedog from its parts
+// anneal   thedog, thecat share t, h, e
+// reuses   the #1 <t, h, e> and transition #2 t -> h -> e   the shared part
+// forms    #11 <c, a, t> and transition #12 c -> a -> t     what varies in thecat
+// forms    #13 <#1, #11> and transition #14 e -> c          thecat from its parts
 func printAnnealing(a engine.Annealing) string {
 	rows := [][]string{{"anneal", fmt.Sprintf("%s share %s", strings.Join(namesOf(a.Of), ", "), strings.Join(namesOf(a.Shared), ", "))}}
-	rows = append(rows, []string{"forms", writeFormed(a.Part, nil), "the shared part, from " + string(a.From)})
+	pieces := []engine.Piece{a.Part}
+	about := "the shared part"
+	if !a.Part.Reused[0] {
+		about += ", from " + string(a.Of[0])
+	}
+	rows = append(rows, pieceRow(a.Part, nil, about))
 	for _, whole := range a.Wholes {
-		if len(whole.Varying) > 0 {
-			rows = append(rows, []string{"forms", writeFormed(whole.Varying, nil), "what varies in " + string(whole.Whole)})
+		both := !whole.Before.Empty() && !whole.After.Empty()
+		for _, side := range []struct {
+			piece engine.Piece
+			where string
+		}{{whole.Before, ", before the shared part"}, {whole.After, ", after the shared part"}} {
+			if len(side.piece.Assemblies) == 0 {
+				continue
+			}
+			label := "what varies in " + string(whole.Whole)
+			if both {
+				label += side.where
+			}
+			rows = append(rows, pieceRow(side.piece, nil, label))
+			pieces = append(pieces, side.piece)
 		}
-		if len(whole.Composed) > 0 {
-			varying := strings.Join(namesOf(whole.Varies), ", ")
-			if len(whole.Varying) > 0 {
-				varying = fmt.Sprintf("#%d", whole.Varying[0].ID())
+		if len(whole.Composed.Assemblies) > 0 {
+			var parts []string
+			for _, piece := range []engine.Piece{whole.Before, a.Part, whole.After} {
+				if !piece.Empty() {
+					parts = append(parts, pieceName(piece))
+				}
 			}
-			parts := []string{fmt.Sprintf("#%d", a.Part[0].ID()), varying}
-			if whole.VariesFirst {
-				parts[0], parts[1] = parts[1], parts[0]
-			}
-			rows = append(rows, []string{"forms", writeFormed(whole.Composed, parts), string(whole.Whole) + " from its parts"})
+			rows = append(rows, pieceRow(whole.Composed, parts, string(whole.Whole)+" from its parts"))
+			pieces = append(pieces, whole.Composed)
 		}
 	}
-	return writeTable(rows)
+	table := writeTable(rows)
+	if !slices.ContainsFunc(pieces, func(p engine.Piece) bool { return !p.AllReused() }) {
+		table += "\nnothing new formed"
+	}
+	return table
 }
 
-// writeFormed writes assemblies anneal formed by number: #5 <t, h, e> and transition #6 t -> h -> e. parts, when
-// given, stands in for the first one's members: #9 <#5, #7>.
-func writeFormed(formed []engine.Assembly, parts []string) string {
-	written := make([]string, len(formed))
-	for i, a := range formed {
+// pieceRow writes one piece anneal reused or formed: reuses the #1 <t, h, e> and transition #2 t -> h -> e. parts,
+// when given, stands in for the first assembly's members: #13 <#1, #11>.
+func pieceRow(piece engine.Piece, parts []string, about string) []string {
+	verb := func(reused bool) string {
+		if reused {
+			return "reuses"
+		}
+		return "forms"
+	}
+	var written strings.Builder
+	for i, a := range piece.Assemblies {
 		shown := namesOf(a.Populations())
 		if i == 0 && parts != nil {
 			shown = parts
 		}
-		written[i] = writeShaped(a.Shape(), shown)
-		if a.Shape() == engine.TransitionShape {
-			written[i] = fmt.Sprintf("transition #%d %s", a.ID(), writeShape(a.Shape(), shown))
-		} else {
-			written[i] = fmt.Sprintf("#%d %s", a.ID(), written[i])
+		switch {
+		case i == 0:
+		case piece.Reused[i] == piece.Reused[0]:
+			written.WriteString(" and ")
+		default:
+			written.WriteString(" and " + verb(piece.Reused[i]) + " ")
 		}
+		if a.Shape() == engine.TransitionShape {
+			fmt.Fprintf(&written, "transition #%d %s", a.ID(), writeShape(a.Shape(), shown))
+			continue
+		}
+		if a.Name() != "" {
+			written.WriteString(string(a.Name()) + " ")
+		}
+		fmt.Fprintf(&written, "#%d %s", a.ID(), writeShape(a.Shape(), shown))
 	}
-	return strings.Join(written, " and ")
+	return []string{verb(piece.Reused[0]), written.String(), about}
+}
+
+// pieceName refers to a piece within a composed whole: its assembly's number, or for a one-member piece, its letter.
+func pieceName(piece engine.Piece) string {
+	if len(piece.Assemblies) == 0 {
+		return string(piece.Members[0].Population().Name())
+	}
+	return fmt.Sprintf("#%d", piece.Assemblies[0].ID())
 }
 
 // writeShaped writes an assembly as <c, a, t>, and a transition as "transition c -> a -> t": the angle brackets

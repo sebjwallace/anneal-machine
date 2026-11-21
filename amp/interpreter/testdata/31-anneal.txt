@@ -76,7 +76,7 @@ error: anneal compares assemblies, and t is a population
 amp> anneal thedog, nope
 error: nope is not declared
 amp> anneal thedog, ca
-error: the intersection is empty
+error: anneal needs the wholes to share at least two letters in a row, and they share none
 amp> insp #99
 error: there is no #99
 amp> anneal = pop 2

@@ -250,3 +250,15 @@ type NoSuchAssemblyError struct {
 }
 
 func (e NoSuchAssemblyError) Error() string { return fmt.Sprintf("there is no #%d", e.ID) }
+
+// TooLittleSharedError: the wholes given to anneal don't share at least two letters next to each other in order.
+type TooLittleSharedError struct {
+	Shared []Name
+}
+
+func (e TooLittleSharedError) Error() string {
+	if len(e.Shared) == 0 {
+		return "anneal needs the wholes to share at least two letters in a row, and they share none"
+	}
+	return fmt.Sprintf("anneal needs the wholes to share at least two letters in a row, and they share only %s", e.Shared[0])
+}
