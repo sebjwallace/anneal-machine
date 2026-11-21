@@ -16,6 +16,22 @@ import "slices"
 // So what is on is the confirmed members and the winner's members. Members a gate brought on don't count towards
 // any score, or the winner, always complete, could never be outcompeted.
 
+// C105 (experiment branch only): how confirmations last, and what a burst projects up.
+type HoldRule int
+
+const (
+	HoldClear    HoldRule = iota // a burst clears every confirmation
+	HoldKeep                     // a burst clears every confirmation but the winner's
+	HoldKeepPlus                 // as HoldKeep, and a challenger that ties the winner takes over
+	HoldWindow                   // a burst clears nothing; a confirmation lasts Window moments
+)
+
+var (
+	Hold              = HoldClear
+	Window            = 4
+	BurstUpPickedOnly = false // a burst projects up only the member picked, not every member of the population
+)
+
 // GateOpens is the rule for an assembly's gate: open as soon as any of its members is confirmed (the owner's choice,
 // for now).
 func GateOpens(confirmed, size int) bool { return confirmed >= 1 }
@@ -49,20 +65,39 @@ type L1BMoment struct {
 
 // l1bState is what L1B carries from one moment to the next during a read.
 type l1bState struct {
-	confirmed map[Member]bool
+	confirmed map[Member]int // when each was confirmed
 	winner    int
 	coming    []Member // what the winner brings on next moment
 	on        map[Member]bool
 }
 
 func newL1BState() *l1bState {
-	return &l1bState{confirmed: map[Member]bool{}, on: map[Member]bool{}}
+	return &l1bState{confirmed: map[Member]int{}, on: map[Member]bool{}}
 }
 
 // l1bStep works out L1B's activity for a moment, from the state it carries and L1A's active members.
 func (m *Memory) l1bStep(s *l1bState, burst bool, active []Member) L1BMoment {
 	moment := L1BMoment{Was: s.winner}
-	if burst {
+	now := m.moment
+	switch {
+	case Hold == HoldWindow:
+		for member, at := range s.confirmed {
+			if now-at >= Window {
+				delete(s.confirmed, member)
+			}
+		}
+	case burst && (Hold == HoldKeep || Hold == HoldKeepPlus) && s.winner > 0:
+		keep := map[Member]bool{}
+		for _, member := range m.assemblies[s.winner-1].Members {
+			keep[member] = true
+		}
+		for member := range s.confirmed {
+			if !keep[member] {
+				delete(s.confirmed, member)
+			}
+		}
+		moment.Cleared = true
+	case burst:
 		clear(s.confirmed)
 		moment.Cleared = true
 	}
@@ -79,7 +114,7 @@ func (m *Memory) l1bStep(s *l1bState, burst bool, active []Member) L1BMoment {
 		}
 	}
 	for _, member := range m.projectedUp(active) {
-		s.confirmed[member] = true
+		s.confirmed[member] = now
 		if !s.on[member] {
 			moment.Up = append(moment.Up, member)
 		}
@@ -92,14 +127,15 @@ func (m *Memory) l1bStep(s *l1bState, burst bool, active []Member) L1BMoment {
 		}
 	}
 
-	best, bestScore, tied := 0, -1.0, false
+	bestScore := -1.0
+	var bests []int
 	for _, a := range m.assemblies {
 		g := Gate{Assembly: a.ID, Size: len(a.Members)}
 		for _, member := range a.Members {
 			if s.on[member] {
 				g.Counted++
 			}
-			if s.confirmed[member] {
+			if _, ok := s.confirmed[member]; ok {
 				g.Confirmed++
 			}
 		}
@@ -107,27 +143,39 @@ func (m *Memory) l1bStep(s *l1bState, burst bool, active []Member) L1BMoment {
 		if g.Open {
 			switch score := g.Score(); {
 			case score > bestScore:
-				best, bestScore, tied = a.ID, score, false
+				bestScore, bests = score, []int{a.ID}
 			case score == bestScore:
-				tied = true
+				bests = append(bests, a.ID)
 			}
 		}
 		moment.Gates = append(moment.Gates, g)
 	}
 	switch {
-	case best == 0:
+	case len(bests) == 0:
 		// no gate open: the winner, if any, holds
-	case s.winner == 0 && !tied:
-		s.winner = best
-	case s.winner > 0 && bestScore > moment.Gates[s.winner-1].Score():
-		if !tied {
-			s.winner = best
+	case s.winner == 0:
+		if len(bests) == 1 {
+			s.winner = bests[0]
+		}
+	case bestScore > moment.Gates[s.winner-1].Score():
+		if len(bests) == 1 {
+			s.winner = bests[0]
+		}
+	case Hold == HoldKeepPlus && bestScore == moment.Gates[s.winner-1].Score():
+		var others []int
+		for _, id := range bests {
+			if id != s.winner {
+				others = append(others, id)
+			}
+		}
+		if len(others) == 1 {
+			s.winner = others[0]
 		}
 	}
 	if s.winner != moment.Was && moment.Was > 0 {
 		// outcompeted: the old winner's members that aren't confirmed go off
 		for _, member := range m.assemblies[moment.Was-1].Members {
-			if !s.confirmed[member] {
+			if _, ok := s.confirmed[member]; !ok {
 				delete(s.on, member)
 			}
 		}

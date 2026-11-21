@@ -111,7 +111,11 @@ func (m *Memory) read(text string) (Reading, error) {
 			moment.Bond = &bond
 		}
 		moment.Predicts = m.primedBy(moment.Active)
-		moment.L1B = m.l1bStep(l1b, moment.Burst, moment.Active)
+		up := moment.Active
+		if BurstUpPickedOnly && moment.Burst {
+			up = []Member{moment.Member}
+		}
+		moment.L1B = m.l1bStep(l1b, moment.Burst, up)
 		i := len(reading.Moments)
 		last := i == len(names)-1
 		switch {

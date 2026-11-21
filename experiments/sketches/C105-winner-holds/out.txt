@@ -1,0 +1,179 @@
+Test bed A: assemblies cast by training (the cat meow ×2, the dog bark ×2)
+  #1 the_cat_meow
+  #2 the_
+  #3 the_dog_bark
+
+== clear    · burst projects up every member
+A1 the purring cat meow: ends on the_cat_meow · fail
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    2 2 2 2 2 2 3 3 3 3 3 3 1 1 1 1 1 1 1 1 
+A2 the loud dog bark: ends on the_dog_bark · pass
+    T h e _ L O U D _ d o g _ b a r k 
+    2 2 2 2 2 2 2 3 2 2 3 3 3 3 3 3 3 
+A3 the dog bark the cat meow: ends on the_ · fail
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A4 meow the cat: ends on the_ · fail
+    M e o w _ T h e _ c a t 
+    1 1 1 1 2 2 2 2 2 2 2 2 
+B: 15 takeovers, 10 weak
+
+== keep     · burst projects up every member
+A1 the purring cat meow: ends on the_ · fail
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A2 the loud dog bark: ends on the_ · fail
+    T h e _ L O U D _ d o g _ b a r k 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A3 the dog bark the cat meow: ends on the_ · fail
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A4 meow the cat: ends on the_ · fail
+    M e o w _ T h e _ c a t 
+    1 1 1 1 1 1 1 1 2 2 2 2 
+B: 3 takeovers, 0 weak
+
+== keep+    · burst projects up every member
+A1 the purring cat meow: ends on the_ · fail
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A2 the loud dog bark: ends on the_ · fail
+    T h e _ L O U D _ d o g _ b a r k 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A3 the dog bark the cat meow: ends on the_dog_bark · fail
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 2 3 2 3 2 3 2 3 3 
+A4 meow the cat: ends on the_ · fail
+    M e o w _ T h e _ c a t 
+    1 1 1 1 1 1 1 1 2 2 1 2 
+B: 27 takeovers, 0 weak
+
+== window 4 · burst projects up every member
+A1 the purring cat meow: ends on the_cat_meow · fail
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    2 2 2 2 2 2 2 3 3 3 3 3 3 1 1 1 1 1 1 1 
+A2 the loud dog bark: ends on the_dog_bark · pass
+    T h e _ L O U D _ d o g _ b a r k 
+    2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 
+A3 the dog bark the cat meow: ends on the_cat_meow · pass
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    2 2 2 2 2 2 3 3 3 3 3 3 3 2 2 2 2 2 2 1 1 1 1 1 1 
+A4 meow the cat: ends on the_cat_meow · pass
+    M e o w _ T h e _ c a t 
+    1 1 1 1 1 1 2 2 2 2 2 1 
+B: 19 takeovers, 4 weak
+
+== window 8 · burst projects up every member
+A1 the purring cat meow: ends on the_cat_meow · fail
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    2 2 2 2 2 2 2 2 2 2 2 3 3 3 1 1 1 1 1 1 
+A2 the loud dog bark: ends on the_dog_bark · pass
+    T h e _ L O U D _ d o g _ b a r k 
+    2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 
+A3 the dog bark the cat meow: ends on the_cat_meow · pass
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    2 2 2 2 2 2 2 2 2 3 3 3 3 3 2 2 2 2 2 2 2 2 1 1 1 
+A4 meow the cat: ends on the_ · fail
+    M e o w _ T h e _ c a t 
+    1 1 1 1 1 1 1 2 2 2 2 2 
+B: 16 takeovers, 0 weak
+
+== clear    · burst projects up picked only
+A1 the purring cat meow: ends on the_cat_meow · pass
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    . 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 
+A2 the loud dog bark: ends on the_dog_bark · pass
+    T h e _ L O U D _ d o g _ b a r k 
+    . 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 
+A3 the dog bark the cat meow: ends on the_cat_meow · pass
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    . 2 2 2 2 2 2 2 2 2 3 3 3 3 2 2 2 2 2 2 2 2 2 1 1 
+A4 meow the cat: ends on the_ · fail
+    M e o w _ T h e _ c a t 
+    . 1 1 1 1 1 2 2 2 2 2 2 
+B: 7 takeovers, 5 weak
+
+== keep     · burst projects up picked only
+A1 the purring cat meow: ends on the_ · fail
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A2 the loud dog bark: ends on the_ · fail
+    T h e _ L O U D _ d o g _ b a r k 
+    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A3 the dog bark the cat meow: ends on the_dog_bark · fail
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    . 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+A4 meow the cat: ends on the_ · fail
+    M e o w _ T h e _ c a t 
+    . 1 1 1 1 1 1 2 2 2 2 2 
+B: 5 takeovers, 1 weak
+
+== keep+    · burst projects up picked only
+A1 the purring cat meow: ends on the_ · fail
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A2 the loud dog bark: ends on the_ · fail
+    T h e _ L O U D _ d o g _ b a r k 
+    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+A3 the dog bark the cat meow: ends on the_cat_meow · pass
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    . 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 
+A4 meow the cat: ends on the_cat_meow · pass
+    M e o w _ T h e _ c a t 
+    . 1 1 1 1 1 1 2 2 2 2 1 
+B: 15 takeovers, 1 weak
+
+== window 4 · burst projects up picked only
+A1 the purring cat meow: ends on the_cat_meow · pass
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    . 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 
+A2 the loud dog bark: ends on the_dog_bark · pass
+    T h e _ L O U D _ d o g _ b a r k 
+    . 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 
+A3 the dog bark the cat meow: ends on the_cat_meow · pass
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    . 2 2 2 2 2 3 3 3 3 3 3 3 3 2 2 2 2 2 1 1 1 1 1 1 
+A4 meow the cat: ends on the_cat_meow · pass
+    M e o w _ T h e _ c a t 
+    . 1 1 1 1 1 2 2 2 2 2 1 
+B: 16 takeovers, 6 weak
+
+== window 8 · burst projects up picked only
+A1 the purring cat meow: ends on the_cat_meow · pass
+    T h e _ P U R R I N G _ C a t _ m e o w 
+    . 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 
+A2 the loud dog bark: ends on the_dog_bark · pass
+    T h e _ L O U D _ d o g _ b a r k 
+    . 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 
+A3 the dog bark the cat meow: ends on the_cat_meow · pass
+    T h e _ d o g _ b a r k _ T h e _ c a t _ m e o w 
+    . 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 2 2 2 2 2 2 1 1 1 
+A4 meow the cat: ends on the_ · fail
+    M e o w _ T h e _ c a t 
+    . 1 1 1 1 1 1 2 2 2 2 2 
+B: 11 takeovers, 2 weak
+
+Summary (seed 1)
+  rule | A1 | A2 | A3 | A4 | B takeovers | B weak
+  clear    · burst projects up every member | fail (the_cat_meow) | pass (the_dog_bark) | fail (the_) | fail (the_) | 15 | 10
+  keep     · burst projects up every member | fail (the_) | fail (the_) | fail (the_) | fail (the_) | 3 | 0
+  keep+    · burst projects up every member | fail (the_) | fail (the_) | fail (the_dog_bark) | fail (the_) | 27 | 0
+  window 4 · burst projects up every member | fail (the_cat_meow) | pass (the_dog_bark) | pass (the_cat_meow) | pass (the_cat_meow) | 19 | 4
+  window 8 · burst projects up every member | fail (the_cat_meow) | pass (the_dog_bark) | pass (the_cat_meow) | fail (the_) | 16 | 0
+  clear    · burst projects up picked only | pass (the_cat_meow) | pass (the_dog_bark) | pass (the_cat_meow) | fail (the_) | 7 | 5
+  keep     · burst projects up picked only | fail (the_) | fail (the_) | fail (the_dog_bark) | fail (the_) | 5 | 1
+  keep+    · burst projects up picked only | fail (the_) | fail (the_) | pass (the_cat_meow) | pass (the_cat_meow) | 15 | 1
+  window 4 · burst projects up picked only | pass (the_cat_meow) | pass (the_dog_bark) | pass (the_cat_meow) | pass (the_cat_meow) | 16 | 6
+  window 8 · burst projects up picked only | pass (the_cat_meow) | pass (the_dog_bark) | pass (the_cat_meow) | fail (the_) | 11 | 2
+
+Over seeds 1–10: seeds passing each test; B takeovers and weak takeovers, summed
+  clear    · burst projects up every member | A1  0 | A2 10 | A3  0 | A4  0 | all four  0 | B 141 takeovers,  95 weak
+  keep     · burst projects up every member | A1  0 | A2  0 | A3  0 | A4  0 | all four  0 | B  30 takeovers,   0 weak
+  keep+    · burst projects up every member | A1  0 | A2  0 | A3  0 | A4  0 | all four  0 | B 322 takeovers,   0 weak
+  window 4 · burst projects up every member | A1  0 | A2 10 | A3 10 | A4  9 | all four  0 | B 212 takeovers,  42 weak
+  window 8 · burst projects up every member | A1  0 | A2 10 | A3 10 | A4  0 | all four  0 | B 138 takeovers,   0 weak
+  clear    · burst projects up picked only | A1  3 | A2 10 | A3  9 | A4  0 | all four  0 | B  89 takeovers,  63 weak
+  keep     · burst projects up picked only | A1  0 | A2  0 | A3  0 | A4  3 | all four  0 | B  46 takeovers,  10 weak
+  keep+    · burst projects up picked only | A1  0 | A2  3 | A3  9 | A4  7 | all four  0 | B 234 takeovers,  10 weak
+  window 4 · burst projects up picked only | A1  3 | A2 10 | A3 10 | A4  9 | all four  2 | B 196 takeovers,  81 weak
+  window 8 · burst projects up picked only | A1  3 | A2 10 | A3 10 | A4  0 | all four  0 | B 119 takeovers,  24 weak
