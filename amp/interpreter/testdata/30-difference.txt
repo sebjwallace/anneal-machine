@@ -1,0 +1,50 @@
+amp> t, h, e, d, o, g, c, a, m, u, s = pop 8
+t: 8 members, t{1..8}, all individuals
+h: 8 members, h{1..8}, all individuals
+e: 8 members, e{1..8}, all individuals
+d: 8 members, d{1..8}, all individuals
+o: 8 members, o{1..8}, all individuals
+g: 8 members, g{1..8}, all individuals
+c: 8 members, c{1..8}, all individuals
+a: 8 members, a{1..8}, all individuals
+m: 8 members, m{1..8}, all individuals
+u: 8 members, u{1..8}, all individuals
+s: 8 members, s{1..8}, all individuals
+amp> thedog = <t -> h -> e -> d -> o -> g>
+thedog: <t, h, e, d, o, g> and transition t -> h -> e -> d -> o -> g
+amp> thecat = <t -> h -> e -> c -> a -> t>
+thecat: <t, h, e, c, a, t> and transition t -> h -> e -> c -> a -> t
+amp> themouse = <t -> h -> e -> m -> o -> u -> s -> e>
+themouse: <t, h, e, m, o, u, s, e> and transition t -> h -> e -> m -> o -> u -> s -> e
+amp> the = intr thedog, thecat, themouse
+the: intersection t, h, e, as <thedog{t, h, e}> and transition thedog{t, h, e}
+amp> dog = difference thedog, the
+dog: difference d, o, g, as <thedog{d, o, g}> and transition thedog{d, o, g}
+amp> insp dog
+dog: #9 <d{1}, o{1}, g{1}>; #10 transition d{1} -> o{1} -> g{1}
+amp> cat = diff thecat, the
+cat: difference c, a, t, as <thecat{c, a, t}> and transition thecat{c, a, t}
+amp> insp cat
+cat: #11 <c{1}, a{1}, t{3}>; #12 transition c{1} -> a{1} -> t{3}
+amp> mouse = DIFF themouse, the
+mouse: difference m, o, u, s, e, as <themouse{m, o, u, s, e}> and transition themouse{m, o, u, s, e}
+amp> insp mouse
+mouse: #13 <m{1}, o{2}, u{1}, s{1}, e{4}>; #14 transition m{1} -> o{2} -> u{1} -> s{1} -> e{4}
+amp> the2 = diff thecat, cat
+the2: difference t, h, e, as <thecat{t, h, e}> and transition thecat{t, h, e}
+amp> insp the2
+the2: #15 <t{2}, h{2}, e{2}>; #16 transition t{2} -> h{2} -> e{2}
+amp> x = diff the, thedog
+error: the difference is empty
+amp> x = diff dog, d, o
+error: the difference is g; an assembly needs at least two populations
+amp> x = difference thedog
+error: a difference needs at least two names
+amp> x = diff d, thedog
+error: a difference takes its members from the first name, and d is a population, not an assembly
+amp> x = diff thedog, nope
+error: nope is not declared
+amp> insp x
+error: x is not declared
+amp> diff = pop 2
+diff: 2 members, diff{1..2}, all individuals

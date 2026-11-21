@@ -81,6 +81,12 @@ population (t, h, e), then forms it by decomposition from the first-named whole:
 of them. Members come from the first name, so that word shares its members with the abstraction. Fewer than two shared
 populations is refused.
 
+## Decomposition by hand: difference
+
+`dog = difference thedog, the` (short form `diff`) forms what the first has that the others don't, from the first's
+own members, beside it: `<thedog{d -> o -> g}>`. The others' letters are taken away in order, not as a set, so
+`difference thecat, the` keeps cat's final "t" (`t{3}`) and `difference themouse, the` keeps mouse's final "e".
+
 ## Forming
 
 One verb describes structure changing.

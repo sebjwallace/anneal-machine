@@ -103,13 +103,18 @@ settings and the clock are unchanged. A REPL command, not an instruction: it doe
 for examining, not for running.
 
 **Short forms.** In the REPL, the instructions' mnemonics can be typed in place of their words, in lower or upper
-case: `pop` for `population`, `com` for `community`, `intr` for `intersection`, `inv` for `invoke`, `insp` for
-`inspect`. REPL commands that aren't instructions (`assemblies`, `reset`, `save`, `open`, `exit`, the settings) keep
+case: `pop` for `population`, `com` for `community`, `intr` for `intersection`, `diff` for `difference`, `inv` for
+`invoke`, `insp` for `inspect`. REPL commands that aren't instructions (`assemblies`, `reset`, `save`, `open`, `exit`, the settings) keep
 their words.
 
 **Intersection.** `the = intersection thedog, thecat` (or `intr`) forms what the names share as a new assembly beside
 them: the populations all of them cover, taken as members of the first named, in its order, as an assembly and a
 transition, exactly as `the = <thedog{t -> h -> e}>` would by hand. It is abstraction, done by hand.
+
+**Difference.** `dog = difference thedog, the` (or `diff`) forms what the first name has that the others don't, beside
+it, from the first's members: decomposition, done by hand. The others' letters are taken away **in order**, so a
+repeated letter only the first has is kept: `thecat − the` is c, a and thecat's last t, where a plain set difference
+would lose every t. With more than two names, each is taken away in turn.
 
 **Comparing.** `compare thedog, thecat` runs the set operations above (`INTR`, `UNI`, `DIFF`, `SYMD`, `CNT`, `SUB`) at the
 population level: an assembly stands for its members' populations, a community for its populations, a population

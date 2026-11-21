@@ -163,12 +163,16 @@ func (in *Interpreter) Run(line string) (string, error) {
 		return in.set(st), nil
 	case listAssembliesCommand:
 		return in.listAssemblies(st.page)
-	case intersectionDeclaration:
-		assemblies, shared, err := in.memory.DeclareIntersection(st.name, st.of)
+	case setDeclaration:
+		declare := in.memory.DeclareIntersection
+		if st.operation == difference {
+			declare = in.memory.DeclareDifference
+		}
+		assemblies, result, err := declare(st.name, st.of)
 		if err != nil {
 			return "", err
 		}
-		return printIntersection(st.name, st.of[0], shared, assemblies), nil
+		return printSetForming(st.operation, st.name, st.of[0], result, assemblies), nil
 	case compareCommand:
 		comparison, err := in.memory.Compare(st.names)
 		if err != nil {

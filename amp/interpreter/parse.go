@@ -41,11 +41,20 @@ type inspectCommand struct {
 	name engine.Name
 }
 
-// the = intersection thedog, thecat: what they share, formed as a new assembly beside them
-type intersectionDeclaration struct {
-	name engine.Name
-	of   []engine.Name
+// the = intersection thedog, thecat: what they share; dog = difference thedog, the: what the first has that the rest
+// don't. Either is formed as a new assembly beside them, from the first name's members.
+type setDeclaration struct {
+	operation setOperation
+	name      engine.Name
+	of        []engine.Name
 }
+
+type setOperation string
+
+const (
+	intersection setOperation = "intersection"
+	difference   setOperation = "difference"
+)
 
 // compare thedog, thecat: what they share and how they differ, by population
 type compareCommand struct {
@@ -98,19 +107,19 @@ type openCommand struct {
 	path string
 }
 
-func (populationDeclaration) isStatement()   {}
-func (communityDeclaration) isStatement()    {}
-func (assemblyDeclaration) isStatement()     {}
-func (invokeCommand) isStatement()           {}
-func (inspectCommand) isStatement()          {}
-func (settingCommand) isStatement()          {}
-func (listAssembliesCommand) isStatement()   {}
-func (budgetCommand) isStatement()           {}
-func (resetCommand) isStatement()            {}
-func (compareCommand) isStatement()          {}
-func (intersectionDeclaration) isStatement() {}
-func (saveCommand) isStatement()             {}
-func (openCommand) isStatement()             {}
+func (populationDeclaration) isStatement() {}
+func (communityDeclaration) isStatement()  {}
+func (assemblyDeclaration) isStatement()   {}
+func (invokeCommand) isStatement()         {}
+func (inspectCommand) isStatement()        {}
+func (settingCommand) isStatement()        {}
+func (listAssembliesCommand) isStatement() {}
+func (budgetCommand) isStatement()         {}
+func (resetCommand) isStatement()          {}
+func (compareCommand) isStatement()        {}
+func (setDeclaration) isStatement()        {}
+func (saveCommand) isStatement()           {}
+func (openCommand) isStatement()           {}
 
 // SyntaxError: the line isn't AMP the interpreter can read.
 type SyntaxError struct {
@@ -256,14 +265,18 @@ func (p *parser) declaration(names []engine.Name) (statement, error) {
 		return p.assemblies(name, first)
 	case first.isKeyword("community", "com"):
 		return p.community(name)
-	case first.isKeyword("intersection", "intr"):
+	case first.isKeyword("intersection", "intr"), first.isKeyword("difference", "diff"):
 		of, err := p.nameList(fmt.Sprintf("%q", first.text))
 		if err != nil {
 			return nil, err
 		}
-		return intersectionDeclaration{name: name, of: of}, nil
+		operation := intersection
+		if first.isKeyword("difference", "diff") {
+			operation = difference
+		}
+		return setDeclaration{operation: operation, name: name, of: of}, nil
 	default:
-		return nil, syntaxError("expected \"population\", \"community\", \"intersection\", an assembly or a transition after \"=\"%s", got(first))
+		return nil, syntaxError("expected \"population\", \"community\", \"intersection\", \"difference\", an assembly or a transition after \"=\"%s", got(first))
 	}
 }
 

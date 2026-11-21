@@ -1,6 +1,9 @@
 package engine
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // The reasons the engine refuses a request. Each is a value callers can match with errors.As.
 
@@ -187,29 +190,43 @@ func (e NotInWholeError) Error() string {
 	return fmt.Sprintf("%s has no member of %s", e.Whole, e.Population)
 }
 
-// TooFewForIntersectionError: an intersection was asked of fewer than two things.
-type TooFewForIntersectionError struct{}
-
-func (TooFewForIntersectionError) Error() string { return "an intersection needs at least two names" }
-
-// IntersectionSourceError: an intersection takes its members from the first name, which wasn't an assembly.
-type IntersectionSourceError struct {
-	Name Name
-	Is   Kind
+// TooFewNamesError: an intersection or a difference was asked of fewer than two things.
+type TooFewNamesError struct {
+	Operation string // "intersection" or "difference"
 }
 
-func (e IntersectionSourceError) Error() string {
-	return fmt.Sprintf("an intersection takes its members from the first name, and %s is %s, not an assembly", e.Name, e.Is.withArticle())
+func (e TooFewNamesError) Error() string {
+	return fmt.Sprintf("a%s %s needs at least two names", article(e.Operation), e.Operation)
 }
 
-// IntersectionTooSmallError: what the things share is too little to form an assembly from.
-type IntersectionTooSmallError struct {
-	Shared []Name
+// SourceError: an intersection or a difference takes its members from the first name, which wasn't an assembly.
+type SourceError struct {
+	Operation string
+	Name      Name
+	Is        Kind
 }
 
-func (e IntersectionTooSmallError) Error() string {
-	if len(e.Shared) == 0 {
-		return "the intersection is empty"
+func (e SourceError) Error() string {
+	return fmt.Sprintf("a%s %s takes its members from the first name, and %s is %s, not an assembly", article(e.Operation), e.Operation, e.Name, e.Is.withArticle())
+}
+
+// FormedTooSmallError: what an intersection or a difference leaves is too little to form an assembly from.
+type FormedTooSmallError struct {
+	Operation string
+	Result    []Name
+}
+
+func (e FormedTooSmallError) Error() string {
+	if len(e.Result) == 0 {
+		return fmt.Sprintf("the %s is empty", e.Operation)
 	}
-	return fmt.Sprintf("the intersection is %s; an assembly needs at least two populations", e.Shared[0])
+	return fmt.Sprintf("the %s is %s; an assembly needs at least two populations", e.Operation, e.Result[0])
+}
+
+// article is "n" before a word starting with a vowel, so "an intersection" and "a difference" read right.
+func article(word string) string {
+	if word != "" && strings.ContainsRune("aeiou", rune(word[0])) {
+		return "n"
+	}
+	return ""
 }

@@ -91,7 +91,7 @@ func difference(a, b []Name) []Name {
 // assembly over those members and a transition through them. It returns what it formed and the populations shared.
 func (m *Memory) DeclareIntersection(name Name, of []Name) ([]Assembly, []Name, error) {
 	if len(of) < 2 {
-		return nil, nil, TooFewForIntersectionError{}
+		return nil, nil, TooFewNamesError{Operation: "intersection"}
 	}
 	if err := m.refuseRedeclaration(name); err != nil {
 		return nil, nil, err
@@ -100,7 +100,7 @@ func (m *Memory) DeclareIntersection(name Name, of []Name) ([]Assembly, []Name, 
 	case !declared:
 		return nil, nil, UndeclaredError{Name: of[0]}
 	case kind != AssemblyKind:
-		return nil, nil, IntersectionSourceError{Name: of[0], Is: kind}
+		return nil, nil, SourceError{Operation: "intersection", Name: of[0], Is: kind}
 	}
 	comparison, err := m.Compare(of)
 	if err != nil {
@@ -108,7 +108,7 @@ func (m *Memory) DeclareIntersection(name Name, of []Name) ([]Assembly, []Name, 
 	}
 	shared := comparison.Intersection
 	if len(shared) < 2 {
-		return nil, nil, IntersectionTooSmallError{Shared: shared}
+		return nil, nil, FormedTooSmallError{Operation: "intersection", Result: shared}
 	}
 	from := []Name{of[0]}
 	assemblies, err := m.DeclareAssemblies(name, []Outline{
@@ -116,4 +116,74 @@ func (m *Memory) DeclareIntersection(name Name, of []Name) ([]Assembly, []Name, 
 		{Shape: TransitionShape, Names: from, Only: [][]Name{shared}},
 	})
 	return assemblies, shared, err
+}
+
+// DeclareDifference forms what the first name has that the others don't, beside it: the first's members, with each of
+// the others' letters taken away in order, as an assembly and a transition. Taking away in order keeps a repeated
+// letter that only the first has: thecat − the leaves c, a and thecat's last t, where a plain set difference would
+// lose every t. It returns what it formed and the populations left.
+func (m *Memory) DeclareDifference(name Name, of []Name) ([]Assembly, []Name, error) {
+	if len(of) < 2 {
+		return nil, nil, TooFewNamesError{Operation: "difference"}
+	}
+	if err := m.refuseRedeclaration(name); err != nil {
+		return nil, nil, err
+	}
+	switch kind, declared := m.KindOf(of[0]); {
+	case !declared:
+		return nil, nil, UndeclaredError{Name: of[0]}
+	case kind != AssemblyKind:
+		return nil, nil, SourceError{Operation: "difference", Name: of[0], Is: kind}
+	}
+	kept := m.partMembers(of[0])
+	for _, other := range of[1:] {
+		letters, err := m.lettersInOrder(other)
+		if err != nil {
+			return nil, nil, err
+		}
+		kept = takeAwayInOrder(kept, letters)
+	}
+	left := populationsOf(kept)
+	if len(kept) < 2 {
+		return nil, nil, FormedTooSmallError{Operation: "difference", Result: left}
+	}
+	return []Assembly{m.form(name, StateShape, kept), m.form(name, TransitionShape, kept)}, left, nil
+}
+
+// lettersInOrder lists the populations a declared name stands for, in order, repeats kept: an assembly's members'
+// populations, a community's populations, or a population itself.
+func (m *Memory) lettersInOrder(name Name) ([]Name, error) {
+	kind, declared := m.KindOf(name)
+	switch {
+	case !declared:
+		return nil, UndeclaredError{Name: name}
+	case kind == PopulationKind:
+		return []Name{name}, nil
+	case kind == CommunityKind:
+		return populationNames(m.communities[name].populations), nil
+	default:
+		return populationsOf(m.partMembers(name)), nil
+	}
+}
+
+// takeAwayInOrder removes from members, for each letter in turn, the next member of that population after the last
+// one removed; a letter with no such member is passed over.
+func takeAwayInOrder(members []Member, letters []Name) []Member {
+	removed := make([]bool, len(members))
+	from := 0
+	for _, letter := range letters {
+		at := slices.IndexFunc(members[from:], func(member Member) bool { return member.population.name == letter })
+		if at < 0 {
+			continue
+		}
+		removed[from+at] = true
+		from += at + 1
+	}
+	var kept []Member
+	for i, member := range members {
+		if !removed[i] {
+			kept = append(kept, member)
+		}
+	}
+	return kept
 }
