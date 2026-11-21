@@ -117,10 +117,10 @@ engineering, not language. It can start with the most obvious approach.
 
 *Provisional:* how much room RAM has, where the floor and the loading threshold sit, and how fast build-up fades.
 These are trade-offs, probably declared settings. The build-up may need a word of its own; "primed" is not used for
-it, because in the language that means pressed but not open, while loaded.
+it, because in the language that means reached but not open, while loaded.
 
-**Pressed is not active.** An assembly that gets a vote or two but doesn't make it into the sparse active set is only
-pressed (primed). Being primed doesn't make something winning.
+**Primed is not active.** An assembly that gets a vote or two but doesn't make it into the sparse active set is only
+primed. Being primed doesn't make something winning.
 
 ## Heat that won't settle
 

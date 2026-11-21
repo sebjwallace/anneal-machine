@@ -216,14 +216,14 @@ from "h". Open: what this means for longer words and for what resolve forms.
 
 ```
 invoke c
-moment 2   +a     chain c -> a opens it; the whole only presses it (1 of 2)
+moment 2   +a     chain c -> a opens it; the whole only primes it (1 of 2)
 moment 3   +t     chain a -> t, and the whole now has c and a (2 of 2)
 complete   #1 ⟨c, a, t⟩   3 of 3, in order
 ```
 
 ```
 invoke t
-moment 1   t      the whole presses c and a (1 of 2 each); nothing leads back from t
+moment 1   t      the whole primes c and a (1 of 2 each); nothing leads back from t
 incomplete #1 ⟨c, a, t⟩   1 of 3
 ```
 
@@ -269,7 +269,7 @@ invoke c, o, t
 ```
 moment 1   c        #2 expects a next
 moment 2   o        expected a (#2 c -> a); o was not expected
-moment 3   t        #1 presses: c and t present, a missing
+moment 3   t        #1 primes: c and t present, a missing
 incomplete #1 ⟨c, a, t⟩   2 of 3, missing a
            heat !o, and the steps c -> o, o -> t unpredicted
 ```

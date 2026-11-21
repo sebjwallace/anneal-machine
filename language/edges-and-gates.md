@@ -50,7 +50,7 @@ barks  =  dog & day                  from dog -> barks & day
 ## Logic from gates and topology
 
 - **AND is a gate.** An assembly invoked by two others opens only when enough of both are active: `{A, C} -> B`. A alone
-  presses B but doesn't open it.
+  primes B but doesn't open it.
 - **OR is topology.** Two separate routes into the same assembly, either one enough on its own.
 
 Both are fuzzy, because "enough" is a count, not a strict all.
@@ -94,7 +94,9 @@ language is flexible about gate types.
 
 *Provisional:* where the rule name sits in the notation (for example `{a, b} all -> c`) is not yet agreed.
 
-A gate that is **pressed but not opening** (some sources active, not enough) is marked hot with `!`. That is one of
+A member whose gate reads some counted sources but doesn't open is **primed** (the owner's word, replacing "pressed"):
+activity reached it, but not enough for it to come on, whether too little was counted, a rival won, a tie was held or
+the budget cut it. A primed gate is marked hot with `!`. That is one of
 the places heat shows.
 
 ## Gates have a limit

@@ -1,6 +1,8 @@
 package engine_test
 
 import (
+	"fmt"
+	"slices"
 	"testing"
 
 	"github.com/sebjwallace/anneal-machine/amp/engine"
@@ -74,8 +76,8 @@ func TestAWordWithARepeatIsNotARivalOfItself(t *testing.T) {
 	memory := engine.New()
 	mustValue(memory.DeclarePopulations([]engine.Name{"a", "b"}, 8))
 	mustValue(memory.DeclareAssemblies("abab", []engine.Outline{
-		{Shape: engine.StateShape, Populations: []engine.Name{"a", "b", "a", "b"}},
-		{Shape: engine.TransitionShape, Populations: []engine.Name{"a", "b", "a", "b"}},
+		{Shape: engine.StateShape, Names: []engine.Name{"a", "b", "a", "b"}},
+		{Shape: engine.TransitionShape, Names: []engine.Name{"a", "b", "a", "b"}},
 	}))
 
 	invocation := mustValue(memory.Invoke([][]engine.Name{{"a", "b"}}))
@@ -122,7 +124,7 @@ func TestInputIsNotLimitedByTheBudget(t *testing.T) {
 func TestRecallNeverTakesAPopulationPastItsBudget(t *testing.T) {
 	memory := engine.New()
 	mustValue(memory.DeclarePopulations([]engine.Name{"a", "b"}, 8))
-	mustValue(memory.DeclareAssemblies("long", []engine.Outline{{Shape: engine.StateShape, Populations: []engine.Name{"a", "b", "a", "b", "a", "b"}}}))
+	mustValue(memory.DeclareAssemblies("long", []engine.Outline{{Shape: engine.StateShape, Names: []engine.Name{"a", "b", "a", "b", "a", "b"}}}))
 	if err := memory.SetBudget(2); err != nil {
 		t.Fatal(err)
 	}
@@ -160,8 +162,8 @@ func TestResetLetsGoOfActivityAndNothingElse(t *testing.T) {
 	memory.SetRefractoryPeriod(true)
 	mustValue(memory.DeclarePopulations([]engine.Name{"c", "a", "t"}, 8))
 	mustValue(memory.DeclareAssemblies("cat", []engine.Outline{
-		{Shape: engine.StateShape, Populations: []engine.Name{"c", "a", "t"}},
-		{Shape: engine.TransitionShape, Populations: []engine.Name{"c", "a", "t"}},
+		{Shape: engine.StateShape, Names: []engine.Name{"c", "a", "t"}},
+		{Shape: engine.TransitionShape, Names: []engine.Name{"c", "a", "t"}},
 	}))
 	mustValue(memory.Invoke([][]engine.Name{{"c", "t"}}))
 	moment := memory.Moment()
@@ -175,5 +177,21 @@ func TestResetLetsGoOfActivityAndNothingElse(t *testing.T) {
 	}
 	if memory.Moment() != moment || memory.CountAssemblies() != 2 || !memory.HasRefractoryPeriod() {
 		t.Errorf("reset should keep the clock (%d, was %d), the assemblies (%d) and the settings", memory.Moment(), moment, memory.CountAssemblies())
+	}
+}
+
+func TestAWholeBindsTheFewestMembersThatCompleteEachPart(t *testing.T) {
+	memory := engine.New()
+	mustValue(memory.DeclarePopulations([]engine.Name{"h", "o", "u", "s", "e", "x"}, 8))
+	mustValue(memory.DeclareAssemblies("house", []engine.Outline{{Shape: engine.StateShape, Names: []engine.Name{"h", "o", "u", "s", "e"}}}))
+
+	whole := mustValue(memory.DeclareAssemblies("houses", []engine.Outline{{Shape: engine.StateShape, Names: []engine.Name{"house", "x"}}}))
+
+	var written []string
+	for _, member := range whole[0].Members() {
+		written = append(written, fmt.Sprintf("%s{%d}", member.Population().Name(), member.Number()))
+	}
+	if want := []string{"h{1}", "o{1}", "u{1}", "x{1}"}; !slices.Equal(written, want) {
+		t.Errorf("a five-member part should give its first three members, then x its own; got %v, want %v", written, want)
 	}
 }

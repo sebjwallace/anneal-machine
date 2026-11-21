@@ -40,6 +40,20 @@ Composition is close to a union, but not only a union. A plain union forgets whi
 they are joined. In an assembly the joining is the point: the bonds that tie the parts together are part of what it is.
 So composition is the union *plus* the bonds that make it complete as one whole.
 
+**Decided, and running in the interpreter** (`amp/interpreter/testdata/24-composition.txt`):
+
+- **An assembly's name inside a declaration is a part.** `thedog = <the, dog>` is a state over members "the" and
+  "dog" already have, formed beside them with nothing rewired; it connects to them through those shared members.
+  Parts and populations can be mixed: `<the, dog, s>`.
+- **A whole binds a sample of each part, not all of it** (the owner's sparse bonding): the fewest members that still
+  complete the part, which under the gate rule is more than half of it (2 of 3, 3 of 5), taken in order. C76 found the
+  smallest binding that completes to be the best: as reliable as binding every member, far cleaner, and far less work.
+  It follows from the gate rule, so it is a rule, not a setting.
+- **A chain joins parts last to first:** `the -> dog` bonds the last member of "the" to the first of "dog", so reading
+  carries on from one part into the next; each part's own structure carries what lies inside it.
+- A whole of two parts isn't completed by one part alone (2 of 4 is a tie); the chain joining them carries reading
+  forwards, and once enough of the whole is counted it completes and holds.
+
 ## Forming
 
 One verb describes structure changing.

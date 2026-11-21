@@ -106,7 +106,8 @@ for examining, not for running.
 second page. A REPL command for reading, not an instruction.
 
 **Seeing the phases.** `phases on` makes invoke also print every member's phase, moment by moment: one row per
-moment, one column per population, ● active, ◐ refractory, · ready. `phases off` stops it; `phases` shows the setting.
+moment, one column per population, ● active, ◦ primed (a gate reached it, but it didn't come on),
+· ready, and a blank for refractory. `phases off` stops it; `phases` shows the setting.
 A REPL display setting, not an instruction, and not saved.
 
 **Saving a session.** `save walkthrough.json` writes a snapshot of what the memory holds (populations, communities,

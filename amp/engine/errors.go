@@ -89,7 +89,7 @@ func (e TooSmallError) Error() string {
 	if e.Shape == TransitionShape {
 		return "a transition needs at least two steps"
 	}
-	return "a state needs at least two populations"
+	return "a state needs at least two populations or parts"
 }
 
 // TooFewToRepeatError: a population appears more times in one assembly than it has members. Each time it appears
@@ -130,4 +130,23 @@ type NegativeBudgetError struct {
 
 func (e NegativeBudgetError) Error() string {
 	return fmt.Sprintf("a budget can't be %d: give a number of members, or 0 for none", e.Budget)
+}
+
+// RepeatedPartError: the same assembly was named twice as a part of one assembly.
+type RepeatedPartError struct {
+	Part Name
+}
+
+func (e RepeatedPartError) Error() string {
+	return fmt.Sprintf("%s is a part twice in one assembly", e.Part)
+}
+
+// NotAPopulationOrAssemblyError: an assembly was written with a name that is neither a population nor an assembly.
+type NotAPopulationOrAssemblyError struct {
+	Name Name
+	Is   Kind
+}
+
+func (e NotAPopulationOrAssemblyError) Error() string {
+	return fmt.Sprintf("%s is %s, not a population or an assembly", e.Name, e.Is.withArticle())
 }

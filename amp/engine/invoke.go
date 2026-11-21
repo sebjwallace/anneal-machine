@@ -81,6 +81,8 @@ type Moment struct {
 	Competitions []Competition
 	// BudgetCuts are the populations whose recall the budget limited this moment.
 	BudgetCuts []BudgetCut
+	// Primed are the ready members a gate reached this moment without bringing them on (the owner's word).
+	Primed []Member
 }
 
 // Completion is how much of one state was counted during an invocation.
@@ -169,12 +171,14 @@ type nextMoment struct {
 	gates        map[int][]Gate
 	competitions []Competition
 	budgetCuts   []BudgetCut
+	primed       memberSet
 }
 
 // upcoming works out the next moment from the phases now and what arrives, without changing anything. Input a gate
 // expects turns on only the members expected; input nothing expects turns on all the population's ready members.
 func (m *Memory) upcoming(input []Population) nextMoment {
-	gates, competitions := m.openGates(m.active.union(m.refractory))
+	counted := m.active.union(m.refractory)
+	gates, competitions := m.openGates(counted)
 	next := nextMoment{input: input, unexpected: map[Name]bool{}, gates: gates, competitions: competitions}
 	for _, p := range input {
 		var arriving []int
@@ -202,7 +206,38 @@ func (m *Memory) upcoming(input []Population) nextMoment {
 	for member := range next.gates {
 		next.active.add(member)
 	}
+	next.primed = m.primed(counted, next.active)
 	return next
+}
+
+// primed finds the members that will be primed next moment (the owner's word): ready, with a gate reading at least
+// one counted source, yet not coming on, whether too little was counted, a rival won, a tie was held or the budget
+// cut it. It reports activity reaching a member; it changes nothing.
+func (m *Memory) primed(counted, comingOn memberSet) memberSet {
+	var primed memberSet
+	reached := func(member Member) bool { return m.isReady(member.index()) && !comingOn.has(member.index()) }
+	for _, a := range m.assemblies {
+		switch a.shape {
+		case StateShape:
+			present := countMembers(counted, a.members)
+			for _, member := range a.members {
+				others := present
+				if counted.has(member.index()) {
+					others--
+				}
+				if others > 0 && reached(member) {
+					primed.add(member.index())
+				}
+			}
+		case TransitionShape:
+			for i := 1; i < len(a.members); i++ {
+				if counted.has(a.members[i-1].index()) && reached(a.members[i]) {
+					primed.add(a.members[i].index())
+				}
+			}
+		}
+	}
+	return primed
 }
 
 // keepWithinBudget stops recall taking any population past its budget, removing from gates the members that don't
@@ -406,6 +441,9 @@ func (m *Memory) step(next nextMoment) Moment {
 			}
 			if m.refractory.has(member) {
 				moment.Refractory = append(moment.Refractory, m.memberAt(p, member))
+			}
+			if next.primed.has(member) {
+				moment.Primed = append(moment.Primed, m.memberAt(p, member))
 			}
 		}
 		if m.active.countIn(p) > 0 && m.active.intersection(m.assembled).countIn(p) == 0 {

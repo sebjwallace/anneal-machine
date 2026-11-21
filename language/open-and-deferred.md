@@ -35,6 +35,10 @@ These are known to be needed and have been set aside until there is more to go o
 - **How invoke ends.** For now (the assistant's choice, to be confirmed): after its input it runs until the next
   moment would be quiet (nothing active or refractory) or would repeat an earlier moment of the same invoke, which
   means something is holding.
+- **Competition between wholes that share a part.** "the dog" and "the cat", both composed with "the", share its
+  members, so they aren't rivals, and "the" brings back both. When the alternatives are different populations at the
+  same point of a chain, competition needs to rest on order (the same step leading on to different members), as the
+  walkthrough's `c -> a | o -> t` suggests, not on members being kept apart. Open.
 - **Competition** is built across assemblies (rivals share a population but not its member; most support opens; a
   tie is held and none of the tied open; [invoke](invoke.md)). Still open: a population's **budget**, and whether a
   rival should lose to one that itself lost (for now each rival is compared only with its own rivals).

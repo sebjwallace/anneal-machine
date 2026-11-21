@@ -21,10 +21,10 @@ held       repeating every 2 moments
 
 moment   c          a          t
 1        ●●●●●●●●   ········   ········
-2        ◐◐◐◐◐◐◐◐   ●·······   ········
-3        ●·······   ◐·······   ●·······
-4        ◐·······   ●·······   ◐·······
-● active   ◐ refractory   · ready
+2                   ●·······   ◦·······
+3        ●·······    ·······   ●·······
+4         ·······   ●·······    ·······
+● active   ◦ primed   · ready   blank: refractory
 amp> phases off
 phases: off
 amp> phases maybe

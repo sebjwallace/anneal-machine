@@ -52,17 +52,32 @@ func (a Assembly) Shape() Shape        { return a.shape }
 func (a Assembly) Members() []Member   { return slices.Clone(a.members) }
 func (a Assembly) Populations() []Name { return populationsOf(a.members) }
 
-// Outline is an assembly written at the population level, before the engine has chosen its members: what the world
-// says, since members are the engine's own business.
+// Outline is an assembly as written, before the engine has chosen its members: what the world says, since members are
+// the engine's own business. Each name is a population, or an assembly to compose (a part).
 type Outline struct {
-	Shape       Shape
-	Populations []Name
+	Shape Shape
+	Names []Name
 }
 
-// DeclareAssemblies forms an assembly for each outline and gives them all the name. A population that appears more
-// than once in an outline gives a new member for each time it appears (the owner's choice for repeats). Outlines
-// declared together share members by order of appearance: the second "a" in each outline is the same member. It is
-// refused, and nothing forms, if the name is taken or any outline breaks a rule.
+// element is one name of an outline, looked up: a population, or a part, which is an assembly being composed.
+type element struct {
+	population Population // set for a population
+	part       []Member   // set for a part: the members of the assemblies with that name, each once, in order
+}
+
+// DeclareAssemblies forms assemblies from the outlines and gives them all the name.
+//
+// A population gives a member of its own: a new one each time it appears in an outline (the owner's choice for
+// repeats), and outlines declared together share members by order of appearance, so the second "a" in each is the
+// same member.
+//
+// A part, an assembly named inside the outline, is composition: the new assembly uses the part's own members, so it
+// connects to the part through them (members are pivot points). A state binds a sample of each part: the fewest of
+// its members that still complete it, more than half, taken in order (as C76 found, the smallest binding that
+// completes is the best). A chain joins a part by its first member coming in and its last going out, so the -> dog
+// bonds the last member of "the" to the first of "dog".
+//
+// It is refused, and nothing forms, if the name is taken or any outline breaks a rule.
 func (m *Memory) DeclareAssemblies(name Name, outlines []Outline) ([]Assembly, error) {
 	if err := m.refuseRedeclaration(name); err != nil {
 		return nil, err
@@ -70,15 +85,21 @@ func (m *Memory) DeclareAssemblies(name Name, outlines []Outline) ([]Assembly, e
 	if len(outlines) == 0 {
 		return nil, NothingToAssembleError{Name: name}
 	}
+	elements := make([][]element, len(outlines))
 	var together []Population // each population once, in the order first written
 	needed := map[Name]int{}  // how many members of each population the line needs: the most times it appears in one outline
-	for _, outline := range outlines {
-		populations, err := m.outlinePopulations(outline)
+	for i, outline := range outlines {
+		written, err := m.outlineElements(outline)
 		if err != nil {
 			return nil, err
 		}
+		elements[i] = written
 		times := map[Name]int{}
-		for _, p := range populations {
+		for _, e := range written {
+			if e.part != nil {
+				continue
+			}
+			p := e.population
 			if times[p.name] == 0 && needed[p.name] == 0 {
 				together = append(together, p)
 			}
@@ -87,17 +108,71 @@ func (m *Memory) DeclareAssemblies(name Name, outlines []Outline) ([]Assembly, e
 		}
 	}
 	chosen := m.chooseMembers(together, needed)
-	assemblies := make([]Assembly, 0, len(outlines))
-	for _, outline := range outlines {
-		members := make([]Member, len(outline.Populations))
+	var assemblies []Assembly
+	for i, outline := range outlines {
 		times := map[Name]int{}
-		for i, population := range outline.Populations {
-			members[i] = chosen[population][times[population]]
-			times[population]++
+		memberOf := func(p Population) Member {
+			member := chosen[p.name][times[p.name]]
+			times[p.name]++
+			return member
 		}
-		assemblies = append(assemblies, m.form(name, outline.Shape, members))
+		switch outline.Shape {
+		case StateShape:
+			assemblies = append(assemblies, m.form(name, StateShape, stateMembers(elements[i], memberOf)))
+		case TransitionShape:
+			for _, chain := range chainMembers(elements[i], memberOf) {
+				assemblies = append(assemblies, m.form(name, TransitionShape, chain))
+			}
+		}
 	}
 	return assemblies, nil
+}
+
+// stateMembers lists a state's members: each population's member, and a sample of each part, each member once.
+func stateMembers(elements []element, memberOf func(Population) Member) []Member {
+	var members []Member
+	for _, e := range elements {
+		taken := []Member{}
+		if e.part != nil {
+			taken = sample(e.part)
+		} else {
+			taken = append(taken, memberOf(e.population))
+		}
+		for _, member := range taken {
+			if !slices.Contains(members, member) {
+				members = append(members, member)
+			}
+		}
+	}
+	return members
+}
+
+// sample is the fewest of a part's members that still complete it: more than half, the first ones in order.
+func sample(part []Member) []Member { return part[:len(part)/2+1] }
+
+// chainMembers lists the chains a transition forms. Populations follow one another in one chain. A part breaks it: the
+// chain so far ends at the part's first member, and a new one starts from its last, since the part's own structure
+// carries what lies between.
+func chainMembers(elements []element, memberOf func(Population) Member) [][]Member {
+	var chains [][]Member
+	var chain []Member
+	finish := func() {
+		if len(chain) >= 2 {
+			chains = append(chains, chain)
+		}
+		chain = nil
+	}
+	for _, e := range elements {
+		if e.part == nil {
+			chain = append(chain, memberOf(e.population))
+			continue
+		}
+		chain = append(chain, e.part[0])
+		finish()
+		chain = []Member{e.part[len(e.part)-1]}
+	}
+	finish()
+	return chains
 }
 
 // AllAssemblies lists every assembly, in the order formed.
@@ -122,14 +197,58 @@ func (m *Memory) Assemblies(name Name) ([]Assembly, error) {
 	return assemblies, nil
 }
 
-// outlinePopulations checks an outline against the rules for its shape and looks up its populations.
-func (m *Memory) outlinePopulations(outline Outline) ([]Population, error) {
-	if len(outline.Populations) < 2 {
+// outlineElements checks an outline against the rules for its shape and looks up each name: a population, or an
+// assembly to compose as a part.
+func (m *Memory) outlineElements(outline Outline) ([]element, error) {
+	if len(outline.Names) < 2 {
 		return nil, TooSmallError{Shape: outline.Shape}
 	}
-	populations := make([]Population, len(outline.Populations))
+	elements := make([]element, len(outline.Names))
 	times := map[Name]int{}
-	for i, name := range outline.Populations {
+	for i, name := range outline.Names {
+		kind, declared := m.KindOf(name)
+		switch {
+		case !declared:
+			return nil, UndeclaredError{Name: name}
+		case kind == AssemblyKind:
+			if slices.Contains(outline.Names[:i], name) {
+				return nil, RepeatedPartError{Part: name}
+			}
+			elements[i] = element{part: m.partMembers(name)}
+		case kind == PopulationKind:
+			population := m.populations[name]
+			if times[name]++; times[name] > population.size {
+				return nil, TooFewToRepeatError{Population: name, Size: population.size, Times: times[name]}
+			}
+			elements[i] = element{population: population}
+		default:
+			return nil, NotAPopulationOrAssemblyError{Name: name, Is: kind}
+		}
+	}
+	return elements, nil
+}
+
+// partMembers lists the members of every assembly with the name, each once, in the order they first appear.
+func (m *Memory) partMembers(name Name) []Member {
+	var members []Member
+	for _, id := range m.named[name] {
+		for _, member := range m.assemblies[id-1].members {
+			if !slices.Contains(members, member) {
+				members = append(members, member)
+			}
+		}
+	}
+	return members
+}
+
+// outlinePopulations checks members' populations against the rules for an assembly's shape, as declaring would.
+func (m *Memory) outlinePopulations(outline Outline) ([]Population, error) {
+	if len(outline.Names) < 2 {
+		return nil, TooSmallError{Shape: outline.Shape}
+	}
+	populations := make([]Population, len(outline.Names))
+	times := map[Name]int{}
+	for i, name := range outline.Names {
 		population, err := m.population(name)
 		if err != nil {
 			return nil, err

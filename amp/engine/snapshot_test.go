@@ -169,7 +169,7 @@ func TestASnapshotKeepsAssembliesInOrder(t *testing.T) {
 func TestASnapshotKeepsEachRepeatsOwnMember(t *testing.T) {
 	original := engine.New()
 	mustValue(original.DeclarePopulations([]engine.Name{"b", "o", "k"}, 8))
-	mustValue(original.DeclareAssemblies("book", []engine.Outline{{Shape: engine.TransitionShape, Populations: []engine.Name{"b", "o", "o", "k"}}}))
+	mustValue(original.DeclareAssemblies("book", []engine.Outline{{Shape: engine.TransitionShape, Names: []engine.Name{"b", "o", "o", "k"}}}))
 
 	var saved bytes.Buffer
 	if err := original.WriteSnapshot(&saved); err != nil {

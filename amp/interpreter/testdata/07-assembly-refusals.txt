@@ -7,7 +7,7 @@ t: 8 members, t{1..8}, all individuals
 amp> letters = community c, a
 letters: c, a (16 members)
 amp> cat = <c>
-error: a state needs at least two populations
+error: a state needs at least two populations or parts
 amp> cat = c
 error: expected "population", "community", a state or a transition after "=", got c
 amp> cat = c ->
@@ -19,7 +19,7 @@ error: expected a population name after "<", got >
 amp> cat = <c, z>
 error: z is not declared
 amp> cat = <c, letters>
-error: letters is a community, not a population
+error: letters is a community, not a population or an assembly
 amp> cat = <c, a, t> ;
 error: expected a state or a transition after ";"
 amp> cat = <c, a> c

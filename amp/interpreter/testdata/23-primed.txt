@@ -1,0 +1,26 @@
+amp> refractory on
+refractory: on
+amp> c, a, t, o = population 8
+c: 8 members, c{1..8}, all individuals
+a: 8 members, a{1..8}, all individuals
+t: 8 members, t{1..8}, all individuals
+o: 8 members, o{1..8}, all individuals
+amp> cat = <c -> a -> t>
+cat: state <c, a, t> and transition c -> a -> t
+amp> cot = <c -> o -> t>
+cot: state <c, o, t> and transition c -> o -> t
+amp> phases on
+phases: on
+amp> invoke {c, t}
+moment   active   refractory   why
+1        c, t
+2                 c, t         tie: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3 | cot <c, o, t> 2 of 3, c -> o -> t 2 of 3, held
+3                              tie: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3 | cot <c, o, t> 2 of 3, c -> o -> t 2 of 3, held
+incomplete   cat <c, a, t>   at most 2 of 3
+incomplete   cot <c, o, t>   at most 2 of 3
+
+moment   c          a          t          o
+1        ●●●●●●●●   ········   ●●●●●●●●   ········
+2                   ◦·······              ◦·······
+3        ◦◦······   ◦·······   ◦◦······   ◦·······
+● active   ◦ primed   · ready   blank: refractory

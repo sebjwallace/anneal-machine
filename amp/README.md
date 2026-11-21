@@ -45,7 +45,7 @@ settings and the clock stay as they are, so the next invoke starts from a quiet 
 `inspect cat` shows one assembly's members.
 
 **Seeing the phases.** `phases on` makes each invoke also print a table with one row per moment and one column per
-population, one mark per member (● active, ◐ refractory, · ready), so reading down shows how activity moves. Off by
+population, one mark per member (● active, ◦ primed, · ready, a blank for refractory), so reading down shows how activity moves. Off by
 default, and not saved: it is about what amp prints, not what the memory holds.
 
 **The budget** is a setting too, off by default: `budget 4` lets recall have at most 4 members of each population
@@ -58,7 +58,9 @@ turn it on in their first line.
 **Built so far:** walkthrough step 1, populations and communities (several populations at once:
 `a, b, c = population 8`); step 2, `invoke` (one moment per comma, braces
 for together) and `inspect`; and assemblies written by hand, as in step 9: `cat = <c, a, t> ; c -> a -> t`, or
-for short `cat = <c -> a -> t>`. Each
+for short `cat = <c -> a -> t>`. Composition: an assembly's name inside a declaration is a part, as in
+`thedog = <the -> dog>`; a whole binds the fewest members of each part that still complete it, and a chain joins parts
+last member to first. Each
 population hands out its members in order and goes round again once all are used; everything on one line shares
 members; `inspect cat` shows them. Step 4: invoke runs the gates, with every bond acting one moment later, members
 active, refractory or ready, and a state completing when more of it is counted than missing. Competition: rivals

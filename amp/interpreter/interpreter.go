@@ -144,11 +144,10 @@ func (in *Interpreter) Run(line string) (string, error) {
 		}
 		return printCommunity(community), nil
 	case assemblyDeclaration:
-		assemblies, err := in.memory.DeclareAssemblies(st.name, st.outlines)
-		if err != nil {
+		if _, err := in.memory.DeclareAssemblies(st.name, st.outlines); err != nil {
 			return "", err
 		}
-		return printAssemblyDeclaration(st.name, assemblies), nil
+		return printAssemblyDeclaration(st.name, st.outlines), nil
 	case invokeCommand:
 		invocation, err := in.memory.Invoke(st.moments)
 		if err != nil {

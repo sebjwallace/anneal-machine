@@ -25,6 +25,6 @@ error: expected a population name after "->", got >
 amp> x = <c -> a, t>
 error: expected "->" or ">" after a, got ,
 amp> x = <c>
-error: a state needs at least two populations
+error: a state needs at least two populations or parts
 amp> inspect x
 error: x is not declared

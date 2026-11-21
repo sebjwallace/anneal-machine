@@ -143,7 +143,7 @@ func (m *Memory) restoreAssembly(position int, saved snapshotAssembly) error {
 	}
 	outline := Outline{Shape: shape}
 	for _, member := range saved.Members {
-		outline.Populations = append(outline.Populations, member.Population)
+		outline.Names = append(outline.Names, member.Population)
 	}
 	populations, err := m.outlinePopulations(outline)
 	if err != nil {

@@ -266,8 +266,8 @@ func printSetting(s setting, on bool) string {
 
 // moment   c          a          t
 // 1        ●●●●●●●●   ········   ········
-// 2        ◐◐◐◐◐◐◐◐   ●·······   ········
-// ● active   ◐ refractory   · ready
+// 2                   ●·······   ◦·······
+// ● active   ◦ primed   · ready   blank: refractory
 //
 // One row per moment and one column per population, one mark per member, so reading down shows how activity moves.
 func printPhases(invocation engine.Invocation, populations []engine.Population) string {
@@ -282,7 +282,10 @@ func printPhases(invocation engine.Invocation, populations []engine.Population) 
 			markMember(phases, activation.Member, '●')
 		}
 		for _, member := range moment.Refractory {
-			markMember(phases, member, '◐')
+			markMember(phases, member, ' ')
+		}
+		for _, member := range moment.Primed {
+			markMember(phases, member, '◦')
 		}
 		row := []string{strconv.Itoa(moment.Number)}
 		for _, p := range populations {
@@ -294,7 +297,7 @@ func printPhases(invocation engine.Invocation, populations []engine.Population) 
 		}
 		rows = append(rows, row)
 	}
-	return writeTable(rows) + "\n● active   ◐ refractory   · ready"
+	return writeTable(rows) + "\n● active   ◦ primed   · ready   blank: refractory"
 }
 
 func markMember(phases map[engine.Population]map[int]rune, member engine.Member, mark rune) {
@@ -409,14 +412,15 @@ func countOf(n int, one, many string) string {
 }
 
 // cat: state <c, a, t> and transition c -> a -> t
+// thedog: state <the, dog> and transition the -> dog
 //
-// What was written, at the population level; inspect shows the members chosen.
-func printAssemblyDeclaration(name engine.Name, assemblies []engine.Assembly) string {
-	parts := make([]string, len(assemblies))
-	for i, a := range assemblies {
-		parts[i] = a.Shape().String() + " " + writeShape(a.Shape(), namesOf(a.Populations()))
+// What was written, populations and parts as named; inspect shows the members chosen.
+func printAssemblyDeclaration(name engine.Name, outlines []engine.Outline) string {
+	written := make([]string, len(outlines))
+	for i, outline := range outlines {
+		written[i] = outline.Shape.String() + " " + writeShape(outline.Shape, namesOf(outline.Names))
 	}
-	return fmt.Sprintf("%s: %s", name, strings.Join(parts, " and "))
+	return fmt.Sprintf("%s: %s", name, strings.Join(written, " and "))
 }
 
 // cat: #1 state <c{1}, a{1}, t{1}>; #2 transition c{1} -> a{1} -> t{1}

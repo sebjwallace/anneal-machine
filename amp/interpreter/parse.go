@@ -281,7 +281,7 @@ func (p *parser) outline(first token) ([]engine.Outline, error) {
 		if closing := p.take(); closing.kind != closeAngleToken {
 			return nil, syntaxError("expected \"->\" or \">\" after %s%s", steps[len(steps)-1], got(closing))
 		}
-		return []engine.Outline{{Shape: engine.StateShape, Populations: steps}, {Shape: engine.TransitionShape, Populations: steps}}, nil
+		return []engine.Outline{{Shape: engine.StateShape, Names: steps}, {Shape: engine.TransitionShape, Names: steps}}, nil
 	case first.kind == openAngleToken:
 		populations, err := p.names(`"<"`)
 		if err != nil {
@@ -290,13 +290,13 @@ func (p *parser) outline(first token) ([]engine.Outline, error) {
 		if closing := p.take(); closing.kind != closeAngleToken {
 			return nil, syntaxError("expected \",\" or \">\" after %s%s", populations[len(populations)-1], got(closing))
 		}
-		return []engine.Outline{{Shape: engine.StateShape, Populations: populations}}, nil
+		return []engine.Outline{{Shape: engine.StateShape, Names: populations}}, nil
 	default:
 		steps, err := p.steps(first)
 		if err != nil {
 			return nil, err
 		}
-		return []engine.Outline{{Shape: engine.TransitionShape, Populations: steps}}, nil
+		return []engine.Outline{{Shape: engine.TransitionShape, Names: steps}}, nil
 	}
 }
 

@@ -29,6 +29,9 @@ Every member is in one of three **phases** (decided by the owner):
 | **refractory** | it was active the moment before, so it can't come on this moment |
 | **ready** | neither: it can come on when a gate opens |
 
+A ready member can also be **primed** (the owner's word): a gate of its read some counted sources, but it didn't come
+on. Primed isn't a fourth phase, only a mark on a ready member, shown by `phases on` as `◦`.
+
 A member active for one moment is refractory for the next, then ready. **The refractory period is a setting, off by
 default** (the owner's choice, for testing): `refractory on`, `refractory off`, or `refractory` to show it. Off, a
 member active one moment is ready the next, nothing is ever refractory, and a held state stays fully active, repeating
@@ -57,7 +60,7 @@ Sparsity is written with a slash: the active set out of the population it is dra
 | Mark | Meaning | Example |
 |---|---|---|
 | `+` | **recalled**: brought back by completion, not arrived from the world | `{1, 4, +7}`: 1 and 4 arrived, 7 was brought back |
-| `!` | **heat**: a hot member, or a gate that is pressed but not opening | `{1, !9}`: 9 is active and nothing holds it |
+| `!` | **heat**: a hot member, or a primed gate (reached, but not opening) | `{1, !9}`: 9 is active and nothing holds it |
 
 The `+` mark matters for the open question of whether recalled members may take part in forming (see
 [heat and learning](heat-and-learning.md)).
