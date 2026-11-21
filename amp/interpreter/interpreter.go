@@ -1,8 +1,14 @@
-// Package interpreter reads AMP, carries it out on the engine's memory, and prints the result back in AMP.
+// Package interpreter reads a line of AMP, carries it out on the engine and prints the result back.
+//
+// The fresh start knows: declaring populations, reading text (invoke "..."), listing bonds, inspecting a population,
+// the seed, and saving and opening snapshots.
 package interpreter
 
 import (
+	"errors"
 	"fmt"
+	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/sebjwallace/anneal-machine/amp/engine"
@@ -10,259 +16,215 @@ import (
 )
 
 type Interpreter struct {
-	memory *engine.Memory
-	file   string // the current file: the snapshot last opened or saved, which save on its own saves to
-	// showPhases is whether invoke also prints each member's phase, moment by moment. It belongs to amp's display,
-	// not to the memory, so it isn't saved.
-	showPhases bool
+	memory  *engine.Memory
+	current string // the file last opened or saved
 }
 
-// NoFileToSaveError: save was given no file name, and no file has been opened or saved yet.
-type NoFileToSaveError struct{}
+func New(memory *engine.Memory) *Interpreter { return &Interpreter{memory: memory} }
 
-func (NoFileToSaveError) Error() string {
-	return "no file to save to yet: give one, as in save walkthrough.json"
-}
+// Memory is the memory the interpreter works on.
+func (in *Interpreter) Memory() *engine.Memory { return in.memory }
 
-func New(memory *engine.Memory) *Interpreter {
-	return &Interpreter{memory: memory}
-}
+var (
+	namePattern        = `[A-Za-z_][A-Za-z0-9_]*`
+	populationsPattern = regexp.MustCompile(`^(` + namePattern + `(?:\s*,\s*` + namePattern + `)*)\s*=\s*(?:population|pop)\s+(-?\d+)$`)
+	invokePattern      = regexp.MustCompile(`^(?:invoke|inv)\s+"(.*)"$`)
+	inspectPattern     = regexp.MustCompile(`^(?:inspect|insp)\s+(` + namePattern + `)$`)
+)
 
-// inspect looks inside a population or an assembly.
-func (in *Interpreter) inspect(name engine.Name) (string, error) {
-	switch kind, _ := in.memory.KindOf(name); kind {
-	case engine.AssemblyKind:
-		assemblies, err := in.memory.Assemblies(name)
-		if err != nil {
-			return "", err
-		}
-		return printAssemblies(name, assemblies), nil
-	case engine.CommunityKind:
-		return "", NotInspectableError{Name: name, Is: kind}
+// Run carries out one line and returns what to print.
+func (in *Interpreter) Run(line string) (string, error) {
+	line = strings.TrimSpace(line)
+	if i := strings.Index(line, "//"); i >= 0 && !strings.Contains(line[:i], `"`) {
+		line = strings.TrimSpace(line[:i])
 	}
-	inspection, err := in.memory.Inspect(name)
+	switch {
+	case line == "":
+		return "", nil
+	case populationsPattern.MatchString(line):
+		return in.declare(populationsPattern.FindStringSubmatch(line))
+	case invokePattern.MatchString(line):
+		return in.read(invokePattern.FindStringSubmatch(line)[1])
+	case inspectPattern.MatchString(line):
+		return in.inspect(engine.Name(inspectPattern.FindStringSubmatch(line)[1]))
+	case line == "bonds":
+		return in.bonds(), nil
+	case line == "seed":
+		return fmt.Sprintf("seed %d", in.memory.Seed()), nil
+	case strings.HasPrefix(line, "seed "):
+		n, err := strconv.ParseUint(strings.TrimSpace(strings.TrimPrefix(line, "seed ")), 10, 64)
+		if err != nil {
+			return "", errors.New("seed takes a whole number, as in seed 7")
+		}
+		in.memory.SetSeed(n)
+		return fmt.Sprintf("seed %d", n), nil
+	case line == "save" || strings.HasPrefix(line, "save "):
+		return in.save(strings.TrimSpace(strings.TrimPrefix(line, "save")))
+	case strings.HasPrefix(line, "open "):
+		return in.Open(strings.TrimSpace(strings.TrimPrefix(line, "open ")))
+	}
+	return "", fmt.Errorf("can't read %q", line)
+}
+
+func (in *Interpreter) declare(match []string) (string, error) {
+	size, err := strconv.Atoi(match[2])
 	if err != nil {
 		return "", err
 	}
-	return printInspection(inspection), nil
-}
-
-// NotInspectableError: inspect looks inside populations and assemblies, and the name is something else.
-type NotInspectableError struct {
-	Name engine.Name
-	Is   engine.Kind
-}
-
-func (e NotInspectableError) Error() string {
-	return fmt.Sprintf("%s is a %s, not a population or an assembly", e.Name, e.Is)
-}
-
-// assembliesPerPage is how many assemblies one page lists: enough to scan, few enough to fit a terminal window.
-const assembliesPerPage = 20
-
-// NoSuchPageError: a page was asked for past the last.
-type NoSuchPageError struct {
-	Page, Pages int
-}
-
-func (e NoSuchPageError) Error() string {
-	if e.Pages == 1 {
-		return fmt.Sprintf("page %d doesn't exist: there is 1 page of assemblies", e.Page)
+	var names []engine.Name
+	for _, name := range strings.Split(match[1], ",") {
+		names = append(names, engine.Name(strings.TrimSpace(name)))
 	}
-	return fmt.Sprintf("page %d doesn't exist: there are %d pages of assemblies", e.Page, e.Pages)
+	declared, err := in.memory.DeclarePopulations(names, size)
+	if err != nil {
+		return "", err
+	}
+	lines := make([]string, len(declared))
+	for i, p := range declared {
+		lines[i] = fmt.Sprintf("%s: population of %d", p.Name(), p.Size())
+	}
+	return strings.Join(lines, "\n"), nil
 }
 
-// listAssemblies lists one page of every assembly, in the order formed.
-func (in *Interpreter) listAssemblies(page int) (string, error) {
-	all := in.memory.AllAssemblies()
-	if len(all) == 0 {
-		return "no assemblies yet", nil
+func (in *Interpreter) read(text string) (string, error) {
+	reading, err := in.memory.Read(text)
+	if err != nil {
+		return "", err
 	}
-	pages := (len(all) + assembliesPerPage - 1) / assembliesPerPage
-	if page > pages {
-		return "", NoSuchPageError{Page: page, Pages: pages}
-	}
-	first := (page - 1) * assembliesPerPage
-	shown := all[first:min(first+assembliesPerPage, len(all))]
-	return printAssemblyList(shown, first, len(all), page, pages), nil
+	return PrintReading(reading), nil
 }
 
-// set switches a setting, if asked, and says what it is now.
-func (in *Interpreter) set(command settingCommand) string {
-	on := command.change == turnOn
-	switch command.setting {
-	case refractorySetting:
-		if command.change != showSetting {
-			in.memory.SetRefractoryPeriod(on)
+// PrintReading writes a read moment by moment, then a summary line: the text with each character that burst in
+// upper case, and how many burst and how many bonds formed.
+func PrintReading(r engine.Reading) string {
+	rows := [][]string{{"moment", "", "arrived", "member", "bond formed", "primes next"}}
+	burst, formed := 0, 0
+	var marks strings.Builder
+	for _, moment := range r.Moments {
+		arrived := "primed"
+		if moment.Burst {
+			arrived = fmt.Sprintf("burst (%d on)", len(moment.Active))
+			burst++
+		} else if len(moment.Primed) > 1 {
+			arrived = "primed: " + joinMembers(moment.Primed)
 		}
-		on = in.memory.HasRefractoryPeriod()
-	case phasesSetting:
-		if command.change != showSetting {
-			in.showPhases = on
+		member := moment.Member.String()
+		if moment.New {
+			member += " new"
 		}
-		on = in.showPhases
+		bond := ""
+		if moment.Bond != nil {
+			bond = moment.Bond.String()
+			formed++
+		}
+		rows = append(rows, []string{strconv.Itoa(moment.Number), string(moment.Population), arrived, member, bond, joinMembers(moment.Predicts)})
+		mark := string(moment.Population)
+		if moment.Burst {
+			mark = strings.ToUpper(mark)
+		}
+		marks.WriteString(mark)
 	}
-	return printSetting(command.setting, on)
+	summary := fmt.Sprintf("%s · %d of %d burst · %d %s formed", marks.String(), burst, len(r.Moments), formed, plural(formed, "bond", "bonds"))
+	return table(rows) + "\n" + summary
 }
 
-// Open replaces the whole memory with the snapshot at path, makes it the current file, and says what it holds. If the
-// snapshot can't be read, the memory and the current file are left as they were.
+func (in *Interpreter) bonds() string {
+	bonds := in.memory.Bonds()
+	if len(bonds) == 0 {
+		return "no bonds yet"
+	}
+	lines := make([]string, len(bonds))
+	for i, b := range bonds {
+		lines[i] = b.String()
+	}
+	return strings.Join(lines, "\n")
+}
+
+func (in *Interpreter) inspect(name engine.Name) (string, error) {
+	p, ok := in.memory.Population(name)
+	if !ok {
+		return "", fmt.Errorf("%s isn't a population", name)
+	}
+	selected := in.memory.Selected(name)
+	lines := []string{fmt.Sprintf("%s: population of %d · %d %s · %d %s", name, p.Size(),
+		len(selected), plural(len(selected), "member", "members"),
+		p.Size()-len(selected), plural(p.Size()-len(selected), "individual", "individuals"))}
+	into := map[engine.Member][]engine.Member{}
+	for _, b := range in.memory.Bonds() {
+		if b.To.Population == name {
+			into[b.To] = append(into[b.To], b.From)
+		}
+	}
+	for _, member := range selected {
+		line := "  " + member.String()
+		if from := into[member]; len(from) > 0 {
+			line += " · from " + joinMembers(from)
+		}
+		if to := in.memory.BondsFrom(member); len(to) > 0 {
+			line += " · to " + joinMembers(to)
+		}
+		lines = append(lines, line)
+	}
+	return strings.Join(lines, "\n"), nil
+}
+
+func (in *Interpreter) save(path string) (string, error) {
+	if path == "" {
+		path = in.current
+	}
+	if path == "" {
+		return "", errors.New("save to which file? as in save reading.json")
+	}
+	if err := snapshot.Save(path, in.memory); err != nil {
+		return "", err
+	}
+	in.current = path
+	return "saved " + path, nil
+}
+
+// Open replaces the memory with the snapshot at path.
 func (in *Interpreter) Open(path string) (string, error) {
 	memory, err := snapshot.Open(path)
 	if err != nil {
 		return "", err
 	}
-	in.memory, in.file = memory, path
-	return fmt.Sprintf("opened %s: %s", path, countDeclarations(memory)), nil
+	in.memory, in.current = memory, path
+	return fmt.Sprintf("opened %s: %d populations, %d bonds", path, len(memory.Populations()), len(memory.Bonds())), nil
 }
 
-// Run reads one line of AMP, carries it out, and returns what to print back. A blank line does nothing.
-// The error is a SyntaxError, the engine's reason for refusing, or why a file couldn't be saved or opened.
-func (in *Interpreter) Run(line string) (string, error) {
-	if strings.TrimSpace(line) == "" {
-		return "", nil
+func joinMembers(members []engine.Member) string {
+	parts := make([]string, len(members))
+	for i, m := range members {
+		parts[i] = m.String()
 	}
-	st, err := parse(line)
-	if err != nil {
-		return "", err
-	}
-	switch st := st.(type) {
-	case populationDeclaration:
-		populations, err := in.memory.DeclarePopulations(st.names, st.size)
-		if err != nil {
-			return "", err
-		}
-		lines := make([]string, len(populations))
-		for i, population := range populations {
-			lines[i] = printPopulation(population, in.memory.Individuals(population))
-		}
-		return strings.Join(lines, "\n"), nil
-	case communityDeclaration:
-		community, err := in.memory.DeclareCommunity(st.name, st.populations)
-		if err != nil {
-			return "", err
-		}
-		return printCommunity(community), nil
-	case assemblyDeclaration:
-		if _, err := in.memory.DeclareAssemblies(st.name, st.outlines); err != nil {
-			return "", err
-		}
-		return printAssemblyDeclaration(st.name, st.outlines), nil
-	case invokeCommand:
-		declared, err := in.declareForReading(st.fromText)
-		if err != nil {
-			return "", err
-		}
-		invocation, err := in.memory.Invoke(st.moments)
-		if err != nil {
-			return "", err
-		}
-		printed := in.printInvoked(invocation)
-		if len(declared) > 0 {
-			printed = printDeclaredForReading(declared) + "\n" + printed
-		}
-		return printed, nil
-	case inspectCommand:
-		if st.id != 0 {
-			a, err := in.memory.AssemblyByID(st.id)
-			if err != nil {
-				return "", err
-			}
-			if a.Name() == "" {
-				return writeAssemblyMembers(a), nil
-			}
-			return printAssemblies(a.Name(), []engine.Assembly{a}), nil
-		}
-		return in.inspect(st.name)
-	case annealCommand:
-		annealing, err := in.memory.Anneal(st.wholes)
-		if err != nil {
-			return "", err
-		}
-		return printAnnealing(annealing), nil
-	case settingCommand:
-		return in.set(st), nil
-	case listAssembliesCommand:
-		return in.listAssemblies(st.page)
-	case setDeclaration:
-		declare := in.memory.DeclareIntersection
-		if st.operation == difference {
-			declare = in.memory.DeclareDifference
-		}
-		assemblies, result, err := declare(st.name, st.of)
-		if err != nil {
-			return "", err
-		}
-		return printSetForming(st.operation, st.name, st.of[0], result, assemblies), nil
-	case compareCommand:
-		comparison, err := in.memory.Compare(st.names)
-		if err != nil {
-			return "", err
-		}
-		return printComparison(comparison), nil
-	case resetCommand:
-		in.memory.Reset()
-		return "reset: nothing active or refractory", nil
-	case budgetCommand:
-		switch st.change {
-		case turnOn:
-			if err := in.memory.SetBudget(st.members); err != nil {
-				return "", err
-			}
-		case turnOff:
-			if err := in.memory.SetBudget(0); err != nil {
-				return "", err
-			}
-		}
-		return printBudget(in.memory.Budget()), nil
-	case saveCommand:
-		path := st.path
-		if path == "" {
-			path = in.file
-		}
-		if path == "" {
-			return "", NoFileToSaveError{}
-		}
-		if err := snapshot.Save(path, in.memory); err != nil {
-			return "", err
-		}
-		in.file = path
-		return fmt.Sprintf("saved %s: %s", path, countDeclarations(in.memory)), nil
-	case openCommand:
-		return in.Open(st.path)
-	}
-	panic(fmt.Sprintf("interpreter: no way to run %T", st))
+	return strings.Join(parts, ", ")
 }
 
-// readingPopulationSize is how many members a population declared for reading gets: the size used so far.
-const readingPopulationSize = 8
-
-// declareForReading declares the populations quoted text reads that aren't declared yet. It is all or nothing: if any
-// of them is already the name of something else, nothing is declared.
-func (in *Interpreter) declareForReading(populations []engine.Name) ([]engine.Name, error) {
-	var missing []engine.Name
-	for _, name := range populations {
-		kind, declared := in.memory.KindOf(name)
-		switch {
-		case !declared:
-			missing = append(missing, name)
-		case kind != engine.PopulationKind:
-			return nil, engine.NotAPopulationError{Name: name, Is: kind}
-		}
+func plural(n int, one, many string) string {
+	if n == 1 {
+		return one
 	}
-	if len(missing) == 0 {
-		return nil, nil
-	}
-	if _, err := in.memory.DeclarePopulations(missing, readingPopulationSize); err != nil {
-		return nil, err
-	}
-	return missing, nil
+	return many
 }
 
-// printInvoked prints an invocation, with the phases table when that is switched on.
-func (in *Interpreter) printInvoked(invocation engine.Invocation) string {
-	if in.showPhases {
-		return printInvocation(invocation) + "\n\n" + printPhases(invocation, in.memory.Populations())
+// table lines up columns with two spaces between them, trimming the ends of lines.
+func table(rows [][]string) string {
+	widths := make([]int, len(rows[0]))
+	for _, row := range rows {
+		for i, cell := range row {
+			widths[i] = max(widths[i], len([]rune(cell)))
+		}
 	}
-	return printInvocation(invocation)
+	lines := make([]string, len(rows))
+	for r, row := range rows {
+		var b strings.Builder
+		for i, cell := range row {
+			b.WriteString(cell)
+			if i < len(row)-1 {
+				b.WriteString(strings.Repeat(" ", widths[i]-len([]rune(cell))+2))
+			}
+		}
+		lines[r] = strings.TrimRight(b.String(), " ")
+	}
+	return strings.Join(lines, "\n")
 }

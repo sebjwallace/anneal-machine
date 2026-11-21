@@ -1,148 +1,163 @@
 // Package engine holds the memory and performs the operations on it.
 //
-// The memory is everything the engine holds: populations, communities and assemblies. The engine knows nothing about
-// text; the interpreter reads AMP and calls it.
+// This is the fresh start (branch l1a-reading): populations, and reading into them, which forms bonds. Sequence
+// memory only, one community's worth; no assemblies yet.
 package engine
 
 import (
 	"fmt"
+	"maps"
 	"slices"
 )
 
-// Name is what a declared thing is called. Populations, communities and assemblies share one set of names.
+// Name is what a declared thing is called.
 type Name string
 
-// Kind says what a name was declared as.
-type Kind int
+// ReadingSize is how many members reading gives a population it declares (a letter not seen before).
+const ReadingSize = 9
 
-const (
-	PopulationKind Kind = iota + 1
-	CommunityKind
-	AssemblyKind
-)
-
-func (k Kind) String() string {
-	switch k {
-	case PopulationKind:
-		return "population"
-	case CommunityKind:
-		return "community"
-	case AssemblyKind:
-		return "assembly"
-	}
-	return "unknown kind"
+// Population is a fixed group of members, declared once. Its members are numbered within it, from 1.
+type Population struct {
+	name Name
+	size int
 }
 
-// withArticle writes the kind as it reads in a sentence: a population, an assembly.
-func (k Kind) withArticle() string {
-	if k == AssemblyKind {
-		return "an " + k.String()
-	}
-	return "a " + k.String()
+func (p Population) Name() Name { return p.name }
+
+// Size is the number of members.
+func (p Population) Size() int { return p.size }
+
+// Member is one member of a population, numbered from 1.
+type Member struct {
+	Population Name
+	Number     int
 }
 
-// Memory is everything the engine holds: what it knows, and what is active now. Declarations are only ever added:
-// nothing declared is replaced or removed.
+func (m Member) String() string { return fmt.Sprintf("%s{%d}", m.Population, m.Number) }
+
+// Bond goes from one member to another, in one direction: when From is active, To is primed the moment after.
+type Bond struct {
+	From, To Member
+}
+
+func (b Bond) String() string { return fmt.Sprintf("%s -> %s", b.From, b.To) }
+
+// Memory is everything the engine holds.
 type Memory struct {
-	populations map[Name]Population
-	communities map[Name]Community
-	// Both in the order declared. Populations' members are numbered across all of them in this order.
+	populations     map[Name]Population
 	populationOrder []Population
-	communityOrder  []Community
-	members         int // members across every population
+	// used is, for each population, its members that have been selected at least once. A member not in it is still
+	// an individual.
+	used  map[Name]map[int]bool
+	bonds []Bond              // every bond, in the order formed
+	out   map[Member][]Member // the members each member bonds to, in the order formed
 
-	assemblies []Assembly            // every assembly, in the order formed; #n is assemblies[n-1]
-	named      map[Name][]AssemblyID // the assemblies each name was given to, in the order formed
-	next       map[Name]int          // for each population, the member a new assembly gets next, counted from 0
-	assembled  memberSet             // the members that belong to at least one assembly
-
-	moment     int       // the last moment that passed: one clock for the memory's whole life, 0 before any
-	active     memberSet // the members active this moment
-	refractory memberSet // the members active the moment before, which can't come on this moment
-	// refractoryPeriod is whether members have a refractory period at all: a setting, off by default (the owner's
-	// choice, for testing). Off, a member active one moment is ready the next, and nothing is ever refractory.
-	refractoryPeriod bool
-	// budget is how many members of each population recall may have active at once; 0 is off, the default.
-	budget     int
-	unexpected map[Name]bool // populations that arrived this moment with nothing expecting them
+	moment int    // the last moment that passed: one clock for the memory's whole life, 0 before any
+	seed   uint64 // with the moment, decides each random pick, so the same reads give the same memory
 }
 
 func New() *Memory {
-	return NewAfter(0)
+	return &Memory{populations: map[Name]Population{}, used: map[Name]map[int]bool{}, out: map[Member][]Member{}, seed: 1}
 }
 
-// NewAfter starts an empty memory whose clock has already reached moment, so its next moment is moment+1. It is for
-// continuing a saved memory. moment must not be negative.
-func NewAfter(moment int) *Memory {
-	if moment < 0 {
-		panic(fmt.Sprintf("engine: a memory can't start after moment %d", moment))
-	}
-	return &Memory{
-		populations: map[Name]Population{},
-		communities: map[Name]Community{},
-		named:       map[Name][]AssemblyID{},
-		next:        map[Name]int{},
-		moment:      moment,
-	}
-}
-
-// HasRefractoryPeriod reports whether a member active one moment is refractory the next.
-func (m *Memory) HasRefractoryPeriod() bool { return m.refractoryPeriod }
-
-// SetRefractoryPeriod turns the refractory period on or off. Turning it off lets go of anything refractory now.
-func (m *Memory) SetRefractoryPeriod(on bool) {
-	m.refractoryPeriod = on
-	if !on {
-		m.refractory = nil
-	}
-}
-
-// Reset lets go of all activity: nothing is active or refractory afterwards. What the memory knows, its settings
-// and its clock are unchanged.
-func (m *Memory) Reset() {
-	m.active, m.refractory = nil, nil
-	clear(m.unexpected)
-}
-
-// Budget is how many members of each population recall may have active at once, or 0 when there is no budget.
-func (m *Memory) Budget() int { return m.budget }
-
-// SetBudget sets the budget for every population, or turns it off with 0.
-func (m *Memory) SetBudget(members int) error {
-	if members < 0 {
-		return NegativeBudgetError{Budget: members}
-	}
-	m.budget = members
-	return nil
-}
-
-// Moment is the last moment that passed, 0 before any. Moments count on across invocations, so every moment in the
-// memory's life has its own number.
+// Moment is the last moment that passed, 0 before any.
 func (m *Memory) Moment() int { return m.moment }
+
+// Seed decides the random picks (with the moment).
+func (m *Memory) Seed() uint64 { return m.seed }
+
+// SetSeed changes what decides the random picks from now on.
+func (m *Memory) SetSeed(seed uint64) { m.seed = seed }
 
 // Populations lists every population, in the order declared.
 func (m *Memory) Populations() []Population { return slices.Clone(m.populationOrder) }
 
-// Communities lists every community, in the order declared.
-func (m *Memory) Communities() []Community { return slices.Clone(m.communityOrder) }
-
-// KindOf reports what name was declared as, if it was declared at all.
-func (m *Memory) KindOf(name Name) (Kind, bool) {
-	if _, ok := m.populations[name]; ok {
-		return PopulationKind, true
-	}
-	if _, ok := m.communities[name]; ok {
-		return CommunityKind, true
-	}
-	if _, ok := m.named[name]; ok {
-		return AssemblyKind, true
-	}
-	return 0, false
+// Population looks up a population by name.
+func (m *Memory) Population(name Name) (Population, bool) {
+	p, ok := m.populations[name]
+	return p, ok
 }
 
-func (m *Memory) refuseRedeclaration(name Name) error {
-	if kind, declared := m.KindOf(name); declared {
-		return AlreadyDeclaredError{Name: name, As: kind}
+// DeclarePopulation adds a population of size members. It is refused if the name is taken or size is below 1.
+func (m *Memory) DeclarePopulation(name Name, size int) (Population, error) {
+	if _, taken := m.populations[name]; taken {
+		return Population{}, fmt.Errorf("%s is already declared", name)
 	}
-	return nil
+	if size < 1 {
+		return Population{}, fmt.Errorf("a population needs at least 1 member, not %d", size)
+	}
+	p := Population{name: name, size: size}
+	m.populations[name] = p
+	m.populationOrder = append(m.populationOrder, p)
+	m.used[name] = map[int]bool{}
+	return p, nil
+}
+
+// DeclarePopulations adds several populations of the same size. All or nothing.
+func (m *Memory) DeclarePopulations(names []Name, size int) ([]Population, error) {
+	for i, name := range names {
+		if slices.Contains(names[:i], name) {
+			return nil, fmt.Errorf("%s is given twice", name)
+		}
+		if _, taken := m.populations[name]; taken {
+			return nil, fmt.Errorf("%s is already declared", name)
+		}
+	}
+	if size < 1 {
+		return nil, fmt.Errorf("a population needs at least 1 member, not %d", size)
+	}
+	declared := make([]Population, 0, len(names))
+	for _, name := range names {
+		p, _ := m.DeclarePopulation(name, size)
+		declared = append(declared, p)
+	}
+	return declared, nil
+}
+
+// Bonds lists every bond, in the order formed.
+func (m *Memory) Bonds() []Bond { return slices.Clone(m.bonds) }
+
+// BondsFrom lists the members a member bonds to, in the order formed.
+func (m *Memory) BondsFrom(member Member) []Member { return slices.Clone(m.out[member]) }
+
+// IsIndividual reports whether a member has never been selected.
+func (m *Memory) IsIndividual(member Member) bool { return !m.used[member.Population][member.Number] }
+
+// Selected lists the members of p that have been selected at least once (no longer individuals), in number order.
+func (m *Memory) Selected(p Name) []Member {
+	numbers := slices.Sorted(maps.Keys(m.used[p]))
+	members := make([]Member, len(numbers))
+	for i, n := range numbers {
+		members[i] = Member{Population: p, Number: n}
+	}
+	return members
+}
+
+func (m *Memory) hasBond(from, to Member) bool { return slices.Contains(m.out[from], to) }
+
+func (m *Memory) addBond(from, to Member) Bond {
+	b := Bond{From: from, To: to}
+	m.bonds = append(m.bonds, b)
+	m.out[from] = append(m.out[from], to)
+	return b
+}
+
+// clone copies the memory, so a read can be tried and thrown away if it fails part way.
+func (m *Memory) clone() *Memory {
+	c := &Memory{
+		populations:     maps.Clone(m.populations),
+		populationOrder: slices.Clone(m.populationOrder),
+		used:            map[Name]map[int]bool{},
+		bonds:           slices.Clone(m.bonds),
+		out:             map[Member][]Member{},
+		moment:          m.moment,
+		seed:            m.seed,
+	}
+	for name, used := range m.used {
+		c.used[name] = maps.Clone(used)
+	}
+	for from, to := range m.out {
+		c.out[from] = slices.Clone(to)
+	}
+	return c
 }

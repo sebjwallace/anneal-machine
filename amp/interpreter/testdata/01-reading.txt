@@ -1,0 +1,27 @@
+amp> invoke "abcd"
+moment     arrived       member    bond formed   primes next
+1       a  burst (9 on)  a{9} new
+2       b  burst (9 on)  b{7} new  a{9} -> b{7}
+3       c  burst (9 on)  c{6} new  b{7} -> c{6}
+4       d  burst (9 on)  d{2} new  c{6} -> d{2}
+ABCD · 4 of 4 burst · 3 bonds formed
+amp> invoke "xbcy"
+moment     arrived       member    bond formed   primes next
+5       x  burst (9 on)  x{5} new
+6       b  burst (9 on)  b{4} new  x{5} -> b{4}  c{6}
+7       c  primed        c{6}      b{4} -> c{6}  d{2}
+8       y  burst (9 on)  y{5} new  c{6} -> y{5}
+XBcY · 3 of 4 burst · 3 bonds formed
+amp> inspect b
+b: population of 9 · 2 members · 7 individuals
+  b{4} · from x{5} · to c{6}
+  b{7} · from a{9} · to c{6}
+amp> bonds
+a{9} -> b{7}
+b{7} -> c{6}
+c{6} -> d{2}
+x{5} -> b{4}
+b{4} -> c{6}
+c{6} -> y{5}
+amp> invoke "ab!"
+error: reading takes lower-case letters and spaces only, not '!'

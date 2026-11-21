@@ -4,184 +4,90 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"slices"
 )
 
-// A snapshot holds what the memory knows (its declarations and assemblies, with the members each assembly was
-// given) and how far its clock has run. It doesn't hold what is active, so a memory read from one starts with nothing
-// active. Reading goes back through the engine's own rules, so a file is checked like anything typed.
-//
-// The snapshot is written here, inside the engine, because which member carries an assembly is the engine's own
-// business: saving the members chosen, rather than re-choosing them, means a later change to how members are chosen
-// can't quietly change a saved memory.
-
-// snapshotVersion is the snapshot format. A file with any other version is refused rather than guessed at.
-const snapshotVersion = 1
+// A snapshot holds what the memory knows: its populations, which of their members have been selected, the bonds in
+// the order formed, the clock and the seed. Nothing is active between reads, so there is no activity to keep.
 
 type snapshotFile struct {
-	Version     int                  `json:"version"`
-	Moment      int                  `json:"moment"`               // the last moment that passed; absent in early files, meaning 0
-	Refractory  bool                 `json:"refractory,omitempty"` // whether members have a refractory period; absent means off
-	Budget      int                  `json:"budget,omitempty"`     // members per population recall may have active; absent means none
+	Seed        uint64               `json:"seed"`
+	Moment      int                  `json:"moment"`
 	Populations []snapshotPopulation `json:"populations"`
-	Communities []snapshotCommunity  `json:"communities"`
-	Assemblies  []snapshotAssembly   `json:"assemblies"` // absent in early files, meaning none
+	Bonds       []snapshotBond       `json:"bonds"`
 }
 
 type snapshotPopulation struct {
-	Name Name `json:"name"`
-	Size int  `json:"size"`
-	// Next is the member the next new assembly gets, counted from 1. Absent in early files, meaning the first.
-	Next int `json:"next,omitempty"`
+	Name    Name  `json:"name"`
+	Size    int   `json:"size"`
+	Members []int `json:"members"` // the members selected so far, by number; the rest are individuals
 }
 
-type snapshotCommunity struct {
-	Name        Name   `json:"name"`
-	Populations []Name `json:"populations"`
-}
-
-type snapshotAssembly struct {
-	ID      AssemblyID       `json:"id"`
-	Name    Name             `json:"name,omitempty"`
-	Shape   string           `json:"shape"`
-	Members []snapshotMember `json:"members"`
+type snapshotBond struct {
+	From snapshotMember `json:"from"`
+	To   snapshotMember `json:"to"`
 }
 
 type snapshotMember struct {
 	Population Name `json:"population"`
-	Member     int  `json:"member"`
+	Number     int  `json:"number"`
 }
 
-// SnapshotVersionError: the file was written in a snapshot format this engine doesn't read.
-type SnapshotVersionError struct {
-	Version int
-}
-
-func (e SnapshotVersionError) Error() string {
-	return fmt.Sprintf("snapshot format %d isn't one this engine reads (it reads %d)", e.Version, snapshotVersion)
-}
-
-// WriteSnapshot puts the memory's snapshot on w, as indented JSON.
+// WriteSnapshot writes what the memory knows as JSON.
 func (m *Memory) WriteSnapshot(w io.Writer) error {
-	snapshot := snapshotFile{
-		Version:     snapshotVersion,
-		Moment:      m.moment,
-		Refractory:  m.refractoryPeriod,
-		Budget:      m.budget,
-		Populations: []snapshotPopulation{},
-		Communities: []snapshotCommunity{},
-		Assemblies:  []snapshotAssembly{},
-	}
+	file := snapshotFile{Seed: m.seed, Moment: m.moment, Populations: []snapshotPopulation{}, Bonds: []snapshotBond{}}
 	for _, p := range m.populationOrder {
-		snapshot.Populations = append(snapshot.Populations, snapshotPopulation{Name: p.name, Size: p.size, Next: m.next[p.name] + 1})
-	}
-	for _, c := range m.communityOrder {
-		snapshot.Communities = append(snapshot.Communities, snapshotCommunity{Name: c.name, Populations: populationNames(c.populations)})
-	}
-	for _, a := range m.assemblies {
-		members := make([]snapshotMember, len(a.members))
-		for i, member := range a.members {
-			members[i] = snapshotMember{Population: member.population.name, Member: member.number}
+		members := []int{}
+		for _, member := range m.Selected(p.name) {
+			members = append(members, member.Number)
 		}
-		snapshot.Assemblies = append(snapshot.Assemblies, snapshotAssembly{ID: a.id, Name: a.name, Shape: a.shape.String(), Members: members})
+		file.Populations = append(file.Populations, snapshotPopulation{Name: p.name, Size: p.size, Members: members})
+	}
+	for _, b := range m.bonds {
+		file.Bonds = append(file.Bonds, snapshotBond{
+			From: snapshotMember{b.From.Population, b.From.Number},
+			To:   snapshotMember{b.To.Population, b.To.Number},
+		})
 	}
 	encoder := json.NewEncoder(w)
 	encoder.SetIndent("", "  ")
-	return encoder.Encode(snapshot)
+	return encoder.Encode(file)
 }
 
-// ReadSnapshot builds a new memory from the snapshot on r.
+// ReadSnapshot rebuilds a memory from a snapshot, checking it through the engine's own rules.
 func ReadSnapshot(r io.Reader) (*Memory, error) {
+	var file snapshotFile
 	decoder := json.NewDecoder(r)
 	decoder.DisallowUnknownFields()
-	var snapshot snapshotFile
-	if err := decoder.Decode(&snapshot); err != nil {
+	if err := decoder.Decode(&file); err != nil {
 		return nil, fmt.Errorf("not a snapshot: %w", err)
 	}
-	if snapshot.Version != snapshotVersion {
-		return nil, SnapshotVersionError{Version: snapshot.Version}
+	if file.Moment < 0 {
+		return nil, fmt.Errorf("the moment can't be negative (%d)", file.Moment)
 	}
-	if snapshot.Moment < 0 {
-		return nil, fmt.Errorf("moment %d is before the first moment", snapshot.Moment)
-	}
-	m := NewAfter(snapshot.Moment)
-	m.refractoryPeriod = snapshot.Refractory
-	if err := m.SetBudget(snapshot.Budget); err != nil {
-		return nil, err
-	}
-	for _, p := range snapshot.Populations {
-		population, err := m.DeclarePopulation(p.Name, p.Size)
-		if err != nil {
+	m := New()
+	m.seed, m.moment = file.Seed, file.Moment
+	for _, p := range file.Populations {
+		if _, err := m.DeclarePopulation(p.Name, p.Size); err != nil {
 			return nil, err
 		}
-		if p.Next < 0 || p.Next > p.Size {
-			return nil, fmt.Errorf("population %s has no member %d to give next", p.Name, p.Next)
-		}
-		m.next[population.name] = max(p.Next-1, 0)
-	}
-	for _, c := range snapshot.Communities {
-		if _, err := m.DeclareCommunity(c.Name, c.Populations); err != nil {
-			return nil, err
+		for _, n := range p.Members {
+			if n < 1 || n > p.Size {
+				return nil, fmt.Errorf("%s has no member %d", p.Name, n)
+			}
+			m.used[p.Name][n] = true
 		}
 	}
-	for i, a := range snapshot.Assemblies {
-		if err := m.restoreAssembly(i, a); err != nil {
-			return nil, fmt.Errorf("assembly #%d: %w", a.ID, err)
+	for _, b := range file.Bonds {
+		from, to := Member{b.From.Population, b.From.Number}, Member{b.To.Population, b.To.Number}
+		for _, member := range []Member{from, to} {
+			if m.IsIndividual(member) {
+				return nil, fmt.Errorf("the bond %s -> %s needs %s to be a member", from, to, member)
+			}
 		}
+		if m.hasBond(from, to) {
+			return nil, fmt.Errorf("the bond %s -> %s is given twice", from, to)
+		}
+		m.addBond(from, to)
 	}
 	return m, nil
-}
-
-// restoreAssembly forms a saved assembly with the members it was saved with, checked by the same rules as declaring.
-func (m *Memory) restoreAssembly(position int, saved snapshotAssembly) error {
-	if want := AssemblyID(position + 1); saved.ID != want {
-		return fmt.Errorf("found where #%d should be", want)
-	}
-	shape, err := parseShape(saved.Shape)
-	if err != nil {
-		return err
-	}
-	outline := Outline{Shape: shape}
-	for _, member := range saved.Members {
-		outline.Names = append(outline.Names, member.Population)
-	}
-	populations, err := m.outlinePopulations(outline)
-	if err != nil {
-		return err
-	}
-	if _, isAssembly := m.named[saved.Name]; !isAssembly {
-		if err := m.refuseRedeclaration(saved.Name); err != nil {
-			return err
-		}
-	}
-	members := make([]Member, len(populations))
-	for i, population := range populations {
-		number := saved.Members[i].Member
-		if number < 1 || number > population.size {
-			return fmt.Errorf("population %s has no member %d", population.name, number)
-		}
-		members[i] = Member{population: population, number: number}
-		if slices.Contains(members[:i], members[i]) {
-			return fmt.Errorf("has %s{%d} twice; each time a population appears takes a member of its own", population.name, number)
-		}
-	}
-	m.form(saved.Name, shape, members)
-	return nil
-}
-
-func parseShape(text string) (Shape, error) {
-	for _, shape := range []Shape{StateShape, TransitionShape} {
-		if shape.String() == text {
-			return shape, nil
-		}
-	}
-	return 0, fmt.Errorf("%q isn't a shape; expected \"state\" or \"transition\"", text)
-}
-
-func populationNames(populations []Population) []Name {
-	names := make([]Name, len(populations))
-	for i, p := range populations {
-		names[i] = p.name
-	}
-	return names
 }
