@@ -1,0 +1,69 @@
+amp> t, h, e, d, o, g, c, a, m, u, s, b, i, r = population 8
+t: 8 members, t{1..8}, all individuals
+h: 8 members, h{1..8}, all individuals
+e: 8 members, e{1..8}, all individuals
+d: 8 members, d{1..8}, all individuals
+o: 8 members, o{1..8}, all individuals
+g: 8 members, g{1..8}, all individuals
+c: 8 members, c{1..8}, all individuals
+a: 8 members, a{1..8}, all individuals
+m: 8 members, m{1..8}, all individuals
+u: 8 members, u{1..8}, all individuals
+s: 8 members, s{1..8}, all individuals
+b: 8 members, b{1..8}, all individuals
+i: 8 members, i{1..8}, all individuals
+r: 8 members, r{1..8}, all individuals
+amp> thedog = <t -> h -> e -> d -> o -> g>
+thedog: state <t, h, e, d, o, g> and transition t -> h -> e -> d -> o -> g
+amp> thecat = <t -> h -> e -> c -> a -> t>
+thecat: state <t, h, e, c, a, t> and transition t -> h -> e -> c -> a -> t
+amp> themouse = <t -> h -> e -> m -> o -> u -> s -> e>
+themouse: state <t, h, e, m, o, u, s, e> and transition t -> h -> e -> m -> o -> u -> s -> e
+amp> thebird = <t -> h -> e -> b -> i -> r -> d>
+thebird: state <t, h, e, b, i, r, d> and transition t -> h -> e -> b -> i -> r -> d
+amp> compare thedog, thecat
+thedog ∩ thecat   t, h, e (3)
+thedog ∪ thecat   t, h, e, d, o, g, c, a (8)
+thedog − thecat   d, o, g (3)
+thecat − thedog   c, a (2)
+thedog △ thecat   d, o, g, c, a (5)
+thedog ⊆ thecat   no
+thecat ⊆ thedog   no
+amp> compare thedog, thecat, themouse, thebird
+thedog ∩ thecat ∩ themouse ∩ thebird   t, h, e (3)
+thedog ∪ thecat ∪ themouse ∪ thebird   t, h, e, d, o, g, c, a, m, u, s, b, i, r (14)
+amp> the = <t -> h -> e>
+the: state <t, h, e> and transition t -> h -> e
+amp> compare the, thedog
+the ∩ thedog   t, h, e (3)
+the ∪ thedog   t, h, e, d, o, g (6)
+the − thedog   ∅ (0)
+thedog − the   d, o, g (3)
+the △ thedog   d, o, g (3)
+the ⊆ thedog   yes
+thedog ⊆ the   no
+amp> letters = community c, a, t
+letters: c, a, t (24 members)
+amp> compare letters, thecat
+letters ∩ thecat   c, a, t (3)
+letters ∪ thecat   c, a, t, h, e (5)
+letters − thecat   ∅ (0)
+thecat − letters   h, e (2)
+letters △ thecat   h, e (2)
+letters ⊆ thecat   yes
+thecat ⊆ letters   no
+amp> compare o, thedog, themouse
+o ∩ thedog ∩ themouse   o (1)
+o ∪ thedog ∪ themouse   o, t, h, e, d, g, m, u, s (9)
+amp> compare thedog
+error: compare needs at least two names
+amp> compare thedog, thedog
+error: thedog is given twice
+amp> compare thedog, z
+error: z is not declared
+amp> compare
+error: expected a name after "compare"
+amp> compare thedog,
+error: expected a name after ","
+amp> compare = population 2
+compare: 2 members, compare{1..2}, all individuals

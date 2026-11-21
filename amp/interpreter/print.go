@@ -248,6 +248,49 @@ func printAssemblyList(shown []engine.Assembly, first, total, page, pages int) s
 	return strings.Join(lines, "\n")
 }
 
+// thedog ∩ thecat   t, h, e (3)
+// thedog ∪ thecat   t, h, e, d, o, g, c, a (8)
+// thedog − thecat   d, o, g (3)
+// thecat − thedog   c, a (2)
+// thedog △ thecat   d, o, g, c, a (5)
+// thedog ⊆ thecat   no
+// thecat ⊆ thedog   no
+//
+// With more than two, only the intersection and union of them all.
+func printComparison(c engine.Comparison) string {
+	names := namesOf(c.Of)
+	rows := [][]string{
+		{strings.Join(names, " ∩ "), writePopulationSet(c.Intersection)},
+		{strings.Join(names, " ∪ "), writePopulationSet(c.Union)},
+	}
+	if len(names) == 2 {
+		first, second := names[0], names[1]
+		rows = append(rows,
+			[]string{first + " − " + second, writePopulationSet(c.FirstOnly)},
+			[]string{second + " − " + first, writePopulationSet(c.SecondOnly)},
+			[]string{first + " △ " + second, writePopulationSet(c.Symmetric)},
+			[]string{first + " ⊆ " + second, yesOrNo(c.FirstInSecond)},
+			[]string{second + " ⊆ " + first, yesOrNo(c.SecondInFirst)},
+		)
+	}
+	return writeTable(rows)
+}
+
+// t, h, e (3), or ∅ (0)
+func writePopulationSet(names []engine.Name) string {
+	if len(names) == 0 {
+		return "∅ (0)"
+	}
+	return fmt.Sprintf("%s (%d)", strings.Join(namesOf(names), ", "), len(names))
+}
+
+func yesOrNo(yes bool) string {
+	if yes {
+		return "yes"
+	}
+	return "no"
+}
+
 // budget: 4, or budget: off
 func printBudget(members int) string {
 	if members == 0 {

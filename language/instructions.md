@@ -102,6 +102,11 @@ cat: 3 of 3: c, t, then a, all from input
 settings and the clock are unchanged. A REPL command, not an instruction: it doesn't come from the dynamics, so it is
 for examining, not for running.
 
+**Comparing.** `compare thedog, thecat` runs the set operations above (`CAP`, `CUP`, `DIFF`, `SYMD`, `CNT`, `SUB`) at the
+population level: an assembly stands for its members' populations, a community for its populations, a population
+for itself. Two names give the intersection, union, both differences, the symmetric difference, the counts and
+both subset tests; more than two give the intersection and union of them all. It only reads.
+
 **Listing assemblies.** `assemblies` lists every assembly, in the order formed, 20 to a page; `assemblies 2` shows the
 second page. A REPL command for reading, not an instruction.
 

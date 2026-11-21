@@ -41,6 +41,11 @@ type inspectCommand struct {
 	name engine.Name
 }
 
+// compare thedog, thecat: what they share and how they differ, by population
+type compareCommand struct {
+	names []engine.Name
+}
+
 // reset: let go of all activity
 type resetCommand struct{}
 
@@ -96,6 +101,7 @@ func (settingCommand) isStatement()        {}
 func (listAssembliesCommand) isStatement() {}
 func (budgetCommand) isStatement()         {}
 func (resetCommand) isStatement()          {}
+func (compareCommand) isStatement()        {}
 func (saveCommand) isStatement()           {}
 func (openCommand) isStatement()           {}
 
@@ -183,6 +189,8 @@ func (p *parser) statement() (statement, error) {
 		return p.invoke()
 	case first.is("inspect") && !declaring:
 		return p.inspect()
+	case first.is("compare") && !declaring:
+		return p.compare()
 	case first.is("reset") && !declaring:
 		return resetCommand{}, nil
 	case first.is("budget") && !declaring:
@@ -377,6 +385,24 @@ func (p *parser) inspect() (statement, error) {
 		return nil, syntaxError("expected a population name after \"inspect\"%s", got(name))
 	}
 	return inspectCommand{name: engine.Name(name.text)}, nil
+}
+
+// compare reads names separated by commas: any declared names; the engine checks there are at least two.
+func (p *parser) compare() (statement, error) {
+	var names []engine.Name
+	after := `"compare"`
+	for {
+		name := p.take()
+		if name.kind != wordToken {
+			return nil, syntaxError("expected a name after %s%s", after, got(name))
+		}
+		names = append(names, engine.Name(name.text))
+		if !p.peekIs(commaToken) {
+			return compareCommand{names: names}, nil
+		}
+		p.take()
+		after = `","`
+	}
 }
 
 func (p *parser) budget() (statement, error) {

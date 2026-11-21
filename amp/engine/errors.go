@@ -150,3 +150,15 @@ type NotAPopulationOrAssemblyError struct {
 func (e NotAPopulationOrAssemblyError) Error() string {
 	return fmt.Sprintf("%s is %s, not a population or an assembly", e.Name, e.Is.withArticle())
 }
+
+// TooFewToCompareError: compare was given fewer than two things.
+type TooFewToCompareError struct{}
+
+func (TooFewToCompareError) Error() string { return "compare needs at least two names" }
+
+// GivenTwiceError: the same name was given twice to compare.
+type GivenTwiceError struct {
+	Name Name
+}
+
+func (e GivenTwiceError) Error() string { return fmt.Sprintf("%s is given twice", e.Name) }

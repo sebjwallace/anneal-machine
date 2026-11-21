@@ -37,6 +37,11 @@ starts with nothing on. The file name is the rest of the line.
 **Transcripts.** Each file in `interpreter/testdata` is a REPL session on a fresh engine. A line starting `amp> ` is
 typed, and the lines after it are what must print back, exactly. A new walkthrough step starts as a transcript.
 
+**Comparing.** `compare thedog, thecat` compares any declared names by the populations they cover (an assembly by
+its members' populations, a community by its populations): intersection ∩, union ∪, both differences −, symmetric
+difference △, each with its count, and whether either is a subset ⊆ of the other. With more than two, the
+intersection and union of them all. It only reads.
+
 **Starting afresh.** `reset` lets go of all activity: nothing active or refractory. What the memory knows, the
 settings and the clock stay as they are, so the next invoke starts from a quiet memory without reopening the file.
 
