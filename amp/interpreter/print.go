@@ -248,6 +248,18 @@ func printAssemblyList(shown []engine.Assembly, first, total, page, pages int) s
 	return strings.Join(lines, "\n")
 }
 
+// the: intersection t, h, e, as <thedog{t, h, e}> and transition thedog{t, h, e}
+//
+// What was shared, and the decomposition it was formed as: from is the whole the members were taken from.
+func printIntersection(name, from engine.Name, shared []engine.Name, formed []engine.Assembly) string {
+	taken := []string{writeOutlineName(from, shared)}
+	written := make([]string, len(formed))
+	for i, a := range formed {
+		written[i] = writeShaped(a.Shape(), taken)
+	}
+	return fmt.Sprintf("%s: intersection %s, as %s", name, strings.Join(namesOf(shared), ", "), strings.Join(written, " and "))
+}
+
 // thedog ∩ thecat   t, h, e (3)
 // thedog ∪ thecat   t, h, e, d, o, g, c, a (8)
 // thedog − thecat   d, o, g (3)

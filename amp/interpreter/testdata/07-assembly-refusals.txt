@@ -9,7 +9,7 @@ letters: c, a (16 members)
 amp> cat = <c>
 error: an assembly needs at least two populations or parts
 amp> cat = c
-error: expected "population", "community", a state or a transition after "=", got c
+error: expected "population", "community", "intersection", an assembly or a transition after "=", got c
 amp> cat = c ->
 error: expected a population name after "->"
 amp> cat = <c, a

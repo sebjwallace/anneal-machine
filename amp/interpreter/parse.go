@@ -41,6 +41,12 @@ type inspectCommand struct {
 	name engine.Name
 }
 
+// the = intersection thedog, thecat: what they share, formed as a new assembly beside them
+type intersectionDeclaration struct {
+	name engine.Name
+	of   []engine.Name
+}
+
 // compare thedog, thecat: what they share and how they differ, by population
 type compareCommand struct {
 	names []engine.Name
@@ -92,18 +98,19 @@ type openCommand struct {
 	path string
 }
 
-func (populationDeclaration) isStatement() {}
-func (communityDeclaration) isStatement()  {}
-func (assemblyDeclaration) isStatement()   {}
-func (invokeCommand) isStatement()         {}
-func (inspectCommand) isStatement()        {}
-func (settingCommand) isStatement()        {}
-func (listAssembliesCommand) isStatement() {}
-func (budgetCommand) isStatement()         {}
-func (resetCommand) isStatement()          {}
-func (compareCommand) isStatement()        {}
-func (saveCommand) isStatement()           {}
-func (openCommand) isStatement()           {}
+func (populationDeclaration) isStatement()   {}
+func (communityDeclaration) isStatement()    {}
+func (assemblyDeclaration) isStatement()     {}
+func (invokeCommand) isStatement()           {}
+func (inspectCommand) isStatement()          {}
+func (settingCommand) isStatement()          {}
+func (listAssembliesCommand) isStatement()   {}
+func (budgetCommand) isStatement()           {}
+func (resetCommand) isStatement()            {}
+func (compareCommand) isStatement()          {}
+func (intersectionDeclaration) isStatement() {}
+func (saveCommand) isStatement()             {}
+func (openCommand) isStatement()             {}
 
 // SyntaxError: the line isn't AMP the interpreter can read.
 type SyntaxError struct {
@@ -185,9 +192,9 @@ func (p *parser) statement() (statement, error) {
 	first := p.take()
 	declaring := p.peekIs(equalsToken) || p.peekIs(commaToken)
 	switch {
-	case first.is("invoke") && !declaring:
+	case first.isKeyword("invoke", "inv") && !declaring:
 		return p.invoke()
-	case first.is("inspect") && !declaring:
+	case first.isKeyword("inspect", "insp") && !declaring:
 		return p.inspect()
 	case first.is("compare") && !declaring:
 		return p.compare()
@@ -237,19 +244,26 @@ func (p *parser) declaration(names []engine.Name) (statement, error) {
 		return nil, syntaxError("expected \"=\" after %s%s", last, got(equals))
 	}
 	first := p.take()
-	if first.is("population") {
+	outline := p.startsOutline(first)
+	if !outline && first.isKeyword("population", "pop") {
 		return p.population(names)
 	}
 	if len(names) > 1 {
 		return nil, syntaxError("only populations can be declared several at once")
 	}
 	switch name := names[0]; {
-	case p.startsOutline(first):
+	case outline:
 		return p.assemblies(name, first)
-	case first.is("community"):
+	case first.isKeyword("community", "com"):
 		return p.community(name)
+	case first.isKeyword("intersection", "intr"):
+		of, err := p.nameList(fmt.Sprintf("%q", first.text))
+		if err != nil {
+			return nil, err
+		}
+		return intersectionDeclaration{name: name, of: of}, nil
 	default:
-		return nil, syntaxError("expected \"population\", \"community\", a state or a transition after \"=\"%s", got(first))
+		return nil, syntaxError("expected \"population\", \"community\", \"intersection\", an assembly or a transition after \"=\"%s", got(first))
 	}
 }
 
@@ -459,8 +473,16 @@ func (p *parser) inspect() (statement, error) {
 
 // compare reads names separated by commas: any declared names; the engine checks there are at least two.
 func (p *parser) compare() (statement, error) {
+	names, err := p.nameList(`"compare"`)
+	if err != nil {
+		return nil, err
+	}
+	return compareCommand{names: names}, nil
+}
+
+// nameList reads declared names separated by commas, the first coming after the given word.
+func (p *parser) nameList(after string) ([]engine.Name, error) {
 	var names []engine.Name
-	after := `"compare"`
 	for {
 		name := p.take()
 		if name.kind != wordToken {
@@ -468,7 +490,7 @@ func (p *parser) compare() (statement, error) {
 		}
 		names = append(names, engine.Name(name.text))
 		if !p.peekIs(commaToken) {
-			return compareCommand{names: names}, nil
+			return names, nil
 		}
 		p.take()
 		after = `","`
@@ -569,6 +591,12 @@ type token struct {
 }
 
 func (t token) is(word string) bool { return t.kind == wordToken && t.text == word }
+
+// isKeyword is true when t is the word, or its short form from the instruction set in lower or upper case:
+// population, pop or POP.
+func (t token) isKeyword(word, short string) bool {
+	return t.kind == wordToken && (t.text == word || t.text == short || t.text == strings.ToUpper(short))
+}
 
 var symbols = map[rune]tokenKind{
 	'=': equalsToken,

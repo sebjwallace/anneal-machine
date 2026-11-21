@@ -440,30 +440,47 @@ func (o opening) bringsOn() []Member {
 	return members
 }
 
-// alternatives records, from every transition, which populations each member follows and which it leads into. Two
-// members are alternatives when they are in different populations and follow the same population somewhere ("a"
-// and "o" after "c"), or lead into the same population ("b" and "c" before "a"): they compete for the same place.
+// alternatives records, from every transition, where each member stands: two members are alternatives when they are in
+// different populations and stand in the same place. Within shared structure a place is a member: following the same
+// member (e{1} -> d{1} and e{1} -> c{1}, where "the dog" and "the cat" share "the") or leading into the same one.
+// Between words written separately, a place is the populations either side: "a" in "cat" and "o" in "cot" both come
+// after a "c" and before a "t"; "b" in "bat" and "c" in "cat" both start a word and lead into an "a". So the "t" that
+// starts "the" and the "t" that ends "cat" are not competing, nor "e" before thedog's "d" and "r" before thebird's.
 type alternatives struct {
-	follows   map[Member]map[Name]bool
-	leadsInto map[Member]map[Name]bool
+	follows   map[Member]map[Member]bool
+	leadsInto map[Member]map[Member]bool
+	places    map[Member]map[place]bool
 }
 
+// place is where a member stands in a chain: the population before it and after it, empty at either end.
+type place struct{ before, after Name }
+
 func (m *Memory) alternatives() alternatives {
-	alt := alternatives{follows: map[Member]map[Name]bool{}, leadsInto: map[Member]map[Name]bool{}}
-	note := func(relation map[Member]map[Name]bool, member Member, population Name) {
+	alt := alternatives{follows: map[Member]map[Member]bool{}, leadsInto: map[Member]map[Member]bool{}, places: map[Member]map[place]bool{}}
+	note := func(relation map[Member]map[Member]bool, member, other Member) {
 		if relation[member] == nil {
-			relation[member] = map[Name]bool{}
+			relation[member] = map[Member]bool{}
 		}
-		relation[member][population] = true
+		relation[member][other] = true
 	}
 	for _, a := range m.assemblies {
 		if a.shape != TransitionShape {
 			continue
 		}
-		for i := 1; i < len(a.members); i++ {
-			from, to := a.members[i-1], a.members[i]
-			note(alt.follows, to, from.population.name)
-			note(alt.leadsInto, from, to.population.name)
+		for i, member := range a.members {
+			var here place
+			if i > 0 {
+				here.before = a.members[i-1].population.name
+				note(alt.follows, member, a.members[i-1])
+				note(alt.leadsInto, a.members[i-1], member)
+			}
+			if i < len(a.members)-1 {
+				here.after = a.members[i+1].population.name
+			}
+			if alt.places[member] == nil {
+				alt.places[member] = map[place]bool{}
+			}
+			alt.places[member][here] = true
 		}
 	}
 	return alt
@@ -473,10 +490,11 @@ func (alt alternatives) between(x, y Member) bool {
 	if x.population == y.population {
 		return false
 	}
-	return sharesAny(alt.follows[x], alt.follows[y]) || sharesAny(alt.leadsInto[x], alt.leadsInto[y])
+	return sharesAny(alt.follows[x], alt.follows[y]) || sharesAny(alt.leadsInto[x], alt.leadsInto[y]) ||
+		sharesAny(alt.places[x], alt.places[y])
 }
 
-func sharesAny(a, b map[Name]bool) bool {
+func sharesAny[K comparable](a, b map[K]bool) bool {
 	for name := range a {
 		if b[name] {
 			return true

@@ -23,7 +23,7 @@ error: expected a number of members after "population", got eight
 amp> d = population 8 9
 error: unexpected 9 at the end of the line
 amp> d = crowd 8
-error: expected "population", "community", a state or a transition after "=", got crowd
+error: expected "population", "community", "intersection", an assembly or a transition after "=", got crowd
 amp> d = community
 error: expected a population name after "community"
 amp> d = community c,

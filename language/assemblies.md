@@ -74,6 +74,13 @@ braces above, naming the populations whose members to take.
 - It mixes with populations, parts and other decompositions: `<cat{c, t}, cot{o}>`.
 - Braces take population names, and only on assemblies; a population's members are the engine's business.
 
+## Abstraction by hand: intersection
+
+`the = intersection thedog, thecat, thebird, themouse` (short form `intr`) works out what the names share by
+population (t, h, e), then forms it by decomposition from the first-named whole: `<thedog{t -> h -> e}>`, beside all
+of them. Members come from the first name, so that word shares its members with the abstraction. Fewer than two shared
+populations is refused.
+
 ## Forming
 
 One verb describes structure changing.

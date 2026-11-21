@@ -85,3 +85,35 @@ func difference(a, b []Name) []Name {
 	}
 	return only
 }
+
+// DeclareIntersection forms what several things share as a new assembly beside them: the populations all of them
+// cover, taken as members of the first named, which must be an assembly, in its order. Like decomposition it forms an
+// assembly over those members and a transition through them. It returns what it formed and the populations shared.
+func (m *Memory) DeclareIntersection(name Name, of []Name) ([]Assembly, []Name, error) {
+	if len(of) < 2 {
+		return nil, nil, TooFewForIntersectionError{}
+	}
+	if err := m.refuseRedeclaration(name); err != nil {
+		return nil, nil, err
+	}
+	switch kind, declared := m.KindOf(of[0]); {
+	case !declared:
+		return nil, nil, UndeclaredError{Name: of[0]}
+	case kind != AssemblyKind:
+		return nil, nil, IntersectionSourceError{Name: of[0], Is: kind}
+	}
+	comparison, err := m.Compare(of)
+	if err != nil {
+		return nil, nil, err
+	}
+	shared := comparison.Intersection
+	if len(shared) < 2 {
+		return nil, nil, IntersectionTooSmallError{Shared: shared}
+	}
+	from := []Name{of[0]}
+	assemblies, err := m.DeclareAssemblies(name, []Outline{
+		{Shape: StateShape, Names: from, Only: [][]Name{shared}},
+		{Shape: TransitionShape, Names: from, Only: [][]Name{shared}},
+	})
+	return assemblies, shared, err
+}

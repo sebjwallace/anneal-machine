@@ -186,3 +186,30 @@ func (e NotInWholeError) Error() string {
 	}
 	return fmt.Sprintf("%s has no member of %s", e.Whole, e.Population)
 }
+
+// TooFewForIntersectionError: an intersection was asked of fewer than two things.
+type TooFewForIntersectionError struct{}
+
+func (TooFewForIntersectionError) Error() string { return "an intersection needs at least two names" }
+
+// IntersectionSourceError: an intersection takes its members from the first name, which wasn't an assembly.
+type IntersectionSourceError struct {
+	Name Name
+	Is   Kind
+}
+
+func (e IntersectionSourceError) Error() string {
+	return fmt.Sprintf("an intersection takes its members from the first name, and %s is %s, not an assembly", e.Name, e.Is.withArticle())
+}
+
+// IntersectionTooSmallError: what the things share is too little to form an assembly from.
+type IntersectionTooSmallError struct {
+	Shared []Name
+}
+
+func (e IntersectionTooSmallError) Error() string {
+	if len(e.Shared) == 0 {
+		return "the intersection is empty"
+	}
+	return fmt.Sprintf("the intersection is %s; an assembly needs at least two populations", e.Shared[0])
+}

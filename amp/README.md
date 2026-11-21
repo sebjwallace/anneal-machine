@@ -65,7 +65,9 @@ turn it on in their first line.
 for together) and `inspect`; and assemblies written by hand, as in step 9: `cat = <c, a, t> ; c -> a -> t`, or
 for short `cat = <c -> a -> t>`. Composition: an assembly's name inside a declaration is a part, as in
 `thedog = <the -> dog>`; a whole binds the fewest members of each part that still complete it, and a chain joins parts
-last member to first. Decomposition: `ca = <cat{c, a}>` forms an assembly over just those members of cat, beside it. Each
+last member to first. Decomposition: `ca = <cat{c, a}>` forms an assembly over just those members of cat, beside it. Intersection:
+`the = intr thedog, thecat` forms what they share, taken from the first. Short forms: `pop`, `com`, `intr`, `inv`,
+`insp`. Each
 population hands out its members in order and goes round again once all are used; everything on one line shares
 members; `inspect cat` shows them. Step 4: invoke runs the gates, with every bond acting one moment later, members
 active, refractory or ready, and an assembly completing when more of it is counted than missing. Competition: rivals

@@ -41,14 +41,16 @@ A | B
 which in practice means how many ways in each one has. A held tie keeps both, unresolved, until more evidence settles it.
 
 **Decided, and running in the interpreter** (`amp/interpreter/testdata/11-competition.txt`):
-- **Rivals (competition by order):** two members are **alternatives** when they are in different populations and
-  follow the same population somewhere ("a" and "o" after "c"), or lead into the same population ("b" and "c" before
-  "a"): they compete for the same place. Two assemblies are rivals when one has a member the other lacks, the other has
-  one the first lacks, and those are alternatives; or when, in that moment, what each would bring on and the other
-  wouldn't are alternatives (anagrams, which share members and differ only in order). A part and its whole are never
-  rivals, nor an assembly and its own chain, nor two versions of one word (members differ, populations the same). This
-  replaced "share a population but not its member", which missed wholes composed from a shared part ("the dog" and
-  "the cat") and made two versions of a word tie for ever.
+- **Rivals (competition by order):** two members are **alternatives** when they are in different populations and stand
+  in **the same place**. Within shared structure a place is a member: following the same member (`e{1} -> d{1}` and
+  `e{1} -> c{1}`, where "the dog" and "the cat" share "the"), or leading into the same one. Between words written
+  separately, a place is the populations either side: "a" in "cat" and "o" in "cot" both come after a "c" and before a
+  "t"; "b" in "bat" and "c" in "cat" both start a word and lead into an "a". Two assemblies are rivals when one has a
+  member the other lacks, the other has one the first lacks, and those are alternatives; or when, in that moment, what
+  each would bring on and the other wouldn't are alternatives. A part and its whole are never rivals, nor an assembly
+  and its own chain, nor two versions of one word. Found by running it: judging place by population alone made rivals
+  of letters in different places (the "t" that starts "the" and the "t" that ends "cat"; "e" before thedog's "d" and
+  "r" before thebird's), which stopped "the bird" and "the cat" completing.
 - **Support:** an assembly's counted part minus its missing part (gates count active and refractory members).
 - **Outcome:** when rivals' gates would open in the same moment, the one with most support opens. When the most support
   is shared, the tie is held: **none of the tied open**, and the tie is unsettled heat. Worked out from the most

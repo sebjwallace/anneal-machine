@@ -24,8 +24,8 @@ INV   c            invoke: read, and report completion or incompletion, and how 
 RSLV  last         resolve: form structure from what invoke left (or RSLV #1,#3 to compare stored)
 
 ; set operations (read-only: they return sets and change nothing)
-CAP   #1,#3        intersection        ∩
-CUP   #1,#3        union               ∪
+INTR  #1,#3        intersection        ∩
+UNI   #1,#3        union               ∪
 DIFF  #1,#3        difference          −
 SYMD  #1,#3        symmetric diff.     △
 CNT   #1           count               |·|
@@ -58,7 +58,7 @@ through its own structure, or fades when something outcompetes it.
 can be written by hand. Everything else declares, feeds input or examines.
 
 **Choices to note.**
-- `CAP` and `CUP` are the traditional names for ∩ and ∪. They avoid `AND` and `OR`, which in AMP mean gates and
+- `INTR` and `UNI` (the owner's choices, replacing `CAP` and `CUP`) name ∩ and ∪. They avoid `AND` and `OR`, which in AMP mean gates and
   topology.
 - `ASML` (the owner's choice, replacing `FORM`) assembles an **assembly**, its members bonded to each other. `CHN`
   assembles a **transition**. In prose, "forms" still describes what resolve does.
@@ -102,7 +102,16 @@ cat: 3 of 3: c, t, then a, all from input
 settings and the clock are unchanged. A REPL command, not an instruction: it doesn't come from the dynamics, so it is
 for examining, not for running.
 
-**Comparing.** `compare thedog, thecat` runs the set operations above (`CAP`, `CUP`, `DIFF`, `SYMD`, `CNT`, `SUB`) at the
+**Short forms.** In the REPL, the instructions' mnemonics can be typed in place of their words, in lower or upper
+case: `pop` for `population`, `com` for `community`, `intr` for `intersection`, `inv` for `invoke`, `insp` for
+`inspect`. REPL commands that aren't instructions (`assemblies`, `reset`, `save`, `open`, `exit`, the settings) keep
+their words.
+
+**Intersection.** `the = intersection thedog, thecat` (or `intr`) forms what the names share as a new assembly beside
+them: the populations all of them cover, taken as members of the first named, in its order, as an assembly and a
+transition, exactly as `the = <thedog{t -> h -> e}>` would by hand. It is abstraction, done by hand.
+
+**Comparing.** `compare thedog, thecat` runs the set operations above (`INTR`, `UNI`, `DIFF`, `SYMD`, `CNT`, `SUB`) at the
 population level: an assembly stands for its members' populations, a community for its populations, a population
 for itself. Two names give the intersection, union, both differences, the symmetric difference, the counts and
 both subset tests; more than two give the intersection and union of them all. It only reads.
