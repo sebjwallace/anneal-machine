@@ -29,7 +29,10 @@ Every member is in one of three **phases** (decided by the owner):
 | **refractory** | it was active the moment before, so it can't come on this moment |
 | **ready** | neither: it can come on when a gate opens |
 
-A member active for one moment is refractory for the next, then ready. Gates count active and refractory members (see
+A member active for one moment is refractory for the next, then ready. **The refractory period is a setting, off by
+default** (the owner's choice, for testing): `refractory on`, `refractory off`, or `refractory` to show it. Off, a
+member active one moment is ready the next, nothing is ever refractory, and a held state stays fully active, repeating
+every moment. The setting is saved in snapshots. Gates count active and refractory members (see
 [edges and gates](edges-and-gates.md)). A state holds by its members taking turns: some active while the others are
 refractory, and the other way round, so the whole state stays counted.
 

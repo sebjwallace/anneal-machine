@@ -1,3 +1,5 @@
+amp> refractory on
+refractory: on
 amp> h = population 8
 h: 8 members, h{1..8}, all individuals
 amp> o = population 8

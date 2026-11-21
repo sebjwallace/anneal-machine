@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"slices"
 	"strings"
 	"testing"
 
@@ -35,6 +36,7 @@ func TestASnapshotRebuildsTheSameDeclarations(t *testing.T) {
 // light the same members.
 func TestAnOpenedMemoryInvokesLikeTheOriginal(t *testing.T) {
 	original := engine.New()
+	original.SetRefractoryPeriod(true)
 	mustValue(original.DeclarePopulation("wide", 100))
 	mustValue(original.DeclarePopulation("c", 8))
 
@@ -161,5 +163,52 @@ func TestASnapshotKeepsAssembliesInOrder(t *testing.T) {
 
 	if err == nil {
 		t.Fatal("want a refusal for #2 where #1 should be")
+	}
+}
+
+func TestASnapshotKeepsEachRepeatsOwnMember(t *testing.T) {
+	original := engine.New()
+	mustValue(original.DeclarePopulations([]engine.Name{"b", "o", "k"}, 8))
+	mustValue(original.DeclareAssemblies("book", []engine.Outline{{Shape: engine.TransitionShape, Populations: []engine.Name{"b", "o", "o", "k"}}}))
+
+	var saved bytes.Buffer
+	if err := original.WriteSnapshot(&saved); err != nil {
+		t.Fatal(err)
+	}
+	opened := mustValue(engine.ReadSnapshot(&saved))
+
+	var numbers []int
+	for _, member := range mustValue(opened.Assemblies("book"))[0].Members() {
+		numbers = append(numbers, member.Number())
+	}
+	if want := []int{1, 1, 2, 1}; !slices.Equal(numbers, want) {
+		t.Errorf("book's members are numbered %v, want %v", numbers, want)
+	}
+}
+
+func TestASnapshotCannotGiveAnAssemblyTheSameMemberTwice(t *testing.T) {
+	_, err := engine.ReadSnapshot(strings.NewReader(`{"version": 1,
+		"populations": [{"name": "o", "size": 2}], "communities": [],
+		"assemblies": [{"id": 1, "name": "oo", "shape": "transition",
+			"members": [{"population": "o", "member": 1}, {"population": "o", "member": 1}]}]}`))
+
+	if err == nil || !strings.Contains(err.Error(), "o{1} twice") {
+		t.Fatalf("want a refusal for o{1} twice, got %v", err)
+	}
+}
+
+func TestASnapshotKeepsTheRefractorySetting(t *testing.T) {
+	for _, on := range []bool{true, false} {
+		original := engine.New()
+		original.SetRefractoryPeriod(on)
+
+		var saved bytes.Buffer
+		if err := original.WriteSnapshot(&saved); err != nil {
+			t.Fatal(err)
+		}
+
+		if opened := mustValue(engine.ReadSnapshot(&saved)); opened.HasRefractoryPeriod() != on {
+			t.Errorf("saved with the refractory period %v, opened with it %v", on, opened.HasRefractoryPeriod())
+		}
 	}
 }

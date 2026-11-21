@@ -2,6 +2,7 @@ package interpreter
 
 import (
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 	"unicode"
@@ -12,10 +13,10 @@ import (
 // A statement is one line of AMP, read and checked, ready to be carried out.
 type statement interface{ isStatement() }
 
-// name = population size
+// name = population size, or a, b, c = population size for several at once
 type populationDeclaration struct {
-	name engine.Name
-	size int
+	names []engine.Name
+	size  int
 }
 
 // name = community population, population, ...
@@ -40,9 +41,22 @@ type inspectCommand struct {
 	name engine.Name
 }
 
-// save walkthrough.json
+// refractory on, refractory off, or refractory alone to show the setting
+type refractoryCommand struct {
+	setting refractorySetting
+}
+
+type refractorySetting int
+
+const (
+	showRefractory refractorySetting = iota
+	refractoryOn
+	refractoryOff
+)
+
+// save walkthrough.json, or save alone for the current file
 type saveCommand struct {
-	path string
+	path string // empty for the current file
 }
 
 // open walkthrough.json
@@ -55,6 +69,7 @@ func (communityDeclaration) isStatement()  {}
 func (assemblyDeclaration) isStatement()   {}
 func (invokeCommand) isStatement()         {}
 func (inspectCommand) isStatement()        {}
+func (refractoryCommand) isStatement()     {}
 func (saveCommand) isStatement()           {}
 func (openCommand) isStatement()           {}
 
@@ -100,7 +115,7 @@ func parseFileCommand(line string) (statement, bool, error) {
 	if (command != "save" && command != "open") || strings.HasPrefix(path, "=") {
 		return nil, false, nil
 	}
-	if path == "" {
+	if path == "" && command == "open" {
 		return nil, true, syntaxError("expected a file name after %q", command)
 	}
 	if command == "save" {
@@ -128,33 +143,67 @@ func (p *parser) peekIs(kind tokenKind) bool {
 	return p.next < len(p.tokens) && p.tokens[p.next].kind == kind
 }
 
+// peekAfterIs looks one token past the next.
+func (p *parser) peekAfterIs(kind tokenKind) bool {
+	return p.next+1 < len(p.tokens) && p.tokens[p.next+1].kind == kind
+}
+
 // statement reads a command or a declaration. Command words aren't reserved: followed by "=", they are names.
 func (p *parser) statement() (statement, error) {
 	first := p.take()
-	declaring := p.peekIs(equalsToken)
+	declaring := p.peekIs(equalsToken) || p.peekIs(commaToken)
 	switch {
 	case first.is("invoke") && !declaring:
 		return p.invoke()
 	case first.is("inspect") && !declaring:
 		return p.inspect()
+	case first.is("refractory") && !declaring:
+		return p.refractory()
 	case p.startsOutline(first):
 		return nil, syntaxError("an assembly written by hand needs a name, as in cat = <c, a, t>")
 	case first.kind == wordToken:
-		return p.declaration(engine.Name(first.text))
+		names, err := p.declaredNames(first)
+		if err != nil {
+			return nil, err
+		}
+		return p.declaration(names)
 	default:
 		return nil, syntaxError("expected a command or a name to declare%s", got(first))
 	}
 }
 
-func (p *parser) declaration(name engine.Name) (statement, error) {
-	if equals := p.take(); equals.kind != equalsToken {
-		return nil, syntaxError("expected \"=\" after %s%s", name, got(equals))
+// declaredNames reads the names on the left of "=": one, or several separated by commas. A name given twice is
+// declared once (the owner asked for this to be forgiving).
+func (p *parser) declaredNames(first token) ([]engine.Name, error) {
+	names := []engine.Name{engine.Name(first.text)}
+	for p.peekIs(commaToken) {
+		p.take()
+		name := p.take()
+		if name.kind != wordToken {
+			return nil, syntaxError("expected a name after \",\"%s", got(name))
+		}
+		if !slices.Contains(names, engine.Name(name.text)) {
+			names = append(names, engine.Name(name.text))
+		}
 	}
-	switch first := p.take(); {
+	return names, nil
+}
+
+func (p *parser) declaration(names []engine.Name) (statement, error) {
+	last := names[len(names)-1]
+	if equals := p.take(); equals.kind != equalsToken {
+		return nil, syntaxError("expected \"=\" after %s%s", last, got(equals))
+	}
+	first := p.take()
+	if first.is("population") {
+		return p.population(names)
+	}
+	if len(names) > 1 {
+		return nil, syntaxError("only populations can be declared several at once")
+	}
+	switch name := names[0]; {
 	case p.startsOutline(first):
 		return p.assemblies(name, first)
-	case first.is("population"):
-		return p.population(name)
 	case first.is("community"):
 		return p.community(name)
 	default:
@@ -175,7 +224,7 @@ func (p *parser) assemblies(name engine.Name, first token) (statement, error) {
 		if err != nil {
 			return nil, err
 		}
-		outlines = append(outlines, outline)
+		outlines = append(outlines, outline...)
 		if !p.peekIs(semicolonToken) {
 			return assemblyDeclaration{name: name, outlines: outlines}, nil
 		}
@@ -186,31 +235,52 @@ func (p *parser) assemblies(name engine.Name, first token) (statement, error) {
 	}
 }
 
-// outline reads a state, <c, a, t>, or a transition, c -> a -> t, starting from first.
-func (p *parser) outline(first token) (engine.Outline, error) {
-	if first.kind == openAngleToken {
-		populations, err := p.names(`"<"`)
+// outline reads a state, <c, a, t>; a transition, c -> a -> t; or both at once over the same populations,
+// <c -> a -> t>, which is short for <c, a, t> ; c -> a -> t (the owner's notation). It starts from first.
+func (p *parser) outline(first token) ([]engine.Outline, error) {
+	switch {
+	case first.kind == openAngleToken && p.peekIs(wordToken) && p.peekAfterIs(arrowToken):
+		steps, err := p.steps(p.take())
 		if err != nil {
-			return engine.Outline{}, err
+			return nil, err
 		}
 		if closing := p.take(); closing.kind != closeAngleToken {
-			return engine.Outline{}, syntaxError("expected \",\" or \">\" after %s%s", populations[len(populations)-1], got(closing))
+			return nil, syntaxError("expected \"->\" or \">\" after %s%s", steps[len(steps)-1], got(closing))
 		}
-		return engine.Outline{Shape: engine.StateShape, Populations: populations}, nil
+		return []engine.Outline{{Shape: engine.StateShape, Populations: steps}, {Shape: engine.TransitionShape, Populations: steps}}, nil
+	case first.kind == openAngleToken:
+		populations, err := p.names(`"<"`)
+		if err != nil {
+			return nil, err
+		}
+		if closing := p.take(); closing.kind != closeAngleToken {
+			return nil, syntaxError("expected \",\" or \">\" after %s%s", populations[len(populations)-1], got(closing))
+		}
+		return []engine.Outline{{Shape: engine.StateShape, Populations: populations}}, nil
+	default:
+		steps, err := p.steps(first)
+		if err != nil {
+			return nil, err
+		}
+		return []engine.Outline{{Shape: engine.TransitionShape, Populations: steps}}, nil
 	}
+}
+
+// steps reads a chain of population names joined by arrows, c -> a -> t, starting from first.
+func (p *parser) steps(first token) ([]engine.Name, error) {
 	steps := []engine.Name{engine.Name(first.text)}
 	for p.peekIs(arrowToken) {
 		p.take()
 		step := p.take()
 		if step.kind != wordToken {
-			return engine.Outline{}, syntaxError("expected a population name after \"->\"%s", got(step))
+			return nil, syntaxError("expected a population name after \"->\"%s", got(step))
 		}
 		steps = append(steps, engine.Name(step.text))
 	}
-	return engine.Outline{Shape: engine.TransitionShape, Populations: steps}, nil
+	return steps, nil
 }
 
-func (p *parser) population(name engine.Name) (statement, error) {
+func (p *parser) population(names []engine.Name) (statement, error) {
 	size := p.take()
 	if size.kind != numberToken {
 		return nil, syntaxError("expected a number of members after \"population\"%s", got(size))
@@ -219,7 +289,7 @@ func (p *parser) population(name engine.Name) (statement, error) {
 	if err != nil {
 		return nil, syntaxError("%s is too large a number of members", size.text)
 	}
-	return populationDeclaration{name: name, size: n}, nil
+	return populationDeclaration{names: names, size: n}, nil
 }
 
 func (p *parser) community(name engine.Name) (statement, error) {
@@ -273,6 +343,20 @@ func (p *parser) inspect() (statement, error) {
 		return nil, syntaxError("expected a population name after \"inspect\"%s", got(name))
 	}
 	return inspectCommand{name: engine.Name(name.text)}, nil
+}
+
+func (p *parser) refractory() (statement, error) {
+	if p.next == len(p.tokens) {
+		return refractoryCommand{setting: showRefractory}, nil
+	}
+	switch setting := p.take(); {
+	case setting.is("on"):
+		return refractoryCommand{setting: refractoryOn}, nil
+	case setting.is("off"):
+		return refractoryCommand{setting: refractoryOff}, nil
+	default:
+		return nil, syntaxError("expected \"on\" or \"off\" after \"refractory\"%s", got(setting))
+	}
 }
 
 // names reads one or more names separated by commas, the first coming after the given token.

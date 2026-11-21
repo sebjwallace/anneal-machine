@@ -56,10 +56,13 @@ type Memory struct {
 	next       map[Name]int          // for each population, the member a new assembly gets next, counted from 0
 	assembled  memberSet             // the members that belong to at least one assembly
 
-	moment     int           // the last moment that passed: one clock for the memory's whole life, 0 before any
-	active     memberSet     // the members active this moment
-	refractory memberSet     // the members active the moment before, which can't come on this moment
-	unexpected map[Name]bool // populations that arrived this moment with nothing expecting them
+	moment     int       // the last moment that passed: one clock for the memory's whole life, 0 before any
+	active     memberSet // the members active this moment
+	refractory memberSet // the members active the moment before, which can't come on this moment
+	// refractoryPeriod is whether members have a refractory period at all: a setting, off by default (the owner's
+	// choice, for testing). Off, a member active one moment is ready the next, and nothing is ever refractory.
+	refractoryPeriod bool
+	unexpected       map[Name]bool // populations that arrived this moment with nothing expecting them
 }
 
 func New() *Memory {
@@ -78,6 +81,17 @@ func NewAfter(moment int) *Memory {
 		named:       map[Name][]AssemblyID{},
 		next:        map[Name]int{},
 		moment:      moment,
+	}
+}
+
+// HasRefractoryPeriod reports whether a member active one moment is refractory the next.
+func (m *Memory) HasRefractoryPeriod() bool { return m.refractoryPeriod }
+
+// SetRefractoryPeriod turns the refractory period on or off. Turning it off lets go of anything refractory now.
+func (m *Memory) SetRefractoryPeriod(on bool) {
+	m.refractoryPeriod = on
+	if !on {
+		m.refractory = nil
 	}
 }
 

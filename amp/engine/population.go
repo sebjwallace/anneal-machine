@@ -1,5 +1,7 @@
 package engine
 
+import "slices"
+
 // Population is a fixed group of members, declared once. Its members are numbered within it, from 1.
 type Population struct {
 	name  Name
@@ -25,6 +27,31 @@ func (m *Memory) DeclarePopulation(name Name, size int) (Population, error) {
 	m.populationOrder = append(m.populationOrder, population)
 	m.members += size
 	return population, nil
+}
+
+// DeclarePopulations adds several populations of the same size at once. It is all or nothing: if any name is taken
+// or given twice, or size is below 1, none is declared.
+func (m *Memory) DeclarePopulations(names []Name, size int) ([]Population, error) {
+	if size < 1 {
+		return nil, TooFewMembersError{Size: size}
+	}
+	for i, name := range names {
+		if slices.Contains(names[:i], name) {
+			return nil, RepeatedNameError{Name: name}
+		}
+		if err := m.refuseRedeclaration(name); err != nil {
+			return nil, err
+		}
+	}
+	populations := make([]Population, 0, len(names))
+	for _, name := range names {
+		population, err := m.DeclarePopulation(name, size)
+		if err != nil {
+			return nil, err
+		}
+		populations = append(populations, population)
+	}
+	return populations, nil
 }
 
 // Individuals counts the members of p that belong to no assembly.

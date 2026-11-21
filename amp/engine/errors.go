@@ -92,14 +92,16 @@ func (e TooSmallError) Error() string {
 	return "a state needs at least two populations"
 }
 
-// RepeatedInAssemblyError: a population appeared twice in one assembly. How repeats work ("dad", "banana") is still
-// open, so they are refused rather than guessed at.
-type RepeatedInAssemblyError struct {
+// TooFewToRepeatError: a population appears more times in one assembly than it has members. Each time it appears
+// takes a member of its own.
+type TooFewToRepeatError struct {
 	Population Name
+	Size       int
+	Times      int
 }
 
-func (e RepeatedInAssemblyError) Error() string {
-	return fmt.Sprintf("%s appears twice in one assembly; repeats aren't settled yet", e.Population)
+func (e TooFewToRepeatError) Error() string {
+	return fmt.Sprintf("%s has %d members, too few to appear %d times in one assembly", e.Population, e.Size, e.Times)
 }
 
 // NotAnAssemblyError: an assembly was expected, and the name was declared as something else.
@@ -110,4 +112,13 @@ type NotAnAssemblyError struct {
 
 func (e NotAnAssemblyError) Error() string {
 	return fmt.Sprintf("%s is %s, not an assembly", e.Name, e.Is.withArticle())
+}
+
+// RepeatedNameError: the same name was given twice in one declaration.
+type RepeatedNameError struct {
+	Name Name
+}
+
+func (e RepeatedNameError) Error() string {
+	return fmt.Sprintf("%s appears twice in one declaration", e.Name)
 }

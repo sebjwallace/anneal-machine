@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"slices"
 )
 
 // A snapshot holds what the memory knows (its declarations and assemblies, with the members each assembly was
@@ -19,7 +20,8 @@ const snapshotVersion = 1
 
 type snapshotFile struct {
 	Version     int                  `json:"version"`
-	Moment      int                  `json:"moment"` // the last moment that passed; absent in early files, meaning 0
+	Moment      int                  `json:"moment"`               // the last moment that passed; absent in early files, meaning 0
+	Refractory  bool                 `json:"refractory,omitempty"` // whether members have a refractory period; absent means off
 	Populations []snapshotPopulation `json:"populations"`
 	Communities []snapshotCommunity  `json:"communities"`
 	Assemblies  []snapshotAssembly   `json:"assemblies"` // absent in early files, meaning none
@@ -63,6 +65,7 @@ func (m *Memory) WriteSnapshot(w io.Writer) error {
 	snapshot := snapshotFile{
 		Version:     snapshotVersion,
 		Moment:      m.moment,
+		Refractory:  m.refractoryPeriod,
 		Populations: []snapshotPopulation{},
 		Communities: []snapshotCommunity{},
 		Assemblies:  []snapshotAssembly{},
@@ -100,6 +103,7 @@ func ReadSnapshot(r io.Reader) (*Memory, error) {
 		return nil, fmt.Errorf("moment %d is before the first moment", snapshot.Moment)
 	}
 	m := NewAfter(snapshot.Moment)
+	m.refractoryPeriod = snapshot.Refractory
 	for _, p := range snapshot.Populations {
 		population, err := m.DeclarePopulation(p.Name, p.Size)
 		if err != nil {
@@ -152,6 +156,9 @@ func (m *Memory) restoreAssembly(position int, saved snapshotAssembly) error {
 			return fmt.Errorf("population %s has no member %d", population.name, number)
 		}
 		members[i] = Member{population: population, number: number}
+		if slices.Contains(members[:i], members[i]) {
+			return fmt.Errorf("has %s{%d} twice; each time a population appears takes a member of its own", population.name, number)
+		}
 	}
 	m.form(saved.Name, shape, members)
 	return nil

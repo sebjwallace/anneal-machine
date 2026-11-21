@@ -99,7 +99,8 @@ cat: 3 of 3: c, t, then a, all from input
 ```
 
 **Saving a session.** `save walkthrough.json` writes a snapshot of what the memory holds (populations, communities,
-and later assemblies) to a JSON file; `open walkthrough.json` replaces the memory with it. These are REPL commands,
+assemblies, and the refractory setting) to a JSON file; `open walkthrough.json` replaces the memory with it. `save` on
+its own saves to the file last opened or saved. These are REPL commands,
 not instructions: they keep a session between runs and are separate from **loaded** and **stored**, which say where an
 assembly sits while the engine runs. A snapshot doesn't hold what is active, so an opened memory starts with nothing on.
 

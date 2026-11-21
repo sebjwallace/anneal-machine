@@ -44,7 +44,9 @@ These are known to be needed and have been set aside until there is more to go o
 - **Arrivals versus held states.** Whether transitions act on what arrives (change) rather than on what is held, so a
   count advances once per tick ([procedures](../docs/theories/procedures-from-states-and-transitions.md) §5).
 - **Returning from a reused subroutine** to the right caller, and **letting go** of a loop that never exits.
-- **Repeats in sequences.** How held context disambiguates what follows a repeated element ("banana").
+- **Repeats in sequences.** (Settled, the owner: a population that appears more than once in an assembly gives a new
+  member each time, so "abab" is `a{1}, b{1}, a{2}, b{2}` and "book" is `o{1} -> o{2}`; walkthrough step 3.) Still
+  open: how held context disambiguates what follows a repeated element ("banana").
 - **RAM's room, ranking and floor.** How much RAM holds, how demand is ranked at each moment, where the floor sits.
 - **The build-up on stored assemblies.** A word for it, and the settings: loading threshold and how fast it fades.
 - **Forming always new.** How many assemblies that produces, and what a new assembly contains when it reinforces an old one.

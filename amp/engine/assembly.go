@@ -59,9 +59,10 @@ type Outline struct {
 	Populations []Name
 }
 
-// DeclareAssemblies forms an assembly for each outline and gives them all the name. Outlines declared together share
-// members: each population in them gives one member, used wherever it appears. It is refused, and nothing forms, if
-// the name is taken or any outline breaks a rule.
+// DeclareAssemblies forms an assembly for each outline and gives them all the name. A population that appears more
+// than once in an outline gives a new member for each time it appears (the owner's choice for repeats). Outlines
+// declared together share members by order of appearance: the second "a" in each outline is the same member. It is
+// refused, and nothing forms, if the name is taken or any outline breaks a rule.
 func (m *Memory) DeclareAssemblies(name Name, outlines []Outline) ([]Assembly, error) {
 	if err := m.refuseRedeclaration(name); err != nil {
 		return nil, err
@@ -69,29 +70,38 @@ func (m *Memory) DeclareAssemblies(name Name, outlines []Outline) ([]Assembly, e
 	if len(outlines) == 0 {
 		return nil, NothingToAssembleError{Name: name}
 	}
-	var together []Population
+	var together []Population // each population once, in the order first written
+	needed := map[Name]int{}  // how many members of each population the line needs: the most times it appears in one outline
 	for _, outline := range outlines {
 		populations, err := m.outlinePopulations(outline)
 		if err != nil {
 			return nil, err
 		}
+		times := map[Name]int{}
 		for _, p := range populations {
-			if !slices.Contains(together, p) {
+			if times[p.name] == 0 && needed[p.name] == 0 {
 				together = append(together, p)
 			}
+			times[p.name]++
+			needed[p.name] = max(needed[p.name], times[p.name])
 		}
 	}
-	chosen := m.chooseMembers(together)
+	chosen := m.chooseMembers(together, needed)
 	assemblies := make([]Assembly, 0, len(outlines))
 	for _, outline := range outlines {
 		members := make([]Member, len(outline.Populations))
+		times := map[Name]int{}
 		for i, population := range outline.Populations {
-			members[i] = chosen[population]
+			members[i] = chosen[population][times[population]]
+			times[population]++
 		}
 		assemblies = append(assemblies, m.form(name, outline.Shape, members))
 	}
 	return assemblies, nil
 }
+
+// AllAssemblies lists every assembly, in the order formed.
+func (m *Memory) AllAssemblies() []Assembly { return slices.Clone(m.assemblies) }
 
 // CountAssemblies is how many assemblies the memory holds.
 func (m *Memory) CountAssemblies() int { return len(m.assemblies) }
@@ -118,28 +128,31 @@ func (m *Memory) outlinePopulations(outline Outline) ([]Population, error) {
 		return nil, TooSmallError{Shape: outline.Shape}
 	}
 	populations := make([]Population, len(outline.Populations))
+	times := map[Name]int{}
 	for i, name := range outline.Populations {
-		if slices.Contains(outline.Populations[:i], name) {
-			return nil, RepeatedInAssemblyError{Population: name}
-		}
 		population, err := m.population(name)
 		if err != nil {
 			return nil, err
+		}
+		if times[name]++; times[name] > population.size {
+			return nil, TooFewToRepeatError{Population: name, Size: population.size, Times: times[name]}
 		}
 		populations[i] = population
 	}
 	return populations, nil
 }
 
-// chooseMembers gives each population's next member. A population hands out its members in order from the first,
-// individuals first; once every member has been used it goes round again from the first (the owner's rule, kept
-// simple on purpose).
-func (m *Memory) chooseMembers(populations []Population) map[Name]Member {
-	chosen := make(map[Name]Member, len(populations))
+// chooseMembers gives each population as many of its next members as needed. A population hands out its members in
+// order from the first, individuals first; once every member has been used it goes round again from the first (the
+// owner's rule, kept simple on purpose).
+func (m *Memory) chooseMembers(populations []Population, needed map[Name]int) map[Name][]Member {
+	chosen := make(map[Name][]Member, len(populations))
 	for _, p := range populations {
-		next := m.next[p.name]
-		chosen[p.name] = Member{population: p, number: next + 1}
-		m.next[p.name] = (next + 1) % p.size
+		for range needed[p.name] {
+			next := m.next[p.name]
+			chosen[p.name] = append(chosen[p.name], Member{population: p, number: next + 1})
+			m.next[p.name] = (next + 1) % p.size
+		}
 	}
 	return chosen
 }

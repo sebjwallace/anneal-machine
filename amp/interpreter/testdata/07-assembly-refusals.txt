@@ -16,10 +16,6 @@ amp> cat = <c, a
 error: expected "," or ">" after a
 amp> cat = <>
 error: expected a population name after "<", got >
-amp> cat = <c, c>
-error: c appears twice in one assembly; repeats aren't settled yet
-amp> cat = c -> a -> c
-error: c appears twice in one assembly; repeats aren't settled yet
 amp> cat = <c, z>
 error: z is not declared
 amp> cat = <c, letters>

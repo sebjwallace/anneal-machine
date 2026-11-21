@@ -36,6 +36,9 @@ letters = community c, a, t
 letters: c, a, t (24 members)
 ```
 
+**Several at once (the owner):** `c, a, t = population 8` declares each of them with 8 members. A name given twice is
+declared once; if any name is already taken, none are declared.
+
 **Decided: member numbers are local to their population.** `c{3}` and `a{3}` are different members, and a member is
 always written with its population. This follows the rule that a name followed by braces means those members of that
 thing. "Individuals" means none of them belongs to an assembly yet.
@@ -119,6 +122,10 @@ resolve    from heat !c, !a, !t
   starting at the first: `c{1}`, then `c{2}`, and so on, so individuals are used up in order. Once every member has
   been used, it goes round again from `c{1}`, so later assemblies share members with earlier ones. Kept simple on
   purpose; a cleverer choice can replace it later.
+- **Decided (the owner): a repeat gets a new member.** A population that appears more than once in an assembly gives
+  its next member each time: `abab = <a -> b -> a -> b>` is `a{1}, b{1}, a{2}, b{2}`, and "book" is
+  `b{1} -> o{1} -> o{2} -> k{1}`. On one line, the second "a" in each outline is the same member. Reusing one member
+  would collapse the state (a set holds a member once) and turn the chain into a loop with no end.
 
 Then invoking part of it shows whether anything was learnt:
 
@@ -521,6 +528,14 @@ reference list is on [instructions](instructions.md).
 **Decided (the owner): in the REPL a state is typed and printed with ordinary angle brackets, `<c, a, t>`,** because
 `⟨ ⟩` aren't on a keyboard. `⟨ ⟩` is still accepted, so lines can be pasted from these pages, and the pages keep it as
 the typeset form. Everything printed can be typed back in.
+
+**Decided (the owner): `<c -> a -> t>` is short for `<c, a, t> ; c -> a -> t`,** a state and its transition over the
+same populations, sharing members. The arrows say transition and the angle brackets say state, so it reads as both.
+
+```
+amp> cat = <c -> a -> t>
+cat: state <c, a, t> and transition c -> a -> t
+```
 
 ```
 amp> cat = ⟨c, a, t⟩ ; c -> a -> t

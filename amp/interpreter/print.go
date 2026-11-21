@@ -201,12 +201,28 @@ func writeSummary(invocation engine.Invocation) string {
 		}
 	}
 	if held {
-		rows = append(rows, []string{"held", fmt.Sprintf("repeating every %d moments", invocation.RepeatsEvery)})
+		rows = append(rows, []string{"held", RepeatingEvery(invocation.RepeatsEvery)})
 	}
 	if len(rows) == 0 {
 		return ""
 	}
 	return writeTable(rows)
+}
+
+// RepeatingEvery says how often a held memory comes back round: repeating every moment, every 2 moments.
+func RepeatingEvery(moments int) string {
+	if moments == 1 {
+		return "repeating every moment"
+	}
+	return fmt.Sprintf("repeating every %d moments", moments)
+}
+
+// refractory: on
+func printRefractory(on bool) string {
+	if on {
+		return "refractory: on"
+	}
+	return "refractory: off"
 }
 
 // writeTable lines rows up in columns, three spaces apart. A row may stop early; its last cell isn't padded.

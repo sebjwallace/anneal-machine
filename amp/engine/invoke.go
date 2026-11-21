@@ -8,6 +8,8 @@ import "slices"
 //   - refractory: it was active the moment before, so it can't come on this moment;
 //   - ready: neither, so it can come on when a gate opens.
 //
+// The refractory period is a setting, off by default (SetRefractoryPeriod). Off, members are only active or ready.
+//
 // Every bond acts one moment later: what is active or refractory now decides what comes on next moment. Gates count
 // active and refractory members alike.
 //
@@ -15,8 +17,8 @@ import "slices"
 // part brings back the rest once more of the state is counted than missing. A transition's gate opens for a step
 // when the step before is counted.
 //
-// Competition: two assemblies are rivals when they share a population but not its member, so they explain the same
-// input differently. A part is never a rival of its whole, since they share members. An assembly's support is its
+// Competition: two assemblies are rivals when they share a population but none of its members, so they explain the
+// same input differently. A part is never a rival of its whole, since they share members. An assembly's support is its
 // counted part minus its missing part. When rivals' gates would open in the same moment, the one with most support
 // opens; if the most support is shared, the tie is held and none of the tied open. Nothing is turned off: a rival
 // that loses simply doesn't open, and fades.
@@ -107,10 +109,10 @@ func (m *Memory) Invoke(sequence [][]Name) (Invocation, error) {
 	}
 	for {
 		next := m.upcoming(nil)
-		if next.active.isEmpty() && m.active.isEmpty() {
+		if next.active.isEmpty() && m.refractoryAfter().isEmpty() {
 			break
 		}
-		if first, repeated := seen[phasesKey(next.active, m.active)]; repeated {
+		if first, repeated := seen[phasesKey(next.active, m.refractoryAfter())]; repeated {
 			invocation.RepeatsEvery = m.moment + 1 - first
 			break
 		}
@@ -292,25 +294,45 @@ func rivalGroups(openings []opening) [][]int {
 	return slices.DeleteFunc(groups, func(g []int) bool { return len(g) < 2 })
 }
 
-// areRivals is true when two assemblies share a population but not its member.
+// areRivals is true when two assemblies share a population but none of its members. Assemblies that share a member
+// of a population read it the same way there, as a part does its whole.
 func areRivals(a, b Assembly) bool {
 	for _, x := range a.members {
-		for _, y := range b.members {
-			if x.population == y.population && x.number != y.number {
-				return true
-			}
+		ofSamePopulation := membersOf(b, x.population)
+		if len(ofSamePopulation) > 0 && !slices.ContainsFunc(ofSamePopulation, func(y Member) bool { return slices.Contains(a.members, y) }) {
+			return true
 		}
 	}
 	return false
 }
 
+// membersOf lists an assembly's members that belong to p.
+func membersOf(a Assembly, p Population) []Member {
+	var members []Member
+	for _, member := range a.members {
+		if member.population == p {
+			members = append(members, member)
+		}
+	}
+	return members
+}
+
 // isReady is true when the member can come on next moment: it isn't active now, so it won't be refractory then.
-func (m *Memory) isReady(member int) bool { return !m.active.has(member) }
+// With no refractory period, every member is ready.
+func (m *Memory) isReady(member int) bool { return !m.refractoryAfter().has(member) }
+
+// refractoryAfter is what will be refractory next moment: what is active now, if members have a refractory period.
+func (m *Memory) refractoryAfter() memberSet {
+	if !m.refractoryPeriod {
+		return nil
+	}
+	return m.active
+}
 
 // step moves the memory to the next moment and reports it.
 func (m *Memory) step(next nextMoment) Moment {
 	m.moment++
-	m.refractory = m.active
+	m.refractory = m.refractoryAfter()
 	m.active = next.active
 	m.unexpected = next.unexpected
 	moment := Moment{Number: m.moment, Input: next.input, Competitions: next.competitions}

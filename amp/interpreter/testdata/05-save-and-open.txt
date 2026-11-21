@@ -1,3 +1,5 @@
+amp> refractory on
+refractory: on
 amp> c = population 8
 c: 8 members, c{1..8}, all individuals
 amp> a = population 8
@@ -37,7 +39,7 @@ error: open missing.json: no such file or directory
 amp> inspect o
 o: 8 members; active: none; refractory: o{1..8}
 amp> save
-error: expected a file name after "save"
+saved walkthrough.json: 4 populations, 1 community, 0 assemblies
 amp> open
 error: expected a file name after "open"
 amp> save = population 1

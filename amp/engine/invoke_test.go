@@ -33,6 +33,7 @@ func TestUnexpectedInputTurnsOnExactlyItsOwnMembers(t *testing.T) {
 
 func TestAMemberActiveOneMomentIsRefractoryTheNext(t *testing.T) {
 	memory := engine.New()
+	memory.SetRefractoryPeriod(true)
 	mustDeclarePopulation(t, memory, "c", 8)
 	mustDeclarePopulation(t, memory, "a", 8)
 
@@ -52,6 +53,7 @@ func TestAMemberActiveOneMomentIsRefractoryTheNext(t *testing.T) {
 
 func TestInvokeEndsBeforeAQuietMoment(t *testing.T) {
 	memory := engine.New()
+	memory.SetRefractoryPeriod(true)
 	mustDeclarePopulation(t, memory, "c", 8)
 
 	invocation, err := memory.Invoke([][]engine.Name{{"c"}})
@@ -65,5 +67,40 @@ func TestInvokeEndsBeforeAQuietMoment(t *testing.T) {
 	}
 	if inspection, _ := memory.Inspect("c"); len(inspection.Active) != 0 || len(inspection.Refractory) != 8 {
 		t.Errorf("c should end refractory, got %+v", inspection)
+	}
+}
+
+func TestAWordWithARepeatIsNotARivalOfItself(t *testing.T) {
+	memory := engine.New()
+	mustValue(memory.DeclarePopulations([]engine.Name{"a", "b"}, 8))
+	mustValue(memory.DeclareAssemblies("abab", []engine.Outline{
+		{Shape: engine.StateShape, Populations: []engine.Name{"a", "b", "a", "b"}},
+		{Shape: engine.TransitionShape, Populations: []engine.Name{"a", "b", "a", "b"}},
+	}))
+
+	invocation := mustValue(memory.Invoke([][]engine.Name{{"a", "b"}}))
+
+	for _, moment := range invocation.Moments {
+		if len(moment.Competitions) > 0 {
+			t.Fatalf("moment %d: abab's state and chain competed: %+v", moment.Number, moment.Competitions)
+		}
+	}
+	if last := invocation.Completions[0]; last.Last != 4 || invocation.RepeatsEvery == 0 {
+		t.Errorf("want abab complete, 4 of 4, and held; got %d of 4, repeating every %d", last.Last, invocation.RepeatsEvery)
+	}
+}
+
+func TestTheRefractoryPeriodIsOffByDefault(t *testing.T) {
+	memory := engine.New()
+	mustDeclarePopulation(t, memory, "c", 8)
+
+	invocation := mustValue(memory.Invoke([][]engine.Name{{"c"}, {"c"}}))
+
+	if memory.HasRefractoryPeriod() {
+		t.Fatal("the refractory period should be off by default")
+	}
+	if second := invocation.Moments[1]; len(second.Refractory) != 0 || len(second.Active) != 8 {
+		t.Errorf("with no refractory period, c should come on again at once; got %d active, %d refractory",
+			len(second.Active), len(second.Refractory))
 	}
 }

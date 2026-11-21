@@ -1,0 +1,32 @@
+amp> save
+error: no file to save to yet: give one, as in save walkthrough.json
+amp> c = population 8
+c: 8 members, c{1..8}, all individuals
+amp> save first.json
+saved first.json: 1 population, 0 communities, 0 assemblies
+amp> a = population 8
+a: 8 members, a{1..8}, all individuals
+amp> save
+saved first.json: 2 populations, 0 communities, 0 assemblies
+amp> save second.json
+saved second.json: 2 populations, 0 communities, 0 assemblies
+amp> t = population 8
+t: 8 members, t{1..8}, all individuals
+amp> save
+saved second.json: 3 populations, 0 communities, 0 assemblies
+amp> open first.json
+opened first.json: 2 populations, 0 communities, 0 assemblies
+amp> open missing.json
+error: open missing.json: no such file or directory
+amp> o = population 8
+o: 8 members, o{1..8}, all individuals
+amp> save
+saved first.json: 3 populations, 0 communities, 0 assemblies
+amp> open second.json
+opened second.json: 3 populations, 0 communities, 0 assemblies
+amp> inspect o
+error: o is not declared
+amp> open first.json
+opened first.json: 3 populations, 0 communities, 0 assemblies
+amp> inspect o
+o: 8 members; active: none; refractory: none
