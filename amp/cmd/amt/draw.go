@@ -35,7 +35,7 @@ var markStyles = map[mark]lipgloss.Style{
 // scene is what the moment shown has reached, and how each part of it is coloured.
 type scene struct {
 	members map[engine.Member]mark // only the members drawn
-	lull    map[engine.Member]bool // the members of the lull the moment shown is in, as far as it has gone: underlined
+	motif   map[engine.Member]bool // the members of the motif the moment shown is in, as far as it has gone: underlined
 	bonds   map[engine.Bond]mark   // only the bonds drawn
 }
 
@@ -117,7 +117,7 @@ func draw(l layout, s scene, offset, width int) []string {
 		p := l.nodes[m]
 		for i, r := range []rune(label(m)) {
 			if p.x+i < l.width {
-				canvas[p.y][p.x+i] = cell{r, mm, s.lull[m]}
+				canvas[p.y][p.x+i] = cell{r, mm, s.motif[m]}
 			}
 		}
 	}

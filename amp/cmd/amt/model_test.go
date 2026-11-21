@@ -105,18 +105,18 @@ func TestReloadsWhenAmpSaves(t *testing.T) {
 	}
 }
 
-// The lull the moment shown is in is underlined on the graph and bracketed under the text; one that has ended says so.
-func TestLullsShow(t *testing.T) {
+// The motif the moment shown is in is underlined on the graph and bracketed under the text; one that has ended says so.
+func TestMotifsShow(t *testing.T) {
 	m := typeIn(fresh(t), "abcd")
 	m = typeIn(m, "xbcy")
-	m = press(m, spaceKey, tea.KeyPressMsg{Code: tea.KeyEnd}) // y, which burst after the lull b c
+	m = press(m, spaceKey, tea.KeyPressMsg{Code: tea.KeyEnd}) // y, which burst after the motif b c
 	got := screen(m)
-	if !strings.Contains(got, "ends the lull of 1 before it") || !strings.Contains(got, "lulls: bc 1") {
-		t.Errorf("y should end the lull b c:\n%s", got)
+	if !strings.Contains(got, "ends the motif of 1 before it") || !strings.Contains(got, "motifs: bc 1") {
+		t.Errorf("y should end the motif b c:\n%s", got)
 	}
 	m = press(m, tea.KeyPressMsg{Code: tea.KeyLeft}) // c
-	if s := m.scene(); len(s.lull) != 2 {
-		t.Errorf("at c, the lull so far is b and c: %v", s.lull)
+	if s := m.scene(); len(s.motif) != 2 {
+		t.Errorf("at c, the motif so far is b and c: %v", s.motif)
 	}
 	if testing.Verbose() {
 		m = typeIn(m, "the cat sat on the mat the dog sat on the log")

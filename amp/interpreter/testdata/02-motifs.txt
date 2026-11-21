@@ -16,7 +16,7 @@ moment     arrived       member    bond formed   primes next
 14      o  burst (9 on)  o{8} new  d{3} -> o{8}
 15      g  burst (9 on)  g{2} new  o{8} -> g{2}
 THE_CAT_The_DOG · 12 of 15 burst · 12 bonds formed
-lull: the_ 3
+motif: the_ 3
 amp> invoke "the cat sat on the mat"
 moment     arrived       member    bond formed   primes next
 16      t  burst (9 on)  t{7} new                _{3}, h{7}
@@ -42,10 +42,10 @@ moment     arrived       member    bond formed   primes next
 36      a  burst (9 on)  a{3} new  m{1} -> a{3}  t{3}
 37      t  primed        t{3}      a{3} -> t{3}  _{3}
 The_cat_SAt_ON_the_MAt · 8 of 22 burst · 11 bonds formed
-lulls: the_cat_ 7 · at_ 2 · _the_ 4 · at 1
+motifs: the_cat_ 7 · at_ 2 · _the_ 4 · at 1
 amp> invoke "zq"
 moment     arrived       member    bond formed   primes next
 38      z  burst (9 on)  z{2} new
 39      q  burst (9 on)  q{5} new  z{2} -> q{5}
 ZQ · 2 of 2 burst · 1 bond formed
-no lulls
+no motifs

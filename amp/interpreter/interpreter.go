@@ -95,7 +95,7 @@ func (in *Interpreter) read(text string) (string, error) {
 }
 
 // PrintReading writes a read moment by moment, then a summary line (the text with each character that burst in
-// upper case, how many burst and how many bonds formed) and its lulls.
+// upper case, how many burst and how many bonds formed) and its motifs.
 func PrintReading(r engine.Reading) string {
 	rows := [][]string{{"moment", "", "arrived", "member", "bond formed", "primes next"}}
 	burst, formed := 0, 0
@@ -125,24 +125,24 @@ func PrintReading(r engine.Reading) string {
 		marks.WriteString(mark)
 	}
 	summary := fmt.Sprintf("%s · %d of %d burst · %d %s formed", marks.String(), burst, len(r.Moments), formed, plural(formed, "bond", "bonds"))
-	return table(rows) + "\n" + summary + "\n" + PrintLulls(r)
+	return table(rows) + "\n" + summary + "\n" + PrintMotifs(r)
 }
 
-// PrintLulls lists a read's lulls, each as the characters it covers and how many predictions it got right.
-func PrintLulls(r engine.Reading) string {
-	lulls := r.Lulls()
-	if len(lulls) == 0 {
-		return "no lulls"
+// PrintMotifs lists a read's motifs, each as the characters it covers and how many predictions it got right.
+func PrintMotifs(r engine.Reading) string {
+	motifs := r.Motifs()
+	if len(motifs) == 0 {
+		return "no motifs"
 	}
-	parts := make([]string, len(lulls))
-	for i, l := range lulls {
+	parts := make([]string, len(motifs))
+	for i, l := range motifs {
 		var chars strings.Builder
 		for _, moment := range r.Moments[l.Start : l.End+1] {
 			chars.WriteString(string(moment.Population))
 		}
 		parts[i] = fmt.Sprintf("%s %d", chars.String(), l.Length())
 	}
-	return fmt.Sprintf("%s: %s", plural(len(lulls), "lull", "lulls"), strings.Join(parts, " · "))
+	return fmt.Sprintf("%s: %s", plural(len(motifs), "motif", "motifs"), strings.Join(parts, " · "))
 }
 
 func (in *Interpreter) bonds() string {
