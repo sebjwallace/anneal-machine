@@ -70,6 +70,9 @@ last member to first. Decomposition: `ca = <cat{c, a}>` forms an assembly over j
 the first has that the rest don't, letters taken away in order. Short forms: `pop`, `com`, `intr`, `diff`, `inv`,
 `insp`, `annl`.
 
+**Reading text.** `invoke "the cat"` reads the text one character a moment, a space as the population `_`, declaring
+any letter not seen before (8 members). Letters and spaces only, for now.
+
 **Annealing.** `anneal thedog, thecat` compares stored wholes and forms, beside them and unnamed: the part they share,
 what varies in each, and each whole again from those parts. `inspect #9` looks at an assembly that has no name. Each
 population hands out its members in order and goes round again once all are used; everything on one line shares

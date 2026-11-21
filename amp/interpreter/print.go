@@ -646,3 +646,8 @@ func namesOf(names []engine.Name) []string {
 	}
 	return texts
 }
+
+// declared c, a, t (8 members each)
+func printDeclaredForReading(declared []engine.Name) string {
+	return fmt.Sprintf("declared %s (%d members each)", strings.Join(namesOf(declared), ", "), readingPopulationSize)
+}

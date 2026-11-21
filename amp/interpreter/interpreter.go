@@ -149,14 +149,19 @@ func (in *Interpreter) Run(line string) (string, error) {
 		}
 		return printAssemblyDeclaration(st.name, st.outlines), nil
 	case invokeCommand:
+		declared, err := in.declareForReading(st.fromText)
+		if err != nil {
+			return "", err
+		}
 		invocation, err := in.memory.Invoke(st.moments)
 		if err != nil {
 			return "", err
 		}
-		if in.showPhases {
-			return printInvocation(invocation) + "\n\n" + printPhases(invocation, in.memory.Populations()), nil
+		printed := in.printInvoked(invocation)
+		if len(declared) > 0 {
+			printed = printDeclaredForReading(declared) + "\n" + printed
 		}
-		return printInvocation(invocation), nil
+		return printed, nil
 	case inspectCommand:
 		if st.id != 0 {
 			a, err := in.memory.AssemblyByID(st.id)
@@ -227,4 +232,37 @@ func (in *Interpreter) Run(line string) (string, error) {
 		return in.Open(st.path)
 	}
 	panic(fmt.Sprintf("interpreter: no way to run %T", st))
+}
+
+// readingPopulationSize is how many members a population declared for reading gets: the size used so far.
+const readingPopulationSize = 8
+
+// declareForReading declares the populations quoted text reads that aren't declared yet. It is all or nothing: if any
+// of them is already the name of something else, nothing is declared.
+func (in *Interpreter) declareForReading(populations []engine.Name) ([]engine.Name, error) {
+	var missing []engine.Name
+	for _, name := range populations {
+		kind, declared := in.memory.KindOf(name)
+		switch {
+		case !declared:
+			missing = append(missing, name)
+		case kind != engine.PopulationKind:
+			return nil, engine.NotAPopulationError{Name: name, Is: kind}
+		}
+	}
+	if len(missing) == 0 {
+		return nil, nil
+	}
+	if _, err := in.memory.DeclarePopulations(missing, readingPopulationSize); err != nil {
+		return nil, err
+	}
+	return missing, nil
+}
+
+// printInvoked prints an invocation, with the phases table when that is switched on.
+func (in *Interpreter) printInvoked(invocation engine.Invocation) string {
+	if in.showPhases {
+		return printInvocation(invocation) + "\n\n" + printPhases(invocation, in.memory.Populations())
+	}
+	return printInvocation(invocation)
 }

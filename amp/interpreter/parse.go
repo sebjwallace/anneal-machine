@@ -31,9 +31,11 @@ type assemblyDeclaration struct {
 	outlines []engine.Outline
 }
 
-// invoke c, {a, t}: commas separate moments, braces hold what arrives together in one moment.
+// invoke c, {a, t}: commas separate moments, braces hold what arrives together in one moment. Quoted text,
+// invoke "the cat", is read one character a moment.
 type invokeCommand struct {
-	moments [][]engine.Name
+	moments  [][]engine.Name
+	fromText []engine.Name // the populations quoted text reads, which are declared if they aren't yet
 }
 
 // inspect c, or inspect #9 for an assembly with no name
@@ -454,20 +456,60 @@ func (p *parser) community(name engine.Name) (statement, error) {
 
 // invoke reads one or more moments separated by commas. A moment is a population, or several in braces.
 func (p *parser) invoke() (statement, error) {
-	var moments [][]engine.Name
+	var command invokeCommand
 	after := `"invoke"`
 	for {
-		moment, err := p.moment(after)
-		if err != nil {
-			return nil, err
+		if p.peekIs(textToken) {
+			moments, populations, err := readText(p.take().text)
+			if err != nil {
+				return nil, err
+			}
+			command.moments = append(command.moments, moments...)
+			for _, population := range populations {
+				if !slices.Contains(command.fromText, population) {
+					command.fromText = append(command.fromText, population)
+				}
+			}
+		} else {
+			moment, err := p.moment(after)
+			if err != nil {
+				return nil, err
+			}
+			command.moments = append(command.moments, moment)
 		}
-		moments = append(moments, moment)
 		if !p.peekIs(commaToken) {
-			return invokeCommand{moments: moments}, nil
+			return command, nil
 		}
 		p.take()
 		after = `","`
 	}
+}
+
+// spacePopulation is the population a space is read as: a name can't be a space, and "_" is easy to type.
+const spacePopulation engine.Name = "_"
+
+// readText turns quoted text into input, one character a moment: each letter is the population of that name, and a
+// space is "_". It also lists those populations in the order they first appear. Letters and spaces only, for now.
+func readText(text string) (moments [][]engine.Name, populations []engine.Name, err error) {
+	if text == "" {
+		return nil, nil, syntaxError(`there is nothing to read in ""`)
+	}
+	for _, r := range text {
+		var population engine.Name
+		switch {
+		case r == ' ':
+			population = spacePopulation
+		case unicode.IsLetter(r):
+			population = engine.Name(r)
+		default:
+			return nil, nil, syntaxError("reading text takes letters and spaces for now, got %q", string(r))
+		}
+		moments = append(moments, []engine.Name{population})
+		if !slices.Contains(populations, population) {
+			populations = append(populations, population)
+		}
+	}
+	return moments, populations, nil
 }
 
 func (p *parser) moment(after string) ([]engine.Name, error) {
@@ -614,6 +656,7 @@ const (
 	arrowToken
 	semicolonToken
 	numberedToken // #9: an assembly by its number
+	textToken     // "the cat": quoted text, its text without the quotes
 )
 
 type token struct {
@@ -652,6 +695,13 @@ func scan(line string) ([]token, error) {
 		switch {
 		case unicode.IsSpace(r):
 			i++
+		case r == '"':
+			end := slices.Index(runes[i+1:], '"')
+			if end < 0 {
+				return nil, syntaxError("a quote is missing its end")
+			}
+			tokens = append(tokens, token{kind: textToken, text: string(runes[i+1 : i+1+end])})
+			i += end + 2
 		case r == '#' && i+1 < len(runes) && unicode.IsDigit(runes[i+1]):
 			end := scanWhile(runes, i+1, unicode.IsDigit)
 			n, _ := strconv.Atoi(string(runes[i+1 : end]))

@@ -102,6 +102,11 @@ cat: 3 of 3: c, t, then a, all from input
 settings and the clock are unchanged. A REPL command, not an instruction: it doesn't come from the dynamics, so it is
 for examining, not for running.
 
+**Reading text.** `invoke "the cat"` reads quoted text one character a moment: each letter is the population of
+that name, and a space is the population `_`. Any of them not declared yet is declared, with 8 members, and the
+reply says so (`declared h, e, _ (8 members each)`). Text mixes with other input: `invoke "the", {c, t}`. Letters and
+spaces only, for now.
+
 **Short forms.** In the REPL, the instructions' mnemonics can be typed in place of their words, in lower or upper
 case: `pop` for `population`, `com` for `community`, `intr` for `intersection`, `diff` for `difference`, `inv` for
 `invoke`, `insp` for `inspect`, `annl` for `anneal`. An assembly with no name is inspected by its number:
