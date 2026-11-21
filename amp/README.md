@@ -37,6 +37,10 @@ starts with nothing on. The file name is the rest of the line.
 **Transcripts.** Each file in `interpreter/testdata` is a REPL session on a fresh engine. A line starting `amp> ` is
 typed, and the lines after it are what must print back, exactly. A new walkthrough step starts as a transcript.
 
+**Seeing the phases.** `phases on` makes each invoke also print a table with one row per moment and one column per
+population, one mark per member (● active, ◐ refractory, · ready), so reading down shows how activity moves. Off by
+default, and not saved: it is about what amp prints, not what the memory holds.
+
 **The refractory period** is a setting, off by default: `refractory on` / `refractory off` (`refractory` shows it).
 It is saved in snapshots, and AMT shows it in its title line. The transcripts written for walkthrough step 4 onwards
 turn it on in their first line.

@@ -41,17 +41,26 @@ type inspectCommand struct {
 	name engine.Name
 }
 
-// refractory on, refractory off, or refractory alone to show the setting
-type refractoryCommand struct {
-	setting refractorySetting
+// refractory on, phases off, or a setting's name alone to show it
+type settingCommand struct {
+	setting setting
+	change  settingChange
 }
 
-type refractorySetting int
+// setting is something switched on or off.
+type setting string
 
 const (
-	showRefractory refractorySetting = iota
-	refractoryOn
-	refractoryOff
+	refractorySetting setting = "refractory" // whether members have a refractory period (the memory's, saved with it)
+	phasesSetting     setting = "phases"     // whether invoke also prints each member's phase (amp's display only)
+)
+
+type settingChange int
+
+const (
+	showSetting settingChange = iota
+	turnOn
+	turnOff
 )
 
 // save walkthrough.json, or save alone for the current file
@@ -69,7 +78,7 @@ func (communityDeclaration) isStatement()  {}
 func (assemblyDeclaration) isStatement()   {}
 func (invokeCommand) isStatement()         {}
 func (inspectCommand) isStatement()        {}
-func (refractoryCommand) isStatement()     {}
+func (settingCommand) isStatement()        {}
 func (saveCommand) isStatement()           {}
 func (openCommand) isStatement()           {}
 
@@ -157,8 +166,10 @@ func (p *parser) statement() (statement, error) {
 		return p.invoke()
 	case first.is("inspect") && !declaring:
 		return p.inspect()
-	case first.is("refractory") && !declaring:
-		return p.refractory()
+	case first.is(string(refractorySetting)) && !declaring:
+		return p.setting(refractorySetting)
+	case first.is(string(phasesSetting)) && !declaring:
+		return p.setting(phasesSetting)
 	case p.startsOutline(first):
 		return nil, syntaxError("an assembly written by hand needs a name, as in cat = <c, a, t>")
 	case first.kind == wordToken:
@@ -345,17 +356,17 @@ func (p *parser) inspect() (statement, error) {
 	return inspectCommand{name: engine.Name(name.text)}, nil
 }
 
-func (p *parser) refractory() (statement, error) {
+func (p *parser) setting(s setting) (statement, error) {
 	if p.next == len(p.tokens) {
-		return refractoryCommand{setting: showRefractory}, nil
+		return settingCommand{setting: s, change: showSetting}, nil
 	}
-	switch setting := p.take(); {
-	case setting.is("on"):
-		return refractoryCommand{setting: refractoryOn}, nil
-	case setting.is("off"):
-		return refractoryCommand{setting: refractoryOff}, nil
+	switch change := p.take(); {
+	case change.is("on"):
+		return settingCommand{setting: s, change: turnOn}, nil
+	case change.is("off"):
+		return settingCommand{setting: s, change: turnOff}, nil
 	default:
-		return nil, syntaxError("expected \"on\" or \"off\" after \"refractory\"%s", got(setting))
+		return nil, syntaxError("expected \"on\" or \"off\" after %q%s", string(s), got(change))
 	}
 }
 

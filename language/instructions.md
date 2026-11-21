@@ -98,6 +98,10 @@ amp> why cat
 cat: 3 of 3: c, t, then a, all from input
 ```
 
+**Seeing the phases.** `phases on` makes invoke also print every member's phase, moment by moment: one row per
+moment, one column per population, ● active, ◐ refractory, · ready. `phases off` stops it; `phases` shows the setting.
+A REPL display setting, not an instruction, and not saved.
+
 **Saving a session.** `save walkthrough.json` writes a snapshot of what the memory holds (populations, communities,
 assemblies, and the refractory setting) to a JSON file; `open walkthrough.json` replaces the memory with it. `save` on
 its own saves to the file last opened or saved. These are REPL commands,

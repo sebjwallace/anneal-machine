@@ -12,6 +12,9 @@ import (
 type Interpreter struct {
 	memory *engine.Memory
 	file   string // the current file: the snapshot last opened or saved, which save on its own saves to
+	// showPhases is whether invoke also prints each member's phase, moment by moment. It belongs to amp's display,
+	// not to the memory, so it isn't saved.
+	showPhases bool
 }
 
 // NoFileToSaveError: save was given no file name, and no file has been opened or saved yet.
@@ -52,6 +55,24 @@ type NotInspectableError struct {
 
 func (e NotInspectableError) Error() string {
 	return fmt.Sprintf("%s is a %s, not a population or an assembly", e.Name, e.Is)
+}
+
+// set switches a setting, if asked, and says what it is now.
+func (in *Interpreter) set(command settingCommand) string {
+	on := command.change == turnOn
+	switch command.setting {
+	case refractorySetting:
+		if command.change != showSetting {
+			in.memory.SetRefractoryPeriod(on)
+		}
+		on = in.memory.HasRefractoryPeriod()
+	case phasesSetting:
+		if command.change != showSetting {
+			in.showPhases = on
+		}
+		on = in.showPhases
+	}
+	return printSetting(command.setting, on)
 }
 
 // Open replaces the whole memory with the snapshot at path, makes it the current file, and says what it holds. If the
@@ -103,14 +124,14 @@ func (in *Interpreter) Run(line string) (string, error) {
 		if err != nil {
 			return "", err
 		}
+		if in.showPhases {
+			return printInvocation(invocation) + "\n\n" + printPhases(invocation, in.memory.Populations()), nil
+		}
 		return printInvocation(invocation), nil
 	case inspectCommand:
 		return in.inspect(st.name)
-	case refractoryCommand:
-		if st.setting != showRefractory {
-			in.memory.SetRefractoryPeriod(st.setting == refractoryOn)
-		}
-		return printRefractory(in.memory.HasRefractoryPeriod()), nil
+	case settingCommand:
+		return in.set(st), nil
 	case saveCommand:
 		path := st.path
 		if path == "" {

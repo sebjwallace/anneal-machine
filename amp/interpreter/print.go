@@ -218,11 +218,52 @@ func RepeatingEvery(moments int) string {
 }
 
 // refractory: on
-func printRefractory(on bool) string {
+func printSetting(s setting, on bool) string {
 	if on {
-		return "refractory: on"
+		return string(s) + ": on"
 	}
-	return "refractory: off"
+	return string(s) + ": off"
+}
+
+// moment   c          a          t
+// 1        ●●●●●●●●   ········   ········
+// 2        ◐◐◐◐◐◐◐◐   ●·······   ········
+// ● active   ◐ refractory   · ready
+//
+// One row per moment and one column per population, one mark per member, so reading down shows how activity moves.
+func printPhases(invocation engine.Invocation, populations []engine.Population) string {
+	header := []string{"moment"}
+	for _, p := range populations {
+		header = append(header, string(p.Name()))
+	}
+	rows := [][]string{header}
+	for _, moment := range invocation.Moments {
+		phases := map[engine.Population]map[int]rune{}
+		for _, activation := range moment.Active {
+			markMember(phases, activation.Member, '●')
+		}
+		for _, member := range moment.Refractory {
+			markMember(phases, member, '◐')
+		}
+		row := []string{strconv.Itoa(moment.Number)}
+		for _, p := range populations {
+			marks := []rune(strings.Repeat("·", p.Size()))
+			for number, mark := range phases[p] {
+				marks[number-1] = mark
+			}
+			row = append(row, string(marks))
+		}
+		rows = append(rows, row)
+	}
+	return writeTable(rows) + "\n● active   ◐ refractory   · ready"
+}
+
+func markMember(phases map[engine.Population]map[int]rune, member engine.Member, mark rune) {
+	p := member.Population()
+	if phases[p] == nil {
+		phases[p] = map[int]rune{}
+	}
+	phases[p][member.Number()] = mark
 }
 
 // writeTable lines rows up in columns, three spaces apart. A row may stop early; its last cell isn't padded.

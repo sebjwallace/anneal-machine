@@ -1,0 +1,33 @@
+amp> refractory on
+refractory: on
+amp> c, a, t = population 8
+c: 8 members, c{1..8}, all individuals
+a: 8 members, a{1..8}, all individuals
+t: 8 members, t{1..8}, all individuals
+amp> cat = <c -> a -> t>
+cat: state <c, a, t> and transition c -> a -> t
+amp> phases
+phases: off
+amp> phases on
+phases: on
+amp> invoke c
+moment   active   refractory   why
+1        c
+2        +a       c            a: cat c -> a
+3        +c, +t   a            c: cat <c, a, t> 2 of 3; t: cat <c, a, t> 2 of 3, cat a -> t
+4        +a       c, t         a: cat <c, a, t> 3 of 3, cat c -> a
+complete   cat <c, a, t>   3 of 3
+held       repeating every 2 moments
+
+moment   c          a          t
+1        ●●●●●●●●   ········   ········
+2        ◐◐◐◐◐◐◐◐   ●·······   ········
+3        ●·······   ◐·······   ●·······
+4        ◐·······   ●·······   ◐·······
+● active   ◐ refractory   · ready
+amp> phases off
+phases: off
+amp> phases maybe
+error: expected "on" or "off" after "phases", got maybe
+amp> phases = population 2
+phases: 2 members, phases{1..2}, all individuals
