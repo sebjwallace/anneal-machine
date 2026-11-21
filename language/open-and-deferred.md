@@ -35,13 +35,10 @@ These are known to be needed and have been set aside until there is more to go o
 - **How invoke ends.** For now (the assistant's choice, to be confirmed): after its input it runs until the next
   moment would be quiet (nothing active or refractory) or would repeat an earlier moment of the same invoke, which
   means something is holding.
-- **Competition between wholes that share a part.** "the dog" and "the cat", both composed with "the", share its
-  members, so they aren't rivals, and "the" brings back both. When the alternatives are different populations at the
-  same point of a chain, competition needs to rest on order (the same step leading on to different members), as the
-  walkthrough's `c -> a | o -> t` suggests, not on members being kept apart. Open.
-- **Competition** is built across assemblies (rivals share a population but not its member; most support opens; a
-  tie is held and none of the tied open; [invoke](invoke.md)). Still open: a population's **budget**, and whether a
-  rival should lose to one that itself lost (for now each rival is compared only with its own rivals).
+- **Competition** is built across assemblies, by order (rivals bring on alternatives: members of different
+  populations competing for the same place; most support opens; a tie is held and none of the tied open; a rival is
+  beaten only by one that wasn't itself beaten; [invoke](invoke.md)). "the dog" against "the cat" after "the" is a
+  held tie, settled by what comes next. Still open: a population's **budget** beyond the testing setting.
 - **The form of `resolve`.** On its own meaning the last incompletion, or always naming what it works on (`resolve last`,
   `resolve #1, #2`).
 - **Inside a population.** (Settled: unexpected input turns all members on until one is chosen, walkthrough step 2;

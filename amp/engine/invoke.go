@@ -294,7 +294,7 @@ func (m *Memory) openGates(counted memberSet) (map[int][]Gate, []Competition) {
 			openings = append(openings, o)
 		}
 	}
-	outcomes, competitions := compete(openings)
+	outcomes, competitions := compete(openings, m.alternatives())
 	gates := map[int][]Gate{}
 	for i, o := range openings {
 		if outcomes[i] != Won {
@@ -332,26 +332,42 @@ func (m *Memory) wouldOpen(a Assembly, counted memberSet) opening {
 	return o
 }
 
-// compete decides each opening's outcome against its rivals among the openings, and reports each group of rivals.
-// An opening with no rivals wins.
-func compete(openings []opening) ([]Outcome, []Competition) {
+// compete decides each opening's outcome against its rivals, working down from the most support: an opening is
+// beaten only by a rival with more support that wasn't itself beaten (it won, or ties and is held); rivals left
+// unbeaten with equal support are a tie, held, and none of them open. An opening with no rivals wins. It reports
+// each group of rivals.
+func compete(openings []opening, alt alternatives) ([]Outcome, []Competition) {
+	order := make([]int, len(openings))
+	for i := range order {
+		order[i] = i
+	}
+	slices.SortStableFunc(order, func(i, j int) int { return openings[j].support() - openings[i].support() })
 	outcomes := make([]Outcome, len(openings))
-	for i, o := range openings {
-		outcomes[i] = Won
-		for j, other := range openings {
-			if i == j || !areRivals(o.assembly, other.assembly) {
-				continue
-			}
-			switch {
-			case other.support() > o.support():
-				outcomes[i] = Lost
-			case other.support() == o.support() && outcomes[i] == Won:
-				outcomes[i] = Held
+	for start := 0; start < len(order); {
+		level := start
+		for level < len(order) && openings[order[level]].support() == openings[order[start]].support() {
+			level++
+		}
+		for _, i := range order[start:level] {
+			outcomes[i] = Won
+			for _, j := range order[:start] {
+				if outcomes[j] != Lost && areRivals(openings[i], openings[j], alt) {
+					outcomes[i] = Lost
+					break
+				}
 			}
 		}
+		for _, i := range order[start:level] {
+			for _, j := range order[start:level] {
+				if i != j && outcomes[i] != Lost && outcomes[j] != Lost && areRivals(openings[i], openings[j], alt) {
+					outcomes[i] = Held
+				}
+			}
+		}
+		start = level
 	}
 	var competitions []Competition
-	for _, group := range rivalGroups(openings) {
+	for _, group := range rivalGroups(openings, alt) {
 		competition := Competition{}
 		for _, i := range group {
 			competition.Rivals = append(competition.Rivals, Rival{Assembly: openings[i].assembly, Counted: openings[i].counted, Outcome: outcomes[i]})
@@ -362,7 +378,7 @@ func compete(openings []opening) ([]Outcome, []Competition) {
 }
 
 // rivalGroups gathers openings joined by rivalry, directly or through others, leaving out those with no rivals.
-func rivalGroups(openings []opening) [][]int {
+func rivalGroups(openings []opening, alt alternatives) [][]int {
 	group := make([]int, len(openings))
 	for i := range group {
 		group[i] = -1
@@ -376,7 +392,7 @@ func rivalGroups(openings []opening) [][]int {
 		group[start] = len(groups)
 		for k := 0; k < len(members); k++ {
 			for j := range openings {
-				if group[j] < 0 && areRivals(openings[members[k]].assembly, openings[j].assembly) {
+				if group[j] < 0 && areRivals(openings[members[k]], openings[j], alt) {
 					group[j] = len(groups)
 					members = append(members, j)
 				}
@@ -388,12 +404,81 @@ func rivalGroups(openings []opening) [][]int {
 	return slices.DeleteFunc(groups, func(g []int) bool { return len(g) < 2 })
 }
 
-// areRivals is true when two assemblies share a population but none of its members. Assemblies that share a member
-// of a population read it the same way there, as a part does its whole.
-func areRivals(a, b Assembly) bool {
-	for _, x := range a.members {
-		ofSamePopulation := membersOf(b, x.population)
-		if len(ofSamePopulation) > 0 && !slices.ContainsFunc(ofSamePopulation, func(y Member) bool { return slices.Contains(a.members, y) }) {
+// areRivals is true when two openings stand for alternatives (competition by order): by structure, one assembly has
+// a member the other lacks, the other has one the first lacks, and those two are alternatives ("a" in "cat", "o" in
+// "cot"); or in this moment, what each would bring on and the other wouldn't are alternatives (anagrams, whose
+// members are the same and only their order differs). A part and its whole are never rivals, and nor are two
+// versions of one word, whose members differ but stand for the same populations.
+func areRivals(a, b opening, alt alternatives) bool {
+	return differInAlternatives(a.assembly.members, b.assembly.members, alt) ||
+		differInAlternatives(a.bringsOn(), b.bringsOn(), alt)
+}
+
+// differInAlternatives is true when some member only in a and some member only in b are alternatives.
+func differInAlternatives(a, b []Member, alt alternatives) bool {
+	for _, x := range a {
+		if slices.Contains(b, x) {
+			continue
+		}
+		for _, y := range b {
+			if !slices.Contains(a, y) && alt.between(x, y) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// bringsOn lists the members an opening's gates would bring on.
+func (o opening) bringsOn() []Member {
+	var members []Member
+	for _, member := range o.assembly.members {
+		if _, opens := o.gates[member.index()]; opens && !slices.Contains(members, member) {
+			members = append(members, member)
+		}
+	}
+	return members
+}
+
+// alternatives records, from every transition, which populations each member follows and which it leads into. Two
+// members are alternatives when they are in different populations and follow the same population somewhere ("a"
+// and "o" after "c"), or lead into the same population ("b" and "c" before "a"): they compete for the same place.
+type alternatives struct {
+	follows   map[Member]map[Name]bool
+	leadsInto map[Member]map[Name]bool
+}
+
+func (m *Memory) alternatives() alternatives {
+	alt := alternatives{follows: map[Member]map[Name]bool{}, leadsInto: map[Member]map[Name]bool{}}
+	note := func(relation map[Member]map[Name]bool, member Member, population Name) {
+		if relation[member] == nil {
+			relation[member] = map[Name]bool{}
+		}
+		relation[member][population] = true
+	}
+	for _, a := range m.assemblies {
+		if a.shape != TransitionShape {
+			continue
+		}
+		for i := 1; i < len(a.members); i++ {
+			from, to := a.members[i-1], a.members[i]
+			note(alt.follows, to, from.population.name)
+			note(alt.leadsInto, from, to.population.name)
+		}
+	}
+	return alt
+}
+
+func (alt alternatives) between(x, y Member) bool {
+	if x.population == y.population {
+		return false
+	}
+	return sharesAny(alt.follows[x], alt.follows[y]) || sharesAny(alt.leadsInto[x], alt.leadsInto[y])
+}
+
+func sharesAny(a, b map[Name]bool) bool {
+	for name := range a {
+		if b[name] {
 			return true
 		}
 	}

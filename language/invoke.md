@@ -41,13 +41,19 @@ A | B
 which in practice means how many ways in each one has. A held tie keeps both, unresolved, until more evidence settles it.
 
 **Decided, and running in the interpreter** (`amp/interpreter/testdata/11-competition.txt`):
-- **Rivals:** two assemblies are rivals when they share a population but not its member. They explain the same input
-  differently: "cat" and "cot" both use "c" and "t", with different members. A part shares its members with its whole,
-  so it is never a rival of it; nor is a state of its own chain.
+- **Rivals (competition by order):** two members are **alternatives** when they are in different populations and
+  follow the same population somewhere ("a" and "o" after "c"), or lead into the same population ("b" and "c" before
+  "a"): they compete for the same place. Two assemblies are rivals when one has a member the other lacks, the other has
+  one the first lacks, and those are alternatives; or when, in that moment, what each would bring on and the other
+  wouldn't are alternatives (anagrams, which share members and differ only in order). A part and its whole are never
+  rivals, nor a state and its own chain, nor two versions of one word (members differ, populations the same). This
+  replaced "share a population but not its member", which missed wholes composed from a shared part ("the dog" and
+  "the cat") and made two versions of a word tie for ever.
 - **Support:** an assembly's counted part minus its missing part (gates count active and refractory members).
 - **Outcome:** when rivals' gates would open in the same moment, the one with most support opens. When the most support
-  is shared, the tie is held: **none of the tied open**, and the tie is unsettled heat. Nothing is turned off; a rival
-  that doesn't open fades.
+  is shared, the tie is held: **none of the tied open**, and the tie is unsettled heat. Worked out from the most
+  support down: a rival is beaten only by one with more support that wasn't itself beaten (won, or held in a tie).
+  Nothing is turned off; a rival that doesn't open fades.
 - This replaces the older wording above that a held tie "keeps both": in a tie, neither is recalled. Whatever was
   already active is left to its phases.
 
