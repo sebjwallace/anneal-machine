@@ -183,7 +183,7 @@ engine learns and represents, not a promise about how it will feel to use.
 **Comparing, not averaging.** The second reason for the mechanical feel is that AMP does no averaging. Averaging is
 smooth and slow: many examples, each moving the numbers a little. AMP learns by comparing, in the everyday sense that
 covers both what is the same and what differs. In the language those are intersection (∩, what is shared) and
-symmetric difference (△, what differs), as described in [resolve](../../language/resolve.md). One comparison can form
+symmetric difference (△, what differs), as described in [resolve](../../language/anneal.md). One comparison can form
 a new assembly, which is where the hope of fast learning comes from (CTR-1 OPZ-1). It is also why each step has a cause
 that can be stated: the comparison *is* the reason.
 

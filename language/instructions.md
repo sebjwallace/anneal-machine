@@ -21,7 +21,7 @@ STEP               advance one moment
 
 ; the two roots
 INV   c            invoke: read, and report completion or incompletion, and how far
-RSLV  last         resolve: form structure from what invoke left (or RSLV #1,#3 to compare stored)
+ANNL  last         anneal: form structure from what invoke left (or ANNL #1,#3 to compare stored)
 
 ; set operations (read-only: they return sets and change nothing)
 INTR  #1,#3        intersection        ∩
@@ -46,22 +46,22 @@ STOR  #12          move out to disk (stored)
 INSP  c            look inside a population or member
 WHY   barks        which gate opened it, and from what
 NAME  #12 cat      attach a name for reading
-POL   inv+rslv     declare the policy for this run
+POL   inv+annl     declare the policy for this run
 ```
 
 **There is no instruction for keeping something on.** Things stay active only because the dynamics sustain them: a
 assembly reverberates because its members point at each other. Context comes in as input (`invoke day`) and stays present
 through its own structure, or fades when something outcompetes it.
 
-**Which are really primitive.** Only `INV` and `RSLV` are roots. The set operations are read-only queries, used by
-`RSLV` inside and by AMX outside. `ASML`, `CHN`, `BOND` and `GATE` are what `RSLV` does underneath, exposed so structure
+**Which are really primitive.** Only `INV` and `ANNL` are roots. The set operations are read-only queries, used by
+`ANNL` inside and by AMX outside. `ASML`, `CHN`, `BOND` and `GATE` are what `ANNL` does underneath, exposed so structure
 can be written by hand. Everything else declares, feeds input or examines.
 
 **Choices to note.**
 - `INTR` and `UNI` (the owner's choices, replacing `CAP` and `CUP`) name ∩ and ∪. They avoid `AND` and `OR`, which in AMP mean gates and
   topology.
 - `ASML` (the owner's choice, replacing `FORM`) assembles an **assembly**, its members bonded to each other. `CHN`
-  assembles a **transition**. In prose, "forms" still describes what resolve does.
+  assembles a **transition**. In prose, "forms" still describes what anneal does.
 - `SET` and `SEQ` are braces and commas from walkthrough step 2.
 - `GATE` addresses a gate by its member. How to address a single gate is open (below).
 
@@ -79,7 +79,7 @@ can be written by hand. Everything else declares, feeds input or examines.
 ## The REPL
 
 Declarations for structure, commands for actions, one line at a time. Defining structure by hand with the **invoke-only**
-policy keeps it exactly as built while you poke at it. Switching learning on (`policy inv+rslv`) shows resolve adding to
+policy keeps it exactly as built while you poke at it. Switching learning on (`policy inv+annl`) shows anneal adding to
 it. **Stepping** one moment at a time is what makes the dynamics (competition, completion) visible. A live view, showing
 each population's members lighting and dimming as you step, would pair naturally with it later. A REPL is also one of
 the simplest parts to build in Go, so it can be the interpreter's first piece.
@@ -104,7 +104,8 @@ for examining, not for running.
 
 **Short forms.** In the REPL, the instructions' mnemonics can be typed in place of their words, in lower or upper
 case: `pop` for `population`, `com` for `community`, `intr` for `intersection`, `diff` for `difference`, `inv` for
-`invoke`, `insp` for `inspect`. REPL commands that aren't instructions (`assemblies`, `reset`, `save`, `open`, `exit`, the settings) keep
+`invoke`, `insp` for `inspect`, `annl` for `anneal`. An assembly with no name is inspected by its number:
+`inspect #9`. REPL commands that aren't instructions (`assemblies`, `reset`, `save`, `open`, `exit`, the settings) keep
 their words.
 
 **Intersection.** `the = intersection thedog, thecat` (or `intr`) forms what the names share as a new assembly beside
@@ -142,7 +143,7 @@ they grow at very different rates:
 
 | Log | Holds | Grows |
 |---|---|---|
-| **command log** | what was asked: every invoke, resolve and policy, from the REPL or a script | slowly |
+| **command log** | what was asked: every invoke, anneal and policy, from the REPL or a script | slowly |
 | **record of changes** | every change to structure (each assembly formed, load, store, name), each with its cause; the engine's whole history, since nothing is removed | only when something is learnt |
 | **trace** | each moment: which members came on, which gate opened them, who won each competition, which ties were held | fastest |
 

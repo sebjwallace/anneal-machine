@@ -187,3 +187,84 @@ func takeAwayInOrder(members []Member, letters []Name) []Member {
 	}
 	return kept
 }
+
+// Annealing is what one anneal over stored wholes formed: the part they share, and for each whole what varies in it
+// and a new version composed from its parts. Everything it forms is unnamed.
+type Annealing struct {
+	Of     []Name
+	Shared []Name     // the populations every whole covers
+	From   Name       // the whole the shared part's members were taken from
+	Part   []Assembly // the shared part: an assembly and a transition
+	Wholes []AnnealedWhole
+}
+
+// AnnealedWhole is what anneal formed for one whole.
+type AnnealedWhole struct {
+	Whole    Name
+	Varies   []Name     // the populations left once the shared part is taken away, in order
+	Varying  []Assembly // what varies, as an assembly and a transition; none when fewer than two members vary
+	Composed []Assembly // the whole again, composed from the shared part and what varies; none when nothing varies
+	// VariesFirst is true when what varies comes before the shared part in the whole, so it is composed first.
+	VariesFirst bool
+}
+
+// Anneal compares stored wholes and forms what that calls for, beside them, as the shapes of forming: the part they
+// all share (abstraction), what varies in each (decomposition), and each whole again from those parts
+// (composition), in the order the parts come in the whole. Nothing existing changes, and what forms has no names.
+func (m *Memory) Anneal(wholes []Name) (Annealing, error) {
+	if len(wholes) < 2 {
+		return Annealing{}, TooFewNamesError{Operation: "anneal"}
+	}
+	for _, whole := range wholes {
+		switch kind, declared := m.KindOf(whole); {
+		case !declared:
+			return Annealing{}, UndeclaredError{Name: whole}
+		case kind != AssemblyKind:
+			return Annealing{}, AnnealSourceError{Name: whole, Is: kind}
+		}
+	}
+	comparison, err := m.Compare(wholes)
+	if err != nil {
+		return Annealing{}, err
+	}
+	if len(comparison.Intersection) < 2 {
+		return Annealing{}, FormedTooSmallError{Operation: "intersection", Result: comparison.Intersection}
+	}
+	shared, err := m.decompose(wholes[0], comparison.Intersection)
+	if err != nil {
+		return Annealing{}, err
+	}
+	annealing := Annealing{Of: slices.Clone(wholes), Shared: comparison.Intersection, From: wholes[0]}
+	annealing.Part = []Assembly{m.form("", StateShape, shared), m.form("", TransitionShape, shared)}
+	letters := populationsOf(shared)
+	for _, whole := range wholes {
+		members := m.partMembers(whole)
+		varies := takeAwayInOrder(members, letters)
+		formed := AnnealedWhole{Whole: whole, Varies: populationsOf(varies)}
+		if len(varies) >= 2 {
+			formed.Varying = []Assembly{m.form("", StateShape, varies), m.form("", TransitionShape, varies)}
+		}
+		if len(varies) > 0 {
+			sharedPart, varyingPart := element{part: shared}, element{part: varies}
+			if len(varies) < 2 {
+				varyingPart = element{exact: varies}
+			}
+			parts := []element{sharedPart, varyingPart}
+			if slices.Index(members, varies[0]) < firstShared(members, varies) {
+				parts = []element{varyingPart, sharedPart}
+				formed.VariesFirst = true
+			}
+			formed.Composed = append(formed.Composed, m.form("", StateShape, stateMembers(parts, nil)))
+			for _, chain := range chainMembers(parts, nil) {
+				formed.Composed = append(formed.Composed, m.form("", TransitionShape, chain))
+			}
+		}
+		annealing.Wholes = append(annealing.Wholes, formed)
+	}
+	return annealing, nil
+}
+
+// firstShared is where the shared letters begin in a whole: the position of its first member that doesn't vary.
+func firstShared(members, varies []Member) int {
+	return slices.IndexFunc(members, func(member Member) bool { return !slices.Contains(varies, member) })
+}

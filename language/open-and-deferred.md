@@ -13,8 +13,8 @@ These are known to be needed and have been set aside until there is more to go o
 
 ## Not yet pinned down
 
-- **The exact cost resolve weighs.** Heat is incompletion, counted as missing, unexplained and unsettled
-  ([heat and learning](heat-and-learning.md)). Resolve prefers the most complete explanation with the least added. How
+- **The exact cost anneal weighs.** Heat is incompletion, counted as missing, unexplained and unsettled
+  ([heat and learning](heat-and-learning.md)). Anneal prefers the most complete explanation with the least added. How
   "least added" is counted (bonds, members, assemblies) is still to be written down.
 - **What forms from an incompletion, exactly.** Over which members, and which of what is held comes along.
 - **How the engine chooses a member** inside a population when something forms. (Settled for now, the owner: each
@@ -29,7 +29,7 @@ These are known to be needed and have been set aside until there is more to go o
   acts one moment later, and members have three phases, active, refractory and ready, walkthrough step 4.)
 - **Assemblies bigger than three and their chains.** A chain brings one member a moment and gates count two moments, so a
   flat assembly of four or more can't be completed by its own chain, nor by reading it in order. Overlapping parts of
-  three work. What this means for long words and for what resolve forms (walkthrough step 4).
+  three work. What this means for long words and for what anneal forms (walkthrough step 4).
 - **Input that arrives at refractory members.** For now (the assistant's choice, to be confirmed): they can't come
   on; unexpected input turns on the population's ready members only.
 - **How invoke ends.** For now (the assistant's choice, to be confirmed): after its input it runs until the next
@@ -39,8 +39,8 @@ These are known to be needed and have been set aside until there is more to go o
   populations competing for the same place; most support opens; a tie is held and none of the tied open; a rival is
   beaten only by one that wasn't itself beaten; [invoke](invoke.md)). "the dog" against "the cat" after "the" is a
   held tie, settled by what comes next. Still open: a population's **budget** beyond the testing setting.
-- **The form of `resolve`.** On its own meaning the last incompletion, or always naming what it works on (`resolve last`,
-  `resolve #1, #2`).
+- **The form of `anneal`.** On its own meaning the last incompletion, or always naming what it works on (`anneal last`,
+  `anneal #1, #2`).
 - **Inside a population.** (Settled: unexpected input turns all members on until one is chosen, walkthrough step 2;
   members for new assemblies are handed out in order, round robin, walkthrough step 3.)
 - **Arrivals versus held assemblies.** Whether transitions act on what arrives (change) rather than on what is held, so a
@@ -74,7 +74,7 @@ These have meaning agreed but the exact notation not yet agreed.
 
 ## Trade-offs, likely to be declared settings
 
-- The policy: which order invoke and resolve run in, per run.
+- The policy: which order invoke and anneal run in, per run.
 - The storage policy: when disk runs out, what is archived or deleted first, and whether archiving or deleting is the default.
 - Whether a stored rank is needed to stop flipping between RAM and disk (placement only, never competition).
 

@@ -197,6 +197,14 @@ func chainMembers(elements []element, memberOf func(Population) Member) [][]Memb
 	return chains
 }
 
+// AssemblyByID finds an assembly by its number, #1 onwards.
+func (m *Memory) AssemblyByID(id AssemblyID) (Assembly, error) {
+	if id < 1 || int(id) > len(m.assemblies) {
+		return Assembly{}, NoSuchAssemblyError{ID: id}
+	}
+	return m.assemblies[id-1], nil
+}
+
 // AllAssemblies lists every assembly, in the order formed.
 func (m *Memory) AllAssemblies() []Assembly { return slices.Clone(m.assemblies) }
 

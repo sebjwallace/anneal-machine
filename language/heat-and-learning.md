@@ -16,11 +16,11 @@ parts:
 
 - **missing**: for each assembly that is partly active, how much of it isn't (`|assembly − active|`, the "2 of 3");
 - **unexplained**: active members that no assembly accounts for at all (the `!o`);
-- **unsettled**: ties being held. Counted, but resolve doesn't act on them: more structure can't settle a tie, only more
+- **unsettled**: ties being held. Counted, but anneal doesn't act on them: more structure can't settle a tie, only more
   evidence can.
 
-All three are counts of bits. The cost resolve weighs is this incompletion together with the structure it would add (see
-[resolve](resolve.md), economy).
+All three are counts of bits. The cost anneal weighs is this incompletion together with the structure it would add (see
+[anneal](anneal.md), economy).
 
 ## Heat as two set differences
 
@@ -42,7 +42,7 @@ When both are empty (`∅`), there is no heat and nothing changes. The size of t
 
 ## Forming: cooling a gap
 
-Forming is what [resolve](resolve.md) does; that page sets out its shapes (composition, abstraction,
+Forming is what [anneal](anneal.md) does; that page sets out its shapes (composition, abstraction,
 decomposition, sequence). In short, a gap is cooled by forming: bonding the uncovered members into an assembly, bonded to the held context they arrived
 with.
 

@@ -21,7 +21,7 @@ error: z is not declared
 amp> cat = <c, letters>
 error: letters is a community, not a population or an assembly
 amp> cat = <c, a, t> ;
-error: expected a state or a transition after ";"
+error: expected an assembly or a transition after ";"
 amp> cat = <c, a> c
 error: unexpected c at the end of the line
 amp> <c, a, t>

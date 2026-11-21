@@ -28,7 +28,7 @@ starts with nothing on. The file name is the rest of the line.
 
 | Package | What it is |
 |---|---|
-| `engine` | the memory (populations and communities so far) and the operations on it (invoke so far; resolve to come) |
+| `engine` | the memory (populations and communities so far) and the operations on it (invoke so far; anneal to come) |
 | `interpreter` | reads a line of AMP, carries it out on the engine, prints the result back in AMP |
 | `snapshot` | saves the memory to a JSON file and opens it again, rebuilding it through the engine's own rules |
 | `cmd/amp` | the REPL |
@@ -68,7 +68,10 @@ for short `cat = <c -> a -> t>`. Composition: an assembly's name inside a declar
 last member to first. Decomposition: `ca = <cat{c, a}>` forms an assembly over just those members of cat, beside it. Intersection:
 `the = intr thedog, thecat` forms what they share, taken from the first; difference: `dog = diff thedog, the` forms what
 the first has that the rest don't, letters taken away in order. Short forms: `pop`, `com`, `intr`, `diff`, `inv`,
-`insp`. Each
+`insp`, `annl`.
+
+**Annealing.** `anneal thedog, thecat` compares stored wholes and forms, beside them and unnamed: the part they share,
+what varies in each, and each whole again from those parts. `inspect #9` looks at an assembly that has no name. Each
 population hands out its members in order and goes round again once all are used; everything on one line shares
 members; `inspect cat` shows them. Step 4: invoke runs the gates, with every bond acting one moment later, members
 active, refractory or ready, and an assembly completing when more of it is counted than missing. Competition: rivals

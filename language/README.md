@@ -37,8 +37,8 @@ For now it is markdown only. Nothing here is code yet.
 - **Heat words are for heat.** Warm and cold describe heat and energy only. Where an assembly lives is described with
   mechanical words: loaded and stored.
 - **Explainable.** Everything the engine does must have a cause that can be stated in AMP itself (CTR-1 CON-20, draft).
-- **Two operations.** invoke (reading) and resolve (learning). Completion, competition and fitting are effects of
-  invoke; composition, abstraction and decomposition are shapes resolve takes ([operations](operations.md)).
+- **Two operations.** invoke (reading) and anneal (learning). Completion, competition and fitting are effects of
+  invoke; composition, abstraction and decomposition are shapes anneal takes ([operations](operations.md)).
 - **The world speaks in populations.** What comes in and goes out is a population; which member takes part is the
   engine's business, private unless inspected.
 - **Plain.** Each page explains in everyday words before showing notation.
@@ -47,14 +47,14 @@ For now it is markdown only. Nothing here is code yet.
 
 | Page | What it covers |
 |---|---|
-| [Walkthrough](walkthrough.md) | **Start here.** The language step by step, as typed into the interpreter and printed back: populations, invoking, resolving, assemblies and transitions, alternatives and keys, member definitions, naming, reading text, instructions. |
-| [The two operations](operations.md) | invoke and resolve: what each does, what each gives, and how they are composed by a declared policy. |
-| [Instructions](instructions.md) | The instruction set beneath the notation (INV, RSLV, CAP, ASML, CHN …), the REPL, and the three logs. |
+| [Walkthrough](walkthrough.md) | **Start here.** The language step by step, as typed into the interpreter and printed back: populations, invoking, annealing, assemblies and transitions, alternatives and keys, member definitions, naming, reading text, instructions. |
+| [The two operations](operations.md) | invoke and anneal: what each does, what each gives, and how they are composed by a declared policy. |
+| [Instructions](instructions.md) | The instruction set beneath the notation (INV, ANNL, CAP, ASML, CHN …), the REPL, and the three logs. |
 | [Members and sets](members-and-sets.md) | Members, individuals, the active set, populations and communities, marks for recalled and hot, the set words. |
 | [Edges and gates](edges-and-gates.md) | Bonds, all directed: inward (completion, holding) and outward (transition, order); gates and thresholds; AND as a gate, OR as topology; declarations. |
 | [Assemblies](assemblies.md) | Assemblies, membership, composition, selecting members of a thing, forming. |
 | [invoke](invoke.md) | Effects of invoke: completion and holding, competition within and across populations, fitting, comparison. |
-| [resolve](resolve.md) | Shapes of resolve: plain forming, composition, abstraction, decomposition, sequence. |
+| [anneal](anneal.md) | Shapes of anneal: plain forming, composition, abstraction, decomposition, sequence. |
 | [Heat and learning](heat-and-learning.md) | Heat as set differences (what invoke leaves), and loaded and stored: where an assembly lives, and what moves it. |
 | [Open and deferred](open-and-deferred.md) | Everything parked or unresolved, in one list. |
 

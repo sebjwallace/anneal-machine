@@ -196,6 +196,9 @@ type TooFewNamesError struct {
 }
 
 func (e TooFewNamesError) Error() string {
+	if e.Operation == "anneal" {
+		return "anneal needs at least two names"
+	}
 	return fmt.Sprintf("a%s %s needs at least two names", article(e.Operation), e.Operation)
 }
 
@@ -230,3 +233,20 @@ func article(word string) string {
 	}
 	return ""
 }
+
+// AnnealSourceError: anneal compares stored wholes, and a name wasn't an assembly.
+type AnnealSourceError struct {
+	Name Name
+	Is   Kind
+}
+
+func (e AnnealSourceError) Error() string {
+	return fmt.Sprintf("anneal compares assemblies, and %s is %s", e.Name, e.Is.withArticle())
+}
+
+// NoSuchAssemblyError: an assembly was asked for by a number nothing has.
+type NoSuchAssemblyError struct {
+	ID AssemblyID
+}
+
+func (e NoSuchAssemblyError) Error() string { return fmt.Sprintf("there is no #%d", e.ID) }

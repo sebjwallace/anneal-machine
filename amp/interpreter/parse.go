@@ -36,9 +36,15 @@ type invokeCommand struct {
 	moments [][]engine.Name
 }
 
-// inspect c
+// inspect c, or inspect #9 for an assembly with no name
 type inspectCommand struct {
 	name engine.Name
+	id   engine.AssemblyID // set instead of name for inspect #9
+}
+
+// anneal thedog, thecat: compare stored wholes and form what that calls for
+type annealCommand struct {
+	wholes []engine.Name
 }
 
 // the = intersection thedog, thecat: what they share; dog = difference thedog, the: what the first has that the rest
@@ -117,6 +123,7 @@ func (listAssembliesCommand) isStatement() {}
 func (budgetCommand) isStatement()         {}
 func (resetCommand) isStatement()          {}
 func (compareCommand) isStatement()        {}
+func (annealCommand) isStatement()         {}
 func (setDeclaration) isStatement()        {}
 func (saveCommand) isStatement()           {}
 func (openCommand) isStatement()           {}
@@ -205,6 +212,12 @@ func (p *parser) statement() (statement, error) {
 		return p.invoke()
 	case first.isKeyword("inspect", "insp") && !declaring:
 		return p.inspect()
+	case first.isKeyword("anneal", "annl") && !declaring:
+		wholes, err := p.nameList(fmt.Sprintf("%q", first.text))
+		if err != nil {
+			return nil, err
+		}
+		return annealCommand{wholes: wholes}, nil
 	case first.is("compare") && !declaring:
 		return p.compare()
 	case first.is("reset") && !declaring:
@@ -299,7 +312,7 @@ func (p *parser) assemblies(name engine.Name, first token) (statement, error) {
 		}
 		p.take()
 		if first = p.take(); !p.startsOutline(first) {
-			return nil, syntaxError("expected a state or a transition after \";\"%s", got(first))
+			return nil, syntaxError("expected an assembly or a transition after \";\"%s", got(first))
 		}
 	}
 }
@@ -476,12 +489,16 @@ func (p *parser) moment(after string) ([]engine.Name, error) {
 	}
 }
 
+// inspect reads a name, or an assembly's number for one that has no name: inspect #9.
 func (p *parser) inspect() (statement, error) {
 	name := p.take()
-	if name.kind != wordToken {
-		return nil, syntaxError("expected a population name after \"inspect\"%s", got(name))
+	switch name.kind {
+	case wordToken:
+		return inspectCommand{name: engine.Name(name.text)}, nil
+	case numberedToken:
+		return inspectCommand{id: name.number}, nil
 	}
-	return inspectCommand{name: engine.Name(name.text)}, nil
+	return nil, syntaxError("expected a population name after \"inspect\"%s", got(name))
 }
 
 // compare reads names separated by commas: any declared names; the engine checks there are at least two.
@@ -596,11 +613,13 @@ const (
 	closeAngleToken
 	arrowToken
 	semicolonToken
+	numberedToken // #9: an assembly by its number
 )
 
 type token struct {
-	kind tokenKind
-	text string
+	kind   tokenKind
+	text   string
+	number engine.AssemblyID // for a numbered token
 }
 
 func (t token) is(word string) bool { return t.kind == wordToken && t.text == word }
@@ -633,6 +652,11 @@ func scan(line string) ([]token, error) {
 		switch {
 		case unicode.IsSpace(r):
 			i++
+		case r == '#' && i+1 < len(runes) && unicode.IsDigit(runes[i+1]):
+			end := scanWhile(runes, i+1, unicode.IsDigit)
+			n, _ := strconv.Atoi(string(runes[i+1 : end]))
+			tokens = append(tokens, token{kind: numberedToken, text: string(runes[i:end]), number: engine.AssemblyID(n)})
+			i = end
 		case r == '-' && i+1 < len(runes) && runes[i+1] == '>':
 			tokens = append(tokens, token{kind: arrowToken, text: "->"})
 			i += 2

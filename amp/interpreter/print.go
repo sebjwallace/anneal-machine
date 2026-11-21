@@ -133,14 +133,14 @@ func writeCompetition(competition engine.Competition) string {
 
 // writeSides writes rivals grouped by name, each name once: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3.
 func writeSides(rivals []engine.Rival) []string {
-	var names []engine.Name
-	written := map[engine.Name][]string{}
+	var names []string
+	written := map[string][]string{}
 	for _, rival := range rivals {
 		a := rival.Assembly
-		if _, seen := written[a.Name()]; !seen {
-			names = append(names, a.Name())
+		if _, seen := written[displayName(a)]; !seen {
+			names = append(names, displayName(a))
 		}
-		written[a.Name()] = append(written[a.Name()], fmt.Sprintf("%s %d of %d", writeShape(a.Shape(), namesOf(a.Populations())), rival.Counted, len(a.Members())))
+		written[displayName(a)] = append(written[displayName(a)], fmt.Sprintf("%s %d of %d", writeShape(a.Shape(), namesOf(a.Populations())), rival.Counted, len(a.Members())))
 	}
 	sides := make([]string, len(names))
 	for i, name := range names {
@@ -153,9 +153,9 @@ func writeSides(rivals []engine.Rival) []string {
 func writeGate(gate engine.Gate) string {
 	a := gate.Assembly
 	if a.Shape() == engine.StateShape {
-		return fmt.Sprintf("%s %s %d of %d", a.Name(), writeShape(a.Shape(), namesOf(a.Populations())), gate.Counted, len(a.Members()))
+		return fmt.Sprintf("%s %s %d of %d", displayName(a), writeShape(a.Shape(), namesOf(a.Populations())), gate.Counted, len(a.Members()))
 	}
-	return fmt.Sprintf("%s %s -> %s", a.Name(), gate.From.Population().Name(), stepAfter(a, gate.From).Population().Name())
+	return fmt.Sprintf("%s %s -> %s", displayName(a), gate.From.Population().Name(), stepAfter(a, gate.From).Population().Name())
 }
 
 // stepAfter is the member that follows from in a transition.
@@ -196,7 +196,7 @@ func writeSummary(invocation engine.Invocation) string {
 	var rows [][]string
 	for _, c := range invocation.Completions {
 		state, size := c.State, len(c.State.Members())
-		label := fmt.Sprintf("%s %s", state.Name(), writeShape(state.Shape(), namesOf(state.Populations())))
+		label := fmt.Sprintf("%s %s", displayName(state), writeShape(state.Shape(), namesOf(state.Populations())))
 		switch {
 		case held && c.Last == size:
 			rows = append(rows, []string{"complete", label, fmt.Sprintf("%d of %d", size, size)})
@@ -235,7 +235,7 @@ func RepeatingEvery(moments int) string {
 func printAssemblyList(shown []engine.Assembly, first, total, page, pages int) string {
 	lines := make([]string, 0, len(shown)+1)
 	for _, a := range shown {
-		lines = append(lines, fmt.Sprintf("#%d %s %s", a.ID(), a.Name(), writeShaped(a.Shape(), namesOf(a.Populations()))))
+		lines = append(lines, strings.TrimSpace(fmt.Sprintf("#%d %s", a.ID(), strings.TrimSpace(string(a.Name())+" "+writeShaped(a.Shape(), namesOf(a.Populations()))))))
 	}
 	switch {
 	case pages == 1:
@@ -495,7 +495,16 @@ func writeOutlineName(name engine.Name, only []engine.Name) string {
 	return fmt.Sprintf("%s{%s}", name, strings.Join(namesOf(only), ", "))
 }
 
-// cat: #1 state <c{1}, a{1}, t{1}>; #2 transition c{1} -> a{1} -> t{1}
+// #13 <t{1}, h{1}, c{1}, a{1}>: one assembly by number, with its members.
+func writeAssemblyMembers(a engine.Assembly) string {
+	members := make([]string, len(a.Members()))
+	for i, member := range a.Members() {
+		members[i] = writeMember(member)
+	}
+	return fmt.Sprintf("#%d %s", a.ID(), writeShaped(a.Shape(), members))
+}
+
+// cat: #1 <c{1}, a{1}, t{1}>; #2 transition c{1} -> a{1} -> t{1}
 func printAssemblies(name engine.Name, assemblies []engine.Assembly) string {
 	parts := make([]string, len(assemblies))
 	for i, a := range assemblies {
@@ -506,6 +515,60 @@ func printAssemblies(name engine.Name, assemblies []engine.Assembly) string {
 		parts[i] = fmt.Sprintf("#%d %s", a.ID(), writeShaped(a.Shape(), members))
 	}
 	return fmt.Sprintf("%s: %s", name, strings.Join(parts, "; "))
+}
+
+// displayName is an assembly's name, or its number when it has none (#9), as the interpreter shows what forms
+// unnamed until something names it.
+func displayName(a engine.Assembly) string {
+	if a.Name() == "" {
+		return fmt.Sprintf("#%d", a.ID())
+	}
+	return string(a.Name())
+}
+
+// anneal     thedog, thecat share t, h, e
+// forms      #5 <t, h, e> and transition #6 t -> h -> e          the shared part, from thedog
+// forms      #7 <d, o, g> and transition #8 d -> o -> g          what varies in thedog
+// forms      #9 <#5, #7> and transition #10 e -> d               thedog from its parts
+func printAnnealing(a engine.Annealing) string {
+	rows := [][]string{{"anneal", fmt.Sprintf("%s share %s", strings.Join(namesOf(a.Of), ", "), strings.Join(namesOf(a.Shared), ", "))}}
+	rows = append(rows, []string{"forms", writeFormed(a.Part, nil), "the shared part, from " + string(a.From)})
+	for _, whole := range a.Wholes {
+		if len(whole.Varying) > 0 {
+			rows = append(rows, []string{"forms", writeFormed(whole.Varying, nil), "what varies in " + string(whole.Whole)})
+		}
+		if len(whole.Composed) > 0 {
+			varying := strings.Join(namesOf(whole.Varies), ", ")
+			if len(whole.Varying) > 0 {
+				varying = fmt.Sprintf("#%d", whole.Varying[0].ID())
+			}
+			parts := []string{fmt.Sprintf("#%d", a.Part[0].ID()), varying}
+			if whole.VariesFirst {
+				parts[0], parts[1] = parts[1], parts[0]
+			}
+			rows = append(rows, []string{"forms", writeFormed(whole.Composed, parts), string(whole.Whole) + " from its parts"})
+		}
+	}
+	return writeTable(rows)
+}
+
+// writeFormed writes assemblies anneal formed by number: #5 <t, h, e> and transition #6 t -> h -> e. parts, when
+// given, stands in for the first one's members: #9 <#5, #7>.
+func writeFormed(formed []engine.Assembly, parts []string) string {
+	written := make([]string, len(formed))
+	for i, a := range formed {
+		shown := namesOf(a.Populations())
+		if i == 0 && parts != nil {
+			shown = parts
+		}
+		written[i] = writeShaped(a.Shape(), shown)
+		if a.Shape() == engine.TransitionShape {
+			written[i] = fmt.Sprintf("transition #%d %s", a.ID(), writeShape(a.Shape(), shown))
+		} else {
+			written[i] = fmt.Sprintf("#%d %s", a.ID(), written[i])
+		}
+	}
+	return strings.Join(written, " and ")
 }
 
 // writeShaped writes an assembly as <c, a, t>, and a transition as "transition c -> a -> t": the angle brackets

@@ -92,13 +92,13 @@ internal to the engine, not part of the language's surface.
 
 ---
 
-## Step 3 · Resolving what invoke left
+## Step 3 · Annealing what invoke left
 
-Resolving is a separate operation, run on what invoke left:
+Annealing is a separate operation, run on what invoke left:
 
 ```
 invoke c, a, t
-resolve
+anneal
 ```
 
 ```
@@ -106,15 +106,15 @@ moment 1   c        incomplete   heat !c
 moment 2   a        incomplete   heat !a
 moment 3   t        incomplete   heat !t
 
-resolve    from heat !c, !a, !t
+anneal    from heat !c, !a, !t
            forms #1 = <c, a, t>      nothing accounted for them together
                      inward: c <-> a, a <-> t, c <-> t
            forms #2 = c -> a -> t     a followed c, t followed a, unpredicted
            heat 3 -> 0
 ```
 
-- **This is the full resolve on a fresh engine.** With nothing stored, there is nothing to compare with, so the most
-  complete explanation is the whole and its order. Once there is something to compare with, resolve does more (step 8).
+- **This is the full anneal on a fresh engine.** With nothing stored, there is nothing to compare with, so the most
+  complete explanation is the whole and its order. Once there is something to compare with, anneal does more (step 8).
 - **Every forming line gives its cause**, so the record of changes reads like the run (CTR-1 CON-20, draft).
 - The interpreter names new assemblies `#1`, `#2` until something gives them names.
 - Which members inside `c`, `a` and `t` carry this is hidden unless you `inspect`.
@@ -143,9 +143,9 @@ complete   #1 <c, a, t>   3 of 3
 The `+` marks what the engine brought back itself, in order, one moment at a time. This is the behaviour of "hello
 there" being completed from "hello".
 
-**Open: the form of `resolve`.** Should `resolve` on its own mean "resolve the last incompletion", or should it always
-say what it works on (`resolve last`, or `resolve #1, #2` to compare stored assemblies)? The explicit form makes the
-two kinds of resolving, from the world and from memory, visibly different in the record.
+**Open: the form of `anneal`.** Should `anneal` on its own mean "anneal the last incompletion", or should it always
+say what it works on (`anneal last`, or `anneal #1, #2` to compare stored assemblies)? The explicit form makes the
+two kinds of annealing, from the world and from memory, visibly different in the record.
 
 ---
 
@@ -153,7 +153,7 @@ two kinds of resolving, from the world and from memory, visibly different in the
 
 **What prompted it.** The owner noticed that `c -> a -> t` doesn't point back on itself, so by the earlier definition
 (members pointing at each other, a cycle) it isn't an assembly. The assistant had printed the whole `#1` without its
-inward bonds, which is why it looked that way. Resolving forms **two** structures, of two shapes:
+inward bonds, which is why it looked that way. Annealing forms **two** structures, of two shapes:
 
 | | Shape | What it does | Answers |
 |---|---|---|---|
@@ -213,7 +213,7 @@ moment and gates count two moments, so at most two members are counted from the 
 `<h, o, u, s, e>` with `h -> o -> u -> s -> e` reaches 2 of 5 from "h", and also when "house" is read in order, and
 never completes; with three given together it completes and holds. Written as overlapping parts, `<h, o, u>` and
 `<u, s, e>` sharing "u", each part holds once complete and keeps the earlier letters counted, and "house" completes
-from "h". Open: what this means for longer words and for what resolve forms.
+from "h". Open: what this means for longer words and for what anneal forms.
 
 ```
 invoke c
@@ -275,15 +275,15 @@ incomplete #1 <c, a, t>   2 of 3, missing a
            heat !o, and the steps c -> o, o -> t unpredicted
 ```
 
-That is a misfit and a gap together. Resolving from the world forms "cot" beside "cat", with nothing about "cat"
+That is a misfit and a gap together. Annealing from the world forms "cot" beside "cat", with nothing about "cat"
 changed:
 
 ```
-resolve
+anneal
 ```
 
 ```
-resolve    from heat !o, and c -> o, o -> t
+anneal    from heat !o, and c -> o, o -> t
            forms #3 = <c, o, t>
            forms #4 = c -> o -> t
            heat -> 0
@@ -292,7 +292,7 @@ resolve    from heat !o, and c -> o, o -> t
 Comparing what is stored gives the rest:
 
 ```
-resolve #1, #3
+anneal #1, #3
 ```
 
 ```
@@ -362,7 +362,7 @@ c -> vowel -> t                  c, then any vowel, then t
 c -> (a & animals | o & nursery) -> t      animals, nursery: context, deciding which wins
 ```
 
-A type need not be hand-written: `vowel` could be the name given to `#1 △ #3`, which resolve found by comparing "cat"
+A type need not be hand-written: `vowel` could be the name given to `#1 △ #3`, which anneal found by comparing "cat"
 and "cot". The type system comes out of comparison.
 
 ---
@@ -404,7 +404,7 @@ sleeps =  dog & night                from dog -> sleeps & night
 **Reading them side by side.** The path line `dog -> barks & day | sleeps & night` becomes the first term of both `barks`
 and `sleeps`. The wholes give the "enough of these" terms. Without context, `barks` and `sleeps` both have {the, dog}
 satisfied, so they tie and the tie is held: the engine genuinely doesn't know. With day held, `barks` has two terms
-satisfied against one, so it wins. **The path view is what you write or what resolve forms; the member view is what
+satisfied against one, so it wins. **The path view is what you write or what anneal forms; the member view is what
 `inspect` shows. They are the same structure, read from the two ends.**
 
 **Alternatives aren't in a member's own definition.** `a | o` compete, so "o" is a rival to "a", not a way of recalling
@@ -423,7 +423,7 @@ barks  =  {dog₁..dog₆} >= 4 & {day₁..day₅} >= 3       from #12
 ```
 
 Here "dog" is six members, any four of which will do, so a misspelt or partly heard "dog" still brings back "barks".
-Definitions formed by resolve would be longer, overlapping and messy, closer to a learnt network than a grammar. **The
+Definitions formed by anneal would be longer, overlapping and messy, closer to a learnt network than a grammar. **The
 engine works in overlaps and thresholds; the notation is how it explains itself.** The risk to guard against is not that
 it looks symbolic, but that clean notation tempts us into hand-writing tidy grammars and calling that learning.
 
@@ -436,12 +436,12 @@ interplay of if-thens?
 and setting bits until nothing changes. That is a threshold Boolean network, close to how rule engines fire rules until
 nothing new fires. Stuart Kauffman showed networks like this settle into attractors and cycles. **Two things need more
 than that:** competition (a selection within each population, and whole assemblies winning or losing together), and
-learning (resolve works on assemblies, and the record traces every rule to its origin). So there are two layers:
+learning (anneal works on assemblies, and the record traces every rule to its origin). So there are two layers:
 
-- **the source**: assemblies and structures, which resolve works on, explanations point to and storage moves;
+- **the source**: assemblies and structures, which anneal works on, explanations point to and storage moves;
 - **the compiled form**: bits, each member's condition, and one selection per population, which is what invoke runs.
 
-When resolve forms something, it updates the source and recompiles only the members affected. A close cousin is
+When anneal forms something, it updates the source and recompiles only the members affected. A close cousin is
 **Datalog**, a rule language evaluated by applying rules until nothing new appears. Its tidy one-rule-per-line discipline,
 not its syntax, is a good model for member definitions.
 
@@ -468,44 +468,44 @@ name #12 cat
 
 ---
 
-## Step 8 · Reading text: resolving in the loop
+## Step 8 · Reading text: annealing in the loop
 
-**Decided (the owner): resolve runs inside the invocation loop when reading text.** It fits the goal of learning online,
+**Decided (the owner): anneal runs inside the invocation loop when reading text.** It fits the goal of learning online,
 and the more it learns, the quicker it gets.
 
 **How often: every moment, acting only where invoke can't complete.** When a character was predicted, there is
-nothing to resolve, so nothing happens. When it wasn't, that moment's incompletion is resolved at once. No schedule, no
+nothing to anneal, so nothing happens. When it wasn't, that moment's incompletion is annealed at once. No schedule, no
 chunk size, no number.
 
-**How much: the full mechanism, every time (decided).** Resolving is never a cheap stand-in, such as just bonding one
-character to the next. Every time invoke can't complete, resolve does everything it is for. It compares the incompletion
+**How much: the full mechanism, every time (decided).** Annealing is never a cheap stand-in, such as just bonding one
+character to the next. Every time invoke can't complete, anneal does everything it is for. It compares the incompletion
 with everything it touches (what is held, and what is loaded and shares members with it), then forms whichever shapes that
 comparison calls for together: composition, abstraction, decomposition, and sequence only as part of them. **Correctness
 and completeness every time:** the aim is to explain the incompletion as fully as possible in that moment, not to make the
-count go to zero. An earlier description in this conversation collapsed resolve to its cheapest shape. That was a
+count go to zero. An earlier description in this conversation collapsed anneal to its cheapest shape. That was a
 mistake, and is recorded so it isn't repeated.
 
-**Economy is part of resolving correctly.** The best resolution is the most complete explanation with the least added.
+**Economy is part of annealing correctly.** The best resolution is the most complete explanation with the least added.
 Reusing a known part, or joining an existing frame as a new alternative, explains more while adding less. So "build only
-what pays" isn't a separate rule bolted on: resolving properly means preferring what already exists over forming
+what pays" isn't a separate rule bolted on: annealing properly means preferring what already exists over forming
 anything new.
 
-**This is the online learning.** The resolve loops inside one invocation are how the engine learns. Like anything that
-learns, it is slow at first: early on almost nothing is predicted, so almost every moment resolves. As it learns, more is
-predicted, fewer moments need resolving, and it speeds up.
+**This is the online learning.** The anneal loops inside one invocation are how the engine learns. Like anything that
+learns, it is slow at first: early on almost nothing is predicted, so almost every moment anneals. As it learns, more is
+predicted, fewer moments need annealing, and it speeds up.
 
-**How much it takes in: what is currently held.** Resolving the current character alone could only form tiny pieces. A
-fixed "how far back" would bring a chunk size in by another door. Instead, the context a resolve takes in is whatever is
+**How much it takes in: what is currently held.** Annealing the current character alone could only form tiny pieces. A
+fixed "how far back" would bring a chunk size in by another door. Instead, the context a anneal takes in is whatever is
 held now (reverberating assemblies), limited by each population's budget, not by a chosen window. The window falls out of
 the dynamics.
 
-**Across time, mostly for free.** Resolve isn't comparing an input with itself. When "cot" arrives months after "cat",
+**Across time, mostly for free.** Anneal isn't comparing an input with itself. When "cot" arrives months after "cat",
 reading "c" invokes whatever is loaded that starts with "c", including "cat", which predicts "a". "o" arriving instead is
-a comparison between new and old, made by reading itself. The deliberate quiet-time comparison (`resolve #1, #3`) covers
+a comparison between new and old, made by reading itself. The deliberate quiet-time comparison (`anneal #1, #3`) covers
 things that never met while reading, and is **limited to assemblies that share members**, through the pivot points. The
 old engine compared every stored assembly with every other, which hit the wall on busy scenes (C33).
 
-**What one sentence can teach.** Reading "the cat sat on the mat" with full resolve in the loop:
+**What one sentence can teach.** Reading "the cat sat on the mat" with full anneal in the loop:
 - the second "the" is recognised as a repeat the moment it starts, because "t, h" predicts "e";
 - when "sat" arrives, comparing it with the just-formed "cat" forms their intersection and the alternatives `c | s` at
   once, not in a later quiet period;
@@ -571,20 +571,20 @@ As two commands, `invoke {c, t}` then `invoke a`, "cat" still completes, but not
 faded, and "a" belongs only to "cat", so its chain `a -> t` opens with no rival and the assembly follows from "a" and "t".
 
 **Every run is logged, as instructions**, each with what it found or made, so the log and the trace are written in the
-same language. Indentation shows what a resolve ran inside itself. One command, `invoke c, o, t` with "cat" known and
-resolve in the loop, might expand to:
+same language. Indentation shows what a anneal ran inside itself. One command, `invoke c, o, t` with "cat" known and
+anneal in the loop, might expand to:
 
 ```
 ; moment 2
   SEQ   o                       o active
   INV   o                       a predicted but o arrived: incomplete
-  RSLV  last                    compare with what it touches: #1, #2 (share c)
+  ANNL  last                    compare with what it touches: #1, #2 (share c)
     DIFF  {o},{a}               {o}           o not accounted for
     CHN   c,a|o                 formed #3 = c -> a | o   o joins as an alternative to a
 ; moment 3
   SEQ   t
   INV   t                       #1 <c, a, t> 2 of 3, a missing
-  RSLV  last
+  ANNL  last
     ASML  <c,o,t>               formed #5 = <c, o, t>
     CAP   #1,#5                 {c, t}
     SYMD  #1,#5                 {a, o}
@@ -592,7 +592,7 @@ resolve in the loop, might expand to:
     CHN   c,a|o,t               formed #7 = c -> a | o -> t
 ```
 
-**A gap the log exposed.** At moment 2 resolve forms `c -> a | o`, and at moment 3 it needs `c -> a | o -> t`, which
+**A gap the log exposed.** At moment 2 anneal forms `c -> a | o`, and at moment 3 it needs `c -> a | o -> t`, which
 would mean extending an assembly, and assemblies are immutable. Either the longer chain forms beside the short one, which
 then loses, or a sequence's forming completes as the sequence settles. Open.
 

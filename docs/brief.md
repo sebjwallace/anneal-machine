@@ -34,8 +34,8 @@ theory, some of it superseded. Read it in this order, and treat the rest as back
 | `docs/brief.md` | this brief |
 | `language/README.md` | AMP's terms and ground rules; start with its **Terms** section |
 | `language/walkthrough.md` | **the language step by step**, as typed into the interpreter and printed back (steps 1 to 9). The most important file after this one. |
-| `language/operations.md` | the two root operations, invoke and resolve |
-| `language/invoke.md`, `language/resolve.md` | what each operation does |
+| `language/operations.md` | the two root operations, invoke and anneal |
+| `language/invoke.md`, `language/anneal.md` | what each operation does |
 | `language/edges-and-gates.md`, `language/members-and-sets.md`, `language/assemblies.md` | the objects |
 | `language/instructions.md` | the instruction set, the REPL and the three logs |
 | `language/heat-and-learning.md` | heat as incompletion; loaded and stored |
@@ -113,7 +113,7 @@ the language is the specification.
 ```
 amp/                 the Go module
   engine/            the library: the data objects (populations, communities, assemblies …) and the operations
-                     on them (invoke, resolve); knows nothing about text
+                     on them (invoke, anneal); knows nothing about text
   interpreter/       reads a line of AMP, carries it out on the engine, prints the result back in AMP
     testdata/        transcripts: lines typed at the prompt and the exact output expected, run as tests
   cmd/amp/           the REPL and script runner
@@ -167,7 +167,7 @@ This summarises `language/`. Where it is terse, the walkthrough has worked examp
   - **Holding** comes only from reverberation. There is **no instruction that keeps something on**. That would be
     puppeteering.
   - **Timing (proposed):** every bond acts one moment later.
-- **resolve** learns. It turns an incompletion into new structure. **It always does the full mechanism**: compare the
+- **anneal** learns. It turns an incompletion into new structure. **It always does the full mechanism**: compare the
   incompletion with everything it touches (what is held, and what is loaded and shares members with it), then form
   whichever shapes that calls for, together:
   - **composition**: a new whole from known parts, the union plus the bonds that join it;
@@ -175,13 +175,13 @@ This summarises `language/`. Where it is terse, the walkthrough has worked examp
   - **decomposition**: the parts that vary, as alternatives beside the whole;
   - **sequence**: outward bonds, as part of the above, never instead of them.
 
-  **Economy is part of resolving correctly:** the most complete explanation with the least added, so reuse what exists
-  first. **Never a cheap stand-in.** An early description that collapsed resolve to "bond one character to the next"
+  **Economy is part of annealing correctly:** the most complete explanation with the least added, so reuse what exists
+  first. **Never a cheap stand-in.** An early description that collapsed anneal to "bond one character to the next"
   was a mistake, and is recorded in the walkthrough so it isn't repeated.
-- **Composing them** is a declared **policy**: invoke only; invoke then resolve; resolve inside the loop; or resolve
-  alone over stored assemblies. **For reading text: resolve inside the loop**, every moment, acting only where invoke
+- **Composing them** is a declared **policy**: invoke only; invoke then anneal; anneal inside the loop; or anneal
+  alone over stored assemblies. **For reading text: anneal inside the loop**, every moment, acting only where invoke
   can't complete, and taking in **what is currently held** as context. There is no fixed window or chunk size. The
-  resolve loops inside one invocation **are the online learning**: slow at first, faster as more is predicted.
+  anneal loops inside one invocation **are the online learning**: slow at first, faster as more is predicted.
 
 ### 3.3 Heat is incompletion
 
@@ -189,7 +189,7 @@ Without metaphor, heat is what invoke couldn't complete, counted three ways (`la
 
 - **missing**: how much of a partly active assembly isn't active;
 - **unexplained**: active members no assembly accounts for;
-- **unsettled**: ties being held. Counted, but resolve doesn't act on them, because only more evidence settles a tie.
+- **unsettled**: ties being held. Counted, but anneal doesn't act on them, because only more evidence settles a tie.
 
 This is what lets the milestone flag what's incomplete for free: incompletion is always measured.
 
@@ -206,8 +206,8 @@ This is what lets the milestone flag what's incomplete for free: incompletion is
 ### 3.5 Source and compiled form
 
 For running, invoke reduces to a row of active bits, each member's condition, and one selection per population: a
-threshold Boolean network. Keep two layers: the **source** (assemblies, which resolve and explanations work on) and the
-**compiled form** (bits and conditions, which invoke runs). When resolve forms something, recompile only the members
+threshold Boolean network. Keep two layers: the **source** (assemblies, which anneal and explanations work on) and the
+**compiled form** (bits and conditions, which invoke runs). When anneal forms something, recompile only the members
 affected (walkthrough step 6).
 
 ---
@@ -288,9 +288,9 @@ The owner wants a glass box from the first commit, not added later.
   This run will force two decisions, which go to the owner: **arrivals versus held assemblies** (a count must advance once per
   arrival of a tick, not once per moment it is on) and **returning to the right caller**.
 
-### Phase 2: resolve (blocked on owner decisions)
+### Phase 2: anneal (blocked on owner decisions)
 
-Before building resolve, these need the owner's answers (`language/open-and-deferred.md`):
+Before building anneal, these need the owner's answers (`language/open-and-deferred.md`):
 
 1. **What exactly forms from an incompletion**, member by member, and which held context comes along.
 2. **How the engine chooses a member** inside a population when something forms.
@@ -301,17 +301,17 @@ Also from the procedures work: whether transitions act on **arrivals** (change) 
 subroutine **returns** to the right caller, and how a loop that never exits is **let go**.
 
 Smaller defaults to settle along the way: the population budget, the default assembly threshold, how to address a single
-gate (proposed `barks{2}#4`), and whether `resolve` must always name what it works on.
+gate (proposed `barks{2}#4`), and whether `anneal` must always name what it works on.
 
 Then the AMX ladder, each world with predictions fixed first: words from letters; noisy words ("cxt"); same letters in
 different contexts ("cat"/"cot"); the categories test (`docs/theories/categories-from-context.md`).
 
 ### Phase 3: general English
 
-Read ordinary text with resolve in the loop. Suggested sources, simplest first: a slice of **TinyStories** (small
+Read ordinary text with anneal in the loop. Suggested sources, simplest first: a slice of **TinyStories** (small
 vocabulary, CDLA-Sharing-1.0; note it is model-generated text), then the **BabyLM** 10M-word corpus (developmentally
 plausible English; check each component's licence), then optionally Simple English Wikipedia and public-domain
-children's books. **Measure three lines:** completion on what is read; completion on **held-out** text with resolve
+children's books. **Measure three lines:** completion on what is read; completion on **held-out** text with anneal
 switched off (the real evidence); and structure size against text read (it should grow more slowly than the text).
 
 ### Phase 4: a domain, and the milestone

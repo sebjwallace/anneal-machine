@@ -27,7 +27,7 @@ nothing is filled in. Small gaps filled in this way are treated as noise: readin
 other on: the assembly **reverberates** and stays held until competition changes it. Held assemblies are what let
 earlier things join later gates (see [edges and gates](edges-and-gates.md), and held states in C101).
 
-**When invoke can't complete**, the leftover is heat, and [resolve](resolve.md) works on it.
+**When invoke can't complete**, the leftover is heat, and [anneal](anneal.md) works on it.
 
 ## Competition
 
@@ -102,7 +102,7 @@ X fits A      most of X is in A:  |X ∩ A| is large compared with |X|
 ## Comparison
 
 Comparing two things uses intersection and difference. Comparison reads; it changes nothing. What it finds is what
-[resolve](resolve.md) may form.
+[anneal](anneal.md) may form.
 
 ```
 A ∩ B     what they share

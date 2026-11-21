@@ -158,7 +158,23 @@ func (in *Interpreter) Run(line string) (string, error) {
 		}
 		return printInvocation(invocation), nil
 	case inspectCommand:
+		if st.id != 0 {
+			a, err := in.memory.AssemblyByID(st.id)
+			if err != nil {
+				return "", err
+			}
+			if a.Name() == "" {
+				return writeAssemblyMembers(a), nil
+			}
+			return printAssemblies(a.Name(), []engine.Assembly{a}), nil
+		}
 		return in.inspect(st.name)
+	case annealCommand:
+		annealing, err := in.memory.Anneal(st.wholes)
+		if err != nil {
+			return "", err
+		}
+		return printAnnealing(annealing), nil
 	case settingCommand:
 		return in.set(st), nil
 	case listAssembliesCommand:

@@ -1,0 +1,83 @@
+amp> refractory on
+refractory: on
+amp> t, h, e, d, o, g, c, a = pop 8
+t: 8 members, t{1..8}, all individuals
+h: 8 members, h{1..8}, all individuals
+e: 8 members, e{1..8}, all individuals
+d: 8 members, d{1..8}, all individuals
+o: 8 members, o{1..8}, all individuals
+g: 8 members, g{1..8}, all individuals
+c: 8 members, c{1..8}, all individuals
+a: 8 members, a{1..8}, all individuals
+amp> thedog = <t -> h -> e -> d -> o -> g>
+thedog: <t, h, e, d, o, g> and transition t -> h -> e -> d -> o -> g
+amp> thecat = <t -> h -> e -> c -> a -> t>
+thecat: <t, h, e, c, a, t> and transition t -> h -> e -> c -> a -> t
+amp> save words.json
+saved words.json: 8 populations, 0 communities, 4 assemblies
+amp> anneal thedog, thecat
+anneal   thedog, thecat share t, h, e
+forms    #5 <t, h, e> and transition #6 t -> h -> e     the shared part, from thedog
+forms    #7 <d, o, g> and transition #8 d -> o -> g     what varies in thedog
+forms    #9 <#5, #7> and transition #10 e -> d          thedog from its parts
+forms    #11 <c, a, t> and transition #12 c -> a -> t   what varies in thecat
+forms    #13 <#5, #11> and transition #14 e -> c        thecat from its parts
+amp> insp #13
+#13 <t{1}, h{1}, c{1}, a{1}>
+amp> insp #10
+#10 transition e{1} -> d{1}
+amp> assemblies
+#1 thedog <t, h, e, d, o, g>
+#2 thedog transition t -> h -> e -> d -> o -> g
+#3 thecat <t, h, e, c, a, t>
+#4 thecat transition t -> h -> e -> c -> a -> t
+#5 <t, h, e>
+#6 transition t -> h -> e
+#7 <d, o, g>
+#8 transition d -> o -> g
+#9 <t, h, d, o>
+#10 transition e -> d
+#11 <c, a, t>
+#12 transition c -> a -> t
+#13 <t, h, c, a>
+#14 transition e -> c
+14 assemblies
+amp> inv t, h, e, c, a, t
+moment   active       refractory   why
+1        t
+2        h            t            h: expected by #6 t -> h, thecat t -> h; thecat t -> h -> e -> c -> a -> t 2 of 6 over thedog t -> h -> e -> d -> o -> g 1 of 6
+3        +t, e        h            t: #5 <t, h, e> 2 of 3; e: expected by #5 <t, h, e> 2 of 3, #6 h -> e, thecat h -> e; thecat t -> h -> e -> c -> a -> t 3 of 6 over thedog t -> h -> e -> d -> o -> g 2 of 6
+4        +h, c        t, e         h: #5 <t, h, e> 3 of 3, #6 t -> h; tie: thedog t -> h -> e -> d -> o -> g 3 of 6 | #10 e -> d 1 of 2 | #14 e -> c 1 of 2, held over thecat t -> h -> e -> c -> a -> t 2 of 6
+5        +t, +e, a    h, c         t: #5 <t, h, e> 3 of 3, #13 <t, h, c, a> 3 of 4; e: #5 <t, h, e> 3 of 3, #6 h -> e; a: expected by thecat c -> a, #12 c -> a, #13 <t, h, c, a> 3 of 4; thecat t -> h -> e -> c -> a -> t 2 of 6, #12 c -> a -> t 1 of 3, #13 <t, h, c, a> 3 of 4 over thedog t -> h -> e -> d -> o -> g 3 of 6, #10 e -> d 1 of 2
+6        t, +h, +c    t, e, a      t: expected by thecat a -> t, #11 <c, a, t> 2 of 3, #12 a -> t; h: #5 <t, h, e> 3 of 3, #6 t -> h, #13 <t, h, c, a> 4 of 4; c: #11 <c, a, t> 2 of 3, #13 <t, h, c, a> 4 of 4, #14 e -> c; thecat t -> h -> e -> c -> a -> t 2 of 6, #11 <c, a, t> 2 of 3, #12 c -> a -> t 2 of 3, #13 <t, h, c, a> 4 of 4, #14 e -> c 2 of 2 over thedog t -> h -> e -> d -> o -> g 3 of 6, #10 e -> d 1 of 2
+7        +t, +e, +a   t, h, c      t: #5 <t, h, e> 3 of 3, #13 <t, h, c, a> 4 of 4; e: #5 <t, h, e> 3 of 3, #6 h -> e; a: thecat c -> a, #11 <c, a, t> 3 of 3, #12 c -> a, #13 <t, h, c, a> 4 of 4; thecat t -> h -> e -> c -> a -> t 3 of 6, #11 <c, a, t> 3 of 3, #12 c -> a -> t 3 of 3, #13 <t, h, c, a> 4 of 4 over thedog t -> h -> e -> d -> o -> g 3 of 6, #10 e -> d 1 of 2
+incomplete   thedog <t, h, e, d, o, g>   3 of 6
+incomplete   thecat <t, h, e, c, a, t>   3 of 6
+complete     #5 <t, h, e>                3 of 3
+incomplete   #9 <t, h, d, o>             2 of 4
+complete     #11 <c, a, t>               3 of 3
+complete     #13 <t, h, c, a>            4 of 4
+held         repeating every 2 moments
+amp> open words.json
+opened words.json: 8 populations, 0 communities, 4 assemblies
+amp> annl thedog, thecat
+anneal   thedog, thecat share t, h, e
+forms    #5 <t, h, e> and transition #6 t -> h -> e     the shared part, from thedog
+forms    #7 <d, o, g> and transition #8 d -> o -> g     what varies in thedog
+forms    #9 <#5, #7> and transition #10 e -> d          thedog from its parts
+forms    #11 <c, a, t> and transition #12 c -> a -> t   what varies in thecat
+forms    #13 <#5, #11> and transition #14 e -> c        thecat from its parts
+amp> ca = <c -> a>
+ca: <c, a> and transition c -> a
+amp> anneal thedog
+error: anneal needs at least two names
+amp> anneal thedog, t
+error: anneal compares assemblies, and t is a population
+amp> anneal thedog, nope
+error: nope is not declared
+amp> anneal thedog, ca
+error: the intersection is empty
+amp> insp #99
+error: there is no #99
+amp> anneal = pop 2
+anneal: 2 members, anneal{1..2}, all individuals
