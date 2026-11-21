@@ -2,6 +2,7 @@ package engine
 
 import (
 	"bytes"
+	"slices"
 	"strings"
 	"testing"
 )
@@ -268,10 +269,10 @@ func TestReusingMembersInL1B(t *testing.T) {
 	}
 }
 
-// "the_" is cast. Reading "thx": t bursts, which clears L1B, and its t comes on there, opening the gate (any one
-// member opens it). The moment after, the gate brings on e and _, which the input hasn't reached: the assembly is
-// complete at h.
-func TestL1BGates(t *testing.T) {
+// "the_" is cast. Reading "thx": t bursts and its t comes up in L1B, confirmed; #1's gate opens and, the only one
+// open, it wins. The moment after, it completes: e and _ come on, which the input hasn't reached. At x, which bursts,
+// the confirmations are cleared but the winner holds.
+func TestL1BWinnerCompletesAndHolds(t *testing.T) {
 	m := New()
 	mustRead(t, m, "the cat the dog")
 	a, _ := m.Assembly(1)
@@ -279,14 +280,46 @@ func TestL1BGates(t *testing.T) {
 		t.Fatalf("#1 is %s, want the_", a.Name())
 	}
 	r := mustRead(t, m, "thx")
-	at, ah := r.Moments[0].L1B, r.Moments[1].L1B
-	if !at.Cleared || len(at.Up) != 1 || at.Up[0] != a.Members[0] || !at.Gates[0].Open || at.Gates[0].Complete() {
-		t.Errorf("at t: cleared, #1's t up, its gate open but not complete: %+v", at)
+	at, ah, ax := r.Moments[0].L1B, r.Moments[1].L1B, r.Moments[2].L1B
+	if at.Winner != 1 || at.Gates[0].Confirmed != 1 || at.Gates[0].Complete() {
+		t.Errorf("at t: #1 wins with 1 of 4 confirmed, not complete yet: %+v", at)
 	}
-	if ah.Cleared || !ah.Gates[0].Complete() || len(ah.Completed) != 2 {
-		t.Errorf("at h: #1 complete, e and _ brought on by its gate: %+v", ah)
+	if ah.Winner != 1 || !ah.Gates[0].Complete() || len(ah.Completed) != 2 {
+		t.Errorf("at h: #1 complete, e and _ brought on: %+v", ah)
 	}
-	if x := r.Moments[2].L1B; !x.Cleared || len(x.On) != 0 {
-		t.Errorf("at x: the burst clears L1B and nothing projects up from x: %+v", x)
+	if !ax.Cleared || ax.Winner != 1 || !ax.Gates[0].Complete() || ax.Gates[0].Confirmed != 0 {
+		t.Errorf("at x: confirmations cleared, #1 still holding: %+v", ax)
+	}
+}
+
+// A state changes when another assembly scores higher: #1 bc wins at b; at the t of "the", which bursts, the
+// confirmations clear and #2 the_ scores higher, so it takes over, and #1's members that aren't confirmed go off.
+func TestL1BStateChanges(t *testing.T) {
+	m := New()
+	mustRead(t, m, "abcd")
+	mustRead(t, m, "xbcy")
+	mustRead(t, m, "the cat the dog")
+	r := mustRead(t, m, "bc the")
+	bc, _ := m.Assembly(1)
+	if r.Moments[1].L1B.Winner != 1 {
+		t.Fatalf("at c, #1 bc should be winning: %+v", r.Moments[1].L1B)
+	}
+	var change *L1BMoment
+	for i := range r.Moments {
+		if l := r.Moments[i].L1B; l.Was == 1 && l.Winner == 2 {
+			change = &l
+			break
+		}
+	}
+	if change == nil {
+		t.Fatal("#2 the_ should take over from #1 bc")
+	}
+	for _, member := range bc.Members {
+		if slices.Contains(change.On, member) && !slices.Contains(change.Up, member) {
+			t.Errorf("%s of #1 should go off when #1 is outcompeted: %+v", member, change)
+		}
+	}
+	if change.Gates[0].Winner || !change.Gates[1].Winner {
+		t.Errorf("only #2 should be the winner: %+v", change.Gates)
 	}
 }

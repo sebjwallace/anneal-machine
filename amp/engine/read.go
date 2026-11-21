@@ -82,8 +82,7 @@ func (m *Memory) read(text string) (Reading, error) {
 	var previous *Member
 	var active []Member
 	lastBurst := 0
-	l1bOn := map[Member]bool{}
-	var l1bComing []Member
+	l1b := newL1BState()
 	for _, name := range names {
 		if _, ok := m.populations[name]; !ok {
 			if _, err := m.DeclarePopulation(name, ReadingSize); err != nil {
@@ -112,7 +111,7 @@ func (m *Memory) read(text string) (Reading, error) {
 			moment.Bond = &bond
 		}
 		moment.Predicts = m.primedBy(moment.Active)
-		moment.L1B, l1bComing = m.l1bStep(l1bOn, moment.Burst, moment.Active, l1bComing)
+		moment.L1B = m.l1bStep(l1b, moment.Burst, moment.Active)
 		i := len(reading.Moments)
 		last := i == len(names)-1
 		switch {

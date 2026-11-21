@@ -179,21 +179,27 @@ func PrintProjections(projections []engine.Projection) string {
 	return strings.Join(parts, " · ")
 }
 
-// printL1B writes L1B's activity at a moment: how many members are on, and how many gates are open and complete.
+// printL1B writes L1B's activity at a moment: the winner (with "now" when it has just taken over), how many
+// members are on, and how many gates are open.
 func printL1B(l engine.L1BMoment) string {
 	if len(l.Gates) == 0 {
 		return ""
 	}
-	open, complete := 0, 0
+	open := 0
 	for _, g := range l.Gates {
 		if g.Open {
 			open++
 		}
-		if g.Complete() {
-			complete++
+	}
+	winner := "no winner"
+	if l.Winner > 0 {
+		g := l.Gates[l.Winner-1]
+		winner = fmt.Sprintf("#%d wins %d/%d", l.Winner, g.Confirmed, g.Size)
+		if l.Winner != l.Was {
+			winner += " now"
 		}
 	}
-	text := fmt.Sprintf("%d on · %d of %d open, %d complete", len(l.On), open, len(l.Gates), complete)
+	text := fmt.Sprintf("%s · %d on · %d of %d open", winner, len(l.On), open, len(l.Gates))
 	if l.Cleared {
 		text = "cleared · " + text
 	}

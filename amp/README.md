@@ -50,11 +50,20 @@ populations of its own, one for each character, 9 members each:
 With gates, members are reused: casting picks any member of the L1B population (individual or not) that isn't
 already in the assembly, so L1B doesn't run out.
 
-**Gates.** While reading, L1B is active. Each moment: a burst in L1A clears L1B; the L1B members that L1A's active
-members project up to come on; an L1B member that came on stays on until the next burst; each assembly's gate counts
-its own members that are on, and opens as soon as any one is counted (the owner's choice, for now: `GateOpens`); an
-open gate brings on the assembly's other members the moment after, and it completes. A member shared by several
-assemblies counts for each of them.
+**Gates and competition.** While reading, L1B is active. Each moment:
+
+- The L1B members that L1A's active members project up to come on, and are **confirmed**. A burst clears the
+  confirmations first.
+- Each assembly's gate counts its confirmed members and opens as soon as any one is (the owner's choice, for now:
+  `GateOpens`). Its score is how much of it is confirmed.
+- Of the open gates, the highest score **wins**. The winner stays the winner until another scores higher (on a tie it
+  stays; with no winner yet, a tie means none wins).
+- The winner completes (its other members come on the moment after) and holds, through bursts too, until it is
+  outcompeted; then its members that aren't confirmed go off. Every other assembly stays quiet: only its confirmed
+  members are on.
+
+A member shared by several assemblies counts for each of them. Members the winner brought on don't count towards any
+score.
 
 ## The REPL
 
@@ -79,12 +88,13 @@ far (the one the moment is in highlighted), and the lines below give the lengths
 Below the text, **L1B**: each of its populations as a 3×3 grid of its members, numbered row by row, with how many
 are members under each. The shape says what a member is (· an individual, ○ a member of an assembly, ◇ a member of
 the assembly selected), filled (● ◆) when it is on; the colour says why it is on (green: projected up from L1A this
-moment; magenta: brought on by a gate; plain: on since earlier). Then the assemblies in the order cast, each with its
-gate (shut, open with how much is counted, or complete in magenta) and its members. ↑ ↓
+moment; magenta: brought on by the winner; plain: on since earlier). Then the assemblies in the order cast, each with
+how much of it is confirmed (faint when its gate is shut, "wins" in magenta for the winner) and its members. ↑ ↓
 select an assembly; the L1A members that project up to it are marked ◆ on the graph. While a read plays, the assembly
-cast or added to at the moment shown is selected, and what casting did is in yellow.
+cast or added to at the moment shown is selected (or else the winner), and what casting did is in yellow. The moment
+line says when a winner takes over.
 
 Colours: **green** arrived primed; **red** burst (every member of the population on), with the individual **picked**
 in reverse; **cyan** primed for the next moment by sequence memory, with the bonds priming it; **yellow** the bond
-formed this moment; **underlined** the members of the motif the moment is in, as far as it has gone; **blue** the assembly selected; **magenta** state memory: members a gate brought on (and later, L1A members primed
-from L1B).
+formed this moment; **underlined** the members of the motif the moment is in, as far as it has gone; **blue** the assembly selected; **magenta** state memory: the winner and the members it brought on (and later, L1A
+members primed from L1B).

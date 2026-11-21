@@ -178,6 +178,16 @@ func (m model) momentView() string {
 			parts = append(parts, fmt.Sprintf("#%d %s again: nothing new", c.Assembly, name))
 		}
 	}
+	if l := moment.L1B; l.Winner != l.Was {
+		change := fmt.Sprintf("L1B: #%d %s wins", l.Winner, m.assemblyName(l.Winner))
+		switch {
+		case l.Winner == 0:
+			change = fmt.Sprintf("L1B: #%d %s let go", l.Was, m.assemblyName(l.Was))
+		case l.Was > 0:
+			change = fmt.Sprintf("L1B: #%d %s takes over from #%d %s", l.Winner, m.assemblyName(l.Winner), l.Was, m.assemblyName(l.Was))
+		}
+		parts = append(parts, markStyles[stateMark].Render(change))
+	}
 	if len(moment.Predicts) > 0 {
 		parts = append(parts, "primes "+labels(moment.Predicts)+" for the next moment")
 	} else {
@@ -203,7 +213,7 @@ func legend() string {
 		markStyles[formed].Render("bond formed"),
 		lipgloss.NewStyle().Underline(true).Render("the motif so far, or the one cast"),
 		markStyles[selectedMark].Render("◆ the assembly selected") + " (↑ ↓) and what projects up to it",
-		markStyles[stateMark].Render("brought on by a gate") + " (state memory completing)",
+		markStyles[stateMark].Render("the winner, and what it brings on") + " (state memory)",
 	}
 	return strings.Join(keys, " · ")
 }

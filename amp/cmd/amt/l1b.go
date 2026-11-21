@@ -66,11 +66,15 @@ func (m model) selectedAssembly() (engine.Assembly, bool) {
 	return engine.Assembly{}, false
 }
 
-// follow selects the assembly that casting cast or added to at the moment shown, if it did.
+// follow selects the assembly that casting cast or added to at the moment shown, if it did, or else the winner.
 func (m model) follow() model {
 	if m.reading != nil {
-		if c := m.reading.Moments[m.shown].Cast; c != nil {
-			m.selected = c.Assembly
+		moment := m.reading.Moments[m.shown]
+		switch {
+		case moment.Cast != nil:
+			m.selected = moment.Cast.Assembly
+		case moment.L1B.Winner > 0:
+			m.selected = moment.L1B.Winner
 		}
 	}
 	return m
@@ -132,19 +136,21 @@ func (m model) l1bView() string {
 	for _, p := range populations {
 		blocks = append(blocks, gridBlock(p, member, chosen, act))
 	}
-	open, complete := 0, 0
+	open := 0
 	for _, g := range act.Gates {
 		if g.Open {
 			open++
 		}
-		if g.Complete() {
-			complete++
-		}
 	}
-	title := titleStyle.Render("L1B") + fmt.Sprintf(" · %d %s · %d on · %d of %d gates open, %d complete",
-		len(assemblies), plural(len(assemblies), "assembly", "assemblies"), len(act.On), open, len(act.Gates), complete)
+	title := titleStyle.Render("L1B") + fmt.Sprintf(" · %d %s · %d on · %d of %d gates open",
+		len(assemblies), plural(len(assemblies), "assembly", "assemblies"), len(act.On), open, len(act.Gates))
+	if act.Winner > 0 {
+		title += " · " + markStyles[stateMark].Render(fmt.Sprintf("#%d %s wins", act.Winner, m.assemblyName(act.Winner)))
+	} else if len(act.Gates) > 0 {
+		title += " · no winner"
+	}
 	if act.Cleared {
-		title += " · " + markStyles[burst].Render("cleared by the burst")
+		title += " · " + markStyles[burst].Render("confirmations cleared by the burst")
 	}
 	if a, ok := m.selectedAssembly(); ok {
 		title += " · " + markStyles[selectedMark].Render(fmt.Sprintf("#%d %s", a.ID, a.Name())) + " selected"
@@ -155,7 +161,7 @@ func (m model) l1bView() string {
 // gridBlock draws one population: its name, its members in a square grid (numbered row by row), and how many of
 // them belong to an assembly. The shape says what a member is (· an individual, ○ ● a member of an assembly, ◇ ◆ a
 // member of the assembly selected), filled when it is on; the colour says why it is on (green: projected up from
-// L1A this moment; magenta: brought on by a gate; plain: on since earlier).
+// L1A this moment; magenta: brought on by the winner; plain: on since earlier).
 func gridBlock(p engine.Population, member, chosen map[engine.Member]bool, act engine.L1BMoment) []string {
 	on, up, completed := map[engine.Member]bool{}, map[engine.Member]bool{}, map[engine.Member]bool{}
 	for _, mm := range act.On {
@@ -313,16 +319,18 @@ func (m model) assemblyList() string {
 	return title + "\n" + strings.Join(lines, "\n")
 }
 
-// gateText writes an assembly's gate at the moment shown, padded so the members line up: complete (magenta), open
-// with how much is counted, or shut.
+// gateText writes an assembly's gate at the moment shown, padded so the members line up: how much of it the input
+// has confirmed, "wins" for the winner (magenta), faint when the gate is shut.
 func gateText(g engine.Gate) string {
+	const width = 11
+	pad := func(text string) string { return fmt.Sprintf("%-*s", width, text) }
 	switch {
 	case g.Size == 0:
-		return strings.Repeat(" ", 10) // cast at this moment, or no read shown: no gate counted yet
-	case g.Complete():
-		return markStyles[stateMark].Render(fmt.Sprintf("%-10s", "complete"))
+		return strings.Repeat(" ", width) // cast at this moment, or no read shown: no gate counted yet
+	case g.Winner:
+		return markStyles[stateMark].Render(pad(fmt.Sprintf("wins %d/%d", g.Confirmed, g.Size)))
 	case g.Open:
-		return fmt.Sprintf("%-10s", fmt.Sprintf("open %d/%d", g.Counted, g.Size))
+		return pad(fmt.Sprintf("%d/%d", g.Confirmed, g.Size))
 	}
-	return hintStyle.Render(fmt.Sprintf("%-10s", fmt.Sprintf("shut 0/%d", g.Size)))
+	return hintStyle.Render(pad(fmt.Sprintf("0/%d", g.Size)))
 }
