@@ -1,0 +1,109 @@
+######## prediction counts from anything active (recalled members included)
+
+== "the cat the dog the bird the mouse", read three times in a row (refractory off)
+
+pass 1   THE_CAT_The_DOG_the_BIRD_The_MOUSE
+         burst (capitals): 23 of 34   bonds formed: 24
+         predicted stretches: "the_", "g_the_", "the_"
+         bonds: t{1}->h{1} h{1}->e{1} e{1}->_{1} _{1}->c{1} c{1}->a{1} a{1}->t{2} t{2}->_{2} _{2}->t{1} _{1}->d{1} d{1}->o{1} o{1}->g{1} g{1}->_{1} _{1}->t{1} _{1}->b{1} b{1}->i{1} i{1}->r{1} r{1}->d{2} d{2}->_{3} _{3}->t{1} _{1}->m{1} m{1}->o{2} o{2}->u{1} u{1}->s{1} s{1}->e{2}
+
+pass 2   The_Cat_the_Dog_The_Bird_the_Mouse
+         burst (capitals): 6 of 34   bonds formed: 0
+         predicted stretches: "the_", "cat_the_", "dog_", "the_", "bird_the_", "mouse"
+
+pass 3   The_Cat_the_Dog_The_Bird_the_Mouse
+         burst (capitals): 6 of 34   bonds formed: 0
+         predicted stretches: "the_", "cat_the_", "dog_", "the_", "bird_the_", "mouse"
+
+== forming an assembly over each predicted stretch: "the cat the dog the bird the mouse"
+
+pass 1   burst 23 of 34   assemblies formed 2, reused 1
+         formed: #25 "the_", #26 "g_the_"
+pass 2   burst 23 of 34   assemblies formed 3, reused 1
+         formed: #51 "at_", #52 "ird_", #53 "ouse"
+pass 3   burst 13 of 34   assemblies formed 7, reused 0
+         formed: #73 "at_th", #74 "e_", #75 "dog_th", #76 "e_", #77 "bird_t", #78 "e_", #79 "mouse"
+pass 4   burst 19 of 34   assemblies formed 9, reused 0
+         formed: #104 "e_", #105 "at_t", #106 "e_", #107 "g_t", #108 "e_", #109 "ir", #110 "d_t", #111 "e_", #112 "ous"
+
+== forming an assembly over each predicted stretch: "the cat sat on the mat the dog sat on the cat a dog ran to the mat"
+
+pass 1   burst 34 of 66   assemblies formed 11, reused 3
+         formed: #35 "sat_", #36 "the_", #37 "mat_", #38 "g_", #39 "at_", #40 "n_", #41 "cat_", #42 "dog_", #43 "n_", #44 "o_", #45 "mat"
+pass 2   burst 43 of 66   assemblies formed 5, reused 8
+         formed: #91 "he_", #92 "n_t", #93 "e_", #94 "he_", #95 "n_t"
+pass 3   burst 38 of 66   assemblies formed 10, reused 4
+         formed: #138 "sat_on_", #139 "he_", #140 "dog_", #141 "n_t", #142 "at_", #143 "a_", #144 "g_", #145 "n_t", #146 "o_", #147 "at"
+pass 4   burst 53 of 66   assemblies formed 4, reused 5
+         formed: #201 "he_", #202 "sa", #203 "on", #204 "he_"
+
+== noise "qwkzjxvbnpfgmhlrtyc", then different noise, then the first noise again
+
+pass 1   QWKZJXVBNPFGMHLRTYC
+         burst (capitals): 19 of 19   bonds formed: 18
+         predicted stretches: none
+         bonds: q{1}->w{1} w{1}->k{1} k{1}->z{1} z{1}->j{1} j{1}->x{1} x{1}->v{1} v{1}->b{1} b{1}->n{1} n{1}->p{1} p{1}->f{1} f{1}->g{1} g{1}->m{1} m{1}->h{1} h{1}->l{1} l{1}->r{1} r{1}->t{1} t{1}->y{1} y{1}->c{1}
+
+pass 2   ASPDOIUEFXZ
+         burst (capitals): 11 of 11   bonds formed: 10
+         predicted stretches: none
+         bonds: a{1}->s{1} s{1}->p{2} p{2}->d{1} d{1}->o{1} o{1}->i{1} i{1}->u{1} u{1}->e{1} e{1}->f{2} f{2}->x{2} x{2}->z{2}
+
+pass 3   Qwkzjxvbnpfgmhlrtyc
+         burst (capitals): 1 of 19   bonds formed: 0
+         predicted stretches: "qwkzjxvbnpfgmhlrtyc"
+
+######## prediction counts only from the letter just before
+
+== "the cat the dog the bird the mouse", read three times in a row (refractory off)
+
+pass 1   THE_CAT_The_DOG_the_BIRD_the_MOUSE
+         burst (capitals): 23 of 34   bonds formed: 22
+         predicted stretches: "the_", "_the_", "_the_"
+         bonds: t{1}->h{1} h{1}->e{1} e{1}->_{1} _{1}->c{1} c{1}->a{1} a{1}->t{2} t{2}->_{2} _{2}->t{1} _{1}->d{1} d{1}->o{1} o{1}->g{1} g{1}->_{2} _{1}->b{1} b{1}->i{1} i{1}->r{1} r{1}->d{2} d{2}->_{2} _{1}->m{1} m{1}->o{2} o{2}->u{1} u{1}->s{1} s{1}->e{2}
+
+pass 2   The_Cat_the_Dog_the_Bird_the_Mouse
+         burst (capitals): 5 of 34   bonds formed: 0
+         predicted stretches: "the_", "cat_the_", "dog_the_", "bird_the_", "mouse"
+
+pass 3   The_Cat_the_Dog_the_Bird_the_Mouse
+         burst (capitals): 5 of 34   bonds formed: 0
+         predicted stretches: "the_", "cat_the_", "dog_the_", "bird_the_", "mouse"
+
+== forming an assembly over each predicted stretch: "the cat the dog the bird the mouse"
+
+pass 1   burst 23 of 34   assemblies formed 2, reused 1
+         formed: #23 "the_", #24 "_the_"
+pass 2   burst 7 of 34   assemblies formed 4, reused 1
+         formed: #29 "cat_the_", #30 "og_the_", #31 "bird_the_", #32 "ouse"
+pass 3   burst 10 of 34   assemblies formed 3, reused 4
+         formed: #39 "ca", #40 "bir", #41 "d_the_"
+pass 4   burst 11 of 34   assemblies formed 1, reused 3
+         formed: #52 "_the_bird_the_"
+
+== forming an assembly over each predicted stretch: "the cat sat on the mat the dog sat on the cat a dog ran to the mat"
+
+pass 1   burst 38 of 66   assemblies formed 8, reused 3
+         formed: #36 "at_", #37 "the_", #38 "n_the_", #39 "cat_", #40 "dog_", #41 "n_", #42 "he_", #43 "mat"
+pass 2   burst 40 of 66   assemblies formed 5, reused 3
+         formed: #80 "ca", #81 "ma", #82 "_the_", #83 "on_the_", #84 "o_the_"
+pass 3   burst 43 of 66   assemblies formed 5, reused 5
+         formed: #125 "sa", #126 "_the_", #127 "do", #128 "ra", #129 "_t"
+pass 4   burst 58 of 66   assemblies formed 0, reused 3
+
+== noise "qwkzjxvbnpfgmhlrtyc", then different noise, then the first noise again
+
+pass 1   QWKZJXVBNPFGMHLRTYC
+         burst (capitals): 19 of 19   bonds formed: 18
+         predicted stretches: none
+         bonds: q{1}->w{1} w{1}->k{1} k{1}->z{1} z{1}->j{1} j{1}->x{1} x{1}->v{1} v{1}->b{1} b{1}->n{1} n{1}->p{1} p{1}->f{1} f{1}->g{1} g{1}->m{1} m{1}->h{1} h{1}->l{1} l{1}->r{1} r{1}->t{1} t{1}->y{1} y{1}->c{1}
+
+pass 2   ASPDOIUEFXZ
+         burst (capitals): 11 of 11   bonds formed: 10
+         predicted stretches: none
+         bonds: a{1}->s{1} s{1}->p{2} p{2}->d{1} d{1}->o{1} o{1}->i{1} i{1}->u{1} u{1}->e{1} e{1}->f{2} f{2}->x{2} x{2}->z{2}
+
+pass 3   Qwkzjxvbnpfgmhlrtyc
+         burst (capitals): 1 of 19   bonds formed: 0
+         predicted stretches: "qwkzjxvbnpfgmhlrtyc"
+

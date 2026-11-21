@@ -1,0 +1,462 @@
+== P1 by hand: cat = <c -> a -> t>, refractory period on, invoke "cat"
+
+-- A  holds, same threshold
+moment   active   refractory   why
+1        c
+2        a        c            a: expected by cat c -> a
+3        +c, t    a            c: cat <c, a, t> 2 of 3; t: expected by cat <c, a, t> 2 of 3, cat a -> t
+4        +a       c, t         a: cat <c, a, t> 3 of 3, cat c -> a
+complete   cat <c, a, t>   3 of 3
+held       repeating every 2 moments
+
+-- B  drops out, same threshold
+moment   active   refractory   why
+1        c
+2        a        c            a: expected by cat c -> a
+3        +c, t    a            c: cat <c, a, t> 2 of 3; t: expected by cat <c, a, t> 2 of 3, cat a -> t
+4        +a       c, t         a: cat c -> a
+5        +t       a            t: cat a -> t
+6        +c, +a   t            c: cat <c, a, t> 2 of 3; a: cat <c, a, t> 2 of 3
+7        +t       c, a         t: cat a -> t
+8        +a       t            a: cat c -> a
+incomplete   cat <c, a, t>   2 of 3
+held         repeating every 6 moments
+
+== P2 by hand: cat = <c, a, t> (no chain), refractory period on
+
+-- B  drops out, same threshold
+invoke c, before cat has completed:
+moment   active   refractory   why
+1        c
+2                 c
+incomplete   cat <c, a, t>   at most 1 of 3
+invoke {c, a}:
+moment   active   refractory   why
+3        c, a
+4        +t       c, a         t: cat <c, a, t> 2 of 3
+5                 t
+complete   cat <c, a, t>   3 of 3, not held
+invoke c, after:
+moment   active   refractory   why
+6        c
+7                 c
+incomplete   cat <c, a, t>   at most 1 of 3
+
+-- C  drops out, one fewer after completing
+invoke c, before cat has completed:
+moment   active   refractory   why
+1        c
+2                 c
+incomplete   cat <c, a, t>   at most 1 of 3
+invoke {c, a}:
+moment   active       refractory   why
+3        c, a
+4        +t           c, a         t: cat <c, a, t> 2 of 3
+5                     t
+6        +c, +a, +t                c: cat <c, a, t> 1 of 3; a: cat <c, a, t> 1 of 3; t: cat <c, a, t> 1 of 3
+7                     c, a, t
+complete   cat <c, a, t>   3 of 3, not held
+invoke c, after:
+moment   active       refractory   why
+8        c
+9        +a, +t       c            a: cat <c, a, t> 1 of 3; t: cat <c, a, t> 1 of 3
+10                    a, t
+11       +c, +a, +t                c: cat <c, a, t> 2 of 3; a: cat <c, a, t> 2 of 3; t: cat <c, a, t> 2 of 3
+12                    c, a, t
+complete   cat <c, a, t>   3 of 3, not held
+
+== part 2: words fitted to assemblies, refractory on; invoke "the cat sat on the mat the dog sat on the cat a dog ran to the mat"
+   words, each <w1 -> w2 -> w3> with its own members: the, cat, sat, on, mat, dog, ran, to
+
+-- A  holds, same threshold
+  1 t  0  
+  2 h  1  to
+  3 e  2  the to
+  4    2  the to
+  5 c  2  the to
+  6 a  2  the to
+  7 t  3  the cat to
+  8    3  the cat to
+  9 s  3  the cat to
+ 10 a  3  the cat to
+ 11 t  3  the cat to
+ 12    3  the cat to
+ 13 o  3  the cat to
+ 14 n  4  the cat on to
+ 15    4  the cat on to
+ 16 t  4  the cat on to
+ 17 h  4  the cat on to
+ 18 e  4  the cat on to
+ 19    4  the cat on to
+ 20 m  4  the cat on to
+ 21 a  4  the cat on to
+ 22 t  4  the cat on to
+ 23    4  the cat on to
+ 24 t  4  the cat on to
+ 25 h  4  the cat on to
+ 26 e  4  the cat on to
+ 27    4  the cat on to
+ 28 d  4  the cat on to
+ 29 o  4  the cat on to
+ 30 g  4  the cat on to
+ 31    4  the cat on to
+ 32 s  4  the cat on to
+ 33 a  4  the cat on to
+ 34 t  4  the cat on to
+ 35    4  the cat on to
+ 36 o  4  the cat on to
+ 37 n  4  the cat on to
+ 38    4  the cat on to
+ 39 t  4  the cat on to
+ 40 h  4  the cat on to
+ 41 e  4  the cat on to
+ 42    4  the cat on to
+ 43 c  4  the cat on to
+ 44 a  4  the cat on to
+ 45 t  4  the cat on to
+ 46    4  the cat on to
+ 47 a  4  the cat on to
+ 48    4  the cat on to
+ 49 d  4  the cat on to
+ 50 o  4  the cat on to
+ 51 g  4  the cat on to
+ 52    4  the cat on to
+ 53 r  4  the cat on to
+ 54 a  4  the cat on to
+ 55 n  4  the cat on to
+ 56    4  the cat on to
+ 57 t  4  the cat on to
+ 58 o  4  the cat on to
+ 59    4  the cat on to
+ 60 t  4  the cat on to
+ 61 h  4  the cat on to
+ 62 e  4  the cat on to
+ 63    4  the cat on to
+ 64 m  4  the cat on to
+ 65 a  4  the cat on to
+ 66 t  4  the cat on to
+ 67 ·  4  the cat on to
+most complete at once: 4; ended held, repeating every 10 moments
+
+-- B  drops out, same threshold
+  1 t  0  
+  2 h  1  to
+  3 e  1  the
+  4    1  the
+  5 c  0  
+  6 a  1  the
+  7 t  2  the cat
+  8    1  cat
+  9 s  1  the
+ 10 a  2  the cat
+ 11 t  1  cat
+ 12    1  the
+ 13 o  2  the cat
+ 14 n  2  cat on
+ 15    1  the
+ 16 t  2  the cat
+ 17 h  2  cat to
+ 18 e  1  the
+ 19    2  the cat
+ 20 m  1  cat
+ 21 a  1  the
+ 22 t  1  the
+ 23    1  to
+ 24 t  1  the
+ 25 h  1  the
+ 26 e  0  
+ 27    1  the
+ 28 d  1  the
+ 29 o  0  
+ 30 g  2  the dog
+ 31    2  the dog
+ 32 s  0  
+ 33 a  2  the dog
+ 34 t  3  the sat dog
+ 35    1  sat
+ 36 o  2  the dog
+ 37 n  4  the sat on dog
+ 38    1  sat
+ 39 t  2  the dog
+ 40 h  3  the sat dog
+ 41 e  1  sat
+ 42    2  the dog
+ 43 c  3  the sat dog
+ 44 a  1  sat
+ 45 t  2  the dog
+ 46    3  the sat dog
+ 47 a  1  sat
+ 48    2  the dog
+ 49 d  3  the sat dog
+ 50 o  1  sat
+ 51 g  2  the dog
+ 52    3  the sat dog
+ 53 r  1  sat
+ 54 a  2  the dog
+ 55 n  2  the dog
+ 56    1  ran
+ 57 t  3  the dog ran
+ 58 o  2  the dog
+ 59    1  ran
+ 60 t  3  the dog ran
+ 61 h  2  the dog
+ 62 e  1  ran
+ 63    3  the dog ran
+ 64 m  2  the dog
+ 65 a  1  ran
+ 66 t  3  the dog ran
+ 67 ·  2  the dog
+ 68 ·  1  ran
+ 69 ·  3  the dog ran
+ 70 ·  2  the dog
+ 71 ·  1  ran
+ 72 ·  3  the dog ran
+most complete at once: 4; ended held, repeating every 6 moments
+
+-- C  drops out, one fewer after completing
+  1 t  0  
+  2 h  1  to
+  3 e  1  the
+  4    2  the to
+  5 c  1  to
+  6 a  1  the
+  7 t  3  the cat to
+  8    2  cat to
+  9 s  1  the
+ 10 a  3  the cat to
+ 11 t  2  cat to
+ 12    1  the
+ 13 o  3  the cat to
+ 14 n  3  cat on to
+ 15    1  the
+ 16 t  4  the cat on to
+ 17 h  3  cat on to
+ 18 e  1  the
+ 19    4  the cat on to
+ 20 m  3  cat on to
+ 21 a  1  the
+ 22 t  3  the on to
+ 23    2  on to
+ 24 t  1  the
+ 25 h  3  the on to
+ 26 e  2  on to
+ 27    1  the
+ 28 d  3  the on to
+ 29 o  2  on to
+ 30 g  1  the
+ 31    2  the dog
+ 32 s  1  dog
+ 33 a  1  the
+ 34 t  3  the sat dog
+ 35    2  sat dog
+ 36 o  1  the
+ 37 n  4  the sat on dog
+ 38    2  sat dog
+ 39 t  1  the
+ 40 h  3  the sat dog
+ 41 e  2  sat dog
+ 42    1  the
+ 43 c  3  the sat dog
+ 44 a  2  sat dog
+ 45 t  1  the
+ 46    3  the sat dog
+ 47 a  2  sat dog
+ 48    1  the
+ 49 d  3  the sat dog
+ 50 o  2  sat dog
+ 51 g  1  the
+ 52    3  the sat dog
+ 53 r  2  sat dog
+ 54 a  1  the
+ 55 n  2  the dog
+ 56    2  dog ran
+ 57 t  2  the ran
+ 58 o  2  the dog
+ 59    2  dog ran
+ 60 t  2  the ran
+ 61 h  2  the dog
+ 62 e  2  dog ran
+ 63    2  the ran
+ 64 m  2  the dog
+ 65 a  2  dog ran
+ 66 t  2  the ran
+ 67 ·  2  the dog
+ 68 ·  2  dog ran
+ 69 ·  2  the ran
+ 70 ·  2  the dog
+ 71 ·  2  dog ran
+ 72 ·  2  the ran
+most complete at once: 4; ended held, repeating every 6 moments
+
+######## an assembly's gate counts as a prediction (rule 3 as written)
+
+== reading "the cat the dog the bird the mouse", 6 passes, an assembly formed over each run of predicted letters
+
+-- A  holds, same threshold
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      23 of 34   2        1        1.0                          0
+2       7 of 34   4        1        5.8                          66
+3       7 of 34   6        1        6.2                          102
+4       7 of 34   4        1        8.0                          171
+5       5 of 34   3        2        10.9                         274
+6       4 of 34   3        1        11.9                         310
+last pass: the_cat_the_dog_the_Bird_the_MoUSe
+
+-- B  drops out, same threshold
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      23 of 34   2        1        1.0                          0
+2       7 of 34   4        1        5.5                          57
+3       5 of 34   4        1        3.4                          42
+4       8 of 34   4        2        3.9                          98
+5      12 of 34   7        3        0.1                          0
+6      10 of 34   0        9        0.0                          0
+last pass: The_Cat_The_DoG_The_Bird_tHe_Mouse
+
+-- C  drops out, one fewer after completing
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      23 of 34   2        1        1.0                          0
+2       7 of 34   4        1        5.5                          57
+3       9 of 34   4        2        4.8                          68
+4      10 of 34   6        1        5.2                          120
+5       8 of 34   3        2        5.1                          142
+6       9 of 34   5        1        7.6                          179
+last pass: ThE_Cat_the_DOG_the_Bird_the_MOuse
+
+-- D  holds, one fewer after completing
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      23 of 34   2        1        1.0                          0
+2       7 of 34   4        1        5.8                          66
+3       7 of 34   6        1        6.2                          102
+4       7 of 34   4        1        8.0                          171
+5       5 of 34   3        2        10.9                         274
+6       4 of 34   3        1        11.9                         310
+last pass: the_cat_the_dog_the_Bird_the_MoUSe
+
+== reading "the cat sat on the mat the dog sat on the cat a dog ran to the mat", 6 passes, an assembly formed over each run of predicted letters
+
+-- A  holds, same threshold
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      38 of 66   8        3        0.7                          0
+2      23 of 66   13       1        7.8                          260
+3      13 of 66   11       1        6.7                          314
+4      16 of 66   10       2        5.3                          270
+5      14 of 66   10       1        6.2                          353
+6       9 of 66   9        1        7.1                          429
+last pass: the_Cat_Sat_on_the_mat_the_DoG_Sat_on_the_Cat_a_DoG_Ran_to_the_mat
+
+-- B  drops out, same threshold
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      38 of 66   8        3        0.7                          0
+2      26 of 66   7        8        1.3                          30
+3      27 of 66   5        12       0.7                          2
+4      31 of 66   2        16       0.6                          10
+5      36 of 66   2        16       0.5                          7
+6      36 of 66   1        17       0.0                          0
+last pass: THe_Cat_Sat_ON_THe_Mat_THe_DoG_Sat_ON_THe_Cat_A_DoG_Ran_TO_THe_MaT
+
+-- C  drops out, one fewer after completing
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      38 of 66   8        3        0.7                          0
+2      36 of 66   12       4        3.4                          91
+3      41 of 66   10       3        2.7                          75
+4      40 of 66   10       6        1.1                          38
+5      42 of 66   7        6        2.6                          73
+6      47 of 66   3        8        3.2                          118
+last pass: The_CAT_SAT_ON_The_MAT_THe_DOG_SAT_ON_The_CAT_A_DOG_RAN_tO_THe_MAT
+
+-- D  holds, one fewer after completing
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      38 of 66   8        3        0.7                          0
+2      23 of 66   13       1        7.8                          260
+3      13 of 66   11       1        6.7                          314
+4      16 of 66   10       2        5.3                          270
+5      14 of 66   10       1        6.2                          353
+6       9 of 66   9        1        7.1                          429
+last pass: the_Cat_Sat_on_the_mat_the_DoG_Sat_on_the_Cat_a_DoG_Ran_to_the_mat
+
+######## only bonds predict, as in C103
+
+== reading "the cat the dog the bird the mouse", 6 passes, an assembly formed over each run of predicted letters
+
+-- A  holds, same threshold
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      23 of 34   2        1        1.0                          0
+2       7 of 34   4        1        5.8                          66
+3      10 of 34   3        4        7.3                          102
+4      11 of 34   1        3        8.1                          170
+5      11 of 34   0        4        8.1                          204
+6      11 of 34   0        4        8.1                          204
+last pass: The_CAT_the_DOG_the_bird_the_MOuse
+
+-- B  drops out, same threshold
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      23 of 34   2        1        1.0                          0
+2       7 of 34   4        1        5.5                          57
+3       9 of 34   4        2        7.7                          98
+4      15 of 34   2        6        7.7                          118
+5       9 of 34   0        6        9.1                          158
+6      11 of 34   1        6        10.0                         162
+last pass: The_CAt_the_DOg_the_bird_the_MOUse
+
+-- C  drops out, one fewer after completing
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      23 of 34   2        1        1.0                          0
+2       7 of 34   4        1        5.5                          57
+3       9 of 34   4        2        7.7                          98
+4      15 of 34   2        6        7.7                          118
+5       9 of 34   0        6        9.1                          158
+6       9 of 34   2        3        10.2                         167
+last pass: The_CAt_the_DOG_the_bird_the_MOuse
+
+-- D  holds, one fewer after completing
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      23 of 34   2        1        1.0                          0
+2       7 of 34   4        1        5.8                          66
+3      10 of 34   3        4        7.3                          102
+4      11 of 34   1        3        8.1                          170
+5      11 of 34   0        4        8.1                          204
+6      11 of 34   0        4        8.1                          204
+last pass: The_CAT_the_DOG_the_bird_the_MOuse
+
+== reading "the cat sat on the mat the dog sat on the cat a dog ran to the mat", 6 passes, an assembly formed over each run of predicted letters
+
+-- A  holds, same threshold
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      38 of 66   8        3        0.7                          0
+2      40 of 66   5        3        7.0                          260
+3      43 of 66   5        5        6.4                          396
+4      58 of 66   0        3        6.0                          528
+5      66 of 66   0        0        6.0                          528
+6      66 of 66   0        0        6.0                          528
+last pass: THE_CAT_SAT_ON_THE_MAT_THE_DOG_SAT_ON_THE_CAT_A_DOG_RAN_TO_THE_MAT
+
+-- B  drops out, same threshold
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      38 of 66   8        3        0.7                          0
+2      36 of 66   6        3        4.9                          144
+3      37 of 66   6        8        1.1                          24
+4      36 of 66   4        15       0.0                          0
+5      37 of 66   1        17       0.0                          0
+6      36 of 66   2        17       0.0                          0
+last pass: THe_Cat_Sat_ON_THe_Mat_THe_DoG_Sat_ON_THe_Cat_A_DoG_RaN_TO_THe_Mat
+
+-- C  drops out, one fewer after completing
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      38 of 66   8        3        0.7                          0
+2      38 of 66   8        4        5.6                          155
+3      48 of 66   8        9        5.2                          221
+4      34 of 66   10       10       3.0                          134
+5      38 of 66   3        13       3.3                          112
+6      41 of 66   3        11       3.8                          138
+last pass: The_CAT_SAT_ON_The_MAT_The_DOG_Sat_ON_The_CAT_A_DOG_Ran_TO_THe_MAT
+
+-- D  holds, one fewer after completing
+pass   burst      formed   reused   on, not input (per letter)   completions
+1      38 of 66   8        3        0.7                          0
+2      40 of 66   5        3        7.0                          260
+3      43 of 66   5        5        6.4                          396
+4      58 of 66   0        3        6.0                          528
+5      66 of 66   0        0        6.0                          528
+6      66 of 66   0        0        6.0                          528
+last pass: THE_CAT_SAT_ON_THE_MAT_THE_DOG_SAT_ON_THE_CAT_A_DOG_RAN_TO_THE_MAT
+
