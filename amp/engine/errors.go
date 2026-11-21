@@ -122,3 +122,12 @@ type RepeatedNameError struct {
 func (e RepeatedNameError) Error() string {
 	return fmt.Sprintf("%s appears twice in one declaration", e.Name)
 }
+
+// NegativeBudgetError: a budget below 0 was asked for. 0 means no budget.
+type NegativeBudgetError struct {
+	Budget int
+}
+
+func (e NegativeBudgetError) Error() string {
+	return fmt.Sprintf("a budget can't be %d: give a number of members, or 0 for none", e.Budget)
+}

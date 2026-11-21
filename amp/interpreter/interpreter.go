@@ -57,6 +57,36 @@ func (e NotInspectableError) Error() string {
 	return fmt.Sprintf("%s is a %s, not a population or an assembly", e.Name, e.Is)
 }
 
+// assembliesPerPage is how many assemblies one page lists: enough to scan, few enough to fit a terminal window.
+const assembliesPerPage = 20
+
+// NoSuchPageError: a page was asked for past the last.
+type NoSuchPageError struct {
+	Page, Pages int
+}
+
+func (e NoSuchPageError) Error() string {
+	if e.Pages == 1 {
+		return fmt.Sprintf("page %d doesn't exist: there is 1 page of assemblies", e.Page)
+	}
+	return fmt.Sprintf("page %d doesn't exist: there are %d pages of assemblies", e.Page, e.Pages)
+}
+
+// listAssemblies lists one page of every assembly, in the order formed.
+func (in *Interpreter) listAssemblies(page int) (string, error) {
+	all := in.memory.AllAssemblies()
+	if len(all) == 0 {
+		return "no assemblies yet", nil
+	}
+	pages := (len(all) + assembliesPerPage - 1) / assembliesPerPage
+	if page > pages {
+		return "", NoSuchPageError{Page: page, Pages: pages}
+	}
+	first := (page - 1) * assembliesPerPage
+	shown := all[first:min(first+assembliesPerPage, len(all))]
+	return printAssemblyList(shown, first, len(all), page, pages), nil
+}
+
 // set switches a setting, if asked, and says what it is now.
 func (in *Interpreter) set(command settingCommand) string {
 	on := command.change == turnOn
@@ -132,6 +162,20 @@ func (in *Interpreter) Run(line string) (string, error) {
 		return in.inspect(st.name)
 	case settingCommand:
 		return in.set(st), nil
+	case listAssembliesCommand:
+		return in.listAssemblies(st.page)
+	case budgetCommand:
+		switch st.change {
+		case turnOn:
+			if err := in.memory.SetBudget(st.members); err != nil {
+				return "", err
+			}
+		case turnOff:
+			if err := in.memory.SetBudget(0); err != nil {
+				return "", err
+			}
+		}
+		return printBudget(in.memory.Budget()), nil
 	case saveCommand:
 		path := st.path
 		if path == "" {

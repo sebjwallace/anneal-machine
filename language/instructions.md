@@ -98,6 +98,9 @@ amp> why cat
 cat: 3 of 3: c, t, then a, all from input
 ```
 
+**Listing assemblies.** `assemblies` lists every assembly, in the order formed, 20 to a page; `assemblies 2` shows the
+second page. A REPL command for reading, not an instruction.
+
 **Seeing the phases.** `phases on` makes invoke also print every member's phase, moment by moment: one row per
 moment, one column per population, ● active, ◐ refractory, · ready. `phases off` stops it; `phases` shows the setting.
 A REPL display setting, not an instruction, and not saved.

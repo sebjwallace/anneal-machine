@@ -18,6 +18,7 @@ amp> invoke {c, t}
 moment   active   refractory   why
 1        c, t
 2                 c, t         tie: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3 | cot <c, o, t> 2 of 3, c -> o -> t 2 of 3, held
+3                              tie: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3 | cot <c, o, t> 2 of 3, c -> o -> t 2 of 3, held
 incomplete   cat <c, a, t>   at most 2 of 3
 incomplete   cot <c, o, t>   at most 2 of 3
 amp> open words.json
@@ -38,14 +39,15 @@ amp> invoke {c, t}
 moment   active   refractory   why
 1        c, t
 2                 c, t         tie: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3 | cot <c, o, t> 2 of 3, c -> o -> t 2 of 3, held
+3                              tie: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3 | cot <c, o, t> 2 of 3, c -> o -> t 2 of 3, held
 incomplete   cat <c, a, t>   at most 2 of 3
 incomplete   cot <c, o, t>   at most 2 of 3
 amp> invoke a
 moment   active   refractory   why
-3        a                     tie: cat <c, a, t> 2 of 3, c -> a -> t 2 of 3 | cot <c, o, t> 2 of 3, c -> o -> t 2 of 3, held
-4        +t       a            t: cat a -> t
-5        +c, +a   t            c: cat <c, a, t> 2 of 3; a: cat <c, a, t> 2 of 3
-6        +t       c, a         t: cat <c, a, t> 3 of 3, cat a -> t
+4        a
+5        +t       a            t: cat a -> t
+6        +c, +a   t            c: cat <c, a, t> 2 of 3; a: cat <c, a, t> 2 of 3
+7        +t       c, a         t: cat <c, a, t> 3 of 3, cat a -> t
 complete   cat <c, a, t>   3 of 3
 held       repeating every 2 moments
 amp> open words.json
@@ -54,5 +56,6 @@ amp> invoke c
 moment   active   refractory   why
 1        c
 2                 c            tie: cat c -> a -> t 1 of 3 | cot c -> o -> t 1 of 3, held
+3                              tie: cat c -> a -> t 1 of 3 | cot c -> o -> t 1 of 3, held
 incomplete   cat <c, a, t>   at most 1 of 3
 incomplete   cot <c, o, t>   at most 1 of 3

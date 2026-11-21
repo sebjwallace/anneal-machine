@@ -22,6 +22,7 @@ type snapshotFile struct {
 	Version     int                  `json:"version"`
 	Moment      int                  `json:"moment"`               // the last moment that passed; absent in early files, meaning 0
 	Refractory  bool                 `json:"refractory,omitempty"` // whether members have a refractory period; absent means off
+	Budget      int                  `json:"budget,omitempty"`     // members per population recall may have active; absent means none
 	Populations []snapshotPopulation `json:"populations"`
 	Communities []snapshotCommunity  `json:"communities"`
 	Assemblies  []snapshotAssembly   `json:"assemblies"` // absent in early files, meaning none
@@ -66,6 +67,7 @@ func (m *Memory) WriteSnapshot(w io.Writer) error {
 		Version:     snapshotVersion,
 		Moment:      m.moment,
 		Refractory:  m.refractoryPeriod,
+		Budget:      m.budget,
 		Populations: []snapshotPopulation{},
 		Communities: []snapshotCommunity{},
 		Assemblies:  []snapshotAssembly{},
@@ -104,6 +106,9 @@ func ReadSnapshot(r io.Reader) (*Memory, error) {
 	}
 	m := NewAfter(snapshot.Moment)
 	m.refractoryPeriod = snapshot.Refractory
+	if err := m.SetBudget(snapshot.Budget); err != nil {
+		return nil, err
+	}
 	for _, p := range snapshot.Populations {
 		population, err := m.DeclarePopulation(p.Name, p.Size)
 		if err != nil {

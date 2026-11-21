@@ -212,3 +212,19 @@ func TestASnapshotKeepsTheRefractorySetting(t *testing.T) {
 		}
 	}
 }
+
+func TestASnapshotKeepsTheBudget(t *testing.T) {
+	original := engine.New()
+	if err := original.SetBudget(4); err != nil {
+		t.Fatal(err)
+	}
+
+	var saved bytes.Buffer
+	if err := original.WriteSnapshot(&saved); err != nil {
+		t.Fatal(err)
+	}
+
+	if opened := mustValue(engine.ReadSnapshot(&saved)); opened.Budget() != 4 {
+		t.Errorf("saved with a budget of 4, opened with %d", opened.Budget())
+	}
+}

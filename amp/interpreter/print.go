@@ -2,6 +2,7 @@ package interpreter
 
 import (
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -80,9 +81,11 @@ func writeWhy(moment engine.Moment) string {
 		if len(group.gates) == 0 {
 			continue
 		}
-		gates := make([]string, len(group.gates))
-		for i, gate := range group.gates {
-			gates[i] = writeGate(gate)
+		var gates []string // each gate written once: one state can open several members of a population
+		for _, gate := range group.gates {
+			if written := writeGate(gate); !slices.Contains(gates, written) {
+				gates = append(gates, written)
+			}
 		}
 		reason := strings.Join(gates, ", ")
 		if group.arrived {
@@ -92,6 +95,9 @@ func writeWhy(moment engine.Moment) string {
 	}
 	for _, competition := range moment.Competitions {
 		reasons = append(reasons, writeCompetition(competition))
+	}
+	for _, cut := range moment.BudgetCuts {
+		reasons = append(reasons, fmt.Sprintf("budget %s: %d of %d recalled", cut.Population.Name(), cut.Recalled, cut.Wanted))
 	}
 	if len(moment.Unexplained) > 0 {
 		hot := make([]string, len(moment.Unexplained))
@@ -197,7 +203,11 @@ func writeSummary(invocation engine.Invocation) string {
 		case held && c.Last > 0:
 			rows = append(rows, []string{"incomplete", label, fmt.Sprintf("%d of %d", c.Last, size)})
 		default:
-			rows = append(rows, []string{"incomplete", label, fmt.Sprintf("at most %d of %d", c.Most, size)})
+			if c.Most == size {
+				rows = append(rows, []string{"complete", label, fmt.Sprintf("%d of %d, not held", size, size)})
+			} else {
+				rows = append(rows, []string{"incomplete", label, fmt.Sprintf("at most %d of %d", c.Most, size)})
+			}
 		}
 	}
 	if held {
@@ -215,6 +225,35 @@ func RepeatingEvery(moments int) string {
 		return "repeating every moment"
 	}
 	return fmt.Sprintf("repeating every %d moments", moments)
+}
+
+// #1 cat state <c, a, t>
+// #2 cat transition c -> a -> t
+// page 1 of 3, assemblies 1 to 20 of 45; next: assemblies 2
+//
+// first is how many assemblies come before this page, total how many there are.
+func printAssemblyList(shown []engine.Assembly, first, total, page, pages int) string {
+	lines := make([]string, 0, len(shown)+1)
+	for _, a := range shown {
+		lines = append(lines, fmt.Sprintf("#%d %s %s %s", a.ID(), a.Name(), a.Shape(), writeShape(a.Shape(), namesOf(a.Populations()))))
+	}
+	switch {
+	case pages == 1:
+		lines = append(lines, countOf(total, "assembly", "assemblies"))
+	case page < pages:
+		lines = append(lines, fmt.Sprintf("page %d of %d, assemblies %d to %d of %d; next: assemblies %d", page, pages, first+1, first+len(shown), total, page+1))
+	default:
+		lines = append(lines, fmt.Sprintf("page %d of %d, assemblies %d to %d of %d", page, pages, first+1, first+len(shown), total))
+	}
+	return strings.Join(lines, "\n")
+}
+
+// budget: 4, or budget: off
+func printBudget(members int) string {
+	if members == 0 {
+		return "budget: off"
+	}
+	return fmt.Sprintf("budget: %d", members)
 }
 
 // refractory: on

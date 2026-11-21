@@ -37,9 +37,16 @@ starts with nothing on. The file name is the rest of the line.
 **Transcripts.** Each file in `interpreter/testdata` is a REPL session on a fresh engine. A line starting `amp> ` is
 typed, and the lines after it are what must print back, exactly. A new walkthrough step starts as a transcript.
 
+**Listing assemblies.** `assemblies` lists every assembly in the order formed, 20 to a page (`#1 cat state <c, a, t>`);
+`assemblies 2` shows the second page, and the last line says which page this is and what to type for the next.
+`inspect cat` shows one assembly's members.
+
 **Seeing the phases.** `phases on` makes each invoke also print a table with one row per moment and one column per
 population, one mark per member (● active, ◐ refractory, · ready), so reading down shows how activity moves. Off by
 default, and not saved: it is about what amp prints, not what the memory holds.
+
+**The budget** is a setting too, off by default: `budget 4` lets recall have at most 4 members of each population
+active at once (input from the world isn't limited); `budget off` removes it; `budget` shows it. Saved in snapshots.
 
 **The refractory period** is a setting, off by default: `refractory on` / `refractory off` (`refractory` shows it).
 It is saved in snapshots, and AMT shows it in its title line. The transcripts written for walkthrough step 4 onwards

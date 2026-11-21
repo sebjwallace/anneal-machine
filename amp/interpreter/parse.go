@@ -41,6 +41,17 @@ type inspectCommand struct {
 	name engine.Name
 }
 
+// budget 4, budget off, or budget alone to show it
+type budgetCommand struct {
+	change  settingChange
+	members int // for turnOn: how many members of each population recall may have active
+}
+
+// assemblies, or assemblies 2 for the second page
+type listAssembliesCommand struct {
+	page int // from 1
+}
+
 // refractory on, phases off, or a setting's name alone to show it
 type settingCommand struct {
 	setting setting
@@ -79,6 +90,8 @@ func (assemblyDeclaration) isStatement()   {}
 func (invokeCommand) isStatement()         {}
 func (inspectCommand) isStatement()        {}
 func (settingCommand) isStatement()        {}
+func (listAssembliesCommand) isStatement() {}
+func (budgetCommand) isStatement()         {}
 func (saveCommand) isStatement()           {}
 func (openCommand) isStatement()           {}
 
@@ -166,6 +179,10 @@ func (p *parser) statement() (statement, error) {
 		return p.invoke()
 	case first.is("inspect") && !declaring:
 		return p.inspect()
+	case first.is("budget") && !declaring:
+		return p.budget()
+	case first.is("assemblies") && !declaring:
+		return p.listAssemblies()
 	case first.is(string(refractorySetting)) && !declaring:
 		return p.setting(refractorySetting)
 	case first.is(string(phasesSetting)) && !declaring:
@@ -354,6 +371,39 @@ func (p *parser) inspect() (statement, error) {
 		return nil, syntaxError("expected a population name after \"inspect\"%s", got(name))
 	}
 	return inspectCommand{name: engine.Name(name.text)}, nil
+}
+
+func (p *parser) budget() (statement, error) {
+	if p.next == len(p.tokens) {
+		return budgetCommand{change: showSetting}, nil
+	}
+	switch value := p.take(); {
+	case value.is("off"):
+		return budgetCommand{change: turnOff}, nil
+	case value.kind == numberToken:
+		n, err := strconv.Atoi(value.text)
+		if err != nil || n < 1 {
+			return nil, syntaxError("a budget needs at least 1 member; budget off removes it")
+		}
+		return budgetCommand{change: turnOn, members: n}, nil
+	default:
+		return nil, syntaxError("expected a number or \"off\" after \"budget\"%s", got(value))
+	}
+}
+
+func (p *parser) listAssemblies() (statement, error) {
+	if p.next == len(p.tokens) {
+		return listAssembliesCommand{page: 1}, nil
+	}
+	page := p.take()
+	if page.kind != numberToken {
+		return nil, syntaxError("expected a page number after \"assemblies\"%s", got(page))
+	}
+	n, err := strconv.Atoi(page.text)
+	if err != nil || n < 1 {
+		return nil, syntaxError("pages are numbered from 1")
+	}
+	return listAssembliesCommand{page: n}, nil
 }
 
 func (p *parser) setting(s setting) (statement, error) {

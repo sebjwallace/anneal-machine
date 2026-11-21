@@ -62,7 +62,9 @@ type Memory struct {
 	// refractoryPeriod is whether members have a refractory period at all: a setting, off by default (the owner's
 	// choice, for testing). Off, a member active one moment is ready the next, and nothing is ever refractory.
 	refractoryPeriod bool
-	unexpected       map[Name]bool // populations that arrived this moment with nothing expecting them
+	// budget is how many members of each population recall may have active at once; 0 is off, the default.
+	budget     int
+	unexpected map[Name]bool // populations that arrived this moment with nothing expecting them
 }
 
 func New() *Memory {
@@ -93,6 +95,18 @@ func (m *Memory) SetRefractoryPeriod(on bool) {
 	if !on {
 		m.refractory = nil
 	}
+}
+
+// Budget is how many members of each population recall may have active at once, or 0 when there is no budget.
+func (m *Memory) Budget() int { return m.budget }
+
+// SetBudget sets the budget for every population, or turns it off with 0.
+func (m *Memory) SetBudget(members int) error {
+	if members < 0 {
+		return NegativeBudgetError{Budget: members}
+	}
+	m.budget = members
+	return nil
 }
 
 // Moment is the last moment that passed, 0 before any. Moments count on across invocations, so every moment in the

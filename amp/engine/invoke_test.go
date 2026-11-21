@@ -104,3 +104,53 @@ func TestTheRefractoryPeriodIsOffByDefault(t *testing.T) {
 			len(second.Active), len(second.Refractory))
 	}
 }
+
+func TestInputIsNotLimitedByTheBudget(t *testing.T) {
+	memory := engine.New()
+	mustDeclarePopulation(t, memory, "c", 8)
+	if err := memory.SetBudget(2); err != nil {
+		t.Fatal(err)
+	}
+
+	invocation := mustValue(memory.Invoke([][]engine.Name{{"c"}}))
+
+	if active := len(invocation.Moments[0].Active); active != 8 {
+		t.Errorf("an unexpected c should turn on all 8 members whatever the budget, got %d", active)
+	}
+}
+
+func TestRecallNeverTakesAPopulationPastItsBudget(t *testing.T) {
+	memory := engine.New()
+	mustValue(memory.DeclarePopulations([]engine.Name{"a", "b"}, 8))
+	mustValue(memory.DeclareAssemblies("long", []engine.Outline{{Shape: engine.StateShape, Populations: []engine.Name{"a", "b", "a", "b", "a", "b"}}}))
+	if err := memory.SetBudget(2); err != nil {
+		t.Fatal(err)
+	}
+
+	invocation := mustValue(memory.Invoke([][]engine.Name{{"a", "b"}}))
+
+	cut := false
+	for _, moment := range invocation.Moments {
+		cut = cut || len(moment.BudgetCuts) > 0
+		recalled := map[engine.Name]int{}
+		for _, activation := range moment.Active {
+			if !activation.Arrived {
+				recalled[activation.Member.Population().Name()]++
+			}
+		}
+		for name, n := range recalled {
+			if n > 2 {
+				t.Errorf("moment %d: recall brought on %d members of %s, over the budget of 2", moment.Number, n, name)
+			}
+		}
+	}
+	if !cut {
+		t.Error("the state wants three members of a and of b, so the budget should have cut recall")
+	}
+}
+
+func TestABudgetBelowZeroIsRefused(t *testing.T) {
+	if err := engine.New().SetBudget(-1); err == nil {
+		t.Error("want a refusal for a budget of -1")
+	}
+}

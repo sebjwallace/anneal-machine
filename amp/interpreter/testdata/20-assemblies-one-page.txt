@@ -1,0 +1,17 @@
+amp> c, a, t = population 8
+c: 8 members, c{1..8}, all individuals
+a: 8 members, a{1..8}, all individuals
+t: 8 members, t{1..8}, all individuals
+amp> cat = <c -> a -> t>
+cat: state <c, a, t> and transition c -> a -> t
+amp> assemblies
+#1 cat state <c, a, t>
+#2 cat transition c -> a -> t
+2 assemblies
+amp> ca = <c, a>
+ca: state <c, a>
+amp> assemblies 1
+#1 cat state <c, a, t>
+#2 cat transition c -> a -> t
+#3 ca state <c, a>
+3 assemblies

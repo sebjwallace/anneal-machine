@@ -72,6 +72,12 @@ result can't always be predicted, but every step has an exact cause.
 
 *Open:* how many members a population allows: a fixed number for every population, or a share of its size.
 
+**For now, a setting (the owner's, for testing), off by default:** `budget 4` lets recall have at most 4 members of
+each population active at once; `budget off` removes it; it is saved in snapshots. **Input from the world isn't
+limited** (the owner's choice): members arriving take places first, and recall gets what is left. Recalled members
+with the most ways in (gates opened for them) come on first; if the places run out in the middle of a tie, the tie is
+held and none of the tied come on. Invoke reports it: `budget a: 1 of 2 recalled`.
+
 Held ties matter for learning. While two structures are still contesting, both are kept, and nothing is broken.
 
 ## Fitting

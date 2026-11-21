@@ -24,6 +24,7 @@ These are known to be needed and have been set aside until there is more to go o
   extended: a longer chain forms beside it, or forming waits until the sequence settles.
 - **Addressing a single gate** (proposed `barks{2}#4`, see [instructions](instructions.md)).
 - **A population's budget.** How many members a population allows at once: a fixed number, or a share of its size.
+  (For now a setting, off by default, one number for every population; input isn't limited by it; [invoke](invoke.md).)
 - **Timing.** (Settled: moments count on across invokes, one clock for the memory, walkthrough step 2; every bond
   acts one moment later, and members have three phases, active, refractory and ready, walkthrough step 4.)
 - **States bigger than three and their chains.** A chain brings one member a moment and gates count two moments, so a

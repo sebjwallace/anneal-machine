@@ -10,6 +10,9 @@ import "slices"
 //
 // The refractory period is a setting, off by default (SetRefractoryPeriod). Off, members are only active or ready.
 //
+// The budget is a setting too, off by default (SetBudget): how many members of each population recall may have
+// active at once. Input from the world isn't limited by it.
+//
 // Every bond acts one moment later: what is active or refractory now decides what comes on next moment. Gates count
 // active and refractory members alike.
 //
@@ -58,6 +61,13 @@ type Competition struct {
 	Rivals []Rival // in the order formed
 }
 
+// BudgetCut is a population whose recall was limited by its budget in one moment.
+type BudgetCut struct {
+	Population Population
+	Recalled   int // how many of its members recall brought on
+	Wanted     int // how many recall would have brought on with no budget
+}
+
 // Moment is one moment of an invocation.
 type Moment struct {
 	Number     int // counted across the memory's whole life, not from the start of the invocation
@@ -69,6 +79,8 @@ type Moment struct {
 	Unexplained []Population
 	// Competitions are the competitions decided for this moment. A held tie is another count of heat: unsettled.
 	Competitions []Competition
+	// BudgetCuts are the populations whose recall the budget limited this moment.
+	BudgetCuts []BudgetCut
 }
 
 // Completion is how much of one state was counted during an invocation.
@@ -89,7 +101,8 @@ type Invocation struct {
 
 // Invoke reads input one moment at a time: each element of sequence is the populations that arrive together, a
 // moment after the element before. After the input it carries on until the next moment would be quiet (nothing
-// active or refractory) or would repeat an earlier moment of this invocation. It only reads, never changing what
+// active or refractory) or would repeat an earlier moment of this invocation. A quiet moment in which a tie was held
+// or the budget cut recall is still reported, as the last. It only reads, never changing what
 // the memory knows. If any name isn't a population the whole invocation is refused and nothing happens.
 func (m *Memory) Invoke(sequence [][]Name) (Invocation, error) {
 	inputs, err := m.inputs(sequence)
@@ -110,6 +123,11 @@ func (m *Memory) Invoke(sequence [][]Name) (Invocation, error) {
 	for {
 		next := m.upcoming(nil)
 		if next.active.isEmpty() && m.refractoryAfter().isEmpty() {
+			// The next moment is quiet. If something was decided in it, a tie held or recall cut by the budget, it
+			// is reported, since that is why it is quiet; then the invocation ends.
+			if len(next.competitions) > 0 || len(next.budgetCuts) > 0 {
+				record(m.step(next))
+			}
 			break
 		}
 		if first, repeated := seen[phasesKey(next.active, m.refractoryAfter())]; repeated {
@@ -150,6 +168,7 @@ type nextMoment struct {
 	unexpected   map[Name]bool // input populations nothing expected, so all their ready members came on
 	gates        map[int][]Gate
 	competitions []Competition
+	budgetCuts   []BudgetCut
 }
 
 // upcoming works out the next moment from the phases now and what arrives, without changing anything. Input a gate
@@ -177,10 +196,50 @@ func (m *Memory) upcoming(input []Population) nextMoment {
 			next.arrived.add(member)
 		}
 	}
-	for member := range gates {
+	if m.budget > 0 {
+		next.budgetCuts = m.keepWithinBudget(next.gates, next.arrived)
+	}
+	for member := range next.gates {
 		next.active.add(member)
 	}
 	return next
+}
+
+// keepWithinBudget stops recall taking any population past its budget, removing from gates the members that don't
+// fit. Members arriving from the world always come on and take places first (the owner's rule: input isn't limited,
+// recall is). Recalled members with the most ways in (gates opened for them) come on first; if the places run out in
+// the middle of a tie, the tie is held and none of the tied come on, nor any with fewer ways in.
+func (m *Memory) keepWithinBudget(gates map[int][]Gate, arrived memberSet) []BudgetCut {
+	var cuts []BudgetCut
+	for _, p := range m.populationOrder {
+		var recalled []int
+		for member := p.first; member < p.first+p.size; member++ {
+			if _, opened := gates[member]; opened && !arrived.has(member) {
+				recalled = append(recalled, member)
+			}
+		}
+		places := max(m.budget-arrived.countIn(p), 0)
+		if len(recalled) <= places {
+			continue
+		}
+		slices.SortStableFunc(recalled, func(x, y int) int { return len(gates[y]) - len(gates[x]) })
+		kept := 0
+		for kept < len(recalled) {
+			tie := kept
+			for tie < len(recalled) && len(gates[recalled[tie]]) == len(gates[recalled[kept]]) {
+				tie++
+			}
+			if tie > places {
+				break
+			}
+			kept = tie
+		}
+		for _, member := range recalled[kept:] {
+			delete(gates, member)
+		}
+		cuts = append(cuts, BudgetCut{Population: p, Recalled: kept, Wanted: len(recalled)})
+	}
+	return cuts
 }
 
 // opening is an assembly whose gates would open this moment, before competition decides.
@@ -335,7 +394,7 @@ func (m *Memory) step(next nextMoment) Moment {
 	m.refractory = m.refractoryAfter()
 	m.active = next.active
 	m.unexpected = next.unexpected
-	moment := Moment{Number: m.moment, Input: next.input, Competitions: next.competitions}
+	moment := Moment{Number: m.moment, Input: next.input, Competitions: next.competitions, BudgetCuts: next.budgetCuts}
 	for _, p := range m.populationOrder {
 		for member := p.first; member < p.first+p.size; member++ {
 			if m.active.has(member) {
