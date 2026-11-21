@@ -1,0 +1,51 @@
+amp> invoke "the cat the dog"
+moment     arrived       member    bond formed   primes next
+1       t  burst (9 on)  t{9} new
+2       h  burst (9 on)  h{7} new  t{9} -> h{7}
+3       e  burst (9 on)  e{6} new  h{7} -> e{6}
+4       _  burst (9 on)  _{2} new  e{6} -> _{2}
+5       c  burst (9 on)  c{5} new  _{2} -> c{5}
+6       a  burst (9 on)  a{7} new  c{5} -> a{7}
+7       t  burst (9 on)  t{3} new  a{7} -> t{3}  h{7}
+8       _  burst (9 on)  _{3} new  t{3} -> _{3}  c{5}
+9       t  burst (9 on)  t{8} new  _{3} -> t{8}  _{3}, h{7}
+10      h  primed        h{7}      t{8} -> h{7}  e{6}
+11      e  primed        e{6}                    _{2}
+12      _  primed        _{2}                    c{5}
+13      d  burst (9 on)  d{3} new  _{2} -> d{3}
+14      o  burst (9 on)  o{8} new  d{3} -> o{8}
+15      g  burst (9 on)  g{2} new  o{8} -> g{2}
+THE_CAT_The_DOG · 12 of 15 burst · 12 bonds formed
+lull: the_ 3
+amp> invoke "the cat sat on the mat"
+moment     arrived       member    bond formed   primes next
+16      t  burst (9 on)  t{7} new                _{3}, h{7}
+17      h  primed        h{7}      t{7} -> h{7}  e{6}
+18      e  primed        e{6}                    _{2}
+19      _  primed        _{2}                    c{5}, d{3}
+20      c  primed        c{5}                    a{7}
+21      a  primed        a{7}                    t{3}
+22      t  primed        t{3}                    _{3}
+23      _  primed        _{3}                    t{8}
+24      s  burst (9 on)  s{2} new  _{3} -> s{2}
+25      a  burst (9 on)  a{1} new  s{2} -> a{1}  t{3}
+26      t  primed        t{3}      a{1} -> t{3}  _{3}
+27      _  primed        _{3}                    s{2}, t{8}
+28      o  burst (9 on)  o{1} new  _{3} -> o{1}  g{2}
+29      n  burst (9 on)  n{5} new  o{1} -> n{5}
+30      _  burst (9 on)  _{9} new  n{5} -> _{9}  c{5}, d{3}, o{1}, s{2}, t{8}
+31      t  primed        t{8}      _{9} -> t{8}  h{7}
+32      h  primed        h{7}                    e{6}
+33      e  primed        e{6}                    _{2}
+34      _  primed        _{2}                    c{5}, d{3}
+35      m  burst (9 on)  m{1} new  _{2} -> m{1}
+36      a  burst (9 on)  a{3} new  m{1} -> a{3}  t{3}
+37      t  primed        t{3}      a{3} -> t{3}  _{3}
+The_cat_SAt_ON_the_MAt · 8 of 22 burst · 11 bonds formed
+lulls: the_cat_ 7 · at_ 2 · _the_ 4 · at 1
+amp> invoke "zq"
+moment     arrived       member    bond formed   primes next
+38      z  burst (9 on)  z{2} new
+39      q  burst (9 on)  q{5} new  z{2} -> q{5}
+ZQ · 2 of 2 burst · 1 bond formed
+no lulls

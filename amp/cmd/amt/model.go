@@ -257,5 +257,11 @@ func (m model) scene() scene {
 	if moment.Bond != nil {
 		s.bonds[*moment.Bond] = formed
 	}
+	if l, in := m.reading.LullAt(m.shown); in {
+		s.lull = map[engine.Member]bool{}
+		for _, member := range l.Members(*m.reading) {
+			s.lull[member] = true
+		}
+	}
 	return s
 }

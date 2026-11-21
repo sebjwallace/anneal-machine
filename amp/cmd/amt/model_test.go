@@ -104,3 +104,28 @@ func TestReloadsWhenAmpSaves(t *testing.T) {
 		t.Errorf("after reloading, %d bonds, want 2", len(m.memory.Bonds()))
 	}
 }
+
+// The lull the moment shown is in is underlined on the graph and bracketed under the text; one that has ended says so.
+func TestLullsShow(t *testing.T) {
+	m := typeIn(fresh(t), "abcd")
+	m = typeIn(m, "xbcy")
+	m = press(m, spaceKey, tea.KeyPressMsg{Code: tea.KeyEnd}) // y, which burst after the lull b c
+	got := screen(m)
+	if !strings.Contains(got, "ends the lull of 1 before it") || !strings.Contains(got, "lulls: bc 1") {
+		t.Errorf("y should end the lull b c:\n%s", got)
+	}
+	m = press(m, tea.KeyPressMsg{Code: tea.KeyLeft}) // c
+	if s := m.scene(); len(s.lull) != 2 {
+		t.Errorf("at c, the lull so far is b and c: %v", s.lull)
+	}
+	if testing.Verbose() {
+		m = typeIn(m, "the cat sat on the mat the dog sat on the log")
+		m = typeIn(m, "the dog sat on the mat")
+		m = press(m, spaceKey, tea.KeyPressMsg{Code: tea.KeyHome})
+		for range 13 {
+			m = press(m, tea.KeyPressMsg{Code: tea.KeyRight})
+		}
+		m.width = 140
+		fmt.Println(screen(m))
+	}
+}

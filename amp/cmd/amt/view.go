@@ -30,7 +30,7 @@ func (m model) View() tea.View {
 	}
 	sections = append(sections, strings.Join(graph, "\n"))
 	if m.reading != nil {
-		sections = append(sections, m.textView()+"\n"+m.momentView())
+		sections = append(sections, m.textView()+"\n"+m.momentView()+"\n"+m.lullsSoFar())
 	}
 	sections = append(sections, legend())
 	if m.problem != "" {
@@ -77,7 +77,65 @@ func (m model) textView() string {
 		}
 		b.WriteString(style.Render(c))
 	}
+	if marks := m.lullMarks(); marks != "" {
+		b.WriteString("\n" + marks)
+	}
 	return b.String()
+}
+
+// lullMarks draws a bracket under each lull the moment shown has reached, as far as it has gone, with the lull it is
+// in highlighted.
+func (m model) lullMarks() string {
+	cells := make([]string, m.shown+1)
+	for i := range cells {
+		cells[i] = " "
+	}
+	found := false
+	for _, l := range m.reading.Lulls() {
+		if l.Start+1 > m.shown {
+			break
+		}
+		found = true
+		end := min(l.End, m.shown)
+		style := hintStyle
+		if m.shown <= l.End {
+			style = markStyles[arrived]
+		}
+		for i := l.Start; i <= end; i++ {
+			r := "─"
+			switch i {
+			case l.Start:
+				r = "└"
+			case end:
+				r = "┘"
+			}
+			cells[i] = style.Render(r)
+		}
+	}
+	if !found {
+		return ""
+	}
+	return strings.TrimRight(strings.Join(cells, ""), " ")
+}
+
+// lullsSoFar lists the lulls the moment shown has reached, each with how many predictions it got right so far.
+func (m model) lullsSoFar() string {
+	var parts []string
+	for _, l := range m.reading.Lulls() {
+		if l.Start+1 > m.shown {
+			break
+		}
+		l.End = min(l.End, m.shown)
+		var chars strings.Builder
+		for _, moment := range m.reading.Moments[l.Start : l.End+1] {
+			chars.WriteString(string(moment.Population))
+		}
+		parts = append(parts, fmt.Sprintf("%s %d", chars.String(), l.Length()))
+	}
+	if len(parts) == 0 {
+		return hintStyle.Render("no lulls yet")
+	}
+	return "lulls: " + strings.Join(parts, " · ")
 }
 
 func (m model) momentView() string {
@@ -94,6 +152,13 @@ func (m model) momentView() string {
 	}
 	if moment.Bond != nil {
 		parts = append(parts, fmt.Sprintf("bond %s → %s formed", label(moment.Bond.From), label(moment.Bond.To)))
+	}
+	if l, in := m.reading.LullAt(m.shown); in {
+		parts = append(parts, fmt.Sprintf("in a lull of %d so far", l.Length()))
+	} else if m.shown > 0 && !m.reading.Moments[m.shown-1].Burst {
+		if before, was := m.reading.LullAt(m.shown - 1); was {
+			parts = append(parts, fmt.Sprintf("ends the lull of %d before it", before.Length()))
+		}
 	}
 	if len(moment.Predicts) > 0 {
 		parts = append(parts, "primes "+labels(moment.Predicts)+" for the next moment")
@@ -118,6 +183,7 @@ func legend() string {
 		markStyles[picked].Render("picked") + " from the individuals",
 		markStyles[primed].Render("primed for the next moment") + " (sequence memory)",
 		markStyles[formed].Render("bond formed"),
+		lipgloss.NewStyle().Underline(true).Render("in the lull so far"),
 		markStyles[stateMark].Render("primed by state memory") + hintStyle.Render(" (not built yet)"),
 	}
 	return strings.Join(keys, " · ")

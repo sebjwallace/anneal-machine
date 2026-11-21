@@ -35,6 +35,7 @@ var markStyles = map[mark]lipgloss.Style{
 // scene is what the moment shown has reached, and how each part of it is coloured.
 type scene struct {
 	members map[engine.Member]mark // only the members drawn
+	lull    map[engine.Member]bool // the members of the lull the moment shown is in, as far as it has gone: underlined
 	bonds   map[engine.Bond]mark   // only the bonds drawn
 }
 
@@ -58,8 +59,9 @@ var boxes = map[int]rune{
 }
 
 type cell struct {
-	r    rune
-	mark mark
+	r     rune
+	mark  mark
+	under bool
 }
 
 // draw lays out the scene as lines of text, cutting it to width from column offset. It always draws the rows the
@@ -98,7 +100,7 @@ func draw(l layout, s scene, offset, width int) []string {
 		}
 		end := r.cells[len(r.cells)-1]
 		if a, ok := arrows[end]; !ok || bm > a.mark {
-			arrows[end] = cell{r.arrow, bm}
+			arrows[end] = cell{r: r.arrow, mark: bm}
 		}
 	}
 	for c, u := range cells {
@@ -106,7 +108,7 @@ func draw(l layout, s scene, offset, width int) []string {
 		if l.crossings[c] && u.straight != 0 {
 			bits = left | right // the horizontal line is drawn over the vertical one it crosses
 		}
-		canvas[c.y][c.x] = cell{boxes[bits], u.mark}
+		canvas[c.y][c.x] = cell{r: boxes[bits], mark: u.mark}
 	}
 	for c, a := range arrows {
 		canvas[c.y][c.x] = a
@@ -115,7 +117,7 @@ func draw(l layout, s scene, offset, width int) []string {
 		p := l.nodes[m]
 		for i, r := range []rune(label(m)) {
 			if p.x+i < l.width {
-				canvas[p.y][p.x+i] = cell{r, mm}
+				canvas[p.y][p.x+i] = cell{r, mm, s.lull[m]}
 			}
 		}
 	}
@@ -128,17 +130,17 @@ func draw(l layout, s scene, offset, width int) []string {
 			continue
 		}
 		var b strings.Builder
-		run, runMark := []rune{}, plain
+		run, runMark, runUnder := []rune{}, plain, false
 		flush := func() {
 			if len(run) > 0 {
-				b.WriteString(markStyles[runMark].Render(string(run)))
+				b.WriteString(markStyles[runMark].Underline(runUnder).Render(string(run)))
 				run = run[:0]
 			}
 		}
 		for _, c := range row[offset:end] {
-			if c.mark != runMark {
+			if c.mark != runMark || c.under != runUnder {
 				flush()
-				runMark = c.mark
+				runMark, runUnder = c.mark, c.under
 			}
 			run = append(run, c.r)
 		}

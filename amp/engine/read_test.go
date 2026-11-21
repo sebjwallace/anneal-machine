@@ -141,3 +141,28 @@ func equalBonds(a, b []Bond) bool {
 	}
 	return true
 }
+
+func TestLulls(t *testing.T) {
+	m := New()
+	mustRead(t, m, "abcd")
+	second := mustRead(t, m, "xbcy")
+	lulls := second.Lulls()
+	if len(lulls) != 1 || lulls[0] != (Lull{Start: 1, End: 2}) || lulls[0].Length() != 1 {
+		t.Fatalf("XBcY should have one lull, b c, of 1: %v", lulls)
+	}
+	again := mustRead(t, New(), "the cat the dog")
+	var lengths []int
+	for _, l := range again.Lulls() {
+		lengths = append(lengths, l.Length())
+	}
+	// THE_CAT_The_DOG: the second "the " follows on from its burst t
+	if len(lengths) != 1 || lengths[0] != 3 {
+		t.Errorf("lulls of %v, want one of 3 (t h e _)", lengths)
+	}
+	if _, in := second.LullAt(1); in {
+		t.Error("b, which burst, isn't yet seen to start a lull")
+	}
+	if l, in := second.LullAt(2); !in || l.Length() != 1 {
+		t.Errorf("c is in a lull of 1: %v %v", l, in)
+	}
+}
