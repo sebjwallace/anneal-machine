@@ -1,7 +1,7 @@
 // Package engine holds the memory and performs the operations on it.
 //
-// This is the fresh start (branch l1a-reading): populations, and reading into them, which forms bonds. Sequence
-// memory only, one community's worth; no assemblies yet.
+// This is the fresh start (branch l1a-reading): populations, and reading into them (L1A, sequence memory), which
+// forms bonds; and casting each motif into an assembly in L1B (state memory), with no activity there yet.
 package engine
 
 import (
@@ -52,12 +52,23 @@ type Memory struct {
 	bonds []Bond              // every bond, in the order formed
 	out   map[Member][]Member // the members each member bonds to, in the order formed
 
+	// L1B: its populations (one for each character, as cast needs them), its members that belong to an assembly,
+	// and the assemblies, in the order cast, each found by its characters.
+	l1b        map[Name]Population
+	l1bOrder   []Population
+	l1bUsed    map[Name]map[int]bool
+	assemblies []Assembly
+	byMotif    map[string]int
+
 	moment int    // the last moment that passed: one clock for the memory's whole life, 0 before any
 	seed   uint64 // with the moment, decides each random pick, so the same reads give the same memory
 }
 
 func New() *Memory {
-	return &Memory{populations: map[Name]Population{}, used: map[Name]map[int]bool{}, out: map[Member][]Member{}, seed: 1}
+	return &Memory{
+		populations: map[Name]Population{}, used: map[Name]map[int]bool{}, out: map[Member][]Member{}, seed: 1,
+		l1b: map[Name]Population{}, l1bUsed: map[Name]map[int]bool{}, byMotif: map[string]int{},
+	}
 }
 
 // Moment is the last moment that passed, 0 before any.
@@ -159,5 +170,6 @@ func (m *Memory) clone() *Memory {
 	for from, to := range m.out {
 		c.out[from] = slices.Clone(to)
 	}
+	cloneAssemblyState(m, c)
 	return c
 }

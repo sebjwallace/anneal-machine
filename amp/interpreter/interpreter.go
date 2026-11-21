@@ -1,7 +1,7 @@
 // Package interpreter reads a line of AMP, carries it out on the engine and prints the result back.
 //
-// The fresh start knows: declaring populations, reading text (invoke "..."), listing bonds, inspecting a population,
-// the seed, and saving and opening snapshots.
+// The fresh start knows: declaring populations, reading text (invoke "..."), which also casts motifs into L1B,
+// listing bonds and assemblies, inspecting a population or an assembly, the seed, and saving and opening snapshots.
 package interpreter
 
 import (
@@ -30,6 +30,7 @@ var (
 	populationsPattern = regexp.MustCompile(`^(` + namePattern + `(?:\s*,\s*` + namePattern + `)*)\s*=\s*(?:population|pop)\s+(-?\d+)$`)
 	invokePattern      = regexp.MustCompile(`^(?:invoke|inv)\s+"(.*)"$`)
 	inspectPattern     = regexp.MustCompile(`^(?:inspect|insp)\s+(` + namePattern + `)$`)
+	assemblyPattern    = regexp.MustCompile(`^(?:inspect|insp)\s+#(\d+)$`)
 )
 
 // Run carries out one line and returns what to print.
@@ -49,6 +50,11 @@ func (in *Interpreter) Run(line string) (string, error) {
 		return in.inspect(engine.Name(inspectPattern.FindStringSubmatch(line)[1]))
 	case line == "bonds":
 		return in.bonds(), nil
+	case line == "assemblies":
+		return in.assemblies(), nil
+	case assemblyPattern.MatchString(line):
+		id, _ := strconv.Atoi(assemblyPattern.FindStringSubmatch(line)[1])
+		return in.inspectAssembly(id)
 	case line == "seed":
 		return fmt.Sprintf("seed %d", in.memory.Seed()), nil
 	case strings.HasPrefix(line, "seed "):
@@ -97,7 +103,7 @@ func (in *Interpreter) read(text string) (string, error) {
 // PrintReading writes a read moment by moment, then a summary line (the text with each character that burst in
 // upper case, how many burst and how many bonds formed) and its motifs.
 func PrintReading(r engine.Reading) string {
-	rows := [][]string{{"moment", "", "arrived", "member", "bond formed", "primes next"}}
+	rows := [][]string{{"moment", "", "arrived", "member", "bond formed", "primes next", "L1B"}}
 	burst, formed := 0, 0
 	var marks strings.Builder
 	for _, moment := range r.Moments {
@@ -117,7 +123,7 @@ func PrintReading(r engine.Reading) string {
 			bond = moment.Bond.String()
 			formed++
 		}
-		rows = append(rows, []string{strconv.Itoa(moment.Number), string(moment.Population), arrived, member, bond, joinMembers(moment.Predicts)})
+		rows = append(rows, []string{strconv.Itoa(moment.Number), string(moment.Population), arrived, member, bond, joinMembers(moment.Predicts), printL1B(moment.L1B)})
 		mark := string(moment.Population)
 		if moment.Burst {
 			mark = strings.ToUpper(mark)
@@ -125,7 +131,73 @@ func PrintReading(r engine.Reading) string {
 		marks.WriteString(mark)
 	}
 	summary := fmt.Sprintf("%s · %d of %d burst · %d %s formed", marks.String(), burst, len(r.Moments), formed, plural(formed, "bond", "bonds"))
-	return table(rows) + "\n" + summary + "\n" + PrintMotifs(r)
+	lines := []string{table(rows), summary, PrintMotifs(r)}
+	for _, moment := range r.Moments {
+		if moment.Cast != nil {
+			lines = append(lines, PrintCasting(r, *moment.Cast))
+		}
+	}
+	return strings.Join(lines, "\n")
+}
+
+// PrintCasting writes what casting a motif did: "cast #1 bc" for a new assembly, "#1 bc again" for one already cast,
+// followed by the projections up from L1A that it added, grouped by the L1B member they go to. L1A and L1B members
+// are written alike, so the line says which way the projections go.
+func PrintCasting(r engine.Reading, c engine.Casting) string {
+	var name strings.Builder
+	for _, moment := range r.Moments[c.Motif.Start : c.Motif.End+1] {
+		name.WriteString(string(moment.Population))
+	}
+	head := fmt.Sprintf("#%d %s again", c.Assembly, name.String())
+	if c.New {
+		head = fmt.Sprintf("cast #%d %s", c.Assembly, name.String())
+	}
+	if len(c.Projections) == 0 {
+		return head + " · nothing new"
+	}
+	return head + " · up, L1A -> L1B: " + PrintProjections(c.Projections)
+}
+
+// PrintProjections writes projections up from L1A grouped by the L1B member they go to, as in b{4} b{7} -> b{3}.
+func PrintProjections(projections []engine.Projection) string {
+	var order []engine.Member
+	from := map[engine.Member][]engine.Member{}
+	for _, p := range projections {
+		if _, seen := from[p.To]; !seen {
+			order = append(order, p.To)
+		}
+		from[p.To] = append(from[p.To], p.From)
+	}
+	parts := make([]string, len(order))
+	for i, to := range order {
+		ups := make([]string, len(from[to]))
+		for j, f := range from[to] {
+			ups[j] = f.String()
+		}
+		parts[i] = strings.Join(ups, " ") + " -> " + to.String()
+	}
+	return strings.Join(parts, " · ")
+}
+
+// printL1B writes L1B's activity at a moment: how many members are on, and how many gates are open and complete.
+func printL1B(l engine.L1BMoment) string {
+	if len(l.Gates) == 0 {
+		return ""
+	}
+	open, complete := 0, 0
+	for _, g := range l.Gates {
+		if g.Open {
+			open++
+		}
+		if g.Complete() {
+			complete++
+		}
+	}
+	text := fmt.Sprintf("%d on · %d of %d open, %d complete", len(l.On), open, len(l.Gates), complete)
+	if l.Cleared {
+		text = "cleared · " + text
+	}
+	return text
 }
 
 // PrintMotifs lists a read's motifs, each as the characters it covers and how many predictions it got right.
@@ -155,6 +227,30 @@ func (in *Interpreter) bonds() string {
 		lines[i] = b.String()
 	}
 	return strings.Join(lines, "\n")
+}
+
+func (in *Interpreter) assemblies() string {
+	assemblies := in.memory.Assemblies()
+	if len(assemblies) == 0 {
+		return "no assemblies yet"
+	}
+	lines := make([]string, len(assemblies))
+	for i, a := range assemblies {
+		lines[i] = fmt.Sprintf("#%d %s  %s", a.ID, a.Name(), joinMembers(a.Members))
+	}
+	return strings.Join(lines, "\n")
+}
+
+func (in *Interpreter) inspectAssembly(id int) (string, error) {
+	a, ok := in.memory.Assembly(id)
+	if !ok {
+		return "", fmt.Errorf("there is no assembly #%d", id)
+	}
+	lines := []string{fmt.Sprintf("#%d %s: %d members in L1B, each bonded to every other both ways", a.ID, a.Name(), len(a.Members))}
+	for i, member := range a.Members {
+		lines = append(lines, fmt.Sprintf("  %s · up from L1A %s", member, joinMembers(a.From[i])))
+	}
+	return strings.Join(lines, "\n"), nil
 }
 
 func (in *Interpreter) inspect(name engine.Name) (string, error) {

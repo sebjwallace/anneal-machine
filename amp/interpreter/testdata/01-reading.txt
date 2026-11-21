@@ -1,5 +1,5 @@
 amp> invoke "abcd"
-moment     arrived       member    bond formed   primes next
+moment     arrived       member    bond formed   primes next  L1B
 1       a  burst (9 on)  a{9} new
 2       b  burst (9 on)  b{7} new  a{9} -> b{7}
 3       c  burst (9 on)  c{6} new  b{7} -> c{6}
@@ -7,13 +7,14 @@ moment     arrived       member    bond formed   primes next
 ABCD · 4 of 4 burst · 3 bonds formed
 no motifs
 amp> invoke "xbcy"
-moment     arrived       member    bond formed   primes next
+moment     arrived       member    bond formed   primes next  L1B
 5       x  burst (9 on)  x{5} new
 6       b  burst (9 on)  b{4} new  x{5} -> b{4}  c{6}
 7       c  primed        c{6}      b{4} -> c{6}  d{2}
 8       y  burst (9 on)  y{5} new  c{6} -> y{5}
 XBcY · 3 of 4 burst · 3 bonds formed
 motif: bc 1
+cast #1 bc · up, L1A -> L1B: b{4} b{7} -> b{7} · c{6} -> c{5}
 amp> inspect b
 b: population of 9 · 2 members · 7 individuals
   b{4} · from x{5} · to c{6}

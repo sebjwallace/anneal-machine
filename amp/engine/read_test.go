@@ -166,3 +166,127 @@ func TestMotifs(t *testing.T) {
 		t.Errorf("c is in a motif of 1: %v %v", l, in)
 	}
 }
+
+// Option 3 in its L1B form: the motif b c is cast once, and every L1A member that took part projects up to it.
+func TestCastingAMotif(t *testing.T) {
+	m := New()
+	mustRead(t, m, "abcd")
+	if len(m.Assemblies()) != 0 {
+		t.Fatal("a read with no motif casts nothing")
+	}
+	second := mustRead(t, m, "xbcy")
+	cast := second.Moments[3].Cast // y, the burst that ends the motif b c
+	if cast == nil || !cast.New || cast.Assembly != 1 {
+		t.Fatalf("y should cast #1: %+v", cast)
+	}
+	a, _ := m.Assembly(1)
+	if a.Name() != "bc" || len(a.Members) != 2 || len(a.Bonds()) != 2 {
+		t.Fatalf("#1 should be b c, two members bonded both ways: %+v", a)
+	}
+	b, c := second.Moments[1], second.Moments[2]
+	if len(a.From[0]) != 2 || a.From[0][0] != b.Member || len(a.From[1]) != 1 || a.From[1][0] != c.Member {
+		t.Errorf("the new b and the b that primed c should both project up to #1's b, and c to its c: %v", a.From)
+	}
+
+	third := mustRead(t, m, "zbcq")
+	again := third.Moments[3].Cast
+	if again == nil || again.New || again.Assembly != 1 || len(again.Projections) != 1 {
+		t.Fatalf("b c from a third way in should add one projection to #1: %+v", again)
+	}
+	if len(m.Assemblies()) != 1 {
+		t.Errorf("%d assemblies, want 1", len(m.Assemblies()))
+	}
+}
+
+// A read that ends in a motif casts it at its last moment; repeated letters get a member each.
+func TestCastingAtTheEndOfARead(t *testing.T) {
+	m := New()
+	mustRead(t, m, "the cat the")
+	r := mustRead(t, m, "the cat the")
+	last := r.Moments[len(r.Moments)-1].Cast
+	if last == nil {
+		t.Fatal("the read ends in a motif, so its last moment casts it")
+	}
+	a, _ := m.Assembly(last.Assembly)
+	if a.Name() != "the_cat_the" {
+		t.Errorf("cast %s, want the_cat_the (from the burst t, the rest primed)", a.Name())
+	}
+	seen := map[Member]bool{}
+	for _, member := range a.Members {
+		if seen[member] {
+			t.Errorf("%s is in #%d twice", member, a.ID)
+		}
+		seen[member] = true
+	}
+}
+
+func TestSnapshotKeepsAssemblies(t *testing.T) {
+	m := New()
+	mustRead(t, m, "abcd")
+	mustRead(t, m, "xbcy")
+	mustRead(t, m, "zbcq")
+	var file bytes.Buffer
+	if err := m.WriteSnapshot(&file); err != nil {
+		t.Fatal(err)
+	}
+	opened, err := ReadSnapshot(&file)
+	if err != nil {
+		t.Fatal(err)
+	}
+	a, _ := m.Assembly(1)
+	b, ok := opened.Assembly(1)
+	if !ok || b.Name() != a.Name() || len(b.From[0]) != 3 {
+		t.Errorf("opened #1: %+v, want %+v", b, a)
+	}
+}
+
+// With gates, casting reuses members, so the reads that used to run L1B out of individuals are all taken in.
+func TestReusingMembersInL1B(t *testing.T) {
+	m := New()
+	for _, text := range []string{
+		"the cat sat on the mat the dog sat on the log",
+		"the dog sat on the mat",
+		"the cat sat on the log",
+		"a dog and a cat sat on a mat",
+	} {
+		mustRead(t, m, text)
+	}
+	shared := map[Member]int{}
+	for _, a := range m.Assemblies() {
+		for _, member := range a.Members {
+			shared[member]++
+		}
+	}
+	reused := 0
+	for _, n := range shared {
+		if n > 1 {
+			reused++
+		}
+	}
+	if reused == 0 {
+		t.Error("some L1B member should belong to more than one assembly")
+	}
+}
+
+// "the_" is cast. Reading "thx": t bursts, which clears L1B, and its t comes on there, opening the gate (any one
+// member opens it). The moment after, the gate brings on e and _, which the input hasn't reached: the assembly is
+// complete at h.
+func TestL1BGates(t *testing.T) {
+	m := New()
+	mustRead(t, m, "the cat the dog")
+	a, _ := m.Assembly(1)
+	if a.Name() != "the_" {
+		t.Fatalf("#1 is %s, want the_", a.Name())
+	}
+	r := mustRead(t, m, "thx")
+	at, ah := r.Moments[0].L1B, r.Moments[1].L1B
+	if !at.Cleared || len(at.Up) != 1 || at.Up[0] != a.Members[0] || !at.Gates[0].Open || at.Gates[0].Complete() {
+		t.Errorf("at t: cleared, #1's t up, its gate open but not complete: %+v", at)
+	}
+	if ah.Cleared || !ah.Gates[0].Complete() || len(ah.Completed) != 2 {
+		t.Errorf("at h: #1 complete, e and _ brought on by its gate: %+v", ah)
+	}
+	if x := r.Moments[2].L1B; !x.Cleared || len(x.On) != 0 {
+		t.Errorf("at x: the burst clears L1B and nothing projects up from x: %+v", x)
+	}
+}

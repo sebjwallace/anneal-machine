@@ -40,6 +40,7 @@ type model struct {
 	membersBefore map[engine.Member]bool
 	bondsBefore   int
 	shown         int
+	selected      int // the assembly selected in L1B, by its ID, or 0 for none
 
 	playing bool
 	play    int
@@ -98,6 +99,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		if m.shown < m.lastMoment() {
 			m.shown++
 		}
+		m = m.follow()
 		if m.shown == m.lastMoment() {
 			m.playing = false
 			return m, nil
@@ -132,7 +134,13 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			case "end":
 				m.shown = m.lastMoment()
 			}
-			return m, nil
+			return m.follow(), nil
+		case key == "up" || key == "down":
+			step := 1
+			if key == "up" {
+				step = -1
+			}
+			return m.choose(step), nil
 		}
 	}
 	var cmd tea.Cmd
@@ -168,7 +176,7 @@ func (m model) read() model {
 	m.input.Reset()
 	m.playing = len(reading.Moments) > 1
 	m.play++
-	return m
+	return m.follow()
 }
 
 func (m model) frame() tea.Cmd {
@@ -203,7 +211,7 @@ func (m model) reloadIfChanged(now time.Time) model {
 		m.problem = err.Error()
 		return m
 	}
-	m.memory, m.fileTime, m.reading, m.shown, m.playing = memory, info.ModTime(), nil, 0, false
+	m.memory, m.fileTime, m.reading, m.shown, m.playing, m.selected = memory, info.ModTime(), nil, 0, false, 0
 	m.layout = lay(memory)
 	m.note, m.problem = "reloaded "+now.Format("15:04:05"), ""
 	return m
@@ -211,6 +219,19 @@ func (m model) reloadIfChanged(now time.Time) model {
 
 // scene is what the moment shown has reached, coloured: with no read yet, the whole memory, uncoloured.
 func (m model) scene() scene {
+	s := m.readingScene()
+	if a, ok := m.selectedAssembly(); ok {
+		s.projects = map[engine.Member]bool{}
+		for _, from := range a.From {
+			for _, member := range from {
+				s.projects[member] = true
+			}
+		}
+	}
+	return s
+}
+
+func (m model) readingScene() scene {
 	if m.reading == nil {
 		return whole(m.memory)
 	}
@@ -261,6 +282,18 @@ func (m model) scene() scene {
 		s.motif = map[engine.Member]bool{}
 		for _, member := range l.Members(*m.reading) {
 			s.motif[member] = true
+		}
+	}
+	if c := moment.Cast; c != nil {
+		// the motif cast this moment, with the members that took part in it
+		if s.motif == nil {
+			s.motif = map[engine.Member]bool{}
+		}
+		for _, member := range c.Motif.Members(*m.reading) {
+			s.motif[member] = true
+		}
+		for _, p := range c.Projections {
+			s.motif[p.From] = true
 		}
 	}
 	return s

@@ -1,0 +1,91 @@
+amp> invoke "abcd"
+moment     arrived       member    bond formed   primes next  L1B
+1       a  burst (9 on)  a{9} new
+2       b  burst (9 on)  b{7} new  a{9} -> b{7}
+3       c  burst (9 on)  c{6} new  b{7} -> c{6}
+4       d  burst (9 on)  d{2} new  c{6} -> d{2}
+ABCD · 4 of 4 burst · 3 bonds formed
+no motifs
+amp> invoke "xbcy"
+moment     arrived       member    bond formed   primes next  L1B
+5       x  burst (9 on)  x{5} new
+6       b  burst (9 on)  b{4} new  x{5} -> b{4}  c{6}
+7       c  primed        c{6}      b{4} -> c{6}  d{2}
+8       y  burst (9 on)  y{5} new  c{6} -> y{5}
+XBcY · 3 of 4 burst · 3 bonds formed
+motif: bc 1
+cast #1 bc · up, L1A -> L1B: b{4} b{7} -> b{7} · c{6} -> c{5}
+amp> invoke "zbcq"
+moment     arrived       member    bond formed   primes next  L1B
+9       z  burst (9 on)  z{9} new                             cleared · 0 on · 0 of 1 open, 0 complete
+10      b  burst (9 on)  b{5} new  z{9} -> b{5}  c{6}         cleared · 1 on · 1 of 1 open, 0 complete
+11      c  primed        c{6}      b{5} -> c{6}  d{2}, y{5}   2 on · 1 of 1 open, 1 complete
+12      q  burst (9 on)  q{3} new  c{6} -> q{3}               cleared · 0 on · 0 of 1 open, 0 complete
+ZBcQ · 3 of 4 burst · 3 bonds formed
+motif: bc 1
+#1 bc again · up, L1A -> L1B: b{5} -> b{7}
+amp> assemblies
+#1 bc  b{7}, c{5}
+amp> inspect #1
+#1 bc: 2 members in L1B, each bonded to every other both ways
+  b{7} · up from L1A b{4}, b{7}, b{5}
+  c{5} · up from L1A c{6}
+amp> inspect #2
+error: there is no assembly #2
+amp> invoke "the cat the dog"
+moment     arrived       member    bond formed   primes next       L1B
+13      t  burst (9 on)  t{3} new                                  cleared · 0 on · 0 of 1 open, 0 complete
+14      h  burst (9 on)  h{8} new  t{3} -> h{8}                    cleared · 0 on · 0 of 1 open, 0 complete
+15      e  burst (9 on)  e{2} new  h{8} -> e{2}                    cleared · 0 on · 0 of 1 open, 0 complete
+16      _  burst (9 on)  _{9} new  e{2} -> _{9}                    cleared · 0 on · 0 of 1 open, 0 complete
+17      c  burst (9 on)  c{3} new  _{9} -> c{3}  d{2}, q{3}, y{5}  cleared · 1 on · 1 of 1 open, 0 complete
+18      a  burst (9 on)  a{8} new  c{3} -> a{8}  b{7}              cleared · 0 on · 0 of 1 open, 0 complete
+19      t  burst (9 on)  t{4} new  a{8} -> t{4}  h{8}              cleared · 0 on · 0 of 1 open, 0 complete
+20      _  burst (9 on)  _{4} new  t{4} -> _{4}  c{3}              cleared · 0 on · 0 of 1 open, 0 complete
+21      t  burst (9 on)  t{6} new  _{4} -> t{6}  _{4}, h{8}        cleared · 0 on · 0 of 1 open, 0 complete
+22      h  primed        h{8}      t{6} -> h{8}  e{2}              0 on · 0 of 1 open, 0 complete
+23      e  primed        e{2}                    _{9}              0 on · 0 of 1 open, 0 complete
+24      _  primed        _{9}                    c{3}              0 on · 0 of 1 open, 0 complete
+25      d  burst (9 on)  d{1} new  _{9} -> d{1}                    cleared · 0 on · 0 of 1 open, 0 complete
+26      o  burst (9 on)  o{8} new  d{1} -> o{8}                    cleared · 0 on · 0 of 2 open, 0 complete
+27      g  burst (9 on)  g{1} new  o{8} -> g{1}                    cleared · 0 on · 0 of 2 open, 0 complete
+THE_CAT_The_DOG · 12 of 15 burst · 12 bonds formed
+motif: the_ 3
+cast #2 the_ · up, L1A -> L1B: t{6} t{3} -> t{4} · h{8} -> h{9} · e{2} -> e{3} · _{9} -> _{1}
+amp> invoke "the cat sat on the mat"
+moment     arrived       member    bond formed   primes next                   L1B
+28      t  burst (9 on)  t{9} new                _{4}, h{8}                    cleared · 1 on · 1 of 2 open, 0 complete
+29      h  primed        h{8}      t{9} -> h{8}  e{2}                          4 on · 1 of 2 open, 1 complete
+30      e  primed        e{2}                    _{9}                          4 on · 1 of 2 open, 1 complete
+31      _  primed        _{9}                    c{3}, d{1}                    4 on · 1 of 2 open, 1 complete
+32      c  primed        c{3}                    a{8}                          4 on · 1 of 2 open, 1 complete
+33      a  primed        a{8}                    t{4}                          4 on · 1 of 2 open, 1 complete
+34      t  primed        t{4}                    _{4}                          4 on · 1 of 2 open, 1 complete
+35      _  primed        _{4}                    t{6}                          4 on · 1 of 2 open, 1 complete
+36      s  burst (9 on)  s{3} new  _{4} -> s{3}                                cleared · 0 on · 0 of 2 open, 0 complete
+37      a  burst (9 on)  a{6} new  s{3} -> a{6}  b{7}, t{4}                    cleared · 1 on · 1 of 3 open, 0 complete
+38      t  primed        t{4}      a{6} -> t{4}  _{4}                          8 on · 2 of 3 open, 1 complete
+39      _  primed        _{4}                    s{3}, t{6}                    11 on · 2 of 3 open, 2 complete
+40      o  burst (9 on)  o{3} new  _{4} -> o{3}  g{1}                          cleared · 0 on · 0 of 3 open, 0 complete
+41      n  burst (9 on)  n{6} new  o{3} -> n{6}                                cleared · 0 on · 0 of 4 open, 0 complete
+42      _  burst (9 on)  _{1} new  n{6} -> _{1}  c{3}, d{1}, o{3}, s{3}, t{6}  cleared · 4 on · 3 of 4 open, 0 complete
+43      t  primed        t{6}      _{1} -> t{6}  h{8}                          13 on · 3 of 4 open, 3 complete
+44      h  primed        h{8}                    e{2}                          13 on · 3 of 4 open, 3 complete
+45      e  primed        e{2}                    _{9}                          13 on · 3 of 4 open, 3 complete
+46      _  primed        _{9}                    c{3}, d{1}                    13 on · 3 of 4 open, 3 complete
+47      m  burst (9 on)  m{9} new  _{9} -> m{9}                                cleared · 0 on · 0 of 4 open, 0 complete
+48      a  burst (9 on)  a{1} new  m{9} -> a{1}  b{7}, t{4}                    cleared · 2 on · 2 of 5 open, 0 complete
+49      t  primed        t{4}      a{1} -> t{4}  _{4}                          10 on · 4 of 5 open, 2 complete
+The_cat_SAt_ON_the_MAt · 8 of 22 burst · 11 bonds formed
+motifs: the_cat_ 7 · at_ 2 · _the_ 4 · at 1
+cast #3 the_cat_ · up, L1A -> L1B: t{9} t{3} t{6} -> t{3} · h{8} -> h{7} · e{2} -> e{3} · _{9} -> _{5} · c{3} -> c{6} · a{8} -> a{5} · t{4} -> t{8} · _{4} -> _{8}
+cast #4 at_ · up, L1A -> L1B: a{6} a{8} -> a{8} · t{4} -> t{8} · _{4} -> _{9}
+cast #5 _the_ · up, L1A -> L1B: _{1} _{4} -> _{3} · t{6} -> t{1} · h{8} -> h{7} · e{2} -> e{9} · _{9} -> _{2}
+cast #6 at · up, L1A -> L1B: a{1} a{6} a{8} -> a{3} · t{4} -> t{5}
+amp> assemblies
+#1 bc  b{7}, c{5}
+#2 the_  t{4}, h{9}, e{3}, _{1}
+#3 the_cat_  t{3}, h{7}, e{3}, _{5}, c{6}, a{5}, t{8}, _{8}
+#4 at_  a{8}, t{8}, _{9}
+#5 _the_  _{3}, t{1}, h{7}, e{9}, _{2}
+#6 at  a{3}, t{5}

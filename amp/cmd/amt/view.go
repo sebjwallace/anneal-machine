@@ -32,6 +32,12 @@ func (m model) View() tea.View {
 	if m.reading != nil {
 		sections = append(sections, m.textView()+"\n"+m.momentView()+"\n"+m.motifsSoFar())
 	}
+	if panel := m.l1bView(); panel != "" {
+		sections = append(sections, panel)
+	}
+	if list := m.assemblyList(); list != "" {
+		sections = append(sections, list)
+	}
 	sections = append(sections, legend())
 	if m.problem != "" {
 		sections = append(sections, problemStyle.Render("error: "+m.problem))
@@ -160,6 +166,18 @@ func (m model) momentView() string {
 			parts = append(parts, fmt.Sprintf("ends the motif of %d before it", before.Length()))
 		}
 	}
+	if c := moment.Cast; c != nil {
+		name := m.assemblyName(c.Assembly)
+		switch {
+		case c.New:
+			parts = append(parts, markStyles[formed].Render(fmt.Sprintf("cast #%d %s into L1B", c.Assembly, name)))
+		case len(c.Projections) > 0:
+			parts = append(parts, markStyles[formed].Render(fmt.Sprintf("#%d %s again: %d more %s up", c.Assembly, name,
+				len(c.Projections), plural(len(c.Projections), "projection", "projections"))))
+		default:
+			parts = append(parts, fmt.Sprintf("#%d %s again: nothing new", c.Assembly, name))
+		}
+	}
 	if len(moment.Predicts) > 0 {
 		parts = append(parts, "primes "+labels(moment.Predicts)+" for the next moment")
 	} else {
@@ -183,8 +201,21 @@ func legend() string {
 		markStyles[picked].Render("picked") + " from the individuals",
 		markStyles[primed].Render("primed for the next moment") + " (sequence memory)",
 		markStyles[formed].Render("bond formed"),
-		lipgloss.NewStyle().Underline(true).Render("in the motif so far"),
-		markStyles[stateMark].Render("primed by state memory") + hintStyle.Render(" (not built yet)"),
+		lipgloss.NewStyle().Underline(true).Render("the motif so far, or the one cast"),
+		markStyles[selectedMark].Render("◆ the assembly selected") + " (↑ ↓) and what projects up to it",
+		markStyles[stateMark].Render("brought on by a gate") + " (state memory completing)",
 	}
 	return strings.Join(keys, " · ")
+}
+
+func (m model) assemblyName(id int) string {
+	a, _ := m.memory.Assembly(id)
+	return a.Name()
+}
+
+func plural(n int, one, many string) string {
+	if n == 1 {
+		return one
+	}
+	return many
 }

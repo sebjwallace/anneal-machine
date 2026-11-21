@@ -23,6 +23,10 @@ type Moment struct {
 	Bond   *Bond // the bond formed this moment, from the member selected the moment before to Member, if any
 	// Predicts are the members this moment's active members bond to: what they prime for the next moment.
 	Predicts []Member
+	// Cast is what casting did, when a motif ended this moment: at the burst after it, or at the read's last moment.
+	Cast *Casting
+	// L1B is L1B's activity this moment (before anything cast this moment, which acts from the next).
+	L1B L1BMoment
 }
 
 // Reading is what a read did, moment by moment.
@@ -50,6 +54,8 @@ func PopulationFor(r rune) (Name, error) {
 //   - Otherwise the population bursts: every member is active, and an individual is picked at random as the member
 //     selected.
 //   - The member selected the moment before bonds to the member selected now, unless that bond already exists.
+//   - L1B's activity follows: see l1bStep.
+//   - When a motif ends (at the burst after it, or at the end of the read), it is cast into L1B: see cast.
 //
 // A letter not seen before is declared with ReadingSize members. The read is all or nothing: if a population has no
 // individual left when it bursts, nothing is changed.
@@ -75,6 +81,9 @@ func (m *Memory) read(text string) (Reading, error) {
 	reading := Reading{Text: text}
 	var previous *Member
 	var active []Member
+	lastBurst := 0
+	l1bOn := map[Member]bool{}
+	var l1bComing []Member
 	for _, name := range names {
 		if _, ok := m.populations[name]; !ok {
 			if _, err := m.DeclarePopulation(name, ReadingSize); err != nil {
@@ -103,6 +112,28 @@ func (m *Memory) read(text string) (Reading, error) {
 			moment.Bond = &bond
 		}
 		moment.Predicts = m.primedBy(moment.Active)
+		moment.L1B, l1bComing = m.l1bStep(l1bOn, moment.Burst, moment.Active, l1bComing)
+		i := len(reading.Moments)
+		last := i == len(names)-1
+		switch {
+		case moment.Burst && i > 0 && !reading.Moments[i-1].Burst:
+			// the burst ends the motif before it
+			casting, err := m.cast(reading.Moments, Motif{Start: lastBurst, End: i - 1}, pick)
+			if err != nil {
+				return Reading{}, err
+			}
+			moment.Cast = casting
+		case last && !moment.Burst:
+			// the read ends in a motif, which this moment ends
+			casting, err := m.cast(append(reading.Moments, moment), Motif{Start: lastBurst, End: i}, pick)
+			if err != nil {
+				return Reading{}, err
+			}
+			moment.Cast = casting
+		}
+		if moment.Burst {
+			lastBurst = i
+		}
 		reading.Moments = append(reading.Moments, moment)
 		selected := moment.Member
 		previous, active = &selected, moment.Active

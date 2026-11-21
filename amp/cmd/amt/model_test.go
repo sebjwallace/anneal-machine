@@ -129,3 +129,32 @@ func TestMotifsShow(t *testing.T) {
 		fmt.Println(screen(m))
 	}
 }
+
+// When y ends the motif b c, #1 is cast and selected: its members are marked in L1B's grids, and both b members of
+// L1A are marked as projecting up to it.
+func TestCastingShows(t *testing.T) {
+	m := typeIn(fresh(t), "abcd")
+	m = typeIn(m, "xbcy")
+	m = press(m, spaceKey, tea.KeyPressMsg{Code: tea.KeyLeft}) // c: nothing cast yet
+	if got := screen(m); strings.Contains(got, "#1 bc") {
+		t.Errorf("before y, #1 shouldn't show:\n%s", got)
+	}
+	m = press(m, tea.KeyPressMsg{Code: tea.KeyEnd}) // y
+	got := screen(m)
+	if !strings.Contains(got, "cast #1 bc into L1B") || !strings.Contains(got, "◆ #1 bc") || !strings.Contains(got, "1/9") {
+		t.Errorf("y should cast and select #1:\n%s", got)
+	}
+	b, c := m.reading.Moments[1], m.reading.Moments[2]
+	s := m.scene()
+	if len(s.projects) != 3 || !s.projects[b.Member] || !s.projects[c.Member] {
+		t.Errorf("the two b members and c should be marked as projecting up to #1: %v", s.projects)
+	}
+	if testing.Verbose() {
+		m = typeIn(m, "the cat sat on the mat the dog sat on the log")
+		m = press(m, spaceKey, tea.KeyPressMsg{Code: tea.KeyEnd})
+		m.width = 150
+		fmt.Println(screen(m))
+		m = press(m, tea.KeyPressMsg{Code: tea.KeyUp}, tea.KeyPressMsg{Code: tea.KeyUp})
+		fmt.Println(strings.Join(strings.Split(screen(m), "\n")[:14], "\n"))
+	}
+}

@@ -13,30 +13,36 @@ import (
 type mark int
 
 const (
-	plain     mark = iota
-	arrived        // the member selected, which arrived primed: sequence memory predicted it
-	burst          // a member of the population that burst (every member is on)
-	picked         // the individual picked when its population burst, a member from now on
-	primed         // primed by sequence memory for the next moment, and the bonds priming it
-	formed         // the bond formed this moment
-	stateMark      // primed by state memory: not built yet, kept for when it is
+	plain        mark = iota
+	arrived           // the member selected, which arrived primed: sequence memory predicted it
+	burst             // a member of the population that burst (every member is on)
+	picked            // the individual picked when its population burst, a member from now on
+	primed            // primed by sequence memory for the next moment, and the bonds priming it
+	formed            // the bond formed this moment
+	stateMark         // state memory's predictions: L1B members a gate brought on (and, once built, L1A primed from L1B)
+	selectedMark      // the assembly selected in L1B, and the L1A members that project up to it
+	fullMark          // an L1B population with no individual left
 )
 
 var markStyles = map[mark]lipgloss.Style{
-	plain:     lipgloss.NewStyle(),
-	arrived:   lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Green),
-	burst:     lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Red),
-	picked:    lipgloss.NewStyle().Bold(true).Reverse(true).Foreground(lipgloss.Red),
-	primed:    lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Cyan),
-	formed:    lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Yellow),
-	stateMark: lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Magenta),
+	plain:        lipgloss.NewStyle(),
+	arrived:      lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Green),
+	burst:        lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Red),
+	picked:       lipgloss.NewStyle().Bold(true).Reverse(true).Foreground(lipgloss.Red),
+	primed:       lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Cyan),
+	formed:       lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Yellow),
+	stateMark:    lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Magenta),
+	selectedMark: lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Blue),
+	fullMark:     lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Red),
 }
 
 // scene is what the moment shown has reached, and how each part of it is coloured.
 type scene struct {
 	members map[engine.Member]mark // only the members drawn
 	motif   map[engine.Member]bool // the members of the motif the moment shown is in, as far as it has gone: underlined
-	bonds   map[engine.Bond]mark   // only the bonds drawn
+	// projects are the L1A members that project up to the assembly selected in L1B: marked ◆ beside them
+	projects map[engine.Member]bool
+	bonds    map[engine.Bond]mark // only the bonds drawn
 }
 
 var subscripts = []rune("₀₁₂₃₄₅₆₇₈₉")
@@ -119,6 +125,9 @@ func draw(l layout, s scene, offset, width int) []string {
 			if p.x+i < l.width {
 				canvas[p.y][p.x+i] = cell{r, mm, s.motif[m]}
 			}
+		}
+		if s.projects[m] && p.x+nodeWidth < l.width {
+			canvas[p.y][p.x+nodeWidth] = cell{r: '◆', mark: selectedMark}
 		}
 	}
 
