@@ -6,6 +6,8 @@ Use these words, with these meanings, and no others.
 
 | Word | Meaning |
 |---|---|
+| **motif** (owner) | A run of correct predictions while reading: from a character whose population burst, through the characters after it that arrived primed, until the next burst. Its length is how many predictions it got right ("the " is a motif of 3). A motif can only happen on a repeat. (Branch l1a-reading; replaces the owner's placeholder "streak", and "lull" briefly, which speech-to-text heard as "lol".) |
+| **cast** (owner) | To form an assembly from a motif. Assemblies are cast, and later annealed. (Not the older sense in the learnt-logic notes, where a cell was cast as a prediction.) |
 | **heat** (owner) | Whatever can't be explained cheaply: a picture or part of one that doesn't fit what's known, or structure that doesn't pay its way. Learning is cooling. |
 | **energy** (owner) | The total cost of describing everything: structure plus flow, plus change when pictures come in sequence. The machine keeps a change only if energy falls. |
 | **structure** (to confirm) | What the machine keeps: stored pixels, plus every placement listed in memories and composites. |

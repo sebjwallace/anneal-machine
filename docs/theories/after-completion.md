@@ -1,5 +1,8 @@
 # After completion: dropping out and priming
 
+*Followed by [Sequence memory and state memory](sequence-and-state.md): the owner's answer, built on branch
+`l1a-reading`, and the question it leaves.*
+
 A theory note, written 21 November 2026 for the owner to take away and think about, and for an agent to pick up and
 talk it through with him. **Partly tested** (C103, C104); the proposal at the end is **untested**. It continues
 [the tilting landscape](the-tilting-landscape.md) §2 ("completion is the sink"), and connects to the priming
