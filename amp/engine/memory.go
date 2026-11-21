@@ -97,6 +97,13 @@ func (m *Memory) SetRefractoryPeriod(on bool) {
 	}
 }
 
+// Reset lets go of all activity: nothing is active or refractory afterwards. What the memory knows, its settings
+// and its clock are unchanged.
+func (m *Memory) Reset() {
+	m.active, m.refractory = nil, nil
+	clear(m.unexpected)
+}
+
 // Budget is how many members of each population recall may have active at once, or 0 when there is no budget.
 func (m *Memory) Budget() int { return m.budget }
 

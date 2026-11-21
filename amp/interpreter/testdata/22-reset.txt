@@ -1,0 +1,38 @@
+amp> refractory on
+refractory: on
+amp> c, a, t = population 8
+c: 8 members, c{1..8}, all individuals
+a: 8 members, a{1..8}, all individuals
+t: 8 members, t{1..8}, all individuals
+amp> cat = <c -> a -> t>
+cat: state <c, a, t> and transition c -> a -> t
+amp> invoke {c, t}
+moment   active   refractory   why
+1        c, t
+2        +a       c, t         a: cat <c, a, t> 2 of 3, cat c -> a
+3        +c, +t   a            c: cat <c, a, t> 3 of 3; t: cat <c, a, t> 3 of 3, cat a -> t
+4        +a       c, t         a: cat <c, a, t> 3 of 3, cat c -> a
+complete   cat <c, a, t>   3 of 3
+held       repeating every 2 moments
+amp> inspect a
+a: 8 members; active: a{1}; refractory: none
+amp> reset
+reset: nothing active or refractory
+amp> inspect a
+a: 8 members; active: none; refractory: none
+amp> inspect c
+c: 8 members; active: none; refractory: none
+amp> invoke c
+moment   active   refractory   why
+5        c
+6        +a       c            a: cat c -> a
+7        +c, +t   a            c: cat <c, a, t> 2 of 3; t: cat <c, a, t> 2 of 3, cat a -> t
+8        +a       c, t         a: cat <c, a, t> 3 of 3, cat c -> a
+complete   cat <c, a, t>   3 of 3
+held       repeating every 2 moments
+amp> refractory
+refractory: on
+amp> reset now
+error: unexpected now at the end of the line
+amp> reset = population 2
+reset: 2 members, reset{1..2}, all individuals

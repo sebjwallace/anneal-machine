@@ -164,6 +164,9 @@ func (in *Interpreter) Run(line string) (string, error) {
 		return in.set(st), nil
 	case listAssembliesCommand:
 		return in.listAssemblies(st.page)
+	case resetCommand:
+		in.memory.Reset()
+		return "reset: nothing active or refractory", nil
 	case budgetCommand:
 		switch st.change {
 		case turnOn:

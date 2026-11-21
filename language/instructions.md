@@ -98,6 +98,10 @@ amp> why cat
 cat: 3 of 3: c, t, then a, all from input
 ```
 
+**Starting afresh.** `reset` lets go of all activity, so nothing is active or refractory; what the memory knows, the
+settings and the clock are unchanged. A REPL command, not an instruction: it doesn't come from the dynamics, so it is
+for examining, not for running.
+
 **Listing assemblies.** `assemblies` lists every assembly, in the order formed, 20 to a page; `assemblies 2` shows the
 second page. A REPL command for reading, not an instruction.
 

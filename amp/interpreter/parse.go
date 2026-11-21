@@ -41,6 +41,9 @@ type inspectCommand struct {
 	name engine.Name
 }
 
+// reset: let go of all activity
+type resetCommand struct{}
+
 // budget 4, budget off, or budget alone to show it
 type budgetCommand struct {
 	change  settingChange
@@ -92,6 +95,7 @@ func (inspectCommand) isStatement()        {}
 func (settingCommand) isStatement()        {}
 func (listAssembliesCommand) isStatement() {}
 func (budgetCommand) isStatement()         {}
+func (resetCommand) isStatement()          {}
 func (saveCommand) isStatement()           {}
 func (openCommand) isStatement()           {}
 
@@ -179,6 +183,8 @@ func (p *parser) statement() (statement, error) {
 		return p.invoke()
 	case first.is("inspect") && !declaring:
 		return p.inspect()
+	case first.is("reset") && !declaring:
+		return resetCommand{}, nil
 	case first.is("budget") && !declaring:
 		return p.budget()
 	case first.is("assemblies") && !declaring:

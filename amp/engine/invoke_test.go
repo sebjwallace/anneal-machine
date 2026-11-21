@@ -154,3 +154,26 @@ func TestABudgetBelowZeroIsRefused(t *testing.T) {
 		t.Error("want a refusal for a budget of -1")
 	}
 }
+
+func TestResetLetsGoOfActivityAndNothingElse(t *testing.T) {
+	memory := engine.New()
+	memory.SetRefractoryPeriod(true)
+	mustValue(memory.DeclarePopulations([]engine.Name{"c", "a", "t"}, 8))
+	mustValue(memory.DeclareAssemblies("cat", []engine.Outline{
+		{Shape: engine.StateShape, Populations: []engine.Name{"c", "a", "t"}},
+		{Shape: engine.TransitionShape, Populations: []engine.Name{"c", "a", "t"}},
+	}))
+	mustValue(memory.Invoke([][]engine.Name{{"c", "t"}}))
+	moment := memory.Moment()
+
+	memory.Reset()
+
+	for _, name := range []engine.Name{"c", "a", "t"} {
+		if inspection := mustValue(memory.Inspect(name)); len(inspection.Active)+len(inspection.Refractory) > 0 {
+			t.Errorf("%s should have nothing active or refractory after reset, got %+v", name, inspection)
+		}
+	}
+	if memory.Moment() != moment || memory.CountAssemblies() != 2 || !memory.HasRefractoryPeriod() {
+		t.Errorf("reset should keep the clock (%d, was %d), the assemblies (%d) and the settings", memory.Moment(), moment, memory.CountAssemblies())
+	}
+}

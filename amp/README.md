@@ -37,6 +37,9 @@ starts with nothing on. The file name is the rest of the line.
 **Transcripts.** Each file in `interpreter/testdata` is a REPL session on a fresh engine. A line starting `amp> ` is
 typed, and the lines after it are what must print back, exactly. A new walkthrough step starts as a transcript.
 
+**Starting afresh.** `reset` lets go of all activity: nothing active or refractory. What the memory knows, the
+settings and the clock stay as they are, so the next invoke starts from a quiet memory without reopening the file.
+
 **Listing assemblies.** `assemblies` lists every assembly in the order formed, 20 to a page (`#1 cat state <c, a, t>`);
 `assemblies 2` shows the second page, and the last line says which page this is and what to type for the next.
 `inspect cat` shows one assembly's members.
