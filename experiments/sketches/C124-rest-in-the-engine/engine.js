@@ -24,6 +24,11 @@
 // - Indexes for speed (states by their letters, assemblies by their exact members), so that anneal's reuse looks up
 //   instead of scanning. They don't change what anneal forms.
 //
+// Found later (when the learning was ported to Go and run on the real engine; the port was withdrawn until the
+// learning is distilled, D-03): declareWord here wraps round a population when a word
+// needs more of a letter than it has members, and reuses members; the Go engine refuses such an assembly. The check
+// scenarios never needed it. Every engine copy from C122 to C127 has this.
+//
 // Departures from the Go engine, all deliberate:
 // - No names, refusals or errors: the experiment calls it correctly, and assemblies are referred to by number.
 // - No budget, save/open, inspect or set operations (not needed here).

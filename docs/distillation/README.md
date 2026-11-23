@@ -9,3 +9,4 @@ was doing. Each distillation has a code (D-01, ...) and a file listing its viola
 |---|---|---|
 | [D-01](D-01-text.md) | Text: constants from a handful of sentences, types from what surrounds words (C62-C67) | step 1 done (C68) |
 | [D-02](D-02-energy-and-bonds.md) | Energy and bonds: rebinding, hardening, energy rules, bond on cooling (C82-C85) | reviewed; the heat meter in the core, the rest kept out (owner's decision) |
+| [D-03](D-03-buffer-annealing.md) | Reading a buffer whole, annealing what doesn't fit (C114-C127) | reading distilled (C128-C130, one change to support for the owner); steps 1-6 and 7a done (C128-C135): no index, no table, no search; encoders at the boundary, holding what fits (C135, C136); next, forgetting |

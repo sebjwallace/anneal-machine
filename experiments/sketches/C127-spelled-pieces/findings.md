@@ -1,5 +1,12 @@
 # C127 · Spelled pieces: findings
 
+> **Caution, added when the learning was ported to Go and run on the real engine.** The JavaScript engine copy here
+> lets a word need more members of a letter than its population has: it wraps round and reuses members. The Go engine
+> refuses such an assembly. So at 8 members per letter, a long hot stretch held here would be refused by the real
+> engine. At 64 members per letter, where nothing wraps, the Go port reproduced this experiment's final figures exactly
+> on both books. The port was withdrawn by the owner's decision: nothing enters the engine until the learning is
+> distilled ([D-03](../../../docs/distillation/D-03-buffer-annealing.md)).
+
 Run: `node spelled.js <folder> <book> 8` (a few seconds a book; everything is in [out.txt](out.txt)). Read
 [the hypothesis](hypothesis.md) first. The "C126 as it was" rows reproduce C126's "with the fixes" figures exactly.
 `check/check.sh` still gives the same output as the Go engine (1,113 lines).

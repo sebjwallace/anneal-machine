@@ -1,0 +1,100 @@
+=== burgess-busterbrown.txt
+burgess-busterbrown.txt; 8 members per letter; learnt on the first nine tenths of the buffers, read on the last tenth
+
+--- encoder: a buffer for each sentence (cut at . ! ? ; :); 1044 buffers  (learning 10 s; 2585 assemblies; 4 ties held)
+  0 held patterns never occurred (0 of 4879 letters held)
+  NEUTRAL energy over the whole book 43528 = memory 4696 + describing every buffer 38833 (each unit priced by how often it occurs in the description)
+  energy over the whole book 50440 = memory 5193 + describing every buffer 45247
+  energy 10067 = memory 5193 + unseen 4874; unseen costs 0.776 per letter
+  1003 different patterns held; 5 stored states repeat letters already held; 424 hot stretches counted as seen again
+  "the" read inside a piece 98%; letters read loose in the unseen tenth 7%
+  clean 33%  coverage 93%  words whole 45%  cuts at a word boundary 56% (chance 25%)
+  loose letters by tenth while learning: 52% 20% 13% 11% 10% 8% 9% 9% 7% 7%
+  most read units: the(95) and(59) he(45) to(40) his(38) of(37) ed(37) ing(37) ve(35) be(35) had(34) re(29) that(29) it(29) ri(27) in(24) was(19) th(19) es(19) ght(19) ter(18) way(18) is(18) la(17) no(16) ly(16) bo(15) ought(15) en(15) you(15)
+  reads: [of][course]c[hat][ter][er][the]r[ed]s[qui]r[re]l[and][happ][yj][ack][the][gr][ay]s[qui]r[re]l[were][the][re]
+  reads: [scre][am][ed][sammy][until][his][thr]o[at][was][so][re]
+  reads: [the][wor]s[tof][itwas][bus][ter][kne]w[that]e[ve][ry][bo][dy][kne]w[that][itwas][tru]e
+  reads: [iw][ish]i[nev][er][had][th][ought][of][be]r[ri][es]g[row][led][bus][ter][to][himself]
+  reads: [xx]ii[busterbear]h[asaf][it][of][tem][per][at]e[mperis]a[bad][bad][th][ing][when]o[nce][it][get][sa][way]
+
+--- encoder: a buffer for each paragraph (cut at a blank line); 266 buffers  (learning 14 s; 3190 assemblies; 10 ties held)
+  0 held patterns never occurred (0 of 6683 letters held)
+  NEUTRAL energy over the whole book 43832 = memory 6125 + describing every buffer 37707 (each unit priced by how often it occurs in the description)
+  energy over the whole book 50693 = memory 6759 + describing every buffer 43935
+  energy 12309 = memory 6759 + unseen 5551; unseen costs 0.776 per letter
+  1230 different patterns held; 25 stored states repeat letters already held; 547 hot stretches counted as seen again
+  "the" read inside a piece 100%; letters read loose in the unseen tenth 7%
+  clean 35%  coverage 93%  words whole 38%  cuts at a word boundary 55% (chance 25%)
+  loose letters by tenth while learning: 65% 30% 19% 14% 11% 10% 9% 9% 9% 8%
+  most read units: the(81) and(59) ing(49) his(38) ed(36) th(34) had(34) that(33) it(31) to(27) in(27) he(27) be(24) on(20) ter(20) ck(19) of(18) way(18) rri(17) was(17) out(16) ly(16) es(16) my(15) see(15) ail(15) bus(15) or(15) you(15) all(14)
+  reads: [iw][ish]i[never][had][th][ought][of][be][rri][es]g[row][led][bus][ter][to][himself]
+  reads: [ate][mperis]a[bad][bad][th][ing][when][on][ce][it][get][sa][way][there]sn[oth][ing][qui]t[eat][all][like][it][to][spoil]a[ple][as]a[nt][day]
+  reads: [ill][ust][ration][th][ose][who]c[ould]f[ly]f[le]w[th][ose][who]c[ould][climb][climb][ed][page]
+  reads: t[hief]t[hief]t[hief][scre][am][ed]s[am][my][and]f[le]wa[way]
+  reads: [fa][rm][erb]r[own][sboy][lu][nc][hes][on][be][rri][es]
+
+--- encoder: a buffer every 60 letters, cut wherever it falls; 1064 buffers  (learning 9 s; 2735 assemblies; 14 ties held)
+  0 held patterns never occurred (0 of 4652 letters held)
+  NEUTRAL energy over the whole book 45905 = memory 4572 + describing every buffer 41334 (each unit priced by how often it occurs in the description)
+  energy over the whole book 52778 = memory 5073 + describing every buffer 47704
+  energy 10286 = memory 5073 + unseen 5212; unseen costs 0.814 per letter
+  1049 different patterns held; 4 stored states repeat letters already held; 474 hot stretches counted as seen again
+  "the" read inside a piece 98%; letters read loose in the unseen tenth 9%
+  clean 31%  coverage 91%  words whole 43%  cuts at a word boundary 55% (chance 26%)
+  loose letters by tenth while learning: 48% 20% 14% 11% 10% 8% 10% 9% 9% 9%
+  most read units: the(103) and(60) of(46) ve(42) ing(41) he(39) it(35) his(34) ed(33) had(33) to(32) re(30) was(29) ri(28) be(27) that(26) in(23) bu(20) ter(19) es(19) is(19) th(18) way(18) ght(18) ly(17) la(17) no(17) whe(16) you(16) ck(14)
+  reads: dp[ri][ck][ly][po]r[ky][and]r[ed][dy][fo]x[and]j[im][my][sk][un]ke[ve][nt][im][id][little][wh][it]e[fo]o
+  reads: t[the][wo][od][mo][use][was][whe][re][hec][ould][pe][er][out][and][see][wit]h[out][be][ing][see]n[of]c
+  reads: [our][se][chat][ter][er][the]r[ed][squ][irr][el][and][hap][py]j[ack][the][gr][ay][squ][irr][el][were]t
+  reads: [he][re][the][re][the]y[all][sat][ina][gr][eat]c[ir][cl][ear][oun]d[him][ea][ch][whe][rehe][felt][saf]
+  reads: e[bu]t[whe][re][hec][ould][see][and]e[ve][ry][one][of][the]m[la][ugh][ing][and][mak][ing][fun][of][bu]
+=== carroll-alice.txt
+carroll-alice.txt; 8 members per letter; learnt on the first nine tenths of the buffers, read on the last tenth
+
+--- encoder: a buffer for each sentence (cut at . ! ? ; :); 2066 buffers  (learning 19 s; 3058 assemblies; 49 ties held)
+  0 held patterns never occurred (0 of 5608 letters held)
+  NEUTRAL energy over the whole book 75337 = memory 5582 + describing every buffer 69755 (each unit priced by how often it occurs in the description)
+  energy over the whole book 87086 = memory 6190 + describing every buffer 80897
+  energy 15246 = memory 6190 + unseen 9057; unseen costs 0.782 per letter
+  1188 different patterns held; 7 stored states repeat letters already held; 627 hot stretches counted as seen again
+  "the" read inside a piece 100%; letters read loose in the unseen tenth 7%
+  clean 32%  coverage 93%  words whole 48%  cuts at a word boundary 56% (chance 24%)
+  loose letters by tenth while learning: 38% 14% 10% 8% 7% 8% 8% 6% 7% 7%
+  most read units: the(309) ing(123) and(90) of(85) it(78) aid(73) ed(58) to(58) in(56) ll(53) her(53) you(48) she(46) be(40) on(38) im(38) nt(36) ly(34) that(34) alice(28) me(27) re(27) en(27) up(26) out(26) as(26) had(24) ter(23) was(23) he(22)
+  reads: [im]a[poor][man][the][ha]t[ter][went][on][and]m[ost][th][ing][st][wi][nk]l[ed][after][that][on][ly][the][ma]r[ch][ha][res][aid]i[did][nt]
+  reads: [the][ma]r[ch]h[are][in][ter]r[up][ted][ina][gr][eat][hurry]
+  reads: [we][ll][at][any][rat]e[the][do][rm][ouse]s[aid][the][ha]t[ter][went][on][look][ing][anxious][ly][round][tosee][if][he][would][den]y[it][too]
+  reads: [but][the][do][rm][ouse][den]i[ed][noth][ing][be][ing][fa][sta][sl][eep]
+  reads: [after][that][co][nt][in]u[ed][the][ha]t[ter]i[cut][some][more]b[rea]d[and][but][ter][but][what][did][the][do][rm][ouse][say]
+
+--- encoder: a buffer for each paragraph (cut at a blank line); 808 buffers  (learning 27 s; 3894 assemblies; 31 ties held)
+  0 held patterns never occurred (0 of 7683 letters held)
+  NEUTRAL energy over the whole book 74946 = memory 7436 + describing every buffer 67510 (each unit priced by how often it occurs in the description)
+  energy over the whole book 86669 = memory 8246 + describing every buffer 78423
+  energy 15660 = memory 8246 + unseen 7415; unseen costs 0.767 per letter
+  1495 different patterns held; 36 stored states repeat letters already held; 797 hot stretches counted as seen again
+  "the" read inside a piece 99%; letters read loose in the unseen tenth 7%
+  clean 36%  coverage 93%  words whole 48%  cuts at a word boundary 57% (chance 24%)
+  loose letters by tenth while learning: 34% 12% 9% 8% 8% 8% 6% 7% 7% 7%
+  most read units: the(246) ing(85) and(78) aid(59) her(56) of(53) ed(51) to(40) it(39) in(38) you(37) she(34) ly(30) that(28) le(27) alice(25) be(24) all(24) ry(22) out(21) rea(21) ver(21) at(20) is(20) on(20) as(19) re(19) ju(19) one(18) ter(18)
+  reads: t[rea]c[les][aid][as]l[eep]y[vo][ice][beh][ind][her]
+  reads: [what][do][you][know][ab][out][this][bu][sin][ess][the]k[ing]s[aid][to][alice]
+  reads: [nothing][what]e[ver][per]s[ist][ed][the]k[ing]
+  reads: [un][im][port][ant][of]c[our]s[eim]e[ant][the]k[ing]h[ast]i[ly]s[aid][and][went][on][to][him][self][ina]n[un][der]t[one]
+  reads: [im][port][ant][un][im][port][ant][un][im][port][ant][im][port][ant][as][if][he][were][try][ing][which][wor][ds][ound][ed][be][st]
+
+--- encoder: a buffer every 60 letters, cut wherever it falls; 1795 buffers  (learning 15 s; 3141 assemblies; 18 ties held)
+  0 held patterns never occurred (0 of 5181 letters held)
+  NEUTRAL energy over the whole book 79387 = memory 5262 + describing every buffer 74125 (each unit priced by how often it occurs in the description)
+  energy over the whole book 91053 = memory 5854 + describing every buffer 85199
+  energy 14677 = memory 5854 + unseen 8823; unseen costs 0.818 per letter
+  1203 different patterns held; 9 stored states repeat letters already held; 769 hot stretches counted as seen again
+  "the" read inside a piece 100%; letters read loose in the unseen tenth 9%
+  clean 31%  coverage 91%  words whole 47%  cuts at a word boundary 54% (chance 25%)
+  loose letters by tenth while learning: 41% 18% 12% 10% 9% 9% 9% 8% 9% 9%
+  most read units: the(277) ing(109) and(79) of(78) aid(64) in(62) her(60) ed(58) she(54) to(50) ll(49) on(45) it(44) you(43) be(41) ur(34) im(31) that(31) ly(30) up(28) rea(27) en(27) alice(26) had(25) his(25) ry(24) ju(23) as(23) re(23) out(22)
+  reads: [her]a[ha][rd][wor][di][wil]l[ju][st][ex][pl][ain][to][you][how][it][was]d[one][the]y[had]a[larg]e[ca]
+  reads: nv[as][ba]g[wh]i[ch][ti][ed][up][at][the]m[out]h[with][st]r[ing]s[in][to][thi]s[the]y[slip][ped][th]
+  reads: e[gu][in][eap]ig[hea]d[first][and][the]n[sat][up][onit][im][gl][ad][iv][eseen][that]d[one][thou]
+  reads: [ght][alice]i[ve][so][of][ten][rea]d[in][the][ne]w[sp][aper][sat][the][end][of][tri][al]s[the][re][wa]
+  reads: s[some][at][tem]pt[sat][ap][pl]a[use][wh]i[ch][was][im]m[ed]i[ate][ly]s[up]p[res]s[ed][by][the][of]f
