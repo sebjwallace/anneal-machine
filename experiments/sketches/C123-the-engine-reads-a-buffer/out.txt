@@ -1,0 +1,112 @@
+=== burgess-busterbrown.txt, 8 members per letter
+burgess-busterbrown.txt: 1044 sentences; 8 members per letter; refractory off; learnt on nine tenths, read on the last tenth
+
+--- with the energy rule  (learning 9 s; 7331 assemblies)
+  clean 63%  coverage 71%  words whole 27%  cuts at a word boundary 47% (chance 25%)
+  loose letters by tenth while learning: 85% 64% 52% 44% 39% 34% 31% 36% 29% 28%
+  most read units: that(26) berries(14) buster(11) busterbear(10) farmerbrownsboy(10) itwas(9) pail(9) thought(9) ight(9) could(9) there(8) have(8) where(7) away(7) this(7) thief(6) when(6) thegreen(6) right(6) more(6) over(6) every(5) thing(5) about(5) thosewho(5) climb(5) thenhe(5) been(5) iguess(5) they(5)
+  reads: [ofcourse][chatterer][there][dsquirrel]and[happy][jack][theg]ray[squirrel][weret][here]
+  reads: [scream]ed[sammy][until]histhroat[wasso]re
+  reads: [theworstof][itwas][buster][knew][that][every][body][knew][that][itwas][true]
+  reads: iwishi[never]had[thought]of[berries][growled][buster]to[himself]
+  reads: xxii[busterbear][hasa]fitoftemperatemperis[abad]bad[thing][when][once]itgets[away]
+  reads: [there]sno[thing][quite][atall][likeit]to[spoil]a[plea]san[tday]
+  reads: [yessir][busterbear]was[having]theworstfitoftemper[ever][seen]in[thegreen][forest]
+  reads: nowordina[rily][buster]is[oneofthe][most][goodnatured]persons[inthe][world]
+
+--- without the energy rule (anneal forms everything, as on main)  (learning 7 s; 21044 assemblies)
+  clean 44%  coverage 77%  words whole 23%  cuts at a word boundary 46% (chance 25%)
+  loose letters by tenth while learning: 77% 42% 34% 28% 26% 24% 23% 23% 22% 22%
+  most read units: that(14) berries(14) pail(13) buster(11) ever(10) andthe(10) farmerbrownsboy(10) itwa(9) thought(9) busterbear(9) ight(9) those(9) here(8) with(7) this(7) could(7) ther(6) thief(6) thing(6) away(6) green(6) right(6) about(6) have(6) than(6) over(6) ches(6) hehad(6) when(5) inthe(5)
+  reads: [ofcours]e[chatterer][ther]e[dsqu][irre][land][happy]jac[kthe][graysqu][irre]l[were][ther]e
+  reads: [scream]ed[sammy][until]his[thro]at[wasso]re
+  reads: [theworst][ofit]was[buster][knew][that][ever]y[body][knew][that][itwa][stru]e
+  reads: [iwish]inev[erhad][thought]of[berries][growled][buster]to[himself]
+  reads: xxii[busterbear][hasa]fitoftemperatemper[isabad]bad[thing][when][once]it[gets][away]
+  reads: t[heres]n[othin]g[quite][atall][like]itto[spoi]la[plea]santday
+  reads: [yessir][busterbear]w[asha][ving][theworst]fitoftemper[ever][seen][inthe][green][fore]st
+  reads: no[word][inar]ily[buster]is[oneofthe][most][good][natur]edpersons[inthe][world]
+=== burgess-busterbrown.txt, 256 members per letter
+burgess-busterbrown.txt: 1044 sentences; 256 members per letter; refractory off; learnt on nine tenths, read on the last tenth
+
+--- with the energy rule  (learning 10 s; 7450 assemblies)
+  clean 62%  coverage 72%  words whole 27%  cuts at a word boundary 47% (chance 25%)
+  loose letters by tenth while learning: 85% 64% 51% 42% 38% 33% 30% 36% 28% 27%
+  most read units: berries(14) pail(13) there(11) buster(11) that(10) busterbear(10) farmerbrownsboy(10) thought(9) where(8) itwas(8) could(8) have(8) guess(8) away(7) might(7) thief(6) when(6) right(6) more(6) about(6) every(5) thing(5) this(5) osewho(5) climb(5) thenhe(5) been(5) over(5) worse(5) hehad(5)
+  reads: [ofcourse][chatterer][there][dsquirrel]and[happy][jack][theg]ray[squirrel][were][there]
+  reads: [scream]ed[sammy][until]histhroat[wasso]re
+  reads: [theworst]of[itwas][buster][knew][that][every][body][knew][thati]t[wastru]e
+  reads: iwishi[never]had[thought]of[berries][growled][buster]to[himself]
+  reads: xxii[busterbear][hasa]fitoftemperatemperis[abad]bad[thing][when][once]itgets[away]
+  reads: [there]sno[thing][quite][atall][likeit]to[spoil]apleasan[tday]
+  reads: [yessir][busterbear]was[having][theworst]fitoftemper[ever][seen]in[thegreenforest]
+  reads: nowordina[rily][buster]i[sone][ofthe][most][goodnatured]persons[inthe]world
+
+--- without the energy rule (anneal forms everything, as on main)  (learning 8 s; 22940 assemblies)
+  clean 43%  coverage 77%  words whole 23%  cuts at a word boundary 47% (chance 25%)
+  loose letters by tenth while learning: 75% 42% 35% 28% 26% 24% 22% 23% 23% 22%
+  most read units: that(15) ight(15) berries(14) here(13) pail(11) buster(10) ever(10) thing(10) itwa(9) busterbear(9) farmerbrowns(9) andthe(8) thought(7) temp(7) away(7) with(7) have(7) could(7) been(7) hehad(7) they(6) thief(6) when(6) inthe(6) thenhe(6) good(5) back(5) about(5) osewh(5) climb(5)
+  reads: [ofcours]e[chatterer]t[here]d[squi][rrel]and[happy][jack][thegr]ay[squi][rrel][were]t[here]
+  reads: [scream]eds[ammy][until]his[throat][wasso]re
+  reads: [theworst][ofit]wa[sbuster][knew][that][ever]y[body][knew][that][itwa][stru]e
+  reads: [iwish]in[ever]had[thought]of[berries][growled][buster]to[himself]
+  reads: xxii[busterbear][hasa]fitof[temp]era[temp]eri[sabad]bad[thing][when][once]it[gets][away]
+  reads: t[heres]no[thing][quite][atall][like][itto][spoil]a[plea]santday
+  reads: [yessir][busterbear][wash]a[ving][theworst]fitof[temp]er[ever][seen][inthegreenforest]
+  reads: [nowo]rdinarily[buster]is[oneofthe][most][good][natur]edpersons[inthe][world]
+=== carroll-alice.txt, 8 members per letter
+carroll-alice.txt: 2066 sentences; 8 members per letter; refractory off; learnt on nine tenths, read on the last tenth
+
+--- with the energy rule  (learning 26 s; 12162 assemblies)
+  clean 54%  coverage 75%  words whole 27%  cuts at a word boundary 45% (chance 24%)
+  loose letters by tenth while learning: 87% 66% 50% 42% 36% 31% 30% 25% 27% 26%
+  most read units: said(44) theking(34) that(29) alice(23) ofthe(20) with(14) thequeen(14) this(14) would(13) inthe(13) andth(12) thing(11) what(11) jury(11) erabbit(11) little(11) hatter(10) read(10) they(10) atthe(10) voice(10) important(10) aidthe(9) down(9) thewhit(9) mouse(8) your(8) turn(8) them(7) court(7)
+  reads: ima[poor]ma[nthe][hatter][wenton]and[most][thing]s[twin]kled[after][that][only][them][archhare][said][ididnt]
+  reads: [them][archhare][inter][rupt][edina][great][hurry]
+  reads: [well][atany][rate][thedo]r[mouse]s[aidthe][hatter][wenton][looking][anxiously][round][tosee][ifhe][would]deny[itto]o
+  reads: [butthe]dor[mouse]deniedno[thing]bei[ngfasta][sleep]
+  reads: [after][that][continu][edthe][hatter]icut[some][more]b[read]and[butter]but[what]did[thedo]r[mouse]say
+  reads: youmust[remember][remark]ed[theking][orill][have]you[execut]ed
+  reads: [them]iserable[hatter][dropp]ed[histeac][upand]b[read]and[butter][andwe]nt[down]ononeknee
+  reads: [youre][avery][poor][speak]er[said][theking]
+
+--- without the energy rule (anneal forms everything, as on main)  (learning 7 s; 32978 assemblies)
+  clean 33%  coverage 79%  words whole 22%  cuts at a word boundary 43% (chance 24%)
+  loose letters by tenth while learning: 62% 37% 29% 26% 24% 22% 22% 19% 22% 21%
+  most read units: said(48) king(34) alice(27) that(20) with(18) ofthe(18) thequeen(14) woul(13) ther(12) atte(11) whiter(11) abbit(11) ejury(10) atthe(10) andthe(10) voice(10) important(10) theco(9) inthe(9) ingth(9) this(9) little(9) ofher(9) writ(9) esaid(8) edthe(8) some(8) have(8) very(8) could(8)
+  reads: ima[poor]m[anth]eh[atte]r[went]o[nand][most][thin]gs[twin]kled[afte][rtha]t[only][them][arch]ha[resaid]i[didnt]
+  reads: [them][arch][hare][inter][rupte]din[agreat][hurr]y
+  reads: [well][atanyrate]th[edorm]ous[esaid][theh][atte]r[went][onlook]ing[anxiously]r[ound][tosee]ifhe[woul]ddeny[ittoo]
+  reads: [butth][edorm][ouse]den[iedn]o[thin]g[being]f[asta][slee]p
+  reads: [afte][rtha]t[conti]nu[edthe]h[atte]ricut[some][more][brea][dand][butt]er[butwh]at[didthe][dorm][ouse]say
+  reads: [youm]ustr[emember]r[emarked]the[king][orill][have]you[execut]ed
+  reads: [them]iser[able]h[atte]r[dropped][hist]eac[upand][brea][dand][butt]er[andwe]nt[down]o[none][knee]
+  reads: [your]ea[very][poor][speak]er[said]the[king]
+=== carroll-alice.txt, 256 members per letter
+carroll-alice.txt: 2066 sentences; 256 members per letter; refractory off; learnt on nine tenths, read on the last tenth
+
+--- with the energy rule  (learning 38 s; 12407 assemblies)
+  clean 51%  coverage 75%  words whole 27%  cuts at a word boundary 45% (chance 24%)
+  loose letters by tenth while learning: 84% 62% 48% 41% 35% 31% 29% 25% 27% 25%
+  most read units: aidthe(32) said(26) king(23) alice(21) ofthe(20) tthe(19) that(18) thequeen(14) this(14) with(13) would(13) what(12) jury(11) andthe(11) inthe(11) little(11) hatter(10) whiterabbit(10) important(10) about(9) voice(9) they(9) after(8) them(8) nothing(8) edthe(8) down(8) ever(8) thats(8) thek(8)
+  reads: ima[poor]ma[nthe][hatter][wenton]and[most][thing]s[twin]kled[after][that][only][them][archhare][said][ididnt]
+  reads: [them][archhare][inter][rupt][edina][great][hurry]
+  reads: [well][atanyrate]the[dormous]es[aidthe][hatter][wenton][look]ing[anxiously][round][toseeif]he[would]deny[itto]o
+  reads: bu[tthe][dormous]edenied[nothing]bei[ngfasta][sleep]
+  reads: [after][that][continu][edthe][hatter]icut[some][more][breadand][butter]but[what]didthe[dormous]esay
+  reads: youmust[remember][remark][edthe][king][orill][have]you[execut]ed
+  reads: [them]iserable[hatter][dropped][histeac][upand][breadand][butter][andw]ent[down][onone]knee
+  reads: [youre][avery][poor][speak]ers[aidthe][king]
+
+--- without the energy rule (anneal forms everything, as on main)  (learning 22 s; 37482 assemblies)
+  clean 37%  coverage 79%  words whole 24%  cuts at a word boundary 44% (chance 24%)
+  loose letters by tenth while learning: 71% 40% 31% 26% 24% 22% 21% 19% 22% 20%
+  most read units: said(55) alice(27) that(24) thek(21) ofthe(20) king(16) jury(15) with(13) ueen(13) atte(12) inthe(12) andthe(11) erabbit(11) would(10) edthe(10) atthe(10) voice(10) impo(10) rtant(10) dthe(9) read(9) tothe(9) mouse(8) nothing(8) theco(8) what(8) mean(8) theq(8) allthe(8) sthe(8)
+  reads: ima[poor]ma[nthe]h[atte]r[went]o[nand][most][things]t[wink]led[after][that][only][them]a[rchhare][said]i[didnt]
+  reads: [them]a[rchhare][inter]r[upte]din[agreat][hurry]
+  reads: [well]a[tany][rate][thedo]r[mouse][said][theh][atte]r[went][onlook][inga]nx[ious]ly[round][toseei]fhe[would][deny][ittoo]
+  reads: b[utthe]dor[mouse][denied][nothing][being][fasta][sleep]
+  reads: [after][that]co[ntin]u[edthe]h[atte]ricutso[memor]eb[read][andb]u[tter][butwh][atdi]d[thedo]r[mouse]say
+  reads: [youmust][rememb]er[remark][edthe][king][orill][have]you[execut]ed
+  reads: [them]iser[able]h[atte]r[dropped][histea]c[upand]b[read][andb]u[tter][andwe]nt[down]o[none][knee]
+  reads: [youre]a[very][poor][spea]k[ersa]i[dthe][king]

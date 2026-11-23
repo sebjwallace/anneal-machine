@@ -1,0 +1,104 @@
+
+==============================================================================================================
+Buster Brown
+==============================================================================================================
+
+sentences (1044 stretches), without spaces, N 16384  (8 s; 4887 held)
+  cheapest  clean pieces 53%   coverage 41%   words whole 12%   cuts at a word boundary 31%   (chance 25%) boundaries found 80%
+  support   clean pieces 45%   coverage 66%   words whole 31%   cuts at a word boundary 38%   (chance 25%) boundaries found 78%
+  cheapest reads:
+    [ofcourse][chatterertheredsquirrel]andhappyjackthegraysquirrelwere[there]
+    screamed[sammy][until]histhroatwassore
+    theworstof[itwas][buster]knewtha[teverybody]knewt[hatitwas]true
+    iwishi[neverhad]thoughtof[berries][growledbuster]to[himself]
+    most used: that(16) berries(10) there(7) where(7) then(7) this(7) buster(6) temper(6) come(6) those(6) when(5) look(5) them(5) bear(4) thenhe(4) know(4) ofthe(3) itwas(3) busterbear(3) sammyjay(3) hathe(3) climb(3) would(3) oughtto(3) saidhe(3)
+  support reads:
+    [ofcourse][chatterertheredsquirrel][and][ha][ppy]jack[the]graysquir[re]l[we][re][there]
+    screamed[sammy][until][his]thro[at]w[as][so][re]
+    [the][wo][rs][to]f[itwas][buster]knew[that][everybody]knew[that][itwas]true
+    iwishinever[had]though[to]f[berries][growledbuster][to][himself]
+    most used: he(57) the(50) and(48) to(44) it(44) ing(34) re(33) had(27) as(26) in(24) at(23) so(22) that(21) his(18) is(16) no(15) en(15) hi(14) ha(13) on(13) ld(13) berries(12) way(12) go(11) wo(10)
+
+random (696 stretches), without spaces, N 16384  (9 s; 3894 held)
+  cheapest  clean pieces 50%   coverage 27%   words whole 9%    cuts at a word boundary 29%   (chance 26%) boundaries found 87%
+  support   clean pieces 30%   coverage 51%   words whole 21%   cuts at a word boundary 35%   (chance 26%) boundaries found 88%
+  cheapest reads:
+    [jimmy][skunk][even]timid[little]whitefootthewoodmousewaswherehecoul
+    yuntilhisthroatwassoretheworstofitwas
+    [bust]erknew[that][ever]ybodyknew[that]itwastrue[that]awfulpailwasproofo
+    ssir[busterbear]washav[ingth]eworstfitof[temper][ever]seenin[thegreenforestand]theworstpart
+    most used: that(20) ther(13) then(13) ofth(11) ever(11) temper(10) bust(9) have(8) even(7) though(7) more(7) when(6) busterbear(5) inth(4) edan(4) ashe(4) lear(3) whenh(3) atit(3) things(3) fraid(3) thesmilingpool(2) little(2) chatterertheredsquirrel(2) ream(2)
+  support reads:
+    [jimmy][skunk][even]timid[little]w[hi]te[fo][ot][the]woodm[ou]se[was]w[he]re[he]c[ou]l
+    yuntil[hi]s[th]ro[at][was][so]re[the]worstofit[was]
+    [bust][er]knew[that][ever]ybodyknew[th][at]it[was]true[that]awfulpail[was]proo[fo]
+    ssir[busterbear][was][ha]v[ing][the]worstfitof[temper][ever]se[en]in[thegreenforest][and][the]worstpart
+    most used: hi(75) he(71) the(70) and(57) ou(56) er(40) en(34) ing(33) at(30) be(29) ri(28) ar(26) so(25) ha(24) le(24) was(23) wa(21) that(20) ho(20) an(19) ot(17) fo(16) ther(15) then(15) had(15)
+
+fixed (1064 stretches), without spaces, N 16384  (5 s; 5743 held)
+  cheapest  clean pieces 47%   coverage 32%   words whole 9%    cuts at a word boundary 30%   (chance 26%) boundaries found 83%
+  support   clean pieces 27%   coverage 65%   words whole 23%   cuts at a word boundary 37%   (chance 26%) boundaries found 79%
+  cheapest reads:
+    d[prick]lyporkyand[reddyfox]and[jimmyskunk]eventimid[little]whit[efoo]
+    t[thewoo]dmousewaswhere[hecoul]dpeeroutandseewithoutbeingseenofc
+    ourse[chatterertheredsquirrel]and[happyja]ckthegraysquirrel[were]t
+    heretheretheyallsatinagreatcirclearoundhimeachwhe[rehe]feltsaf
+    most used: that(17) then(12) ight(11) hehad(10) here(8) nthe(6) than(6) when(5) buster(5) edto(5) tthe(5) were(4) hatit(4) ingto(4) ashe(4) little(3) hecoul(3) every(3) never(3) mmyjay(3) andhe(3) coul(3) ewho(3) would(3) smile(3)
+  support reads:
+    d[prick][ly]p[or]ky[and][reddyfox][and][jimmyskunk][eve][nt][im]id[little][wh][it][efoo]
+    t[the]w[oo]dmou[se][was]w[he][re][he][coul]dpeero[ut][and][se]ewi[th]o[ut]be[ing][se][en]ofc
+    our[se][chatterertheredsquirrel][and][happyja][ck][the]gr[ay]squir[re]l[were]t
+    [he][re][the][re][the]yallsa[tin]ag[re]atcirclearound[him][ea]chw[he][rehe]f[elt]saf
+    most used: the(68) and(52) he(49) to(43) re(39) th(33) en(32) or(31) ed(31) it(29) ing(26) se(24) was(23) tha(23) ck(19) thi(19) as(19) ly(17) wh(17) ad(17) in(17) st(16) es(16) le(15) then(15)
+
+==============================================================================================================
+Alice
+==============================================================================================================
+
+sentences (2066 stretches), without spaces, N 16384  (29 s; 9336 held)
+  cheapest  clean pieces 48%   coverage 52%   words whole 13%   cuts at a word boundary 32%   (chance 24%) boundaries found 74%
+  support   clean pieces 40%   coverage 77%   words whole 32%   cuts at a word boundary 42%   (chance 24%) boundaries found 75%
+  cheapest reads:
+    imapoorman[thehatter][wenton]andmos[tthing]stwinkled[after][that]only[themarchharesaid]ididnt
+    [themarchhare][interrupted][inagreathurry]
+    [well][atanyrate][thedormouse][saidthehatter][wenton]lookinganxiously[round]toseeifhe[would][denyi]ttoo
+    bu[tthedormouse]denied[nothing]being[fastasleep]
+    most used: them(16) this(15) saidtheking(14) would(13) ofthe(13) with(12) they(11) theking(10) that(9) saidalice(9) jury(8) down(8) andthe(8) ands(8) court(7) just(7) voice(7) king(7) thejury(7) dream(7) ther(7) nothing(6) then(6) turn(6) again(6)
+  support reads:
+    [im]apo[or]m[an][thehatter][wenton][and]most[things]twinkl[ed][after][that][on]ly[themarchharesaid][id][id]nt
+    [themarchhare][interrupted][inagreathurry]
+    [well][atanyrate][thedormouse][saidthehatter][wenton][lo]oking[an]xiously[round][to]see[if][he][would]deny[it][to]o
+    [but][thedormouse]d[en]i[ed][nothing][be]ing[fastasleep]
+    most used: the(102) and(62) to(53) it(52) at(50) ed(50) re(50) an(48) be(42) en(40) she(36) is(32) ne(31) ar(30) er(30) of(29) so(28) im(27) her(27) on(26) as(25) ad(24) es(24) he(23) me(21)
+
+random (1196 stretches), without spaces, N 16384  (18 s; 6700 held)
+  cheapest  clean pieces 32%   coverage 25%   words whole 6%    cuts at a word boundary 27%   (chance 25%) boundaries found 84%
+  support   clean pieces 17%   coverage 59%   words whole 16%   cuts at a word boundary 34%   (chance 25%) boundaries found 83%
+  cheapest reads:
+    ishe[dthe]guineapigs[thoughtalice]nowweshallgeton[better]idratherfinishmytea[saidtheha]tte
+    rwithananxiouslookatthequeenwho[wasreading]thelistofsingers[youm]aygo
+    one[ofth]eofficersbutth[ehatter][wasoutofsight]beforetheofficercouldgettothedoorcallthene
+    nadeepvoicewhataretartsmadeofpeppermostlysai[dthe]cooktreaclesaidasleepyvoic
+    most used: dthe(19) ofth(16) head(13) here(13) andth(12) alice(12) saidtheking(9) gain(8) shes(8) othe(8) othi(6) rself(6) ingo(6) youknow(5) onth(5) come(5) teve(5) ingto(5) twas(5) littl(5) youm(4) dear(4) dthewhiterabbit(4) very(4) thewhiterabbit(4)
+  support reads:
+    i[she][dthe]guineapigs[thoughtalice][now]we[sh]a[ll]get[on][better]idr[at][her]fi[ni][sh][my][te]asai[dthe]hat[te]
+    r[wi]than[an]xiou[sl][oo]k[at]t[he]q[ue][en][who][wasreading]t[he][li][st]ofs[ing]ers[youm]aygo
+    [on]eoft[he]offi[ce]rs[but]t[he]h[atter][wasoutofsight]be[fo][re]t[he]offi[ce]r[cou]ldgettot[he]d[oo]r[ca][ll]t[he]ne
+    n[ad][ee]pvoi[ce]wh[at]a[re]t[ar]tsmadeofpeppermo[st][ly][sa]i[dthe]c[oo]kt[re]acle[sa]id[as]l[ee]pyvoic
+    most used: he(216) at(88) re(88) and(79) en(73) ing(53) st(48) as(47) she(47) her(46) th(45) ad(44) ed(42) on(41) ur(41) ll(40) es(40) to(35) ce(32) te(31) sa(31) ng(31) se(30) ut(29) ow(27)
+
+fixed (1795 stretches), without spaces, N 16384  (12 s; 9762 held)
+  cheapest  clean pieces 49%   coverage 39%   words whole 11%   cuts at a word boundary 30%   (chance 25%) boundaries found 80%
+  support   clean pieces 33%   coverage 74%   words whole 32%   cuts at a word boundary 41%   (chance 25%) boundaries found 82%
+  cheapest reads:
+    [hera]hardwordiwilljustexplaintoyouhow[itwas]done[they]hadalargeca
+    nvasbagwhichtiedupat[themout]hwithstringsin[tothis][they]slippedth
+    eguineapig[head]first[andthe]nsatuponitimgladivesee[nthat]donethou
+    g[htalice]ivesooftenread[inthe]newspapersat[theendof]trials[there]wa
+    most used: that(18) fthe(18) said(14) eking(13) they(12) inthe(12) ever(12) head(11) alice(11) saidtheking(10) sand(9) andthe(8) there(8) again(7) nothing(7) voice(6) atth(6) have(6) hera(5) itwas(5) youknow(5) down(5) thewhiterabbit(5) over(5) very(5)
+  support reads:
+    [hera][har]dw[or]diwilljust[ex]pl[ain][to][you][how][itwas]done[they][ha]d[al]ar[ge][ca]
+    nvasbag[wh]ichti[ed]upat[the]m[ou][th]wi[th]str[ing]s[in][tothis][they]s[li]pp[ed][th]
+    eguineapig[head]first[and][th]ensatupon[it]imgladi[ve][se][en][that]done[th][ou]
+    g[htalice]i[ve][so][of]t[en]r[ead][in][th]en[ew]s[pa]p[er]sat[theendof][tri][als][th]er[ew]a
+    most used: the(138) ing(77) ed(73) to(67) er(64) of(62) th(60) en(56) an(53) in(50) and(49) she(46) be(45) it(44) st(31) you(30) hi(30) ve(29) se(28) ly(28) said(27) that(26) he(26) ou(24) ld(24)

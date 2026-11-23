@@ -1,0 +1,187 @@
+
+====================================================================================================
+support is length (first run) · reader: streamed 3 times; pool 256, population 256; a use costs 2.96
+====================================================================================================
+0 lasting pieces, in the order they nucleated (sightings @ character):
+  
+shifted copies: 0
+how hot, by stretch (a quarter of a pass): loose letters, ties held, beaten, dissolved, nucleated
+  1   loose 100%  ties 32   beaten 0    dissolved 0     nucleated 0
+  2   loose 100%  ties 69   beaten 0    dissolved 0     nucleated 0
+  3   loose 100%  ties 78   beaten 0    dissolved 0     nucleated 0
+  4   loose 97%   ties 62   beaten 2    dissolved 0     nucleated 0
+  5   loose 100%  ties 80   beaten 0    dissolved 0     nucleated 0
+  6   loose 100%  ties 79   beaten 0    dissolved 0     nucleated 0
+  7   loose 100%  ties 80   beaten 0    dissolved 0     nucleated 0
+  8   loose 100%  ties 76   beaten 4    dissolved 0     nucleated 0
+  9   loose 100%  ties 80   beaten 0    dissolved 0     nucleated 0
+  10  loose 100%  ties 80   beaten 0    dissolved 0     nucleated 0
+  11  loose 100%  ties 80   beaten 0    dissolved 0     nucleated 0
+  12  loose 100%  ties 76   beaten 4    dissolved 0     nucleated 0
+  13  loose 100%  ties 2    beaten 0    dissolved 0     nucleated 0
+the last pass as read (321 units, 321 loose letters, 0 cutting inside a word):
+  the_cat_sat_on_the_mat_and_the_dog_sat_on_the_log_the_cat_saw_the_dog_and_the_dog_saw_the_cat_the_cat_ran_to_the_dog_and_the_dog_ran_to_the_cat_then_the_cat_and_the_dog_sat_on_the_mat_the_man_saw_the_cat_and_the_dog_on_the_mat_and_the_man_sat_on_the_log_the_zebra_sat_on_the_mat_the_zebra_saw_the_zebra_and_the_zebra_ran_
+  cutting inside a word: -
+  "the zebra sat on the mat": the_zebra_sat_on_the_mat
+
+====================================================================================================
+support is length (first run) · story: streamed 2 times; pool 256, population 256; a use costs 2.72
+====================================================================================================
+0 lasting pieces, in the order they nucleated (sightings @ character):
+  
+shifted copies: 0
+how hot, by stretch (a quarter of a pass): loose letters, ties held, beaten, dissolved, nucleated
+  1   loose 93%   ties 127  beaten 0    dissolved 0     nucleated 0
+  2   loose 98%   ties 295  beaten 0    dissolved 0     nucleated 0
+  3   loose 98%   ties 337  beaten 2    dissolved 0     nucleated 0
+  4   loose 97%   ties 334  beaten 2    dissolved 23    nucleated 0
+  5   loose 98%   ties 350  beaten 5    dissolved 21    nucleated 0
+  6   loose 99%   ties 361  beaten 5    dissolved 6     nucleated 0
+  7   loose 100%  ties 372  beaten 5    dissolved 2     nucleated 0
+  8   loose 99%   ties 360  beaten 5    dissolved 4     nucleated 0
+the last pass as read (1550 units, 1536 loose letters, 14 cutting inside a word):
+  the_village_stood_at_the_edge_of_the_forest_where_the_river_turned_towards_the_sea_every_morning_the_baker_opened_his_shop_and_the_smell_of_bread_drifted_along_the_street_the_children_walked_to_school_past_the_old_mill_and_the_farmers_drove_their_[car]ts_to_the_m[ar][ke]t_in_the_square_one_winter_the_river_[fro]ze_for_the_first_time_in_m[an][y_]years_and_the_people_of_the_village_came_out_to_look_at_the_ice_the_children_wanted_to_walk_on_it_but_their_mothers_told_them_to_wait_the_baker_said_that_his_father_had_once_crossed_the_[fro]zen_river_to_bring_flour[_fro]m_the_town_on_the_other_s[id]e_and_that_the_ice_had_held_him_all_the_way_the_old_miller_said_that_the_ice_was_thin_near_the_bank_and_thick_in_the_middle_and_that_nobody_sh[oul]d_walk_on_it_until_the_cold_had_lasted_for_a_week_the_children_waited_and_every_day_they_went_down_to_the_river_to_see_if_the_ice_was_still_there_on_the_seventh_day_the_miller_walked_out_onto_the_ice_with_a_long_pole_and_tapped_it_as_he_went_the_ice_held_and_the_people_cheered_and_soon_the_whole_village_was_on_the_river_the_children_slid_and_fell_and_laughed_the_farmers_walked_across_to_the_other_side_and_back_again_and_the_baker_brought_bread_and_hot_tea_for_everyone_that_night_the_wind_changed_and_the_air_g[re]w_warm_and_in_the_morning_the_river_was_moving_again_the_ice_was_gone_and_the_children_stood_on_the_bank_and_watched_the_water_[car]ry_the_last_pie[ce]s_of_it_towards_the_sea_the_miller_said_that_the_river_would_freeze_again_one_day_and_the_children_asked_him_when_and_he_said_that_nobody_k[ne]w_but_that_when_it_did_they_would_be_ready_
+  cutting inside a word: car  ar  ke  fro  an  y_  _fro  id  oul  re  ce  ne
+  "the baker opened his shop": the_baker_opened_his_shop
+
+====================================================================================================
+support is ways in · reader: streamed 3 times; pool 256, population 256; a use costs 2.96
+====================================================================================================
+26 lasting pieces, in the order they nucleated (sightings @ character):
+  the_(4@188)  _the_(4@258)  n_the_(4@325)  t_on_the_(2@367)  and_(4@395)  cat_(4@465)  w_the_(4@521)  _the_m(4@557)  og_the_(3@579)  sat_o(3@590)  n_the_m(4@662)  at_a(4@666)  the_d(4@721)  _the_d(4@756)  the_dog_(2@759)  he_cat_(2@786)  cat_the(2@789)  the_c(4@796)  sat_on_the_m(3@823)  the_m(4@831)  he_d(4@855)  he_dog_(2@858)  n_the_l(4@893)  sat_on_the_mat_(2@921)  _saw_the_(2@939)  and_the_(3@953)
+shifted copies: 9: the_/he_d  _the_/the_d  _the_/the_c  _the_/the_m  n_the_/_the_m  n_the_/_the_d  cat_/at_a  w_the_/_the_m  w_the_/_the_d
+how hot, by stretch (a quarter of a pass): loose letters, ties held, beaten, dissolved, nucleated
+  1   loose 99%   ties 26   beaten 4    dissolved 0     nucleated 0
+  2   loose 70%   ties 21   beaten 14   dissolved 0     nucleated 0
+  3   loose 57%   ties 15   beaten 9    dissolved 0     nucleated 1
+  4   loose 71%   ties 13   beaten 8    dissolved 0     nucleated 2
+  5   loose 35%   ties 3    beaten 8    dissolved 0     nucleated 2
+  6   loose 67%   ties 19   beaten 10   dissolved 0     nucleated 1
+  7   loose 59%   ties 11   beaten 12   dissolved 0     nucleated 2
+  8   loose 67%   ties 15   beaten 11   dissolved 0     nucleated 2
+  9   loose 48%   ties 7    beaten 7    dissolved 0     nucleated 3
+  10  loose 61%   ties 11   beaten 12   dissolved 0     nucleated 5
+  11  loose 52%   ties 6    beaten 9    dissolved 0     nucleated 5
+  12  loose 50%   ties 8    beaten 5    dissolved 0     nucleated 3
+the last pass as read (122 units, 65 loose letters, 52 cutting inside a word):
+  [cat_][sat_o][n_the_m][at_a]nd_t[he_d][og_][sat_o][n_the_l]o[g_][the_c][at_]sa[w_the_]d[og_]and_[the_d][og_]sa[w_the_][cat_]t[he_][cat_]ran_to_[the_d][og_]and[_the_d][og_]ran_t[o_]t[he_][cat_][the]n_[the_c]a[t_]and[_the_d][og_][sat_on_the_m][at_][the_m]a[n_]sa[w_the_]ca[t_]and_t[he_d][og_]o[n_the_m][at_an]d[_the_m]an_[sat_o][n_the_l][og_the_]zeb[ra_][sat_on_the_m][at_]th[e_]ze[bra][_sa][w_the_][ze]b[ra_][and_the_][ze]bra_r[an_]
+  cutting inside a word: sat_o  n_the_m  at_a  he_d  og_  n_the_l  g_  the_c  at_  w_the_  the_d  he_  _the_d  o_  the  t_  sat_on_the_m  the_m  n_  at_an  _the_m  og_the_  ra_  e_  bra  _sa  ze  an_
+  "the zebra sat on the mat": [og_the_]zeb[ra_][sat_on_the_m][at_]
+
+====================================================================================================
+support is ways in · story: streamed 2 times; pool 256, population 256; a use costs 2.72
+====================================================================================================
+35 lasting pieces, in the order they nucleated (sightings @ character):
+  the_(4@164)  _the_(4@274)  t_the_(4@594)  on_the_(3@1040)  river_(2@1046)  d_the_(4@1089)  e_an(4@1131)  _and_(3@1251)  n_the_(4@1297)  ice_(4@1301)  chil(4@1322)  er_(11@1422)  d_th(4@1429)  y_the_(4@1575)  nd_the_(4@1798)  _the_s(4@1846)  walk(4@1997)  ld_(11@2027)  the(11@2030)  ther_(3@2071)  ed_(11@2088)  _the_o(4@2142)  at_the_(4@2165)  had_(4@2173)  aid_th(3@2216)  was_(4@2231)  d_that_(2@2283)  _on_(4@2305)  o_the_(4@2401)  _the_ic(3@2493)  and_the_(4@2558)  e_th(4@2770)  _the_w(4@2784)  child(4@2894)  er_s(4@2994)
+shifted copies: 15: t_the_/_the_s  t_the_/_the_o  t_the_/_the_w  d_the_/_the_s  d_the_/_the_o  d_the_/_the_w  n_the_/_the_s  n_the_/_the_o  n_the_/_the_w  y_the_/_the_s  y_the_/_the_o  y_the_/_the_w  o_the_/_the_s  o_the_/_the_o  o_the_/_the_w
+how hot, by stretch (a quarter of a pass): loose letters, ties held, beaten, dissolved, nucleated
+  1   loose 78%   ties 18   beaten 10   dissolved 0     nucleated 2
+  2   loose 57%   ties 32   beaten 23   dissolved 102   nucleated 1
+  3   loose 52%   ties 21   beaten 40   dissolved 157   nucleated 4
+  4   loose 48%   ties 2    beaten 39   dissolved 154   nucleated 7
+  5   loose 47%   ties 17   beaten 46   dissolved 157   nucleated 2
+  6   loose 38%   ties 11   beaten 29   dissolved 134   nucleated 12
+  7   loose 45%   ties 17   beaten 40   dissolved 152   nucleated 3
+  8   loose 40%   ties 3    beaten 25   dissolved 142   nucleated 4
+the last pass as read (738 units, 317 loose letters, 352 cutting inside a word):
+  [vi][ll][ag][e_]s[to]od[_a][t_the_][ed]ge[_o]f_[the_]fo[re]s[t_]w[he][re][_the_]r[iv][er_]tu[rn][ed_][to][war]ds[_the_]s[ea]_e[ver][y_]m[or]n[ing][_the_][ba]k[er_]op[en][ed_][hi][s_]sh[op]_and[_the_s]me[ll][_o]f_b[re][ad_]d[ri]f[te][d_a]l[on][g_][the_][st][re]e[t_the_]ch[il]dre[n_][walk][ed_]to[_s][ch]o[ol]_past[_the_o][ld_][mi][ll]_an[d_the_]f[ar]mer[s_]d[ro][ve]_[the]i[r_]c[ar]t[s_]to[_the_]m[ar]ke[t_]in[_the_s]qua[re][_o]n[e_]w[in][te]r[_the_]r[iv][er_][fro]z[e_f]o[r_][the_]f[ir]s[t_]tim[e_]i[n_]m[an][y_]y[ear][s_][and_the_][pe][op]le[_of][_the_][vi][ll][ag][e_c]ame[_o][ut_][to_]l[oo]k[_a]t_[the_][ice_][the_]ch[il]dr[en_][wa][nt][ed_][to_][walk][_on_][it_]b[ut_][the]i[r_][mo][the]r[s_][to][ld_][the]m[_to_][wa]i[t_the_][ba]k[er_]sai[d_th][at_][hi][s_][fa][ther_][had_][on][ce_]c[ro]ss[ed_][the_][fro]z[en_][river_]to_b[ri]n[g_]fl[ou][r_][fro]m[_the_][to]w[n_]on[_the_o]th[er_]s[id]e_an[d_th][at_the_][ice_][had_][he][ld_][hi]m[_a][ll]_[the_][wa]y[_the_o][ld_][mi][ll]e[r_s][aid_th][at_the_][ice_][was_][th][in_]n[ear][_the_]b[an]k[_and_][th][ic][k_]i[n_the_][mi]dd[le_]an[d_th][at_]nob[od]y_s[ho]u[ld_][walk][_on_][it_]u[nt][il][_the_]co[ld_][had_][la][st][ed_]f[or][_a][_we]e[k_][the_]ch[il]dr[en_][wa]it[ed_]a[nd_]e[ver][y_][da][y_][the][y_]w[en][t_]do[wn_]t[o_the_][river_]to[_s]e[e_]i[f_][the_][ice_]wa[s_][st]i[ll]_[the][re]_on_[the_]seven[th]_[da][y_the_][mi][ll][er_][walk][ed_]o[ut_][on]to[_the_ic][e_]wi[th][_a]_l[on][g_]p[ol]e_an[d_]tapp[ed_]i[t_]a[s_][he_]went_[the_][ice_][he][ld_][and_the_][pe][op]le_c[he]e[re][d_a]n[d_]s[oo]n[_the_w]h[ol][e_][vi][ll][ag]e_[was_][on_the_][river_][the_][child]ren[_s]li[d_a][nd_]fe[ll][_and_][la]ugh[ed_][the_]f[ar][me][rs_][walk]e[d_a]c[ro]s[s_]to[_the_o]t[he][r_s][id][e_and_][ba]c[k_][ag][ai]n_[and_the_][ba]k[er_]b[ro]ugh[t_]b[re]a[d_a][nd_][ho][t_][te]a[_f]o[r_]e[ver]yon[e_th][at_]ni[gh]t[_the_w][in][d_][ch][an]g[ed_]and[_the_][ai][r_]g[re]w_[war]m[_and_]i[n_the_]m[or]n[ing][_the_][river_][was_][mo][vi]n[g_][ag][ai][n_the_][ice_][was_]g[one]_[and_the_][child]re[n_s][to]o[d_]o[n_the_]b[an]k[_and_][wat][ch][ed_][the_][wat][er_]c[ar]r[y_the_][la][st_]piece[s_]o[f_][it_][to][war][ds][_the_s][ea][_the_][mi][ll][er_s][aid_th][at_the_]r[iv][er_]wou[ld_]f[re]ez[e_][agai][n_]on[e_][da][y_][and_the_][child]ren[_a]s[ke][d_][hi]m[_w][he]n[_and_]h[e_s][aid_th][at_]nob[od][y_]knew[_b][ut_][tha][t_w][he]n_[it_]d[id]_[the][y_]wou[ld_]b[e_][re]ad[y_]
+  cutting inside a word: vi  ll  ag  e_  to  _a  t_the_  ed  _o  re  t_  he  iv  er_  rn  ed_  war  ea  ver  y_  or  ing  ba  en  hi  s_  op  _the_s  ad_  ri  te  d_a  on  g_  st  il  n_  walk  _s  ch  ol  _the_o  ld_  mi  d_the_  ar  ro  ve  the  r_  in  fro  e_f  ir  an  ear  pe  e_c  ut_  oo  en_  wa  nt  mo  d_th  at_  fa  ther_  ce_  ou  id  at_the_  r_s  aid_th  th  in_  ic  k_  n_the_  le_  od  ho  la  _we  nd_  da  wn_  o_the_  f_  y_the_  _the_ic  d_  _the_w  child  me  rs_  e_and_  ai  _f  e_th  gh  one  n_s  wat  st_  ds  er_s  agai  ke  _w  e_s  _b  tha  t_w
+  "the baker opened his shop": [_the_][ba]k[er_]op[en][ed_][hi][s_]sh[op]
+
+====================================================================================================
+support is length, then ways in · reader: streamed 3 times; pool 256, population 256; a use costs 2.96
+====================================================================================================
+26 lasting pieces, in the order they nucleated (sightings @ character):
+  the_(4@140)  d_the_(3@212)  n_the_(3@223)  _the_(4@283)  at_o(4@334)  nd_the_(4@352)  at_on_the_(3@367)  _saw(4@406)  _the_cat(2@414)  _the_dog(2@437)  and_the_(4@446)  an_t(4@455)  dog_(4@490)  _saw_the_(3@521)  _and_the_(4@533)  og_the_(3@579)  at_on_the_mat(2@599)  _the_z(4@605)  _and_the_dog_(3@677)  an_to(4@777)  _the_man(2@833)  man_saw_the_(2@842)  n_the_ma(3@867)  an_s(4@882)  at_on_the_l(4@893)  ebra(4@944)
+shifted copies: 3: d_the_/_the_z  n_the_/_the_z  n_the_ma/_the_man
+how hot, by stretch (a quarter of a pass): loose letters, ties held, beaten, dissolved, nucleated
+  1   loose 99%   ties 26   beaten 4    dissolved 0     nucleated 0
+  2   loose 63%   ties 13   beaten 12   dissolved 0     nucleated 1
+  3   loose 57%   ties 10   beaten 12   dissolved 0     nucleated 2
+  4   loose 64%   ties 6    beaten 6    dissolved 0     nucleated 1
+  5   loose 29%   ties 0    beaten 6    dissolved 0     nucleated 4
+  6   loose 30%   ties 0    beaten 5    dissolved 0     nucleated 4
+  7   loose 28%   ties 0    beaten 5    dissolved 0     nucleated 3
+  8   loose 40%   ties 4    beaten 6    dissolved 0     nucleated 3
+  9   loose 47%   ties 2    beaten 5    dissolved 0     nucleated 1
+  10  loose 15%   ties 0    beaten 2    dissolved 0     nucleated 1
+  11  loose 27%   ties 0    beaten 4    dissolved 0     nucleated 5
+  12  loose 31%   ties 0    beaten 3    dissolved 0     nucleated 1
+the last pass as read (57 units, 17 loose letters, 20 cutting inside a word):
+  [_s][at_on_the_mat][_and_the_dog_]s[at_on_the_l]og[_the_cat][_saw_the_]d[og][_and_the_dog_]saw[_the_cat][_the_cat][_r][an_to][_the_dog][_and_the_dog_]r[an_to][_the_cat][_the]n[_the_cat][_and_the_dog_s][at_on_the_mat][_the_][man][_saw_the_][cat][_and_the_dog_]o[n_the_ma]t[_and_the_]m[an_s][at_on_the_l][og_the_]z[ebra][_s][at_on_the_mat][_the_ze]b[ra][_saw_the_]z[ebra][_and_the_][zebra]_[ran]_
+  cutting inside a word: _s  at_on_the_mat  at_on_the_l  og  _r  an_to  _the  _and_the_dog_s  n_the_ma  an_s  og_the_  ebra  _the_ze  ra
+  "the zebra sat on the mat": [og_the_]z[ebra][_s][at_on_the_mat]
+
+====================================================================================================
+support is length, then ways in · story: streamed 2 times; pool 256, population 256; a use costs 2.72
+====================================================================================================
+48 lasting pieces, in the order they nucleated (sightings @ character):
+  the_(4@101)  _the_(4@164)  d_the_(4@521)  _to_(4@537)  t_the_(4@594)  _and(4@797)  ver_to_(2@839)  n_the_(4@1040)  river(3@1045)  _the_ch(3@1052)  _the_o(4@1119)  ther_(3@1124)  and_the_(3@1233)  _and_(4@1251)  ce_wa(3@1303)  _the_m(4@1416)  chil(4@1481)  _tha(4@1537)  _th(11@1553)  at_the_(4@1596)  _the_s(4@1651)  walk(4@1759)  s_to(4@1826)  _the_f(4@1888)  _the_child(2@1979)  ren_(4@1983)  ildren_(2@1983)  _that_(3@2060)  ice_(4@2169)  had_(4@2173)  ld_(11@2178)  er_s(4@2210)  in_the_(4@2267)  _and_th(3@2280)  ould_(3@2297)  _the_river(3@2406)  _the(4@2438)  on_the_(4@2448)  t_the_i(4@2542)  _and_the_(4@2558)  was_(4@2604)  hed_the_(3@2660)  walked_(2@2675)  _the_children_(3@2898)  er_(11@2938)  _the_sea(3@2981)  ed_hi(3@3065)  n_it_(3@3118)
+shifted copies: 15: d_the_/_the_o  d_the_/_the_m  d_the_/_the_s  d_the_/_the_f  t_the_/_the_o  t_the_/_the_m  t_the_/_the_s  t_the_/_the_f  n_the_/_the_o  n_the_/_the_m  n_the_/_the_s  n_the_/_the_f  at_the_/t_the_i  s_to/_to_  _the/the_
+how hot, by stretch (a quarter of a pass): loose letters, ties held, beaten, dissolved, nucleated
+  1   loose 77%   ties 4    beaten 12   dissolved 0     nucleated 2
+  2   loose 56%   ties 21   beaten 22   dissolved 109   nucleated 3
+  3   loose 44%   ties 10   beaten 22   dissolved 154   nucleated 7
+  4   loose 52%   ties 9    beaten 36   dissolved 154   nucleated 7
+  5   loose 49%   ties 10   beaten 33   dissolved 154   nucleated 5
+  6   loose 34%   ties 2    beaten 23   dissolved 125   nucleated 11
+  7   loose 40%   ties 0    beaten 33   dissolved 142   nucleated 8
+  8   loose 45%   ties 4    beaten 24   dissolved 128   nucleated 5
+the last pass as read (649 units, 276 loose letters, 301 cutting inside a word):
+  v[ill]a[ge_][st][oo][d_][at_the_][ed]g[e_o]f[_the_f]o[re]s[t_]w[he][re][_the_][river][_t]u[rn]ed[_to][war]ds[_the_s][ea]_e[ver][y_]m[or]n[ing][_the_][ba]k[er_]op[en][ed_][hi][s_]shop_[and_the_]sme[ll][_o][f_]b[re]a[d_]drift[ed_][al][on]g[_the_s]t[re]et[_the_ch][ild][ren_][walk]ed[_to_]scho[ol]_pas[t_the_]o[ld_]m[ill]_[and_the_]f[ar]m[er][s_]drov[e_th]ei[r_]c[ar]t[s_to][_the_m][ar]ke[t_][in_the_]squ[ar][e_o]n[e_]w[in]ter[_the_][river]_[fro]z[e_f][or][_the_f][ir][st_]tim[e_][in_]m[an][y_]y[ear]s[_and_the_][pe][op]l[e_o]f[_the_]v[ill]a[ge_]cam[e_o][ut][_to_]l[oo][k_][at_the_]ice[_the_ch][ild][ren_][wa]n[ted][_to_][walk][_o][n_][it_]b[ut][_th]ei[r_]m[othe]r[s_to]ld[_th]em[_to_][wai][t_the_][ba]k[er_s]a[id][_that_][hi][s_][fa][ther_][had_][on][ce_]c[ro]s[se][d_the_][fro]z[en_]ri[ver_to_][br][ing][_f]l[ou][r_][fro]m[_the_][to][wn_][on_the_]o[ther_]s[id]e[_and_][th][at_the_][ice_][had_][he][ld_][hi]m[_a][ll][_the_][wa]y[_the_o][ld_]m[ill][er_s][ai][d_t]h[at_the_]i[ce_wa]s[_th][in_]n[ear][_the_]b[an]k[_and_][th][ic][k_][in_the_]m[id]dle[_and_th][at_]nobod[y_]sh[ould_][walk][_o][n_][it_]u[nt][il][_the_]co[ld_][had_][la][st][ed_]for_a[_we]ek[_the_child][ren_][wai][ted][_and_]e[ver][y_][da]y[_the]y[_we]n[t_]do[wn_][to][_the_river][_to_][se][e_]if[_the_]i[ce_wa][s_][st][ill][_the][re]_[on_the_][se]v[en][th]_[da]y[_the_m]il[ler_][walk][ed_][ou][t_][on][to][_the_][ice_]wi[th][_a]_l[on]g_p[ol]e[_and_]tapp[ed_][it_]a[s_][he][_we]n[t_the_i][ce_][he]ld[_and_the_][pe][op]l[e_c][he]e[re]d[_and_]so[on_the_]w[ho]l[e_]v[ill]a[ge_][was_]on[_the_river][_the_child][ren_]sl[id][_and_]fe[ll][_and_][la][ug][hed_the_]f[ar]m[er][s_][walk][ed_]ac[ro]s[s_to][_the_o][ther_]s[id]e[_and_][ba]ck[_ag]ain[_and_the_][ba]k[er_]b[ro][ug]h[t_]b[rea]d[_and_][ho][t_]t[ea][_f]o[r_]e[ver]y[one][_that_]ni[gh][t_the_]w[in][d_][ch][an]ged[_and_the_]a[ir_]g[re][w_][war]m[_and_][in_the_]m[or]n[ing][_the_river]_[was_][mo]v[ing][_ag]a[in_the_][ice_wa][s_]g[one]_a[nd][_the_children_]stoo[d_][on_the_]b[an]k[_and_][wat]c[hed_the_][wat][er_]c[ar]r[y_the_][la][st_]piece[s_]o[f_]it[_to][war][ds][_the_sea][_the_m][ill][er_s][ai][d_th]at[_the_river]_w[ould_]f[re]eze_[ag]a[in_][one]_[day]_a[nd][_the_children_]ask[ed_hi]m[_w][he]n[_and_]h[e_][sa][id][_that_]nobod[y_]kne[w_]b[ut][_that_]w[he][n_it_]d[id][_the][y_]w[ould_]b[e_][rea]d[y_]
+  cutting inside a word: ill  ge_  st  oo  d_  ed  e_o  _the_f  re  t_  he  _t  rn  _to  war  _the_s  ea  ver  y_  or  ing  ba  er_  en  ed_  hi  s_  ll  _o  f_  al  on  _the_ch  ild  ren_  walk  ol  t_the_  ld_  ar  er  e_th  r_  s_to  _the_m  e_  in  fro  e_f  ir  st_  an  ear  pe  op  ut  k_  wa  ted  n_  _th  othe  wai  er_s  id  fa  ther_  ce_  ro  se  d_the_  en_  ver_to_  br  _f  ou  to  wn_  th  at_the_  _a  _the_o  ai  d_t  ce_wa  in_  ic  _and_th  at_  ould_  nt  il  la  _we  _the_child  da  _the  ler_  t_the_i  e_c  on_the_  ho  ug  hed_the_  _ag  rea  one  gh  ch  ir_  w_  mo  in_the_  ice_wa  nd  wat  y_the_  ds  d_th  ag  ed_hi  _w  sa  n_it_
+  "the baker opened his shop": [_the_][ba]k[er_]op[en][ed_][hi][s_]shop
+
+====================================================================================================
+sizes
+====================================================================================================
+
+support is ways in · reader
+  T      N      lasting  shifted  units  loose  inside  sample
+  64     64     20       5        116    47     45      th[e_]ze[bra]_s[at_]o[n_the_]m[at_]
+  64     256    13       2        109    38     51      th[e_]zebr[a_]s[at_]o[n_the_]m[at_]
+  64     1024   11       2        103    32     54      t[he_]zeb[ra]_[sat_o][n_the_]m[at_]
+  256    64     24       4        126    73     40      [og_the_]zeb[ra_][sat_on_the_m][at_]
+  256    256    26       9        122    65     52      [og_the_]zeb[ra_][sat_on_the_m][at_]
+  256    1024   16       5        122    65     52      [og_the_]zeb[ra_][sat_on_the_m][at_]
+  1024   64     24       4        126    73     40      [og_the_]zeb[ra_][sat_on_the_m][at_]
+  1024   256    26       9        122    65     52      [og_the_]zeb[ra_][sat_on_the_m][at_]
+  1024   1024   16       5        122    65     52      [og_the_]zeb[ra_][sat_on_the_m][at_]
+
+support is ways in · story
+  T      N      lasting  shifted  units  loose  inside  sample
+  64     64     13       2        894    475    344     [_the_][ba]k[er_][op]en[ed_][hi][s_]sh[op]
+  64     256    8        0        895    471    352     [_the_][ba]k[er_][op]en[ed_][hi][s_]sh[op]
+  64     1024   5        0        895    471    352     [_the_][ba]k[er_][op]en[ed_][hi][s_]sh[op]
+  256    64     56       27       740    321    346     [_the_][ba]k[er_]op[en][ed_][hi][s_]sh[op]
+  256    256    35       15       738    317    352     [_the_][ba]k[er_]op[en][ed_][hi][s_]sh[op]
+  256    1024   23       4        741    318    350     [_the_][ba]k[er_]op[en][ed_][hi][s_]sh[op]
+  1024   64     62       21       797    400    336     [_the_][ba]k[er_][op][en][ed_][hi][s_]sh[op]
+  1024   256    41       10       797    400    336     [_the_][ba]k[er_][op][en][ed_][hi][s_]sh[op]
+  1024   1024   28       4        797    400    336     [_the_][ba]k[er_][op][en][ed_][hi][s_]sh[op]
+
+support is length, then ways in · reader
+  T      N      lasting  shifted  units  loose  inside  sample
+  64     64     24       6        70     18     34      [_the_ze]b[ra_s][at_on_the_][mat]
+  64     256    21       5        78     25     38      [_the_ze]b[ra_s][at_on_the_][ma]t
+  64     1024   13       4        76     22     37      [_the_ze]b[ra_s][at_on_the_][ma]t
+  256    64     29       4        57     17     20      [og_the_]z[ebra][_s][at_on_the_mat]
+  256    256    26       3        57     17     20      [og_the_]z[ebra][_s][at_on_the_mat]
+  256    1024   16       2        57     17     20      [og_the_]z[ebra][_s][at_on_the_mat]
+  1024   64     29       4        57     17     20      [og_the_]z[ebra][_s][at_on_the_mat]
+  1024   256    26       3        57     17     20      [og_the_]z[ebra][_s][at_on_the_mat]
+  1024   1024   16       2        57     17     20      [og_the_]z[ebra][_s][at_on_the_mat]
+
+support is length, then ways in · story
+  T      N      lasting  shifted  units  loose  inside  sample
+  64     64     15       5        870    472    329     [_the_][ba]k[er_][op]en[ed_][hi][s_]sh[op]
+  64     256    12       5        883    491    322     [_the_][ba]k[er_][op]en[ed_][hi][s_]sh[op]
+  64     1024   7        1        878    477    329     [_the_][ba]k[er_][op]en[ed_][hi][s_]sh[op]
+  256    64     64*      23       644    273    303     [_the_][ba]k[er_]op[en][ed_][hi][s_]shop
+  256    256    48       15       649    276    301     [_the_][ba]k[er_]op[en][ed_][hi][s_]shop
+  256    1024   41       11       649    276    301     [_the_][ba]k[er_]op[en][ed_][hi][s_]shop
+  1024   64     64*      23       610    248    295     [_the_][ba][ker_][op][en][ed_][hi][s_]shop
+  1024   256    56       18       610    248    295     [_the_][ba][ker_][op][en][ed_][hi][s_]shop
+  1024   1024   43       10       610    248    295     [_the_][ba][ker_][op][en][ed_][hi][s_]shop
+
+(* population full)

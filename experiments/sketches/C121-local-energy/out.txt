@@ -1,0 +1,53 @@
+learnt from: 1150 sentences (Buster Brown 1-400, King James 1-250, Buster Brown 401-900); unseen: 144 Buster Brown, 150 King James
+
+==============================================================================================================
+global energy (C118)  (1 s; 3058 patterns held, 3058 formed, 14891 not kept by the energy rule)
+==============================================================================================================
+patterns found only in the minority stretch: 450; only in the majority: 2022; in both: 586
+  shortest minority-only patterns: god fowl host dust four wife itbr abel cain pass eden city esis fori slew died noch sofe nine edryl letth bless sogod hehim field thday ename thoue slept mybon woman butof mboth naked shalt ption ofthy sweat wroth thybr
+  thee    held as a pattern; inside 2 other patterns
+  thou    held as a pattern; inside 18 other patterns
+  hath    held as a pattern; inside 15 other patterns
+  unto    held as a pattern; inside 12 other patterns
+  saith   not a pattern of its own; inside 0 other patterns
+  shall   held as a pattern; inside 5 other patterns
+  lord    not a pattern of its own; inside 2 other patterns
+  said    held as a pattern; inside 6 other patterns
+  god     held as a pattern; inside 12 other patterns
+  waters  not a pattern of its own; inside 1 other patterns
+  earth   not a pattern of its own; inside 1 other patterns
+  begat   not a pattern of its own; inside 0 other patterns
+  majority (Buster Brown)    clean 60%   coverage 73%   cost per letter 0.784 words whole 27%
+      he[would][have][give]n[anyth][ingto]getrid[ofit]
+      [buthe][took]it[because][hecould]nt[help]it
+      [andthat]bringsus[back][tothe]questiondid[buster][steal][farmerbrownsboy]s[pail]
+  minority (King James)      clean 48%   coverage 64%   cost per letter 0.845 words whole 18%
+      [andit][cameto][pass][when]men[began]to[multiply][onthe][face][ofth][eearth][andd][aught]ers[were]born[untoth]em
+      th[atthe]sonsofgodsawthed[aught]ersofmen[that][theywere]fair
+      [andth]ey[took][them]wives[ofall][which][they]chose
+
+==============================================================================================================
+local energy  (1 s; 3092 patterns held, 3092 formed, 9416 not kept by the energy rule)
+==============================================================================================================
+patterns found only in the minority stretch: 339; only in the majority: 1818; in both: 935
+  shortest minority-only patterns: vid god hyc bim usc firm dryl lett todi odse sbri fowl odcr yliv host ield rain dust four ansh adam ofmy woma nyea dthy veme ywif icom abel floc cain sblo ieth fold welt eden city adah bare snam
+  thee    held as a pattern; inside 1 other patterns
+  thou    held as a pattern; inside 4 other patterns
+  hath    held as a pattern; inside 4 other patterns
+  unto    held as a pattern; inside 4 other patterns
+  saith   not a pattern of its own; inside 0 other patterns
+  shall   held as a pattern; inside 5 other patterns
+  lord    not a pattern of its own; inside 1 other patterns
+  said    held as a pattern; inside 4 other patterns
+  god     held as a pattern; inside 7 other patterns
+  waters  not a pattern of its own; inside 0 other patterns
+  earth   not a pattern of its own; inside 1 other patterns
+  begat   not a pattern of its own; inside 0 other patterns
+  majority (Buster Brown)    clean 43%   coverage 75%   cost per letter 0.845 words whole 22%
+      he[woul]d[have][given][anyt][hing][toget]rid[ofit]
+      but[hetook]it[because][hecoul]d[nthe]lpit
+      [andt]hatbringsus[back]to[theques][tion]did[buster][stea]l[farmerbrownsboy]s[pail]
+  minority (King James)      clean 37%   coverage 68%   cost per letter 0.900 words whole 19%
+      [andi]t[came][topass][when]men[begant]o[multiply]o[nthe]f[aceoft][heearth][andd][aught]ers[were]bornu[ntoth]em
+      [that][thes]ons[ofgod]saw[thed][aught]ersof[ment]ha[tthe]y[were]fair
+      [andt]hey[took][them][wives][ofall][which][they]c[hose]

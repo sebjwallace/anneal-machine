@@ -1,0 +1,192 @@
+
+==============================================================================================================
+Buster Brown: 1044 utterances
+==============================================================================================================
+
+without spaces, N 16384, no rest  (9 s; 4887 held)
+  cheapest  clean pieces 75%   coverage 41%   words whole 12%   cuts at a word boundary 31%   (chance 25%) boundaries found 80%
+  support   clean pieces 56%   coverage 66%   words whole 31%   cuts at a word boundary 38%   (chance 25%) boundaries found 78%
+  named     clean pieces 76%   coverage 43%   words whole 14%   cuts at a word boundary 31%   (chance 25%) boundaries found 80%
+  cheapest reads:
+    [ofcourse][chatterertheredsquirrel]andhappyjackthegraysquirrelwere[there]
+    screamed[sammy][until]histhroatwassore
+    theworstof[itwas][buster]knewtha[teverybody]knewt[hatitwas]true
+    iwishi[neverhad]thoughtof[berries][growledbuster]to[himself]
+    most used: that(16) berries(10) there(7) where(7) then(7) this(7) buster(6) temper(6) come(6) those(6) when(5) look(5) them(5) bear(4) thenhe(4) know(4) ofthe(3) itwas(3) busterbear(3) sammyjay(3) hathe(3) climb(3) would(3) oughtto(3) saidhe(3)
+  support reads:
+    [ofcourse][chatterertheredsquirrel][and][ha][ppy]jack[the]graysquir[re]l[we][re][there]
+    screamed[sammy][until][his]thro[at]w[as][so][re]
+    [the][wo][rs][to]f[itwas][buster]knew[that][everybody]knew[that][itwas]true
+    iwishinever[had]though[to]f[berries][growledbuster][to][himself]
+    most used: he(57) the(50) and(48) to(44) it(44) ing(34) re(33) had(27) as(26) in(24) at(23) so(22) that(21) his(18) is(16) no(15) en(15) hi(14) ha(13) on(13) ld(13) berries(12) way(12) go(11) wo(10)
+  named reads:
+    [ofcourse][chatterertheredsquirrel][and]happyjackthegraysquirrelwere[there]
+    screamed[sammy][until]histhroatwassore
+    theworstof[itwas][buster]knewtha[teverybody]knewt[hatitwas]true
+    iwishi[neverhad]thoughtof[berries][growledbuster]to[himself]
+    most used: and(42) that(16) berries(10) this(8) there(7) where(7) buster(7) then(7) when(6) temper(6) come(6) those(6) but(5) look(5) them(5) itwas(4) busterbear(4) thenhe(4) know(4) ofthe(3) sammyjay(3) hathe(3) bear(3) climb(3) would(3)
+
+without spaces, N 16384, rest every 100  (37 s; 7327 held)
+  cheapest  clean pieces 77%   coverage 46%   words whole 12%   cuts at a word boundary 32%   (chance 25%) boundaries found 77%
+  support   clean pieces 52%   coverage 77%   words whole 35%   cuts at a word boundary 44%   (chance 25%) boundaries found 76%
+  named     clean pieces 78%   coverage 47%   words whole 14%   cuts at a word boundary 32%   (chance 25%) boundaries found 77%
+  cheapest reads:
+    [ofcourse][chatterertheredsquirrel][andh]appyjackthegraysquirrel[were][there]
+    screamed[sammy][until]histhroatwassore
+    theworstof[itwas][buster]knewtha[teverybody]knewt[hatitwas]true
+    iwish[ineverhad]thoughtof[berries][growledbuster]to[himself]
+    most used: pail(13) that(10) berries(9) there(6) buster(6) come(6) this(6) thati(6) been(6) itwas(5) temper(5) then(5) those(5) them(5) andthen(5) look(4) know(4) were(3) busterbear(3) when(3) sammyjay(3) little(3) andhe(3) bear(3) could(3)
+  support reads:
+    [ofcourse][chatterertheredsquirrel][and]ha[ppy]jack[the]graysquir[re]l[were][there]
+    s[cr]eam[ed][sammy][until][his][th]ro[at][was][so][re]
+    [the][wo][rs][to]f[itwas][buster][kne]w[that][everybody][kne]w[that][itwas]true
+    iwish[ineverhad][th][ou]gh[to]f[berries][growledbuster][to][himself]
+    most used: to(55) he(47) the(46) and(43) it(40) ed(39) ing(33) had(27) er(26) at(24) in(24) ou(22) re(21) th(21) so(20) an(18) his(17) that(17) st(17) of(16) as(15) is(15) be(15) no(13) pail(13)
+  named reads:
+    [ofcourse][chatterertheredsquirrel][and]happyjackthegraysquirrel[were][there]
+    screamed[sammy][until]histhroatwassore
+    theworstof[itwas][buster]knew[that][everybody]knewt[hatitwas]true
+    iwish[ineverhad]thoughtof[berries][growledbuster]to[himself]
+    most used: and(41) that(12) berries(9) there(7) buster(7) itwas(6) pail(6) come(6) this(6) temper(5) then(5) those(5) them(5) thati(5) andthen(5) when(4) look(4) know(4) farmerbrownsboy(4) were(3) everybody(3) busterbear(3) sammyjay(3) little(3) andhe(3)
+
+with spaces, N 16384, no rest  (19 s; 5178 held)
+  cheapest  clean pieces 79%   coverage 48%   words whole 16%   cuts at a word boundary 44%   (chance 40%) boundaries found 78%
+  support   clean pieces 55%   coverage 58%   words whole 28%   cuts at a word boundary 48%   (chance 40%) boundaries found 83%
+  named     clean pieces 79%   coverage 48%   words whole 16%   cuts at a word boundary 44%   (chance 40%) boundaries found 78%
+  cheapest reads:
+    [of_course][_chatterer_the_red_squirrel_][and_]happy_jack_[the_]gray_squirrel_were_[there]
+    screamed_[sammy_][until_]his_throat[_was_]sore
+    [the_]wor[st_of][_it_was]_[buster_]knew[_that][_everybody]_knew_t[hat_it_was_]true
+    that_awful_pail[_was_]proof_of_it
+    most used: _and_(25) the_(23) _that(12) _berries(8) they(7) _was_(7) and_(6) temper(6) come(6) buster_(5) those(5) them(5) there(4) there_(4) _it_was(4) when_(4) _see(4) where(4) ther(4) now_(4) then_(4) this(4) i_gues(4) _where_he_(3) but_wh(3)
+  support reads:
+    [of_course]_[chatterer]_[the_][re]d_squir[re]l_[and_][ha][ppy]_jack_[the_]gray_squir[re]l_[we][re]_[there]
+    screamed_[sammy_][until_][his]_thro[at]_was_[so][re]
+    t[he_w]orst_of[_it_was]_[buster_]knew[_that][_everybody]_knew_th[at][_it_was]_true
+    th[at_]awful_pail[_was_]pr[oof]_of[_it]
+    most used: he_(47) re(40) _and_(35) at(34) s_(26) his(25) he(25) the_(24) it_(23) en(23) on(19) un(18) had(17) i_(16) it(16) _m(14) then_(13) hi(12) way(12) no(12) you(12) go(12) _ha(11) n_t(11) who(10)
+  named reads:
+    [of_course][_chatterer_the_red_squirrel_][and_]happy_jack_[the_]gray_squirrel_were_[there]
+    screamed_[sammy_][until_]his_throat[_was_]sore
+    t[he_w]or[st_of][_it_was]_[buster_]knew[_that][_everybody]_knew_t[hat_it_was_]true
+    that_awful_pail[_was_]proof_of_it
+    most used: _and_(25) the_(21) _that(12) _berries(8) they(7) and_(6) _was_(6) temper(6) come(6) buster_(5) when_(5) those(5) them(5) there(4) there_(4) he_w(4) _it_was(4) _see(4) where(4) ther(4) now_(4) but_(4) then_(4) this(4) i_gues(4)
+
+with spaces, N 16384, rest every 100  (64 s; 8151 held)
+  cheapest  clean pieces 79%   coverage 54%   words whole 19%   cuts at a word boundary 45%   (chance 40%) boundaries found 76%
+  support   clean pieces 50%   coverage 73%   words whole 34%   cuts at a word boundary 51%   (chance 40%) boundaries found 82%
+  named     clean pieces 81%   coverage 54%   words whole 19%   cuts at a word boundary 45%   (chance 40%) boundaries found 76%
+  cheapest reads:
+    [of_course][_chatterer_the_red_squirrel_][and_h]appy_jack[_the]_gray_squirrel_[were_][there]
+    screamed_[sammy_][until_]his_throat[_was_]sore
+    [the_]wor[st_of][_it_was]_[buster_]knew[_that][_everybody]_knew_t[hat_it_was_]true
+    [that_]awful[_pail][_was_]proof[_of_it]
+    most used: _the(28) _and_(19) _had(14) _that(10) _pail(10) _berries(8) and_(8) _thought_(7) _you(7) been_(6) _was_(5) buster_(5) _thing(5) temper(5) with(5) those(5) there(4) _him(4) _but_(4) _it_was(4) that_(4) _when_(4) s_that_(4) now_(4) _in_the_(4)
+  support reads:
+    [of_course_][chatterer]_[the_]r[ed]_squir[re]l[_and_]ha[ppy]_jack_[the_][gr]ay_squir[re]l_[were_][there]
+    [sc][re]am[ed]_[sammy_][until_][his][_th]ro[at_][was_][so][re]
+    [the_][wo]r[st_of][_it_was]_[buster_][kne]w[_that]_[everybody_][kne]w[_that][_it_was]_true
+    [tha]t[_a]wful[_pail][_was_]pr[oof][_of_it]
+    most used: _a(52) ed(40) _and_(38) ing(34) he_(29) _to(29) er(28) the_(25) _i(25) _of(25) s_(25) on(23) it_(23) en(22) re(20) he(18) st(18) _m(17) had(16) is(16) t_(15) _that(15) tha(15) his(14) wo(12)
+  named reads:
+    [of_course][_chatterer_the_red_squirrel_][and_]happy_jack_[the_]gray_squirrel_[were_][there]
+    screamed_[sammy_][until_]his_throat[_was_]sore
+    [the_]wor[st_of][_it_was]_[buster_]knew[_that]_[everybody_]knew_t[hat_it_was_]true
+    [that_]awful[_pail][_was_]proof[_of_it]
+    most used: _and_(19) the_(18) _had(14) and_(10) _that(10) _pail(10) you_(9) _berries(8) they(7) _thought_(7) _was_(5) buster_(5) temper(5) with(5) those(5) them(5) been_(5) there(4) _it_was(4) that_(4) _thing(4) _when_(4) s_that_(4) now_(4) _in_the_(4)
+
+==============================================================================================================
+Alice: 2066 utterances
+==============================================================================================================
+
+without spaces, N 16384, no rest  (29 s; 9336 held)
+  cheapest  clean pieces 69%   coverage 52%   words whole 13%   cuts at a word boundary 32%   (chance 24%) boundaries found 74%
+  support   clean pieces 52%   coverage 77%   words whole 32%   cuts at a word boundary 42%   (chance 24%) boundaries found 75%
+  named     clean pieces 71%   coverage 54%   words whole 16%   cuts at a word boundary 32%   (chance 24%) boundaries found 74%
+  cheapest reads:
+    imapoorman[thehatter][wenton]andmos[tthing]stwinkled[after][that]only[themarchharesaid]ididnt
+    [themarchhare][interrupted][inagreathurry]
+    [well][atanyrate][thedormouse][saidthehatter][wenton]lookinganxiously[round]toseeifhe[would][denyi]ttoo
+    bu[tthedormouse]denied[nothing]being[fastasleep]
+    most used: them(16) this(15) saidtheking(14) would(13) ofthe(13) with(12) they(11) theking(10) that(9) saidalice(9) jury(8) down(8) andthe(8) ands(8) court(7) just(7) voice(7) king(7) thejury(7) dream(7) ther(7) nothing(6) then(6) turn(6) again(6)
+  support reads:
+    [im]apo[or]m[an][thehatter][wenton][and]most[things]twinkl[ed][after][that][on]ly[themarchharesaid][id][id]nt
+    [themarchhare][interrupted][inagreathurry]
+    [well][atanyrate][thedormouse][saidthehatter][wenton][lo]oking[an]xiously[round][to]see[if][he][would]deny[it][to]o
+    [but][thedormouse]d[en]i[ed][nothing][be]ing[fastasleep]
+    most used: the(102) and(62) to(53) it(52) at(50) ed(50) re(50) an(48) be(42) en(40) she(36) is(32) ne(31) ar(30) er(30) of(29) so(28) im(27) her(27) on(26) as(25) ad(24) es(24) he(23) me(21)
+  named reads:
+    imapoorman[thehatter][wenton][and]most[things]twinkled[after][that]only[themarchharesaid]ididnt
+    [themarchhare][interrupted][inagreathurry]
+    [well][atanyrate][thedormouse][saidthehatter][wenton]lookinganxiously[round]toseeifhe[would][denyi]ttoo
+    bu[tthedormouse]denied[nothing]being[fastasleep]
+    most used: and(60) she(28) them(16) this(15) saidtheking(14) would(13) with(12) ofthe(12) they(11) theking(10) that(9) saidalice(9) some(8) jury(8) down(8) andthe(8) ther(8) nothing(7) court(7) just(7) then(7) said(7) voice(7) king(7) thejury(7)
+
+without spaces, N 16384, rest every 100  (97 s; 13713 held)
+  cheapest  clean pieces 67%   coverage 56%   words whole 14%   cuts at a word boundary 33%   (chance 24%) boundaries found 71%
+  support   clean pieces 50%   coverage 83%   words whole 33%   cuts at a word boundary 46%   (chance 24%) boundaries found 72%
+  named     clean pieces 70%   coverage 56%   words whole 15%   cuts at a word boundary 33%   (chance 24%) boundaries found 72%
+  cheapest reads:
+    imapoorman[thehatter][wenton]andmos[tthing]stwinkled[after][that][only][themarchharesaid]ididnt
+    [themarchhareinterrupted][inagreathurry]
+    [well][atanyrate][thedormouses][aidthehatter][wenton]looking[anxiously][round]toseeifhe[would][denyi]ttoo
+    bu[tthedormouse]denied[nothing]being[fastasleep]
+    most used: this(15) saidtheking(14) them(13) inthe(12) with(11) ofthe(11) theking(10) they(10) would(9) saidalice(9) jury(8) down(8) that(7) nothing(7) some(7) just(7) voice(7) thejury(7) dream(7) court(6) again(6) alice(6) over(6) little(6) allthe(6)
+  support reads:
+    [im]apo[or]m[an][thehatter][wenton][and]most[things]tw[in]kl[ed][after][tha][to]n[ly][themarchharesaid][id][id]nt
+    [themarchhareinterrupted][inagreathurry]
+    [well][atanyrate][thedormouse][saidthehatter][wenton]look[ing][anxiously][round][to][see][if][he][would]de[nyit][to]o
+    [butthe][do]rmous[ed]e[ni][ed][nothing][be][ing][fastasleep]
+    most used: the(79) to(60) and(56) ed(53) it(47) an(44) er(44) ing(42) en(39) in(38) at(36) be(34) is(33) her(33) she(33) le(30) re(29) im(27) so(25) as(25) ar(24) or(24) of(24) me(23) he(23)
+  named reads:
+    imapoorman[thehatter][wenton][and]most[things]twinkled[after][that][only][themarchharesaid]ididnt
+    [themarchhareinterrupted][inagreathurry]
+    [well][atanyrate][thedormouse][saidthehatter][wenton]looking[anxiously][round]toseeifhe[would][denyi]ttoo
+    bu[tthedormouse]denied[nothing]being[fastasleep]
+    most used: and(52) saidtheking(15) this(15) them(13) inthe(11) that(10) some(10) theking(10) ofthe(10) they(10) with(10) would(9) down(9) saidalice(9) thewhiterabbit(8) nothing(7) just(7) said(7) voice(7) jury(7) thejury(7) ther(7) dream(7) court(6) again(6)
+
+with spaces, N 16384, no rest  (52 s; 9826 held)
+  cheapest  clean pieces 77%   coverage 59%   words whole 20%   cuts at a word boundary 43%   (chance 38%) boundaries found 73%
+  support   clean pieces 52%   coverage 73%   words whole 36%   cuts at a word boundary 52%   (chance 38%) boundaries found 81%
+  named     clean pieces 77%   coverage 59%   words whole 21%   cuts at a word boundary 43%   (chance 38%) boundaries found 73%
+  cheapest reads:
+    [of_course_]twinkling_[begin]s[_with]_a_t
+    [the_march_hare_][interrupted_]in[_a_great_]hurry
+    bu[t_the_dormouse_]denie[d_nothing_]being_fast_asleep
+    [that_][i_can_t_remember_][said_the_hatter]
+    most used: the_(35) _and(33) and_(15) she_(12) _him(12) that_(11) jury(11) _you(11) they_(11) _of_the_(11) _with(10) _said_the_king(10) this(10) _them_(9) some(8) _in_the_(8) _she_had_(8) _their_(8) s_the_(8) that(7) court(7) head(7) e_king(7) voice(7) dream(7)
+  support reads:
+    [of_course_]tw[in]kl[in]g_[begin]s[_with]_a_t
+    [the_m][ar]ch_h[are][_i]nt[er]rupt[ed][_i]n[_a_great_]hurry
+    [but_][the_dormouse]_d[en]i[ed][_nothing_]be[in]g_f[as]t_[as][le]ep
+    [that][_i_can_t_][re][me]mb[er][_said_the_hatter]
+    most used: the_(84) in(82) ed(71) and_(66) er(61) to(49) he(49) en(48) an(45) on(45) is(40) _i(37) at(37) le(35) _of(35) it_(31) ea(31) ar(30) she_(29) it(27) or(26) he_(25) as_(23) es(22) _t(22)
+  named reads:
+    [of_course_]twinkling_[begin]s[_with]_a_t
+    [the_march_hare_][interrupted_]in[_a_great_]hurry
+    bu[t_the_dormouse_]denie[d_nothing_]being_fast_asleep
+    [that_][i_can_t_remember_][said_the_hatter]
+    most used: and_(40) the_(35) _with(12) _and(12) she_(12) _him(12) that_(11) jury(11) _you(11) they_(11) _of_the_(11) this(10) _said_the_king(9) that(8) some(8) _in_the_(8) e_king(8) _she_had_(8) _them_(8) and(8) _their_(8) court(7) head(7) voice(7) s_the_(7)
+
+with spaces, N 16384, rest every 100  (189 s; 15043 held)
+  cheapest  clean pieces 74%   coverage 63%   words whole 21%   cuts at a word boundary 43%   (chance 38%) boundaries found 71%
+  support   clean pieces 51%   coverage 80%   words whole 37%   cuts at a word boundary 51%   (chance 38%) boundaries found 79%
+  named     clean pieces 75%   coverage 62%   words whole 20%   cuts at a word boundary 43%   (chance 38%) boundaries found 72%
+  cheapest reads:
+    [of_course_]twinkling_[begin]s[_with]_a_t
+    [the_march_hare_interrupted_]in[_a_great_]h[urry]
+    bu[t_the_dormouse_]denied[_nothing_]being_fast_asleep
+    [that_][i_can_t_remember_][said_the_hatter]
+    most used: _and_(24) _the_(20) and_(13) t_the_(12) the_(12) _him(12) _you_(11) _of_the_(11) _with(10) _said_the_king(10) jury(10) king(9) they_(9) _the(9) _that_(8) some(8) she_(8) _had(8) _would_(7) court(7) _in_the_(7) voice(7) the_king(7) dream(7) _for(6)
+  support reads:
+    [of_course_]tw[in]kl[in]g[_be]g[in]s[_with]_[a_]t
+    [the_m][ar]ch_h[are][_i]nt[er]rupt[ed][_i]n[_a_great_]h[urry]
+    [but_][the_dormouse][_d]eni[ed][_nothing]_[be][in]g_f[as]t_[as][le]ep
+    [that_][i_can][_t][_remember][_said_the_hatter]
+    most used: ed(71) er(60) _the_(54) an(48) in(46) a_(39) _and_(38) e_(38) on(37) is(37) _of(37) her(33) ing(30) it_(29) ar(28) to(27) re(27) _be(26) st(26) le(26) she_(24) or(23) king(22) and_(21) _to(21)
+  named reads:
+    [of_course_]twinkling_[begin]s[_with]_a_t
+    [the_march_hare_interrupted_]in[_a_great_]h[urry]
+    bu[t_the_dormouse_]denied[_nothing_]being_fast_asleep
+    [that_][i_can_t_remember_][said_the_hatter]
+    most used: _and_(22) _the_(20) and_(16) _of_the_(14) the_(13) _with(12) t_the_(12) _him(12) _said_the_king(11) _you_(10) they_(10) king(9) _and(9) _in_the_(9) jury(9) _that_(8) some(8) she_(8) _had(8) _the(8) _for(7) court(7) voice(7) _their_(7) the_king(7)

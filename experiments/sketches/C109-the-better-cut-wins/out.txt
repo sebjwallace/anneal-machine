@@ -1,0 +1,130 @@
+
+====================================================================================================
+N = 8 (a use costs 1.73)
+====================================================================================================
+
+pass 1
+  buffer 1: [the_cat_sa][t_on_the_]mat[_and_the_dog_sa][t_on_the_]log_[the_cat_sa]w[_the_]dog[_and_the_dog_sa]w[_the_]cat
+    form   _the_                  built as _the_
+    form   _and_the_dog_sa        built as _and[_the_]dog_sa
+    form   the_cat_sa             built as the_cat_sa
+    form   t_on_the_              built as t_on[_the_]
+  buffer 2: the_cat[_ran_to_the_]dog_and[_the_]dog[_ran_to_the_]cat
+    form   _ran_to_the_           built as _ran_to[_the_]
+  buffer 3: then[_the_]cat[_and_the_dog_sa][t_on_the_]mat
+  buffer 4: the_[man_sa]w[_the_]c[at_and_the_]dog_on[_the_]m[at_and_the_][man_sa][t_on_the_]log
+    form   at_and_the_            built as at_and[_the_]
+    form   man_sa                 built as man_sa
+  buffer 5: the_zebra_sa[t_on_the_]mat
+  buffer 6: [the_zebra_]saw_[the_zebra_]and_[the_zebra_]ran
+    form   the_zebra_             built as the_zebra_
+
+pass 2
+  buffer 1: [the_cat_sa][t_on_the_]mat[_and_the_dog_sa][t_on_the_]log_[the_cat_sa]w[_the_]dog[_and_the_dog_sa]w[_the_]cat
+  buffer 2: the_cat[_ran_to_the_]dog_and[_the_]dog[_ran_to_the_]cat
+  buffer 3: then[_the_]cat[_and_the_dog_sa][t_on_the_]mat
+  buffer 4: the_[man_sa]w[_the_]c[at_and_the_]dog_on[_the_]m[at_and_the_][man_sa][t_on_the_]log
+  buffer 5: [the_zebra_]sa[t_on_the_]mat
+  buffer 6: [the_zebra_]saw_[the_zebra_]and_[the_zebra_]ran
+
+pieces at the end: 8 loaded, 0 stored; 0 stored and 0 brought back along the way
+loaded (chosen in all, used on the last pass):
+  _the_                    chosen 12  last pass 6   built as _the_   (C106 whole-text piece)
+  t_on_the_                chosen 10  last pass 5   built as t_on[_the_]
+  the_zebra_               chosen 7   last pass 4   built as the_zebra_
+  _and_the_dog_sa          chosen 6   last pass 3   built as _and[_the_]dog_sa
+  the_cat_sa               chosen 4   last pass 2   built as the_cat_sa
+  _ran_to_the_             chosen 4   last pass 2   built as _ran_to[_the_]
+  at_and_the_              chosen 4   last pass 2   built as at_and[_the_]
+  man_sa                   chosen 4   last pass 2   built as man_sa
+used on the last pass and cutting inside a word: the_cat_sa  t_on_the_  _and_the_dog_sa  man_sa  at_and_the_
+
+====================================================================================================
+N = 16 (a use costs 1.98)
+====================================================================================================
+
+pass 1
+  buffer 1: [the_cat_sa][t_on_the_]mat[_and_the_dog_sa][t_on_the_]log_[the_cat_sa]w[_the_]dog[_and_the_dog_sa]w[_the_]cat
+    form   _the_                  built as _the_
+    form   _and_the_dog_sa        built as _and[_the_]dog_sa
+    form   the_cat_sa             built as the_cat_sa
+    form   t_on_the_              built as t_on[_the_]
+  buffer 2: the_cat[_ran_to_the_]dog_and[_the_]dog[_ran_to_the_]cat
+    form   _ran_to_the_           built as _ran_to[_the_]
+  buffer 3: then[_the_]cat[_and_the_dog_sa][t_on_the_]mat
+  buffer 4: the_[man_sa]w[_the_]c[at_and_the_]dog_on[_the_]m[at_and_the_][man_sa][t_on_the_]log
+    form   at_and_the_            built as at_and[_the_]
+    form   man_sa                 built as man_sa
+  buffer 5: the_zebra_sa[t_on_the_]mat
+  buffer 6: [the_zebra_]saw_[the_zebra_]and_[the_zebra_]ran
+    form   the_zebra_             built as the_zebra_
+
+pass 2
+  buffer 1: [the_cat_sa][t_on_the_]mat[_and_the_dog_sa][t_on_the_]log_[the_cat_sa]w[_the_]dog[_and_the_dog_sa]w[_the_]cat
+  buffer 2: the_cat[_ran_to_the_]dog_and[_the_]dog[_ran_to_the_]cat
+  buffer 3: then[_the_]cat[_and_the_dog_sa][t_on_the_]mat
+  buffer 4: the_[man_sa]w[_the_]c[at_and_the_]dog_on[_the_]m[at_and_the_][man_sa][t_on_the_]log
+  buffer 5: [the_zebra_]sa[t_on_the_]mat
+  buffer 6: [the_zebra_]saw_[the_zebra_]and_[the_zebra_]ran
+
+pieces at the end: 8 loaded, 0 stored; 0 stored and 0 brought back along the way
+loaded (chosen in all, used on the last pass):
+  _the_                    chosen 12  last pass 6   built as _the_   (C106 whole-text piece)
+  t_on_the_                chosen 10  last pass 5   built as t_on[_the_]
+  the_zebra_               chosen 7   last pass 4   built as the_zebra_
+  _and_the_dog_sa          chosen 6   last pass 3   built as _and[_the_]dog_sa
+  the_cat_sa               chosen 4   last pass 2   built as the_cat_sa
+  _ran_to_the_             chosen 4   last pass 2   built as _ran_to[_the_]
+  at_and_the_              chosen 4   last pass 2   built as at_and[_the_]
+  man_sa                   chosen 4   last pass 2   built as man_sa
+used on the last pass and cutting inside a word: the_cat_sa  t_on_the_  _and_the_dog_sa  man_sa  at_and_the_
+
+====================================================================================================
+N = 64 (a use costs 2.47)
+====================================================================================================
+
+pass 1
+  buffer 1: [the_cat_sa][t_on_the_]mat[_and_the_dog_sa][t_on_the_]log_[the_cat_sa]w[_the_]dog[_and_the_dog_sa]w[_the_]cat
+    form   _the_                  built as _the_
+    form   _and_the_dog_sa        built as _and[_the_]dog_sa
+    form   the_cat_sa             built as the_cat_sa
+    form   t_on_the_              built as t_on[_the_]
+  buffer 2: the_cat[_ran_to_the_]dog_and[_the_]dog[_ran_to_the_]cat
+    form   _ran_to_the_           built as _ran_to[_the_]
+  buffer 3: then[_the_]cat[_and_the_dog_sa][t_on_the_]mat
+  buffer 4: the_[man_sa]w[_the_]c[at_and_the_]dog_on[_the_]m[at_and_the_][man_sa][t_on_the_]log
+    form   at_and_the_            built as at_and[_the_]
+    form   man_sa                 built as man_sa
+  buffer 5: the_zebra_sa[t_on_the_]mat
+  buffer 6: [the_zebra_]saw_[the_zebra_]and_[the_zebra_]ran
+    form   the_zebra_             built as the_zebra_
+
+pass 2
+  buffer 1: [the_cat_sa][t_on_the_]mat[_and_the_dog_sa][t_on_the_]log_[the_cat_sa]w[_the_]dog[_and_the_dog_sa]w[_the_]cat
+  buffer 2: the_cat[_ran_to_the_]dog_and[_the_]dog[_ran_to_the_]cat
+  buffer 3: then[_the_]cat[_and_the_dog_sa][t_on_the_]mat
+  buffer 4: the_[man_sa]w[_the_]c[at_and_the_]dog_on[_the_]m[at_and_the_][man_sa][t_on_the_]log
+  buffer 5: [the_zebra_]sa[t_on_the_]mat
+  buffer 6: [the_zebra_]saw_[the_zebra_]and_[the_zebra_]ran
+
+pieces at the end: 8 loaded, 0 stored; 0 stored and 0 brought back along the way
+loaded (chosen in all, used on the last pass):
+  _the_                    chosen 12  last pass 6   built as _the_   (C106 whole-text piece)
+  t_on_the_                chosen 10  last pass 5   built as t_on[_the_]
+  the_zebra_               chosen 7   last pass 4   built as the_zebra_
+  _and_the_dog_sa          chosen 6   last pass 3   built as _and[_the_]dog_sa
+  the_cat_sa               chosen 4   last pass 2   built as the_cat_sa
+  _ran_to_the_             chosen 4   last pass 2   built as _ran_to[_the_]
+  at_and_the_              chosen 4   last pass 2   built as at_and[_the_]
+  man_sa                   chosen 4   last pass 2   built as man_sa
+used on the last pass and cutting inside a word: the_cat_sa  t_on_the_  _and_the_dog_sa  man_sa  at_and_the_
+
+====================================================================================================
+summary
+====================================================================================================
+N = 8   loaded 8   stored 0   (stored 0×, brought back 0×); last pass uses 8 pieces, 1 of them C106's whole-text pieces, 5 cutting inside a word
+         zebra on the last pass: [the_zebra_]sa[t_on_the_]mat
+N = 16  loaded 8   stored 0   (stored 0×, brought back 0×); last pass uses 8 pieces, 1 of them C106's whole-text pieces, 5 cutting inside a word
+         zebra on the last pass: [the_zebra_]sa[t_on_the_]mat
+N = 64  loaded 8   stored 0   (stored 0×, brought back 0×); last pass uses 8 pieces, 1 of them C106's whole-text pieces, 5 cutting inside a word
+         zebra on the last pass: [the_zebra_]sa[t_on_the_]mat

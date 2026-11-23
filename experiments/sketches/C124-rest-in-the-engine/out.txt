@@ -1,0 +1,47 @@
+carroll-alice.txt: 2066 sentences; 8 members per letter; learnt on nine tenths, read on the last tenth; energy rule on
+
+--- link 4, no rest  (learning 35 s; 11570 assemblies; 0 parts formed at rest)
+  clean 54%  coverage 73%  words whole 27%  cuts at a word boundary 44% (chance 24%)
+  energy 48233 = memory 38743 + unseen 9490; 4218 patterns, 2740 prime
+  loose letters by tenth while learning: 90% 72% 56% 46% 38% 34% 30% 25% 28% 27%
+  atter: not held   hatter (prime)   matter (prime)   said (prime)   theking (prime)   thing (prime)   nothing: not held   ing (prime)
+  most read units: said(45) theking(32) alice(28) ofthe(26) that(25) this(15) thequeen(14)* inthe(13) what(12) andthe(12) jury(11) atthe(11) little(11) hatter(10) read(10) voice(10) important(10) would(9) thing(9) about(9) thewhit(9) erabbit(9)* your(9) shehad(9)* mouse(8)   (* composed, not prime)
+  reads: ima[poor]ma[nthe][hatter][wenton]and[most][things][twink]led[after][that][only]the[marchhare][said]i[didnt]
+  reads: the[marchhare][interrupt]ed[inagreathurry]
+  reads: [well][atanyrate][thedor][mouse]sa[idthe][hatter][wenton][look]ing[anxiously][round][toseeif]he[would]deny[itto]o
+  reads: [butthe]dor[mouse]deniedno[thing]bei[ngfasta][sleep]
+
+--- link 4, rest every 200 sentences and at the end  (learning 51 s; 11687 assemblies; 43 parts formed at rest)
+  clean 52%  coverage 73%  words whole 27%  cuts at a word boundary 44% (chance 24%)
+  energy 48088 = memory 38568 + unseen 9520; 4229 patterns, 2741 prime
+  loose letters by tenth while learning: 90% 71% 55% 45% 38% 34% 30% 26% 28% 27%
+  atter: not held   hatter = [hatte]r   matter (prime)   said (prime)   theking: not held   thing (prime)   nothing: not held   ing (prime)
+  first parts formed at rest: fourtimes ishall thedoor would after theduchess doesnt downhere areyou right shefelt amongth feeling andhad atanyra sucha saying witha round ingand better ending herhand possibl digging hardly ekidgloves tting happen ingit behindit three didyou erthan ressing ressed subject inging twinkle justas
+  most read units: said(31) alice(28) idthe(26) ofthe(25) that(24) king(19) this(15) thequeen(14)* inthe(13) atthe(12) andthe(12) what(11) thejury(11) thek(11) little(11) hatter(10)* read(10) your(10) voice(10) important(10) would(9) about(9) thewhit(9) erabbit(9)* shehad(9)*   (* composed, not prime)
+  reads: ima[poor]ma[nthe][hatter][wenton]and[most][things][twinkle]d[after][that][only]the[marchhare][said]i[didnt]
+  reads: the[marchhare][interrupt]ed[inagreathurry]
+  reads: [well][atanyrate][thedo]r[mouse]sa[idthe][hatter][wenton][look]ing[anxiously][round][toseeif]he[would]deny[itto]o
+  reads: [butthe]dor[mouse]deniedno[thing]bei[ngfasta][sleep]
+
+--- link 2.3, no rest  (learning 2 s; 10431 assemblies; 0 parts formed at rest)
+  clean 31%  coverage 86%  words whole 36%  cuts at a word boundary 48% (chance 24%)
+  energy 18985 = memory 10946 + unseen 8039; 2703 patterns, 1554 prime
+  loose letters by tenth while learning: 49% 24% 19% 17% 15% 15% 14% 13% 14% 13%
+  atter: not held   hatter: not held   matter: not held   said = s[aid]   theking: not held   thing: not held   nothing: not held   ing (prime)
+  most read units: the(156) ing(88) and(62) said(58)* you(42) that(32)* alice(28)* she(24) had(22) her(22) with(21)* ofth(21)* ther(20)* all(20) ejury(18)* hers(16)* ent(15) would(15)* his(15) atth(15)* int(14) est(14) ice(14) head(14)* que(14)   (* composed, not prime)
+  reads: [ima][poor][man][the]h[atte]rw[ent][ona]ndm[ost][thin]gs[twinkl]ed[after][that][only][the][mar][chh]ar[esaid]i[did]nt
+  reads: [the][mar][chh][are][int][err][upt][edin][agr][eat][hurry]
+  reads: [well][ata]ny[rat][eth]e[dorm][ouse][said][the]h[atte]rw[ent]on[loo]k[ing][anxi][ous]ly[round][tos][eeif]he[would][den][yit][too]
+  reads: [but][the][dorm][ouse][den]i[edn][othin]g[bei]ngf[ast][asl][eep]
+
+--- link 2.3, rest every 200 sentences and at the end  (learning 3 s; 10484 assemblies; 14 parts formed at rest)
+  clean 31%  coverage 86%  words whole 36%  cuts at a word boundary 48% (chance 24%)
+  energy 19040 = memory 10994 + unseen 8046; 2721 patterns, 1555 prime
+  loose letters by tenth while learning: 49% 24% 19% 17% 15% 15% 14% 13% 14% 13%
+  atter: not held   hatter: not held   matter: not held   said = s[aid]   theking: not held   thing: not held   nothing: not held   ing (prime)
+  first parts formed at rest: rea surp teles tha let itt mark drop abo ick tal ind wee sul
+  most read units: the(159) ing(85) and(63) said(58)* you(42) that(33)* alice(28)* she(24) with(21)* ofth(21)* had(21) ther(21)* her(21) all(20) ejury(18)* hers(16)* would(15)* his(15) atth(15)* for(14) ent(14) int(14) est(14) ice(14) head(14)*   (* composed, not prime)
+  reads: [ima][poor][man][the]h[atte]rw[ent][ona]ndm[ost][thin]gs[twinkl]ed[after][that][only][the][mar][chh]ar[esaid]i[did]nt
+  reads: [the][mar][chh][are][int][err][upt][edin][agr][eat][hurry]
+  reads: [well][ata]ny[rat][eth]e[dorm][ouse][said][the]h[atte]rw[ent]on[loo]k[ing][anxi][ous]ly[round][tos][eeif]he[would][den][yit][too]
+  reads: [but][the][dorm][ouse][den]i[edn][othin]g[bei]ngf[ast][asl][eep]

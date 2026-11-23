@@ -1,0 +1,164 @@
+
+==============================================================================================================
+Buster Brown: 1044 utterances
+==============================================================================================================
+
+without spaces, N 16384, no rest (C114)  (8 s)
+  cuts at a word boundary 31% (chance 25%); word boundaries found 80%; words read whole 12%
+  pieces read with both edges at word boundaries 75%; text covered by pieces 41%
+  pieces formed 4887 (0 at rest), stored away 0, held 4887
+  first pieces formed: theadventuresofbusterbearbythorntonw  busterbear  theadventuresof  bythorntonw  burgessi  goesfishingbusterbearyawnedashelayonhiscomfortablebedofleavesandwatchedthefirstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  burgessibusterbeargoesfishingbusterbearyawnedashelayonhiscomfortablebedofleavesandwatchedthefirstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  yawneda  goesfishingbusterbear  shelayonhiscomfortablebedofleavesandwatchedthefirstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  oncemorehe  ndslowlygottohisfeetandshookhimself  oncemoreheyawnedandslowlygottohisfeetandshookhimself  atchedthe  goesfishingbusterbearyawnedashelayonhiscomfortablebedofleavesandw  firstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  thenhewalkedovertoabigpinetreestooduponhishindlegsreachedashighuponthetrunkofthetreeashecouldandscr  barkwithhisgreatclaws  thenhewalkedovertoabigpinetreestooduponhishindlegsreachedashighuponthetrunkofthetreeashecouldandscratchedthebarkwithhisgreatclaws  heyawned  oncemore  andslowlygottohisfeetandshookhimself  afterthat  untilitseemedasifhisjawswouldcrackandthensatdowntothinkwhathewantedforbreakfast  afterthatheyawneduntilitseemedasifhisjawswouldcrackandthensatdowntothinkwhathewantedforbreakfast
+  most used: that(16) berries(10) there(7) where(7) then(7) this(7) buster(6) temper(6) come(6) those(6) when(5) look(5) them(5) bear(4) thenhe(4) know(4) ofthe(3) itwas(3) busterbear(3) sammyjay(3) hathe(3) climb(3) would(3) oughtto(3) saidhe(3) ands(3) theyare(3) thavebeen(3) hishead(3) worse(3)
+  reads: [ofcourse][chatterertheredsquirrel]andhappyjackthegraysquirrelwere[there]
+  reads: screamed[sammy][until]histhroatwassore
+  reads: theworstof[itwas][buster]knewtha[teverybody]knewt[hatitwas]true
+  reads: iwishi[neverhad]thoughtof[berries][growledbuster]to[himself]
+  reads: xxii[busterbear]hasafitoftemperatemperisabadbadthing[when]onceitgetsaway
+  reads: [there]snothingquiteatalllike[itto]spoilapleasantday
+
+without spaces, N 16384, rest every 100  (35 s)
+  cuts at a word boundary 32% (chance 25%); word boundaries found 77%; words read whole 12%
+  pieces read with both edges at word boundaries 77%; text covered by pieces 46%
+  pieces formed 7327 (2525 at rest), stored away 0, held 7327
+  first pieces formed: theadventuresofbusterbearbythorntonw  busterbear  theadventuresof  bythorntonw  burgessi  goesfishingbusterbearyawnedashelayonhiscomfortablebedofleavesandwatchedthefirstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  burgessibusterbeargoesfishingbusterbearyawnedashelayonhiscomfortablebedofleavesandwatchedthefirstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  yawneda  goesfishingbusterbear  shelayonhiscomfortablebedofleavesandwatchedthefirstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  oncemorehe  ndslowlygottohisfeetandshookhimself  oncemoreheyawnedandslowlygottohisfeetandshookhimself  atchedthe  goesfishingbusterbearyawnedashelayonhiscomfortablebedofleavesandw  firstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  thenhewalkedovertoabigpinetreestooduponhishindlegsreachedashighuponthetrunkofthetreeashecouldandscr  barkwithhisgreatclaws  thenhewalkedovertoabigpinetreestooduponhishindlegsreachedashighuponthetrunkofthetreeashecouldandscratchedthebarkwithhisgreatclaws  heyawned  oncemore  andslowlygottohisfeetandshookhimself  afterthat  untilitseemedasifhisjawswouldcrackandthensatdowntothinkwhathewantedforbreakfast  afterthatheyawneduntilitseemedasifhisjawswouldcrackandthensatdowntothinkwhathewantedforbreakfast
+  most used: pail(13) that(10) berries(9) there(6) buster(6) come(6) this(6) thati(6) been(6) itwas(5) temper(5) then(5) those(5) them(5) andthen(5) look(4) know(4) were(3) busterbear(3) when(3) sammyjay(3) little(3) andhe(3) bear(3) could(3) climb(3) would(3) thenhe(3) saidhe(3) theyare(3)
+  reads: [ofcourse][chatterertheredsquirrel][andh]appyjackthegraysquirrel[were][there]
+  reads: screamed[sammy][until]histhroatwassore
+  reads: theworstof[itwas][buster]knewtha[teverybody]knewt[hatitwas]true
+  reads: iwish[ineverhad]thoughtof[berries][growledbuster]to[himself]
+  reads: xxii[busterbear]hasafitoftemperatemperisabadbadthing[when]onceitgetsaway
+  reads: [there]snothingquiteatalllike[itto]spoilapleasantday
+
+without spaces, N 16384, rest every 400  (27 s)
+  cuts at a word boundary 31% (chance 25%); word boundaries found 77%; words read whole 12%
+  pieces read with both edges at word boundaries 74%; text covered by pieces 45%
+  pieces formed 6852 (2008 at rest), stored away 0, held 6852
+  first pieces formed: theadventuresofbusterbearbythorntonw  busterbear  theadventuresof  bythorntonw  burgessi  goesfishingbusterbearyawnedashelayonhiscomfortablebedofleavesandwatchedthefirstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  burgessibusterbeargoesfishingbusterbearyawnedashelayonhiscomfortablebedofleavesandwatchedthefirstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  yawneda  goesfishingbusterbear  shelayonhiscomfortablebedofleavesandwatchedthefirstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  oncemorehe  ndslowlygottohisfeetandshookhimself  oncemoreheyawnedandslowlygottohisfeetandshookhimself  atchedthe  goesfishingbusterbearyawnedashelayonhiscomfortablebedofleavesandw  firstearlymorningsunbeamscreepingthroughthegreenforesttochaseouttheblackshadows  thenhewalkedovertoabigpinetreestooduponhishindlegsreachedashighuponthetrunkofthetreeashecouldandscr  barkwithhisgreatclaws  thenhewalkedovertoabigpinetreestooduponhishindlegsreachedashighuponthetrunkofthetreeashecouldandscratchedthebarkwithhisgreatclaws  heyawned  oncemore  andslowlygottohisfeetandshookhimself  afterthat  untilitseemedasifhisjawswouldcrackandthensatdowntothinkwhathewantedforbreakfast  afterthatheyawneduntilitseemedasifhisjawswouldcrackandthensatdowntothinkwhathewantedforbreakfast
+  most used: that(10) berries(9) there(6) buster(6) come(6) this(6) thati(6) been(6) temper(5) then(5) those(5) them(5) andthen(5) where(4) itwas(4) look(4) know(4) were(3) oneoft(3) busterbear(3) when(3) sammyjay(3) hathe(3) little(3) andhe(3) bear(3) could(3) climb(3) would(3) thenhe(3)
+  reads: [ofcourse][chatterertheredsquirrel][andh]appyjackthegraysquirrel[were][there]
+  reads: screamed[sammy][until]histhroatwassore
+  reads: theworstof[itwas][buster]knewtha[teverybody]knewt[hatitwas]true
+  reads: iwish[ineverhad]thoughtof[berries][growledbuster]to[himself]
+  reads: xxii[busterbear]hasafitoftemperatemperisabadbadthing[when]onceitgetsaway
+  reads: [there]snothingquiteatalllike[itto]spoilapleasantday
+
+with spaces, N 16384, no rest (C114)  (18 s)
+  cuts at a word boundary 44% (chance 40%); word boundaries found 78%; words read whole 16%
+  pieces read with both edges at word boundaries 79%; text covered by pieces 48%
+  pieces formed 5178 (0 at rest), stored away 0, held 5178
+  first pieces formed: the_adventures_of_buster_bear_by_thornton_w  _buster_bear_  the_adventures_of  by_thornton_w  burgess_i  goes_fishing_buster_bear_yawned_as_he_lay_on_his_comfortable_bed_of_leaves_and_watched_the_first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  burgess_i_buster_bear_goes_fishing_buster_bear_yawned_as_he_lay_on_his_comfortable_bed_of_leaves_and_watched_the_first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  _yawned_a  burgess_i_buster_bear_goes_fishing_buster_bear  s_he_lay_on_his_comfortable_bed_of_leaves_and_watched_the_first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  once_more_he  nd_slowly_got_to_his_feet_and_shook_himself  once_more_he_yawned_and_slowly_got_to_his_feet_and_shook_himself  atched_the_  goes_fishing_buster_bear_yawned_as_he_lay_on_his_comfortable_bed_of_leaves_and_w  first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  then_he_walked_over_to_a_big_pine_tree_stood_up_on_his_hind_legs_reached_as_high_up_on_the_trunk_of_the_tree_as_he_could_and_scr  bark_with_his_great_claws  then_he_walked_over_to_a_big_pine_tree_stood_up_on_his_hind_legs_reached_as_high_up_on_the_trunk_of_the_tree_as_he_could_and_scratched_the_bark_with_his_great_claws  _he_yawned_  once_more  and_slowly_got_to_his_feet_and_shook_himself  after_that  until_it_seemed_as_if_his_jaws_would_crack_and_then_sat_down_to_think_what_he_wanted_for_breakfast  after_that_he_yawned_until_it_seemed_as_if_his_jaws_would_crack_and_then_sat_down_to_think_what_he_wanted_for_breakfast
+  most used: _and_(25) the_(23) _that(12) _berries(8) they(7) _was_(7) and_(6) temper(6) come(6) buster_(5) those(5) them(5) there(4) there_(4) _it_was(4) when_(4) _see(4) where(4) ther(4) now_(4) then_(4) this(4) i_gues(4) _where_he_(3) but_wh(3) _he_could_(3) _everybody(3) s_that_(3) he_is(3) sammy_jay(3)
+  reads: [of_course][_chatterer_the_red_squirrel_][and_]happy_jack_[the_]gray_squirrel_were_[there]
+  reads: screamed_[sammy_][until_]his_throat[_was_]sore
+  reads: [the_]wor[st_of][_it_was]_[buster_]knew[_that][_everybody]_knew_t[hat_it_was_]true
+  reads: that_awful_pail[_was_]proof_of_it
+  reads: [i_wi]sh_i[_never_had_]thought_of[_berries]_[growl][ed_buster_]to[_himself]
+  reads: xxii[_buster_bear_]has_a_fit_of_temper_a_temper_is_a_bad_bad_thing_[when_]once_it_gets_away
+
+with spaces, N 16384, rest every 100  (56 s)
+  cuts at a word boundary 45% (chance 40%); word boundaries found 76%; words read whole 19%
+  pieces read with both edges at word boundaries 79%; text covered by pieces 54%
+  pieces formed 8151 (3048 at rest), stored away 0, held 8151
+  first pieces formed: the_adventures_of_buster_bear_by_thornton_w  _buster_bear_  the_adventures_of  by_thornton_w  burgess_i  goes_fishing_buster_bear_yawned_as_he_lay_on_his_comfortable_bed_of_leaves_and_watched_the_first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  burgess_i_buster_bear_goes_fishing_buster_bear_yawned_as_he_lay_on_his_comfortable_bed_of_leaves_and_watched_the_first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  _yawned_a  burgess_i_buster_bear_goes_fishing_buster_bear  s_he_lay_on_his_comfortable_bed_of_leaves_and_watched_the_first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  once_more_he  nd_slowly_got_to_his_feet_and_shook_himself  once_more_he_yawned_and_slowly_got_to_his_feet_and_shook_himself  atched_the_  goes_fishing_buster_bear_yawned_as_he_lay_on_his_comfortable_bed_of_leaves_and_w  first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  then_he_walked_over_to_a_big_pine_tree_stood_up_on_his_hind_legs_reached_as_high_up_on_the_trunk_of_the_tree_as_he_could_and_scr  bark_with_his_great_claws  then_he_walked_over_to_a_big_pine_tree_stood_up_on_his_hind_legs_reached_as_high_up_on_the_trunk_of_the_tree_as_he_could_and_scratched_the_bark_with_his_great_claws  _he_yawned_  once_more  and_slowly_got_to_his_feet_and_shook_himself  after_that  until_it_seemed_as_if_his_jaws_would_crack_and_then_sat_down_to_think_what_he_wanted_for_breakfast  after_that_he_yawned_until_it_seemed_as_if_his_jaws_would_crack_and_then_sat_down_to_think_what_he_wanted_for_breakfast
+  most used: _the(28) _and_(19) _had(14) _that(10) _pail(10) _berries(8) and_(8) _thought_(7) _you(7) been_(6) _was_(5) buster_(5) _thing(5) temper(5) with(5) those(5) there(4) _him(4) _but_(4) _it_was(4) that_(4) _when_(4) s_that_(4) now_(4) _in_the_(4) come(4) this(4) was_(4) i_gues(4) and_then(4)
+  reads: [of_course][_chatterer_the_red_squirrel_][and_h]appy_jack[_the]_gray_squirrel_[were_][there]
+  reads: screamed_[sammy_][until_]his_throat[_was_]sore
+  reads: [the_]wor[st_of][_it_was]_[buster_]knew[_that][_everybody]_knew_t[hat_it_was_]true
+  reads: [that_]awful[_pail][_was_]proof[_of_it]
+  reads: [i_wi]sh_i[_never_had][_thought_]of[_berries]_[growled_buster_]to[_himself]
+  reads: xxii[_buster_bear_]has_a_fit_of_temper_a_temper_is_a_bad_bad[_thing][_when_]once_it[_get]s_away
+
+with spaces, N 16384, rest every 400  (46 s)
+  cuts at a word boundary 45% (chance 40%); word boundaries found 75%; words read whole 17%
+  pieces read with both edges at word boundaries 79%; text covered by pieces 53%
+  pieces formed 7597 (2463 at rest), stored away 0, held 7597
+  first pieces formed: the_adventures_of_buster_bear_by_thornton_w  _buster_bear_  the_adventures_of  by_thornton_w  burgess_i  goes_fishing_buster_bear_yawned_as_he_lay_on_his_comfortable_bed_of_leaves_and_watched_the_first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  burgess_i_buster_bear_goes_fishing_buster_bear_yawned_as_he_lay_on_his_comfortable_bed_of_leaves_and_watched_the_first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  _yawned_a  burgess_i_buster_bear_goes_fishing_buster_bear  s_he_lay_on_his_comfortable_bed_of_leaves_and_watched_the_first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  once_more_he  nd_slowly_got_to_his_feet_and_shook_himself  once_more_he_yawned_and_slowly_got_to_his_feet_and_shook_himself  atched_the_  goes_fishing_buster_bear_yawned_as_he_lay_on_his_comfortable_bed_of_leaves_and_w  first_early_morning_sunbeams_creeping_through_the_green_forest_to_chase_out_the_black_shadows  then_he_walked_over_to_a_big_pine_tree_stood_up_on_his_hind_legs_reached_as_high_up_on_the_trunk_of_the_tree_as_he_could_and_scr  bark_with_his_great_claws  then_he_walked_over_to_a_big_pine_tree_stood_up_on_his_hind_legs_reached_as_high_up_on_the_trunk_of_the_tree_as_he_could_and_scratched_the_bark_with_his_great_claws  _he_yawned_  once_more  and_slowly_got_to_his_feet_and_shook_himself  after_that  until_it_seemed_as_if_his_jaws_would_crack_and_then_sat_down_to_think_what_he_wanted_for_breakfast  after_that_he_yawned_until_it_seemed_as_if_his_jaws_would_crack_and_then_sat_down_to_think_what_he_wanted_for_breakfast
+  most used: _the(28) _and_(18) _that(10) _all(8) _berries(8) and_(8) _you(7) thing(6) been_(6) _was_(5) buster_(5) temper(5) was_(5) those(5) there(4) _him(4) _but_(4) the_(4) _it_was(4) that_(4) _when_(4) s_that_(4) now_(4) then_(4) come(4) this(4) i_gues(4) and_then(4) d_of(4) were_(3)
+  reads: [of_course][_chatterer_the_red_squirrel_][and_h]appy_jack[_the]_gray_squirrel_[were_][there]
+  reads: screamed_[sammy_][until_]his_throat[_was_]sore
+  reads: [the_]wor[st_of][_it_was]_[buster_]knew[_that][_everybody]_knew_t[hat_it_was_]true
+  reads: [that_]awful_pail[_was_]proof_[of_it]
+  reads: [i_wi]sh_[i_never_had_]thought_of[_berries]_[growled_buster_]to[_himself]
+  reads: xxii[_buster_bear_]has_a_fit_of_temper_a_temper_[is_a]_bad_bad_[thing][_when_]once_it[_get]s_away
+
+==============================================================================================================
+Alice: 2066 utterances
+==============================================================================================================
+
+without spaces, N 16384, no rest (C114)  (28 s)
+  cuts at a word boundary 32% (chance 24%); word boundaries found 74%; words read whole 13%
+  pieces read with both edges at word boundaries 69%; text covered by pieces 52%
+  pieces formed 9336 (0 at rest), stored away 0, held 9336
+  first pieces formed: alicesadventuresinwonderlandbylewiscarrollchapteri  alice  sadventuresinwonderlandbylewiscarrollchapteri  downtherabbithole  wasbeginningtogetverytiredofsittingbyhersisteronthebankandofhavingnothingtodo  downtherabbitholealicewasbeginningtogetverytiredofsittingbyhersisteronthebankandofhavingnothingtodo  hersister  downtherabbitholealicewasbeginningtogetverytiredofsittingby  onthebankandofhavingnothingtodo  onceortwiceshehadpeepedintothebook  wasreadingbutithadnopicturesorconversationsinitandwhatistheuseofabookthoughtalicewithoutpicturesorconversation  onceortwiceshehadpeepedintothebookhersisterwasreadingbutithadnopicturesorconversationsinitandwhatistheuseofabookthoughtalicewithoutpicturesorconversation  erabbit  downth  holealicewasbeginningtogetverytiredofsittingbyhersisteronthebankandofhavingnothingtodo  soshewasconsideringinherownmindaswellasshecouldforthehotdaymadeherfeelverysleepyandstupidwhetherthepleasureofmakingadaisychainwouldbeworththetroubleofgettingupandpickingthedaisieswhensuddenlyawhit  withpinkeyesranclosebyher  soshewasconsideringinherownmindaswellasshecouldforthehotdaymadeherfeelverysleepyandstupidwhetherthepleasureofmakingadaisychainwouldbeworththetroubleofgettingupandpickingthedaisieswhensuddenlyawhiterabbitwithpinkeyesranclosebyher  nothing  downtherabbitholealicewasbeginningtogetverytiredofsittingbyhersisteronthebankandofhaving  todo  therewas  soveryremarkableinthat  therewasnothingsoveryremarkableinthat  therabbit
+  most used: them(16) this(15) saidtheking(14) would(13) ofthe(13) with(12) they(11) theking(10) that(9) saidalice(9) jury(8) down(8) andthe(8) ands(8) court(7) just(7) voice(7) king(7) thejury(7) dream(7) ther(7) nothing(6) then(6) turn(6) again(6) over(6) after(5) saidthehatter(5) some(5) oneof(5)
+  reads: imapoorman[thehatter][wenton]andmos[tthing]stwinkled[after][that]only[themarchharesaid]ididnt
+  reads: [themarchhare][interrupted][inagreathurry]
+  reads: [well][atanyrate][thedormouse][saidthehatter][wenton]lookinganxiously[round]toseeifhe[would][denyi]ttoo
+  reads: bu[tthedormouse]denied[nothing]being[fastasleep]
+  reads: [after][that]continu[edthehatter]icut[some]more[breadandbutter]b[utwhat]did[thedormouses]ay
+  reads: [youmust][remember][remarked][theking][orillhaveyouexecuted]
+
+without spaces, N 16384, rest every 100  (89 s)
+  cuts at a word boundary 33% (chance 24%); word boundaries found 71%; words read whole 14%
+  pieces read with both edges at word boundaries 67%; text covered by pieces 56%
+  pieces formed 13713 (4710 at rest), stored away 0, held 13713
+  first pieces formed: alicesadventuresinwonderlandbylewiscarrollchapteri  alice  sadventuresinwonderlandbylewiscarrollchapteri  downtherabbithole  wasbeginningtogetverytiredofsittingbyhersisteronthebankandofhavingnothingtodo  downtherabbitholealicewasbeginningtogetverytiredofsittingbyhersisteronthebankandofhavingnothingtodo  hersister  downtherabbitholealicewasbeginningtogetverytiredofsittingby  onthebankandofhavingnothingtodo  onceortwiceshehadpeepedintothebook  wasreadingbutithadnopicturesorconversationsinitandwhatistheuseofabookthoughtalicewithoutpicturesorconversation  onceortwiceshehadpeepedintothebookhersisterwasreadingbutithadnopicturesorconversationsinitandwhatistheuseofabookthoughtalicewithoutpicturesorconversation  erabbit  downth  holealicewasbeginningtogetverytiredofsittingbyhersisteronthebankandofhavingnothingtodo  soshewasconsideringinherownmindaswellasshecouldforthehotdaymadeherfeelverysleepyandstupidwhetherthepleasureofmakingadaisychainwouldbeworththetroubleofgettingupandpickingthedaisieswhensuddenlyawhit  withpinkeyesranclosebyher  soshewasconsideringinherownmindaswellasshecouldforthehotdaymadeherfeelverysleepyandstupidwhetherthepleasureofmakingadaisychainwouldbeworththetroubleofgettingupandpickingthedaisieswhensuddenlyawhiterabbitwithpinkeyesranclosebyher  nothing  downtherabbitholealicewasbeginningtogetverytiredofsittingbyhersisteronthebankandofhaving  todo  therewas  soveryremarkableinthat  therewasnothingsoveryremarkableinthat  therabbit
+  most used: this(15) saidtheking(14) them(13) inthe(12) with(11) ofthe(11) theking(10) they(10) would(9) saidalice(9) jury(8) down(8) that(7) nothing(7) some(7) just(7) voice(7) thejury(7) dream(7) court(6) again(6) alice(6) over(6) little(6) allthe(6) shes(6) ther(6) after(5) oneofthe(5) bythe(5)
+  reads: imapoorman[thehatter][wenton]andmos[tthing]stwinkled[after][that][only][themarchharesaid]ididnt
+  reads: [themarchhareinterrupted][inagreathurry]
+  reads: [well][atanyrate][thedormouses][aidthehatter][wenton]looking[anxiously][round]toseeifhe[would][denyi]ttoo
+  reads: bu[tthedormouse]denied[nothing]being[fastasleep]
+  reads: [after][that]continu[edthehatter]icut[some]more[breadandbutter][butwhat]did[thedormouses]ay
+  reads: [youmust][remember][remark]ed[theking][orillhaveyouexecuted]
+
+without spaces, N 16384, rest every 400  (84 s)
+  cuts at a word boundary 32% (chance 24%); word boundaries found 72%; words read whole 14%
+  pieces read with both edges at word boundaries 67%; text covered by pieces 55%
+  pieces formed 13819 (4733 at rest), stored away 0, held 13819
+  first pieces formed: alicesadventuresinwonderlandbylewiscarrollchapteri  alice  sadventuresinwonderlandbylewiscarrollchapteri  downtherabbithole  wasbeginningtogetverytiredofsittingbyhersisteronthebankandofhavingnothingtodo  downtherabbitholealicewasbeginningtogetverytiredofsittingbyhersisteronthebankandofhavingnothingtodo  hersister  downtherabbitholealicewasbeginningtogetverytiredofsittingby  onthebankandofhavingnothingtodo  onceortwiceshehadpeepedintothebook  wasreadingbutithadnopicturesorconversationsinitandwhatistheuseofabookthoughtalicewithoutpicturesorconversation  onceortwiceshehadpeepedintothebookhersisterwasreadingbutithadnopicturesorconversationsinitandwhatistheuseofabookthoughtalicewithoutpicturesorconversation  erabbit  downth  holealicewasbeginningtogetverytiredofsittingbyhersisteronthebankandofhavingnothingtodo  soshewasconsideringinherownmindaswellasshecouldforthehotdaymadeherfeelverysleepyandstupidwhetherthepleasureofmakingadaisychainwouldbeworththetroubleofgettingupandpickingthedaisieswhensuddenlyawhit  withpinkeyesranclosebyher  soshewasconsideringinherownmindaswellasshecouldforthehotdaymadeherfeelverysleepyandstupidwhetherthepleasureofmakingadaisychainwouldbeworththetroubleofgettingupandpickingthedaisieswhensuddenlyawhiterabbitwithpinkeyesranclosebyher  nothing  downtherabbitholealicewasbeginningtogetverytiredofsittingbyhersisteronthebankandofhaving  todo  therewas  soveryremarkableinthat  therewasnothingsoveryremarkableinthat  therabbit
+  most used: this(15) saidtheking(14) them(14) would(12) ofthe(12) with(11) they(11) theking(10) saidalice(9) jury(8) down(8) nothing(7) some(7) court(7) just(7) thewhiterabbit(7) voice(7) alice(7) thejury(7) dream(7) ther(7) that(6) then(6) again(6) over(6) little(6) allthe(6) ands(6) after(5) oneofthe(5)
+  reads: imapoorman[thehatter][wentonand]mos[tthing]stwinkled[after][that][only][themarchharesaid]ididnt
+  reads: [themarchhareinterrupted][inagreathurry]
+  reads: [well][atanyrate][thedormouses][aidthehatter][wenton]looking[anxiously][round]toseeifhe[would][denyi]ttoo
+  reads: bu[tthedormouse]denied[nothing]being[fastasleep]
+  reads: [after][that]continu[edthehatter]icut[some]more[breadandbutter][butwhat]did[thedormouses]ay
+  reads: [youmust][remember][remark]ed[theking][orillhaveyouexecuted]
+
+with spaces, N 16384, no rest (C114)  (50 s)
+  cuts at a word boundary 43% (chance 38%); word boundaries found 73%; words read whole 20%
+  pieces read with both edges at word boundaries 77%; text covered by pieces 59%
+  pieces formed 9826 (0 at rest), stored away 0, held 9826
+  first pieces formed: alice_s_adventures_in_wonderland_by_lewis_carroll_chapter_i  alice_  s_adventures_in_wonderland_by_lewis_carroll_chapter_i  down_the_rabbit_hole_  was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having_nothing_to_do  down_the_rabbit_hole_alice_was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having_nothing_to_do  _her_sister_  down_the_rabbit_hole_alice_was_beginning_to_get_very_tired_of_sitting_by  on_the_bank_and_of_having_nothing_to_do  once_or_twice_she_had_peeped_into_the_book  was_reading_but_it_had_no_pictures_or_conversations_in_it_and_what_is_the_use_of_a_book_thought_alice_without_pictures_or_conversation  once_or_twice_she_had_peeped_into_the_book_her_sister_was_reading_but_it_had_no_pictures_or_conversations_in_it_and_what_is_the_use_of_a_book_thought_alice_without_pictures_or_conversation  e_rabbit_  down_th  hole_alice_was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having_nothing_to_do  so_she_was_considering_in_her_own_mind_as_well_as_she_could_for_the_hot_day_made_her_feel_very_sleepy_and_stupid_whether_the_pleasure_of_making_a_daisy_chain_would_be_worth_the_trouble_of_getting_up_and_picking_the_daisies_when_suddenly_a_whit  with_pink_eyes_ran_close_by_her  so_she_was_considering_in_her_own_mind_as_well_as_she_could_for_the_hot_day_made_her_feel_very_sleepy_and_stupid_whether_the_pleasure_of_making_a_daisy_chain_would_be_worth_the_trouble_of_getting_up_and_picking_the_daisies_when_suddenly_a_white_rabbit_with_pink_eyes_ran_close_by_her  _nothing_  down_the_rabbit_hole_alice_was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having  to_do  there_was  so_very_remarkable_in_that  there_was_nothing_so_very_remarkable_in_that  _the_rabbit_
+  most used: the_(35) _and(33) and_(15) she_(12) _him(12) that_(11) jury(11) _you(11) they_(11) _of_the_(11) _with(10) _said_the_king(10) this(10) _them_(9) some(8) _in_the_(8) _she_had_(8) _their_(8) s_the_(8) that(7) court(7) head(7) e_king(7) voice(7) dream(7) king(6) _all_(6) _the_white_rabbit_(6) turn(6) begin(5)
+  reads: [of_course_]twinkling_[begin]s[_with]_a_t
+  reads: [the_march_hare_][interrupted_]in[_a_great_]hurry
+  reads: bu[t_the_dormouse_]denie[d_nothing_]being_fast_asleep
+  reads: [that_][i_can_t_remember_][said_the_hatter]
+  reads: [you_must][_remember][_remarked_][the_][king]_or_[i_ll]_[have_you][_execute]d
+  reads: [the_m]iserable_[hatter]_dropp[ed_his_]teacup[_and]_bread[_and][_butter]_[and_w][ent_down_]on_one_knee
+
+with spaces, N 16384, rest every 100  (168 s)
+  cuts at a word boundary 43% (chance 38%); word boundaries found 71%; words read whole 21%
+  pieces read with both edges at word boundaries 74%; text covered by pieces 63%
+  pieces formed 15043 (5679 at rest), stored away 0, held 15043
+  first pieces formed: alice_s_adventures_in_wonderland_by_lewis_carroll_chapter_i  alice_  s_adventures_in_wonderland_by_lewis_carroll_chapter_i  down_the_rabbit_hole_  was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having_nothing_to_do  down_the_rabbit_hole_alice_was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having_nothing_to_do  _her_sister_  down_the_rabbit_hole_alice_was_beginning_to_get_very_tired_of_sitting_by  on_the_bank_and_of_having_nothing_to_do  once_or_twice_she_had_peeped_into_the_book  was_reading_but_it_had_no_pictures_or_conversations_in_it_and_what_is_the_use_of_a_book_thought_alice_without_pictures_or_conversation  once_or_twice_she_had_peeped_into_the_book_her_sister_was_reading_but_it_had_no_pictures_or_conversations_in_it_and_what_is_the_use_of_a_book_thought_alice_without_pictures_or_conversation  e_rabbit_  down_th  hole_alice_was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having_nothing_to_do  so_she_was_considering_in_her_own_mind_as_well_as_she_could_for_the_hot_day_made_her_feel_very_sleepy_and_stupid_whether_the_pleasure_of_making_a_daisy_chain_would_be_worth_the_trouble_of_getting_up_and_picking_the_daisies_when_suddenly_a_whit  with_pink_eyes_ran_close_by_her  so_she_was_considering_in_her_own_mind_as_well_as_she_could_for_the_hot_day_made_her_feel_very_sleepy_and_stupid_whether_the_pleasure_of_making_a_daisy_chain_would_be_worth_the_trouble_of_getting_up_and_picking_the_daisies_when_suddenly_a_white_rabbit_with_pink_eyes_ran_close_by_her  _nothing_  down_the_rabbit_hole_alice_was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having  to_do  there_was  so_very_remarkable_in_that  there_was_nothing_so_very_remarkable_in_that  _the_rabbit_
+  most used: _and_(24) _the_(20) and_(13) t_the_(12) the_(12) _him(12) _you_(11) _of_the_(11) _with(10) _said_the_king(10) jury(10) king(9) they_(9) _the(9) _that_(8) some(8) she_(8) _had(8) _would_(7) court(7) _in_the_(7) voice(7) the_king(7) dream(7) _for(6) e_of_the(6) ed_the(6) _was_(6) _into(6) _the_white_rabbit_(6)
+  reads: [of_course_]twinkling_[begin]s[_with]_a_t
+  reads: [the_march_hare_interrupted_]in[_a_great_]h[urry]
+  reads: bu[t_the_dormouse_]denied[_nothing_]being_fast_asleep
+  reads: [that_][i_can_t_remember_][said_the_hatter]
+  reads: [you_must][_remember_][remark][ed_the]_[king]_or_[i_ll_][have_you][_execute]d
+  reads: [the_m]iserable_[hatter]_[dropped]_his_teacup[_and][_bread_and_butter_][and_]went[_down_]on_one_knee
+
+with spaces, N 16384, rest every 400  (173 s)
+  cuts at a word boundary 43% (chance 38%); word boundaries found 71%; words read whole 20%
+  pieces read with both edges at word boundaries 75%; text covered by pieces 63%
+  pieces formed 15356 (5822 at rest), stored away 0, held 15356
+  first pieces formed: alice_s_adventures_in_wonderland_by_lewis_carroll_chapter_i  alice_  s_adventures_in_wonderland_by_lewis_carroll_chapter_i  down_the_rabbit_hole_  was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having_nothing_to_do  down_the_rabbit_hole_alice_was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having_nothing_to_do  _her_sister_  down_the_rabbit_hole_alice_was_beginning_to_get_very_tired_of_sitting_by  on_the_bank_and_of_having_nothing_to_do  once_or_twice_she_had_peeped_into_the_book  was_reading_but_it_had_no_pictures_or_conversations_in_it_and_what_is_the_use_of_a_book_thought_alice_without_pictures_or_conversation  once_or_twice_she_had_peeped_into_the_book_her_sister_was_reading_but_it_had_no_pictures_or_conversations_in_it_and_what_is_the_use_of_a_book_thought_alice_without_pictures_or_conversation  e_rabbit_  down_th  hole_alice_was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having_nothing_to_do  so_she_was_considering_in_her_own_mind_as_well_as_she_could_for_the_hot_day_made_her_feel_very_sleepy_and_stupid_whether_the_pleasure_of_making_a_daisy_chain_would_be_worth_the_trouble_of_getting_up_and_picking_the_daisies_when_suddenly_a_whit  with_pink_eyes_ran_close_by_her  so_she_was_considering_in_her_own_mind_as_well_as_she_could_for_the_hot_day_made_her_feel_very_sleepy_and_stupid_whether_the_pleasure_of_making_a_daisy_chain_would_be_worth_the_trouble_of_getting_up_and_picking_the_daisies_when_suddenly_a_white_rabbit_with_pink_eyes_ran_close_by_her  _nothing_  down_the_rabbit_hole_alice_was_beginning_to_get_very_tired_of_sitting_by_her_sister_on_the_bank_and_of_having  to_do  there_was  so_very_remarkable_in_that  there_was_nothing_so_very_remarkable_in_that  _the_rabbit_
+  most used: _and_(24) _to_(15) and_(12) _the_(11) jury(10) the_(10) _him(10) _of_the_(10) _with(9) _said_the_king(9) they_(9) king(8) _would_(8) some(8) _in_the_(8) she_(8) this_(8) _them_(8) e_of_the(7) court(7) voice(7) _their_(7) the_king(7) _you(7) dream(7) _for(6) _that(6) _and(6) head(6) _was_(6)
+  reads: [of_course_]twinkling_[begin]s[_with]_a_t
+  reads: [the_march_hare_interrupted_]in[_a_great_][hurry]
+  reads: bu[t_the_dormouse_]denied[_nothing_]being_fast_asleep
+  reads: [that_][i_can_t_remember_][said_the_hatter]
+  reads: [you_must][_remember_][remark][ed_the]_[king]_or_[i_ll_][have_you][_execute]d
+  reads: [the_m]iserable_[hatter]_[dropped]_his_teacup[_and][_bread_and_butter_][and_w][ent_down_]on_one_knee

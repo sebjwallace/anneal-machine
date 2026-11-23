@@ -1,0 +1,106 @@
+
+==============================================================================================================
+Buster Brown, no spaces, sentences; learnt as C118 "both" on nine tenths
+==============================================================================================================
+held patterns 2576; unseen tenth: 105 sentences, 6283 letters
+
+--- link costs 2.3 letters  (2 s)
+  before rest: energy 20585 = memory 17134 + unseen 3451; 2576 patterns, 635 prime; unseen covered 83%
+  after rest:  energy 20029 = memory 16676 + unseen 3354; 2755 patterns (179 new parts), 523 prime; unseen covered 87%
+    atter: not held
+    hatter: not held
+    matter = ma[tter]
+    thehatter: not held
+    saidthe: not held
+    esaid: not held
+    ing (prime)
+    the (prime)
+    nothing: not held
+  most used primes in the unseen tenth: and(19) his(14) had(13) per(11) pail(10) the(10) was(8) you(7) ing(7) hes(7) ill(6) but(5) way(5) for(5) her(5) climb(5) been(5) him(4) body(4) bad(4) once(4) ive(4) wor(4) little(4) past(4) with(4) place(4) who(4) good(4) all(3)
+  most used composites: berries = [ber][rie]s   buster = bus[ter]   there = t[here]   that = t[hat]   busterbear = [buster][bear]   farmerbrownsboy = [farmerbrowns][boy]   thought = [though]t   itwas = it[was]   away = a[way]   could = c[ould]   have = h[ave]   guess = gu[ess]
+  primes by length (12 = 12 or more): 2:65 3:186 4:140 5:75 6:28 7:14 8:8 9:6 12:1
+
+--- link costs 3.2 letters  (2 s)
+  before rest: energy 24514 = memory 20185 + unseen 4329; 2576 patterns, 1290 prime; unseen covered 72%
+  after rest:  energy 24406 = memory 20100 + unseen 4306; 2636 patterns (60 new parts), 1184 prime; unseen covered 73%
+    atter: not held
+    hatter: not held
+    matter (prime)
+    thehatter: not held
+    saidthe: not held
+    esaid: not held
+    ing (prime)
+    the (prime)
+    nothing: not held
+  most used primes in the unseen tenth: berries(14) buster(11) that(9) pail(9) away(8) could(8) have(8) guess(8) itwas(7) thief(6) thing(6) when(6) andth(6) more(6) about(6) hehad(6) then(5) this(5) osewho(5) climb(5) been(5) over(5) andw(5) worse(5) they(4) them(4) body(4) once(4) little(4) past(4)
+  most used composites: there = t[here]   busterbear = bust[erbear]   farmerbrownsboy = [farmerbrowns]boy   thought = [though]t   might = m[ight]   right = r[ight]   thenhe = [thenh]e   every = e[very]   thati = [that]i   where = w[here]   ingand = [inga]nd   ofthe = o[fthe]
+  primes by length (12 = 12 or more): 2:65 3:135 4:261 5:304 6:162 7:92 8:61 9:46 10:15 11:13 12:30
+
+--- link costs 4 letters  (1 s)
+  before rest: energy 26904 = memory 21940 + unseen 4964; 2576 patterns, 1621 prime; unseen covered 56%
+  after rest:  energy 26901 = memory 21937 + unseen 4964; 2577 patterns (1 new parts), 1621 prime; unseen covered 56%
+    atter: not held
+    hatter: not held
+    matter (prime)
+    thehatter: not held
+    saidthe: not held
+    esaid: not held
+    ing (prime)
+    the (prime)
+    nothing: not held
+  most used primes in the unseen tenth: berries(14) buster(11) there(9) guess(8) could(7) might(7) thief(6) itwas(6) andth(6) right(6) about(6) hehad(6) every(5) ofthe(5) thati(5) thing(5) where(5) osewho(5) climb(5) worse(5) ingand(4) little(4) place(4) hadbeen(4) great(3) erehe(3) laugh(3) theworst(3) never(3) enough(3)
+  most used composites: busterbear = bust[erbear]   farmerbrownsboy = [farmerbrowns]boy   thought = [though]t   thenhe = [thenh]e   sammyjay = [sammy]jay   around = a[round]   thegreenforest = t[hegreenforest]   hecould = he[could]   hisneck = hi[sneck]   dthatwa = d[thatwa]   edthat = e[dthat]   whenhe = [whenh]e
+  primes by length (12 = 12 or more): 2:65 3:135 4:231 5:356 6:269 7:157 8:122 9:93 10:48 11:41 12:104
+
+==============================================================================================================
+Alice, no spaces, sentences; learnt as C118 "both" on nine tenths
+==============================================================================================================
+held patterns 4148; unseen tenth: 207 sentences, 11576 letters
+
+--- link costs 2.3 letters  (5 s)
+  before rest: energy 33256 = memory 26889 + unseen 6367; 4148 patterns, 975 prime; unseen covered 86%
+  after rest:  energy 32433 = memory 26246 + unseen 6187; 4396 patterns (248 new parts), 767 prime; unseen covered 90%
+    atter = [atte]r
+    hatter = h[atter]
+    matter = m[atter]
+    thehatter: not held
+    saidthe: not held
+    esaid: not held
+    ing (prime)
+    the (prime)
+    nothing = no[thing]
+  most used primes in the unseen tenth: the(38) and(29) she(14) ing(13) her(12) jury(11) off(9) him(9) all(8) his(8) turn(8) writ(8) rea(8) you(7) ine(6) pig(6) added(6) wit(6) ness(6) for(6) began(5) ers(5) edup(5) head(5) had(5) est(5) been(5) poor(4) its(4) but(4)
+  most used composites: said = s[aid]   aidthe = ai[dthe]   king = k[ing]   alice = [alic]e   ofthe = o[fthe]   that = t[hat]   tthe = t[the]   thequeen = [the][queen]   them = t[hem]   would = w[ould]   this = t[his]   andthe = a[ndthe]
+  primes by length (12 = 12 or more): 2:122 3:326 4:192 5:77 6:33 7:14 8:2 9:1
+
+--- link costs 3.2 letters  (5 s)
+  before rest: energy 40066 = memory 31929 + unseen 8138; 4148 patterns, 2154 prime; unseen covered 75%
+  after rest:  energy 39879 = memory 31804 + unseen 8075; 4231 patterns (83 new parts), 1997 prime; unseen covered 76%
+    atter: not held
+    hatter = ha[tter]
+    matter = ma[tter]
+    thehatter: not held
+    saidthe: not held
+    esaid: not held
+    ing (prime)
+    the (prime)
+    nothing = no[thing]
+  most used primes in the unseen tenth: king(33) said(31) that(17) tthe(17) would(13) them(11) they(11) this(11) little(11) what(10) tothe(10) important(10) court(9) with(9) voice(9) after(8) some(8) jury(8) your(8) hesai(8) sthe(8) dormous(7) just(7) ever(7) mean(7) down(7) writ(7) majesty(6) read(6) added(6)
+  most used composites: aidthe = ai[dthe]   alice = [alic]e   ofthe = o[fthe]   thequeen = the[queen]   inthe = i[nthe]   andthe = a[ndthe]   hatter = ha[tter]   whiterabbit = [white][rabbit]   about = [abou]t   nothing = no[thing]   there = t[here]   edthe = e[dthe]
+  primes by length (12 = 12 or more): 2:122 3:257 4:504 5:444 6:287 7:153 8:98 9:44 10:33 11:20 12:35
+
+--- link costs 4 letters  (3 s)
+  before rest: energy 44192 = memory 34755 + unseen 9437; 4148 patterns, 2694 prime; unseen covered 54%
+  after rest:  energy 44185 = memory 34750 + unseen 9435; 4151 patterns (3 new parts), 2690 prime; unseen covered 54%
+    atter: not held
+    hatter (prime)
+    matter (prime)
+    thehatter: not held
+    saidthe: not held
+    esaid: not held
+    ing (prime)
+    the (prime)
+    nothing = no[thing]
+  most used primes in the unseen tenth: aidthe(32) ofthe(20) alice(20) inthe(13) would(12) little(11) hatter(10) important(10) court(9) about(9) voice(9) tothe(9) after(8) edthe(8) hesai(8) there(8) dormous(7) allthe(7) right(7) majesty(6) bythe(6) thats(6) onthe(6) before(6) again(6) ofher(6) wenton(5) first(5) never(5) youknow(5)
+  most used composites: thequeen = the[queen]   andthe = a[ndthe]   whiterabbit = [white][rabbit]   nothing = no[thing]   ingthe = i[ngthe]   shehad = s[hehad]   oneofthe = one[ofthe]   hersister = h[ersiste]r   ofcourse = of[course]   toherself = to[herself]   withthe = wi[ththe]   shecould = she[could]
+  primes by length (12 = 12 or more): 2:122 3:257 4:463 5:596 6:424 7:264 8:193 9:102 10:95 11:49 12:125

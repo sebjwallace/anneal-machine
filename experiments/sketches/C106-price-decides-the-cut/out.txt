@@ -1,0 +1,292 @@
+
+====================================================================================================
+two sentences: "the cat sat on the mat the dog sat on the log" (45 characters, alphabet 13)
+====================================================================================================
+
+--- docs pricing, pieces never edited (main)
+energy 45.0 → 34.1; 2 pieces; 13 of 45 letters left loose
+steps, in order:
+  form   #0 _sat_on_the_     as _sat_on_the_           used 2×   energy 45.0 → 35.0
+  form   #1 the_             as the_                   used 2×   energy 35.0 → 34.1
+pieces:
+  #0   _sat_on_the_       built as _sat_on_the_             used 2 in the text, in 0 piece(s)
+  #1   the_               built as the_                     used 2 in the text, in 0 piece(s)
+the buffer as described:
+  [the_]cat[_sat_on_the_]mat_[the_]dog[_sat_on_the_]log
+
+--- names pricing, pieces never edited
+energy 45.0 → 34.8; 2 pieces; 13 of 45 letters left loose
+pieces:
+  #0   _sat_on_the_       built as _sat_on_the_             used 2 in the text, in 0 piece(s)
+  #1   the_               built as the_                     used 2 in the text, in 0 piece(s)
+the buffer as described:
+  [the_]cat[_sat_on_the_]mat_[the_]dog[_sat_on_the_]log
+
+--- docs pricing, older pieces rewritten
+energy 45.0 → 31.4; 2 pieces; 13 of 45 letters left loose
+pieces:
+  #0   _sat_on_the_       built as _sat_on_[the_]           used 2 in the text, in 0 piece(s)
+  #1   the_               built as the_                     used 2 in the text, in 1 piece(s)
+the buffer as described:
+  [the_]cat[_sat_on_the_]mat_[the_]dog[_sat_on_the_]log
+
+--- names pricing, older pieces rewritten
+energy 45.0 → 31.3; 3 pieces; 9 of 45 letters left loose
+pieces:
+  #0   _sat_on_the_       built as _s[at]_on_[the_]         used 2 in the text, in 0 piece(s)
+  #1   the_               built as the_                     used 2 in the text, in 1 piece(s)
+  #2   at                 built as at                       used 2 in the text, in 1 piece(s)
+the buffer as described:
+  [the_]c[at][_sat_on_the_]m[at]_[the_]dog[_sat_on_the_]log
+
+====================================================================================================
+reader: "the cat sat on the mat and the dog sat on the log the cat saw the dog and the dog saw the …" (253 characters, alphabet 15)
+====================================================================================================
+
+--- docs pricing, pieces never edited (main)
+energy 253.0 → 124.7; 7 pieces; 47 of 253 letters left loose
+steps, in order:
+  form   #0 _the_            as _the_                  used 20×   energy 253.0 → 178.0
+  form   #1 _and_the_dog_    as _and[_the_]dog_        used 5×   energy 178.0 → 152.4
+  form   #2 sat_on_the_      as sat_on[_the_]          used 4×   energy 152.4 → 138.9
+  form   #3 _the_cat         as [_the_]cat             used 6×   energy 138.9 → 127.8
+  form   #4 _the_dog_and_the_dog_ as [_the_]dog[_and_the_dog_] used 2×   energy 127.8 → 126.7
+  form   #5 ran_to           as ran_to                 used 2×   energy 126.7 → 125.5
+  form   #6 _the_ma          as [_the_]ma              used 3×   energy 125.5 → 124.7
+pieces:
+  #0   _the_              built as _the_                    used 0 in the text, in 5 piece(s)
+  #1   _and_the_dog_      built as _and[_the_]dog_          used 3 in the text, in 1 piece(s)
+  #2   sat_on_the_        built as sat_on[_the_]            used 4 in the text, in 0 piece(s)
+  #3   _the_cat           built as [_the_]cat               used 6 in the text, in 0 piece(s)
+  #4   _the_dog_and_the_dog_ built as [_the_]dog[_and_the_dog_] used 2 in the text, in 0 piece(s)
+  #5   ran_to             built as ran_to                   used 2 in the text, in 0 piece(s)
+  #6   _the_ma            built as [_the_]ma                used 3 in the text, in 0 piece(s)
+the buffer as described:
+  the_cat_[sat_on_the_]mat[_and_the_dog_][sat_on_the_]log[_the_cat]_saw[_the_dog_and_the_dog_]saw[_the_cat][_the_cat]_[ran_to][_the_dog_and_the_dog_][ran_to][_the_cat]_then[_the_cat][_and_the_dog_][sat_on_the_]mat[_the_ma]n_saw[_the_cat][_and_the_dog_]on[_the_ma]t_and[_the_ma]n_[sat_on_the_]log
+
+--- names pricing, pieces never edited
+energy 253.0 → 116.5; 10 pieces; 23 of 253 letters left loose
+pieces:
+  #0   _the_              built as _the_                    used 3 in the text, in 4 piece(s)
+  #1   _and_the_dog_      built as _and[_the_]dog_          used 3 in the text, in 1 piece(s)
+  #2   sat_on_the_        built as sat_on[_the_]            used 2 in the text, in 1 piece(s)
+  #3   _the_cat           built as [_the_]cat               used 6 in the text, in 0 piece(s)
+  #4   an_                built as an_                      used 2 in the text, in 1 piece(s)
+  #5   mat                built as mat                      used 3 in the text, in 0 piece(s)
+  #6   saw                built as saw                      used 3 in the text, in 0 piece(s)
+  #7   _the_dog_and_the_dog_ built as [_the_]dog[_and_the_dog_] used 2 in the text, in 0 piece(s)
+  #8   sat_on_the_log     built as [sat_on_the_]log         used 2 in the text, in 0 piece(s)
+  #9   ran_to             built as r[an_]to                 used 2 in the text, in 0 piece(s)
+the buffer as described:
+  the_cat_[sat_on_the_][mat][_and_the_dog_][sat_on_the_log][_the_cat]_[saw][_the_dog_and_the_dog_][saw][_the_cat][_the_cat]_[ran_to][_the_dog_and_the_dog_][ran_to][_the_cat]_then[_the_cat][_and_the_dog_][sat_on_the_][mat][_the_]m[an_][saw][_the_cat][_and_the_dog_]on[_the_][mat]_and[_the_]m[an_][sat_on_the_log]
+
+--- docs pricing, older pieces rewritten
+energy 253.0 → 123.4; 7 pieces; 47 of 253 letters left loose
+pieces:
+  #0   _the_              built as _the_                    used 0 in the text, in 4 piece(s)
+  #1   _and_the_dog_      built as _and[_the_dog]_          used 5 in the text, in 0 piece(s)
+  #2   sat_on_the_        built as sat_on[_the_]            used 4 in the text, in 0 piece(s)
+  #3   _the_cat           built as [_the_]cat               used 6 in the text, in 0 piece(s)
+  #4   _the_dog           built as [_the_]dog               used 2 in the text, in 1 piece(s)
+  #5   ran_to             built as ran_to                   used 2 in the text, in 0 piece(s)
+  #6   _the_ma            built as [_the_]ma                used 3 in the text, in 0 piece(s)
+the buffer as described:
+  the_cat_[sat_on_the_]mat[_and_the_dog_][sat_on_the_]log[_the_cat]_saw[_the_dog][_and_the_dog_]saw[_the_cat][_the_cat]_[ran_to][_the_dog][_and_the_dog_][ran_to][_the_cat]_then[_the_cat][_and_the_dog_][sat_on_the_]mat[_the_ma]n_saw[_the_cat][_and_the_dog_]on[_the_ma]t_and[_the_ma]n_[sat_on_the_]log
+
+--- names pricing, older pieces rewritten
+energy 253.0 → 109.3; 15 pieces; 6 of 253 letters left loose
+pieces:
+  #0   _the_              built as _[the]_                  used 0 in the text, in 4 piece(s)
+  #1   _and_the_dog_      built as [_and][_the_dog]_        used 5 in the text, in 0 piece(s)
+  #2   sat_on_the_        built as s[at]_on[_the_]          used 0 in the text, in 2 piece(s)
+  #3   _the_cat           built as [_the_]c[at]             used 3 in the text, in 1 piece(s)
+  #4   _the_dog           built as [_the_]dog               used 2 in the text, in 1 piece(s)
+  #5   an_                built as an_                      used 2 in the text, in 1 piece(s)
+  #6   at                 built as at                       used 2 in the text, in 3 piece(s)
+  #7   the                built as the                      used 2 in the text, in 1 piece(s)
+  #8   saw                built as saw                      used 3 in the text, in 0 piece(s)
+  #9   sat_on_the_log     built as [sat_on_the_]log         used 2 in the text, in 0 piece(s)
+  #10  ran_to             built as r[an_]to                 used 2 in the text, in 0 piece(s)
+  #11  _and               built as _and                     used 1 in the text, in 1 piece(s)
+  #12  sat_on_the_mat     built as [sat_on_the_]m[at]       used 2 in the text, in 0 piece(s)
+  #13  _the_cat_          built as [_the_cat]_              used 3 in the text, in 0 piece(s)
+  #14  _the_m             built as [_the_]m                 used 3 in the text, in 0 piece(s)
+the buffer as described:
+  [the]_c[at]_[sat_on_the_mat][_and_the_dog_][sat_on_the_log][_the_cat_][saw][_the_dog][_and_the_dog_][saw][_the_cat][_the_cat_][ran_to][_the_dog][_and_the_dog_][ran_to][_the_cat_][the]n[_the_cat][_and_the_dog_][sat_on_the_mat][_the_m][an_][saw][_the_cat][_and_the_dog_]on[_the_m][at][_and][_the_m][an_][sat_on_the_log]
+
+====================================================================================================
+prose: "early in the morning the river was still and grey and a thin mist hung over the water a wo…" (552 characters, alphabet 23)
+====================================================================================================
+
+--- docs pricing, pieces never edited (main)
+energy 552.0 → 447.8; 12 pieces; 305 of 552 letters left loose
+steps, in order:
+  form   #0 _the_            as _the_                  used 17×   energy 552.0 → 489.0
+  form   #1 _and             as _and                   used 7×   energy 489.0 → 477.3
+  form   #2 er_              as er_                    used 8×   energy 477.3 → 470.2
+  form   #3 _she_            as _she_                  used 4×   energy 470.2 → 463.9
+  form   #4 ing              as ing                    used 7×   energy 463.9 → 459.1
+  form   #5 was_             as was_                   used 4×   energy 459.1 → 455.9
+  form   #6 ing_the_river_   as [ing][_the_]riv[er_]   used 2×   energy 455.9 → 453.5
+  form   #7 _of_the_         as _of[_the_]             used 3×   energy 453.5 → 451.2
+  form   #8 _the_water_      as [_the_]wat[er_]        used 2×   energy 451.2 → 449.9
+  form   #9 early_           as early_                 used 2×   energy 449.9 → 449.0
+  form   #10 _she_had_        as [_she_]had_            used 2×   energy 449.0 → 448.2
+  form   #11 _wo              as _wo                    used 4×   energy 448.2 → 447.8
+pieces:
+  #0   _the_              built as _the_                    used 10 in the text, in 3 piece(s)
+  #1   _and               built as _and                     used 7 in the text, in 0 piece(s)
+  #2   er_                built as er_                      used 4 in the text, in 2 piece(s)
+  #3   _she_              built as _she_                    used 2 in the text, in 1 piece(s)
+  #4   ing                built as ing                      used 5 in the text, in 1 piece(s)
+  #5   was_               built as was_                     used 4 in the text, in 0 piece(s)
+  #6   ing_the_river_     built as [ing][_the_]riv[er_]     used 2 in the text, in 0 piece(s)
+  #7   _of_the_           built as _of[_the_]               used 3 in the text, in 0 piece(s)
+  #8   _the_water_        built as [_the_]wat[er_]          used 2 in the text, in 0 piece(s)
+  #9   early_             built as early_                   used 2 in the text, in 0 piece(s)
+  #10  _she_had_          built as [_she_]had_              used 2 in the text, in 0 piece(s)
+  #11  _wo                built as _wo                      used 4 in the text, in 0 piece(s)
+the buffer as described:
+  [early_]in[_the_]morn[ing_the_river_][was_]still[_and]_grey[_and]_a_thin_mist_hung_over[_the_water_]a[_wo]man_walked_along[_the_]bank_with_h[er_]dog_stopp[ing]_now[_and]_then_to_look_at[_the_]birds_on[_the_]far_side[_she_had_]come_here_every_morn[ing]_for_years[_and][_she_]knew[_the_]sounds[_of_the_]place[_the_]slow_turn[_of_the_]current[_the_]calls[_of_the_]herons[_and][_the_]wind_in[_the_]reeds_today_someth[ing]_[was_]different[_the_water_][was_]high[er_]than[_she_had_]ev[er_]seen_it[_and][_the_]old[_wo]oden_bridge_[was_]n[early_]und[er_]it[_she_]stood_for_a_long_time_watch[ing_the_river_]rise[_and][_wo]nder[ing]_what_it[_wo]uld_br[ing]
+
+--- names pricing, pieces never edited
+energy 552.0 → 454.9; 13 pieces; 279 of 552 letters left loose
+pieces:
+  #0   _the_              built as _the_                    used 12 in the text, in 2 piece(s)
+  #1   _and               built as _and                     used 7 in the text, in 0 piece(s)
+  #2   er_                built as er_                      used 6 in the text, in 1 piece(s)
+  #3   ing                built as ing                      used 5 in the text, in 1 piece(s)
+  #4   _she_              built as _she_                    used 4 in the text, in 0 piece(s)
+  #5   was_               built as was_                     used 4 in the text, in 0 piece(s)
+  #6   _w                 built as _w                       used 8 in the text, in 0 piece(s)
+  #7   _of_the_           built as _of[_the_]               used 3 in the text, in 0 piece(s)
+  #8   ing_the_river_     built as [ing][_the_]riv[er_]     used 2 in the text, in 0 piece(s)
+  #9   early_             built as early_                   used 2 in the text, in 0 piece(s)
+  #10  _t                 built as _t                       used 6 in the text, in 0 piece(s)
+  #11  er                 built as er                       used 6 in the text, in 0 piece(s)
+  #12  d_                 built as d_                       used 6 in the text, in 0 piece(s)
+the buffer as described:
+  [early_]in[_the_]morn[ing_the_river_][was_]still[_and]_grey[_and]_a[_t]hin_mist_hung_ov[er][_the_]wat[er_]a[_w]oman[_w]alke[d_]along[_the_]bank[_w]ith_h[er_]dog_stopp[ing]_now[_and][_t]hen[_t]o_look_at[_the_]birds_on[_the_]far_side[_she_]ha[d_]come_h[er]e_ev[er]y_morn[ing]_for_years[_and][_she_]knew[_the_]sounds[_of_the_]place[_the_]slow[_t]urn[_of_the_]current[_the_]calls[_of_the_]h[er]ons[_and][_the_]win[d_]in[_the_]reeds[_t]oday_someth[ing]_[was_]diff[er]ent[_the_]wat[er_][was_]high[er_]than[_she_]ha[d_]ev[er_]seen_it[_and][_the_]old[_w]ooden_bridge_[was_]n[early_]und[er_]it[_she_]stoo[d_]for_a_long[_t]ime[_w]atch[ing_the_river_]rise[_and][_w]ond[er][ing][_w]hat_it[_w]oul[d_]br[ing]
+
+--- docs pricing, older pieces rewritten
+energy 552.0 → 447.8; 12 pieces; 305 of 552 letters left loose
+pieces:
+  #0   _the_              built as _the_                    used 10 in the text, in 3 piece(s)
+  #1   _and               built as _and                     used 7 in the text, in 0 piece(s)
+  #2   er_                built as er_                      used 4 in the text, in 2 piece(s)
+  #3   _she_              built as _she_                    used 2 in the text, in 1 piece(s)
+  #4   ing                built as ing                      used 5 in the text, in 1 piece(s)
+  #5   was_               built as was_                     used 4 in the text, in 0 piece(s)
+  #6   ing_the_river_     built as [ing][_the_]riv[er_]     used 2 in the text, in 0 piece(s)
+  #7   _of_the_           built as _of[_the_]               used 3 in the text, in 0 piece(s)
+  #8   _the_water_        built as [_the_]wat[er_]          used 2 in the text, in 0 piece(s)
+  #9   early_             built as early_                   used 2 in the text, in 0 piece(s)
+  #10  _she_had_          built as [_she_]had_              used 2 in the text, in 0 piece(s)
+  #11  _wo                built as _wo                      used 4 in the text, in 0 piece(s)
+the buffer as described:
+  [early_]in[_the_]morn[ing_the_river_][was_]still[_and]_grey[_and]_a_thin_mist_hung_over[_the_water_]a[_wo]man_walked_along[_the_]bank_with_h[er_]dog_stopp[ing]_now[_and]_then_to_look_at[_the_]birds_on[_the_]far_side[_she_had_]come_here_every_morn[ing]_for_years[_and][_she_]knew[_the_]sounds[_of_the_]place[_the_]slow_turn[_of_the_]current[_the_]calls[_of_the_]herons[_and][_the_]wind_in[_the_]reeds_today_someth[ing]_[was_]different[_the_water_][was_]high[er_]than[_she_had_]ev[er_]seen_it[_and][_the_]old[_wo]oden_bridge_[was_]n[early_]und[er_]it[_she_]stood_for_a_long_time_watch[ing_the_river_]rise[_and][_wo]nder[ing]_what_it[_wo]uld_br[ing]
+
+--- names pricing, older pieces rewritten
+energy 552.0 → 452.6; 13 pieces; 279 of 552 letters left loose
+pieces:
+  #0   _the_              built as [_t]he_                  used 12 in the text, in 2 piece(s)
+  #1   _and               built as _and                     used 7 in the text, in 0 piece(s)
+  #2   er_                built as [er]_                    used 6 in the text, in 1 piece(s)
+  #3   ing                built as ing                      used 5 in the text, in 1 piece(s)
+  #4   _she_              built as _she_                    used 4 in the text, in 0 piece(s)
+  #5   was_               built as was_                     used 4 in the text, in 0 piece(s)
+  #6   _w                 built as _w                       used 8 in the text, in 0 piece(s)
+  #7   _t                 built as _t                       used 6 in the text, in 1 piece(s)
+  #8   er                 built as er                       used 6 in the text, in 1 piece(s)
+  #9   _of_the_           built as _of[_the_]               used 3 in the text, in 0 piece(s)
+  #10  early_             built as early_                   used 2 in the text, in 0 piece(s)
+  #11  ing_the_river_     built as [ing][_the_]riv[er_]     used 2 in the text, in 0 piece(s)
+  #12  d_                 built as d_                       used 6 in the text, in 0 piece(s)
+the buffer as described:
+  [early_]in[_the_]morn[ing_the_river_][was_]still[_and]_grey[_and]_a[_t]hin_mist_hung_ov[er][_the_]wat[er_]a[_w]oman[_w]alke[d_]along[_the_]bank[_w]ith_h[er_]dog_stopp[ing]_now[_and][_t]hen[_t]o_look_at[_the_]birds_on[_the_]far_side[_she_]ha[d_]come_h[er]e_ev[er]y_morn[ing]_for_years[_and][_she_]knew[_the_]sounds[_of_the_]place[_the_]slow[_t]urn[_of_the_]current[_the_]calls[_of_the_]h[er]ons[_and][_the_]win[d_]in[_the_]reeds[_t]oday_someth[ing]_[was_]diff[er]ent[_the_]wat[er_][was_]high[er_]than[_she_]ha[d_]ev[er_]seen_it[_and][_the_]old[_w]ooden_bridge_[was_]n[early_]und[er_]it[_she_]stoo[d_]for_a_long[_t]ime[_w]atch[ing_the_river_]rise[_and][_w]ond[er][ing][_w]hat_it[_w]oul[d_]br[ing]
+
+====================================================================================================
+buffers in turn: the reader in four buffers, then a new word once, then three times
+====================================================================================================
+
+--- docs pricing, pieces never edited (main)
+
+buffer 1: "the cat sat on the mat and the dog sat on the log the cat saw the dog and the dog saw the cat"
+  read with what is held:  the_cat_sat_on_the_mat_and_the_dog_sat_on_the_log_the_cat_saw_the_dog_and_the_dog_saw_the_cat
+  formed 4 piece(s); energy 93.0 → 59.4
+  #0   _the_              built as _the_                    used 3 in the text, in 2 piece(s)
+  #1   _and_the_dog_sa    built as _and[_the_]dog_sa        used 2 in the text, in 0 piece(s)
+  #2   cat_sa             built as cat_sa                   used 2 in the text, in 0 piece(s)
+  #3   t_on_the_          built as t_on[_the_]              used 2 in the text, in 0 piece(s)
+  described:               the_[cat_sa][t_on_the_]mat[_and_the_dog_sa][t_on_the_]log[_the_][cat_sa]w[_the_]dog[_and_the_dog_sa]w[_the_]cat
+
+buffer 2: "the cat ran to the dog and the dog ran to the cat"
+  read with what is held:  the_cat_ran_to[_the_]dog_and[_the_]dog_ran_to[_the_]cat
+  formed 1 piece(s); energy 38.5 → 33.3
+  #4   _ran_to_the_       built as _ran_to[_the_]           used 2 in the text, in 0 piece(s)
+  described:               the_cat[_ran_to_the_]dog_and[_the_]dog[_ran_to_the_]cat
+
+buffer 3: "then the cat and the dog sat on the mat"
+  read with what is held:  then[_the_]cat[_and_the_dog_sa][t_on_the_]mat
+  formed 0 piece(s); energy 14.7 → 14.7
+  described:               then[_the_]cat[_and_the_dog_sa][t_on_the_]mat
+
+buffer 4: "the man saw the cat and the dog on the mat and the man sat on the log"
+  read with what is held:  the_man_saw[_the_]cat_and[_the_]dog_on[_the_]mat_and[_the_]man_sa[t_on_the_]log
+  formed 2 piece(s); energy 47.8 → 41.5
+  #5   at_and_the_        built as at_and[_the_]            used 2 in the text, in 0 piece(s)
+  #6   man_sa             built as man_sa                   used 2 in the text, in 0 piece(s)
+  described:               the_[man_sa]w[_the_]c[at_and_the_]dog_on[_the_]m[at_and_the_][man_sa][t_on_the_]log
+
+buffer 5: "the zebra sat on the mat"
+  read with what is held:  the_zebra_sa[t_on_the_]mat
+  formed 0 piece(s); energy 16.7 → 16.7
+  described:               the_zebra_sa[t_on_the_]mat
+
+buffer 6: "the zebra saw the zebra and the zebra ran"
+  read with what is held:  the_zebra_saw[_the_]zebra_and[_the_]zebra_ran
+  formed 1 piece(s); energy 34.4 → 27.7
+  #7   zebra_             built as zebra_                   used 3 in the text, in 0 piece(s)
+  described:               the_[zebra_]saw[_the_][zebra_]and[_the_][zebra_]ran
+
+--- names pricing, pieces never edited
+
+buffer 1: "the cat sat on the mat and the dog sat on the log the cat saw the dog and the dog saw the cat"
+  read with what is held:  the_cat_sat_on_the_mat_and_the_dog_sat_on_the_log_the_cat_saw_the_dog_and_the_dog_saw_the_cat
+  formed 4 piece(s); energy 93.0 → 58.0
+  #0   _the_              built as _the_                    used 3 in the text, in 2 piece(s)
+  #1   _and_the_dog_sa    built as _and[_the_]dog_sa        used 2 in the text, in 0 piece(s)
+  #2   cat_sa             built as cat_sa                   used 2 in the text, in 0 piece(s)
+  #3   t_on_the_          built as t_on[_the_]              used 2 in the text, in 0 piece(s)
+  described:               the_[cat_sa][t_on_the_]mat[_and_the_dog_sa][t_on_the_]log[_the_][cat_sa]w[_the_]dog[_and_the_dog_sa]w[_the_]cat
+
+buffer 2: "the cat ran to the dog and the dog ran to the cat"
+  read with what is held:  the_cat_ran_to[_the_]dog_and[_the_]dog_ran_to[_the_]cat
+  formed 3 piece(s); energy 39.8 → 32.5
+  #4   _ran_to_the_       built as _ran_to[_the_]           used 2 in the text, in 0 piece(s)
+  #5   cat                built as cat                      used 2 in the text, in 0 piece(s)
+  #6   dog                built as dog                      used 2 in the text, in 0 piece(s)
+  described:               the_[cat][_ran_to_the_][dog]_and[_the_][dog][_ran_to_the_][cat]
+
+buffer 3: "then the cat and the dog sat on the mat"
+  read with what is held:  then[_the_][cat][_and_the_dog_sa][t_on_the_]mat
+  formed 0 piece(s); energy 12.3 → 12.3
+  described:               then[_the_][cat][_and_the_dog_sa][t_on_the_]mat
+
+buffer 4: "the man saw the cat and the dog on the mat and the man sat on the log"
+  read with what is held:  the_man_saw[_the_][cat]_and[_the_][dog]_on[_the_]mat_and[_the_]man_sa[t_on_the_]log
+  formed 2 piece(s); energy 46.0 → 39.1
+  #7   man_sa             built as man_sa                   used 2 in the text, in 0 piece(s)
+  #8   _and_the_          built as _and[_the_]              used 2 in the text, in 0 piece(s)
+  described:               the_[man_sa]w[_the_][cat][_and_the_][dog]_on[_the_]mat[_and_the_][man_sa][t_on_the_]log
+
+buffer 5: "the zebra sat on the mat"
+  read with what is held:  the_zebra_sa[t_on_the_]mat
+  formed 0 piece(s); energy 18.4 → 18.4
+  described:               the_zebra_sa[t_on_the_]mat
+
+buffer 6: "the zebra saw the zebra and the zebra ran"
+  read with what is held:  the_zebra_saw[_the_]zebra[_and_the_]zebra_ran
+  formed 1 piece(s); energy 33.3 → 25.6
+  #9   zebra              built as zebra                    used 3 in the text, in 0 piece(s)
+  described:               the_[zebra]_saw[_the_][zebra][_and_the_][zebra]_ran

@@ -1,0 +1,244 @@
+
+====================================================================================================
+two sentences (45 characters)
+====================================================================================================
+
+--- G    global total, at rest (C106 main)
+2 pieces, 2 of them also G's (G has 2); total 34.1; 0 start or end inside a word somewhere
+pieces:
+  _sat_on_the_           built as _sat_on_the_               
+  the_                   built as the_                       
+described:
+  [the_]cat[_sat_on_the_]mat_[the_]dog[_sat_on_the_]log
+
+--- L    local, a use costing 1, at rest
+2 pieces, 2 of them also G's (G has 2); total 34.1; 0 start or end inside a word somewhere
+pieces:
+  _sat_on_the_           built as _sat_on_the_               
+  the_                   built as the_                       
+described:
+  [the_]cat[_sat_on_the_]mat_[the_]dog[_sat_on_the_]log
+
+--- L+n  local, with its own naming cost, at rest
+2 pieces, 2 of them also G's (G has 2); total 34.1; 0 start or end inside a word somewhere
+pieces:
+  _sat_on_the_           built as _sat_on_the_               
+  the_                   built as the_                       
+described:
+  [the_]cat[_sat_on_the_]mat_[the_]dog[_sat_on_the_]log
+
+--- S    local, with naming, as it streams
+5 pieces, 1 of them also G's (G has 2); total 37.9; 2 start or end inside a word somewhere: at_ sat_o
+pieces:
+  at_                    built as at_                        (not G's)
+  the                    built as the                        (not G's)
+  the_                   built as [the]_                     
+  sat_o                  built as s[at_]o                    (not G's)
+  sat_on_                built as [sat_o]n_                  (not G's)
+described:
+  [the_]c[at_][sat_on_][the_]m[at_][the_]dog_[sat_on_][the_]log
+
+====================================================================================================
+reader (253 characters)
+====================================================================================================
+
+--- G    global total, at rest (C106 main)
+7 pieces, 7 of them also G's (G has 7); total 124.7; 1 start or end inside a word somewhere: _the_ma
+pieces:
+  _the_                  built as _the_                      
+  _and_the_dog_          built as _and[_the_]dog_            
+  sat_on_the_            built as sat_on[_the_]              
+  _the_cat               built as [_the_]cat                 
+  _the_dog_and_the_dog_  built as [_the_]dog[_and_the_dog_]  
+  ran_to                 built as ran_to                     
+  _the_ma                built as [_the_]ma                  
+described:
+  the_cat_[sat_on_the_]mat[_and_the_dog_][sat_on_the_]log[_the_cat]_saw[_the_dog_and_the_dog_]saw[_the_cat][_the_cat]_[ran_to][_the_dog_and_the_dog_][ran_to][_the_cat]_then[_the_cat][_and_the_dog_][sat_on_the_]mat[_the_ma]n_saw[_the_cat][_and_the_dog_]on[_the_ma]t_and[_the_ma]n_[sat_on_the_]log
+
+--- L    local, a use costing 1, at rest
+13 pieces, 6 of them also G's (G has 7); total 131.0; 2 start or end inside a word somewhere: an_ the
+pieces:
+  _the_                  built as _the_                      
+  _and_the_dog_          built as _and[_the_]dog_            
+  sat_on_the_            built as sat_on[_the_]              
+  _the_cat               built as [_the_]cat                 
+  an_                    built as an_                        (not G's)
+  mat                    built as mat                        (not G's)
+  saw                    built as saw                        (not G's)
+  _the_dog_and_the_dog_  built as [_the_]dog[_and_the_dog_]  
+  sat_on_the_log         built as [sat_on_the_]log           (not G's)
+  ran_to                 built as r[an_]to                   
+  the                    built as the                        (not G's)
+  _the_cat_              built as [_the_cat]_                (not G's)
+  _the_man_              built as [_the_]m[an_]              (not G's)
+described:
+  [the]_cat_[sat_on_the_][mat][_and_the_dog_][sat_on_the_log][_the_cat_][saw][_the_dog_and_the_dog_][saw][_the_cat][_the_cat_][ran_to][_the_dog_and_the_dog_][ran_to][_the_cat_][the]n[_the_cat][_and_the_dog_][sat_on_the_][mat][_the_man_][saw][_the_cat][_and_the_dog_]on[_the_][mat]_and[_the_man_][sat_on_the_log]
+
+--- L+n  local, with its own naming cost, at rest
+11 pieces, 6 of them also G's (G has 7); total 125.6; 0 start or end inside a word somewhere
+pieces:
+  _the_                  built as _the_                      
+  _and_the_dog_          built as _and[_the_]dog_            
+  sat_on_the_            built as sat_on[_the_]              
+  _the_cat               built as [_the_]cat                 
+  _the_dog_and_the_dog_  built as [_the_]dog[_and_the_dog_]  
+  ran_to                 built as ran_to                     
+  _the_man_              built as [_the_]man_                (not G's)
+  sat_on_the_mat         built as [sat_on_the_]mat           (not G's)
+  sat_on_the_log         built as [sat_on_the_]log           (not G's)
+  saw_the_cat            built as saw[_the_cat]              (not G's)
+  _the_cat_              built as [_the_cat]_                (not G's)
+described:
+  the_cat_[sat_on_the_mat][_and_the_dog_][sat_on_the_log][_the_cat_]saw[_the_dog_and_the_dog_][saw_the_cat][_the_cat_][ran_to][_the_dog_and_the_dog_][ran_to][_the_cat_]then[_the_cat][_and_the_dog_][sat_on_the_mat][_the_man_][saw_the_cat][_and_the_dog_]on[_the_]mat_and[_the_man_][sat_on_the_log]
+
+--- S    local, with naming, as it streams
+16 pieces, 0 of them also G's (G has 7); total 140.0; 4 start or end inside a word somewhere: at_ the sat_o _the_d
+pieces:
+  at_                    built as at_                        (not G's)
+  the                    built as the                        (not G's)
+  the_                   built as [the]_                     (not G's)
+  sat_o                  built as s[at_]o                    (not G's)
+  sat_on_                built as [sat_o]n_                  (not G's)
+  the_cat_               built as [the_]c[at_]               (not G's)
+  _the_d                 built as _[the_]d                   (not G's)
+  _the_dog               built as [_the_d]og                 (not G's)
+  and_the_dog            built as and[_the_dog]              (not G's)
+  _the_dog_and_the_dog   built as [_the_dog]_[and_the_dog]   (not G's)
+  _the_cat_              built as _[the_cat_]                (not G's)
+  and_the_dog_sat_on_    built as [and_the_dog]_[sat_on_]    (not G's)
+  the_mat_               built as [the_]m[at_]               (not G's)
+  _saw_the_cat_          built as _saw[_the_cat_]            (not G's)
+  the_man                built as [the_]man                  (not G's)
+  the_log                built as [the_]log                  (not G's)
+described:
+  [the_cat_][sat_on_][the_mat_][and_the_dog_sat_on_][the_log][_the_cat_]saw[_the_dog_and_the_dog][_saw_the_cat_][the_cat_]ran_to[_the_dog_and_the_dog]_ran_to[_the_cat_][the]n[_the_cat_][and_the_dog_sat_on_][the_mat_][the_man][_saw_the_cat_][and_the_dog]_on_[the_mat_]and_[the_man]_[sat_on_][the_log]
+
+====================================================================================================
+prose (552 characters)
+====================================================================================================
+
+--- G    global total, at rest (C106 main)
+12 pieces, 12 of them also G's (G has 12); total 447.8; 5 start or end inside a word somewhere: er_ ing ing_the_river_ early_ _wo
+pieces:
+  _the_                  built as _the_                      
+  _and                   built as _and                       
+  er_                    built as er_                        
+  _she_                  built as _she_                      
+  ing                    built as ing                        
+  was_                   built as was_                       
+  ing_the_river_         built as [ing][_the_]riv[er_]       
+  _of_the_               built as _of[_the_]                 
+  _the_water_            built as [_the_]wat[er_]            
+  early_                 built as early_                     
+  _she_had_              built as [_she_]had_                
+  _wo                    built as _wo                        
+described:
+  [early_]in[_the_]morn[ing_the_river_][was_]still[_and]_grey[_and]_a_thin_mist_hung_over[_the_water_]a[_wo]man_walked_along[_the_]bank_with_h[er_]dog_stopp[ing]_now[_and]_then_to_look_at[_the_]birds_on[_the_]far_side[_she_had_]come_here_every_morn[ing]_for_years[_and][_she_]knew[_the_]sounds[_of_the_]place[_the_]slow_turn[_of_the_]current[_the_]calls[_of_the_]herons[_and][_the_]wind_in[_the_]reeds_today_someth[ing]_[was_]different[_the_water_][was_]high[er_]than[_she_had_]ev[er_]seen_it[_and][_the_]old[_wo]oden_bridge_[was_]n[early_]und[er_]it[_she_]stood_for_a_long_time_watch[ing_the_river_]rise[_and][_wo]nder[ing]_what_it[_wo]uld_br[ing]
+
+--- L    local, a use costing 1, at rest
+31 pieces, 12 of them also G's (G has 12); total 502.7; 23 start or end inside a word somewhere: er_ ing _w early_ ing_the_river_ _t er d_ on en in morn st it _h un _wo an al ing_ at ds ome
+pieces:
+  _the_                  built as _the_                      
+  _and                   built as _and                       
+  er_                    built as er_                        
+  ing                    built as ing                        
+  _she_                  built as _she_                      
+  was_                   built as was_                       
+  _w                     built as _w                         (not G's)
+  _of_the_               built as _of[_the_]                 
+  early_                 built as early_                     
+  ing_the_river_         built as [ing][_the_]riv[er_]       
+  _t                     built as _t                         (not G's)
+  er                     built as er                         (not G's)
+  d_                     built as d_                         (not G's)
+  _the_water_            built as [_the_]wat[er_]            
+  on                     built as on                         (not G's)
+  en                     built as en                         (not G's)
+  in                     built as in                         (not G's)
+  morn                   built as morn                       (not G's)
+  st                     built as st                         (not G's)
+  it                     built as it                         (not G's)
+  _she_had_              built as [_she_]ha[d_]              
+  for_                   built as for_                       (not G's)
+  _h                     built as _h                         (not G's)
+  un                     built as un                         (not G's)
+  _wo                    built as [_w]o                      
+  an                     built as an                         (not G's)
+  al                     built as al                         (not G's)
+  ing_                   built as [ing]_                     (not G's)
+  at                     built as at                         (not G's)
+  ds                     built as ds                         (not G's)
+  ome                    built as ome                        (not G's)
+described:
+  [early_][in][_the_][morn][ing_the_river_][was_][st]ill[_and]_grey[_and]_a[_t]h[in]_mi[st][_h][un]g_ov[er][_the_water_]a[_wo]m[an][_w][al]ke[d_][al][on]g[_the_]b[an]k[_w][it]h[_h][er_]dog_[st]opp[ing_]now[_and][_t]h[en][_t]o_look_[at][_the_]bir[ds]_[on][_the_]far_side[_she_had_]c[ome][_h][er]e_ev[er]y_[morn][ing_][for_]years[_and][_she_]knew[_the_]so[un][ds][_of_the_]place[_the_]slow[_t]urn[_of_the_]curr[en]t[_the_]c[al]ls[_of_the_]h[er][on]s[_and][_the_]w[in][d_][in][_the_]ree[ds][_t]oday_s[ome]th[ing_][was_]diff[er][en]t[_the_water_][was_]high[er_]th[an][_she_had_]ev[er_]se[en]_[it][_and][_the_]old[_wo]od[en]_bridge_[was_]n[early_][un]d[er_][it][_she_][st]oo[d_][for_]a_l[on]g[_t]ime[_w][at]ch[ing_the_river_]rise[_and][_w][on]d[er][ing][_w]h[at]_[it][_wo]ul[d_]br[ing]
+
+--- L+n  local, with its own naming cost, at rest
+20 pieces, 12 of them also G's (G has 12); total 455.0; 11 start or end inside a word somewhere: er_ ing ing_the_river_ early_ _wo en_ morn long rent n_the_ ing_
+pieces:
+  _the_                  built as _the_                      
+  _and                   built as _and                       
+  er_                    built as er_                        
+  _she_                  built as _she_                      
+  ing                    built as ing                        
+  was_                   built as was_                       
+  ing_the_river_         built as [ing][_the_]riv[er_]       
+  _of_the_               built as _of[_the_]                 
+  _the_water_            built as [_the_]wat[er_]            
+  early_                 built as early_                     
+  _she_had_              built as [_she_]had_                
+  _wo                    built as _wo                        
+  _for_                  built as _for_                      (not G's)
+  en_                    built as en_                        (not G's)
+  morn                   built as morn                       (not G's)
+  long                   built as long                       (not G's)
+  rent                   built as rent                       (not G's)
+  n_the_                 built as n[_the_]                   (not G's)
+  _and_                  built as [_and]_                    (not G's)
+  ing_                   built as [ing]_                     (not G's)
+described:
+  [early_]i[n_the_][morn][ing_the_river_][was_]still[_and_]grey[_and_]a_thin_mist_hung_over[_the_water_]a[_wo]man_walked_a[long][_the_]bank_with_h[er_]dog_stopp[ing_]now[_and_]th[en_]to_look_at[_the_]birds_o[n_the_]far_side[_she_had_]come_here_every_[morn][ing][_for_]years[_and][_she_]knew[_the_]sounds[_of_the_]place[_the_]slow_turn[_of_the_]cur[rent][_the_]calls[_of_the_]herons[_and][_the_]wind_i[n_the_]reeds_today_someth[ing_][was_]diffe[rent][_the_water_][was_]high[er_]than[_she_had_]ev[er_]se[en_]it[_and][_the_]old[_wo]od[en_]bridge_[was_]n[early_]und[er_]it[_she_]stood[_for_]a_[long]_time_watch[ing_the_river_]rise[_and][_wo]nder[ing_]what_it[_wo]uld_br[ing]
+
+--- S    local, with naming, as it streams
+22 pieces, 5 of them also G's (G has 12); total 479.1; 14 start or end inside a word somewhere: _th _an ver_ _her morn ng_ he_ ds_o _and_th ing_ rent wate _she_ha early
+pieces:
+  _th                    built as _th                        (not G's)
+  _the_                  built as [_th]e_                    
+  _an                    built as _an                        (not G's)
+  _and_                  built as [_an]d_                    (not G's)
+  ver_                   built as ver_                       (not G's)
+  _her                   built as _her                       (not G's)
+  morn                   built as morn                       (not G's)
+  ng_                    built as ng_                        (not G's)
+  he_                    built as he_                        (not G's)
+  ds_o                   built as ds_o                       (not G's)
+  _of_the_               built as _of[_the_]                 
+  _and_th                built as [_and_]th                  (not G's)
+  _in_the_               built as _in[_the_]                 (not G's)
+  ing_                   built as i[ng_]                     (not G's)
+  was_                   built as was_                       
+  rent                   built as rent                       (not G's)
+  wate                   built as wate                       (not G's)
+  water_                 built as [wate]r_                   (not G's)
+  _she_                  built as _s[he_]                    
+  _she_ha                built as [_she_]ha                  (not G's)
+  _she_had_              built as [_she_ha]d_                
+  early                  built as early                      (not G's)
+described:
+  [early][_in_the_][morn]ing[_the_]ri[ver_][was_]still[_and_]grey[_and_]a[_th]in_mist_hu[ng_]o[ver_]t[he_][water_]a_woman_walked_along[_the_]bank_with[_her]_dog_stopp[ing_]now[_and_th]en_to_look_at[_the_]bir[ds_o]n[_the_]far_side[_she_had_]come[_her]e_every_[morn][ing_]for_years[_and_]s[he_]knew[_the_]soun[ds_o]f[_the_]place[_the_]slow_turn[_of_the_]cur[rent][_the_]calls[_of_the_]herons[_and_th]e_wind[_in_the_]reeds_today_someth[ing_][was_]diffe[rent][_the_][water_][was_]higher[_th]an[_she_had_]e[ver_]seen_it[_and_th]e_old_wooden_bridge_[was_]n[early]_under_it[_she_]stood_for_a_lo[ng_]time_watch[ing_]t[he_]ri[ver_]rise[_and_]wonder[ing_]what_it_would_bring
+
+====================================================================================================
+summary
+====================================================================================================
+text            way   pieces  also G's  total   inside a word
+two sentences   G     2       2/2       34.1    0
+two sentences   L     2       2/2       34.1    0
+two sentences   L+n   2       2/2       34.1    0
+two sentences   S     5       1/2       37.9    2
+reader          G     7       7/7       124.7   1
+reader          L     13      6/7       131.0   2
+reader          L+n   11      6/7       125.6   0
+reader          S     16      0/7       140.0   4
+prose           G     12      12/12     447.8   5
+prose           L     31      12/12     502.7   23
+prose           L+n   20      12/12     455.0   11
+prose           S     22      5/12      479.1   14

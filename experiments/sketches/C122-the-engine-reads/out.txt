@@ -1,0 +1,14 @@
+burgess-busterbrown.txt: 500 sentences; 256 members per letter; refractory off; learnt on nine tenths, read on the last tenth
+
+--- with the energy rule  (learning 234 s; 6616 assemblies)
+  clean 7%  coverage 13%  words whole 7%  cuts at a word boundary 25% (chance 24%)
+  loose letters by tenth while learning: 60% 56% 58% 67% 72% 75% 78% 81% 83% 86%
+  most read units: he(10) ll(9) re(9) in(7) ck(7) li(6) to(6) en(4) oo(4) ow(4) hi(3) th(3) ng(3) mi(3) wo(2) pl(2) ea(2) lin(2) ar(2) ve(2) sh(2) if(2) ry(2) tt(2) is(2) fo(2) ling(2) er(2) ot(2) uch(1)
+  reads: itwouldbeafavortomew[hi]chahcertnly[wo]uldappreciatesaiduncbillypossumwhenheheardthenews
+  reads: letsa[ll]gotogetherandte[ll]busterbearhowm[uch]obligedweareforwhatheh[as]do[ne]prop[os]edjerrymuskrat
+  reads: isayletswa[it]andseeforourselves[ifit]isa[ll]true
+  reads: dontyoube[li]eveimtel[lin]gthetruth
+  reads: ofcourse[no][on]edoubtsyour[wo]r[dr][ep]liedblackywiththeutmostpoliteness
+  reads: butyousayyourselfthatfarmerbrownsboydidntseebusterbe[ar]bu[to]nlyhisf[oo]tprint
+  reads: perhapshedidntknowwhoseitwasandifhehadhew[ou]ldntha[ve]beenafraid
+  reads: nowivegotaplan[by]whichwecanseeforo[ur]selvesifhe[re]allyisafraidofbusterbear

@@ -1,0 +1,115 @@
+==============================================================================================================
+like for like: the first 40000 characters, measured on their last tenth; population 4096
+==============================================================================================================
+
+Buster Brown
+  G, global at rest (C108)           words whole 19%   inside a clean piece 55%   pieces cutting inside a word 27%   cuts at a word gap 52%   (chance 42%) letters loose 23%   lasting 759   (45 s)
+  greedy (C110)                      words whole 36%   inside a clean piece 66%   pieces cutting inside a word 52%   cuts at a word gap 67%   (chance 42%) letters loose 1%    lasting 681
+  compete, length then ways (C112)   words whole 27%   inside a clean piece 48%   pieces cutting inside a word 56%   cuts at a word gap 55%   (chance 42%) letters loose 12%   lasting 579
+  ways in (C112)                     words whole 20%   inside a clean piece 27%   pieces cutting inside a word 77%   cuts at a word gap 40%   (chance 42%) letters loose 24%   lasting 424
+  G reads: [_his_f]riend_unless[_it_is][_that_][other]_[mischief]_maker[_sammy_jay]_who[_you_know]_is[_blacky_]s_[cousin][_but_][no_one_said][_any][thing][_and_][blacky]_[went_on][_little_joe_otte]r[_has_]told_us_how[_he_saw]_[farmer_brown_s_b]oy_hurry[_home][_when_he_][found_the_][footprint][_of_buster_bear_]on[_the_edge_of][_the_laughing_br][ook_and_how_][all_the_way]
+  G's most used: farmer_brown_s_b(11) _and_(7) _blacky_(7) _the_green_fores(6) _that_(5) _was_(4) _sammy_jay(4) _but_(4) _will_(4) e_to_(4) out_(4) began_to_(3) everybod(3) _for(3) _it_is(3) _the_edge_of(3) s_if_he_(3) _perhaps(3) _you_(3) _near(3) _what(3) where(3) t_to_(3) _right_(3) _it_was_(3) _and_s(3) d_he_(3) _he_(3) _the_barn(3) sure_that_(2)
+
+Alice
+  G, global at rest (C108)           words whole 25%   inside a clean piece 56%   pieces cutting inside a word 24%   cuts at a word gap 50%   (chance 42%) letters loose 31%   lasting 784   (58 s)
+  greedy (C110)                      words whole 42%   inside a clean piece 59%   pieces cutting inside a word 58%   cuts at a word gap 63%   (chance 42%) letters loose 2%    lasting 602
+  compete, length then ways (C112)   words whole 25%   inside a clean piece 41%   pieces cutting inside a word 65%   cuts at a word gap 51%   (chance 42%) letters loose 16%   lasting 548
+  ways in (C112)                     words whole 25%   inside a clean piece 29%   pieces cutting inside a word 75%   cuts at a word gap 42%   (chance 42%) letters loose 23%   lasting 346
+  G reads: e_go[_and_]tak[e_it_]away[_there_was_][a_long][_silence][_after_]thi[s_and_][alice]_[could_][only_]hear_whispers[_now][_and_then_][such_a]s[_sure]_[i_don_t_]lik[e_it_][yer_honour_][at_all_][at_all_]do[_as_]i_[tell_you_]you_coward[_and_][at_last][_she_]spr[ead_out_her_hand][_again][_and_]made[_another_][snatch_in_the_a]ir[_this_time][_there_were_]two[_little_]
+  G's most used: bill_(7) _they_(6) _little_(5) _who_(4) _that_(4) _and_(4) _now(4) _what_(4) _here_(4) _down_the_chimne(4) yer_honour_(3) _you_(3) e_it_(3) _for_(3) _it_s_(3) _there_(3) s_and_(3) _another_(3) must_(3) _thought_alice_(3) _what(3) t_to_(3) _came_(3) t_the_(3) _this_(3) _enough(3) t_you_(3) to_herself(3) ed_to_(3) _the_rabbit_s(3)
+
+==============================================================================================================
+whole books, streamed once, measured on the last tenth
+==============================================================================================================
+
+Buster Brown: 80173 characters
+  greedy (C110), T 1024 N 1024       words whole 45%   inside a clean piece 63%   pieces cutting inside a word 56%   cuts at a word gap 63%   (chance 41%) letters loose 2%    lasting 811
+  greedy (C110), T 1024 N 4096       words whole 44%   inside a clean piece 60%   pieces cutting inside a word 59%   cuts at a word gap 61%   (chance 41%) letters loose 2%    lasting 680
+  greedy (C110), T 4096 N 1024       words whole 40%   inside a clean piece 68%   pieces cutting inside a word 49%   cuts at a word gap 68%   (chance 41%) letters loose 1%    lasting 1024 (full)
+  greedy (C110), T 4096 N 4096       words whole 40%   inside a clean piece 68%   pieces cutting inside a word 49%   cuts at a word gap 69%   (chance 41%) letters loose 1%    lasting 1270
+    loose letters by tenth: 11% 3% 2% 1% 1% 1% 1% 1% 1% 1%
+    reads: [all][_sat_][in_a_grea][t_][ci]r[cl][e_][around_][him][_ea][ch_][where][_he_][fel][t_s][af][e_but_][where_he_could_][see][_and_][every][_one][_of_them][_l][augh][ing_][and_][making_][fun_][of_][buster][_th][ief_][thief_thief_][scream][ed_s][ammy_][until][_his_][thro][at_][was_s][ore_][the_][wor][st_of_][it_was_][buster][_k][new][_that_][everybody_][knew][_that_][it_was_tru][e_that][_a]w[ful_pail_][was_][pro][of_][of_it][_i]
+    most used: and_(15) to_(15) it(14) i_(13) of_(9) _of_(9) buster(8) that_(8) you(8) ed_(8) his_(8) la(8) te(7) was_(7) _that_(7) per(7) _s(7) es_(7) so_(7) he_(7) those_(7) then_(7) where(6) t_(6) _he_(6) berries_(6) _was_(6) ar(6) _it_(6) ve_(6)
+  compete, length then ways (C112), T 1024 N 1024 words whole 29%   inside a clean piece 45%   pieces cutting inside a word 64%   cuts at a word gap 51%   (chance 41%) letters loose 14%   lasting 716
+  compete, length then ways (C112), T 1024 N 4096 words whole 30%   inside a clean piece 44%   pieces cutting inside a word 64%   cuts at a word gap 51%   (chance 41%) letters loose 14%   lasting 620
+  compete, length then ways (C112), T 4096 N 1024 words whole 25%   inside a clean piece 47%   pieces cutting inside a word 58%   cuts at a word gap 53%   (chance 41%) letters loose 13%   lasting 1024 (full)
+  compete, length then ways (C112), T 4096 N 4096 words whole 25%   inside a clean piece 46%   pieces cutting inside a word 59%   cuts at a word gap 53%   (chance 41%) letters loose 13%   lasting 1112
+    loose letters by tenth: 22% 14% 14% 12% 12% 11% 14% 12% 12% 11%
+    reads: [sat_]i[n_a_great_]c[ir][cl]e_[around_][him_][each_][where_][he_][felt][_sa][fe][_but_][where_][he_could_s][ee_and_]ev[ery][_one_of_them_][laughing_][and_][making_][fun]_o[f_buster_]t[hie]f_t[hief]_[thief_][scream][ed_][sammy_][until_]his[_thro]a[t_was_][so]re[_the_wo][rst_]of[_it_was_b][uster]_[knew_]that[_everybody_]k[new_][that_it_was_]t[ru][e_that_][aw]f[ul][_pail][_was_][pr][oof][_of_i]t_
+    most used: berries_(9) to_(8) where_(6) and_(6) i_(6) t_of_(6) his_(6) la(6) might_(6) he(5) _buster_bear_(5) t_to_(5) al(5) temper_(5) ar(5) had_(5) ail(5) han(5) no_(5) even_(4) be(4) he_(4) ed_(4) tem(4) _bad(4) s_(4) the_(4) _his_(4) is_(4) _you_(4)
+  ways in (C112), T 1024 N 1024      words whole 30%   inside a clean piece 33%   pieces cutting inside a word 74%   cuts at a word gap 43%   (chance 41%) letters loose 20%   lasting 458
+  ways in (C112), T 1024 N 4096      words whole 27%   inside a clean piece 28%   pieces cutting inside a word 78%   cuts at a word gap 41%   (chance 41%) letters loose 19%   lasting 378
+  ways in (C112), T 4096 N 1024      words whole 23%   inside a clean piece 30%   pieces cutting inside a word 73%   cuts at a word gap 41%   (chance 41%) letters loose 24%   lasting 1024 (full)
+  ways in (C112), T 4096 N 4096      words whole 22%   inside a clean piece 31%   pieces cutting inside a word 73%   cuts at a word gap 41%   (chance 41%) letters loose 23%   lasting 868
+    loose letters by tenth: 26% 22% 23% 24% 21% 22% 20% 21% 20% 20%
+    reads: [all_]s[at_i][n_a_]gre[at_c][ir]c[le_]a[round_][him_][each_]wher[e_he_][fel][t_s]a[fe]_b[ut_]w[here_]h[e_could_]s[ee_and_]eve[ry_][one_of_][them_]laughin[g_and_]mak[ing_f][un_]of[_buster_][thief_][thief_]thi[ef_][scream][ed_s]a[mmy_][unti]l[_his_]th[ro]at[_was_so]r[e_the_][wor][st_of_]it_[was_][buster_]knew[_that_]ever[ybody_][knew_][that_i]t[_was_]t[ru][e_that_][aw][ful_]pai[l_]w[as_][pro][of_][of_it_]
+    most used: _it_(12) ad_(11) _i_(9) er_(8) who_(8) es_(8) he_had_(8) te(7) _his_(7) you_(7) _there_(7) is_(7) more_(7) pail_(7) la(7) se_(6) all_(6) them_(6) _buster_(6) of_(6) ve_(6) ight_(6) or_(6) with_(6) _of_(6) ss(6) i_(6) no_(6) where_(5) the_(5)
+
+Alice: 135020 characters
+  greedy (C110), T 1024 N 1024       words whole 43%   inside a clean piece 57%   pieces cutting inside a word 63%   cuts at a word gap 58%   (chance 40%) letters loose 2%    lasting 1024 (full)
+  greedy (C110), T 1024 N 4096       words whole 44%   inside a clean piece 56%   pieces cutting inside a word 64%   cuts at a word gap 56%   (chance 40%) letters loose 2%    lasting 857
+  greedy (C110), T 4096 N 1024       words whole 37%   inside a clean piece 65%   pieces cutting inside a word 54%   cuts at a word gap 66%   (chance 40%) letters loose 1%    lasting 1024 (full)
+  greedy (C110), T 4096 N 4096       words whole 37%   inside a clean piece 65%   pieces cutting inside a word 53%   cuts at a word gap 66%   (chance 40%) letters loose 1%    lasting 1895
+    loose letters by tenth: 8% 2% 1% 1% 1% 1% 1% 1% 1% 1%
+    reads: [sa][t_up][on_it_][i_m][_gla][d_][i_ve_][see][n_][that][_done][_thought_alice_][i_ve_][so_][often][_re][ad_][in_the_][new]s[pa][per][s_][at_the_][end_][of_][trial][s_][there_was_][some][_a][tt][empt][s_][at][_a][pp][la][use_][which_][was_][im][med]i[at][ely_][supp][res][sed_][by_the_][offi][cers][_of_the_cour][t_and_][i_never][_under][stood_][what_][it_mean][t_][till][_now][_if_][that_s][_all][_you_know][_about_][it][_you_]
+    most used: the_(30) t_(23) and_(19) s_(16) _the_(16) d_(14) _to_(13) her_(13) se(13) _s(12) be(12) a_(12) e_(12) of_(11) _of_(11) his(11) ed_(11) he_(11) _she_(11) in(10) _you_(10) er_(10) es_(10) you(9) to_(9) that(9) at(9) him(9) nt(9) un(9)
+  compete, length then ways (C112), T 1024 N 1024 words whole 29%   inside a clean piece 45%   pieces cutting inside a word 66%   cuts at a word gap 51%   (chance 40%) letters loose 12%   lasting 883
+  compete, length then ways (C112), T 1024 N 4096 words whole 29%   inside a clean piece 44%   pieces cutting inside a word 66%   cuts at a word gap 50%   (chance 40%) letters loose 13%   lasting 757
+  compete, length then ways (C112), T 4096 N 1024 words whole 20%   inside a clean piece 41%   pieces cutting inside a word 64%   cuts at a word gap 50%   (chance 40%) letters loose 13%   lasting 1024 (full)
+  compete, length then ways (C112), T 4096 N 4096 words whole 20%   inside a clean piece 40%   pieces cutting inside a word 65%   cuts at a word gap 49%   (chance 40%) letters loose 14%   lasting 1752
+    loose letters by tenth: 18% 14% 13% 12% 12% 11% 11% 12% 12% 12%
+    reads: s[at_]up[on_it_][i_m_]g[lad_]i_[ve_see][n_that_]don[e_thought_alice_][i_ve_][so_][oft]en[_rea][d_in_the_][new]s[pa][pers][_at_the_]end[_of_t]ri[als][_there_was_][some_]at[temp]ts[_at_][app]l[ause_][which_was_][im]m[edi]at[ely_]sup[press]e[d_][by_the_]o[ff]ice[rs][_of_the_court]_a[nd_][i_never_][under]s[tood_]wh[at_it_me][ant_]till[_now_]if[_that_]s_all[_you_know_][about_]i[t_you_]
+    most used: king_(11) white_rabbit_(11) ea(11) un(11) d_(10) im(9) a_(9) as_(8) _his_(7) and_(7) jury_(7) s_the_(7) just_(6) ed_the_(6) ed_(6) ing_the_(6) t_the_(6) the_(6) ver(6) s_(6) e_they_(5) _at_the_(5) st(5) at_(5) e_that_(5) e_(5) said_(5) _again_(5) he_(5) e_the_(5)
+  ways in (C112), T 1024 N 1024      words whole 30%   inside a clean piece 36%   pieces cutting inside a word 74%   cuts at a word gap 44%   (chance 40%) letters loose 17%   lasting 496
+  ways in (C112), T 1024 N 4096      words whole 28%   inside a clean piece 34%   pieces cutting inside a word 76%   cuts at a word gap 45%   (chance 40%) letters loose 18%   lasting 386
+  ways in (C112), T 4096 N 1024      words whole 21%   inside a clean piece 29%   pieces cutting inside a word 75%   cuts at a word gap 40%   (chance 40%) letters loose 22%   lasting 1024 (full)
+  ways in (C112), T 4096 N 4096      words whole 21%   inside a clean piece 29%   pieces cutting inside a word 75%   cuts at a word gap 41%   (chance 40%) letters loose 21%   lasting 1213
+    loose letters by tenth: 24% 20% 19% 20% 19% 19% 19% 20% 19% 18%
+    reads: [then_s][at_][upon]_i[t_i_][m_]g[lad_][i_ve_][seen][_that_d][one_]thought[_alice_]i_[ve_][so_][oft][en_]r[ead_][in_the_][ne][ws][pa]p[ers_][at_the_]end_of_[tri][al]s_ther[e_was_][some_]a[tt][em][pt]s_[at_a]p[pla][use_]which[_was_][im][medi][ate][ly_s][upp][ress][ed_b][y_the_][of]fi[ce][rs_]of[_the_c][ourt_]a[nd_i_][never_]und[ers][too][d_wh]a[t_it_][mean][t_t][ill_]n[ow_][if_]t[hat_s][_all_][you_know_]abou[t_it_]yo[u_]
+    most used: king_(17) of_(15) in_the_(13) en_(12) es_(12) t_the_(12) e_the_(12) at_the_(11) _her_(11) un(11) they_(10) m_(10) _all_(10) to_the_(10) s_the_(10) ri(10) of_the_(10) _said_the_(9) d_the_(9) le_(9) nce_(9) one_(8) ss_(8) ue(8) s_and_(8) _had_(8) te_(8) k_(8) would_(8) ou_(7)
+
+Bryant: 231028 characters
+  greedy (C110), T 1024 N 1024       words whole 37%   inside a clean piece 46%   pieces cutting inside a word 71%   cuts at a word gap 52%   (chance 40%) letters loose 4%    lasting 1024 (full)
+  greedy (C110), T 1024 N 4096       words whole 38%   inside a clean piece 47%   pieces cutting inside a word 70%   cuts at a word gap 52%   (chance 40%) letters loose 4%    lasting 1108
+  greedy (C110), T 4096 N 1024       words whole 38%   inside a clean piece 56%   pieces cutting inside a word 61%   cuts at a word gap 60%   (chance 40%) letters loose 2%    lasting 1024 (full)
+  greedy (C110), T 4096 N 4096       words whole 38%   inside a clean piece 60%   pieces cutting inside a word 56%   cuts at a word gap 64%   (chance 40%) letters loose 1%    lasting 2868
+    loose letters by tenth: 5% 2% 1% 1% 1% 1% 1% 1% 1% 1%
+    reads: [after_][the_lion_][and_st][ruck][_him_][and_d][eli][ver][ed_the_][lam]b[_out_of][_his_][mouth][_and_when_][he_][ar][ose_][against][_me_]i[_c][aught][_him_][by_the_][be][ard_][and_st][ruck][_him_][and_s][lew][_him_][th][y_s][erv][ant_][sle]w[_b]o[th][_the_lion_and_the_][be][ar][_and_th][is_][philistin][e_s][hall][_be_][as_][one_][of_them_][for][_he_ha][th][_d][ef]i[ed_the_][armies_of_the_][living][_go][d_the_][lord][_who]
+    most used: and_(44) th(31) for(26) _and_(26) _to(26) _his_(25) the_(24) s_(24) a_(23) to_(23) d_(22) _the_(22) ly_(22) _he(21) e_(20) in(20) his_(19) _for(19) _s(19) ing(18) _that_(17) to_the(17) was_(17) of_(16) n_(16) or(16) be(15) go(15) y_(15) as_(14)
+  compete, length then ways (C112), T 1024 N 1024 words whole 27%   inside a clean piece 39%   pieces cutting inside a word 71%   cuts at a word gap 47%   (chance 40%) letters loose 15%   lasting 1024 (full)
+  compete, length then ways (C112), T 1024 N 4096 words whole 26%   inside a clean piece 37%   pieces cutting inside a word 73%   cuts at a word gap 46%   (chance 40%) letters loose 15%   lasting 872
+  compete, length then ways (C112), T 4096 N 1024 words whole 22%   inside a clean piece 37%   pieces cutting inside a word 69%   cuts at a word gap 48%   (chance 40%) letters loose 14%   lasting 1024 (full)
+  compete, length then ways (C112), T 4096 N 4096 words whole 23%   inside a clean piece 41%   pieces cutting inside a word 64%   cuts at a word gap 50%   (chance 40%) letters loose 14%   lasting 2705
+    loose letters by tenth: 16% 12% 13% 13% 12% 12% 12% 12% 12% 12%
+    reads: after[_the_lion_][and_s][tru]ck[_him_and_][deli]v[ered_the_][lam]b_out[_of_his_][mouth][_and_when_he_]a[rose_][agains][t_me_][i_][cau]gh[t_him_]by[_the_bea]r[d_and_s][tru]ck[_him_and_][sle][w_him_][thy]_[servant][_s][lew_][bo][th_][the_li][on_and_the_]bea[r_and_][this_philisti][ne_][shall_][be_]a[s_one_][of_them][_for_h]e_[hath_][def][ied_the_][armi]es[_of_the_]l[iving_][go][d_the_l][ord][_who_]
+    most used: hermit_(16) david_(15) be_(14) ly_(14) he_(13) less_(13) im(12) _to_(12) wor(12) to_(11) sh(11) _but_(11) been_(10) _from_(10) the_(10) _your_(10) ed_and_(10) ith(9) e_his_(9) s_of_(9) man_(9) si(9) ing_(8) _a_(8) go(8) ed_his_(8) _with_(8) e_and_(8) ed_to_(8) other_(8)
+  ways in (C112), T 1024 N 1024      words whole 24%   inside a clean piece 26%   pieces cutting inside a word 82%   cuts at a word gap 39%   (chance 40%) letters loose 20%   lasting 641
+  ways in (C112), T 1024 N 4096      words whole 25%   inside a clean piece 27%   pieces cutting inside a word 81%   cuts at a word gap 41%   (chance 40%) letters loose 19%   lasting 486
+  ways in (C112), T 4096 N 1024      words whole 20%   inside a clean piece 27%   pieces cutting inside a word 79%   cuts at a word gap 40%   (chance 40%) letters loose 19%   lasting 1024 (full)
+  ways in (C112), T 4096 N 4096      words whole 21%   inside a clean piece 29%   pieces cutting inside a word 76%   cuts at a word gap 41%   (chance 40%) letters loose 21%   lasting 1716
+    loose letters by tenth: 25% 19% 19% 19% 18% 18% 17% 17% 17% 17%
+    reads: [aft][er_the_][lion_][and_s]t[ru][ck_h]im[_and_d]el[iv][ered_]th[e_la][mb][_out_]o[f_his_][mou]th[_and_w]hen[_he_]a[ros][e_ag][ain][st_]me_i[_ca]ught[_him_]by_[the_be][ard_][and_s]t[ru][ck_h]im[_and_s][lew_]h[im_][th]y[_se][rv]an[t_s][lew_]b[oth_][the_lion_]an[d_the_]b[ear_]and[_this_][phil][ist][ine_][shall_][be_][as_][one_o]f[_them_][for_]he[_ha][th_][de][fi][ed_the_]ar[mi]e[s_of_the_][liv][ing_][god][_the_l][or][d_wh]
+    most used: _his_(52) for_(30) ly_(30) d_and_(28) st_(24) ing_(22) _that_(22) th_(21) to_the_(21) _of_the_(20) ed_the_(20) _with_(20) be_(19) not_(19) e_and_(19) s_the_(19) sa(19) own_(18) wor(18) ce_(18) one_(18) si(18) _to_(17) es_(17) be(16) had_(16) ve_(15) ear(15) it_(15) mi(14)
+
+Emma (first 300,000): 300000 characters
+  greedy (C110), T 1024 N 1024       words whole 45%   inside a clean piece 59%   pieces cutting inside a word 63%   cuts at a word gap 58%   (chance 38%) letters loose 2%    lasting 1024 (full)
+  greedy (C110), T 1024 N 4096       words whole 45%   inside a clean piece 59%   pieces cutting inside a word 62%   cuts at a word gap 59%   (chance 38%) letters loose 2%    lasting 1245
+  greedy (C110), T 4096 N 1024       words whole 43%   inside a clean piece 71%   pieces cutting inside a word 48%   cuts at a word gap 70%   (chance 38%) letters loose 1%    lasting 1024 (full)
+  greedy (C110), T 4096 N 4096       words whole 42%   inside a clean piece 72%   pieces cutting inside a word 46%   cuts at a word gap 72%   (chance 38%) letters loose 0%    lasting 3123
+    loose letters by tenth: 5% 1% 1% 1% 1% 1% 0% 1% 0% 0%
+    reads: [out_][in_th][at_][party_][on_the_][wa][ter_][and_she_][by_the_][su][dd][en_][whi][rl][ing_][round][_of_so][me][thing_][or_o][ther][_am][ong][_the_][sa][il][s_w][ould_have][_been_]d[as][hed_][into_the_][sea_][at_once_][and_][actually_][was_all_][but_][gone][_if_he_][had_not_][with_the_][greatest_][pres][ence_][of_][mind][_c][augh][t_][hold_][of_her_][habit][_i_c][an][_never_][think_of_][it_w][ithout_][trem][bl]
+    most used: her_(40) s_(37) and_(35) of_(35) ed_(33) the_(32) was_(29) not_(27) had_(27) that_(24) she_(23) i_(22) _the_(21) ing_(20) but_(20) _of_(20) to_(20) ly_(19) in_(19) very_(19) it(19) as_(19) a_(19) t_(18) _her(18) _a_(18) no_(17) you(17) for(17) at_(16)
+  compete, length then ways (C112), T 1024 N 1024 words whole 32%   inside a clean piece 48%   pieces cutting inside a word 64%   cuts at a word gap 51%   (chance 38%) letters loose 11%   lasting 1024 (full)
+  compete, length then ways (C112), T 1024 N 4096 words whole 33%   inside a clean piece 49%   pieces cutting inside a word 63%   cuts at a word gap 51%   (chance 38%) letters loose 11%   lasting 1126
+  compete, length then ways (C112), T 4096 N 1024 words whole 27%   inside a clean piece 49%   pieces cutting inside a word 57%   cuts at a word gap 53%   (chance 38%) letters loose 12%   lasting 1024 (full)
+  compete, length then ways (C112), T 4096 N 4096 words whole 26%   inside a clean piece 50%   pieces cutting inside a word 56%   cuts at a word gap 54%   (chance 38%) letters loose 12%   lasting 2931
+    loose letters by tenth: 14% 12% 10% 11% 11% 11% 11% 10% 10% 10%
+    reads: [out_][in_that_][part][y_][on_the_]wa[ter_and_][she_][by_the_]s[udd]en_[whi][rl][ing_]rou[nd_of_][something_][or_][other_]amo[ng_the_][sai]l[s_w]o[uld_have_been_][da][she]d_[into_the_]s[ea][_at_]o[nce_and_][actually_]wa[s_all_][but_][gone_]if_[he_had_not_]w[ith][_the_][greatest_]p[res][ence_of_][mind_][cau][ght_]hold[_of_her_][hab]i[t_][i_can_][never_][think_of_]it[_without_][trem]b
+    most used: so_(18) had_(17) she_(16) i_(16) her_(16) jane_(15) as_(15) on_(15) it_(15) of_(13) to_(13) you_(13) and_(12) o_(12) could_(12) s_(12) ur(11) _her_own_(10) quite_(10) better_(10) ss(10) _jane_(9) ing_(9) long_(9) just_(9) _my_mother_(9) n_(9) now_(9) s_and_(9) jane_fairfax_(9)
+  ways in (C112), T 1024 N 1024      words whole 36%   inside a clean piece 41%   pieces cutting inside a word 72%   cuts at a word gap 44%   (chance 38%) letters loose 15%   lasting 776
+  ways in (C112), T 1024 N 4096      words whole 37%   inside a clean piece 42%   pieces cutting inside a word 71%   cuts at a word gap 45%   (chance 38%) letters loose 14%   lasting 630
+  ways in (C112), T 4096 N 1024      words whole 25%   inside a clean piece 34%   pieces cutting inside a word 73%   cuts at a word gap 42%   (chance 38%) letters loose 19%   lasting 1024 (full)
+  ways in (C112), T 4096 N 4096      words whole 23%   inside a clean piece 32%   pieces cutting inside a word 73%   cuts at a word gap 40%   (chance 38%) letters loose 20%   lasting 2238
+    loose letters by tenth: 21% 19% 19% 18% 18% 18% 18% 17% 18% 17%
+    reads: hey[_were_][out_]in[_that_]pa[rty_][on_the_][wat]er_an[d_she_][by_][the_su][dd]en_[whi][rl][ing_][rou][nd_of_]some[thing_]o[r_]other[_am][ong_][the_sa][il]s[_would_]have_[been_]d[as]he[d_in]to[_the_s][ea_][at_o]nc[e_and_a][ctu][ally_][was_a]l[l_][but_]gone[_if_]h[e_had_]n[ot_][with_]t[he_][grea]t[est_][presen][ce_of_]m[ind_]c[aug]h[t_h][old_][of_her_][hab]i[t_i_][can_][never_][think_]of_[it_w]i[thou][t_t][rem][bli]
+    most used: _was_(24) on_(21) _but_(19) st_(18) _had_(18) _her_(17) than_(17) one_(17) r_(16) g_(16) ad_(16) said_(16) e_the_(15) _that_(15) ed_to_(15) e_and_(15) more_(15) by_(14) think_(14) able_(14) ch_(14) _so_(13) ted_(13) no_(13) ure_(13) it_was_(13) et(13) sa(13) s_s(13) _you_(12)

@@ -1,0 +1,168 @@
+
+==============================================================================================================
+Buster Brown
+==============================================================================================================
+
+sentences, neither  (8 s; 4887 held, 4887 formed, 0 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%
+  cheapest  clean pieces 53%   coverage 41%   words whole 12%   cuts at a word boundary 31%   (chance 25%) boundaries found 80%
+  cheapest reads:
+    [ofcourse][chatterertheredsquirrel]andhappyjackthegraysquirrelwere[there]
+    screamed[sammy][until]histhroatwassore
+    theworstof[itwas][buster]knewtha[teverybody]knewt[hatitwas]true
+    iwishi[neverhad]thoughtof[berries][growledbuster]to[himself]
+    most used: that(16) berries(10) there(7) where(7) then(7) this(7) buster(6) temper(6) come(6) those(6) when(5) look(5) them(5) bear(4) thenhe(4) know(4) ofthe(3) itwas(3) busterbear(3) sammyjay(3) hathe(3) climb(3) would(3) oughtto(3) saidhe(3)
+
+sentences, heat  (2 s; 5367 held, 5367 formed, 0 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 71% 40% 32% 26% 24% 22% 22% 20% 20% 20%
+  cheapest  clean pieces 43%   coverage 79%   words whole 23%   cuts at a word boundary 48%   (chance 25%) boundaries found 70%
+  cheapest reads:
+    [ofcourse][chatterer][ther]ed[squi][rrel]and[happy][jack][thegr]ay[squi][rrel][were][ther]e
+    [scream]ed[sammy][until]his[throat][wasso]re
+    [theworst][ofit]was[buster][knew][that][ever]y[body][knew][that][itwa][strue]
+    [iwish]inev[erhad][thought]of[berries][growled][buster]to[himself]
+    most used: that(17) ight(15) berries(14) pail(13) andth(12) buster(11) thing(10) farmerb(10) rown(10) sboy(10) thought(9) busterbear(9) ever(8) ther(7) itwa(7) temp(7) with(7) have(7) could(7) thief(6) away(6) than(6) thenhe(6) they(6) sand(6)
+
+sentences, energy  (16 s; 4311 held, 4311 formed, 27132 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%
+  cheapest  clean pieces 57%   coverage 61%   words whole 11%   cuts at a word boundary 36%   (chance 25%) boundaries found 67%
+  cheapest reads:
+    [ofcourse][chatterertheredsquirrel]and[happyjack][thegr]ay[squirrel]w[erethere]
+    [scream]ed[sammy][until]histhroat[wasso]re
+    [thewo]rstof[itwas][buster]knew[thateverybody]knew[thatitwas]true
+    iwishi[neverhad][thoughtof][berries][growledbuster][tohimself]
+    most used: temper(6) thepail(5) might(5) berries(4) bear(4) thenhe(4) iguess(4) andthen(4) where(3) itwas(3) thing(3) sammyjay(3) intheoldpasture(3) thiswa(3) those(3) oughtto(3) saidhe(3) theberries(3) hehad(3) farmerbrownsboy(3) hadbeen(3) worse(3) that(3) because(3) sandwiches(3)
+
+sentences, both  (1 s; 2776 held, 2776 formed, 13856 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 82% 61% 50% 40% 36% 30% 33% 29% 26% 26%
+  cheapest  clean pieces 62%   coverage 73%   words whole 28%   cuts at a word boundary 48%   (chance 25%) boundaries found 75%
+  cheapest reads:
+    [ofcourse][chatterer][there][dsquirrel]and[happy][jack][theg]ray[squirrel][were][there]
+    [scream]ed[sammy][until]histhroat[wasso]re
+    [theworst]of[itwas][buster][knew][that][every][body][knew][thati]t[wastru]e
+    iwishi[never]had[thought]of[berries][growled][buster]to[himself]
+    most used: berries(14) there(11) buster(11) that(10) busterbear(10) farmerbrownsboy(10) pail(9) thought(9) andth(8) could(8) have(8) guess(8) where(7) itwas(7) away(7) temper(7) might(7) thief(6) when(6) right(6) more(6) about(6) thenhe(6) every(5) thing(5)
+
+fixed, neither  (5 s; 5743 held, 5743 formed, 0 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%
+  cheapest  clean pieces 47%   coverage 32%   words whole 9%    cuts at a word boundary 30%   (chance 26%) boundaries found 83%
+  cheapest reads:
+    d[prick]lyporkyand[reddyfox]and[jimmyskunk]eventimid[little]whit[efoo]
+    t[thewoo]dmousewaswhere[hecoul]dpeeroutandseewithoutbeingseenofc
+    ourse[chatterertheredsquirrel]and[happyja]ckthegraysquirrel[were]t
+    heretheretheyallsatinagreatcirclearoundhimeachwhe[rehe]feltsaf
+    most used: that(17) then(12) ight(11) hehad(10) here(8) nthe(6) than(6) when(5) buster(5) edto(5) tthe(5) were(4) hatit(4) ingto(4) ashe(4) little(3) hecoul(3) every(3) never(3) mmyjay(3) andhe(3) coul(3) ewho(3) would(3) smile(3)
+
+fixed, heat  (1 s; 6195 held, 6195 formed, 0 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 70% 41% 35% 29% 27% 21% 24% 24% 23% 23%
+  cheapest  clean pieces 38%   coverage 74%   words whole 20%   cuts at a word boundary 44%   (chance 26%) boundaries found 68%
+  cheapest reads:
+    d[prick]lypork[yand]re[ddyfox]an[djimmy]skunk[even]timid[little]whitefoo
+    [tthe][wood]m[ouse]was[where][hecould]pee[rout][ands]ee[with]ou[tbein]g[seen]ofc
+    [ourse][chatterertheredsqui][rrel][andh]app[yjack][thegr][aysqui][rrel][were]t
+    [here][there][theya]llsati[nagreat]circ[lear][ound]hi[meac]h[where]he[felts]af
+    most used: ight(17) andth(13) buster(11) berr(11) with(10) ever(10) rown(10) sboy(10) pail(9) farmerb(9) where(8) there(8) that(8) thought(8) busterbear(8) thing(8) more(8) guess(8) itwas(7) have(7) even(6) when(6) about(6) thos(6) henhe(6)
+
+fixed, energy  (8 s; 4696 held, 4696 formed, 29235 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%
+  cheapest  clean pieces 61%   coverage 56%   words whole 10%   cuts at a word boundary 36%   (chance 26%) boundaries found 71%
+  cheapest reads:
+    dpricklyporkyand[reddyfox]andji[mmyskunk]eventimid[little]whitefoo
+    tthewoodmousewas[wherehe][could]peerou[tands]ee[without][beings]eenofc
+    [ourse][chatterertheredsquirrel]and[happy]ja[ckthegraysquirre]lweret
+    [hereth][erethe]yallsat[inagreat]circle[around]himeach[where][hefelt]saf
+    most used: temper(6) might(6) itwas(5) berries(5) hehad(5) andthen(5) little(4) where(4) thepail(4) iguess(4) hadbeen(4) around(3) sammyjay(3) sneck(3) onthe(3) oughtto(3) theberries(3) reddyfox(2) wherehe(2) could(2) chatterertheredsquirrel(2) making(2) thiefthief(2) until(2) buster(2)
+
+fixed, both  (1 s; 3396 held, 3396 formed, 16160 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 85% 65% 56% 46% 44% 34% 39% 34% 32% 32%
+  cheapest  clean pieces 60%   coverage 66%   words whole 23%   cuts at a word boundary 44%   (chance 26%) boundaries found 75%
+  cheapest reads:
+    dpricklypor[kyand][reddyfox]an[djimmy]skunk[even]timid[little]whitefoo
+    t[thewoo]dmousewas[where][hecould]peerou[tands]ee[without][being][seen]ofc
+    [ourse][chatterer][there][dsquirrel]and[happyjack][thegr]ay[squirrel][were]t
+    [here][there][they]allsatina[great]circle[around]hi[meac]h[where][hefelt]saf
+    most used: berries(14) buster(11) there(10) where(9) might(9) farmerbrownsboy(9) that(8) thought(8) busterbear(8) then(8) itwas(7) andth(7) have(7) over(7) thing(6) temper(6) right(6) could(6) more(6) epail(6) even(5) little(5) every(5) thati(5) when(5)
+
+==============================================================================================================
+Alice
+==============================================================================================================
+
+sentences, neither  (32 s; 9336 held, 9336 formed, 0 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%
+  cheapest  clean pieces 48%   coverage 52%   words whole 13%   cuts at a word boundary 32%   (chance 24%) boundaries found 74%
+  cheapest reads:
+    imapoorman[thehatter][wenton]andmos[tthing]stwinkled[after][that]only[themarchharesaid]ididnt
+    [themarchhare][interrupted][inagreathurry]
+    [well][atanyrate][thedormouse][saidthehatter][wenton]lookinganxiously[round]toseeifhe[would][denyi]ttoo
+    bu[tthedormouse]denied[nothing]being[fastasleep]
+    most used: them(16) this(15) saidtheking(14) would(13) ofthe(13) with(12) they(11) theking(10) that(9) saidalice(9) jury(8) down(8) andthe(8) ands(8) court(7) just(7) voice(7) king(7) thejury(7) dream(7) ther(7) nothing(6) then(6) turn(6) again(6)
+
+sentences, heat  (4 s; 8347 held, 8347 formed, 0 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 69% 37% 26% 24% 20% 19% 18% 19% 17% 17%
+  cheapest  clean pieces 38%   coverage 80%   words whole 25%   cuts at a word boundary 46%   (chance 24%) boundaries found 68%
+  cheapest reads:
+    ima[poor]ma[nthe][hatt]er[wento][nand][most][things]t[wink]led[after][that][only][them]a[rchhare][said]i[didnt]
+    [them]a[rchhare][inter][rupted]in[agreat][hurry]
+    [well]a[tanyr]at[ethe]d[ormous]esa[idthe][hatt]er[wento]n[looking]anx[ious]ly[round][toseei]fhe[would][deny][ittoo]
+    b[utthe]d[ormous][edenie]d[nothing][being][fasta][sleep]
+    most used: idthe(37) king(32) said(27) alice(27) that(24) jury(18) ofthe(16) ueen(14) this(12) with(11) would(11) atthe(11) erabbit(11) inthe(10) important(10) hatt(9) what(9) allthe(9) tthe(9) tothe(9) ever(9) after(8) nothing(8) theco(8) whit(8)
+
+sentences, energy  (32 s; 7796 held, 7796 formed, 47455 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%
+  cheapest  clean pieces 48%   coverage 68%   words whole 11%   cuts at a word boundary 36%   (chance 24%) boundaries found 62%
+  cheapest reads:
+    imapoorman[thehatterwe]nt[onand]mos[tthing]stwinkled[afterthat]only[themarchharesaid][ididnt]
+    [themarchhare][interrupted][inagreathurry]
+    [well][atanyrate][thedormouses]aid[thehatterwenton][looking][anxiously][round][toseeif]he[would]denyittoo
+    bu[tthedormouse]denied[nothing][being][fastasleep]
+    most used: saidtheking(13) thejury(10) theking(10) saidalice(8) would(6) said(6) inthe(5) what(5) alice(5) ofher(5) ofthe(5) saidthequeen(5) hersister(5) saidthehatter(4) nothing(4) yourmajesty(4) atthe(4) witness(4) court(4) that(4) thewhiterabbit(4) shehad(4) their(4) tsaidtheking(4) toyou(4)
+
+sentences, both  (4 s; 4450 held, 4450 formed, 22624 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 82% 60% 45% 37% 31% 29% 25% 25% 23% 22%
+  cheapest  clean pieces 51%   coverage 77%   words whole 27%   cuts at a word boundary 47%   (chance 24%) boundaries found 72%
+  cheapest reads:
+    ima[poor]ma[nthe][hatter][wenton]and[most][thing]stwinkled[after][that][only][them][archhare][said][ididnt]
+    [them][archhare][inter][rupt][edina][great][hurry]
+    [well][atanyrate]the[dormous]es[aidthe][hatter][wenton][look]ing[anxiously][round][toseeif]he[would]deny[itto]o
+    bu[tthe][dormous]edenied[nothing]bei[ngfasta][sleep]
+    most used: aidthe(32) said(27) king(24) ofthe(20) alice(20) tthe(19) that(18) with(14) thequeen(14) this(14) would(13) what(12) andthe(12) jury(11) inthe(11) little(11) hatter(10) whiterabbit(10) important(10) about(9) voice(9) they(9) after(8) them(8) nothing(8)
+
+fixed, neither  (13 s; 9762 held, 9762 formed, 0 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%
+  cheapest  clean pieces 49%   coverage 39%   words whole 11%   cuts at a word boundary 30%   (chance 25%) boundaries found 80%
+  cheapest reads:
+    [hera]hardwordiwilljustexplaintoyouhow[itwas]done[they]hadalargeca
+    nvasbagwhichtiedupat[themout]hwithstringsin[tothis][they]slippedth
+    eguineapig[head]first[andthe]nsatuponitimgladivesee[nthat]donethou
+    g[htalice]ivesooftenread[inthe]newspapersat[theendof]trials[there]wa
+    most used: that(18) fthe(18) said(14) eking(13) they(12) inthe(12) ever(12) head(11) alice(11) saidtheking(10) sand(9) andthe(8) there(8) again(7) nothing(7) voice(6) atth(6) have(6) hera(5) itwas(5) youknow(5) down(5) thewhiterabbit(5) over(5) very(5)
+
+fixed, heat  (2 s; 9029 held, 9029 formed, 0 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 65% 41% 30% 26% 24% 22% 20% 21% 19% 20%
+  cheapest  clean pieces 35%   coverage 77%   words whole 21%   cuts at a word boundary 44%   (chance 25%) boundaries found 67%
+  cheapest reads:
+    [hera]hard[word]i[will]jus[texpla][into][youhow][itwas][done]the[yhada][large]ca
+    nvasbag[which]ti[edup][atthe]m[outh][with]st[ring]s[into][this][they]sl[ipped]th
+    egu[ineap]ig[head][first][andth]ensat[upon]itim[glad]iv[eseen][that][done]thou
+    ght[alice]ives[ooften][read][inth]enewsp[aper]s[atthe][endof][trial][sthe][rewa]
+    most used: aidth(27) king(26) ofthe(21) alice(20) said(18) that(15) atthe(14) andth(13) would(13) tthe(12) with(11) queen(11) whiterab(11) inth(10) little(10) jury(10) portan(10) sthe(8) down(8) could(8) allthe(8) voice(8) esaid(8) hehad(8) their(8)
+
+fixed, energy  (18 s; 8078 held, 8078 formed, 51048 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%
+  cheapest  clean pieces 57%   coverage 62%   words whole 11%   cuts at a word boundary 36%   (chance 25%) boundaries found 67%
+  cheapest reads:
+    herahardwordiwilljus[texplain]toyouhow[itwas]done[theyhada][large]ca
+    nvasbag[which]tiedupat[themout]h[with]str[ingsi]n[tothis][they]slippedth
+    eguineapighead[first][andthen]sat[uponit]imgladi[veseen][that]donethou
+    g[htalice]ivesooftenread[inthe]newspapersat[theendof][trial][stherewa]
+    most used: thejury(10) inthe(8) that(6) with(5) theking(5) allthe(5) ofher(5) hadbeen(5) said(5) which(4) they(4) bythe(4) saidtheking(4) thequeen(4) little(4) shehad(4) king(4) nothing(4) ethe(4) toyou(4) hersister(4) wonder(4) itwas(3) large(3) never(3)
+
+fixed, both  (3 s; 5419 held, 5419 formed, 26131 not kept by the energy rule)
+  hot (loose) share of letters learnt from, by tenth: 87% 69% 55% 44% 38% 33% 30% 29% 27% 26%
+  cheapest  clean pieces 52%   coverage 72%   words whole 24%   cuts at a word boundary 45%   (chance 25%) boundaries found 73%
+  cheapest reads:
+    [hera]hardwordi[will][just][explain][toyou]how[itwas][done][they][hada][large]ca
+    nvasbag[which]tiedup[atthe][mouth][with]st[ring]s[into][this][they]slipp[edth]
+    e[guine][apig][head][first][andth]ensat[upon]itimgladiveseen[that][done]thou
+    gh[talice]iveso[often][read][inthe]newspapers[atthe][endof][trials][there]wa
+    most used: saidthe(24) that(21) ofthe(16) jury(15) king(13) said(13) inthe(12) would(12) whiterab(11) atthe(10) andth(10) what(10) alice(10) eking(10) little(10) this(9) shehad(9) saidalice(9) they(8) thequeen(8) important(8) with(7) there(7) about(7) voice(7)

@@ -1,0 +1,190 @@
+first run, cold (tentative pieces grow only by becoming lasting):
+  reader  T 16    N 64    lasting pieces 0
+  reader  T 16    N 256   lasting pieces 0
+  reader  T 16    N 1024  lasting pieces 0
+  reader  T 64    N 64    lasting pieces 0
+  reader  T 64    N 256   lasting pieces 0
+  reader  T 64    N 1024  lasting pieces 0
+  reader  T 256   N 64    lasting pieces 0
+  reader  T 256   N 256   lasting pieces 0
+  reader  T 256   N 1024  lasting pieces 0
+  reader  T 1024  N 64    lasting pieces 0
+  reader  T 1024  N 256   lasting pieces 0
+  reader  T 1024  N 1024  lasting pieces 0
+  story   T 16    N 64    lasting pieces 0
+  story   T 16    N 256   lasting pieces 0
+  story   T 16    N 1024  lasting pieces 0
+  story   T 64    N 64    lasting pieces 0
+  story   T 64    N 256   lasting pieces 0
+  story   T 64    N 1024  lasting pieces 0
+  story   T 256   N 64    lasting pieces 0
+  story   T 256   N 256   lasting pieces 0
+  story   T 256   N 1024  lasting pieces 0
+  story   T 1024  N 64    lasting pieces 0
+  story   T 1024  N 256   lasting pieces 0
+  story   T 1024  N 1024  lasting pieces 0
+
+second run, hot (tentative pieces met again take part in reading and grow): everything below
+
+====================================================================================================
+reader: 321 characters, streamed 3 times; main run: pool 256, population 256
+====================================================================================================
+alphabet 17; a use costs 2.96; 35 lasting pieces
+
+lasting pieces in the order they nucleated (built from, sightings, at character):
+  _the_              _th + e_                   seen 3   at 78
+  _the_dog           _the_ + dog                seen 2   at 133
+  cat_               c + at_                    seen 4   at 144
+  the_               th + e_                    seen 4   at 153
+  _sat_              _s + at_                   seen 3   at 268
+  on_the_            on + _the_                 seen 3   at 275
+  _the_cat_          _the_ + cat_               seen 3   at 329  (pass 2)
+  mat_               m + at_                    seen 4   at 344  (pass 2)
+  the_cat_           the_ + cat_                seen 3   at 423  (pass 2)
+  _and               _a + nd                    seen 4   at 441  (pass 2)
+  o_the_             o + _the_                  seen 4   at 461  (pass 2)
+  cat_an             cat_ + an                  seen 3   at 480  (pass 2)
+  _sat_on_the_       _sat_ + on_the_            seen 3   at 501  (pass 2)
+  aw_the_            aw + _the_                 seen 3   at 521  (pass 2)
+  d_the_dog          d + _the_dog               seen 4   at 536  (pass 2)
+  n_the_             n_ + the_                  seen 4   at 544  (pass 2)
+  mat_and            mat_ + and                 seen 2   at 555  (pass 2)
+  an_s               an + _s                    seen 4   at 561  (pass 2)
+  at_on              at_ + on                   seen 3   at 566  (pass 2)
+  _the_ze            _the_ + ze                 seen 3   at 581  (pass 2)
+  _saw               _s + aw                    seen 4   at 613  (pass 2)
+  _the_zebra         _the_ze + bra              seen 2   at 630  (pass 2)
+  _the_cat_sa        _the_cat_ + sa             seen 3   at 652  (pass 3)
+  on_the_mat_        on_the_ + mat_             seen 3   at 665  (pass 3)
+  _and_the_dog       _and + _the_dog            seen 3   at 723  (pass 3)
+  ran_t              ran + _t                   seen 3   at 749  (pass 3)
+  _ran               _ + ran                    seen 4   at 774  (pass 3)
+  _to_the_           _t + o_the_                seen 3   at 782  (pass 3)
+  cat_th             cat_ + th                  seen 3   at 788  (pass 3)
+  cat_and_the_dog    cat_an + d_the_dog         seen 3   at 810  (pass 3)
+  _sat_on_the_mat_   _sat_on_the_ + mat_        seen 3   at 826  (pass 3)
+  the_m              the_ + m                   seen 4   at 831  (pass 3)
+  _the_m             _the_ + m                  seen 4   at 878  (pass 3)
+  _the_log           _the_ + log                seen 2   at 900  (pass 3)
+  zebr               ze + br                    seen 4   at 929  (pass 3)
+
+how hot, by stretch (a quarter of a pass each): share of units read as loose letters, tentative pieces dissolved, nucleated
+  1   loose 77%   chars per unit 1.33  dissolved 0     nucleated 1
+  2   loose 35%   chars per unit 2.56  dissolved 0     nucleated 3
+  3   loose 17%   chars per unit 2.83  dissolved 0     nucleated 0
+  4   loose 42%   chars per unit 2.45  dissolved 0     nucleated 3
+  5   loose 12%   chars per unit 4.94  dissolved 0     nucleated 1
+  6   loose 11%   chars per unit 4.78  dissolved 0     nucleated 5
+  7   loose 0%    chars per unit 5.00  dissolved 0     nucleated 7
+  8   loose 7%    chars per unit 5.60  dissolved 0     nucleated 4
+  9   loose 8%    chars per unit 7.00  dissolved 0     nucleated 2
+  10  loose 9%    chars per unit 7.45  dissolved 0     nucleated 6
+  11  loose 0%    chars per unit 6.92  dissolved 0     nucleated 2
+  12  loose 22%   chars per unit 4.67  dissolved 0     nucleated 1
+
+the last pass as read (47 units; 4 loose letters; 15 pieces cutting inside a word):
+  [t_][on_the_mat_][and][_the_dog][_sat_on_the_][log][_the_cat_sa]w[_the_dog][_and_the_dog][_saw][_the_cat_][the_cat_][ran_t][o_the_][dog][_and_the_dog][_ran][_to_the_][cat_th]e[n_the_][cat_and_the_dog][_sat_on_the_mat_][the_m][an_s][aw_the_][cat_and_the_dog][_o][n_the_][mat_and][_the_m][an_s][at_on][_the_][log][_the_zebra][_sat_on_the_mat_][the_][zebr]a[_saw][_the_zebra][_and][_the_zebra][_ran]_
+  cutting inside a word: t_  _the_cat_sa  ran_t  o_the_  cat_th  n_the_  the_m  an_s  aw_the_  _o  _the_m  at_on  zebr
+  the zebra sat on the mat: [_the_zebra][_sat_on_the_mat_]
+
+====================================================================================================
+story: 1571 characters, streamed 2 times; main run: pool 256, population 256
+====================================================================================================
+alphabet 25; a use costs 2.72; 45 lasting pieces
+
+lasting pieces in the order they nucleated (built from, sightings, at character):
+  _the_              _t + he_                   seen 3   at 164
+  the_               th + e_                    seen 4   at 363
+  t_the_             t_ + the_                  seen 4   at 594
+  d_tha              d_t + ha                   seen 3   at 710
+  ver_to             ver + _to                  seen 2   at 841
+  ice_               ic + e_                    seen 4   at 974
+  river              ri + ver                   seen 3   at 1045
+  d_the_             d_t + he_                  seen 4   at 1089
+  ther_              the + r_                   seen 3   at 1124
+  e_an               e_ + an                    seen 4   at 1131
+  e_th               e_ + th                    seen 4   at 1199
+  nd_t               n + d_t                    seen 4   at 1230
+  _and_              _an + d_                   seen 3   at 1251
+  chil               ch + il                    seen 4   at 1322
+  dren_              dre + n_                   seen 3   at 1327
+  and_the_           an + d_the_                seen 3   at 1477
+  y_the_             y_ + the_                  seen 4   at 1575  (pass 2)
+  _the_river         _the_ + river              seen 3   at 1630  (pass 2)
+  children_          chil + dren_               seen 3   at 1755  (pass 2)
+  walk               wa + lk                    seen 4   at 1759  (pass 2)
+  _the_o             _the_ + o                  seen 4   at 1782  (pass 2)
+  s_to               s + _to                    seen 4   at 1826  (pass 2)
+  the_s              the_ + s                   seen 4   at 1846  (pass 2)
+  _the_f             _the_ + f                  seen 4   at 1888  (pass 2)
+  _to_w              _to + _w                   seen 3   at 1994  (pass 2)
+  aid_tha            ai + d_tha                 seen 3   at 2058  (pass 2)
+  _to                _t + o                     seen 11  at 2107  (pass 2)
+  on_the_            on + _the_                 seen 3   at 2141  (pass 2)
+  othe               o + the                    seen 4   at 2145  (pass 2)
+  had_               ha + d_                    seen 4   at 2173  (pass 2)
+  ler_               l + er_                    seen 4   at 2209  (pass 2)
+  t_the_ice_         t_the_ + ice_              seen 3   at 2227  (pass 2)
+  was_               wa + s_                    seen 4   at 2231  (pass 2)
+  _on_               _o + n_                    seen 4   at 2305  (pass 2)
+  _on_it_            _on_ + it_                 seen 2   at 2312  (pass 2)
+  old_               ol + d_                    seen 4   at 2323  (pass 2)
+  to_the_            to + _the_                 seen 3   at 2401  (pass 2)
+  miller_            mil + ler_                 seen 2   at 2474  (pass 2)
+  ed_a               ed + _a                    seen 4   at 2574  (pass 2)
+  n_the_             n_ + the_                  seen 4   at 2586  (pass 2)
+  e_wa               e_ + wa                    seen 4   at 2602  (pass 2)
+  and_               an + d_                    seen 4   at 2747  (pass 2)
+  he_                h + e_                     seen 11  at 2804  (pass 2)
+  er_                er + _                     seen 11  at 2938  (pass 2)
+  ld_                l + d_                     seen 11  at 3019  (pass 2)
+
+how hot, by stretch (a quarter of a pass each): share of units read as loose letters, tentative pieces dissolved, nucleated
+  1   loose 73%   chars per unit 1.39  dissolved 0     nucleated 2
+  2   loose 42%   chars per unit 1.87  dissolved 130   nucleated 2
+  3   loose 29%   chars per unit 2.16  dissolved 153   nucleated 6
+  4   loose 39%   chars per unit 2.17  dissolved 158   nucleated 7
+  5   loose 27%   chars per unit 2.37  dissolved 146   nucleated 7
+  6   loose 25%   chars per unit 2.74  dissolved 129   nucleated 12
+  7   loose 22%   chars per unit 2.68  dissolved 138   nucleated 6
+  8   loose 31%   chars per unit 2.56  dissolved 144   nucleated 3
+
+the last pass as read (608 units; 162 loose letters; 357 pieces cutting inside a word):
+  v[ill][ag][e_][st][oo][d_]a[t_the_][ed][ge_][of][_the_f][or]e[st][_w][he][re][_the_river][_t]u[rn][ed][_to][wa]rd[s_][the_]s[ea]_e[ver][y_]m[or]n[ing][_the_][ba]k[er_][op][en][ed]_[hi][s_]s[ho]p[_and_][the_s]me[ll][_o][f_]b[re]a[d_][dr]if[ted][_a][lo][ng][_the_][st][re][et_][the_][children_][walk][ed_][to][_s][ch][oo][l_]pa[st][_the_o][ld_][mil][l_][and_the_][fa][rm][er][s_][dr]ov[e_th]e[ir]_c[ar]t[s_to][_the_]m[ar]k[et_][in_][the_s]qu[ar][e_o]n[e_]w[in]t[er_][the_][river][_f][ro]z[e_f][or][_the_f][ir][st][_t]im[e_][in_]m[an][y_]y[ea][rs][_and_][the_][pe][op][le_][of][_the_]v[ill][ag][e_c]am[e_o][ut_][to]_[lo]o[k_a][t_the_][ice_][the_][children_][wa]n[ted][_to_w][al]k[_on_][it_]b[ut_][the][ir][_m][othe][rs][_to][ld_][the]m[_to_w][ai][t_the_][ba]k[er_s][aid_tha][t_][hi][s_][fa][ther_][had_][on][ce_]c[ro]ss[ed_][the_][fro]z[en]_[river][_to][_b][ri][ng][_f][lo]u[r_][fro]m[_the_][to][wn_][on_the_][othe][r_]s[id][e_an][d_tha][t_the_][ice_][had_][he][ld_][hi]m[_a][ll][_the_][wa][y_the_][old_][mil][ler_][sai][d_tha][t_the_ice_][was_][th][in_]n[ea][r_][the_][ba]n[k_a][nd_t][hi]ck_[in_][the_]m[id]d[le_][and_][th]a[t_n]obod[y_]s[ho][uld_][walk][_on_][it_]unt[il][_the_]c[old_][had_][la][st][ed_]f[or][_a][_w]eek[_the_][children_][wa]i[ted][_and_]e[ver][y_]d[ay_][the][y_][wen][t_]do[wn_][to_the_][river][_to][_s]e[e_]i[f_][the_][ice_][was_][st][ill][_t][he][re][_on_][the_s]ev[en][th][_d][ay_][the_][mil][ler_][walk][ed_][ou][t_][on][to_the_][ice_]wi[th][_a]_[lo][ng]_p[ol][e_an][d_t]ap[pe][d_][it_]a[s_][he_][wen][t_the_ice_][he][ld_][and_the_][pe][op][le_][ch]e[er][ed_a][nd_]s[oo][n_the_]w[ho][le_]v[ill][ag][e_wa][s_][on_the_][river][_the_][children_]sl[id][_and_]fe[ll][_and_][la][ug][he][d_the_][fa][rm][er][s_][walk][ed_a]c[ro]s[s_to][_the_o][ther_]s[id][e_an][d_][ba]c[k_a][gai][n_][and_the_][ba]k[er_]b[ro][ug]h[t_]b[rea][d_][and_][ho][t_]t[ea][_f][or]_e[ver]y[on][e_th]a[t_n]i[gh][t_the_]w[in][d_][ch][an]g[ed_a][nd_t][he_][ai][r_]g[re]w[_wa][rm][_and_][in_][the_]m[or]n[ing][_the_river][_wa][s_]mov[ing][_a][gai][n_the_][ice_][was_]g[on][e_an][d_the_][children_][stoo][d_][on_the_][ba]n[k_a][nd_][wat][ch][ed_][the_][wat][er_]c[ar]r[y_the_][la][st]_piece[s_][of]_[it_][to][war][ds_][the_s][ea][_the_][miller_][sai][d_tha][t_the_][river][_w][ou][ld_]f[re]ez[e_][ag][ain_][on][e_]d[ay_][and_the_][children_]ask[ed_][hi]m[_whe][n_][and_][he_][sai][d_tha][t_n]obod[y_]knew[_b][ut_][th]a[t_]w[hen_][it_]d[id][_t][he][y_]w[ou][ld_]b[e_][rea]d[y_]
+  cutting inside a word: ill  ag  e_  st  oo  d_  t_the_  ed  ge_  _the_f  or  _w  he  re  _t  rn  _to  wa  s_  ea  ver  y_  ing  ba  er_  op  en  hi  ho  the_s  ll  _o  f_  dr  ted  _a  lo  ng  et_  walk  ed_  _s  ch  l_  _the_o  ld_  mil  fa  rm  er  e_th  ir  ar  s_to  e_o  in  _f  ro  e_f  an  rs  pe  le_  e_c  ut_  k_a  _to_w  al  the  _m  othe  ai  er_s  aid_tha  t_  ther_  on  ce_  fro  _b  ri  r_  to  wn_  id  e_an  d_tha  y_the_  ler_  sai  t_the_ice_  th  in_  nd_t  t_n  uld_  il  old_  la  ay_  wen  _d  ou  to_the_  ol  d_t  ed_a  nd_  n_the_  e_wa  ug  d_the_  gai  n_  rea  gh  he_  _wa  stoo  wat  war  ds_  ain_  _whe  hen_
+
+====================================================================================================
+sizes: pool T and population N
+====================================================================================================
+
+reader
+  T      N      lasting  units  loose  inside  zebra / sample
+  16     64     5        148    78     54      [_the_]zebra_s[at_]on[_the_m][at_]
+  16     256    4        148    78     54      [_the_]zebra_s[at_]on[_the_m][at_]
+  16     1024   4        153    88     49      [_the_]zeb[ra]_s[at_]on[_the_m][at_]
+  64     64     33       57     7      19      [_the_zebra][_sat_on_the_mat_]
+  64     256    29       57     7      19      [_the_zebra][_sat_on_the_mat_]
+  64     1024   23       59     9      21      [_the_zebra][_sat_on_the_mat_]
+  256    64     38       47     4      15      [_the_zebra][_sat_on_the_mat_]
+  256    256    35       47     4      15      [_the_zebra][_sat_on_the_mat_]
+  256    1024   30       47     4      15      [_the_zebra][_sat_on_the_mat_]
+  1024   64     38       47     4      15      [_the_zebra][_sat_on_the_mat_]
+  1024   256    35       47     4      15      [_the_zebra][_sat_on_the_mat_]
+  1024   1024   30       47     4      15      [_the_zebra][_sat_on_the_mat_]
+
+story
+  T      N      lasting  units  loose  inside  zebra / sample
+  16     64     3        1134   838    252     [_the_]bak[er]_opene[d_h]is_shop
+  16     256    2        1147   864    239     [_the_]bak[er]_opene[d_h]is_shop
+  16     1024   1        1147   864    239     [_the_]bak[er]_opene[d_h]is_shop
+  64     64     13       859    396    383     [_the_][ba]k[er][_o]pen[ed_][hi][s_]sh[op]
+  64     256    9        866    398    388     [_the_][ba]k[er][_o]pen[ed_][hi][s_]sh[op]
+  64     1024   5        874    406    388     [_the_][ba]k[er][_o]pen[ed_][hi][s_]sh[op]
+  256    64     64*      604    157    358     [_the_][ba]k[er_][op][en][ed]_[hi][s_]s[ho]p
+  256    256    45       608    162    357     [_the_][ba]k[er_][op][en][ed]_[hi][s_]s[ho]p
+  256    1024   35       609    161    362     [_the_][ba]k[er_][op][en][ed]_[hi][s_]s[ho]p
+  1024   64     64*      541    99     361     [_the_][ba][ker_][op][en][ed_][hi][s_]s[ho]p
+  1024   256    65       541    99     361     [_the_][ba][ker_][op][en][ed_][hi][s_]s[ho]p
+  1024   1024   50       541    99     361     [_the_][ba][ker_][op][en][ed_][hi][s_]s[ho]p
+
+(* population full: something paid but there was no room)

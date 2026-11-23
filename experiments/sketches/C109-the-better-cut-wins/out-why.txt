@@ -1,0 +1,5 @@
+buffer 1 now costs 34.74 [the_cat_sa][t_on_the_]mat[_and_the_dog_sa][t_on_the_]log_[the_cat_sa]w[_the_]dog[_and_the_dog_sa]w[_the_]cat
+sat_on_the_      reading with it 34.74 + body 4.47 ( sa[t_on_the_] ) = 39.21
+_sat_on_the_     reading with it 34.74 + body 5.47 ( _sa[t_on_the_] ) = 40.21
+_the_cat         reading with it 31.74 + body 5.47 ( [_the_]cat ) = 37.21
+cat_sat_on_the_  reading with it 34.74 + body 8.47 ( cat_sa[t_on_the_] ) = 43.21

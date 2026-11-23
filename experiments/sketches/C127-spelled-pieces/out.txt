@@ -1,0 +1,88 @@
+=== burgess-busterbrown.txt
+burgess-busterbrown.txt: 1044 sentences; 8 members per letter; cost as surprise; learnt on nine tenths, read on the last tenth; energy rule on
+
+--- C126 as it was  (learning 0 s; 2753 assemblies)
+  98 held patterns never occurred (826 of 6504 letters held)
+  energy 10231 = memory 6115 + unseen 4116; unseen costs 0.655 per letter
+  1357 different patterns held; 4 stored states repeat letters already held; 640 hot stretches counted as seen again
+  "the" read inside a piece 98%; letters read loose in the unseen tenth 10%
+  clean 37%  coverage 90%  words whole 46%  cuts at a word boundary 56% (chance 25%)
+  loose letters by tenth while learning: 52% 22% 16% 13% 13% 10% 9% 11% 10% 9%
+  most read units: the(90) and(59) of(45) ed(40) to(40) his(38) ing(37) he(36) had(34) hat(29) it(25) in(24) be(24) bu(20) ter(19) here(19) was(19) ight(19) way(18) een(18) th(17) you(16) ly(16) ould(15) rri(15) es(15) no(15) one(14) on(14) who(14)
+  reads: [of]c[our]sec[hat][ter][er][the]r[ed]s[qui][rrel][and][happ][yj][ack][the][gr][ays][qui][rrel][were]t[here]
+  reads: [sc][rea]m[ed][sammy][until][his][th]ro[at][was][so]re
+  reads: [the]wo[rst][of][itwas][bu]s[ter][kne]wt[hat]e[very][body][kne]wt[hat][itwas][true]
+  reads: iw[ish][in][eve]r[had][thought][of][be][rri][es]g[row][led][bu]s[ter][to][himself]
+  reads: [xx]ii[busterbear][ha][saf][it][of][tem][per][ate][mperis]a[bad][bad][th][ing][when][on][ce][it][get]sa[way]
+
+--- spelled pieces only  (learning 0 s; 2630 assemblies)
+  0 held patterns never occurred (0 of 5473 letters held)
+  energy 9278 = memory 5094 + unseen 4184; unseen costs 0.666 per letter
+  1158 different patterns held; 0 stored states repeat letters already held; 673 hot stretches counted as seen again
+  "the" read inside a piece 98%; letters read loose in the unseen tenth 10%
+  clean 35%  coverage 90%  words whole 44%  cuts at a word boundary 54% (chance 25%)
+  loose letters by tenth while learning: 50% 22% 15% 13% 12% 11% 10% 12% 10% 10%
+  most read units: the(101) and(59) of(48) he(47) his(38) ing(37) it(35) to(35) had(34) ed(33) re(32) hat(29) in(29) be(23) th(22) es(22) bu(20) igh(20) was(19) ter(18) is(18) wa(18) rri(16) you(16) ould(15) no(15) all(14) one(14) who(14) pail(13)
+  reads: [of][cou]r[sec][hat][ter][er][the]r[ed][squ][irr]el[and][happ][yj][ack][the][gr]ay[squ][irr]el[were][the][re]
+  reads: [scre]a[med][sammy][until][his][th]ro[at][was][so][re]
+  reads: [the]wo[rst][of][itwas][bu]s[ter][kne]wt[hat]e[very][bo][dy][kne]wt[hat][itwas][true]
+  reads: iw[is][hin][eve]r[had][th][ought][of][be][rri][es]g[row][led][bu]s[ter][to][himself]
+  reads: [xx]ii[busterbear]h[as][af][it][of][tem][per][ate][mperis]a[bad][bad][th][ing][when]o[nce][it][get][saw]ay
+
+--- spelled pieces, and a stretch seen again credited once  (learning 1 s; 2469 assemblies)
+  0 held patterns never occurred (0 of 5166 letters held)
+  energy 9051 = memory 4831 + unseen 4221; unseen costs 0.672 per letter
+  1094 different patterns held; 0 stored states repeat letters already held; 580 hot stretches counted as seen again
+  "the" read inside a piece 98%; letters read loose in the unseen tenth 10%
+  clean 34%  coverage 90%  words whole 43%  cuts at a word boundary 54% (chance 25%)
+  loose letters by tenth while learning: 50% 20% 15% 13% 12% 10% 10% 11% 9% 9%
+  most read units: the(100) and(59) of(49) he(46) his(38) it(38) ing(37) th(37) ed(34) had(34) to(34) re(32) hat(29) in(29) be(24) bu(20) es(20) igh(20) wa(20) ter(19) was(19) is(18) you(16) ould(15) bo(15) rri(15) all(14) one(14) at(14) no(14)
+  reads: [of][cou]r[sec][hat][ter][er][the]r[ed][squ][irr]el[and][happ][yj][ack][the][gr]ay[squ][irr]el[were][the][re]
+  reads: [scre]a[med][sammy][until][his][th]ro[at][was][so][re]
+  reads: [the][wo][rst][of][itwas][bu]s[ter][kne]wt[hat]e[very][bo][dy][kne]wt[hat][itwas][true]
+  reads: [iw][is][hin][eve]r[had][th][ought][of][be][rri][es]g[row][led][bu]s[ter][to][himself]
+  reads: [xx]ii[busterbear][ha][saf][it][of][tem][per][at]e[mperis]a[bad][bad][th][ing][when]o[nce][it][get][saw]ay
+=== carroll-alice.txt
+carroll-alice.txt: 2066 sentences; 8 members per letter; cost as surprise; learnt on nine tenths, read on the last tenth; energy rule on
+
+--- C126 as it was  (learning 0 s; 3361 assemblies)
+  123 held patterns never occurred (722 of 7392 letters held)
+  energy 14987 = memory 7233 + unseen 7754; unseen costs 0.670 per letter
+  1650 different patterns held; 8 stored states repeat letters already held; 1224 hot stretches counted as seen again
+  "the" read inside a piece 100%; letters read loose in the unseen tenth 8%
+  clean 34%  coverage 92%  words whole 50%  cuts at a word boundary 56% (chance 24%)
+  loose letters by tenth while learning: 38% 17% 13% 12% 10% 10% 9% 8% 9% 8%
+  most read units: the(309) and(92) of(83) at(82) ing(80) said(72) th(62) it(61) her(59) she(58) in(52) you(50) to(48) al(43) king(42) im(42) ed(42) on(39) as(37) his(37) ly(36) ch(31) be(28) alice(28) ter(27) out(26) an(26) had(26) one(24) up(23)
+  reads: [im]a[poor][man][the]h[at][ter][went][on][and][most][th][ing]s[tw][ink][led][after][th][at][on][ly][the][mar][ch]h[are][said]i[did][nt]
+  reads: [the][mar][ch]h[are][in][ter]r[up]t[edin]a[gr][eat][hurry]
+  reads: [well][at][anyr][at]e[the][do][rm][ouse][said][the]h[at][ter][went][on][loo][king][anxious][ly][ro][und][tosee][if][he][would][den]y[it][too]
+  reads: [but][the][do][rm][ouse][den]i[ed][noth][ing][be][ing]f[ast][as]l[eep]
+  reads: [after][th][at][con][tin]u[ed][the]h[at][ter]i[cut]s[ome][more]b[rea]d[and][but][ter][but][what][did][the][do][rm][ouse]s[ay]
+
+--- spelled pieces only  (learning 0 s; 3486 assemblies)
+  0 held patterns never occurred (0 of 6839 letters held)
+  energy 14306 = memory 6605 + unseen 7700; unseen costs 0.665 per letter
+  1510 different patterns held; 0 stored states repeat letters already held; 1290 hot stretches counted as seen again
+  "the" read inside a piece 100%; letters read loose in the unseen tenth 8%
+  clean 36%  coverage 92%  words whole 52%  cuts at a word boundary 57% (chance 24%)
+  loose letters by tenth while learning: 39% 17% 15% 12% 10% 9% 10% 8% 9% 8%
+  most read units: the(306) and(91) of(82) ing(76) said(72) to(65) it(59) she(59) in(57) ed(55) her(55) you(48) al(47) king(44) ly(36) that(36) on(34) as(33) ch(31) be(30) alice(28) out(26) had(26) im(25) ter(24) one(24) an(23) qu(23) ry(22) ver(22)
+  reads: [im]a[poor][man][the][hat][ter][went][on][and][most][thin][gs][tw][in][kle]d[after][that][on][ly][the][mar][ch]h[are][said]i[did][nt]
+  reads: [the][mar][ch]h[are][in][ter]r[up]t[ed][ina][gr][eat][hurry]
+  reads: [well][at][any][rat]e[the][do][rm][ouse][said][the][hat][ter][went][on][loo][king][anxious][ly]r[ound][tosee][if][he][would][den]y[it][to]o
+  reads: [but][the][do][rm][ouse][den]i[ed][noth][ing][be][ing]f[ast][as]l[eep]
+  reads: [after][that]c[ont][in]u[ed][the][hat][ter]i[cut]s[ome][more]b[rea]d[and][but][ter][but][what][did][the][do][rm][ouse]s[ay]
+
+--- spelled pieces, and a stretch seen again credited once  (learning 0 s; 3214 assemblies)
+  0 held patterns never occurred (0 of 6226 letters held)
+  energy 13802 = memory 6067 + unseen 7736; unseen costs 0.668 per letter
+  1387 different patterns held; 0 stored states repeat letters already held; 991 hot stretches counted as seen again
+  "the" read inside a piece 100%; letters read loose in the unseen tenth 8%
+  clean 34%  coverage 92%  words whole 51%  cuts at a word boundary 56% (chance 24%)
+  loose letters by tenth while learning: 37% 16% 12% 10% 9% 9% 9% 8% 8% 9%
+  most read units: the(307) it(100) and(91) ing(78) of(77) said(72) in(71) on(63) to(60) she(57) her(53) ed(52) al(50) you(48) king(44) ly(36) that(36) at(33) as(32) ch(31) re(30) be(28) alice(28) an(27) im(26) out(26) had(26) ter(24) up(23) was(23)
+  reads: [im]a[poor][man][the]h[at][ter][went][on][and][most][th][ing][st]w[in]kl[ed][after][that][on][ly][the][mar][ch]h[are][said]i[didnt]
+  reads: [the][mar][ch]h[are][in][ter]r[up][ted][ina][gr][eat][hurry]
+  reads: [well][atanyrate][the][do][rm][ouse][said][the]h[at][ter][went][on][loo][king][anxious][ly]r[ound][tosee][if][he][would][den]y[it][to]o
+  reads: [but][the][do][rm][ouse][den]i[ed][noth][ing][be][ing]f[ast][as]l[eep]
+  reads: [after][that]c[on][tin]u[ed][the]h[at][ter]i[cut]s[ome][more]b[rea]d[and][but][ter][but][what][did][the][do][rm][ouse]s[ay]

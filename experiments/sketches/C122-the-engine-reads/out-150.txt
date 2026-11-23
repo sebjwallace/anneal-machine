@@ -1,0 +1,84 @@
+=== 8 members per letter, first 150 sentences
+burgess-busterbrown.txt: 150 sentences; 8 members per letter; refractory off; learnt on nine tenths, read on the last tenth
+
+--- with the energy rule  (learning 20 s; 985 assemblies)
+  clean 10%  coverage 6%  words whole 7%  cuts at a word boundary 24% (chance 24%)
+  loose letters by tenth while learning: 82% 95% 92% 94% 94% 96% 94% 93% 88% 62%
+  most read units: li(3) en(3) to(2) ea(2) the(2) wa(1) for(1) he(1) le(1) hi(1) eb(1) nto(1) ee(1)
+  reads: helookedthis[wa]yandhelookedthatwaysuspiciouslybuttherewasnoonetobeseen
+  reads: everythingwasstillsave[for]thelaughterofthelaughingbrook
+  reads: somehowitseemedtobusterasift[he]brookwerelaughingathim
+  reads: itsverycuriousmutteredbusterverycuriousindeed
+  reads: itlooksasifmyfishingisspoi[le]dfortoday
+  reads: itlooksasifsomebodyistryingtoha
+  reads: asuddenthoughthadpoppedin[to][hi]sh[ea]d
+  reads: [the]nh[eb]ega[nto]chuckl[ea]ndfinally[to]laugh
+
+--- without the energy rule (anneal forms everything, as on main)  (learning 42 s; 3606 assemblies)
+  clean 18%  coverage 4%  words whole 7%  cuts at a word boundary 25% (chance 24%)
+  loose letters by tenth while learning: 83% 91% 91% 95% 99% 95% 94% 89% 95% 90%
+  most read units: he(3) as(2) that(1) tthere(1) tt(1) il(1) at(1) ho(1)
+  reads: helookedthiswayand[he]looked[that]waysuspiciouslybu[tthere]wasnoonetobeseen
+  reads: everythingwasstillsaveforthelaughterofthelaughingbrook
+  reads: somehowitseemedtobusterasifthebrookwerelaughingathim
+  reads: itsverycuriousmu[tt]eredbusterverycuriousindeed
+  reads: itlooksasifmyfishingisspo[il]edfortoday
+  reads: itlooksasifsomebodyistryingtoha
+  reads: asuddent[ho]ughthadpoppedintohishead
+  reads: t[he]nhebegantochuckleandfinallytolaugh
+=== 64 members per letter, first 150 sentences
+burgess-busterbrown.txt: 150 sentences; 64 members per letter; refractory off; learnt on nine tenths, read on the last tenth
+
+--- with the energy rule  (learning 15 s; 1593 assemblies)
+  clean 11%  coverage 11%  words whole 8%  cuts at a word boundary 25% (chance 24%)
+  loose letters by tenth while learning: 59% 62% 63% 57% 70% 65% 76% 80% 86% 83%
+  most read units: ng(4) in(3) to(2) st(2) nd(2) at(2) ca(2) ss(1) ve(1) of(1) kw(1) ind(1) yfi(1) hi(1) df(1) udd(1) fi(1) ri(1) wi(1) te(1) ea(1) ld(1) id(1) gea(1) do(1)
+  reads: helookedthiswayandhelookedthatwaysuspiciouslybuttherewasnoone[to]beseen
+  reads: everythi[ng]was[st]illsa[ve]forthelaughter[of]thelaughi[ng]brook
+  reads: somehowitseemed[to]busterasifthebroo[kw]erelaughingathim
+  reads: itsverycuriousmutteredbu[st]erverycurious[ind]eed
+  reads: itlooksasifm[yfi]s[hi]ngisspoile[df]ortoday
+  reads: itlooksasifsomebodyistryi[ng]toha
+  reads: as[udd]enthoughthadpoppedintohishead
+  reads: thenhebegantochuckleand[fi]nallytolaugh
+
+--- without the energy rule (anneal forms everything, as on main)  (learning 29 s; 4873 assemblies)
+  clean 5%  coverage 6%  words whole 7%  cuts at a word boundary 24% (chance 24%)
+  loose letters by tenth while learning: 68% 73% 76% 85% 83% 81% 85% 89% 91% 94%
+  most read units: ug(4) li(3) ss(2) il(2) ed(1) br(1) yc(1) ou(1) ck(1) dd(1) di(1) hu(1) th(1) of(1) as(1)
+  reads: helook[ed]thiswayandhelookedthatwaysuspiciouslybuttherewasnoonetobeseen
+  reads: everythingwasst[il]lsaveforthela[ug]hterofthela[ug]hing[br]ook
+  reads: somehowitseemedtobusterasifthebrookwerela[ug]hingathim
+  reads: itsver[yc]uri[ou]smutteredbusterverycuriousindeed
+  reads: itlooksasifmyfishingisspo[il]edfortoday
+  reads: itlooksasifsomebodyistryingtoha
+  reads: asu[dd]enthoughthadpoppe[di]ntohishead
+  reads: thenhebegantoc[hu]ckleandfinallytolaugh
+=== 256 members per letter, first 150 sentences
+burgess-busterbrown.txt: 150 sentences; 256 members per letter; refractory off; learnt on nine tenths, read on the last tenth
+
+--- with the energy rule  (learning 27 s; 1810 assemblies)
+  clean 14%  coverage 33%  words whole 15%  cuts at a word boundary 25% (chance 24%)
+  loose letters by tenth while learning: 59% 57% 63% 50% 59% 58% 55% 58% 62% 51%
+  most read units: in(5) el(4) and(4) oo(4) at(4) to(4) ve(4) er(4) ng(4) ll(3) ca(3) was(2) ss(2) as(2) dt(2) be(2) if(2) fi(2) do(2) nt(2) ck(2) he(2) ook(1) is(1) ke(1) ly(1) ythin(1) ti(1) gb(1) so(1)
+  reads: h[el][ook]e[dt]h[is]way[and]h[el][oo][ke][dt]h[at]waysuspicious[ly]buttherew[as]n[oo]ne[to][be]seen
+  reads: e[ve]r[ythin]g[was]s[ti][ll]sa[ve]forthelaughterofthelaughin[gb]rook
+  reads: [so]meh[ow]itseeme[dto]bust[er]asifthebr[oo]kw[er][el]aughingathim
+  reads: itsverycuriou[sm]utt[ere]dbu[st][er][ver][yc]uriou[sin]deed
+  reads: itlooksas[if]my[fi]sh[in]gi[ss]poiledfor[to]day
+  reads: itlooksas[if]somebodyistry[in]g[to][ha]
+  reads: asudd[en]t[hou]ghthadpoppedintohi[sh]ead
+  reads: t[he]n[he]bega[nto]chu[ck][le][and]f[in]a[ll]y[to]laugh
+
+--- without the energy rule (anneal forms everything, as on main)  (learning 30 s; 5350 assemblies)
+  clean 12%  coverage 22%  words whole 11%  cuts at a word boundary 26% (chance 24%)
+  loose letters by tenth while learning: 68% 67% 68% 68% 71% 69% 74% 76% 70% 75%
+  most read units: ve(4) li(3) ook(2) ed(2) wa(2) hi(2) bu(2) as(2) to(2) nd(2) wh(2) ir(1) was(1) his(1) dh(1) at(1) ys(1) sl(1) oo(1) ne(1) ry(1) sa(1) se(1) kw(1) ng(1) mu(1) sh(1) is(1) po(1) il(1)
+  reads: hel[ook][ed]t[his]wayan[dh]el[ook][ed]th[at][wa][ys]uspiciou[sl]ybutthere[wa]sn[oo][ne]tobeseen
+  reads: eve[ry]t[hi]ngwasstill[sa]veforthelaughterofthelaug[hi]ngbrook
+  reads: somehowit[se]emedto[bu]sterasifthebroo[kw]erelaughi[ng]athim
+  reads: its[ve]rycurious[mu]ttered[bu]ster[ve]rycuriousindeed
+  reads: itlooks[as]ifmyfi[sh]ing[is]s[po][il]edfortoday
+  reads: itlooks[as]ifsomebodyistryingto[ha]
+  reads: as[ud]dent[ho]ught[had]poppe[di]ntohishead
+  reads: t[hen][he]began[to]chucklea[nd]fina[ll]y[to]laugh

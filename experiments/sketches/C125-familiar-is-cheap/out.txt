@@ -1,0 +1,70 @@
+=== burgess-busterbrown.txt
+burgess-busterbrown.txt: 1044 sentences; 8 members per letter; learnt on nine tenths, read on the last tenth; energy rule on
+
+--- as before (C123): a piece costs 3.98, a letter 1  (learning 9 s; 7331 assemblies)
+  "the" read inside a piece 75%; letters read loose in the unseen tenth 29%; using "the" costs 3.98 letters at the end
+  clean 63%  coverage 71%  words whole 27%  cuts at a word boundary 47% (chance 25%)
+  loose letters by tenth while learning: 85% 64% 52% 44% 39% 34% 31% 36% 29% 28%
+  most read units: that(26) berries(14) buster(11) busterbear(10) farmerbrownsboy(10) itwas(9) pail(9) thought(9) ight(9) could(9) there(8) have(8) where(7) away(7) this(7) thief(6) when(6) thegreen(6) right(6) more(6) over(6) every(5) thing(5) about(5) thosewho(5) climb(5) thenhe(5) been(5) iguess(5) they(5)
+  reads: [ofcourse][chatterer][there][dsquirrel]and[happy][jack][theg]ray[squirrel][weret][here]
+  reads: [scream]ed[sammy][until]histhroat[wasso]re
+  reads: [theworstof][itwas][buster][knew][that][every][body][knew][that][itwas][true]
+  reads: iwishi[never]had[thought]of[berries][growled][buster]to[himself]
+  reads: xxii[busterbear][hasa]fitoftemperatemperis[abad]bad[thing][when][once]itgets[away]
+
+--- no placement charge: a piece costs 2.98, a letter 1  (learning 3 s; 6475 assemblies)
+  "the" read inside a piece 74%; letters read loose in the unseen tenth 15%; using "the" costs 2.98 letters at the end
+  clean 45%  coverage 85%  words whole 36%  cuts at a word boundary 55% (chance 25%)
+  loose letters by tenth while learning: 76% 37% 28% 22% 20% 17% 15% 18% 15% 14%
+  most read units: the(35) had(32) his(25) and(23) that(20) ing(17) way(15) berr(14) pail(13) ies(13) there(11) ever(11) buster(11) for(11) you(11) thi(11) itwas(10) was(10) busterbear(10) temper(10) andthe(10) nth(10) those(10) been(10) farmerbrownsboy(10) thought(9) thing(9) who(9) coul(9) mor(9)
+  reads: [ofcourse][chatterer][there][dsquirrel][and][happy][jack][the][graysquirrel][were][there]
+  reads: [scr][eam]ed[sammy][until][his][thr]oa[twas][sore]
+  reads: [the][wors][tof][itwas][buster][knew][that][ever]y[body][knew][that][itwas][true]
+  reads: iwi[shin][ever][had][thought]of[berr][ies][growled][buster]to[himself]
+  reads: [xxi]i[busterbear][has]a[fit]of[temper]a[temper][isabad][bad][thing][when][once]it[get][saw]ay
+
+--- cost is surprise: familiar things cheap, letters and pieces alike  (learning 0 s; 6913 assemblies)
+  "the" read inside a piece 98%; letters read loose in the unseen tenth 16%; using "the" costs 1.04 letters at the end
+  clean 37%  coverage 84%  words whole 37%  cuts at a word boundary 53% (chance 25%)
+  loose letters by tenth while learning: 53% 26% 22% 19% 17% 15% 15% 19% 15% 15%
+  most read units: the(89) and(59) of(46) ing(38) his(38) had(34) hat(29) here(20) bu(20) was(19) ight(19) ter(18) way(18) een(16) you(16) ly(16) ould(15) berrie(14) who(14) gr(12) all(12) nd(12) see(12) pail(12) ear(12) out(12) one(11) for(11) tha(11) hes(11)
+  reads: [of]c[our]sec[hat][ter]er[the][red]s[qui][rrel][and][happ][yj][ack][the][gr][ays][qui][rrel][were]t[here]
+  reads: sc[rea][med][sammy][until][his][thr][oat][was][sor]e
+  reads: [the]w[ors]t[of][itwas][bu]s[ter][kne]wt[hat]e[very][body][kne]wt[hat][itwas][true]
+  reads: iw[ish]in[eve]r[had][thought][of][berrie]sg[row][led][bu]s[ter]to[himself]
+  reads: [xx]ii[busterbear][hasa][fit][of][tem][per][ate][mperis]a[bad][bad]th[ing][when][once]it[get]sa[way]
+=== carroll-alice.txt
+carroll-alice.txt: 2066 sentences; 8 members per letter; learnt on nine tenths, read on the last tenth; energy rule on
+
+--- as before (C123): a piece costs 3.98, a letter 1  (learning 20 s; 12162 assemblies)
+  "the" read inside a piece 78%; letters read loose in the unseen tenth 25%; using "the" costs 3.98 letters at the end
+  clean 54%  coverage 75%  words whole 27%  cuts at a word boundary 45% (chance 24%)
+  loose letters by tenth while learning: 87% 66% 50% 42% 36% 31% 30% 25% 27% 26%
+  most read units: said(44) theking(34) that(29) alice(23) ofthe(20) with(14) thequeen(14) this(14) would(13) inthe(13) andth(12) thing(11) what(11) jury(11) erabbit(11) little(11) hatter(10) read(10) they(10) atthe(10) voice(10) important(10) aidthe(9) down(9) thewhit(9) mouse(8) your(8) turn(8) them(7) court(7)
+  reads: ima[poor]ma[nthe][hatter][wenton]and[most][thing]s[twin]kled[after][that][only][them][archhare][said][ididnt]
+  reads: [them][archhare][inter][rupt][edina][great][hurry]
+  reads: [well][atany][rate][thedo]r[mouse]s[aidthe][hatter][wenton][looking][anxiously][round][tosee][ifhe][would]deny[itto]o
+  reads: [butthe]dor[mouse]deniedno[thing]bei[ngfasta][sleep]
+  reads: [after][that][continu][edthe][hatter]icut[some][more]b[read]and[butter]but[what]did[thedo]r[mouse]say
+
+--- no placement charge: a piece costs 2.98, a letter 1  (learning 4 s; 10122 assemblies)
+  "the" read inside a piece 66%; letters read loose in the unseen tenth 13%; using "the" costs 2.98 letters at the end
+  clean 40%  coverage 87%  words whole 40%  cuts at a word boundary 53% (chance 24%)
+  loose letters by tenth while learning: 63% 30% 21% 20% 17% 14% 15% 13% 14% 13%
+  most read units: the(121) said(72) and(55) king(36) ing(35) that(34) you(32) ofthe(29) her(28) alice(28) all(22) with(21) ter(20) ther(20) she(17) this(16) our(15) would(15) int(14) they(14) ever(14) een(14) are(13) but(13) one(13) was(13) att(13) head(13) andthe(13) ejury(13)
+  reads: [ima][poor][man][the][hat][ter][went][ona]nd[most][things][twi]n[kle]d[after][that][only][the]m[archh][are][said]i[didnt]
+  reads: [the]m[archh][are][int][errupte][dina][great][hur]ry
+  reads: [well][atanyrate]th[edorm][ouse][said][the][hat][ter][went]on[look][ing][anxiously][round][toseeif]he[would][deny]i[tto]o
+  reads: b[utth][edorm][ouse]d[eni]ed[nothing]b[ein]g[fas]ta[sleep]
+  reads: [after][that][con][tinued][the][hat][ter]icut[some][more]b[read][and][but][ter][but][what][did]th[edorm][ouse][say]
+
+--- cost is surprise: familiar things cheap, letters and pieces alike  (learning 0 s; 10805 assemblies)
+  "the" read inside a piece 99%; letters read loose in the unseen tenth 14%; using "the" costs 0.97 letters at the end
+  clean 35%  coverage 86%  words whole 44%  cuts at a word boundary 53% (chance 24%)
+  loose letters by tenth while learning: 40% 21% 18% 17% 16% 15% 15% 14% 16% 15%
+  most read units: the(311) and(92) ing(83) of(82) said(72) she(58) her(56) you(50) king(42) al(42) hat(39) his(37) ly(36) ch(29) alice(28) th(27) out(26) had(26) be(25) ter(24) up(24) one(23) rea(22) with(21) ver(21) was(20) ju(18) ry(18) que(17) ave(16)
+  reads: [ima][poor][man][the][hat][ter][went]on[and][most][th][ing]stw[ink][led][after]t[hat]on[ly][the][mar][ch]h[are][said]i[did]nt
+  reads: [the][mar][ch]h[are][int][err][up]t[edin][agr][eat][hurry]
+  reads: [well][atanyrate][the][dorm][ouse][said][the][hat][ter][went]on[loo][king][anxious][ly]ro[und][tosee][ifhe][would][den][yit][too]
+  reads: [but][the][dorm][ouse][den]ied[noth][ing][be][ing]f[ast][asl][eep]
+  reads: [after]t[hat][con][tin][ued][the][hat][ter]i[cut]s[ome][more]b[rea]d[and][but][ter][but][what][did][the][dorm][ouse]s[ay]
