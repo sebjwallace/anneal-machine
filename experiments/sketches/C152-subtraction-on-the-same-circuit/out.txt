@@ -1,0 +1,69 @@
+C152 · Subtraction on the same circuit
+10 seeds per arm; 12 worked examples per seed, alternating "+" and "−" (2- and 3-digit, fully worked); 8 lanes; test: the store's "+" and "−" steps bound into one circuit, 20 sums per length and sign, 4, 5, 6, 7, 8 digits, ending in column 10.
+
+== learn both, seed 1
+  example 1 (326 + 43): 336 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 2 (248 − 91): 333 circuit runs; nothing recalled; stage A kept 1 read set; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 3 (345 + 672): 333 circuit runs; nothing recalled; stage A kept 1 read set; 1 lane settled and bound itself: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": Σ: read -2,0 + -1,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 4 (872 − 88): 334 circuit runs; the recalled step did not settle; stage A kept 1 read set; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 5 (596 + 315): 333 circuit runs; nothing recalled; stage A kept 1 read set; 1 lane settled and bound itself: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": Σ: read -2,0 + -1,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 6 (92 − 45): 256 circuit runs; the recalled step did not settle; stage A kept 2 read sets; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 7 (69 + 30): 255 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": Σ: read -2,0 + -1,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 8 (364 − 38): 334 circuit runs; the recalled step did not settle; stage A kept 1 read set; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 9 (95 + 201): 336 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": Σ: read -2,0 + -1,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 10 (237 − 106): 337 circuit runs; the recalled step did not settle; stage A kept 2 read sets; 2 lanes settled and bound themselves: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ← | Δ: from -2,0 take -1,0 and -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 11 (59 + 280): 333 circuit runs; nothing recalled; stage A kept 1 read set; 1 lane settled and bound itself: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": Σ: read -2,0 + -1,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 12 (685 − 89): 334 circuit runs; the recalled step did not settle; stage A kept 1 read set; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+
+== learn both: what the store gives from "+" at the end
+  10 seeds: nothing
+  first recalled anything at example (min / median / max): 1 / 1 / 3
+
+== learn both: what the store gives from "−" at the end
+  10 seeds: nothing
+  first recalled anything at example (min / median / max): 3 / 3 / 7
+
+== learn both: test (both steps in one circuit, each sum started from its sign)
+
+| sums | 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped by itself |
+|---|---|---|---|---|---|---|---|
+| + | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0 of 10 | 0 of 1000 |
+| − | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0 of 10 | 0 of 1000 |
+
+  seeds right on both kinds at every length: 0 of 10
+
+learn both: work in learning, per seed (mean): 3838 circuit runs (each up to 8 lanes), 24158 moments; candidates run: stage A 30228, stage B 410
+
+== one sign for both, seed 1
+  example 1 (326 + 43, bound under "+"): 336 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 2 (248 − 91, bound under "+"): 333 circuit runs; nothing recalled; stage A kept 1 read set; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 3 (345 + 672, bound under "+"): 333 circuit runs; nothing recalled; stage A kept 1 read set; 1 lane settled and bound itself: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": nothing
+  example 4 (872 − 88, bound under "+"): 334 circuit runs; the recalled step did not settle; stage A kept 1 read set; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 5 (596 + 315, bound under "+"): 333 circuit runs; nothing recalled; stage A kept 1 read set; 1 lane settled and bound itself: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": nothing
+  example 6 (92 − 45, bound under "+"): 256 circuit runs; the recalled step did not settle; stage A kept 2 read sets; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 7 (69 + 30, bound under "+"): 255 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": nothing
+  example 8 (364 − 38, bound under "+"): 334 circuit runs; the recalled step did not settle; stage A kept 1 read set; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 9 (95 + 201, bound under "+"): 336 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": nothing
+  example 10 (237 − 106, bound under "+"): 337 circuit runs; the recalled step did not settle; stage A kept 2 read sets; 2 lanes settled and bound themselves: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ← | Δ: from -2,0 take -1,0 and -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+  example 11 (59 + 280, bound under "+"): 333 circuit runs; nothing recalled; stage A kept 1 read set; 1 lane settled and bound itself: Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": Σ: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; from "−": nothing
+  example 12 (685 − 89, bound under "+"): 334 circuit runs; the recalled step did not settle; stage A kept 1 read set; 1 lane settled and bound itself: Δ: from -2,0 take -1,0 and -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: from "+": nothing; from "−": nothing
+
+== one sign for both: what the store gives from "+" at the end
+  10 seeds: nothing
+  first recalled anything at example (min / median / max): 1 / 1 / 3
+
+== one sign for both: what the store gives from "−" at the end
+  10 seeds: nothing
+  first recalled anything at example (min / median / max): never (never in 10)
+
+== one sign for both: test (both steps in one circuit, every sum started from "+")
+
+| sums | 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped by itself |
+|---|---|---|---|---|---|---|---|
+| + | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0 of 10 | 0 of 1000 |
+| − | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0 of 10 | 0 of 1000 |
+
+  seeds right on both kinds at every length: 0 of 10
+
+one sign for both: work in learning, per seed (mean): 3839 circuit runs (each up to 8 lanes), 24166 moments; candidates run: stage A 30228, stage B 410
+

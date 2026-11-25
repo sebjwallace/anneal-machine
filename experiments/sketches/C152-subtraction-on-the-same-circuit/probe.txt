@@ -1,0 +1,18 @@
+"+" bound 1, "−" bound 1; from "+": RA4  RB7  RK10  ·
+"+" bound 1, "−" bound 1; from "−": RA7  RB4  RK10  ·
+"+" bound 2, "−" bound 1; from "+": RA4  RB7  RK10  WU1  WK9  GO←  Σ
+"+" bound 2, "−" bound 1; from "−": RA7  RB4  RK10  WU1  WK9  GO←  Σ
+"+" bound 1, "−" bound 2; from "+": RA4  RB7  RK10  WU1  WK9  GO←  Δ
+"+" bound 1, "−" bound 2; from "−": RA7  RB4  RK10  WU1  WK9  GO←  Δ
+"+" bound 3, "−" bound 3; from "+": RA4  RB7  RK10  ·
+"+" bound 3, "−" bound 3; from "−": RA7  RB4  RK10  ·
+
+FAMILY=first
+"+" bound 1, "−" bound 1; from "+": Σ  RA4  RB7  RK10  ·
+"+" bound 1, "−" bound 1; from "−": Δ  RA7  RB4  RK10  ·
+"+" bound 2, "−" bound 1; from "+": Σ  RA4  RB7  RK10  WU1  WK9  GO←
+"+" bound 2, "−" bound 1; from "−": Δ  RA7  RB4  RK10  WU1  WK9  GO←
+"+" bound 1, "−" bound 2; from "+": Σ  RA4  RB7  RK10  WU1  WK9  GO←
+"+" bound 1, "−" bound 2; from "−": Δ  RA7  RB4  RK10  WU1  WK9  GO←
+"+" bound 3, "−" bound 3; from "+": Σ  RA4  RB7  RK10  ·
+"+" bound 3, "−" bound 3; from "−": Δ  RA7  RB4  RK10  ·

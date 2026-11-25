@@ -1,0 +1,60 @@
+C147 · Rule B
+Column addition as C142 to C145: 6 worked examples of 2- and 3-digit sums; test 40 sums per length, 4, 5, 6, 7, 8 digits, at a new position; 20 seeds; limit 40. Facts in memory, rivals from place. 8 lanes.
+
+== check: C145's judging with company counted from the facts only: right digits kept 1000 of 1000; wrong digits dropped 9000 of 9000
+
+== C145 (C143's search, units judged by the engine one at a time), seed 1
+  example 1 (326 + 43, 0 carries): 421 checks; cooled by tie held open (36 candidates)
+  example 2 (91 + 248, 1 carry): 480 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672, 2 carries): 5 checks; cooled by recall
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== rule B (the bar lowered by distance, judged in lanes), seed 1
+  example 1 (326 + 43, 0 carries): 0 checks; cooled by tie held open (12 candidates)
+  example 2 (91 + 248, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672, 2 carries): 5 checks; cooled by recall
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== after the first run: rule B, lowered one step further before stopping, seed 1
+  example 1 (326 + 43, 0 carries): 0 checks; cooled by tie held open (36 candidates)
+  example 2 (91 + 248, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672, 2 carries): 5 checks; cooled by recall
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+Same step at the same example as C145 in every seed: no
+  C145 (C143's search, units judged by the engine one at a time): 20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  rule B (the bar lowered by distance, judged in lanes): 20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  after the first run: rule B, lowered one step further before stopping: 20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+rule B (the bar lowered by distance, judged in lanes): how far the bar was lowered in each searched example: distance 1: 0; distance 2: 2; distance 3: 29; distance 4: 0
+
+after the first run: rule B, lowered one step further before stopping: how far the bar was lowered in each searched example: distance 1: 0; distance 2: 0; distance 3: 2; distance 4: 25
+Rule B, one step further: same step at the same example as C145 in every seed: yes
+
+== seeds that did not reach 100%
+
+-- rule B (the bar lowered by distance, judged in lanes), seed 17
+  example 1 (19 + 22, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read 0,+1 + -1,0 + -2,0; write units at 0,0; carry at -3,-1; move ←
+  example 2 (556 + 22, 0 carries): 10 checks; cooled by tie held open (12 candidates)
+  example 3 (73 + 76, 1 carry): 10 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 4 (30 + 123, 0 carries): 0 checks; cooled by tie held open (12 candidates)
+  example 5 (225 + 45, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 6 (47 + 643, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  recalled from "+" alone: nothing usable
+
+== summary
+
+| arm | 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped after exactly the answer's digits | learnt at example | hypotheses judged by the engine in training (mean per seed) | engine runs for judging (mean per seed) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| C145 (C143's search, units judged by the engine one at a time) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 | 1 / 1 / 2 | 158 | 158 |
+| rule B (the bar lowered by distance, judged in lanes) | 95.0% | 95.0% | 95.0% | 95.0% | 95.0% | 19 of 20 | 3800 of 4000 | 1 / 1 / 2 | 96 | 17 |
+| after the first run: rule B, lowered one step further before stopping | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 | 1 / 1 / 2 | 152 | 28 |

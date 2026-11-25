@@ -1,0 +1,205 @@
+C139 · Attention learnt by heat
+20 seeds; 10 worked examples per operator in training; 100 test problems per operator, each with an operand pair never seen with that operator.
+
+== learn, seed 1: training, example by example
+  + #1  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  × #1  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  − #1  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  × #2  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #2  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #3  cooled by search, bound r1 then r2                     reads 12
+  + #2  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #3  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  × #3  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  + #4  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #5  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #4  cooled by recall                                       reads 2
+  + #6  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #5  cooled by recall                                       reads 2
+  × #4  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #6  cooled by recall                                       reads 2
+  × #5  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #7  cooled by recall                                       reads 2
+  − #8  cooled by recall                                       reads 2
+  × #6  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #9  cooled by recall                                       reads 2
+  + #7  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  × #7  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  + #8  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  × #8  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #10 cooled by recall                                       reads 2
+  × #9  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  × #10 cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #9  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #10 cooled by tie held (2 pairs fit), nothing bound        reads 12
+  test, what the engine brought on from the operator alone (moment 2, moment 3):
+    −: @r1 , @r2   right 100, wrong 0, no answer 0
+    +:    right 0, wrong 0, no answer 100
+    ×:    right 0, wrong 0, no answer 100
+
+== shuffled, seed 1: training, example by example
+  + #1  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  × #1  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  − #1  cooled by search, bound r3 then r1                     reads 12
+  × #2  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #2  cooled by search, bound r2 then r1                     reads 14
+  − #3  cooled by search, bound r3 then r1                     reads 12
+  + #2  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #3  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  × #3  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #4  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #5  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #4  cooled by search, bound r2 then r3                     reads 12
+  + #6  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #5  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  × #4  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #6  cooled by search, bound r1 then r3                     reads 12
+  × #5  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #7  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  − #8  cooled by search, bound r1 then r3                     reads 12
+  × #6  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  − #9  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #7  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  × #7  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  + #8  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  × #8  cooled by tie held (4 pairs fit), nothing bound        reads 12
+  − #10 cooled by search, bound r1 then r2                     reads 12
+  × #9  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  × #10 cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #9  cooled by tie held (2 pairs fit), nothing bound        reads 12
+  + #10 cooled by tie held (2 pairs fit), nothing bound        reads 12
+  test, what the engine brought on from the operator alone (moment 2, moment 3):
+    −: -   right 0, wrong 0, no answer 100
+    +:    right 0, wrong 0, no answer 100
+    ×:    right 0, wrong 0, no answer 100
+
+== learn-open, seed 1: training, example by example
+  + #1  cooled by tie held open (2 candidates)                 reads 12
+  × #1  cooled by tie held open (4 candidates)                 reads 12
+  − #1  cooled by tie held open (2 candidates)                 reads 12
+  × #2  cooled by tie held open (2 candidates)                 reads 12
+  − #2  cooled by held tie settled, bound r1 then r2           reads 12
+  − #3  cooled by recall                                       reads 2
+  + #2  cooled by held tie settled, bound r1 then r3 (2 interchangeable) reads 12
+  + #3  cooled by recall                                       reads 2
+  × #3  cooled by held tie settled, bound r1 then r3 (2 interchangeable) reads 12
+  + #4  cooled by recall                                       reads 2
+  + #5  cooled by recall                                       reads 2
+  − #4  cooled by recall                                       reads 2
+  + #6  cooled by recall                                       reads 2
+  − #5  cooled by recall                                       reads 2
+  × #4  cooled by recall                                       reads 2
+  − #6  cooled by recall                                       reads 2
+  × #5  cooled by recall                                       reads 2
+  − #7  cooled by recall                                       reads 2
+  − #8  cooled by recall                                       reads 2
+  × #6  cooled by recall                                       reads 2
+  − #9  cooled by recall                                       reads 2
+  + #7  cooled by recall                                       reads 2
+  × #7  cooled by recall                                       reads 2
+  + #8  cooled by recall                                       reads 2
+  × #8  cooled by recall                                       reads 2
+  − #10 cooled by recall                                       reads 2
+  × #9  cooled by recall                                       reads 2
+  × #10 cooled by recall                                       reads 2
+  + #9  cooled by recall                                       reads 2
+  + #10 cooled by recall                                       reads 2
+  test, what the engine brought on from the operator alone (moment 2, moment 3):
+    −: @r1 , @r2   right 100, wrong 0, no answer 0
+    +: @r1 , @r3   right 100, wrong 0, no answer 0
+    ×: @r1 , @r3   right 100, wrong 0, no answer 0
+
+== shuffled-open, seed 1: training, example by example
+  + #1  cooled by tie held open (2 candidates)                 reads 12
+  × #1  cooled by tie held open (4 candidates)                 reads 12
+  − #1  cooled by held tie settled, bound r3 then r1           reads 12
+  × #2  cooled by tie held open (2 candidates)                 reads 12
+  − #2  cooled by held tie settled, bound r2 then r1           reads 14
+  − #3  cooled by held tie settled, bound r3 then r1           reads 12
+  + #2  cooled by tie held open (2 candidates, conflict: started again) reads 12
+  + #3  cooled by held tie settled, bound r1 then r3 (2 interchangeable) reads 12
+  × #3  cooled by tie held open (2 candidates, conflict: started again) reads 12
+  + #4  cooled by tie held open (2 candidates)                 reads 14
+  + #5  cooled by recall                                       reads 2
+  − #4  cooled by held tie settled, bound r2 then r3           reads 12
+  + #6  cooled by held tie settled, bound r2 then r3 (2 interchangeable) reads 14
+  − #5  cooled by tie held open (2 candidates)                 reads 12
+  × #4  cooled by held tie settled, bound r1 then r3 (2 interchangeable) reads 12
+  − #6  cooled by held tie settled, bound r1 then r3           reads 12
+  × #5  cooled by tie held open (2 candidates)                 reads 14
+  − #7  cooled by tie held open (2 candidates)                 reads 12
+  − #8  cooled by held tie settled, bound r1 then r3           reads 12
+  × #6  cooled by recall                                       reads 2
+  − #9  cooled by tie held open (2 candidates)                 reads 12
+  + #7  cooled by tie held open (4 candidates)                 reads 12
+  × #7  cooled by recall                                       reads 2
+  + #8  cooled by tie held open (2 candidates)                 reads 12
+  × #8  cooled by recall                                       reads 2
+  − #10 cooled by held tie settled, bound r1 then r2           reads 12
+  × #9  cooled by tie held open (2 candidates, conflict: started again) reads 14
+  × #10 cooled by held tie settled, bound r1 then r2 (2 interchangeable) reads 14
+  + #9  cooled by tie held open (2 candidates, conflict: started again) reads 12
+  + #10 cooled by held tie settled, bound r2 then r3 (2 interchangeable) reads 12
+  test, what the engine brought on from the operator alone (moment 2, moment 3):
+    −: -   right 0, wrong 0, no answer 100
+    +: -   right 0, wrong 0, no answer 100
+    ×: -   right 0, wrong 0, no answer 100
+
+== summary over all seeds
+
+| arm | operator | test right | test wrong | no answer | seeds at 100% | learnt at example (min / median / max) | procedures bound (mean) | reads of the unused register |
+|---|---|---|---|---|---|---|---|---|
+| learn | − | 100.0% | 0.0% | 0.0% | 20 of 20 | 1 / 1 / 3 | 1.0 | 0 |
+| learn | + | 0.0% | 0.0% | 100.0% | 0 of 20 | never | 0.0 | 0 |
+| learn | × | 0.0% | 0.0% | 100.0% | 0 of 20 | never | 0.0 | 0 |
+| shuffled | − | 0.6% | 9.4% | 90.0% | 0 of 20 | 1 / 1 / 5 | 6.1 | - |
+| shuffled | + | 0.0% | 0.0% | 100.0% | 0 of 20 | never | 0.0 | - |
+| shuffled | × | 0.0% | 0.0% | 100.0% | 0 of 20 | never | 0.0 | - |
+| memorise | − | 0.0% | 0.0% | 100.0% | 0 of 20 | - | - | - |
+| memorise | + | 0.0% | 0.0% | 100.0% | 0 of 20 | - | - | - |
+| memorise | × | 0.0% | 0.0% | 100.0% | 0 of 20 | - | - | - |
+| none | − | 0.0% | 0.0% | 100.0% | 0 of 20 | - | - | - |
+| none | + | 0.0% | 0.0% | 100.0% | 0 of 20 | - | - | - |
+| none | × | 0.0% | 0.0% | 100.0% | 0 of 20 | - | - | - |
+| learn-open | − | 100.0% | 0.0% | 0.0% | 20 of 20 | 1 / 1 / 2 | 1.0 | 0 |
+| learn-open | + | 100.0% | 0.0% | 0.0% | 20 of 20 | 2 / 2 / 3 | 1.0 | 0 |
+| learn-open | × | 90.0% | 0.0% | 10.0% | 18 of 20 | 2 / 2 / 4 | 1.4 | 0 |
+| shuffled-open | − | 0.3% | 4.7% | 95.0% | 0 of 20 | 1 / 1 / 5 | 6.5 | - |
+| shuffled-open | + | 12.8% | 27.2% | 60.0% | 2 of 20 | 2 / 3 / 10 | 1.9 | - |
+| shuffled-open | × | 17.2% | 7.8% | 75.0% | 3 of 20 | 2 / 3 / 5 | 2.1 | - |
+
+== learn: how the n-th worked example of an operator was cooled (all seeds, all operators)
+
+| n | by recall | by search, bound | tie held | reads (mean) |
+|---|---|---|---|---|
+| 1 | 0 | 14 | 46 | 12.0 |
+| 2 | 14 | 3 | 43 | 9.7 |
+| 3 | 17 | 3 | 40 | 9.2 |
+| 4 | 20 | 0 | 40 | 8.7 |
+| 5 | 20 | 0 | 40 | 8.7 |
+| 6 | 20 | 0 | 40 | 8.7 |
+| 7 | 20 | 0 | 40 | 8.7 |
+| 8 | 20 | 0 | 40 | 8.7 |
+| 9 | 20 | 0 | 40 | 8.7 |
+| 10 | 20 | 0 | 40 | 8.7 |
+
+learn: after an operator's procedure was bound: 171 later worked examples, 171 cooled by recall, 0 searched.
+learn: ties held (examples where more than one pair fitted by coincidence): 409 of 600.
+
+== learn-open: how the n-th worked example of an operator was cooled (all seeds, all operators)
+
+| n | by recall | by search, bound | tie held | reads (mean) |
+|---|---|---|---|---|
+| 1 | 0 | 14 | 46 | 12.0 |
+| 2 | 14 | 38 | 8 | 9.7 |
+| 3 | 50 | 7 | 3 | 3.7 |
+| 4 | 57 | 3 | 0 | 2.6 |
+| 5 | 58 | 0 | 2 | 2.3 |
+| 6 | 58 | 2 | 0 | 2.3 |
+| 7 | 58 | 0 | 2 | 2.3 |
+| 8 | 58 | 2 | 0 | 2.3 |
+| 9 | 58 | 0 | 2 | 2.3 |
+| 10 | 58 | 1 | 1 | 2.3 |
+
+learn-open: after an operator's procedure was bound: 485 later worked examples, 469 cooled by recall, 16 searched.
+learn-open: ties held (examples where more than one pair fitted by coincidence): 64 of 600.

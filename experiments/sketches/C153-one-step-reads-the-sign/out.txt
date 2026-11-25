@@ -1,0 +1,61 @@
+C153 · One step reads the sign
+10 seeds in the learn arm, 4 in the unordered arm; 12 worked examples per seed, alternating "+" and "−" (2- and 3-digit, fully worked, the sign under every column); 8 lanes; test: the store's step and links bound into one circuit, 20 sums per length and sign, 4, 5, 6, 7, 8 digits, ending in column 10.
+
+== learn, seed 1
+  example 1 (326 + 43): 1430 circuit runs; no step recalled; stage A kept 6 (Σ reading -1,0 then -2,0 then -3,0, Σ reading -2,0 then -1,0 then -3,0, Σ reading -3,0 then -1,0 then -2,0, Σ reading -1,0 then -2,0 then -3,-1, Σ reading -2,0 then -1,0 then -3,-1, Σ reading -3,-1 then -1,0 then -2,0); 6 lanes settled and bound: Σ: read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -3,0 then -1,0 then -2,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 then -2,0 then -3,-1; sign at 1,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -2,0 then -1,0 then -3,-1; sign at 1,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -3,-1 then -1,0 then -2,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step nothing; "+" means Σ, "−" means nothing
+  example 2 (248 − 91): 1149 circuit runs; no step recalled; stage A kept 1 (Δ reading -2,0 then -1,0 then -3,0); 1 lane settled and bound: Δ: read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 3 (345 + 672): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 4 (872 − 88): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 5 (596 + 315): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 6 (92 − 45): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 7 (69 + 30): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 8 (364 − 38): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 9 (95 + 201): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 10 (237 − 106): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 11 (59 + 280): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 12 (685 − 89): 1 circuit runs; recall: the store's step and link settled the example (and bound themselves again). The store now gives: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+
+== learn: what the store gives at the end
+  10 seeds: step read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ; "−" means Δ
+  a step and both links first recalled at example (min / median / max): 2 / 2 / 2
+
+== learn: test (the store's step and links in one circuit, every sum started from "=")
+
+| sums | 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped by itself |
+|---|---|---|---|---|---|---|---|
+| + | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 10 of 10 | 1000 of 1000 |
+| − | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 10 of 10 | 1000 of 1000 |
+
+  seeds right on both kinds at every length: 10 of 10
+
+learn: work in learning, per seed (mean): 2451 circuit runs (each up to 8 lanes), 17577 moments; candidates run: stage A 16817, stage B 2700
+
+== addition proposed unordered, seed 1
+  example 1 (326 + 43): 841 circuit runs; no step recalled; stage A kept 2 (Σ reading -1,0 then -2,0 then -3,0, Σ reading -1,0 then -2,0 then -3,-1); 2 lanes settled and bound: Σ: read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 then -2,0 then -3,-1; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step nothing; "+" means Σ, "−" means nothing
+  example 2 (248 − 91): 785 circuit runs; no step recalled; stage A kept 1 (Δ reading -2,0 then -1,0 then -3,0); 1 lane settled and bound: Δ: read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step nothing; "+" means Σ, "−" means Δ
+  example 3 (345 + 672): 785 circuit runs; no step recalled; stage A kept 1 (Σ reading -1,0 then -2,0 then -3,0); 1 lane settled and bound: Σ: read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 4 (872 − 88): 786 circuit runs; the recalled step did not settle; stage A kept 1 (Δ reading -2,0 then -1,0 then -3,0); 1 lane settled and bound: Δ: read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step nothing; "+" means Σ, "−" means Δ
+  example 5 (596 + 315): 785 circuit runs; no step recalled; stage A kept 1 (Σ reading -1,0 then -2,0 then -3,0); 1 lane settled and bound: Σ: read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 6 (92 − 45): 660 circuit runs; the recalled step did not settle; stage A kept 2 (Σ reading -1,0 then -2,0 then -3,0, Δ reading -2,0 then -1,0 then -3,0); 1 lane settled and bound: Δ: read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step nothing; "+" means Σ, "−" means Δ
+  example 7 (69 + 30): 659 circuit runs; no step recalled; stage A kept 2 (Σ reading -1,0 then -2,0 then -3,0, Σ reading -1,0 then -2,0 then -3,-1); 2 lanes settled and bound: Σ: read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 then -2,0 then -3,-1; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 8 (364 − 38): 786 circuit runs; the recalled step did not settle; stage A kept 1 (Δ reading -2,0 then -1,0 then -3,0); 1 lane settled and bound: Δ: read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step nothing; "+" means Σ, "−" means Δ
+  example 9 (95 + 201): 841 circuit runs; no step recalled; stage A kept 2 (Σ reading -1,0 then -2,0 then -3,0, Σ reading -1,0 then -2,0 then -3,-1); 2 lanes settled and bound: Σ: read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ← | Σ: read -1,0 then -2,0 then -3,-1; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 10 (237 − 106): 842 circuit runs; the recalled step did not settle; stage A kept 2 (Δ reading -2,0 then -1,0 then -3,0, Δ reading -2,0 then -1,0 then -3,-1); 2 lanes settled and bound: Δ: read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ← | Δ: read -2,0 then -1,0 then -3,-1; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step nothing; "+" means Σ, "−" means Δ
+  example 11 (59 + 280): 785 circuit runs; no step recalled; stage A kept 1 (Σ reading -1,0 then -2,0 then -3,0); 1 lane settled and bound: Σ: read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step read -1,0 then -2,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←; "+" means Σ, "−" means Δ
+  example 12 (685 − 89): 786 circuit runs; the recalled step did not settle; stage A kept 1 (Δ reading -2,0 then -1,0 then -3,0); 1 lane settled and bound: Δ: read -2,0 then -1,0 then -3,0; sign at 1,0; write units at 0,0; carry at -3,-1; move ←. The store now gives: step nothing; "+" means Σ, "−" means Δ
+
+== addition proposed unordered: what the store gives at the end
+  4 seeds: step nothing; "+" means Σ; "−" means Δ
+  a step and both links first recalled at example (min / median / max): 3 / 3 / 3
+
+== addition proposed unordered: test (the store's step and links in one circuit, every sum started from "=")
+
+| sums | 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped by itself |
+|---|---|---|---|---|---|---|---|
+| + | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0 of 4 | 0 of 400 |
+| − | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0 of 4 | 0 of 400 |
+
+  seeds right on both kinds at every length: 0 of 4
+
+addition proposed unordered: work in learning, per seed (mean): 9327 circuit runs (each up to 8 lanes), 63152 moments; candidates run: stage A 66976, stage B 7538
+

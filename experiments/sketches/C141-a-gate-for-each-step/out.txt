@@ -1,0 +1,58 @@
+C141 · A gate for each step
+
+== part 1: single steps, from every column, both moves
+
+  old: from C0, →: C0 C1   (right: C1)
+  old: from C0, ←: C0 C1   (right: no column, off the row)
+  old: from C5, →: (no column)   (right: C6)
+  old: from C5, ←: (no column)   (right: C4)
+  old: from C15, →: C14 C15   (right: no column, off the row)
+  old: from C15, ←: C14 C15   (right: C14)
+  old: exactly the right column, and only it: 0 of 30; moves off the row bringing on no column: 0 of 2
+
+  gate: from C0, →: C1   (right: C1)
+  gate: from C0, ←: (no column)   (right: no column, off the row)
+  gate: from C5, →: C6   (right: C6)
+  gate: from C5, ←: C4   (right: C4)
+  gate: from C15, →: (no column)   (right: no column, off the row)
+  gate: from C15, ←: C14   (right: C14)
+  gate: exactly the right column, and only it: 30 of 30; moves off the row bringing on no column: 2 of 2
+
+== part 1: chains of moves (gate only)
+
+  from C5, → → ←: C6 , C7 , C6
+  from C2, ← → → →: C1 , C2 , C3 , C4
+  from C13, → → → →: C14 , C15 , (no column) , (no column)
+
+  paths that stay on the row: 131 of 131 exact at every moment (one column on, the right one)
+  paths that leave the row: 29 of 29 exact until they leave, then no column on
+
+== part 2: C140 rerun, places reached by the engine's moves
+
+-- walk learned everywhere, seed 1
+  example 1 (row 4, "−" in column 7): cooled by tie held open (2 candidates)
+  example 2 (row 2, "−" in column 6): cooled by held tie settled, bound @-1 then @+1
+  example 3 (row 0, "−" in column 8): cooled by recall
+  example 4 (row 1, "−" in column 8): cooled by recall
+  example 5 (row 3, "−" in column 3): cooled by recall
+  example 6 (row 5, "−" in column 4): cooled by recall
+  test: from "−" alone the engine brought on @-1 , @+1; right 100, wrong 0, no answer 0
+
+-- walk learned only where training happened (columns 0 to 10), seed 1
+  example 1 (row 4, "−" in column 7): cooled by tie held open (2 candidates)
+  example 2 (row 2, "−" in column 6): cooled by held tie settled, bound @-1 then @+1
+  example 3 (row 0, "−" in column 8): cooled by recall
+  example 4 (row 1, "−" in column 8): cooled by recall
+  example 5 (row 3, "−" in column 3): cooled by recall
+  example 6 (row 5, "−" in column 4): cooled by recall
+  test: from "−" alone the engine brought on @-1 , @+1; right 0, wrong 0, no answer 100
+
+== summary
+
+Part 1, single steps: old shapes 0 of 30 exact; gate 30 of 30 exact; moves off the row bringing on nothing: old 0 of 2, gate 2 of 2.
+Part 1, chains (gate): staying on the row 131 of 131 exact; leaving the row 29 of 29 exact until they leave, then nothing.
+
+| part 2 arm | right | wrong | no answer | seeds at 100% | learnt at example (min / median / max) | procedures bound (mean) |
+|---|---|---|---|---|---|---|
+| walk learned everywhere | 100.0% | 0.0% | 0.0% | 20 of 20 | 1 / 2 / 2 | 1.0 |
+| walk learned only where training happened (columns 0 to 10) | 0.0% | 0.0% | 100.0% | 0 of 20 | 1 / 1 / 2 | 1.0 |

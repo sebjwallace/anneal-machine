@@ -1,0 +1,108 @@
+C143 · A search steered by heat
+As C142: 6 worked examples of 2- and 3-digit sums; test 40 sums per length, 4, 5, 6, 7, 8 digits, at a new position; 20 seeds; limit 40.
+
+== steered by heat, seed 1
+  example 1 (326 + 43, 0 carries): 236 checks; cooled by tie held open (72 candidates)
+  example 2 (91 + 248, 1 carry): 273 checks; cooled by tie held open (2 candidates)
+  example 3 (345 + 672, 2 carries): 314 checks; cooled by held tie settled (2 candidates, interchangeable on the examples), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== exhaustive (C142, counted), seed 1
+  example 1 (326 + 43, 0 carries): 131758 checks; cooled by tie held open (60 candidates)
+  example 2 (91 + 248, 1 carry): 122382 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672, 2 carries): 5 checks; cooled by recall
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== steered by heat, from sums without carries, seed 1
+  example 1 (24 + 973, 0 carries): 265 checks; cooled by tie held open (72 candidates)
+  example 2 (10 + 17, 0 carries): 245 checks; cooled by held tie settled (72 candidates, interchangeable on the examples), bound: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at 0,-1; move ←
+  example 3 (22 + 14, 0 carries): 3 checks; cooled by recall
+  example 4 (712 + 40, 0 carries): 4 checks; cooled by recall
+  example 5 (504 + 92, 0 carries): 4 checks; cooled by recall
+  example 6 (202 + 27, 0 carries): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at 0,-1; move ←
+
+== after the first run: steered by heat, a place written only once, seed 1
+  example 1 (326 + 43, 0 carries): 236 checks; cooled by tie held open (72 candidates)
+  example 2 (91 + 248, 1 carry): 275 checks; cooled by tie held open (2 candidates)
+  example 3 (345 + 672, 2 carries): 323 checks; cooled by held tie settled (2 candidates, interchangeable on the examples), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== after the first run: each explanation keeps its own heat, and must leave none, seed 1
+  example 1 (326 + 43, 0 carries): 421 checks; cooled by tie held open (36 candidates)
+  example 2 (91 + 248, 1 carry): 480 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672, 2 carries): 5 checks; cooled by recall
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== after the first run: each explanation keeps its own heat, from sums without carries, seed 1
+  example 1 (24 + 973, 0 carries): 484 checks; cooled by tie held open (36 candidates)
+  example 2 (10 + 17, 0 carries): 456 checks; cooled by held tie settled (36 candidates, interchangeable on the examples), bound: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at 0,-1; move ←
+  example 3 (22 + 14, 0 carries): 3 checks; cooled by recall
+  example 4 (712 + 40, 0 carries): 4 checks; cooled by recall
+  example 5 (504 + 92, 0 carries): 4 checks; cooled by recall
+  example 6 (202 + 27, 0 carries): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at 0,-1; move ←
+
+== steered by heat: the steps learnt, over 20 seeds
+  20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== exhaustive (C142, counted): the steps learnt, over 20 seeds
+  20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== steered by heat, from sums without carries: the steps learnt, over 20 seeds
+  20 seeds: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at 0,-1; move ←
+
+== after the first run: steered by heat, a place written only once: the steps learnt, over 20 seeds
+  20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== after the first run: each explanation keeps its own heat, and must leave none: the steps learnt, over 20 seeds
+  20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== after the first run: each explanation keeps its own heat, from sums without carries: the steps learnt, over 20 seeds
+  20 seeds: read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at 0,-1; move ←
+
+Steered by heat and exhaustive learnt the same step at the same example in every seed: no
+
+== summary
+
+| arm | 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped after exactly the answer's digits | hit the limit | learnt at example (min / median / max) | checks in training (mean per seed) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| steered by heat | 95.0% | 95.0% | 95.0% | 95.0% | 95.0% | 19 of 20 | 3800 of 4000 | 0 | 2 / 3 / 4 | 894 |
+| exhaustive (C142, counted) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 | 0 | 1 / 1 / 2 | 164,216 |
+| steered by heat, from sums without carries | 17.0% | 9.1% | 4.1% | 2.9% | 1.3% | 0 of 20 | 123 of 4000 | 0 | 2 / 2 / 3 | 564 |
+| after the first run: steered by heat, a place written only once | 95.0% | 95.0% | 95.0% | 95.0% | 95.0% | 19 of 20 | 3800 of 4000 | 0 | 2 / 3 / 4 | 912 |
+| after the first run: each explanation keeps its own heat, and must leave none | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 | 0 | 1 / 1 / 2 | 680 |
+| after the first run: each explanation keeps its own heat, from sums without carries | 17.0% | 9.1% | 4.1% | 2.9% | 1.3% | 0 of 20 | 123 of 4000 | 0 | 2 / 2 / 3 | 1,023 |
+
+Checks, exhaustive over steered by heat: 184 times as many; over steered by heat with a place written only once: 180 times; over each explanation keeping its own heat: 241 times.
+
+== seeds that did not reach 100%
+
+-- steered by heat, seed 7
+  example 1 (962 + 405, 1 carry): 260 checks; cooled by tie held open (8 candidates)
+  example 2 (42 + 87, 1 carry): 266 checks; cooled by held tie settled (8 candidates, interchangeable on the examples), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at 0,-1; move ←
+  example 3 (32 + 97, 1 carry): 284 checks; cooled by tie held open (56 candidates)
+  example 4 (90 + 926, 2 carries): 304 checks; cooled by tie held open (2 candidates)
+  example 5 (11 + 141, 0 carries): 4 checks; cooled by recall
+  example 6 (175 + 52, 1 carry): 307 checks; cooled by held tie settled (2 candidates, interchangeable on the examples), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  recalled from "+" alone: nothing usable
+-- after the first run: steered by heat, a place written only once, seed 7
+  example 1 (962 + 405, 1 carry): 260 checks; cooled by tie held open (8 candidates)
+  example 2 (42 + 87, 1 carry): 266 checks; cooled by held tie settled (8 candidates, interchangeable on the examples), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at 0,-1; move ←
+  example 3 (32 + 97, 1 carry): 284 checks; cooled by tie held open (56 candidates)
+  example 4 (90 + 926, 2 carries): 311 checks; cooled by tie held open (2 candidates)
+  example 5 (11 + 141, 0 carries): 4 checks; cooled by recall
+  example 6 (175 + 52, 1 carry): 310 checks; cooled by held tie settled (2 candidates, interchangeable on the examples), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  recalled from "+" alone: nothing usable

@@ -1,0 +1,42 @@
+C148 · More structure wins
+Column addition as C147: 6 worked examples; test 40 sums per length, 4, 5, 6, 7, 8 digits, at a new position; 20 seeds. Facts in memory, rivals from place (company from the facts only), 8 lanes.
+
+== part 1: the probe. Bind the wrong step once, then the right step n times, and recall from "+" alone.
+  wrong: read 0,+1 + -1,0 + -2,0; write units at 0,0; carry at -3,-1; move ←
+  right: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+| arm | right bound 0 times | 1 | 2 | 3 |
+|---|---|---|---|---|
+| as before (fresh members, copies not counted) | the wrong step | no answer | no answer | no answer |
+| same cells only | the wrong step | no answer | no answer | no answer |
+| same cells, copies count | the wrong step | no answer | **the right step** | **the right step** |
+
+== part 2. Same first binding at the same example as with the switches off: rule B yes; one step further yes
+
+== seed 17, rule B, with and without the change
+
+-- rule B as C147 (switches off)
+  example 1 (19 + 22, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read 0,+1 + -1,0 + -2,0; write units at 0,0; carry at -3,-1; move ←
+  example 2 (556 + 22, 0 carries): 10 checks; cooled by tie held open (12 candidates)
+  example 3 (73 + 76, 1 carry): 10 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 4 (30 + 123, 0 carries): 0 checks; cooled by tie held open (12 candidates)
+  example 5 (225 + 45, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 6 (47 + 643, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  recalled from "+" alone: nothing usable
+-- rule B, same cells, copies count
+  example 1 (19 + 22, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read 0,+1 + -1,0 + -2,0; write units at 0,0; carry at -3,-1; move ←
+  example 2 (556 + 22, 0 carries): 10 checks; cooled by tie held open (12 candidates)
+  example 3 (73 + 76, 1 carry): 10 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 4 (30 + 123, 0 carries): 0 checks; cooled by tie held open (12 candidates)
+  example 5 (225 + 45, 1 carry): 0 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 6 (47 + 643, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== summary, part 2
+
+| arm | 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped after exactly the answer's digits |
+|---|---|---|---|---|---|---|---|
+| rule B as C147 (switches off) | 95.0% | 95.0% | 95.0% | 95.0% | 95.0% | 19 of 20 | 3800 of 4000 |
+| rule B, same cells, copies count | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 |
+| rule B one step further, as C147 (switches off) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 |
+| rule B one step further, same cells, copies count | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 |

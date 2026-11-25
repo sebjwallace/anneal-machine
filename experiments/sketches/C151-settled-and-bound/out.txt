@@ -1,0 +1,43 @@
+C151 · Settled and bound
+20 seeds; 6 worked examples (2- and 3-digit sums, fully worked) per seed; 8 lanes; test: the learned step bound into C149's circuit, 20 sums per length, 4, 5, 6, 7, 8 digits, ending in column 10.
+
+== learn, seed 1
+  example 1 (326 + 43): 90 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: nothing (a tie, or empty)
+  example 2 (91 + 248): 87 circuit runs; nothing recalled; stage A kept 1 read set; 1 lane settled and bound itself: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←; the store now recalls: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672): 1 circuit runs; recall: the store's step settled the example (and bound itself again); the store now recalls: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 4 (872 + 88): 1 circuit runs; recall: the store's step settled the example (and bound itself again); the store now recalls: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 5 (596 + 315): 1 circuit runs; recall: the store's step settled the example (and bound itself again); the store now recalls: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 6 (45 + 92): 1 circuit runs; recall: the store's step settled the example (and bound itself again); the store now recalls: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== learn: the steps learned in the circuit
+  20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  learnt at example (min / median / max): 1 / 1 / 2
+
+== learn: test (C149's circuit, with the step learned in the circuit)
+
+| 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped by itself |
+|---|---|---|---|---|---|---|
+| 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 2000 of 2000 |
+
+learn: work in learning, per seed (mean): 111 circuit runs (each up to 8 lanes), 888 moments; candidates run: stage A 792 (a read set at one column), stage B 40 (a whole step over a whole example)
+
+== learn from sums without carries, seed 1
+  example 1 (24 + 973): 90 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: nothing (a tie, or empty)
+  example 2 (10 + 17): 70 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: nothing (a tie, or empty)
+  example 3 (22 + 14): 70 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: nothing (a tie, or empty)
+  example 4 (712 + 40): 90 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: nothing (a tie, or empty)
+  example 5 (504 + 92): 90 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: nothing (a tie, or empty)
+  example 6 (202 + 27): 90 circuit runs; nothing recalled; stage A kept 2 read sets; 2 lanes settled and bound themselves: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← | read -1,0 + -2,0 + -3,-1; write units at 0,0; carry at -3,-1; move ←; the store now recalls: nothing (a tie, or empty)
+
+== learn from sums without carries: the steps learned in the circuit
+  20 seeds: nothing
+  learnt at example (min / median / max): never (never in 20)
+
+== learn from sums without carries: test (C149's circuit, with the step learned in the circuit)
+
+| 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped by itself |
+|---|---|---|---|---|---|---|
+| 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0 of 20 | 0 of 2000 |
+
+learn from sums without carries: work in learning, per seed (mean): 512 circuit runs (each up to 8 lanes), 3898 moments; candidates run: stage A 3729 (a read set at one column), stage B 288 (a whole step over a whole example)
+

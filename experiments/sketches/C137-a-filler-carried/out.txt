@@ -1,0 +1,167 @@
+C137 · A filler carried
+
+== learning: whole · moving: core
+  carry: fail  (moment 2: (nothing))
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active (nothing)   [a tie held between 4 openings]
+  trained: fail  (moment 2: "put" "cat")
+    moment 1  input "put" "cat"    active "put" "cat"
+    moment 2  input (nothing)      active "put" "cat"
+    moment 3  input (nothing)      active "put" "cat"
+    moment 4  input (nothing)      active "put" "cat"
+    moment 5  input (nothing)      active "put" "cat"
+  alone: fail  (moment 2: (nothing))
+    moment 1  input "put"          active "put"
+    moment 2  input (nothing)      active (nothing)   [a tie held between 4 openings]
+  replace: fail  (moment 4: "cat")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active (nothing)   [a tie held between 4 openings]
+    moment 3  input "cat"          active "cat"
+    moment 4  input (nothing)      active "cat"
+    moment 5  input (nothing)      active "cat"
+    moment 6  input (nothing)      active "cat"
+    moment 7  input (nothing)      active "cat"
+
+== learning: whole · moving: hold
+  carry: fail  (moment 2: "put" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+    moment 3  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+    moment 4  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+    moment 5  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+  trained: fail  (moment 2: "put" "cat")
+    moment 1  input "put" "cat"    active "put" "cat"
+    moment 2  input (nothing)      active "put" "cat"
+    moment 3  input (nothing)      active "put" "cat"
+    moment 4  input (nothing)      active "put" "cat"
+    moment 5  input (nothing)      active "put" "cat"
+  alone: fail  (moment 2: "put")
+    moment 1  input "put"          active "put"
+    moment 2  input (nothing)      active "put"   ["put" held]   [a tie held between 4 openings]
+    moment 3  input (nothing)      active "put"   ["put" held]   [a tie held between 4 openings]
+    moment 4  input (nothing)      active "put"   ["put" held]   [a tie held between 4 openings]
+    moment 5  input (nothing)      active "put"   ["put" held]   [a tie held between 4 openings]
+  replace: fail  (moment 4: "cat" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+    moment 3  input "cat"          active "cat" "fox"   ["put" displaced by "cat"; "fox" held]   [a tie held between 4 openings]
+    moment 4  input (nothing)      active "cat" "fox"   ["fox" held]
+    moment 5  input (nothing)      active "cat" "fox"   ["fox" held]
+    moment 6  input (nothing)      active "cat" "fox"   ["fox" held]
+    moment 7  input (nothing)      active "cat" "fox"   ["fox" held]
+
+== learning: whole · moving: handon
+  carry: fail  (moment 2: "put" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+    moment 3  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+    moment 4  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+    moment 5  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+  trained: fail  (moment 2: "put" "cat")
+    moment 1  input "put" "cat"    active "put" "cat"
+    moment 2  input (nothing)      active "put" "cat"
+    moment 3  input (nothing)      active "put" "cat"
+    moment 4  input (nothing)      active "put" "cat"
+    moment 5  input (nothing)      active "put" "cat"
+  alone: fail  (moment 2: "put")
+    moment 1  input "put"          active "put"
+    moment 2  input (nothing)      active "put"   ["put" held]   [a tie held between 4 openings]
+    moment 3  input (nothing)      active "put"   ["put" held]   [a tie held between 4 openings]
+    moment 4  input (nothing)      active "put"   ["put" held]   [a tie held between 4 openings]
+    moment 5  input (nothing)      active "put"   ["put" held]   [a tie held between 4 openings]
+  replace: fail  (moment 4: "cat" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "put" "fox"   ["put" held; "fox" held]   [a tie held between 4 openings]
+    moment 3  input "cat"          active "cat" "fox"   ["put" displaced by "cat"; "fox" held]   [a tie held between 4 openings]
+    moment 4  input (nothing)      active "cat" "fox"   ["fox" held]
+    moment 5  input (nothing)      active "cat" "fox"   ["fox" held]
+    moment 6  input (nothing)      active "cat" "fox"   ["fox" held]
+    moment 7  input (nothing)      active "cat" "fox"   ["fox" held]
+
+== learning: change · moving: core
+  carry: fail  (moment 2: "in")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "in"
+    moment 3  input (nothing)      active (nothing)
+  trained: fail  (moment 2: "put" "in" "cat")
+    moment 1  input "put" "cat"    active "put" "cat"
+    moment 2  input (nothing)      active "put" "in" "cat"
+    moment 3  input (nothing)      active "put" "in" "cat"
+    moment 4  input (nothing)      active "put" "in" "cat"
+    moment 5  input (nothing)      active "put" "in" "cat"
+  alone: PASS  (moment 2: "in")
+    moment 1  input "put"          active "put"
+    moment 2  input (nothing)      active "in"
+    moment 3  input (nothing)      active (nothing)
+  replace: fail  (moment 4: (nothing))
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "in"
+    moment 3  input "cat"          active "cat"
+    moment 4  input (nothing)      active (nothing)
+
+== learning: change · moving: hold
+  carry: fail  (moment 2: "put" "in" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "put" "in" "fox"   ["put" held; "fox" held]
+    moment 3  input (nothing)      active "put" "in" "fox"   ["put" held; "fox" held]
+    moment 4  input (nothing)      active "put" "in" "fox"   ["put" held; "fox" held]
+    moment 5  input (nothing)      active "put" "in" "fox"   ["put" held; "fox" held]
+  trained: fail  (moment 2: "put" "in" "cat")
+    moment 1  input "put" "cat"    active "put" "cat"
+    moment 2  input (nothing)      active "put" "in" "cat"
+    moment 3  input (nothing)      active "put" "in" "cat"
+    moment 4  input (nothing)      active "put" "in" "cat"
+    moment 5  input (nothing)      active "put" "in" "cat"
+  alone: fail  (moment 2: "put" "in")
+    moment 1  input "put"          active "put"
+    moment 2  input (nothing)      active "put" "in"   ["put" held]
+    moment 3  input (nothing)      active "put" "in"   ["put" held]
+    moment 4  input (nothing)      active "put" "in"   ["put" held]
+    moment 5  input (nothing)      active "put" "in"   ["put" held]
+  replace: fail  (moment 4: "put" "in" "cat" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "put" "in" "fox"   ["put" held; "fox" held]
+    moment 3  input "cat"          active "put" "in" "cat" "fox"   ["put" held; "fox" held]
+    moment 4  input (nothing)      active "put" "in" "cat" "fox"   ["fox" held]
+    moment 5  input (nothing)      active "put" "in" "cat" "fox"   ["fox" held]
+    moment 6  input (nothing)      active "put" "in" "cat" "fox"   ["fox" held]
+    moment 7  input (nothing)      active "put" "in" "cat" "fox"   ["fox" held]
+
+== learning: change · moving: handon
+  carry: PASS  (moment 2: "in" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "in" "fox"   ["put" handed on; "fox" held]
+    moment 3  input (nothing)      active "in" "fox"   ["in" held; "fox" held]
+    moment 4  input (nothing)      active "in" "fox"   ["in" held; "fox" held]
+    moment 5  input (nothing)      active "in" "fox"   ["in" held; "fox" held]
+  trained: fail  (moment 2: "put" "in" "cat")
+    moment 1  input "put" "cat"    active "put" "cat"
+    moment 2  input (nothing)      active "put" "in" "cat"
+    moment 3  input (nothing)      active "put" "in" "cat"
+    moment 4  input (nothing)      active "put" "in" "cat"
+    moment 5  input (nothing)      active "put" "in" "cat"
+  alone: PASS  (moment 2: "in")
+    moment 1  input "put"          active "put"
+    moment 2  input (nothing)      active "in"   ["put" handed on]
+    moment 3  input (nothing)      active "in"   ["in" held]
+    moment 4  input (nothing)      active "in"   ["in" held]
+    moment 5  input (nothing)      active "in"   ["in" held]
+  replace: fail  (moment 4: "in" "cat" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "in" "fox"   ["put" handed on; "fox" held]
+    moment 3  input "cat"          active "in" "cat" "fox"   ["in" held; "fox" held]
+    moment 4  input (nothing)      active "in" "cat" "fox"   ["fox" held]
+    moment 5  input (nothing)      active "in" "cat" "fox"   ["fox" held]
+    moment 6  input (nothing)      active "in" "cat" "fox"   ["fox" held]
+    moment 7  input (nothing)      active "in" "cat" "fox"   ["fox" held]
+
+== summary (moment judged: what was active)
+
+| learning | moving | carry | trained | alone | replace |
+|---|---|---|---|---|---|
+| whole | core | fail: (nothing) | fail: "put" "cat" | fail: (nothing) | fail: "cat" |
+| whole | hold | fail: "put" "fox" | fail: "put" "cat" | fail: "put" | fail: "cat" "fox" |
+| whole | handon | fail: "put" "fox" | fail: "put" "cat" | fail: "put" | fail: "cat" "fox" |
+| change | core | fail: "in" | fail: "put" "in" "cat" | **pass**: "in" | fail: (nothing) |
+| change | hold | fail: "put" "in" "fox" | fail: "put" "in" "cat" | fail: "put" "in" | fail: "put" "in" "cat" "fox" |
+| change | handon | **pass**: "in" "fox" | fail: "put" "in" "cat" | **pass**: "in" | fail: "in" "cat" "fox" |

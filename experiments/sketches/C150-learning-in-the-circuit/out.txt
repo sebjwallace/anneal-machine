@@ -1,0 +1,43 @@
+C150 · Learning in the circuit
+20 seeds; 6 worked examples (2- and 3-digit sums, fully worked) per seed; 8 lanes; test: the learned step bound into C149's circuit, 20 sums per length, 4, 5, 6, 7, 8 digits, ending in column 10.
+
+== learn, seed 1
+  example 1 (326 + 43): 90 circuit runs; tie held open (2 candidates) [read sets surviving stage A: 2]
+  example 2 (91 + 248): 87 circuit runs; settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← [read sets surviving stage A: 1]
+  example 3 (345 + 672): 1 circuit runs; recall (the bound step, run over the example, left no heat)
+  example 4 (872 + 88): 1 circuit runs; recall (the bound step, run over the example, left no heat)
+  example 5 (596 + 315): 1 circuit runs; recall (the bound step, run over the example, left no heat)
+  example 6 (45 + 92): 1 circuit runs; recall (the bound step, run over the example, left no heat)
+
+== learn: the steps learned in the circuit
+  20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  learnt at example (min / median / max): 1 / 1 / 2
+
+== learn: test (C149's circuit, with the step learned in the circuit)
+
+| 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped by itself |
+|---|---|---|---|---|---|---|
+| 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 2000 of 2000 |
+
+learn: work in learning, per seed (mean): 111 circuit runs (each up to 8 lanes), 882 moments; candidates run: stage A 792 (a read set at one column), stage B 40 (a whole step over a whole example)
+
+== learn from sums without carries, seed 1
+  example 1 (24 + 973): 90 circuit runs; tie held open (2 candidates) [read sets surviving stage A: 2]
+  example 2 (10 + 17): 70 circuit runs; settled (2 candidates), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ← [read sets surviving stage A: 2]
+  example 3 (22 + 14): 1 circuit runs; recall (the bound step, run over the example, left no heat)
+  example 4 (712 + 40): 1 circuit runs; recall (the bound step, run over the example, left no heat)
+  example 5 (504 + 92): 1 circuit runs; recall (the bound step, run over the example, left no heat)
+  example 6 (202 + 27): 1 circuit runs; recall (the bound step, run over the example, left no heat)
+
+== learn from sums without carries: the steps learned in the circuit
+  20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  learnt at example (min / median / max): 2 / 2 / 2
+
+== learn from sums without carries: test (C149's circuit, with the step learned in the circuit)
+
+| 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped by itself |
+|---|---|---|---|---|---|---|
+| 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 2000 of 2000 |
+
+learn from sums without carries: work in learning, per seed (mean): 173 circuit runs (each up to 8 lanes), 1397 moments; candidates run: stage A 1229 (a read set at one column), stage B 96 (a whole step over a whole example)
+

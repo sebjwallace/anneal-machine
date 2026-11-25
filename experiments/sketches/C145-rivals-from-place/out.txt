@@ -1,0 +1,55 @@
+C145 · Rivals from place
+Column addition as C144: 6 worked examples of 2- and 3-digit sums; test 40 sums per length, 4, 5, 6, 7, 8 digits, at a new position; 20 seeds; limit 40. Facts in memory; C143's best search.
+
+== part 1, without place rivals: judging a written digit (digits at moment 1, written digit at moment 2, read moment 3)
+  right digit written: still on at moment 3 in 1000 of 1000
+  wrong digit written: off at moment 3 in 0 of 9000; the right digit on at moment 3 in 9000 of 9000
+    cue 0, 0, carry 0; 1 written (right: 0): units on at moment 3: 0 1 2 3 4 5 6 7 8 9
+    cue 0, 0, carry 0; 2 written (right: 0): units on at moment 3: 0 1 2 3 4 5 6 7 8 9
+== part 2, without place rivals: from 3, 4, carry 1, left to run on: members active at each moment 3, 5, 29, 42, 43
+
+== part 1, with place rivals: judging a written digit (digits at moment 1, written digit at moment 2, read moment 3)
+  right digit written: still on at moment 3 in 1000 of 1000
+  wrong digit written: off at moment 3 in 9000 of 9000; the right digit on at moment 3 in 9000 of 9000
+    cue 0, 0, carry 0; 1 written (right: 0): units on at moment 3: 0
+    cue 0, 0, carry 0; 2 written (right: 0): units on at moment 3: 0
+== part 2, with place rivals: from 3, 4, carry 1, left to run on: members active at each moment 3, 5, then the same state again (held, every 1 moment)
+
+== part 3: C144: place rivals off, units compared in code, seed 1
+  example 1 (326 + 43, 0 carries): 421 checks; cooled by tie held open (36 candidates)
+  example 2 (91 + 248, 1 carry): 480 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672, 2 carries): 5 checks; cooled by recall
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== part 3: place rivals on, units compared in code, seed 1
+  example 1 (326 + 43, 0 carries): 421 checks; cooled by tie held open (36 candidates)
+  example 2 (91 + 248, 1 carry): 480 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672, 2 carries): 5 checks; cooled by recall
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== part 3: place rivals on, units judged by the engine, seed 1
+  example 1 (326 + 43, 0 carries): 421 checks; cooled by tie held open (36 candidates)
+  example 2 (91 + 248, 1 carry): 480 checks; cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672, 2 carries): 5 checks; cooled by recall
+  example 4 (872 + 88, 2 carries): 4 checks; cooled by recall
+  example 5 (596 + 315, 2 carries): 4 checks; cooled by recall
+  example 6 (45 + 92, 1 carry): 4 checks; cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+Same step at the same example as C144 in every seed, C144: place rivals off, units compared in code: yes
+Same step at the same example as C144 in every seed, place rivals on, units compared in code: yes
+Same step at the same example as C144 in every seed, place rivals on, units judged by the engine: yes
+
+== summary, part 3
+
+| arm | 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped after exactly the answer's digits | hit the limit | learnt at example |
+|---|---|---|---|---|---|---|---|---|---|
+| C144: place rivals off, units compared in code | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 | 0 | 1 / 1 / 2 |
+| place rivals on, units compared in code | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 | 0 | 1 / 1 / 2 |
+| place rivals on, units judged by the engine | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 | 0 | 1 / 1 / 2 |

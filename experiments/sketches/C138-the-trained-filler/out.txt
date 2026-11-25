@@ -1,0 +1,90 @@
+C138 · The trained filler
+
+== A · as C137
+  carry: PASS  (moment 2: "in" "fox"; moment 3: "shut" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "in" "fox"   ["put" handed on; "fox" held]
+    moment 3  input (nothing)      active "shut" "fox"   ["in" handed on; "fox" held]
+    moment 4  input (nothing)      active "shut" "fox"   ["shut" held; "fox" held]
+    moment 5  input (nothing)      active "shut" "fox"   ["shut" held; "fox" held]
+  trained: fail  (moment 2: "put" "in" "cat"; moment 3: "put" "in" "shut" "cat")
+    moment 1  input "put" "cat"    active "put" "cat"
+    moment 2  input (nothing)      active "put" "in" "cat"
+    moment 3  input (nothing)      active "put" "in" "shut" "cat"
+    moment 4  input (nothing)      active "put" "in" "shut" "cat"
+    moment 5  input (nothing)      active "put" "in" "shut" "cat"
+  alone: PASS  (moment 2: "in"; moment 3: "shut")
+    moment 1  input "put"          active "put"
+    moment 2  input (nothing)      active "in"   ["put" handed on]
+    moment 3  input (nothing)      active "shut"   ["in" handed on]
+    moment 4  input (nothing)      active "shut"   ["shut" held]
+    moment 5  input (nothing)      active "shut"   ["shut" held]
+  replace: fail  (moment 2: "in" "cat" "fox"; moment 3: "in" "shut" "cat" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input "cat"          active "in" "cat" "fox"   ["put" handed on; "fox" held]
+    moment 3  input (nothing)      active "in" "shut" "cat" "fox"   ["fox" held]
+    moment 4  input (nothing)      active "in" "shut" "cat" "fox"   ["fox" held]
+    moment 5  input (nothing)      active "in" "shut" "cat" "fox"   ["fox" held]
+    moment 6  input (nothing)      active "in" "shut" "cat" "fox"   ["fox" held]
+
+== B · no fillers in the moments
+  carry: PASS  (moment 2: "in" "fox"; moment 3: "shut" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "in" "fox"   ["put" handed on; "fox" held]
+    moment 3  input (nothing)      active "shut" "fox"   ["in" handed on; "fox" held]
+    moment 4  input (nothing)      active "shut" "fox"   ["shut" held; "fox" held]
+    moment 5  input (nothing)      active "shut" "fox"   ["shut" held; "fox" held]
+  trained: PASS  (moment 2: "in" "cat"; moment 3: "shut" "cat")
+    moment 1  input "put" "cat"    active "put" "cat"
+    moment 2  input (nothing)      active "in" "cat"   ["put" handed on; "cat" held]
+    moment 3  input (nothing)      active "shut" "cat"   ["in" handed on; "cat" held]
+    moment 4  input (nothing)      active "shut" "cat"   ["shut" held; "cat" held]
+    moment 5  input (nothing)      active "shut" "cat"   ["shut" held; "cat" held]
+  alone: PASS  (moment 2: "in"; moment 3: "shut")
+    moment 1  input "put"          active "put"
+    moment 2  input (nothing)      active "in"   ["put" handed on]
+    moment 3  input (nothing)      active "shut"   ["in" handed on]
+    moment 4  input (nothing)      active "shut"   ["shut" held]
+    moment 5  input (nothing)      active "shut"   ["shut" held]
+  replace: fail  (moment 2: "in" "cat" "fox"; moment 3: "shut" "cat" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input "cat"          active "in" "cat" "fox"   ["put" handed on; "fox" held]
+    moment 3  input (nothing)      active "shut" "cat" "fox"   ["cat" held; "in" handed on; "fox" held]
+    moment 4  input (nothing)      active "shut" "cat" "fox"   ["shut" held; "cat" held; "fox" held]
+    moment 5  input (nothing)      active "shut" "cat" "fox"   ["shut" held; "cat" held; "fox" held]
+    moment 6  input (nothing)      active "shut" "cat" "fox"   ["shut" held; "cat" held; "fox" held]
+
+== C · a transition closes the state it leaves
+  carry: PASS  (moment 2: "in" "fox"; moment 3: "shut" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input (nothing)      active "in" "fox"   ["put" handed on; "fox" held]
+    moment 3  input (nothing)      active "shut" "fox"   ["in" handed on; "fox" held]
+    moment 4  input (nothing)      active "shut" "fox"   ["shut" held; "fox" held]
+    moment 5  input (nothing)      active "shut" "fox"   ["shut" held; "fox" held]
+  trained: PASS  (moment 2: "in" "cat"; moment 3: "shut" "cat")
+    moment 1  input "put" "cat"    active "put" "cat"
+    moment 2  input (nothing)      active "in" "cat"   ["put" its state "put" "cat" closed, then handed on; "cat" its state "put" "cat" closed, then held]
+    moment 3  input (nothing)      active "shut" "cat"   ["in" its state "in" "cat" closed, then handed on; "cat" its state "in" "cat" closed, then held]
+    moment 4  input (nothing)      active "shut" "cat"
+    moment 5  input (nothing)      active "shut" "cat"
+  alone: PASS  (moment 2: "in"; moment 3: "shut")
+    moment 1  input "put"          active "put"
+    moment 2  input (nothing)      active "in"   ["put" handed on]
+    moment 3  input (nothing)      active "shut"   ["in" handed on]
+    moment 4  input (nothing)      active "shut"   ["shut" held]
+    moment 5  input (nothing)      active "shut"   ["shut" held]
+  replace: fail  (moment 2: "in" "cat" "fox"; moment 3: "shut" "cat" "fox")
+    moment 1  input "put" "fox"    active "put" "fox"
+    moment 2  input "cat"          active "in" "cat" "fox"   ["put" handed on; "fox" held]
+    moment 3  input (nothing)      active "shut" "cat" "fox"   ["in" its state "in" "cat" closed, then handed on; "cat" its state "in" "cat" closed, then held; "fox" held]
+    moment 4  input (nothing)      active "shut" "cat" "fox"   ["fox" held]
+    moment 5  input (nothing)      active "shut" "cat" "fox"   ["fox" held]
+    moment 6  input (nothing)      active "shut" "cat" "fox"   ["fox" held]
+
+== summary (moment 2 / moment 3: what was active)
+
+| arm | carry | trained | alone | replace |
+|---|---|---|---|---|
+| A · as C137 | **pass**: "in" "fox" / "shut" "fox" | fail: "put" "in" "cat" / "put" "in" "shut" "cat" | **pass**: "in" / "shut" | fail: "in" "cat" "fox" / "in" "shut" "cat" "fox" |
+| B · no fillers in the moments | **pass**: "in" "fox" / "shut" "fox" | **pass**: "in" "cat" / "shut" "cat" | **pass**: "in" / "shut" | fail: "in" "cat" "fox" / "shut" "cat" "fox" |
+| C · a transition closes the state it leaves | **pass**: "in" "fox" / "shut" "fox" | **pass**: "in" "cat" / "shut" "cat" | **pass**: "in" / "shut" | fail: "in" "cat" "fox" / "shut" "cat" "fox" |

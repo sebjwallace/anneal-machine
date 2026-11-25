@@ -1,0 +1,25 @@
+C146 · Several at once
+300 trials per K per arm; each trial a real column of a worked 2- or 3-digit sum, and K hypotheses (random sets of three read places; in half the trials the true one, in a random lane).
+
+Timing "first run": written digit at moment 2, read at moment 4 (the hypothesis's plan). "corrected": written digit at moment 3, read at moment 5. Both read with dying activity as nothing on.
+
+| timing | K | arm | judgements matching the truth | hypotheses that fit, kept | hypotheses that don't, dropped | the true hypothesis, kept |
+|---|---|---|---|---|---|---|
+| first run | 2 | shared | 66.2% (397 of 600) | 0 of 203 | 397 of 397 | 0 of 146 |
+| first run | 2 | lanes, company from everything | 66.2% (397 of 600) | 0 of 203 | 397 of 397 | 0 of 146 |
+| first run | 2 | lanes, company from states only | 100.0% (600 of 600) | 203 of 203 | 397 of 397 | 146 of 146 |
+| first run | 4 | shared | 77.1% (925 of 1200) | 0 of 275 | 925 of 925 | 0 of 150 |
+| first run | 4 | lanes, company from everything | 77.1% (925 of 1200) | 0 of 275 | 925 of 925 | 0 of 150 |
+| first run | 4 | lanes, company from states only | 100.0% (1200 of 1200) | 275 of 275 | 925 of 925 | 150 of 150 |
+| first run | 8 | shared | 81.5% (1956 of 2400) | 0 of 444 | 1956 of 1956 | 0 of 172 |
+| first run | 8 | lanes, company from everything | 81.5% (1956 of 2400) | 0 of 444 | 1956 of 1956 | 0 of 172 |
+| first run | 8 | lanes, company from states only | 100.0% (2400 of 2400) | 444 of 444 | 1956 of 1956 | 172 of 172 |
+| corrected | 2 | shared | 66.2% (397 of 600) | 0 of 203 | 397 of 397 | 0 of 146 |
+| corrected | 2 | lanes, company from everything | 66.2% (397 of 600) | 0 of 203 | 397 of 397 | 0 of 146 |
+| corrected | 2 | lanes, company from states only | 100.0% (600 of 600) | 203 of 203 | 397 of 397 | 146 of 146 |
+| corrected | 4 | shared | 77.1% (925 of 1200) | 0 of 275 | 925 of 925 | 0 of 150 |
+| corrected | 4 | lanes, company from everything | 77.1% (925 of 1200) | 0 of 275 | 925 of 925 | 0 of 150 |
+| corrected | 4 | lanes, company from states only | 100.0% (1200 of 1200) | 275 of 275 | 925 of 925 | 150 of 150 |
+| corrected | 8 | shared | 81.5% (1956 of 2400) | 0 of 444 | 1956 of 1956 | 0 of 172 |
+| corrected | 8 | lanes, company from everything | 81.5% (1956 of 2400) | 0 of 444 | 1956 of 1956 | 0 of 172 |
+| corrected | 8 | lanes, company from states only | 100.0% (2400 of 2400) | 444 of 444 | 1956 of 1956 | 172 of 172 |

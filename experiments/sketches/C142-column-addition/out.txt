@@ -1,0 +1,39 @@
+C142 · Column addition
+Grid 4 rows by 12 columns. Training: 6 worked examples of 2- and 3-digit sums ending in column 9. Test: 40 sums per length, 4, 5, 6, 7, 8 digits, ending in column 10. 20 seeds. Step limit 40.
+
+== learn, seed 1
+  example 1 (326 + 43, 0 carries): cooled by tie held open (60 candidates)
+  example 2 (91 + 248, 1 carry): cooled by held tie settled (1 candidate), bound: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  example 3 (345 + 672, 2 carries): cooled by recall
+  example 4 (872 + 88, 2 carries): cooled by recall
+  example 5 (596 + 315, 2 carries): cooled by recall
+  example 6 (45 + 92, 1 carry): cooled by recall
+  recalled from "+" alone: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+  two 8-digit test sums:
+  43081263 + 70006246: wrote 113087509 (right: 113087509), carries row ..1.....1..., 9 steps, stopped by itself
+  61761989 + 44089207: wrote 105851196 (right: 105851196), carries row ..1..111.1.., 9 steps, stopped by itself
+
+== learn from sums without carries, seed 1
+  example 1 (24 + 973, 0 carries): cooled by tie held open (60 candidates)
+  example 2 (10 + 17, 0 carries): cooled by held tie settled (60 candidates, interchangeable on the examples), bound: read 0,-1 + -1,0 + -2,0; write units at 0,0; carry at 0,-1; move ←
+  example 3 (22 + 14, 0 carries): cooled by recall
+  example 4 (712 + 40, 0 carries): cooled by recall
+  example 5 (504 + 92, 0 carries): cooled by recall
+  example 6 (202 + 27, 0 carries): cooled by recall
+  recalled from "+" alone: read 0,-1 + -1,0 + -2,0; write units at 0,0; carry at 0,-1; move ←
+  two 8-digit test sums:
+  46357005 + 44336454: wrote 13459 (right: 90693459), carries row ............, 4 steps, did not stop: could not write units
+  52675202 + 63732854: wrote 1056 (right: 116408056), carries row ............, 3 steps, did not stop: could not write units
+
+== learn: the steps learnt, over 20 seeds
+  20 seeds: read -1,0 + -2,0 + -3,0; write units at 0,0; carry at -3,-1; move ←
+
+== learn from sums without carries: the steps learnt, over 20 seeds
+  20 seeds: read 0,-1 + -1,0 + -2,0; write units at 0,0; carry at 0,-1; move ←
+
+== summary: exactly right answers, by length (all seeds)
+
+| arm | 4 digits | 5 digits | 6 digits | 7 digits | 8 digits | seeds at 100% | stopped after exactly the answer's digits | hit the limit | learnt at example (min / median / max) |
+|---|---|---|---|---|---|---|---|---|---|
+| learn | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 20 of 20 | 4000 of 4000 | 0 | 1 / 1 / 2 |
+| learn from sums without carries | 16.6% | 8.8% | 4.0% | 2.8% | 1.3% | 0 of 20 | 120 of 4000 | 0 | 2 / 2 / 3 |
