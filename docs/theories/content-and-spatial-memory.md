@@ -689,3 +689,21 @@ four kinds.
 recalled when one of its parts doesn't matter. The next move is steps with only the parts they use (the smaller step
 preferred when both settle), which is minimality applied to steps. Behind it waits the rivalry between two steps that
 can't replace each other, and the question of what picks between them, which is where states come in.
+
+### 13.23 Only the parts it uses (C158)
+
+**The owner** asked to be spoken to through his own theory, not the experiments' internals. **The assistant** put the
+proposal that way: a frame with a place that doesn't matter splits into many equally good explanations that contend
+and never settle (heat that can't cool), so let the memory also form the lean frame without that place, and let "the
+structure repeated most wins" do the rest. The owner asked whether the run had to be long. Four seeds were agreed.
+
+**What C158 found.** The lean frame for holding "times 6" through a row came back as one structure, was recalled, and
+got long-multiplication first rows right for the first time. But the frame for adding lost a part that single-digit
+multiplication needed. When one frame is the other minus a part, the store recalls the leaner one whatever the counts,
+because at the point where they differ, what both share outweighs what only one has. The store now flips between the
+two frames, and no seed got all four kinds of sum right.
+
+**What it changed.** Minimality is already in the engine's competition, and stronger than expected: shared structure
+beats repetition. The problem now stands in its plainest form. Two frames that can't replace each other are both in
+memory, and nothing but recent history decides which one completes. The owner's transition-memory picture, a cue plus
+context deciding the state, is where to look next.

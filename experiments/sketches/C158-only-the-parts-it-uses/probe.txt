@@ -1,0 +1,6 @@
+lean bound 1, full bound 1: recalls the lean step (no pass-on)
+lean bound 1, full bound 2: recalls the lean step (no pass-on)
+lean bound 1, full bound 3: recalls the lean step (no pass-on)
+lean bound 2, full bound 3: recalls the lean step (no pass-on)
+lean bound 2, full bound 5: recalls the lean step (no pass-on)
+lean bound 1, full bound 10: recalls the lean step (no pass-on)
