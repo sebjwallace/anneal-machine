@@ -671,3 +671,21 @@ writing on the page. Long multiplication is the first procedure where the page h
 This is the first time held context, a kind of state, has been called for by a procedure itself. The next step is
 offering "hold this read" as a part a candidate can have and seeing whether the long pages select it. After that comes
 the restart to the next row.
+
+### 13.22 Holding a value (C157)
+
+**The owner** asked for the final bundle, then for the next step: offering "hold this value" as a part a step can have.
+**The assistant** flagged first that a step holding the multiplier can't also add, so if the long pages picked the
+hold, the store would hold two genuinely different steps for the first time.
+
+**What C157 found.** The long pages did pick it: in every seed, a long first row was settled by the learned step with
+the multiplier held (found by varied replay, which tries stored steps with one read turned into a hold). No hold ever
+fitted an addition or subtraction. But the store never gave the hold step back. With the multiplier held, the step's
+pass-on does nothing, so every long row bound the hold step with all its pass-ons alike, and equal variants tie for
+ever. The store ended with the read step in half the seeds and nothing in the other half, and no seed was right on all
+four kinds.
+
+**What it changed.** Holding works and is found from its effect. But a step that must have every part can't be
+recalled when one of its parts doesn't matter. The next move is steps with only the parts they use (the smaller step
+preferred when both settle), which is minimality applied to steps. Behind it waits the rivalry between two steps that
+can't replace each other, and the question of what picks between them, which is where states come in.
