@@ -1,0 +1,3 @@
+old competition, 8 sums done; frames: {"+":{"nothing":74,"reading":6},"−":{"reading":6,"nothing":74},"×":{"nothing":61,"holding":19},"L":{"nothing":69,"holding":11}}
+ties pass what all agree on, 8 sums done; frames: {"+":{"nothing":61,"reading":19},"−":{"reading":25,"nothing":55},"×":{"nothing":33,"holding":47},"L":{"nothing":52,"holding":28}}
+ties pass what all agree on, 24 sums done; frames: {"+":{"reading":35,"nothing":45},"−":{"nothing":44,"reading":36},"×":{"holding":45,"nothing":35},"L":{"nothing":30,"holding":50}}

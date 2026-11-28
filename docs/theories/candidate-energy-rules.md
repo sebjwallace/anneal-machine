@@ -148,3 +148,50 @@ memory), that points at putting the facts into associative memory as the next st
 A is the most faithful to the owner's flow picture and could come second, once B has shown what the competition can
 and can't do. C is mainly useful as a control: if B and A both fail, C shows whether the problem is the engine doing
 the work or the shape of the work.
+
+---
+
+## 7. What round one of the fan-out found (C179, 27 November 2026)
+
+At the owner's request, the three rules were explored side by side rather than one being picked. In
+[C179](../../experiments/sketches/C179-three-ways-to-adapt/findings.md) each was copied as a way of choosing what to try
+when the memory adapts a way of working it already knows: times one digit from adding, and the second row of long
+multiplication from times one digit. All of them were still the code's. The point was to learn the trade-offs before
+building one into the engine.
+
+| rule | second row (runs) | second row right (200 new) |
+|---|---|---|
+| greedy (C177's rule, the reference) | 258 | 200 |
+| **B · heat lowers the bar** (nearest first, widening until something cools more, the winner kept) | **226** | **200** |
+| C · settling spreads from the gap (only progress from the start counts) | stuck on all four examples | 0 |
+| A · a budget of units flowing (random steps near the heat, kept if no worse) | 266 to 1,131 in 3 of 5 seeds; 2 stuck | 200 in 3 seeds, 0 in 2 |
+| A + B (the budget pulled toward the nearest) | 937 in 1 of 5 seeds; the rest stuck or wrong | 200 in 1 seed |
+
+What it taught:
+
+1. **Progress has to count wherever it shows up.** C failed because the first gap needed several parts to change at
+   once. Pieces don't come right in the order the working is done.
+2. **Start near, but keep widening.** B's widening is what lets it reach the far changes the second row needs. A pull
+   that only prefers near (A + B) starves them.
+3. **Keep the winner, reset the bar.** It's what makes greedy and B steady. A's drifting wastes steps.
+4. **Randomness can avoid a trap.** A was the only rule that, in one seed, never learned the coincidence. But it was
+   unreliable.
+
+B is the one to build into the engine's dynamics (round two). The open risk named in section 3, that the fit test stays
+given, still stands: agreement with the worked example is how cooling is judged.
+
+**Round two, step one (C180).** B was restated as heat dynamics: heat builds up on the parts an attempt blames (writes
+that didn't cool; then, from a wrong answer, the reads that fed it), the reach of alternatives grows with that heat,
+competition goes by heat less distance, and one try is made at a time, the first that cools more being kept and the heat
+reset. It learned the right second row (200 of 200) in 341 runs, never fooled by the coincidence, but it stuck twice
+where two parts had to move at once. Heat is still kept by the code. The next step is heat as the memory's own
+structure.
+
+**Round two, step two (C181): heat in the substrate.** Heat was moved into the substrate (the owner's word, from 27
+November, for the structure of associative memory) as energy on its cells. Four general rules moved it: blame and
+unfilled places as sources; spreading, half kept and half shared with neighbours; the warmest alternative above a fixed
+bar taking over and spending its heat; draining when more cools. **It churned, and nothing was learned.** Several parts
+took over at once. Parts with few neighbours (the move) flipped first, whatever was to blame. Heat piled up on the parts
+in place. And parts doing their job got no stronger. The energy rules need what the code's version held without saying
+so: one change at a time, heat independent of how many neighbours a part has, each part's bar grown by the work it does,
+and pulling only what's to blame.

@@ -1,0 +1,49 @@
+C186 · Hubs from overlap
+
+For comparison, in the same setup: C185 (no hubs) times one digit 11 runs in every seed; the second row in 1 of 3 seeds (471, 468, 412 runs); C184 (nothing undone) drifted, the second row in none of three seeds; C183 (worse undone): C182 (residue bound to the worked example) times one digit 12, the second row stuck on all four (0 of 200); C181 (energy layer) churned, nothing learned; C180 (heat kept by the code) times one digit 14, the second row 341; C179: times one digit 15 (greedy), 14 (B); the second row 258 (greedy), 226 (B), both 200 of 200.
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| hubs by position (seed 3) | 11 | 200 of 200 |
+
+Example by example:
+  hubs by position (seed 3):
+      hubs (pos): 10 formed over 6 kept ways of working; the most widely shared: Pos:s:13 (6), Pos:u:1 (6), Pos:k:9 (6), Pos:w:12 (6), Pos:mv:0 (6), Pos:A:4 (2)
+      settled: A (reach 1, attempt 3)
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 10 runs
+    7529 × 6: recalled, settled; 1 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| hubs by position (seed 3) | 429 | 0 of 200 |
+
+Example by example:
+  hubs by position (seed 3):
+      hubs (pos): 11 formed over 7 kept ways of working; the most widely shared: Pos:s:13 (7), Pos:u:1 (7), Pos:k:9 (7), Pos:w:12 (7), Pos:mv:0 (7), Pos:K:10 (3)
+      further: u (reach 2), 3 cooled (attempt 16)
+      further: A (reach 2), 4 cooled (attempt 31)
+      further: B (reach 2), 5 cooled (attempt 42)
+      further: k (reach 6), 6 cooled (attempt 64)
+      further: k (reach 1), 7 cooled (attempt 71)
+      nothing left within reach (attempt 101); best 7 cooled
+    525 × 67: adapted, stuck; 109 runs
+      further: u (reach 3), 2 cooled (attempt 26)
+      further: k (reach 5), 4 cooled (attempt 55)
+      further: B (reach 1), 8 cooled (attempt 65)
+      nothing left within reach (attempt 96); best 8 cooled
+    9188 × 54: adapted, stuck; 104 runs
+      further: u (reach 3), 1 cooled (attempt 26)
+      further: K (reach 1), 2 cooled (attempt 40)
+      further: k (reach 5), 3 cooled (attempt 72)
+      nothing left within reach (attempt 107); best 3 cooled
+    905 × 79: adapted, stuck; 115 runs
+      further: u (reach 3), 1 cooled (attempt 25)
+      further: A (reach 1), 2 cooled (attempt 29)
+      further: k (reach 5), 3 cooled (attempt 58)
+      nothing left within reach (attempt 93); best 3 cooled
+    7894 × 27: adapted, stuck; 101 runs
+

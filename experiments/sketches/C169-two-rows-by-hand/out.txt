@@ -1,0 +1,48 @@
+C169 · Two rows, by hand
+200 long multiplications, 2- to 5-digit tops by 2-digit multipliers, the first row ending in column 10. Step limit 600.
+
+| arm | first row right | jumps landing one column left of the start | second row right and in place | let go and went quiet | both rows right |
+|---|---|---|---|---|---|
+| two rows (jump one left of the start) | 200 of 200 | 200 of 200 | 200 of 200 | 200 of 200 | 200 of 200 |
+| jump to the start itself (control) | 200 of 200 | 0 of 200 | 0 of 200 | 200 of 200 | 0 of 200 |
+
+== left of start: 40 × 74 (rows should be 160 and 280, the second one place left)
+  row 0: .......0100.
+  row 1: ........040.
+  row 2: .........74.
+  row 3: ........160.
+  row 4: ......×××××.
+  row 5: ......0200..
+  row 6: .......280..
+  jump landed at: 9; Done: 1; moments: 53
+
+== left of start: 288 × 80 (rows should be 0 and 2304, the second one place left)
+  row 0: ......00000.
+  row 1: .......0288.
+  row 2: .........80.
+  row 3: .......0000.
+  row 4: .....××××××.
+  row 5: .....02760..
+  row 6: ......2304..
+  jump landed at: 9; Done: 1; moments: 65
+
+== start: 40 × 74 (rows should be 160 and 280, the second one place left)
+  row 0: .......0100.
+  row 1: ........040.
+  row 2: .........74.
+  row 3: ........160.
+  row 4: ......×××××.
+  row 5: .........0..
+  row 6: ............
+  jump landed at: 10; Done: 1; moments: 35
+
+== start: 288 × 80 (rows should be 0 and 2304, the second one place left)
+  row 0: ......00000.
+  row 1: .......0288.
+  row 2: .........80.
+  row 3: .......0000.
+  row 4: .....××××××.
+  row 5: .........0..
+  row 6: ............
+  jump landed at: 10; Done: 1; moments: 41
+

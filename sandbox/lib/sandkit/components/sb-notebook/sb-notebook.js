@@ -6,7 +6,7 @@
 // edited in place.
 //
 //   <sb-notebook id="workshop" heading="Reorder rules workshop">
-//     <section heading="Does 40 still hold?" kind="question" by="Sam Okafor" time="2026-10-20T09:12" relevance="key">…</section>
+//     <section heading="Does 40 still hold?" kind="question" by="Sam Okafor" time="2026-10-20" relevance="key">…</section>
 //   </sb-notebook>
 //
 // See manifest.md for the full contract.

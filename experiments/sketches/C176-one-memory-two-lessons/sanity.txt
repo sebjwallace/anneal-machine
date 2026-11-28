@@ -1,0 +1,4 @@
+build 77 ms 32231 assemblies
++ right 20 /20; worked examples settled 20 /20; recalled [ [ 'Fr0', 20 ] ] 83 ms a run
+× right 20 /20; worked examples settled 20 /20; recalled [ [ 'Fr1', 20 ] ] 90 ms a run
+offering the adding frame on a times page: on [ 'Fr0' ] settled false cooled 2

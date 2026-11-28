@@ -1,0 +1,1 @@
+no hubs (seed 3): second row 338, final adding 246, final 0/200, second 200/200 (187s)

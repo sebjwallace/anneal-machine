@@ -1,0 +1,39 @@
+C160 · Keeping what episodes share, a taste
+4 seeds; per seed 8 worked examples (+, −, ×, long row, +, −, ×, long row), 2- and 3-digit; each run with both given frames; whichever settles binds itself with its view, and (arm "overlaps") with the overlap of that view and each earlier view of the same frame. Test: 20 sums of each kind (3 to 5 digit tops; L = long-multiplication first row), recalled from "=" with what's in view.
+
+== overlaps, seed 1, training
+  47 + 85: settled by reading; view: 8@-1,-1 5@-1,0 4@-2,-1 7@-2,0 0@-3,0 +@1,0
+  44 − 18: settled by reading; view: 1@-1,-1 8@-1,0 4@-2,-1 4@-2,0 0@-3,0 −@1,0; overlaps bound: {4@-2,-1 0@-3,0}
+  923 × 1: settled by holding; view: 1@-1,0 2@-2,-1 3@-2,0 0@-3,0 ×@1,0
+  332 × 79 (first row): settled by holding; view: 7@-1,-1 9@-1,0 3@-2,-1 2@-2,0 0@-3,0 ×@1,0; overlaps bound: {0@-3,0 ×@1,0}
+  402 + 455: settled by reading; view: 5@-1,-1 5@-1,0 0@-2,-1 2@-2,0 0@-3,0 +@1,0; overlaps bound: {5@-1,0 0@-3,0 +@1,0} {0@-3,0}
+  607 − 390: settled by reading; view: 9@-1,-1 0@-1,0 0@-2,-1 7@-2,0 0@-3,0 −@1,0; overlaps bound: {7@-2,0 0@-3,0} {0@-3,0 −@1,0} {0@-3,0} {0@-2,-1 0@-3,0}
+  642 × 4: settled by holding; view: 4@-1,0 4@-2,-1 2@-2,0 0@-3,0 ×@1,0; overlaps bound: {0@-3,0 ×@1,0} {2@-2,0 0@-3,0 ×@1,0}
+  826 × 23 (first row): settled by holding; view: 2@-1,-1 3@-1,0 2@-2,-1 6@-2,0 0@-3,0 ×@1,0; overlaps bound: {2@-2,-1 0@-3,0 ×@1,0} {0@-3,0 ×@1,0}
+
+== episodes, seed 1, training
+  47 + 85: settled by reading; view: 8@-1,-1 5@-1,0 4@-2,-1 7@-2,0 0@-3,0 +@1,0
+  44 − 18: settled by reading; view: 1@-1,-1 8@-1,0 4@-2,-1 4@-2,0 0@-3,0 −@1,0
+  923 × 1: settled by holding; view: 1@-1,0 2@-2,-1 3@-2,0 0@-3,0 ×@1,0
+  332 × 79 (first row): settled by holding; view: 7@-1,-1 9@-1,0 3@-2,-1 2@-2,0 0@-3,0 ×@1,0
+  402 + 455: settled by reading; view: 5@-1,-1 5@-1,0 0@-2,-1 2@-2,0 0@-3,0 +@1,0
+  607 − 390: settled by reading; view: 9@-1,-1 0@-1,0 0@-2,-1 7@-2,0 0@-3,0 −@1,0
+  642 × 4: settled by holding; view: 4@-1,0 4@-2,-1 2@-2,0 0@-3,0 ×@1,0
+  826 × 23 (first row): settled by holding; view: 2@-1,-1 3@-1,0 2@-2,-1 6@-2,0 0@-3,0 ×@1,0
+
+== with overlaps: recall from "=" with what is in view (80 sums of each kind)
+| kind | frame recalled | right |
+|---|---|---|
+| + | reading 64, nothing 16 | 80.0% |
+| − | reading 64, nothing 16 | 80.0% |
+| × | holding 70, nothing 10 | 87.5% |
+| long first row | holding 55, nothing 24, reading 1 | 68.8% |
+
+== episodes only (as C159): recall from "=" with what is in view (80 sums of each kind)
+| kind | frame recalled | right |
+|---|---|---|
+| + | nothing 74, reading 6 | 7.5% |
+| − | reading 6, nothing 74 | 7.5% |
+| × | nothing 61, holding 19 | 23.8% |
+| long first row | nothing 69, holding 11 | 13.8% |
+

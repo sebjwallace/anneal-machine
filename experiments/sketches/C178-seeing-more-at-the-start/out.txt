@@ -1,0 +1,36 @@
+C178 · Seeing more at the start
+
+| worked example | how it was settled | runs |
+|---|---|---|
+| 823 + 569 | nothing kept: the code's search (2,052 tries) settled 6, kept as Fr0, Fr1, Fr2, Fr3, Fr4, Fr5 | 2,053 |
+| 1518 + 15 | recalled Fr0, settled | 1 |
+| 531 × 9 | recall brought on Fr0; offers Fr0, Fr1, Fr2, Fr3, Fr4, Fr5 settled none (furthest: Fr0, Fr2, Fr3, Fr5, 2 places cooled); varied the first read (hold or read): kept Fr6 | 11 |
+| 7529 × 6 | recalled Fr6, settled | 1 |
+| 525 × 67 (second row) | recall brought on Fr6; offers (Fr0, Fr1, Fr2, Fr3, Fr4, Fr5, Fr6) settled none (most cooled: 0); adapted Fr6: settled as Fr205 | 204 |
+| 9188 × 54 (second row) | recall brought on Fr205; offers (Fr0, Fr1, Fr2, Fr3, Fr4, Fr5, Fr6, Fr205) settled none (most cooled: 9); adapted Fr205: settled as Fr239 | 43 |
+| 905 × 79 (second row) | recall brought on Fr205, not settled; offers Fr0, Fr1, Fr2, Fr3, Fr4, Fr5, Fr6, Fr205, Fr239; settled: Fr239 | 10 |
+| 7894 × 27 (second row) | recalled Fr239, settled | 1 |
+
+The second row in all: 258 runs. For comparison: C172's blind search 136,922; C174's recount with heat first and pieces 15,646.
+
+How the adapting went:
+  == 525 × 67: adapting Fr6
+  start from hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←: 0 cooled
+  round 1: one change (u to (3,-1)): 4 cooled
+  round 2: one change (k to (2,-1)): 5 cooled
+  round 3: one change (B to (-2,1)): 7 cooled
+  round 4: two changes (u to (3,0), K to (-3,1)): 10 cooled, settled
+  == 9188 × 54: adapting Fr205
+  start from hold (-1,0), read (-2,1), carry in (-3,1), sign (1,0), write (3,0), carry out (2,-1), sign on (1,-1), move ←: 9 cooled
+  round 1: one change (K to (2,0)): 12 cooled, settled
+
+Learned: hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), sign on (1,-1), move ←
+
+| test (200 new, the same memory) | right | what the start brought on |
+|---|---|---|
+| adding | 200 of 200 | Fr0 200 |
+| times one digit | 200 of 200 | Fr6 200 |
+| second rows, from the start (recall) | 200 of 200 | Fr239 200 |
+| second rows, the learned way of working offered | 200 of 200 | Fr239 200 |
+
+Copies of each link: Fr0 2, Fr1 1, Fr2 1, Fr3 1, Fr4 1, Fr5 1, Fr6 2, Fr205 1, Fr239 3

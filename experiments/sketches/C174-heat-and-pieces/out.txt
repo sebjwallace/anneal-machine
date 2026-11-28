@@ -1,0 +1,9 @@
+C174 · Heat and pieces: C172's search recounted (no new runs)
+
+Worked example 525 × 67; reads within two rows of the focus, as C172.
+
+| proposing | stage 1 tries | kept | stage 2 tries | total tries | settled the page |
+|---|---|---|---|---|---|
+| blind (C172) | 34,170 | 988 | 102,752 | 136,922 | 6 (3 right, 3 coincidences) |
+| heat first | 9,996 | 988 | 102,752 | 112,748 | 6 (3 right, 3 coincidences) |
+| heat first, then pieces | 9,996 | 988 | 5,650 | 15,646 | 6 (3 right, 3 coincidences) |

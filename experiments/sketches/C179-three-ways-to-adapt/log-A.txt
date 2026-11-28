@@ -1,0 +1,21 @@
+times one digit, from adding · A · a budget flowing (seed 1): 12 runs, 200/200 (38s)
+times one digit, from adding · A · a budget flowing (seed 2): 13 runs, 200/200 (64s)
+times one digit, from adding · A · a budget flowing (seed 3): 46 runs, 200/200 (92s)
+times one digit, from adding · A · a budget flowing (seed 4): 13 runs, 200/200 (117s)
+times one digit, from adding · A · a budget flowing (seed 5): 26 runs, 200/200 (145s)
+  ...500 tries
+  ...1000 tries
+the second row, from times one digit · A · a budget flowing (seed 1): 1131 runs, 200/200 (361s)
+  ...500 tries
+  ...1000 tries
+  ...1500 tries
+  ...2000 tries
+the second row, from times one digit · A · a budget flowing (seed 2): 2427 runs, 0/200 (829s)
+  ...500 tries
+  ...1000 tries
+  ...1500 tries
+  ...2000 tries
+the second row, from times one digit · A · a budget flowing (seed 3): 2429 runs, 0/200 (1336s)
+  ...500 tries
+the second row, from times one digit · A · a budget flowing (seed 4): 545 runs, 200/200 (1461s)
+the second row, from times one digit · A · a budget flowing (seed 5): 266 runs, 200/200 (1550s)

@@ -99,3 +99,14 @@ the probe after it are described above.
    but it shows that a part only some examples need can't survive in the same frame as examples that don't need it.
    Splitting by context (point 1) may settle this too: the frame for multiplying holds, the frame for adding reads.
 3. Then the restart to the next row, and adding the rows.
+
+## Note added after C159: a leak in the lanes
+
+[C159](../C159-context-picks-the-frame/findings.md) found a leak in how holds run in the lanes (the trial circuits where
+candidates are tried side by side). Attention to a place is shared across lanes. So a lane holding a value could, in a
+later column, also take the digit from the page whenever another lane happened to be attending the same place at the
+same moment. That can only make a hold candidate look as if it settled when it shouldn't. It can't stop a right one
+settling. In this experiment no hold settled an addition or subtraction, and the hold step's test results came from
+the test circuit, which has no lanes and no leak. So the findings above stand. But a hold settling a long row in the
+lanes was not, on its own, proof that the hold was really holding. The test circuit is what confirmed it. C159 fixes
+the leak (the pick-up is keyed on its own moments, not on the phase).

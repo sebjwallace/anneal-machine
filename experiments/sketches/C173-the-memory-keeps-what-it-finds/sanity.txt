@@ -1,0 +1,11 @@
+build 78 ms; 28790 assemblies
+first row alone right: true 93 ms 41 moments
+525 67 settled true frOn [ 'Fr0' ] bound [ 'Fr0' ]
+9188 54 settled true frOn [ 'Fr0' ] bound [ 'Fr0' ]
+33 92 settled true frOn [ 'Fr0' ] bound [ 'Fr0' ]
+979 68 settled true frOn [ 'Fr0' ] bound [ 'Fr0' ]
+2109 75 settled true frOn [ 'Fr0' ] bound [ 'Fr0' ]
+13353 45 settled true frOn [ 'Fr0' ] bound [ 'Fr0' ]
+both rows right 20 of 20; 156 ms each
+no tie-break | recall: [] settled false rivals [ 'Fr0', 'Fr1' ] | offered Fr1: [ 'Fr1' ] settled true bound [ 'Fr1' ]
+first-formed wins | recall: [ 'Fr0' ] settled true rivals [ 'Fr0', 'Fr1' ] | offered Fr1: [ 'Fr1' ] settled true bound [ 'Fr1' ]

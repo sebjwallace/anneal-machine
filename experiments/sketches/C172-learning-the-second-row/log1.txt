@@ -1,0 +1,10 @@
+shard 1: stage 1 0/17085 (0s), kept 0
+shard 1: stage 1 2000/17085 (80s), kept 74
+shard 1: stage 1 4000/17085 (168s), kept 154
+shard 1: stage 1 6000/17085 (254s), kept 231
+shard 1: stage 1 8000/17085 (335s), kept 297
+shard 1: stage 1 10000/17085 (417s), kept 378
+shard 1: stage 1 12000/17085 (496s), kept 444
+shard 1: stage 1 14000/17085 (577s), kept 557
+shard 1: stage 1 16000/17085 (661s), kept 592
+shard 1: done; stage 1 kept 604 of 17085; stage 2 tried 62816, settled 0

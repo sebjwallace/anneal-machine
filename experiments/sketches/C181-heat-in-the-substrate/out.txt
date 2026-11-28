@@ -1,0 +1,37 @@
+C181 · Heat in the substrate
+
+For comparison, in the same setup: C180 (heat kept by the code) times one digit 14, the second row 341; C179: times one digit 15 (greedy), 14 (B); the second row 258 (greedy), 226 (B), both 200 of 200.
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| heat in the substrate (C181) | 3,010 | 0 of 200 |
+
+Example by example:
+  heat in the substrate (C181):
+    531 × 9: adapted, stuck; 1505 runs
+    7529 × 6: adapted, stuck; 1505 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| heat in the substrate (C181) | 6,005 | 0 of 200 |
+
+Example by example:
+  heat in the substrate (C181):
+      kept u:15 + k:19: 3 cooled (all heat drained)
+    525 × 67: adapted, stuck; 1503 runs
+      kept u:15 + k:19: 1 cooled (all heat drained)
+      kept u:22 + k:18 + K:1: 3 cooled (all heat drained)
+      kept u:19 + k:15 + A:H:7 + B:10 + K:16: 4 cooled (all heat drained)
+    9188 × 54: adapted, stuck; 1500 runs
+      kept u:19: 1 cooled (all heat drained)
+      kept u:18 + k:22 + B:1 + K:8 + s:14: 2 cooled (all heat drained)
+    905 × 79: adapted, stuck; 1502 runs
+      kept u:19: 1 cooled (all heat drained)
+      kept u:18 + k:22 + A:H:7 + B:1 + K:8: 2 cooled (all heat drained)
+      kept u:19 + k:15 + A:H:4 + B:16 + K:7 + s:12: 4 cooled (all heat drained)
+    7894 × 27: adapted, stuck; 1500 runs
+

@@ -1,0 +1,56 @@
+C170 · The whole long multiplication, by hand
+200 long multiplications, 2- to 5-digit tops by 2-digit multipliers, the first row ending in column 10. Step limit 900.
+
+| arm | first row right | second row right | second jump landed on the start column | final sum = the product | let go and went quiet |
+|---|---|---|---|---|---|
+| the whole procedure | 200 of 200 | 200 of 200 | 200 of 200 | 200 of 200 | 200 of 200 |
+| adding starts one column left (control) | 200 of 200 | 200 of 200 | 0 of 200 | 0 of 200 | 200 of 200 |
+
+== the whole procedure: 40 × 74 = 2960
+  row 0: ......00100.
+  row 1: .......0040.
+  row 2: .........74.
+  row 3: .......0160.
+  row 4: .....××××××.
+  row 5: .....00200..
+  row 6: ......02800.
+  row 7: ......00000.
+  row 8: .......2960.
+  jumps landed at: 9 then 10; Done: 1; moments: 98
+
+== the whole procedure: 288 × 80 = 23040
+  row 0: .....000000.
+  row 1: ......00288.
+  row 2: .........80.
+  row 3: ......00000.
+  row 4: ....×××××××.
+  row 5: ....002760..
+  row 6: .....023040.
+  row 7: .....000000.
+  row 8: ......23040.
+  jumps landed at: 9 then 10; Done: 1; moments: 116
+
+== adding one column left: 40 × 74 = 2960
+  row 0: ......00100.
+  row 1: .......0040.
+  row 2: .........74.
+  row 3: .......0160.
+  row 4: .....××××××.
+  row 5: .....00200..
+  row 6: ......02800.
+  row 7: ..........0.
+  row 8: ............
+  jumps landed at: 9 then 9; Done: 1; moments: 74
+
+== adding one column left: 288 × 80 = 23040
+  row 0: .....000000.
+  row 1: ......00288.
+  row 2: .........80.
+  row 3: ......00000.
+  row 4: ....×××××××.
+  row 5: ....002760..
+  row 6: .....023040.
+  row 7: ..........0.
+  row 8: ............
+  jumps landed at: 9 then 9; Done: 1; moments: 86
+

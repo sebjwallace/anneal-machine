@@ -1,0 +1,29 @@
+C159 · Context picks the frame, a taste
+4 seeds; per seed 8 worked examples (+, −, ×, long row, +, −, ×, long row), 2- and 3-digit; each run with both given frames, and whichever settles binds itself with the view at the start. Test: 20 sums of each kind (3 to 5 digit tops; L = long-multiplication first row).
+
+== seed 1, training
+  47 + 85: settled by reading; view bound: 6 places
+  44 − 18: settled by reading; view bound: 6 places
+  923 × 1: settled by holding; view bound: 5 places
+  332 × 79 (first row): settled by holding; view bound: 6 places
+  402 + 455: settled by reading; view bound: 6 places
+  607 − 390: settled by reading; view bound: 6 places
+  642 × 4: settled by holding; view bound: 5 places
+  826 × 23 (first row): settled by holding; view bound: 6 places
+
+== recall from "=" with what is in view (80 sums of each kind)
+| kind | frame recalled | right |
+|---|---|---|
+| + | nothing 74, reading 6 | 7.5% |
+| − | reading 6, nothing 74 | 7.5% |
+| × | nothing 61, holding 19 | 23.8% |
+| long first row | nothing 69, holding 11 | 13.8% |
+
+== recall from "=" alone (80 sums of each kind)
+| kind | frame recalled | right |
+|---|---|---|
+| + | nothing 80 | 0.0% |
+| − | nothing 80 | 0.0% |
+| × | nothing 80 | 0.0% |
+| long first row | nothing 80 | 0.0% |
+

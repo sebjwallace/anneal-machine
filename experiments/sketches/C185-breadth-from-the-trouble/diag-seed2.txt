@@ -1,0 +1,1 @@
+DIAG Ex1: best hold (-3,1), read (-2,1), carry in (-3,0), sign (1,0), write (2,-1), carry out (3,0), sign on (1,-1), move ← (7 cooled); hot parts: u,mv,s,K,A,B,k; the right one differs in u,k,A,K; it cools 10, covers the best: true; best's places it misses: none

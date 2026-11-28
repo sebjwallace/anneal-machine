@@ -1,0 +1,18 @@
+C171 · Learning the hand-overs
+Candidates per worked example: 225 pairs of continuations (each of H, S, F at a start relation of -2, -1, 0, 1, 2 columns from the start latch). Test: 200 new long multiplications (2- to 5-digit tops by 2-digit multipliers) from the cue, with the learned hand-overs.
+
+| arm | per worked example: pairs that settled | learned | test: final sum = product | test: first row right |
+|---|---|---|---|---|
+| learn from 3 worked examples | 2, 2, 2 | nothing (no single pair settled every example) | 0 of 200 | 200 of 200 |
+| learn from 1 worked example | 2 | nothing (no single pair settled every example) | 0 of 200 | 200 of 200 |
+| learn from 3 worked first rows only (control) | 225, 225, 225 | nothing (no single pair settled every example) | 0 of 200 | 200 of 200 |
+| working as a target: learn from 3 worked examples | 1, 1, 1 | second-row frame at 1 left of the start, then adding frame at the start | 200 of 200 | 200 of 200 |
+| working as a target: learn from 1 worked example | 1 | second-row frame at 1 left of the start, then adding frame at the start | 200 of 200 | 200 of 200 |
+| working as a target: first rows only (control) | 225, 225, 225 | nothing (no single pair settled every example) | 0 of 200 | 200 of 200 |
+
+Which pairs settled the first worked example (working as a target):
+  working as a target: learn from 3 worked examples: S@-1 then F@+0
+  working as a target: learn from 1 worked example: S@-1 then F@+0
+  working as a target: first rows only (control): H@-2 then H@-2 | H@-2 then H@-1 | H@-2 then H@+0 | H@-2 then H@+1 | H@-2 then H@+2 | H@-2 then S@-2 | ...
+
+For the first three arms (working readable on the page), the pairs are in which.txt.

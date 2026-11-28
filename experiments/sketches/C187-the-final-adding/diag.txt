@@ -1,0 +1,4 @@
+DIAG the final adding: the start brought up Fr0; adapting from Fr0: read (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+DIAG the final adding: the start brought up Fr0; adapting from Fr0: read (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+DIAG the final adding: the start brought up Fr0; adapting from Fr0: read (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+DIAG the final adding: the start brought up Fr0; adapting from Fr0: read (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←

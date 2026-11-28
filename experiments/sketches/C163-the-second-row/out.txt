@@ -1,0 +1,32 @@
+C163 · The second row, a taste
+4 seeds; worked passes cycling: addition, subtraction, long multiplication's first row, its second row (2- and 3-digit tops, 2-digit multipliers); each run with all three given frames; whichever settles binds itself with what was in view. Test: 20 of each, 3 to 5 digit tops, recalled from "=" with what's in view; and whole two-row long multiplications, the second row started by hand (the restart, given).
+
+| worked passes | + | − | first row | second row | both rows | wrong frame recalled | nothing recalled |
+|---|---|---|---|---|---|---|---|
+| 8 | 36.3% | 36.3% | 23.8% | 7.5% | 2.5% | 1 of 421 | 315 of 421 |
+| 24 | 46.3% | 43.8% | 35.0% | 25.0% | 7.5% | 2 of 425 | 272 of 425 |
+
+== 8 worked passes, seed 1, training
+  778 + 181: settled by reading
+  94 − 78: settled by reading
+  40 × 76 (first row): settled by holding
+  430 × 98 (second row): settled by second
+  988 + 689: settled by reading
+  723 − 135: settled by reading
+  69 × 99 (first row): settled by holding
+  606 × 79 (second row): settled by second
+
+== 8 worked passes: frames recalled
+  +: nothing 51, reading 29
+  −: nothing 51, reading 29
+  first row: nothing 61, holding 19
+  second row: nothing 74, second 6
+  both rows: holding 20, nothing 78, second 2, reading 1
+
+== 24 worked passes: frames recalled
+  +: reading 37, nothing 43
+  −: reading 35, nothing 45
+  first row: nothing 50, holding 28, reading 2
+  second row: second 20, nothing 60
+  both rows: holding 25, nothing 74, second 6
+

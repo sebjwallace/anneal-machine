@@ -1,0 +1,1 @@
+hubs by relation (seed 2): second row 140, final adding 264, final 0/200, second 17/200 (150s)

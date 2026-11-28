@@ -1,0 +1,54 @@
+C176 · One memory, two lessons
+
+Lesson 1 (adding): 823 + 569, then 1518 + 15. Lesson 2 (times one digit): 531 × 9, then 7529 × 6. C175's examples.
+
+== no tie-break
+
+| worked example | how it was settled | runs |
+|---|---|---|
+| 823 + 569 | nothing kept: the code's search (2,052 tries) settled 6, kept as Fr0, Fr1, Fr2, Fr3, Fr4, Fr5 | 2,053 |
+| 1518 + 15 | recall tied; offers Fr0, Fr1, Fr2, Fr3, Fr4, Fr5; settled: Fr0, Fr1, Fr2, Fr3, Fr4, Fr5 | 7 |
+| 531 × 9 | recall tied; offers Fr0, Fr1, Fr2, Fr3, Fr4, Fr5 settled none (furthest: Fr0, Fr2, Fr3, Fr5, 2 places cooled); varied the first read (hold or read): kept Fr6 | 11 |
+| 7529 × 6 | recalled Fr6, settled | 1 |
+
+Lesson 2 in all: 12 runs (4 of them variations). For comparison (C175): from scratch 1,112; with the code carrying lesson 1's pieces over, 180.
+
+Frames:
+  Fr0 (kept, seen with +; 2 copies of its link): read (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr1 (kept, seen with +; 2 copies of its link): read (-1,0), read (-3,0), carry in (-2,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr2 (kept, seen with +; 2 copies of its link): read (-2,0), read (-1,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr3 (kept, seen with +; 2 copies of its link): read (-2,0), read (-3,0), carry in (-1,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr4 (kept, seen with +; 2 copies of its link): read (-3,0), read (-1,0), carry in (-2,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr5 (kept, seen with +; 2 copies of its link): read (-3,0), read (-2,0), carry in (-1,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr6 (kept from a variation; 2 copies of its link): hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+
+| test (200 new of each, the same memory) | right | what the start brought on |
+|---|---|---|
+| adding | 0 of 200 | nothing 200 |
+| times one digit | 200 of 200 | Fr6 200 |
+
+== tie-break: the first formed wins (a declared crutch)
+
+| worked example | how it was settled | runs |
+|---|---|---|
+| 823 + 569 | nothing kept: the code's search (2,052 tries) settled 6, kept as Fr0, Fr1, Fr2, Fr3, Fr4, Fr5 | 2,053 |
+| 1518 + 15 | recalled Fr0, settled | 1 |
+| 531 × 9 | recall brought on Fr0; offers Fr0, Fr1, Fr2, Fr3, Fr4, Fr5 settled none (furthest: Fr0, Fr2, Fr3, Fr5, 2 places cooled); varied the first read (hold or read): kept Fr6 | 11 |
+| 7529 × 6 | recalled Fr6, settled | 1 |
+
+Lesson 2 in all: 12 runs (4 of them variations). For comparison (C175): from scratch 1,112; with the code carrying lesson 1's pieces over, 180.
+
+Frames:
+  Fr0 (kept, seen with +; 2 copies of its link): read (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr1 (kept, seen with +; 1 copies of its link): read (-1,0), read (-3,0), carry in (-2,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr2 (kept, seen with +; 1 copies of its link): read (-2,0), read (-1,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr3 (kept, seen with +; 1 copies of its link): read (-2,0), read (-3,0), carry in (-1,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr4 (kept, seen with +; 1 copies of its link): read (-3,0), read (-1,0), carry in (-2,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr5 (kept, seen with +; 1 copies of its link): read (-3,0), read (-2,0), carry in (-1,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  Fr6 (kept from a variation; 2 copies of its link): hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+
+| test (200 new of each, the same memory) | right | what the start brought on |
+|---|---|---|
+| adding | 200 of 200 | Fr0 200 |
+| times one digit | 200 of 200 | Fr6 200 |
+

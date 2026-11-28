@@ -1,0 +1,25 @@
+C168 · A latch
+Two 3-digit additions run straight on in one memory (columns 8 to 11, then 3 to 6), the second cue arriving on whatever is still active (100 pairs per arm); and 200 single sums (3 to 6 digits). Step limit 400.
+
+| arm | first sum worked and copied | second jump: only its own start / more than one place / none | second sum worked and copied | how the second run ended (and what was on in its last recorded moment) |
+|---|---|---|---|---|
+| bond, two sums | 100 of 100 | 0 / 100 / 0 | 6 of 100 | went quiet; last moment: nothing (100) |
+| latch, two sums | 100 of 100 | 100 / 0 / 0 | 100 of 100 | went quiet; last moment: S@6 (100) |
+| latch, two sums, no letting go | 100 of 100 | 0 / 100 / 0 | 6 of 100 | held on; last moment: P S@6 S@11 (100) |
+| latch, one sum (200) | worked and copied 200 of 200 | jump to its own start 200 of 200 | | went quiet by itself 200 of 200 |
+
+== bond, two sums, first pair: 385 + 708 at columns 8 to 11, then 113 + 730 at columns 3 to 6
+  row 3: ...0843.1093
+  row 5: ...0043.1093
+  jumps: moment 34 -> column 11; moment 99 -> column 11 and 6; Done: 2
+
+== latch, two sums, first pair: 385 + 708 at columns 8 to 11, then 113 + 730 at columns 3 to 6
+  row 3: ...0843.1093
+  row 5: ...0843.1093
+  jumps: moment 34 -> column 11; moment 99 -> column 6; Done: 2
+
+== latch, two sums, no letting go, first pair: 385 + 708 at columns 8 to 11, then 113 + 730 at columns 3 to 6
+  row 3: ...0843.1093
+  row 5: ...0043.1093
+  jumps: moment 34 -> column 11; moment 100 -> column 6 and 11; Done: 0
+

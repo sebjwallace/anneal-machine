@@ -1,0 +1,66 @@
+C179 · Three ways to adapt (round one)
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| A+B · a budget flowing toward the nearest (seed 1) | 13 | 200 of 200 |
+| A+B · a budget flowing toward the nearest (seed 2) | 31 | 200 of 200 |
+| A+B · a budget flowing toward the nearest (seed 3) | 29 | 200 of 200 |
+| A+B · a budget flowing toward the nearest (seed 4) | 11 | 200 of 200 |
+| A+B · a budget flowing toward the nearest (seed 5) | 12 | 200 of 200 |
+
+Example by example:
+  A+B · a budget flowing toward the nearest (seed 1):
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 12 runs
+    7529 × 6: recalled, settled; 1 runs
+  A+B · a budget flowing toward the nearest (seed 2):
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 30 runs
+    7529 × 6: recalled, settled; 1 runs
+  A+B · a budget flowing toward the nearest (seed 3):
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 28 runs
+    7529 × 6: recalled, settled; 1 runs
+  A+B · a budget flowing toward the nearest (seed 4):
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 10 runs
+    7529 × 6: recalled, settled; 1 runs
+  A+B · a budget flowing toward the nearest (seed 5):
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 11 runs
+    7529 × 6: recalled, settled; 1 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| A+B · a budget flowing toward the nearest (seed 1) | 937 | 200 of 200 |
+| A+B · a budget flowing toward the nearest (seed 2) | 2,483 | 0 of 200 |
+| A+B · a budget flowing toward the nearest (seed 3) | 2,462 | 0 of 200 |
+| A+B · a budget flowing toward the nearest (seed 4) | 2,117 | 4 of 200 |
+| A+B · a budget flowing toward the nearest (seed 5) | 2,555 | 0 of 200 |
+
+Example by example:
+  A+B · a budget flowing toward the nearest (seed 1):
+    525 × 67: adapted, settled (hold (0,-1), read (-2,1), carry in (-3,1), sign (1,1), write (3,0), carry out (2,-1), sign on (1,-1), move ←); 164 runs
+    9188 × 54: adapted, stuck; 584 runs
+    905 × 79: adapted, settled (hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), sign on (1,-1), move ←); 179 runs
+    7894 × 27: an offer settled (Fr910); 10 runs
+  A+B · a budget flowing toward the nearest (seed 2):
+    525 × 67: adapted, stuck; 640 runs
+    9188 × 54: adapted, stuck; 599 runs
+    905 × 79: adapted, stuck; 610 runs
+    7894 × 27: adapted, stuck; 634 runs
+  A+B · a budget flowing toward the nearest (seed 3):
+    525 × 67: adapted, stuck; 606 runs
+    9188 × 54: adapted, stuck; 611 runs
+    905 × 79: adapted, stuck; 612 runs
+    7894 × 27: adapted, stuck; 633 runs
+  A+B · a budget flowing toward the nearest (seed 4):
+    525 × 67: adapted, settled (hold (0,-1), read (-2,1), carry in (-3,1), sign (1,0), write (3,0), carry out (2,-1), sign on (1,-1), move ←); 413 runs
+    9188 × 54: adapted, stuck; 575 runs
+    905 × 79: adapted, stuck; 559 runs
+    7894 × 27: adapted, stuck; 570 runs
+  A+B · a budget flowing toward the nearest (seed 5):
+    525 × 67: adapted, stuck; 638 runs
+    9188 × 54: adapted, stuck; 646 runs
+    905 × 79: adapted, stuck; 616 runs
+    7894 × 27: adapted, stuck; 655 runs
+

@@ -17,6 +17,7 @@ The Anneal engine was built in steps. Each step has a checkpoint note: what was 
 | 11 | [(name to agree)](11-thinking.md) | the other half of the cycle: joining, checking, context (C33–C58; on the branch, not in the core) |
 | 12 | [(name to agree)](12-flow.md) | flow and heat: binding, sinking, priming (C82–C91; experiments, with a heat meter in the core) |
 | 13 | [(name to agree)](13-anneal.md) | reading a buffer whole, annealing what doesn't fit (C106–C136; experiments, distilled in D-03 apart from forgetting and one change to support; the engine unchanged) |
+| 14 | [(name to agree)](14-learned-computation.md) | learned computation: procedures run by the memory, then learned from experience (C137–C187; sketches, the engine unchanged) |
 
 Every note has the same sections:
 1. **In one paragraph**

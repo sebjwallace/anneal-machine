@@ -1,0 +1,4 @@
+DIAG Ex1: best hold (-1,0), read (-2,1), carry in (-3,0), sign (1,0), write (2,-1), carry out (3,-1), sign on (1,-1), move ←; residue on carry read (2,0): 1, on answer write (3,0): 1
+DIAG Ex2: best hold (-1,0), read (-2,1), carry in (-3,0), sign (1,0), write (2,-1), carry out (3,-1), sign on (1,-1), move ←; residue on carry read (2,0): 1, on answer write (3,0): 1
+DIAG Ex3: best hold (-1,0), read (-2,1), carry in (-3,0), sign (1,0), write (2,-1), carry out (3,-1), sign on (1,-1), move ←; residue on carry read (2,0): 1, on answer write (3,0): 1
+DIAG Ex4: best hold (-1,0), read (-2,1), carry in (-3,0), sign (1,0), write (2,-1), carry out (3,-1), sign on (1,-1), move ←; residue on carry read (2,0): 1, on answer write (3,0): 1

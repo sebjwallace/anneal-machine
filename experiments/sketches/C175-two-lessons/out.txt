@@ -1,0 +1,28 @@
+C175 · Two lessons (a taste)
+
+Lesson 1, adding with carrying (823 + 569, then 1518 + 15). Lesson 2, times one digit (531 × 9, then 7529 × 6).
+
+| | tries (whole runs of the circuit) | settled the first example | settled both (learned) | test: 200 new, right |
+|---|---|---|---|---|
+| lesson 1, adding, from scratch | 2,052 (stages kept 24, 12) | 6 | 6 | 200, 200, 200, 200, 200, 200 |
+| lesson 2, times one digit, from scratch | 1,112 (stages kept 8, 12) | 1 | 1 | 200 |
+| lesson 2, times one digit, with lesson 1's pieces (first run) | 8,220 | 1 | 1 | 200 |
+| (b) lesson 2 with lesson 1's pieces, plus the same filter (added) | 180 | 1 | 1 | 200 |
+| (c) lesson 2 with the pieces of one of lesson 1's six, plus the filter (added) | 2 | 1 | 1 | 200 |
+
+Learned in lesson 1:
+  read (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  read (-1,0), read (-3,0), carry in (-2,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  read (-2,0), read (-1,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  read (-2,0), read (-3,0), carry in (-1,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  read (-3,0), read (-1,0), carry in (-2,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+  read (-3,0), read (-2,0), carry in (-1,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+
+Learned in lesson 2 from scratch:
+  hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+
+Learned in lesson 2 with pieces:
+  hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←
+The same as from scratch, first run: yes
+The same as from scratch, (b): yes
+The same as from scratch, (c): yes

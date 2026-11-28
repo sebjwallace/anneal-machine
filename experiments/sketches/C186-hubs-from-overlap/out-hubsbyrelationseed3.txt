@@ -1,0 +1,47 @@
+C186 · Hubs from overlap
+
+For comparison, in the same setup: C185 (no hubs) times one digit 11 runs in every seed; the second row in 1 of 3 seeds (471, 468, 412 runs); C184 (nothing undone) drifted, the second row in none of three seeds; C183 (worse undone): C182 (residue bound to the worked example) times one digit 12, the second row stuck on all four (0 of 200); C181 (energy layer) churned, nothing learned; C180 (heat kept by the code) times one digit 14, the second row 341; C179: times one digit 15 (greedy), 14 (B); the second row 258 (greedy), 226 (B), both 200 of 200.
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| hubs by relation (seed 3) | 15 | 200 of 200 |
+
+Example by example:
+  hubs by relation (seed 3):
+      hubs (rel): 16 formed over 6 kept ways of working; the most widely shared: Rel:s>u:-1,0 (6), Rel:s>k:-4,-1 (6), Rel:s>w:0,-1 (6), Rel:u>s:1,0 (6), Rel:u>k:-3,-1 (6), Rel:u>w:1,-1 (6)
+      settled: A (reach 1, attempt 7)
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 14 runs
+    7529 × 6: recalled, settled; 1 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| hubs by relation (seed 3) | 297 | 200 of 200 |
+
+Example by example:
+  hubs by relation (seed 3):
+      hubs (rel): 17 formed over 7 kept ways of working; the most widely shared: Rel:s>u:-1,0 (7), Rel:s>k:-4,-1 (7), Rel:s>w:0,-1 (7), Rel:u>s:1,0 (7), Rel:u>k:-3,-1 (7), Rel:u>w:1,-1 (7)
+      further: B (with u by completion) (reach 2), 1 cooled (attempt 16)
+      further: A (reach 1), 2 cooled (attempt 19)
+      further: A (reach 3), 3 cooled (attempt 49)
+      further: B (reach 1), 4 cooled (attempt 56)
+      further: B (reach 1), 5 cooled (attempt 67)
+      further: k (reach 6), 6 cooled (attempt 94)
+      further: k (reach 1), 7 cooled (attempt 106)
+      nothing left within reach (attempt 136); best 7 cooled
+    525 × 67: adapted, stuck; 144 runs
+      further: A (with K,u,k,w by completion) (reach 3), 2 cooled (attempt 26)
+      further: B (with A,K,s by completion) (reach 1), 4 cooled (attempt 27)
+      further: A (reach 1), 9 cooled (attempt 35)
+      settled: K (with w by completion) (reach 5, attempt 72)
+    9188 × 54: adapted, settled (hold (0,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), sign on (5,-1), move ←); 80 runs
+      hubs (rel): 25 formed over 8 kept ways of working; the most widely shared: Rel:s>u:-1,0 (7), Rel:s>k:-4,-1 (7), Rel:s>w:0,-1 (7), Rel:u>s:1,0 (7), Rel:u>k:-3,-1 (7), Rel:u>w:1,-1 (7)
+      further: A (with K,w by completion) (reach 1), 5 cooled (attempt 6)
+      further: A (reach 1), 8 cooled (attempt 17)
+      settled: K (reach 5, attempt 54)
+    905 × 79: adapted, settled (hold (-1,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), sign on (3,0), move ←); 63 runs
+    7894 × 27: an offer settled (Fr271); 10 runs
+

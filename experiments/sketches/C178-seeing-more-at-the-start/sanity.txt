@@ -1,0 +1,2 @@
+views: 5 and 17 things in view
+times-one pages: right 10/10, started Fr0,10; second-row pages: right 10/10, started Fr1,10 (times one is Fr0, second row is Fr1)

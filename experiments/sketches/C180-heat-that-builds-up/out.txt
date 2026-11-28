@@ -1,0 +1,43 @@
+C180 · Heat that builds up (round two, step one)
+
+For comparison, C179 in the same setup: times one digit 15 (greedy), 14 (B); the second row 258 (greedy), 226 (B), both 200 of 200.
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| heat that builds up (C180) | 14 | 200 of 200 |
+
+Example by example:
+  heat that builds up (C180):
+      settled by hold
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 13 runs
+    7529 × 6: recalled, settled; 1 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| heat that builds up (C180) | 341 | 200 of 200 |
+
+Example by example:
+  heat that builds up (C180):
+      kept u→(2,-1): 3 cooled (heat reset)
+      kept u→(3,-1): 4 cooled (heat reset)
+      kept k→(2,-1): 5 cooled (heat reset)
+      kept B→(-2,1): 7 cooled (heat reset)
+    525 × 67: adapted, stuck; 114 runs
+      kept u→(2,-1): 1 cooled (heat reset)
+      kept u→(3,-1): 2 cooled (heat reset)
+      kept k→(2,-1): 4 cooled (heat reset)
+      kept B→(-2,1): 8 cooled (heat reset)
+    9188 × 54: adapted, stuck; 125 runs
+      kept u→(2,-1): 1 cooled (heat reset)
+      kept u→(3,-1): 2 cooled (heat reset)
+      kept k→(2,-1): 3 cooled (heat reset)
+      kept B→(-2,1): 5 cooled (heat reset)
+      kept K→(2,0): 6 cooled (heat reset)
+      settled by u→(3,0)
+    905 × 79: adapted, settled (hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), sign on (1,-1), move ←); 101 runs
+    7894 × 27: recalled, settled; 1 runs
+

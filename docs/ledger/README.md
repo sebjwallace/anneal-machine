@@ -37,6 +37,6 @@ clause existed), with a one-sentence **lesson**.
 | | TRD | Trade-off | what one thing costs in another |
 
 ## Experiment codes
-Every experiment is coded by its folder in `experiments/sketches/` (C01 to C127; C92 to C105 are not yet recorded in the ledger). C57 and C58 ran on the branch, so their
+Every experiment is coded by its folder in `experiments/sketches/` (C01 to C187; C92 to C105 are not yet recorded in the ledger). C57 and C58 ran on the branch, so their
 folders point into `C56-integrated/`. C33 has two folders (scale, scenes). There is no C13. Findings for C02-C35 are in
 `experiments/findings/`; from C36 they sit in each folder.

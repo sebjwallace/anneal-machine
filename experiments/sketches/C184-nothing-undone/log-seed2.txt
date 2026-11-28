@@ -1,0 +1,6 @@
+times one digit, from adding · nothing undone (seed 2): 62 runs, 0/200 (23s)
+  ...500 tries
+  ...1000 tries
+  ...1500 tries
+  ...2000 tries
+the second row, from times one digit · nothing undone (seed 2): 2291 runs, 0/200 (562s)

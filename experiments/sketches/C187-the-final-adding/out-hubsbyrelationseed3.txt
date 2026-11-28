@@ -1,0 +1,53 @@
+C187 · The final adding
+
+Background: adding and times one digit (as C176), then the second row by hubs by relation (C186), the same seed in both arms. For reference, C186: the second row by hubs by relation 287 to 355 runs, 200 of 200.
+
+| arm | second row (runs, background) | final adding (runs) | test: final adding (200 new) | test: second row (200 new, after) |
+|---|---|---|---|---|
+| hubs by relation (seed 3) | 338 | 243 | 0 of 200 | 200 of 200 |
+
+Example by example:
+  hubs by relation (seed 3):
+    the second row (background, hubs by relation in every arm):
+      hubs (rel): 17 formed over 7 kept ways of working; the most widely shared: Rel:s>u:-1,0 (7), Rel:s>k:-4,-1 (7), Rel:s>w:0,-1 (7), Rel:u>s:1,0 (7), Rel:u>k:-3,-1 (7), Rel:u>w:1,-1 (7)
+      further: B (with u by completion) (reach 2), 1 cooled (attempt 19)
+      further: A (reach 1), 2 cooled (attempt 25)
+      further: A (reach 1), 3 cooled (attempt 34)
+      further: B (reach 1), 4 cooled (attempt 40)
+      further: B (reach 1), 5 cooled (attempt 48)
+      further: k (reach 6), 6 cooled (attempt 70)
+      further: k (reach 1), 7 cooled (attempt 79)
+      nothing left within reach (attempt 106); best 7 cooled
+    525 × 67: adapted, stuck; 114 runs
+      further: A (with K,u,k,w by completion) (reach 3), 2 cooled (attempt 22)
+      further: u (reach 1), 3 cooled (attempt 24)
+      nothing left within reach (attempt 60); best 3 cooled
+    9188 × 54: adapted, stuck; 68 runs
+      further: u (reach 3), 2 cooled (attempt 27)
+      nothing left within reach (attempt 65); best 2 cooled
+    905 × 79: adapted, stuck; 73 runs
+      further: u (reach 3), 1 cooled (attempt 26)
+      further: A (with B,K,s,w by completion) (reach 1), 3 cooled (attempt 27)
+      further: K (with k,w by completion) (reach 5), 5 cooled (attempt 66)
+      settled: A (reach 1, attempt 75)
+    7894 × 27: adapted, settled (hold (-1,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), sign on (5,-1), move ←); 83 runs
+    the final adding:
+      hubs (rel): 23 formed over 8 kept ways of working; the most widely shared: Rel:s>u:-1,0 (7), Rel:s>k:-4,-1 (7), Rel:s>w:0,-1 (7), Rel:u>s:1,0 (7), Rel:u>k:-3,-1 (7), Rel:u>w:1,-1 (7)
+      further: u (reach 4), 1 cooled (attempt 18)
+      further: A (reach 4), 2 cooled (attempt 29)
+      further: k (reach 8), 3 cooled (attempt 48)
+      nothing left within reach (attempt 70); best 3 cooled
+    727 × 57: adapted, stuck; 79 runs
+      further: k (reach 8), 1 cooled (attempt 27)
+      further: A (reach 1), 2 cooled (attempt 30)
+      nothing left within reach (attempt 56); best 2 cooled
+    3012 × 68: adapted, stuck; 65 runs
+      further: k (reach 7), 1 cooled (attempt 24)
+      further: A (reach 1), 3 cooled (attempt 25)
+      further: A (reach 1), 4 cooled (attempt 28)
+      further: B (reach 2), 5 cooled (attempt 36)
+      nothing left within reach (attempt 58); best 5 cooled
+    270 × 83: adapted, stuck; 67 runs
+      nothing left within reach (attempt 23); best 0 cooled
+    2589 × 32: adapted, stuck; 32 runs
+

@@ -1,0 +1,28 @@
+C181 · Heat in the substrate
+
+For comparison, in the same setup: C180 (heat kept by the code) times one digit 14, the second row 341; C179: times one digit 15 (greedy), 14 (B); the second row 258 (greedy), 226 (B), both 200 of 200.
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| heat in the substrate (C181) | 24 | 0 of 200 |
+
+Example by example:
+  heat in the substrate (C181):
+    531 × 9: adapted, stuck; 12 runs
+    7529 × 6: adapted, stuck; 12 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| heat in the substrate (C181) | 36 | 0 of 200 |
+
+Example by example:
+  heat in the substrate (C181):
+    525 × 67: adapted, stuck; 9 runs
+    9188 × 54: adapted, stuck; 9 runs
+    905 × 79: adapted, stuck; 9 runs
+    7894 × 27: adapted, stuck; 9 runs
+

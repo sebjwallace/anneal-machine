@@ -707,3 +707,115 @@ two frames, and no seed got all four kinds of sum right.
 beats repetition. The problem now stands in its plainest form. Two frames that can't replace each other are both in
 memory, and nothing but recent history decides which one completes. The owner's transition-memory picture, a cue plus
 context deciding the state, is where to look next.
+
+### 13.24 Context picks the frame, a taste (C159)
+
+**The owner** wanted context, not a built-in rule, to decide which of the two frames completes, and asked for a light
+first taste rather than a full run. **The assistant** proposed binding each frame with what was in view when it worked,
+and recalling from the cue plus the new page's view, so that what stays the same across a frame's episodes (the sign)
+would back it and the varying digits would wash out. The taste took the two frames as already learned.
+
+**What C159 found.** Whenever context picked a frame, it picked the right one: the reading frame only for additions and
+subtractions, the holding frame only for multiplications, never wrong. But most sums recalled nothing. Episodes of the
+same frame disagree on their incidental digits, two digits in one place are rivals, and so the memory's own episodes
+tie. The taste also exposed a leak in how holds ran in the trial circuits, which is now fixed. The earlier findings
+stand.
+
+**What it changed.** Context pulls the right way. What's missing is abstraction: keeping what a frame's episodes share
+(their overlap, here the sign) so the frame is bound to that and not to every incidental digit. That's the owner's
+"overlap becomes abstraction", and it's the next experiment.
+
+### 13.25 Keeping what episodes share, a taste (C160)
+
+**The assistant** proposed keeping what a frame's episodes share: binding each frame also with the overlap of its new
+view and its earlier ones, so the frame is tied to what stays the same (the sign) rather than to incidental digits. The
+engine's preference for leaner structures, which had cost a needed part before, should now work in its favour. The
+intersecting was done by the binding rule, declared as such. **The owner** agreed.
+
+**What C160 found.** Right answers rose from 7 to 24% to 69 to 88% across additions, subtractions and both kinds of
+multiplication, with one wrong frame in 320 sums. The overlaps formed were the expected ones ("+", "−", "×", each with
+the 0 carried in) plus coincidences: digits two sums happened to share in the same place. Those likely account for the
+10 to 30% of sums that still recall nothing.
+
+**What it changed.** Abstraction from overlap is what lets context choose between frames. The open questions are
+whether coincidences wash out with more examples, as they should since only the sign repeats, and whether the engine
+can find the overlap itself instead of a rule doing it.
+
+### 13.26 More sums, and refining, a taste (C161)
+
+**The assistant** proposed checking whether coincidental overlaps wash out with more worked sums, and pushed back on
+its own design: comparing each new sum with every earlier one grows the structure roughly with the square of what's
+seen. It proposed refining instead (compare a new sum only with the frame's existing abstractions, so they narrow).
+**The owner** agreed to test both.
+
+**What C161 found.** More sums helped slowly (nothing recalled fell from 21% to 14% by 48 sums) while the overlaps kept
+grew from 7 to 89 per seed, mostly coincidences. Refining kept only 3, but did worse. The reading frame serves two
+signs, its first overlap (an addition meeting a subtraction) had no sign in it, and narrowing can never get the sign
+back. One core per frame is the wrong assumption when a frame's real context is "+ or −". Wrong frames stayed at zero
+throughout.
+
+**What it changed.** The clean abstractions do form. The problem is everything coincidental around them. The owner's
+principle that forgetting is part of lowering energy points to the next taste: overlaps that are never confirmed again
+go cold and stop competing, while the sign-based ones, confirmed by nearly every sum of their kind, stay warm.
+
+### 13.27 Abstraction from competition, a taste (C162)
+
+**The owner** asked whether the work was hitting diminishing returns. **The assistant** agreed that the last few tastes
+had each added a rule to the storing step (drifting towards designing the mechanism), said the problem itself
+(abstraction from overlap) was the right one but was being attacked at the wrong level, and suggested parking it or
+taking it into the engine. **The owner** asked for one more experiment, on abstraction from competition.
+
+**What C162 found.** A general change to competition, with nothing stored but plain episodes: when tied rivals all
+agree on what comes next, that comes on. Right answers rose from 7 to 24% to 24 to 59% at 8 worked sums and 44 to 63% at
+24, with no wrong or broken frame. It was weaker than the storing rule, but stored nothing and kept improving with
+experience. About half of sums still recalled nothing, likely ties between memories of different frames.
+
+**What it changed.** Abstraction can come from the memory's own competition: memories tied over incidental detail still
+pass on what they share. What it can't do yet is separate memories that genuinely disagree, which is where context has
+to do more than overlap of digits.
+
+### 13.28 The second row, a taste (C163)
+
+**The assistant** proposed going back to long multiplication's next piece, the second row, as a third way of working
+alongside the other two, with context choosing (the first row already written above is a natural cue), and with the
+restart parked as a declared crutch. **The owner** agreed. While setting it up, the assistant found the search for the
+second-row frame would be about ten times larger at the reach it needs, and gave that frame by hand instead, saying so
+before the run.
+
+**What C163 found.** The second-row frame settled every worked second row and nothing else. Recall picked it only for
+second rows, and wrong frames stayed at 3 in 846. Whole two-row long multiplications came out right for the first time
+(7.5% at 24 worked passes), limited entirely by recall coming back empty (64% of recalls). The taste also exposed an
+old assumption in the trial lanes (answers always written in row 3), now fixed.
+
+**What it changed.** All three movements of long multiplication now exist in one memory, with context choosing between
+them almost without error. What's left is clear: the second-row frame is still given (the proposing crutch), so is the
+restart, and recall too often gives nothing at all. That last one now limits everything, and it's the gap C162 named.
+
+### 13.29 The memory proposes (C164)
+
+**The owner** asked whether removing crutches would help now, and which there were, then asked for the most problematic
+one out. **The assistant** named proposing (its own code deciding what to try) and removed the part it could: replay of
+every stored way of working. What's tried first is now what the memory offers, either what it recalls with the page in
+view or what it couldn't choose between when recall stalled, with search only when nothing offered settles, and
+everything learned in one continuous run. It said beforehand that this helps learning but not recall at test.
+
+**What C164 found.** The memory's own offers settled 31 of 48 worked examples. But search still ran 17 times, and at
+test recall gave nothing for about 90% of sums. Each search settles many equally good variants, and binding each one
+with its own page makes every memory a unique structure. Repetition can no longer pool identical memories and winnow
+the variants, so recall faces hundreds of near-identical rivals. The earlier tastes had hidden this by handing over a
+single frame.
+
+**What it changed.** Binding with context and winnowing by repetition each worked alone, and together the first
+defeats the second. The evidence points to keeping a frame as one structure that repetition strengthens, with each
+context as a separate association pointing to it. That's close to the owner's transition-memory picture of a cue and
+context choosing a single state, and it's a design decision for the owner.
+
+### 13.30 Schema memory, and composition on both sides
+
+**The owner** stepped back and connected the experiments' sticking point (several procedures in one memory, switching
+between them) to his theory of procedures composed like anything else, by super-assemblies over sparse subsamples. He
+asked for the principles in associative memory's own terms. **The assistant**'s account added spatial super-assemblies:
+relations between places composed into layouts, giving a second kind of jump beside content addressing. The owner took
+that up as new, since he had only thought of composition on one side. He renamed content memory **schema memory**, and
+asked for a theory note and for small, careful steps from here. The note is
+[schema and spatial memory](schema-and-spatial-memory.md), and it carries this part of the thinking forward.

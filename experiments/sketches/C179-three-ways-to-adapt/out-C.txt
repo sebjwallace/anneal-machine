@@ -1,0 +1,26 @@
+C179 · Three ways to adapt (round one)
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| C · spreading from the gap | 15 | 200 of 200 |
+
+Example by example:
+  C · spreading from the gap:
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 14 runs
+    7529 × 6: recalled, settled; 1 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| C · spreading from the gap | 6,631 | 0 of 200 |
+
+Example by example:
+  C · spreading from the gap:
+    525 × 67: adapted, stuck; 1627 runs
+    9188 × 54: adapted, stuck; 1668 runs
+    905 × 79: adapted, stuck; 1709 runs
+    7894 × 27: adapted, stuck; 1627 runs
+

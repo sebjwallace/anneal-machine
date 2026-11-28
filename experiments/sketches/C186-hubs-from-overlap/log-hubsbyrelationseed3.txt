@@ -1,0 +1,2 @@
+times one digit, from adding · hubs by relation (seed 3): 15 runs, 200/200 (38s)
+the second row, from times one digit · hubs by relation (seed 3): 297 runs, 200/200 (134s)

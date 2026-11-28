@@ -1,0 +1,26 @@
+C172 · Learning the second row by doing and checking (a taste)
+
+Worked example searched: 525 × 67; checked on: 9188 × 54. The page shows only what's given; both rows' working is the target.
+Candidates for the second frame (reads within 2 rows of the focus): 34170 in stage 1 (start relation, three reads, sign read, units write); stage 1 kept 988; stage 2 tried 102752 (each keeper with hold or none, 26 carry places, two moves); settled the whole page: 6.
+
+What settled the searched example:
+  start 1 left of the start; hold (0,-1), read (-2,1), carry in (2,0), sign (1,-1), write (3,0), carry out (2,-1), move ←
+  start 1 left of the start; hold (0,-1), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), move ←
+  start 1 left of the start; hold (0,-1), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), move ←
+  start 1 left of the start; hold (-1,0), read (-2,1), carry in (2,0), sign (1,-1), write (3,0), carry out (2,-1), move ←
+  start 1 left of the start; hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), move ←
+  start 1 left of the start; hold (-1,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), move ←
+
+Settled the second worked example as well: 3
+  start 1 left of the start; hold (-1,0), read (-2,1), carry in (2,0), sign (1,-1), write (3,0), carry out (2,-1), move ←
+  start 1 left of the start; hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), move ←   <- the hand-written second-row frame
+  start 1 left of the start; hold (-1,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), move ←
+
+| what runs after the first row | first row right | second row right |
+|---|---|---|
+| tied: start 1 left of the start; hold (-1,0), read (-2,1), carry in (2,0), sign (1,-1), write (3,0), carry out (2,-1), move ← | 200 of 200 | 200 of 200 |
+| tied: start 1 left of the start; hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), move ← | 200 of 200 | 200 of 200 |
+| tied: start 1 left of the start; hold (-1,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), move ← | 200 of 200 | 200 of 200 |
+| the hand-written second-row frame (reference) | 200 of 200 | 200 of 200 |
+
+Learned: nothing (3 settled every example)

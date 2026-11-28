@@ -1,0 +1,45 @@
+C182 · Convergence and the map
+
+For comparison, in the same setup: C181 (energy layer) churned, nothing learned; C180 (heat kept by the code) times one digit 14, the second row 341; C179: times one digit 15 (greedy), 14 (B); the second row 258 (greedy), 226 (B), both 200 of 200.
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| convergence and the map (C182) | 12 | 200 of 200 |
+
+Example by example:
+  convergence and the map (C182):
+      settled: A gave way (attempt 4)
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 11 runs
+    7529 × 6: recalled, settled; 1 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| convergence and the map (C182) | 203 | 0 of 200 |
+
+Example by example:
+  convergence and the map (C182):
+      better: u gave way, 3 cooled
+      better: k gave way, 4 cooled
+      better: B gave way, 7 cooled
+      nothing left to give way (attempt 43); best 7 cooled
+    525 × 67: adapted, stuck; 51 runs
+      better: u gave way, 1 cooled
+      better: k gave way, 3 cooled
+      better: B gave way, 5 cooled
+      nothing left to give way (attempt 42); best 5 cooled
+    9188 × 54: adapted, stuck; 50 runs
+      better: u gave way, 1 cooled
+      better: k gave way, 2 cooled
+      better: B gave way, 5 cooled
+      nothing left to give way (attempt 42); best 5 cooled
+    905 × 79: adapted, stuck; 50 runs
+      better: u gave way, 2 cooled
+      better: k gave way, 3 cooled
+      better: B gave way, 5 cooled
+      nothing left to give way (attempt 44); best 5 cooled
+    7894 × 27: adapted, stuck; 52 runs
+

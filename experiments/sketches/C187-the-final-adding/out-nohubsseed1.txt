@@ -1,0 +1,47 @@
+C187 · The final adding
+
+Background: adding and times one digit (as C176), then the second row by hubs by relation (C186), the same seed in both arms. For reference, C186: the second row by hubs by relation 287 to 355 runs, 200 of 200.
+
+| arm | second row (runs, background) | final adding (runs) | test: final adding (200 new) | test: second row (200 new, after) |
+|---|---|---|---|---|
+| no hubs (seed 1) | 291 | 226 | 0 of 200 | 200 of 200 |
+
+Example by example:
+  no hubs (seed 1):
+    the second row (background, hubs by relation in every arm):
+      hubs (rel): 17 formed over 7 kept ways of working; the most widely shared: Rel:s>u:-1,0 (7), Rel:s>k:-4,-1 (7), Rel:s>w:0,-1 (7), Rel:u>s:1,0 (7), Rel:u>k:-3,-1 (7), Rel:u>w:1,-1 (7)
+      further: B (with u by completion) (reach 2), 1 cooled (attempt 17)
+      further: A (reach 1), 2 cooled (attempt 19)
+      further: A (reach 2), 3 cooled (attempt 41)
+      further: B (reach 1), 4 cooled (attempt 42)
+      further: B (reach 1), 5 cooled (attempt 52)
+      further: k (reach 6), 6 cooled (attempt 79)
+      further: k (reach 1), 7 cooled (attempt 96)
+      nothing left within reach (attempt 130); best 7 cooled
+    525 × 67: adapted, stuck; 138 runs
+      further: A (with K,u,k,w by completion) (reach 3), 2 cooled (attempt 28)
+      further: B (with A,K,s by completion) (reach 1), 4 cooled (attempt 30)
+      further: A (reach 1), 9 cooled (attempt 35)
+      settled: K (with w by completion) (reach 5, attempt 72)
+    9188 × 54: adapted, settled (hold (0,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), sign on (5,-1), move ←); 80 runs
+      hubs (rel): 25 formed over 8 kept ways of working; the most widely shared: Rel:s>u:-1,0 (7), Rel:s>k:-4,-1 (7), Rel:s>w:0,-1 (7), Rel:u>s:1,0 (7), Rel:u>k:-3,-1 (7), Rel:u>w:1,-1 (7)
+      further: A (with K,w by completion) (reach 1), 5 cooled (attempt 4)
+      further: A (reach 1), 8 cooled (attempt 16)
+      settled: K (reach 5, attempt 54)
+    905 × 79: adapted, settled (hold (-1,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), sign on (3,0), move ←); 63 runs
+    7894 × 27: an offer settled (Fr265); 10 runs
+    the final adding:
+      further: u (reach 4), 1 cooled (attempt 19)
+      further: A (reach 4), 2 cooled (attempt 34)
+      further: k (reach 8), 3 cooled (attempt 56)
+      nothing left within reach (attempt 77); best 3 cooled
+    727 × 57: adapted, stuck; 87 runs
+      further: k (reach 8), 1 cooled (attempt 25)
+      nothing left within reach (attempt 46); best 1 cooled
+    3012 × 68: adapted, stuck; 56 runs
+      further: k (reach 8), 2 cooled (attempt 22)
+      nothing left within reach (attempt 42); best 2 cooled
+    270 × 83: adapted, stuck; 52 runs
+      nothing left within reach (attempt 21); best 0 cooled
+    2589 × 32: adapted, stuck; 31 runs
+

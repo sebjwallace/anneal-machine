@@ -1,0 +1,48 @@
+C173 · The memory keeps what it finds (a taste)
+
+== no tie-break
+
+| worked example | how it was settled | frames kept (copies of each recall link) |
+|---|---|---|
+| 525 × 67 | nothing kept: the code's search (reused) settled 6, kept as Fr0, Fr1, Fr2, Fr3, Fr4, Fr5; given with the cue in the memory, 6 of 6 settled again | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×2, Fr4 ×2, Fr5 ×2 |
+| 9188 × 54 | recall brought on nothing (a tie); offers tried: Fr0, Fr1, Fr2, Fr3, Fr4, Fr5; settled: Fr3, Fr4, Fr5 | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×3, Fr4 ×3, Fr5 ×3 |
+| 33 × 92 | recall brought on nothing (a tie); offers tried: Fr0, Fr1, Fr2, Fr3, Fr4, Fr5; settled: Fr3, Fr4, Fr5 | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×4, Fr4 ×4, Fr5 ×4 |
+| 979 × 68 | recall brought on nothing (a tie); offers tried: Fr0, Fr1, Fr2, Fr3, Fr4, Fr5; settled: Fr3, Fr4, Fr5 | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×5, Fr4 ×5, Fr5 ×5 |
+| 2109 × 75 | recall brought on nothing (a tie); offers tried: Fr0, Fr1, Fr2, Fr3, Fr4, Fr5; settled: Fr3, Fr4, Fr5 | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×6, Fr4 ×6, Fr5 ×6 |
+| 13353 × 45 | recall brought on nothing (a tie); offers tried: Fr0, Fr1, Fr2, Fr3, Fr4, Fr5; settled: Fr3, Fr4, Fr5 | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×7, Fr4 ×7, Fr5 ×7 |
+
+Frames kept:
+  Fr0 (2 copies): start 1 left; hold (0,-1), read (-2,1), carry in (2,0), sign (1,-1), write (3,0), carry out (2,-1), move ←
+  Fr1 (2 copies): start 1 left; hold (0,-1), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), move ←
+  Fr2 (2 copies): start 1 left; hold (0,-1), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), move ←
+  Fr3 (7 copies): start 1 left; hold (-1,0), read (-2,1), carry in (2,0), sign (1,-1), write (3,0), carry out (2,-1), move ←
+  Fr4 (7 copies): start 1 left; hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), move ←   <- the hand-written second-row frame
+  Fr5 (7 copies): start 1 left; hold (-1,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), move ←
+
+| test (200 new long multiplications, the same memory) | first row right | second row right | recalled at the hand-over |
+|---|---|---|---|
+| no tie-break | 200 of 200 | 0 of 200 | nothing 200 |
+
+== tie-break: the first formed wins (a declared crutch)
+
+| worked example | how it was settled | frames kept (copies of each recall link) |
+|---|---|---|
+| 525 × 67 | nothing kept: the code's search (reused) settled 6, kept as Fr0, Fr1, Fr2, Fr3, Fr4, Fr5; given with the cue in the memory, 6 of 6 settled again | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×2, Fr4 ×2, Fr5 ×2 |
+| 9188 × 54 | recall brought on Fr0, didn't settle; offers tried: Fr0, Fr1, Fr2, Fr3, Fr4, Fr5; settled: Fr3, Fr4, Fr5 | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×3, Fr4 ×3, Fr5 ×3 |
+| 33 × 92 | recalled Fr3, settled | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×4, Fr4 ×3, Fr5 ×3 |
+| 979 × 68 | recalled Fr3, settled | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×5, Fr4 ×3, Fr5 ×3 |
+| 2109 × 75 | recalled Fr3, settled | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×6, Fr4 ×3, Fr5 ×3 |
+| 13353 × 45 | recalled Fr3, settled | Fr0 ×2, Fr1 ×2, Fr2 ×2, Fr3 ×7, Fr4 ×3, Fr5 ×3 |
+
+Frames kept:
+  Fr0 (2 copies): start 1 left; hold (0,-1), read (-2,1), carry in (2,0), sign (1,-1), write (3,0), carry out (2,-1), move ←
+  Fr1 (2 copies): start 1 left; hold (0,-1), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), move ←
+  Fr2 (2 copies): start 1 left; hold (0,-1), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), move ←
+  Fr3 (7 copies): start 1 left; hold (-1,0), read (-2,1), carry in (2,0), sign (1,-1), write (3,0), carry out (2,-1), move ←
+  Fr4 (3 copies): start 1 left; hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), move ←   <- the hand-written second-row frame
+  Fr5 (3 copies): start 1 left; hold (-1,0), read (-2,1), carry in (2,0), sign (1,1), write (3,0), carry out (2,-1), move ←
+
+| test (200 new long multiplications, the same memory) | first row right | second row right | recalled at the hand-over |
+|---|---|---|---|
+| tie-break: the first formed wins (a declared crutch) | 200 of 200 | 200 of 200 | Fr3 200 |
+

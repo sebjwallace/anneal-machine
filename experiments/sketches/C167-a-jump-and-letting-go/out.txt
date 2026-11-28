@@ -1,0 +1,32 @@
+C167 · A jump, and letting go
+200 written additions, 3 to 6 digits, ending in column 9, each in a fresh memory (arms 1 to 3); arm 4: two 3-digit additions in one memory. Step limit 400.
+
+| arm | A right | jumps landing on exactly the start column | C copied the answer | the procedure let go | how the run ended |
+|---|---|---|---|---|---|
+| jump and let go | 200 of 200 | 200 of 200 | 200 of 200 | 200 of 200 | went quiet by itself 200 |
+| no start bound | 200 of 200 | 0 of 200 | 0 of 200 | 200 of 200 | went quiet by itself 200 |
+| no letting go | 200 of 200 | 200 of 200 | 200 of 200 | 0 of 200 | held on, repeating every 1 200 |
+| second sum in one memory (50 pairs) | first sum worked and copied: 50 of 50 | the second sum's jump brought on more than one place: 50 of 50 | second sum worked and copied: 1 of 50 | | |
+
+== second sum in one memory, first pair: 385 + 708 at columns 8 to 11, then 113 + 730 at columns 3 to 6
+  row 1: ...0113.0385
+  row 2: ...0730.0708
+  row 3: ...0843.1093
+  row 5: ...0043.1093
+  starts bound: 11, 6; jumps: moment 34 -> columns 11; moment 34 -> columns 11 and 6
+
+== jump, first sum: 179 + 901
+  row 3: ......1080..
+  row 5: ......1080..
+  stalls: moment 31 (A, column 5); moment 64 (C, column 5); jumps: moment 34 -> column 9; Done: 1; moments: 65; went quiet by itself
+
+== no-start, first sum: 179 + 901
+  row 3: ......1080..
+  row 5: ............
+  stalls: moment 31 (A, column 5); moment 40 (C, column ); jumps: moment 34 -> column none; Done: 1; moments: 41; went quiet by itself
+
+== no-letting-go, first sum: 179 + 901
+  row 3: ......1080..
+  row 5: ......1080..
+  stalls: moment 31 (A, column 5); moment 64 (C, column 5); jumps: moment 34 -> column 9; Done: 0; moments: 66; held on, repeating every 1
+

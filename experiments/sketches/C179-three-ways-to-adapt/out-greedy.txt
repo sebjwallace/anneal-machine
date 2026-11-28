@@ -1,0 +1,26 @@
+C179 · Three ways to adapt (round one)
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| greedy (C177, reference) | 15 | 200 of 200 |
+
+Example by example:
+  greedy (C177, reference):
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 14 runs
+    7529 × 6: recalled, settled; 1 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| greedy (C177, reference) | 258 | 200 of 200 |
+
+Example by example:
+  greedy (C177, reference):
+    525 × 67: adapted, settled (hold (-1,0), read (-2,1), carry in (-3,1), sign (1,0), write (3,0), carry out (2,-1), sign on (1,-1), move ←); 204 runs
+    9188 × 54: adapted, settled (hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), sign on (1,-1), move ←); 43 runs
+    905 × 79: an offer settled (Fr239); 10 runs
+    7894 × 27: recalled, settled; 1 runs
+

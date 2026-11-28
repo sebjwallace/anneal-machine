@@ -1,0 +1,1 @@
+C172 · filter check: 300 filtered-out candidates run through stage 1 (100 with a read of an empty place, 100 with a sign read of a place without a sign, 100 with a units write to a filled place); passed stage 1: 0 (by kind: {"empty":0,"nosign":0,"filled":0})

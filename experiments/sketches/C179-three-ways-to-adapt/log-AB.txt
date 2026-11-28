@@ -1,0 +1,28 @@
+times one digit, from adding · A+B · a budget flowing toward the nearest (seed 1): 13 runs, 200/200 (37s)
+times one digit, from adding · A+B · a budget flowing toward the nearest (seed 2): 31 runs, 200/200 (65s)
+times one digit, from adding · A+B · a budget flowing toward the nearest (seed 3): 29 runs, 200/200 (93s)
+times one digit, from adding · A+B · a budget flowing toward the nearest (seed 4): 11 runs, 200/200 (121s)
+times one digit, from adding · A+B · a budget flowing toward the nearest (seed 5): 12 runs, 200/200 (148s)
+  ...500 tries
+the second row, from times one digit · A+B · a budget flowing toward the nearest (seed 1): 937 runs, 200/200 (367s)
+  ...500 tries
+  ...1000 tries
+  ...1500 tries
+  ...2000 tries
+the second row, from times one digit · A+B · a budget flowing toward the nearest (seed 2): 2483 runs, 0/200 (814s)
+  ...500 tries
+  ...1000 tries
+  ...1500 tries
+  ...2000 tries
+the second row, from times one digit · A+B · a budget flowing toward the nearest (seed 3): 2462 runs, 0/200 (1242s)
+  ...500 tries
+  ...1000 tries
+  ...1500 tries
+  ...2000 tries
+the second row, from times one digit · A+B · a budget flowing toward the nearest (seed 4): 2117 runs, 4/200 (1761s)
+  ...500 tries
+  ...1000 tries
+  ...1500 tries
+  ...2000 tries
+  ...2500 tries
+the second row, from times one digit · A+B · a budget flowing toward the nearest (seed 5): 2555 runs, 0/200 (2253s)

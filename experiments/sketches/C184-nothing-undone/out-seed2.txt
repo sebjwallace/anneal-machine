@@ -1,0 +1,51 @@
+C184 · Nothing undone
+
+For comparison, in the same setup: C183 (worse undone, residue with a sparse sample) the second row right in 2 of 3 seeds (154, 196 runs), stuck in one (307); C182 (residue bound to the worked example) times one digit 12, the second row stuck on all four (0 of 200); C181 (energy layer) churned, nothing learned; C180 (heat kept by the code) times one digit 14, the second row 341; C179: times one digit 15 (greedy), 14 (B); the second row 258 (greedy), 226 (B), both 200 of 200.
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| nothing undone (seed 2) | 62 | 0 of 200 |
+
+Example by example:
+  nothing undone (seed 2):
+      nothing left to give way (attempt 32); best 2 cooled
+    531 × 9: adapted, stuck; 39 runs
+      nothing left to give way (attempt 16); best 2 cooled
+    7529 × 6: adapted, stuck; 23 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| nothing undone (seed 2) | 2,291 | 0 of 200 |
+
+Example by example:
+  nothing undone (seed 2):
+      furthest yet: u gave way, 3 cooled (attempt 2)
+      furthest yet: k gave way, 4 cooled (attempt 3)
+      furthest yet: K gave way, 5 cooled (attempt 115)
+      furthest yet: A gave way, 6 cooled (attempt 116)
+      nothing left to give way (attempt 161); best 6 cooled
+    525 × 67: adapted, stuck; 169 runs
+      furthest yet: u gave way, 2 cooled (attempt 2)
+      furthest yet: k gave way, 4 cooled (attempt 3)
+      furthest yet: k gave way, 5 cooled (attempt 79)
+      nothing left to give way (attempt 486); best 5 cooled
+    9188 × 54: adapted, stuck; 494 runs
+      furthest yet: u gave way, 2 cooled (attempt 2)
+      furthest yet: k gave way, 3 cooled (attempt 3)
+      furthest yet: B gave way, 4 cooled (attempt 7)
+      furthest yet: u gave way, 5 cooled (attempt 8)
+      furthest yet: u gave way, 6 cooled (attempt 48)
+      nothing left to give way (attempt 913); best 6 cooled
+    905 × 79: adapted, stuck; 921 runs
+      furthest yet: u gave way, 2 cooled (attempt 2)
+      furthest yet: B gave way, 4 cooled (attempt 6)
+      furthest yet: mv gave way, 5 cooled (attempt 46)
+      furthest yet: B gave way, 6 cooled (attempt 47)
+      furthest yet: A gave way, 8 cooled (attempt 433)
+      nothing left to give way (attempt 699); best 8 cooled
+    7894 × 27: adapted, stuck; 707 runs
+

@@ -1,0 +1,8 @@
+C162 · Abstraction from competition, a taste
+4 seeds; worked sums cycling +, −, ×, long row (2- and 3-digit), each run with both given frames; whichever settles binds itself with its view (episodes only, no overlaps stored). Test: 20 sums of each kind (3 to 5 digit tops), recalled from "=" with what's in view.
+
+| arm | + | − | × | long row | nothing recalled | wrong or broken frame |
+|---|---|---|---|---|---|---|
+| old competition, 8 sums | 7.5% | 7.5% | 23.8% | 13.8% | 86.9% | 0 of 320 |
+| ties pass what all agree on, 8 sums | 23.8% | 31.3% | 58.8% | 35.0% | 62.8% | 0 of 320 |
+| ties pass what all agree on, 24 sums | 43.8% | 45.0% | 56.3% | 62.5% | 48.1% | 0 of 320 |

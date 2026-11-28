@@ -1,0 +1,14 @@
+DIAG attempt 3: took over mv:1(0.00); cooled 2 (best 2); hottest mv:0=1.50 u:1=1.18 K:10=1.04 B:7=1.03
+DIAG attempt 5: took over u:0(0.00), mv:1(0.00); cooled 1 (best 2); hottest u:1=1.60 B:7=1.39 K:10=1.39 k:9=1.27
+DIAG attempt 6: took over u:0(0.00), mv:1(0.00); cooled 1 (best 2); hottest B:7=1.55 K:10=1.53 u:1=1.53 k:9=1.38
+DIAG attempt 7: took over u:0(0.00), mv:1(0.00); cooled 1 (best 2); hottest B:7=1.70 K:10=1.67 u:1=1.54 k:9=1.47
+DIAG attempt 8: took over u:0(0.00), k:1(0.00), mv:1(0.00); cooled 0 (best 2); hottest B:7=1.85 K:10=1.80 k:7=1.63 u:1=1.57
+DIAG attempt 9: took over u:0(0.00), K:6(0.00), mv:1(0.00); cooled 0 (best 2); hottest B:7=1.99 K:10=1.91 k:7=1.76 u:1=1.62
+DIAG attempt 10: took over u:0(0.00), k:3(0.00), mv:1(0.00); cooled 0 (best 2); hottest B:7=2.13 k:7=2.03 k:9=1.84 s:13=1.70
+DIAG attempt 11: took over k:0(0.00), K:6(0.00), mv:1(0.00); cooled 0 (best 2); hottest B:7=2.26 k:7=2.16 K:10=1.82 s:13=1.79
+DIAG attempt 12: took over u:0(0.00), k:3(0.00), B:6(0.00), mv:1(0.00); cooled 1 (best 2); hottest B:7=2.39 u:1=2.30 k:7=2.26 s:13=1.88
+DIAG attempt 13: took over u:0(0.00), k:3(0.00), K:6(0.00), mv:1(0.00); cooled 0 (best 2); hottest k:7=2.34 u:1=2.09 B:7=2.01 s:13=1.97
+DIAG attempt 14: took over u:3(0.00), k:0(0.00), B:6(0.00), mv:1(0.00); cooled 0 (best 2); hottest k:7=2.40 B:7=2.33 u:1=2.06 s:13=2.05
+DIAG attempt 15: took over u:0(0.00), k:3(0.00), K:6(0.00), mv:1(0.00); cooled 0 (best 2); hottest k:7=2.50 s:13=2.12 u:1=2.09 k:4=2.03
+DIAG attempt 16: took over u:3(0.00), k:0(0.00), A:R:7(0.00), B:6(0.00), mv:1(0.00); cooled 0 (best 2); hottest k:7=2.56 B:7=2.36 s:13=2.20 k:4=2.13
+DIAG attempt 17: took over u:0(0.00), k:8(0.00), K:6(0.00), mv:1(0.00); cooled 0 (best 2); hottest k:7=2.65 s:13=2.27 k:4=2.21 k:1=2.18

@@ -1,0 +1,2 @@
+times one digit, from adding · breadth from the trouble (seed 3): 11 runs, 200/200 (48s)
+the second row, from times one digit · breadth from the trouble (seed 3): 412 runs, 0/200 (192s)

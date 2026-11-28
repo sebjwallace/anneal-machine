@@ -1,0 +1,99 @@
+C183 · Residue with a sparse sample
+
+For comparison, in the same setup: C182 (residue bound to the worked example) times one digit 12, the second row stuck on all four (0 of 200); C181 (energy layer) churned, nothing learned; C180 (heat kept by the code) times one digit 14, the second row 341; C179: times one digit 15 (greedy), 14 (B); the second row 258 (greedy), 226 (B), both 200 of 200.
+
+== times one digit, from adding (2 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| residue with a sparse sample (seed 1) | 12 | 200 of 200 |
+| residue with a sparse sample (seed 2) | 12 | 200 of 200 |
+| residue with a sparse sample (seed 3) | 11 | 200 of 200 |
+
+Example by example:
+  residue with a sparse sample (seed 1):
+      settled: A gave way (attempt 4)
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 11 runs
+    7529 × 6: recalled, settled; 1 runs
+  residue with a sparse sample (seed 2):
+      settled: A gave way (attempt 4)
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 11 runs
+    7529 × 6: recalled, settled; 1 runs
+  residue with a sparse sample (seed 3):
+      settled: A gave way (attempt 3)
+    531 × 9: adapted, settled (hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ←); 10 runs
+    7529 × 6: recalled, settled; 1 runs
+
+== the second row, from times one digit (4 worked examples)
+
+| arm | runs | test: 200 new, from the start |
+|---|---|---|
+| residue with a sparse sample (seed 1) | 307 | 0 of 200 |
+| residue with a sparse sample (seed 2) | 154 | 200 of 200 |
+| residue with a sparse sample (seed 3) | 196 | 200 of 200 |
+
+Example by example:
+  residue with a sparse sample (seed 1):
+      better: u gave way, 3 cooled
+      better: k gave way, 4 cooled
+      better: B gave way, 7 cooled
+      nothing left to give way (attempt 46); best 7 cooled
+    525 × 67: adapted, stuck; 54 runs
+      better: u gave way, 2 cooled
+      better: k gave way, 4 cooled
+      better: B gave way, 8 cooled
+      nothing left to give way (attempt 55); best 8 cooled
+    9188 × 54: adapted, stuck; 63 runs
+      better: u gave way, 1 cooled
+      better: k gave way, 2 cooled
+      better: K gave way, 3 cooled
+      better: B gave way, 6 cooled
+      better: u gave way, 7 cooled
+      nothing left to give way (attempt 71); best 7 cooled
+    905 × 79: adapted, stuck; 79 runs
+      better: u gave way, 1 cooled
+      better: u gave way, 2 cooled
+      better: B gave way, 3 cooled
+      better: k gave way, 5 cooled
+      better: B gave way, 6 cooled
+      better: B gave way, 7 cooled
+      nothing left to give way (attempt 103); best 7 cooled
+    7894 × 27: adapted, stuck; 111 runs
+  residue with a sparse sample (seed 2):
+      better: u gave way, 3 cooled
+      better: k gave way, 4 cooled
+      better: B gave way, 7 cooled
+      nothing left to give way (attempt 46); best 7 cooled
+    525 × 67: adapted, stuck; 54 runs
+      better: u gave way, 2 cooled
+      better: k gave way, 4 cooled
+      better: B gave way, 8 cooled
+      nothing left to give way (attempt 46); best 8 cooled
+    9188 × 54: adapted, stuck; 54 runs
+      better: u gave way, 2 cooled
+      better: k gave way, 3 cooled
+      better: K gave way, 4 cooled
+      better: B gave way, 6 cooled
+      settled: u gave way (attempt 37)
+    905 × 79: adapted, settled (hold (-1,0), read (-2,1), carry in (2,0), sign (1,-1), write (3,0), carry out (2,-1), sign on (1,-1), move ←); 45 runs
+    7894 × 27: recalled, settled; 1 runs
+  residue with a sparse sample (seed 3):
+      better: u gave way, 3 cooled
+      better: k gave way, 4 cooled
+      better: B gave way, 7 cooled
+      nothing left to give way (attempt 52); best 7 cooled
+    525 × 67: adapted, stuck; 60 runs
+      better: u gave way, 2 cooled
+      better: k gave way, 4 cooled
+      better: B gave way, 8 cooled
+      nothing left to give way (attempt 48); best 8 cooled
+    9188 × 54: adapted, stuck; 56 runs
+      better: u gave way, 1 cooled
+      better: k gave way, 2 cooled
+      better: B gave way, 5 cooled
+      better: K gave way, 6 cooled
+      better: K gave way, 8 cooled
+      settled: K gave way (attempt 71)
+    905 × 79: adapted, settled (hold (-1,0), read (-2,1), carry in (2,0), sign (1,0), write (3,0), carry out (2,-1), sign on (1,-1), move ←); 79 runs
+    7894 × 27: recalled, settled; 1 runs
+

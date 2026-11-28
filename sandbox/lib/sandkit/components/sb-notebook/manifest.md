@@ -12,12 +12,12 @@ Use this component through the interface below. You don't need to read its sourc
 <script src="components/sb-notebook/sb-notebook.js"></script>
 
 <sb-notebook id="ridge-fire" heading="Ridge fire · afternoon planning">
-  <section heading="Will the wind turn before 16:00?" kind="question"
-           by="Ana Lima" time="2026-08-14T13:20" relevance="key">
+  <section heading="Will the wind turn by the afternoon?" kind="question"
+           by="Ana Lima" time="2026-08-14" relevance="key">
     <p>The crews felt it backing to the south (QST-2).</p>
   </section>
   <section heading="Hold the ridge road" kind="decision"
-           by="Ana Lima, Joe Tanaka" time="2026-08-14T13:55" relevance="key">
+           by="Ana Lima, Joe Tanaka" time="2026-08-14" relevance="key">
     <p>We hold the ridge road and pull the crews back from the saddle.</p>
   </section>
   <section heading="Radio channels" kind="discussion" relevance="aside">…</section>

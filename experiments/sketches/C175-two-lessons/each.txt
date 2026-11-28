@@ -1,0 +1,10 @@
+C175 · arm (c) with each of lesson 1's six on its own
+
+| lesson 1's way of working offered | tries | learned in lesson 2 | test |
+|---|---|---|---|
+| read (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ← | 2 | hold (-1,0), read (-2,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ← | 200 |
+| read (-1,0), read (-3,0), carry in (-2,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ← | 2 | nothing | - |
+| read (-2,0), read (-1,0), carry in (-3,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ← | 2 | nothing | - |
+| read (-2,0), read (-3,0), carry in (-1,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ← | 2 | nothing | - |
+| read (-3,0), read (-1,0), carry in (-2,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ← | 2 | nothing | - |
+| read (-3,0), read (-2,0), carry in (-1,0), sign (1,0), write (0,0), carry out (-3,-1), sign on (1,-1), move ← | 2 | nothing | - |
